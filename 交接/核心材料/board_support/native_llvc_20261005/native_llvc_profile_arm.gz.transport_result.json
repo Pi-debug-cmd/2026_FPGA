@@ -1,0 +1,10 @@
+{
+  "source": "native_llvc_profile_arm.gz",
+  "remote": "/home/root/native_llvc_trial_20261005/native_llvc_profile_arm.gz",
+  "sha256": "2082c8de68c809973575fb2b583bcb2132af6857bbaafb40d8d335fed7d23c10",
+  "bytes": 659210,
+  "seconds": 30.153353400004562,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

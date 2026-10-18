@@ -1,0 +1,20 @@
+[
+  {
+    "name": "batch_native",
+    "f0_median": 196.53918795124758,
+    "voiced_coverage_s": 2.56,
+    "clip_fraction": 0.0
+  },
+  {
+    "name": "stream_full5_native",
+    "f0_median": 196.53918795124758,
+    "voiced_coverage_s": 2.56,
+    "clip_fraction": 0.0
+  },
+  {
+    "name": "stream_speed4_native",
+    "f0_median": 196.51123877462788,
+    "voiced_coverage_s": 2.57,
+    "clip_fraction": 0.0
+  }
+]

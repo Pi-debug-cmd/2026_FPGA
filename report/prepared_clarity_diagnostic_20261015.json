@@ -1,0 +1,41 @@
+{
+  "kind": "capture_vs_world_identity_diagnostic",
+  "order": [
+    "original_capture",
+    "world_identity_no_conversion",
+    "old_fixed_recipe"
+  ],
+  "duration_s": 18.0,
+  "segment_seconds": 5,
+  "gap_seconds": 1,
+  "leading_silence_seconds": 1,
+  "source_crop_start_s": 2.68,
+  "rate": 32000,
+  "inputs": [
+    {
+      "path": "data\\registrations\\source_20261015\\speaker01\\holdout.wav",
+      "sha256": "1c064f8961590df3ed6e2893fb6f74942871be43d9c6aee55da5489c43a66e97"
+    },
+    {
+      "path": "data\\registrations\\source_20261015\\speaker01\\clarity_audit\\identity.wav",
+      "sha256": "d86431772b7ac50070710828fd222ca01850c9a093b9bbf6dea4ad3f421710f8"
+    },
+    {
+      "path": "data\\registrations\\source_20261015\\speaker01\\hybrid_comparison\\old_fixed.wav",
+      "sha256": "be670efcee2f7dd540a1d202a841518423133bdfc8b23faace732a6faa0b5d57"
+    }
+  ],
+  "gains": [
+    6.0573019743187295,
+    5.746399834949453,
+    6.3268670946656655
+  ],
+  "common_rms_before_interpolation": 0.06382462629802696,
+  "peak": 0.8499355423391092,
+  "clip_fraction": 0.0,
+  "wav_sha256": "b266e6c99fc9819b839c2a2c892de38d87787a97cc94b888a7b287d2f81eb0a8",
+  "gzip_sha256": "b4c096171fc1a72321329f7a3c311d6a0f742914682984e4f8e28e562464331e",
+  "configuration_changed": false,
+  "listening_completed": false,
+  "limitations": "Diagnostic only. RMS equalization is for this playback, not an input gain change. Identity resynthesis uses measured F0, original spectrum and AP, without voice mapping. It still runs WORLD analysis/synthesis and resampling. Not a target identity test or realtime measurement."
+}

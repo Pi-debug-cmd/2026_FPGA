@@ -1,0 +1,96 @@
+{
+  "status": "Original full ARM migration PASS / original realtime FAIL; new small96 experimental native live IO; quality NOT accepted",
+  "artifacts": [
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\native_llvc.cpp",
+      "bytes": 12752,
+      "sha256": "1cfda63154d857217e6bffd3f7a546832483e83d64cbbc4678897e28eb1e8078"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\export_model.py",
+      "bytes": 3590,
+      "sha256": "6b5cdecace59b6c5ff12415b1e7c1bab5d5d7819184deafd1fc200e78f80c4d4"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\verify_native.py",
+      "bytes": 1469,
+      "sha256": "72a8bfce51c733fca13f40a69c8e264da48e4a56d8951db9393f5733e749aa3a"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\native_llvc_arm",
+      "bytes": 1846796,
+      "sha256": "f5e977a83313126fdb2730ada00e69e5e81677e0c6a029fa93aa38be5511b743"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\llvc_step20.f32",
+      "bytes": 13250059,
+      "sha256": "e9d039938958c3b1de93144e2b81259d6acbe7887df5d03a203ae8629e6bc5d5"
+    }
+  ],
+  "actual_board": {
+    "port": "COM8",
+    "cpu_mhz": 666.666,
+    "total_ram_kib": 1029284,
+    "remote_dir": "/home/root/native_llvc_trial_20261005",
+    "full_package_sha_verified": true,
+    "actual_arm_checks": "actual_arm_numerical_checks.json",
+    "one_second_case": {
+      "case": "real_16000",
+      "native": {
+        "samples": 16000,
+        "chunks": 77,
+        "audio_seconds": 1,
+        "inference_seconds": 31.2346,
+        "mean_chunk_ms": 405.634,
+        "max_chunk_ms": 414.573,
+        "peak_rss_kib": 17060,
+        "core": "native_fp32",
+        "source_enrollment": false,
+        "real_time_verified": false,
+        "quality_accepted": false,
+        "wall_seconds": 31.574198275999834,
+        "temperature_before_c": 63.735119628712006,
+        "temperature_peak_c": 66.195935058392,
+        "binary_sha256": "f5e977a83313126fdb2730ada00e69e5e81677e0c6a029fa93aa38be5511b743",
+        "model_sha256": "e9d039938958c3b1de93144e2b81259d6acbe7887df5d03a203ae8629e6bc5d5",
+        "actual_arm_execution": true
+      },
+      "normalized_rmse": 7.888975886994093e-06,
+      "max_absolute_error": 5.862148100277409e-09,
+      "output_sha256": "0907c9e5fc99d3167cbd1b87ba9e1941557d2c7e1f1080190445bfa2a5eb8f39",
+      "migration_pass": true
+    },
+    "microphone_recording_trial_cancelled": true,
+    "continuous_real_time_verified": false,
+    "target_quality_accepted": false
+  },
+  "performance_diagnosis": "actual_arm_performance_diagnosis.json",
+  "profile_artifacts": [
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\make_profile_build.py",
+      "bytes": 2975,
+      "sha256": "5d83e4caffa8573542b0871dbb011b2a1406f2dee531c2d70d167edfa9e72f85"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\native_llvc_profile.cpp",
+      "bytes": 14515,
+      "sha256": "ae809e5ff51cc319ba53356944abf86164e2eda6d95a7dd123d99848382b6b5e"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\native_llvc_profile_arm",
+      "bytes": 1848036,
+      "sha256": "adbe79709236fc835dccd37a165206e273c44a557a4e8fba283fecf4cc0b3ea3"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\actual_arm_profile.jsonl",
+      "bytes": 1277,
+      "sha256": "2de35d350c3e4ebc1a2b86bad8c86602b197879e231f229de71b32180282aaa7"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\actual_arm_profile_tone.jsonl",
+      "bytes": 1276,
+      "sha256": "cc4406bc9a646c6e89ec8464f1e4103d60aae6a46394bcdae0dc32c05a5e99c6"
+    }
+  ],
+  "current_small_model_stage": "realtime_stage_evidence.json"
+}

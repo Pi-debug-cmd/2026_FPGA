@@ -1,0 +1,30 @@
+{
+  "cases": [
+    {
+      "samples": 0,
+      "identical_pcm": true
+    },
+    {
+      "samples": 1,
+      "identical_pcm": true
+    },
+    {
+      "samples": 207,
+      "identical_pcm": true
+    },
+    {
+      "samples": 208,
+      "identical_pcm": true
+    },
+    {
+      "samples": 224,
+      "identical_pcm": true
+    },
+    {
+      "samples": 16000,
+      "identical_pcm": true
+    }
+  ],
+  "first_chunk_before_eof": true,
+  "diagnostic_only": true
+}

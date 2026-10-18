@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\fargan_mapper_probe_bundle_20261006.tar.gz",
+  "remote": "/home/root/native_llvc_trial_20261005/fargan_mapper_probe_bundle_20261006.tar.gz",
+  "sha256": "e83387b9c5780ff656f78bee04394c054eb9d00ee468e0ab81038949ef4cd9aa",
+  "bytes": 379466,
+  "seconds": 17.9962869999581,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

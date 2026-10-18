@@ -1,0 +1,7 @@
+{
+  "audible_output_matches_original_pcm_exactly": true,
+  "wraparound_input_output_alignment_exact": true,
+  "samples_retained": 1920048,
+  "diagnostic_dump_after_requested_flag": true,
+  "user_audio_used": false
+}

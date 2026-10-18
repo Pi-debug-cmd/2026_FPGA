@@ -1,0 +1,1439 @@
+{
+  "kind": "ps_opt_aperiodic_c_final",
+  "date": "2026-10-18",
+  "round": 2,
+  "status": "MEASURED_ON_BOARD_MULTISENTENCE_QUALITY_PASSED_LISTENING_FILE_READY",
+  "one_line": "候选 c 的 200 ms 批量形态否决；10 ms 帧锚点 + 双 vuv 变体 + 过渡段回退后 4 句质量全过（相关≥0.9995、谱差中位≤0.35 dB、无削顶），板端合成 −19%~−36%、全链 RTF −0.104~−0.160；听感文件已备好未播放；实时化滚动窗口方案预计保留近 100% 收益。",
+  "write_scope": [
+    "build/generated/ps_opt_20261018/",
+    "report/ps_opt_*",
+    "data/registrations/source_20261015/speaker01/psopt_comparison/ (Lead 指定听感输出)"
+  ],
+  "upstream_untouched": true,
+  "measurement": {
+    "board": "Zynq-7020, COM14",
+    "binary": "world_budget（src/ps/world_budget.cpp 未改）",
+    "command": "world_budget <5s.wav> <out>.wav dio fast4",
+    "arm_flags": "-O3 -funroll-loops -fno-math-errno -fno-trapping-math -std=c++11 -mcpu=cortex-a9 -mfpu=neon -mfloat-abi=hard -ffp-contract=off -pthread -static"
+  },
+  "implementation": {
+    "sha256": {
+      "upstream_synthesis": "9888973e28f2194a0eb9807e18e36680f3d912bef3ddf174dc640fedc4e08b4c",
+      "prototype_synthesis": "b37dc620500125ae0cd9dd5be4929b1461a457a40d7ccb7c6d84cbff94bdb574",
+      "common_copy_equals_upstream": "ef4a982d103bfd4c0efe6f1e6fa1192809e07ac39289f29951f3d95f1af8ca51",
+      "baseline_arm": "7792e7f9eb1e5c233c78bc646ac28aa3e83a988ec9b0c545346a35ee0df4d926",
+      "optimized_arm": "badfc2619fd7f26422de8858c3ca5ead027012208ae290681cb3b71a03ed29f8"
+    },
+    "mechanism": [
+      "参数帧网格预计算非周期最小相位复谱（10 ms 锚点，stride=1）。",
+      "脉冲时刻对相邻锚点复谱线性插值，再与同一随机噪声谱相乘、逆 FFT、OLA。",
+      "双 vuv 变体：发声脉冲用 log(|sp|*ap^2)/2，未发声脉冲用 log(|sp|)/2，仅在用到的锚点上分配。",
+      "过渡区间回退：相邻锚点滤波能量比 >8 时，区间内脉冲走上游逐脉冲最小相位（质量兜底）。",
+      "未发声脉冲仅在锚点路径生效区间跳过包络/ap 准备；周期性支路、噪声序列、时间基、OLA 未改。"
+    ],
+    "knobs": {
+      "WORLD_AP_MINPHASE_STRIDE": "锚点间距（帧，1=10 ms，默认 1；0=逐脉冲参照）",
+      "WORLD_AP_INTERP_MODE": "0=复谱插值（默认），1=幅值校正插值（板上更慢，不推荐）",
+      "WORLD_AP_FALLBACK_RATIO": "过渡段回退阈值（默认 8；0=关闭回退）",
+      "WORLD_AP_DEBUG_PULSES": "逐脉冲滤波能量诊断（默认关）"
+    },
+    "refactor_neutrality": {
+      "check": "WORLD_AP_MINPHASE_STRIDE=0 板端",
+      "synthesis_s": 2.655623,
+      "baseline_synthesis_s_mean": 2.654849,
+      "output_sha256_equals_baseline": true
+    }
+  },
+  "pulse_statistics_c0": {
+    "audio_s": 5.0,
+    "analysis_frames": 501,
+    "pulses": 2023,
+    "voiced_pulses": 896,
+    "baseline_minphase_calls_total": 2919,
+    "anchor_filter_calls": 521,
+    "fallback_pulses": 138,
+    "fallback_ratio": 6.8
+  },
+  "board_results": {
+    "sentences": {
+      "c0": {
+        "baseline": {
+          "label": "c0 基线（上游 synthesis.cpp）",
+          "runs": [
+            {
+              "synthesis_s": 2.655143,
+              "total_compute_s": 4.045704,
+              "rtf": 0.809141
+            },
+            {
+              "synthesis_s": 2.654555,
+              "total_compute_s": 4.04142,
+              "rtf": 0.808284
+            }
+          ],
+          "mean_synthesis_s": 2.654849,
+          "mean_total_compute_s": 4.043562,
+          "mean_rtf": 0.808712
+        },
+        "optimized": {
+          "label": "c0 最终版（10 ms 锚点 + 双变体 + 回退 8×）",
+          "runs": [
+            {
+              "synthesis_s": 1.854939,
+              "total_compute_s": 3.246858,
+              "rtf": 0.649372,
+              "peak": 0.796566376
+            },
+            {
+              "synthesis_s": 1.852326,
+              "total_compute_s": 3.240804,
+              "rtf": 0.648161,
+              "peak": 0.796566376
+            }
+          ],
+          "mean_synthesis_s": 1.853632,
+          "mean_total_compute_s": 3.243831,
+          "mean_rtf": 0.648767
+        },
+        "delta_synthesis_s": -0.801217,
+        "delta_synthesis_relative": -0.301794,
+        "delta_rtf": -0.159945
+      },
+      "q1": {
+        "baseline": {
+          "label": "q1 基线",
+          "runs": [
+            {
+              "synthesis_s": 2.153296,
+              "total_compute_s": 3.230092,
+              "rtf": 0.646018
+            }
+          ],
+          "mean_synthesis_s": 2.153296,
+          "mean_total_compute_s": 3.230092,
+          "mean_rtf": 0.646018
+        },
+        "optimized": {
+          "label": "q1 最终版",
+          "runs": [
+            {
+              "synthesis_s": 1.380123,
+              "total_compute_s": 2.451147,
+              "rtf": 0.490229
+            }
+          ],
+          "mean_synthesis_s": 1.380123,
+          "mean_total_compute_s": 2.451147,
+          "mean_rtf": 0.490229
+        },
+        "delta_synthesis_s": -0.773173,
+        "delta_synthesis_relative": -0.359065,
+        "delta_rtf": -0.155789
+      },
+      "q2": {
+        "baseline": {
+          "label": "q2 基线",
+          "runs": [
+            {
+              "synthesis_s": 2.734626,
+              "total_compute_s": 4.139543,
+              "rtf": 0.827909
+            }
+          ],
+          "mean_synthesis_s": 2.734626,
+          "mean_total_compute_s": 4.139543,
+          "mean_rtf": 0.827909
+        },
+        "optimized": {
+          "label": "q2 最终版",
+          "runs": [
+            {
+              "synthesis_s": 1.966214,
+              "total_compute_s": 3.363085,
+              "rtf": 0.672617
+            }
+          ],
+          "mean_synthesis_s": 1.966214,
+          "mean_total_compute_s": 3.363085,
+          "mean_rtf": 0.672617
+        },
+        "delta_synthesis_s": -0.768412,
+        "delta_synthesis_relative": -0.280993,
+        "delta_rtf": -0.155292
+      },
+      "q3": {
+        "baseline": {
+          "label": "q3 基线",
+          "runs": [
+            {
+              "synthesis_s": 2.709821,
+              "total_compute_s": 4.741621,
+              "rtf": 0.948324
+            }
+          ],
+          "mean_synthesis_s": 2.709821,
+          "mean_total_compute_s": 4.741621,
+          "mean_rtf": 0.948324
+        },
+        "optimized": {
+          "label": "q3 最终版",
+          "runs": [
+            {
+              "synthesis_s": 2.188264,
+              "total_compute_s": 4.220119,
+              "rtf": 0.844024
+            }
+          ],
+          "mean_synthesis_s": 2.188264,
+          "mean_total_compute_s": 4.220119,
+          "mean_rtf": 0.844024
+        },
+        "delta_synthesis_s": -0.521557,
+        "delta_synthesis_relative": -0.192469,
+        "delta_rtf": -0.1043
+      }
+    },
+    "c0_ablation": {
+      "no_fallback": {
+        "label": "c0 消融：双变体、无回退",
+        "runs": [
+          {
+            "synthesis_s": 1.750778,
+            "total_compute_s": 3.14469,
+            "rtf": 0.628938
+          }
+        ],
+        "mean_synthesis_s": 1.750778,
+        "mean_total_compute_s": 3.14469,
+        "mean_rtf": 0.628938
+      },
+      "stride0_refactor_reference": {
+        "label": "c0 中性性对照：stride=0 重构版",
+        "runs": [
+          {
+            "synthesis_s": 2.655623,
+            "total_compute_s": 4.045763,
+            "rtf": 0.809153
+          }
+        ],
+        "mean_synthesis_s": 2.655623,
+        "mean_total_compute_s": 4.045763,
+        "mean_rtf": 0.809153
+      },
+      "stride_curve_no_fallback": [
+        {
+          "label": "c0 消融：双变体、无回退",
+          "runs": [
+            {
+              "synthesis_s": 1.750778,
+              "total_compute_s": 3.14469,
+              "rtf": 0.628938
+            }
+          ],
+          "mean_synthesis_s": 1.750778,
+          "mean_total_compute_s": 3.14469,
+          "mean_rtf": 0.628938
+        },
+        {
+          "label": "c0 消融：stride=2（20 ms，质量不过）",
+          "runs": [
+            {
+              "synthesis_s": 1.59244,
+              "total_compute_s": 2.983045,
+              "rtf": 0.596609
+            }
+          ],
+          "mean_synthesis_s": 1.59244,
+          "mean_total_compute_s": 2.983045,
+          "mean_rtf": 0.596609
+        },
+        {
+          "label": "c0 消融：stride=5（50 ms，质量不过+削顶）",
+          "runs": [
+            {
+              "synthesis_s": 1.489661,
+              "total_compute_s": 2.875779,
+              "rtf": 0.575156,
+              "peak": 1.087760837
+            }
+          ],
+          "mean_synthesis_s": 1.489661,
+          "mean_total_compute_s": 2.875779,
+          "mean_rtf": 0.575156
+        },
+        {
+          "label": "c0 消融：stride=10（100 ms，质量不过）",
+          "runs": [
+            {
+              "synthesis_s": 1.462265,
+              "total_compute_s": 2.854142,
+              "rtf": 0.570828
+            }
+          ],
+          "mean_synthesis_s": 1.462265,
+          "mean_total_compute_s": 2.854142,
+          "mean_rtf": 0.570828
+        },
+        {
+          "label": "c0 消融：stride=20（200 ms，否决）",
+          "runs": [
+            {
+              "synthesis_s": 1.440288,
+              "total_compute_s": 2.831503,
+              "rtf": 0.566301
+            }
+          ],
+          "mean_synthesis_s": 1.440288,
+          "mean_total_compute_s": 2.831503,
+          "mean_rtf": 0.566301
+        }
+      ],
+      "mode1": {
+        "label": "c0 消融：mode1 幅值校正插值（质量略好、板上慢）",
+        "runs": [
+          {
+            "synthesis_s": 2.012667,
+            "total_compute_s": 3.402395,
+            "rtf": 0.680479
+          }
+        ],
+        "mean_synthesis_s": 2.012667,
+        "mean_total_compute_s": 3.402395,
+        "mean_rtf": 0.680479
+      },
+      "marginal_cost_per_minphase_call_s": 0.000654,
+      "fallback_pulse_cost_s": 0.00075
+    },
+    "post_optimization_breakdown_rtf_c0": {
+      "synthesis": 0.371,
+      "d4c_ap": 0.208,
+      "envelope": 0.106,
+      "dio_fast4": 0.032,
+      "refine_warp": 0.036,
+      "rtf_total": 0.649
+    },
+    "host_arm_bit_identical": true,
+    "output_sha256": {
+      "c0_optimized": "beb38af6766843da838a504338b9efebceeda4b3358755092a3b7f3fe28fb5d9",
+      "q1_baseline": "908824a7d474c4e84b99cd29544dec58fed06e59edf349447ef7bd23f625a0dd",
+      "q1_optimized": "7cdcab7b2ecd805b3ef1d2539fd60976e497c943fd903dc2f895f3d3fe6dce6a",
+      "q2_baseline": "6c136aea312463ae6d6af65b432f72a839faa8cf40005a17b3a25880984f45a4",
+      "q2_optimized": "afbd1f095ab67cb2e0b2a624df8265fd3bac1469d743fcdd0892b1c2bb54be5c",
+      "q3_baseline": "dcc3ca5196f79deece77815b2417e9bedb8b4acdca14c4d49606b236e1783e80",
+      "q3_optimized": "c1b89fe8164c3435e5de18a719d26c08ebdfd081964232a3ac68336acc7ba9f4"
+    },
+    "next_targets": [
+      "D4C（0.208 RTF）",
+      "合成内周期支路（896 次最小相位，风险较高）"
+    ]
+  },
+  "quality": {
+    "method": "eval_quality.py：16 kHz/16 bit；相关；RMS 差；STFT Hann 1024/hop 256 逐 bin 谱差 dB（帧 RMS>-60 dBFS 且参考 bin > 帧峰值-60 dB）；峰值与 16 bit 满幅计数。",
+    "gates": {
+      "correlation_ge": 0.995,
+      "spectral_median_db_le": 0.5,
+      "no_new_clipping": true
+    },
+    "sentences": [
+      {
+        "label": "c0",
+        "file": "quality_c0_final.json",
+        "correlation": 0.99982571,
+        "rms_difference": 0.00213974,
+        "rms_difference_relative": 0.01867438,
+        "spectral_median_db": 0.206,
+        "spectral_p95_db": 1.9267,
+        "spectral_max_db": 28.9635,
+        "per_band_median_db": {
+          "0-1k": 0.014,
+          "1k-2k": 0.0559,
+          "2k-4k": 0.2307,
+          "4k-8k": 0.3683
+        },
+        "worst_frame_median_db": 1.1433,
+        "worst_frames": [
+          {
+            "frame": 201,
+            "time_s": 3.216,
+            "median_db": 1.1433
+          },
+          {
+            "frame": 200,
+            "time_s": 3.2,
+            "median_db": 1.0289
+          },
+          {
+            "frame": 233,
+            "time_s": 3.728,
+            "median_db": 1.0271
+          },
+          {
+            "frame": 159,
+            "time_s": 2.544,
+            "median_db": 0.9546
+          },
+          {
+            "frame": 110,
+            "time_s": 1.76,
+            "median_db": 0.9399
+          }
+        ],
+        "peak": {
+          "reference": 0.79653931,
+          "candidate": 0.79653931,
+          "candidate_over_reference": 0.0,
+          "reference_clip_samples": 0,
+          "candidate_clip_samples": 0,
+          "candidate_peak_ok": true
+        },
+        "gate": {
+          "correlation_ge_0.995": true,
+          "spectral_median_le_0.5db": true,
+          "no_new_clipping": true
+        }
+      },
+      {
+        "label": "q1 speaker01 holdout 0 s 起",
+        "file": "quality_inputs/quality_q1_speaker01_holdout_5s_final.json",
+        "correlation": 0.99985928,
+        "rms_difference": 0.00017936,
+        "rms_difference_relative": 0.01679274,
+        "spectral_median_db": 0.3471,
+        "spectral_p95_db": 2.6625,
+        "spectral_max_db": 43.6054,
+        "per_band_median_db": {
+          "0-1k": 0.0609,
+          "1k-2k": 0.1767,
+          "2k-4k": 0.3649,
+          "4k-8k": 0.6293
+        },
+        "worst_frame_median_db": 1.1577,
+        "worst_frames": [
+          {
+            "frame": 4,
+            "time_s": 0.064,
+            "median_db": 1.1577
+          },
+          {
+            "frame": 308,
+            "time_s": 4.928,
+            "median_db": 1.144
+          },
+          {
+            "frame": 199,
+            "time_s": 3.184,
+            "median_db": 1.1258
+          },
+          {
+            "frame": 211,
+            "time_s": 3.376,
+            "median_db": 1.069
+          },
+          {
+            "frame": 198,
+            "time_s": 3.168,
+            "median_db": 1.0405
+          }
+        ],
+        "peak": {
+          "reference": 0.3729248,
+          "candidate": 0.3729248,
+          "candidate_over_reference": 0.0,
+          "reference_clip_samples": 0,
+          "candidate_clip_samples": 0,
+          "candidate_peak_ok": true
+        },
+        "gate": {
+          "correlation_ge_0.995": true,
+          "spectral_median_le_0.5db": true,
+          "no_new_clipping": true
+        }
+      },
+      {
+        "label": "q2 target t5_8 2.849 s 起",
+        "file": "quality_inputs/quality_q2_target_t5_8_5s_final.json",
+        "correlation": 0.99982675,
+        "rms_difference": 0.00218345,
+        "rms_difference_relative": 0.01862222,
+        "spectral_median_db": 0.1896,
+        "spectral_p95_db": 2.0618,
+        "spectral_max_db": 26.4473,
+        "per_band_median_db": {
+          "0-1k": 0.0146,
+          "1k-2k": 0.0539,
+          "2k-4k": 0.2161,
+          "4k-8k": 0.3219
+        },
+        "worst_frame_median_db": 1.0532,
+        "worst_frames": [
+          {
+            "frame": 277,
+            "time_s": 4.432,
+            "median_db": 1.0532
+          },
+          {
+            "frame": 262,
+            "time_s": 4.192,
+            "median_db": 1.0058
+          },
+          {
+            "frame": 54,
+            "time_s": 0.864,
+            "median_db": 0.9938
+          },
+          {
+            "frame": 261,
+            "time_s": 4.176,
+            "median_db": 0.99
+          },
+          {
+            "frame": 274,
+            "time_s": 4.384,
+            "median_db": 0.9891
+          }
+        ],
+        "peak": {
+          "reference": 0.74136353,
+          "candidate": 0.74124146,
+          "candidate_over_reference": -0.00012207,
+          "reference_clip_samples": 0,
+          "candidate_clip_samples": 0,
+          "candidate_peak_ok": true
+        },
+        "gate": {
+          "correlation_ge_0.995": true,
+          "spectral_median_le_0.5db": true,
+          "no_new_clipping": true
+        }
+      },
+      {
+        "label": "q3 target t8 1.780 s 起",
+        "file": "quality_inputs/quality_q3_target_t8_5s_final.json",
+        "correlation": 0.99956203,
+        "rms_difference": 0.00260573,
+        "rms_difference_relative": 0.02960471,
+        "spectral_median_db": 0.2018,
+        "spectral_p95_db": 2.071,
+        "spectral_max_db": 32.2914,
+        "per_band_median_db": {
+          "0-1k": 0.015,
+          "1k-2k": 0.0467,
+          "2k-4k": 0.2481,
+          "4k-8k": 0.3846
+        },
+        "worst_frame_median_db": 1.2558,
+        "worst_frames": [
+          {
+            "frame": 225,
+            "time_s": 3.6,
+            "median_db": 1.2558
+          },
+          {
+            "frame": 154,
+            "time_s": 2.464,
+            "median_db": 1.2102
+          },
+          {
+            "frame": 155,
+            "time_s": 2.48,
+            "median_db": 1.172
+          },
+          {
+            "frame": 274,
+            "time_s": 4.384,
+            "median_db": 1.1552
+          },
+          {
+            "frame": 138,
+            "time_s": 2.208,
+            "median_db": 1.1265
+          }
+        ],
+        "peak": {
+          "reference": 0.67776489,
+          "candidate": 0.67776489,
+          "candidate_over_reference": 0.0,
+          "reference_clip_samples": 0,
+          "candidate_clip_samples": 0,
+          "candidate_peak_ok": true
+        },
+        "gate": {
+          "correlation_ge_0.995": true,
+          "spectral_median_le_0.5db": true,
+          "no_new_clipping": true
+        }
+      }
+    ],
+    "ablation": {
+      "v0_single_variant_no_fallback_c0": {
+        "label": "c0 v0",
+        "file": "quality_m0_k1.json",
+        "correlation": 0.99681652,
+        "rms_difference": 0.00915005,
+        "rms_difference_relative": 0.07985631,
+        "spectral_median_db": 0.2713,
+        "spectral_p95_db": 2.5874,
+        "spectral_max_db": 35.2434,
+        "per_band_median_db": {
+          "0-1k": 0.0197,
+          "1k-2k": 0.0788,
+          "2k-4k": 0.2802,
+          "4k-8k": 0.4405
+        },
+        "worst_frame_median_db": 3.1842,
+        "worst_frames": [
+          {
+            "frame": 118,
+            "time_s": 1.888,
+            "median_db": 3.1842
+          },
+          {
+            "frame": 119,
+            "time_s": 1.904,
+            "median_db": 3.0174
+          },
+          {
+            "frame": 120,
+            "time_s": 1.92,
+            "median_db": 2.2299
+          },
+          {
+            "frame": 232,
+            "time_s": 3.712,
+            "median_db": 1.8921
+          },
+          {
+            "frame": 121,
+            "time_s": 1.936,
+            "median_db": 1.3828
+          }
+        ],
+        "peak": {
+          "reference": 0.79653931,
+          "candidate": 0.7850647,
+          "candidate_over_reference": -0.01147461,
+          "reference_clip_samples": 0,
+          "candidate_clip_samples": 0,
+          "candidate_peak_ok": true
+        },
+        "gate": {
+          "correlation_ge_0.995": true,
+          "spectral_median_le_0.5db": true,
+          "no_new_clipping": true
+        }
+      },
+      "v0_single_variant_no_fallback_q1": {
+        "label": "q1 v0",
+        "file": "quality_inputs/quality_q1_speaker01_holdout_5s.json",
+        "correlation": 0.97324745,
+        "rms_difference": 0.00263952,
+        "rms_difference_relative": 0.24713196,
+        "spectral_median_db": 0.5093,
+        "spectral_p95_db": 4.2608,
+        "spectral_max_db": 52.5501,
+        "per_band_median_db": {
+          "0-1k": 0.1379,
+          "1k-2k": 0.2981,
+          "2k-4k": 0.5107,
+          "4k-8k": 0.771
+        },
+        "worst_frame_median_db": 4.3181,
+        "worst_frames": [
+          {
+            "frame": 0,
+            "time_s": 0.0,
+            "median_db": 4.3181
+          },
+          {
+            "frame": 296,
+            "time_s": 4.736,
+            "median_db": 2.1988
+          },
+          {
+            "frame": 295,
+            "time_s": 4.72,
+            "median_db": 1.9234
+          },
+          {
+            "frame": 297,
+            "time_s": 4.752,
+            "median_db": 1.8405
+          },
+          {
+            "frame": 298,
+            "time_s": 4.768,
+            "median_db": 1.6817
+          }
+        ],
+        "peak": {
+          "reference": 0.3729248,
+          "candidate": 0.28561401,
+          "candidate_over_reference": -0.08731079,
+          "reference_clip_samples": 0,
+          "candidate_clip_samples": 0,
+          "candidate_peak_ok": true
+        },
+        "gate": {
+          "correlation_ge_0.995": false,
+          "spectral_median_le_0.5db": false,
+          "no_new_clipping": true
+        }
+      },
+      "v2_dual_variant_no_fallback_c0": {
+        "label": "c0 v2",
+        "file": "quality_c0_v2.json",
+        "correlation": 0.99916126,
+        "rms_difference": 0.00471419,
+        "rms_difference_relative": 0.04114273,
+        "spectral_median_db": 0.2641,
+        "spectral_p95_db": 2.3523,
+        "spectral_max_db": 35.2434,
+        "per_band_median_db": {
+          "0-1k": 0.019,
+          "1k-2k": 0.0765,
+          "2k-4k": 0.2776,
+          "4k-8k": 0.4377
+        },
+        "worst_frame_median_db": 1.8713,
+        "worst_frames": [
+          {
+            "frame": 232,
+            "time_s": 3.712,
+            "median_db": 1.8713
+          },
+          {
+            "frame": 119,
+            "time_s": 1.904,
+            "median_db": 1.5432
+          },
+          {
+            "frame": 118,
+            "time_s": 1.888,
+            "median_db": 1.4528
+          },
+          {
+            "frame": 202,
+            "time_s": 3.232,
+            "median_db": 1.2061
+          },
+          {
+            "frame": 200,
+            "time_s": 3.2,
+            "median_db": 1.1683
+          }
+        ],
+        "peak": {
+          "reference": 0.79653931,
+          "candidate": 0.78515625,
+          "candidate_over_reference": -0.01138306,
+          "reference_clip_samples": 0,
+          "candidate_clip_samples": 0,
+          "candidate_peak_ok": true
+        },
+        "gate": {
+          "correlation_ge_0.995": true,
+          "spectral_median_le_0.5db": true,
+          "no_new_clipping": true
+        }
+      },
+      "v2_dual_variant_no_fallback_q1": {
+        "label": "q1 v2",
+        "file": "quality_inputs/quality_q1_speaker01_holdout_5s_v2.json",
+        "correlation": 0.97384619,
+        "rms_difference": 0.00261441,
+        "rms_difference_relative": 0.24478131,
+        "spectral_median_db": 0.4429,
+        "spectral_p95_db": 3.6088,
+        "spectral_max_db": 34.0562,
+        "per_band_median_db": {
+          "0-1k": 0.0988,
+          "1k-2k": 0.2436,
+          "2k-4k": 0.4542,
+          "4k-8k": 0.7409
+        },
+        "worst_frame_median_db": 4.3181,
+        "worst_frames": [
+          {
+            "frame": 0,
+            "time_s": 0.0,
+            "median_db": 4.3181
+          },
+          {
+            "frame": 296,
+            "time_s": 4.736,
+            "median_db": 2.1537
+          },
+          {
+            "frame": 295,
+            "time_s": 4.72,
+            "median_db": 1.5563
+          },
+          {
+            "frame": 308,
+            "time_s": 4.928,
+            "median_db": 1.5344
+          },
+          {
+            "frame": 297,
+            "time_s": 4.752,
+            "median_db": 1.5318
+          }
+        ],
+        "peak": {
+          "reference": 0.3729248,
+          "candidate": 0.28561401,
+          "candidate_over_reference": -0.08731079,
+          "reference_clip_samples": 0,
+          "candidate_clip_samples": 0,
+          "candidate_peak_ok": true
+        },
+        "gate": {
+          "correlation_ge_0.995": false,
+          "spectral_median_le_0.5db": true,
+          "no_new_clipping": true
+        }
+      },
+      "fallback_ratio_sweep_c0": [
+        {
+          "label": "fallback 2x",
+          "file": "quality_c0_r2.json",
+          "correlation": 0.99998432,
+          "rms_difference": 0.00064182,
+          "rms_difference_relative": 0.00560146,
+          "spectral_median_db": 0.0953,
+          "spectral_p95_db": 1.2138,
+          "spectral_max_db": 21.7976,
+          "per_band_median_db": {
+            "0-1k": 0.0088,
+            "1k-2k": 0.0271,
+            "2k-4k": 0.1123,
+            "4k-8k": 0.1849
+          },
+          "worst_frame_median_db": 0.7318,
+          "worst_frames": [
+            {
+              "frame": 92,
+              "time_s": 1.472,
+              "median_db": 0.7318
+            },
+            {
+              "frame": 93,
+              "time_s": 1.488,
+              "median_db": 0.7015
+            },
+            {
+              "frame": 96,
+              "time_s": 1.536,
+              "median_db": 0.674
+            },
+            {
+              "frame": 95,
+              "time_s": 1.52,
+              "median_db": 0.6663
+            },
+            {
+              "frame": 94,
+              "time_s": 1.504,
+              "median_db": 0.6493
+            }
+          ],
+          "peak": {
+            "reference": 0.79653931,
+            "candidate": 0.79653931,
+            "candidate_over_reference": 0.0,
+            "reference_clip_samples": 0,
+            "candidate_clip_samples": 0,
+            "candidate_peak_ok": true
+          },
+          "gate": {
+            "correlation_ge_0.995": true,
+            "spectral_median_le_0.5db": true,
+            "no_new_clipping": true
+          }
+        },
+        {
+          "label": "fallback 4x",
+          "file": "quality_c0_r4.json",
+          "correlation": 0.99991928,
+          "rms_difference": 0.00145603,
+          "rms_difference_relative": 0.0127074,
+          "spectral_median_db": 0.1745,
+          "spectral_p95_db": 1.685,
+          "spectral_max_db": 24.7753,
+          "per_band_median_db": {
+            "0-1k": 0.0124,
+            "1k-2k": 0.0467,
+            "2k-4k": 0.1984,
+            "4k-8k": 0.3157
+          },
+          "worst_frame_median_db": 1.1422,
+          "worst_frames": [
+            {
+              "frame": 201,
+              "time_s": 3.216,
+              "median_db": 1.1422
+            },
+            {
+              "frame": 200,
+              "time_s": 3.2,
+              "median_db": 1.0009
+            },
+            {
+              "frame": 110,
+              "time_s": 1.76,
+              "median_db": 0.9399
+            },
+            {
+              "frame": 111,
+              "time_s": 1.776,
+              "median_db": 0.8799
+            },
+            {
+              "frame": 172,
+              "time_s": 2.752,
+              "median_db": 0.8258
+            }
+          ],
+          "peak": {
+            "reference": 0.79653931,
+            "candidate": 0.79653931,
+            "candidate_over_reference": 0.0,
+            "reference_clip_samples": 0,
+            "candidate_clip_samples": 0,
+            "candidate_peak_ok": true
+          },
+          "gate": {
+            "correlation_ge_0.995": true,
+            "spectral_median_le_0.5db": true,
+            "no_new_clipping": true
+          }
+        },
+        {
+          "label": "fallback 8x (default)",
+          "file": "quality_c0_r8.json",
+          "correlation": 0.99982571,
+          "rms_difference": 0.00213974,
+          "rms_difference_relative": 0.01867438,
+          "spectral_median_db": 0.206,
+          "spectral_p95_db": 1.9267,
+          "spectral_max_db": 28.9635,
+          "per_band_median_db": {
+            "0-1k": 0.014,
+            "1k-2k": 0.0559,
+            "2k-4k": 0.2307,
+            "4k-8k": 0.3683
+          },
+          "worst_frame_median_db": 1.1433,
+          "worst_frames": [
+            {
+              "frame": 201,
+              "time_s": 3.216,
+              "median_db": 1.1433
+            },
+            {
+              "frame": 200,
+              "time_s": 3.2,
+              "median_db": 1.0289
+            },
+            {
+              "frame": 233,
+              "time_s": 3.728,
+              "median_db": 1.0271
+            },
+            {
+              "frame": 159,
+              "time_s": 2.544,
+              "median_db": 0.9546
+            },
+            {
+              "frame": 110,
+              "time_s": 1.76,
+              "median_db": 0.9399
+            }
+          ],
+          "peak": {
+            "reference": 0.79653931,
+            "candidate": 0.79653931,
+            "candidate_over_reference": 0.0,
+            "reference_clip_samples": 0,
+            "candidate_clip_samples": 0,
+            "candidate_peak_ok": true
+          },
+          "gate": {
+            "correlation_ge_0.995": true,
+            "spectral_median_le_0.5db": true,
+            "no_new_clipping": true
+          }
+        },
+        {
+          "label": "fallback 16x",
+          "file": "quality_c0_r16.json",
+          "correlation": 0.9998255,
+          "rms_difference": 0.002141,
+          "rms_difference_relative": 0.01868543,
+          "spectral_median_db": 0.2133,
+          "spectral_p95_db": 1.9845,
+          "spectral_max_db": 28.9635,
+          "per_band_median_db": {
+            "0-1k": 0.0142,
+            "1k-2k": 0.0566,
+            "2k-4k": 0.2388,
+            "4k-8k": 0.3806
+          },
+          "worst_frame_median_db": 1.1433,
+          "worst_frames": [
+            {
+              "frame": 201,
+              "time_s": 3.216,
+              "median_db": 1.1433
+            },
+            {
+              "frame": 200,
+              "time_s": 3.2,
+              "median_db": 1.0289
+            },
+            {
+              "frame": 233,
+              "time_s": 3.728,
+              "median_db": 1.0271
+            },
+            {
+              "frame": 111,
+              "time_s": 1.776,
+              "median_db": 1.0023
+            },
+            {
+              "frame": 159,
+              "time_s": 2.544,
+              "median_db": 0.9546
+            }
+          ],
+          "peak": {
+            "reference": 0.79653931,
+            "candidate": 0.79653931,
+            "candidate_over_reference": 0.0,
+            "reference_clip_samples": 0,
+            "candidate_clip_samples": 0,
+            "candidate_peak_ok": true
+          },
+          "gate": {
+            "correlation_ge_0.995": true,
+            "spectral_median_le_0.5db": true,
+            "no_new_clipping": true
+          }
+        }
+      ]
+    },
+    "stride_sweep_v0_c0": [
+      {
+        "label": "10 ms",
+        "file": "quality_m0_k1.json",
+        "correlation": 0.99681652,
+        "rms_difference": 0.00915005,
+        "rms_difference_relative": 0.07985631,
+        "spectral_median_db": 0.2713,
+        "spectral_p95_db": 2.5874,
+        "spectral_max_db": 35.2434,
+        "per_band_median_db": {
+          "0-1k": 0.0197,
+          "1k-2k": 0.0788,
+          "2k-4k": 0.2802,
+          "4k-8k": 0.4405
+        },
+        "worst_frame_median_db": 3.1842,
+        "worst_frames": [
+          {
+            "frame": 118,
+            "time_s": 1.888,
+            "median_db": 3.1842
+          },
+          {
+            "frame": 119,
+            "time_s": 1.904,
+            "median_db": 3.0174
+          },
+          {
+            "frame": 120,
+            "time_s": 1.92,
+            "median_db": 2.2299
+          },
+          {
+            "frame": 232,
+            "time_s": 3.712,
+            "median_db": 1.8921
+          },
+          {
+            "frame": 121,
+            "time_s": 1.936,
+            "median_db": 1.3828
+          }
+        ],
+        "peak": {
+          "reference": 0.79653931,
+          "candidate": 0.7850647,
+          "candidate_over_reference": -0.01147461,
+          "reference_clip_samples": 0,
+          "candidate_clip_samples": 0,
+          "candidate_peak_ok": true
+        },
+        "gate": {
+          "correlation_ge_0.995": true,
+          "spectral_median_le_0.5db": true,
+          "no_new_clipping": true
+        }
+      },
+      {
+        "label": "20 ms",
+        "file": "quality_m0_k2.json",
+        "correlation": 0.9842977,
+        "rms_difference": 0.02022552,
+        "rms_difference_relative": 0.17651649,
+        "spectral_median_db": 0.8731,
+        "spectral_p95_db": 7.5021,
+        "spectral_max_db": 41.2497,
+        "per_band_median_db": {
+          "0-1k": 0.0409,
+          "1k-2k": 0.2146,
+          "2k-4k": 0.9692,
+          "4k-8k": 1.367
+        },
+        "worst_frame_median_db": 5.3968,
+        "worst_frames": [
+          {
+            "frame": 201,
+            "time_s": 3.216,
+            "median_db": 5.3968
+          },
+          {
+            "frame": 200,
+            "time_s": 3.2,
+            "median_db": 5.2297
+          },
+          {
+            "frame": 119,
+            "time_s": 1.904,
+            "median_db": 4.8815
+          },
+          {
+            "frame": 118,
+            "time_s": 1.888,
+            "median_db": 3.8962
+          },
+          {
+            "frame": 233,
+            "time_s": 3.728,
+            "median_db": 3.446
+          }
+        ],
+        "peak": {
+          "reference": 0.79653931,
+          "candidate": 0.78347778,
+          "candidate_over_reference": -0.01306152,
+          "reference_clip_samples": 0,
+          "candidate_clip_samples": 0,
+          "candidate_peak_ok": true
+        },
+        "gate": {
+          "correlation_ge_0.995": false,
+          "spectral_median_le_0.5db": false,
+          "no_new_clipping": true
+        }
+      },
+      {
+        "label": "50 ms",
+        "file": "quality_m0_k5.json",
+        "correlation": 0.98317031,
+        "rms_difference": 0.02097484,
+        "rms_difference_relative": 0.18305613,
+        "spectral_median_db": 1.4859,
+        "spectral_p95_db": 11.6277,
+        "spectral_max_db": 53.5034,
+        "per_band_median_db": {
+          "0-1k": 0.1077,
+          "1k-2k": 0.4612,
+          "2k-4k": 1.5955,
+          "4k-8k": 2.3609
+        },
+        "worst_frame_median_db": 21.5531,
+        "worst_frames": [
+          {
+            "frame": 233,
+            "time_s": 3.728,
+            "median_db": 21.5531
+          },
+          {
+            "frame": 232,
+            "time_s": 3.712,
+            "median_db": 16.4187
+          },
+          {
+            "frame": 234,
+            "time_s": 3.744,
+            "median_db": 14.354
+          },
+          {
+            "frame": 235,
+            "time_s": 3.76,
+            "median_db": 7.8834
+          },
+          {
+            "frame": 200,
+            "time_s": 3.2,
+            "median_db": 5.945
+          }
+        ],
+        "peak": {
+          "reference": 0.79653931,
+          "candidate": 0.99996948,
+          "candidate_over_reference": 0.20343018,
+          "reference_clip_samples": 0,
+          "candidate_clip_samples": 5,
+          "candidate_peak_ok": false
+        },
+        "gate": {
+          "correlation_ge_0.995": false,
+          "spectral_median_le_0.5db": false,
+          "no_new_clipping": false
+        }
+      },
+      {
+        "label": "100 ms",
+        "file": "quality_m0_k10.json",
+        "correlation": 0.98123272,
+        "rms_difference": 0.02210064,
+        "rms_difference_relative": 0.19288143,
+        "spectral_median_db": 2.0755,
+        "spectral_p95_db": 15.4277,
+        "spectral_max_db": 68.0115,
+        "per_band_median_db": {
+          "0-1k": 0.2119,
+          "1k-2k": 0.7677,
+          "2k-4k": 2.1389,
+          "4k-8k": 3.3193
+        },
+        "worst_frame_median_db": 20.0676,
+        "worst_frames": [
+          {
+            "frame": 233,
+            "time_s": 3.728,
+            "median_db": 20.0676
+          },
+          {
+            "frame": 157,
+            "time_s": 2.512,
+            "median_db": 13.7622
+          },
+          {
+            "frame": 234,
+            "time_s": 3.744,
+            "median_db": 13.4772
+          },
+          {
+            "frame": 169,
+            "time_s": 2.704,
+            "median_db": 13.0078
+          },
+          {
+            "frame": 158,
+            "time_s": 2.528,
+            "median_db": 12.9566
+          }
+        ],
+        "peak": {
+          "reference": 0.79653931,
+          "candidate": 0.79248047,
+          "candidate_over_reference": -0.00405884,
+          "reference_clip_samples": 0,
+          "candidate_clip_samples": 0,
+          "candidate_peak_ok": true
+        },
+        "gate": {
+          "correlation_ge_0.995": false,
+          "spectral_median_le_0.5db": false,
+          "no_new_clipping": true
+        }
+      },
+      {
+        "label": "200 ms",
+        "file": "quality_m0_k20.json",
+        "correlation": 0.97844378,
+        "rms_difference": 0.0236647,
+        "rms_difference_relative": 0.2065316,
+        "spectral_median_db": 2.5355,
+        "spectral_p95_db": 20.9669,
+        "spectral_max_db": 80.1004,
+        "per_band_median_db": {
+          "0-1k": 0.3287,
+          "1k-2k": 1.0735,
+          "2k-4k": 2.726,
+          "4k-8k": 3.8669
+        },
+        "worst_frame_median_db": 22.4771,
+        "worst_frames": [
+          {
+            "frame": 157,
+            "time_s": 2.512,
+            "median_db": 22.4771
+          },
+          {
+            "frame": 156,
+            "time_s": 2.496,
+            "median_db": 21.3252
+          },
+          {
+            "frame": 204,
+            "time_s": 3.264,
+            "median_db": 21.0109
+          },
+          {
+            "frame": 203,
+            "time_s": 3.248,
+            "median_db": 18.7923
+          },
+          {
+            "frame": 117,
+            "time_s": 1.872,
+            "median_db": 17.987
+          }
+        ],
+        "peak": {
+          "reference": 0.79653931,
+          "candidate": 0.7953186,
+          "candidate_over_reference": -0.0012207,
+          "reference_clip_samples": 0,
+          "candidate_clip_samples": 0,
+          "candidate_peak_ok": true
+        },
+        "gate": {
+          "correlation_ge_0.995": false,
+          "spectral_median_le_0.5db": false,
+          "no_new_clipping": true
+        }
+      }
+    ],
+    "q1_failure_localization": {
+      "full": {
+        "correlation": 0.973247,
+        "rms_difference_relative": 0.24713
+      },
+      "skip_first_0_5s": {
+        "correlation": 0.998605,
+        "rms_difference_relative": 0.05282
+      },
+      "diff_energy_share_first_0_5s": 0.975,
+      "padded_leading_0_5s_silence": {
+        "failure_moves_to_onset_0_4_0_6s": true,
+        "onset_energy_share": 0.994,
+        "middle_1_4s_correlation": 0.999635
+      },
+      "onset_pulse_anchor_over_reference_filter_energy": [
+        0.8214,
+        0.6255,
+        0.4366,
+        0.2522,
+        0.3577
+      ],
+      "conclusion": "不是清浊比例敏感性，而是硬起音/突变处的时域平滑误差；双变体修正清浊错配，回退绕过突变。"
+    },
+    "peak_guard": {
+      "c0_baseline_peak": 0.796563723,
+      "c0_final_peak": 0.796566376,
+      "c0_final_clip_samples": 0,
+      "stride1_no_fallback_peak": 0.785115505,
+      "stride2_peak": 0.783509234,
+      "stride5_peak": 1.087760837,
+      "stride5_clipped": true,
+      "stride20_peak": 0.795371486,
+      "verdict": "默认 stride=1 + 回退 8× 峰值与基线一致、无削顶；粗锚点（stride 5）会削顶，禁止作为默认。"
+    }
+  },
+  "realtime_plan": {
+    "window": "上一块末锚点 + 当前块 20 锚点 + 下一块首锚点（预取）≈22 锚点；两整块+2 边界=42 锚点（最坏情况含两套变体）",
+    "memory_bytes_22_anchors": 180576,
+    "memory_bytes_42_anchors": 344736,
+    "update_strategy": "200 ms 参数块到达时计算 20 个新帧锚点（清浊边界 ±1 帧需要第二变体）；上一块末锚点保留插值；合成滞后 ≥1 块，下一块首锚点在需要前到达；惰性预取把 13 ms 突发摊平为每 ~5 ms 0.65 ms。",
+    "compute_per_200ms_ms": {
+      "anchors": 13.0,
+      "fallback_pulses": 4.0,
+      "total": 17.0,
+      "current_offline_synthesis_ms": 74.0,
+      "after_optimization_ms": 91.0,
+      "wall_budget_ms": 200.0
+    },
+    "retained_benefit": {
+      "offline_delta_rtf_c0": -0.16,
+      "expected_stream_retained_fraction": "≈1.0（调用次数与离线相同：100 锚点/s）",
+      "conservative_stream_delta_rtf": "-0.14 ~ -0.16",
+      "notes": "折扣项：FIFO/调度/缓存；锚点窗口更小更易命中 L2（偏正）；未实现惰性预取时预留 10–15% 余量。"
+    },
+    "implementation_order": [
+      "在 synthesisrealtime.cpp 复刻锚点表 + 回退（API 不变）",
+      "现有流式主机 16 项检查 + PCM 对比",
+      "板端 60 s 零欠载门槛",
+      "再评估与 PL 卸载的叠加（收益重叠：本项已省 1364/2919 次最小相位调用）"
+    ],
+    "status": "DESIGN_AND_ESTIMATE_ONLY_NOT_IMPLEMENTED"
+  },
+  "listening_comparison": {
+    "path": "data/registrations/source_20261015/speaker01/psopt_comparison/psopt_comparison.wav",
+    "manifest": "data/registrations/source_20261015/speaker01/psopt_comparison/comparison_manifest.json",
+    "order": [
+      "baseline_synthesis",
+      "optimized_synthesis",
+      "target_reference"
+    ],
+    "duration_s": 17.4,
+    "rate": 32000,
+    "segment_seconds": 4.8,
+    "gap_seconds": 1.0,
+    "leading_silence_seconds": 1.0,
+    "common_rms": 0.08,
+    "peak": 0.5899205339523916,
+    "clip_fraction": 0.0,
+    "wav_sha256": "72d1bbe47d02f1c70d5aea03592c811267d5160b69f788caf75a96ec51313c3d",
+    "gzip_sha256": "5c945f8fb5a6a711de9097fb0ea663bf72ce57381edfba3115be30c740cd4b9e",
+    "content": "target_t5_8 素材 2.8493 s 起 4.8 s（q2 验证片段）",
+    "uploaded": false,
+    "played": false
+  },
+  "risks": [
+    "残余时域平滑误差：回退未覆盖的能量平缓但相位快变区间仍有小误差（p95 2.0–2.7 dB）；需真人听感。",
+    "回退比例随素材变化（c0/q1/q2/q3 = 6.8/9.1/10.5/10.9%），收益从 −0.160 到 −0.104 波动；极端素材会更低。",
+    "硬起音/首帧是主要误差源，实时化后需流式回归确认。",
+    "实时化未实现（只有设计与估算），无流式实测证据。",
+    "离线锚点表约 4.1 MB；流式滚动窗口 180–345 KB，L2/调度行为待板端验证。",
+    "与 PL 卸载最小相位收益重叠，PL 优先级需重估。",
+    "宿主/ARM 输出逐位一致，但任何后续改动（如 mode1）需重过质量门槛。"
+  ],
+  "verdict": {
+    "recommended": "采纳 10 ms 帧锚点 + 双 vuv 变体 + 过渡段回退 8×",
+    "why": "4 句质量全过且余量大；板端合成 −19%~−36%，全链 RTF −0.104~−0.160；纯 PS、无 PL、确定性可复现。",
+    "rejected": [
+      "200 ms 批量（原候选 c 字面形态）：相关 0.978、谱差中位 2.54 dB，明确不达标。",
+      "不回退版本：q1 类硬起音素材相关 0.974，不达标。",
+      "mode1 幅值校正插值：板上合成 +0.26 s 换小幅质量，不划算。"
+    ],
+    "before_adoption": [
+      "真人 A/B 听感（文件已备好，未播放）",
+      "实时流式改造 + 主机 16 项检查 + 60 s 零欠载",
+      "重新评估 PL 卸载优先级"
+    ]
+  },
+  "evidence": {
+    "board_logs": [
+      "report/ps_opt_aperiodic_c_board.log",
+      "report/ps_opt_aperiodic_c_board_extra.log",
+      "report/ps_opt_aperiodic_c_multisent_board.log"
+    ],
+    "quality_json": "build/generated/ps_opt_20261018/quality_*.json, build/generated/ps_opt_20261018/quality_inputs/quality_*.json",
+    "build_manifest": "build/generated/ps_opt_20261018/build_manifest.json",
+    "listening_manifest": "data/registrations/source_20261015/speaker01/psopt_comparison/comparison_manifest.json"
+  },
+  "limitations": [
+    "4 句（c0 + 3 个 5 s 片段）验证，未覆盖极端低音/高音/长静音；未做真人听感（规则禁止播放）。",
+    "实时化只有设计与估算，未实现流式版本、未做实时回归。",
+    "回退阈值 8× 为 4 句折中，未做听感调参。",
+    "ARM 基线与历史人工报告不同（本轮统一新基线 flags，−2.6%，与给定结论一致）。",
+    "听感对照的目标原声为 16 kHz 注册素材，按既有约定 16 k→32 k；仅作相对 A/B。"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "kind": "causal_content_bottleneck_training_smoke",
+  "date": "2026-10-18",
+  "architecture": {
+    "latent_dim": 32,
+    "parameters": 54520,
+    "source_spectrum_output_skip": false,
+    "source_energy_output_skip": false,
+    "source_periodicity_output_skip": false,
+    "prosody": [
+      "causal_relative_energy",
+      "causal_relative_f0",
+      "voiced_flag",
+      "causal_energy_delta"
+    ]
+  },
+  "data_split": {
+    "train_pairs": 240,
+    "train_speakers": 20,
+    "heldout_pairs": 8,
+    "heldout_speakers": [
+      "SSB0080",
+      "SSB0434"
+    ],
+    "speaker_leakage": false,
+    "normalization_uses_train_only": true
+  },
+  "smoke_run": {
+    "epochs_completed": 1,
+    "steps_completed": 2,
+    "crop_frames": 64,
+    "batch_size": 4,
+    "train_total_loss": 0.95616,
+    "validation_total_loss": 0.5647000931203365,
+    "checkpoint": "build/generated/quality_exploration_20261018/causal_content_bottleneck_smoke.pt",
+    "checkpoint_sha256": "550c6e65954e0db44d1bf4543cb57c08c73b753f5034c717595ae9f25d1c9e7a"
+  },
+  "verification": {
+    "unit_tests_passed": 8,
+    "causal_prefix_max_abs": 0.0,
+    "deterministic_output_max_abs": 0.0,
+    "deterministic_gradient_max_abs": 0.0,
+    "checkpoint_metadata_reloaded": true,
+    "long_training_started": false
+  },
+  "limitations": [
+    "Random-initialization losses are health checks and have no quality meaning.",
+    "The current experiment is fixed-target and cannot establish unseen-target registration.",
+    "No waveform synthesis, objective quality gate, listening, export, or board integration was performed."
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "kind": "bounded_low_frequency_guard_offline_gate",
+  "results": {
+    "source": {
+      "attenuated_frames": 86,
+      "voiced_frames_attenuated": 0,
+      "minimum_frequency_gain": 0.5011872336272722,
+      "maximum_gain_difference_above_100hz": 0.0,
+      "maximum_attenuation_db": 6,
+      "offline_only": true,
+      "wav_sha256": "477ccbe823f1b8fc93bfb42c084e5c8e9a1b4b57c5b37b4792cf1d3cb6f0e6b5",
+      "peak": 0.2609750413681066,
+      "raw_clip_samples": 0,
+      "full_signal_difference_rms": 0.005698141539532285,
+      "played_crop_difference_over_signal_rms": 0.015307177643138459,
+      "waveform_sample_alignment_preserved": true,
+      "played_crop_below90hz_power_ratio_after_before": 0.9032197505928792
+    },
+    "old_fixed": {
+      "attenuated_frames": 0,
+      "voiced_frames_attenuated": 0,
+      "minimum_frequency_gain": 1.0,
+      "maximum_gain_difference_above_100hz": 0.0,
+      "maximum_attenuation_db": 6,
+      "offline_only": true,
+      "wav_sha256": "be670efcee2f7dd540a1d202a841518423133bdfc8b23faace732a6faa0b5d57",
+      "peak": 0.37295532226562506,
+      "raw_clip_samples": 0,
+      "full_signal_difference_rms": 1.8706563760347096e-18,
+      "played_crop_difference_over_signal_rms": 2.087823475919409e-16,
+      "waveform_sample_alignment_preserved": true,
+      "played_crop_below90hz_power_ratio_after_before": 0.9999999999999998
+    }
+  },
+  "configuration_sha256": "7aac203c811ce78be80317bbd6c8ef4c24439d6ee3e21dc092393cb8ef583cf0",
+  "configuration_changed": false,
+  "new_recording_or_playback": false,
+  "limitations": "Only low-frequency-dominant unvoiced coefficient frames targeted, max6dB; overlap/add can affect samples neighboring voiced boundaries. Acoustic candidates lack manual breath labels. Does not treat glottal rasp or source identity. 64ms centered offline frames, not a validated causal realtime implementation. No subjective or target identity acceptance."
+}

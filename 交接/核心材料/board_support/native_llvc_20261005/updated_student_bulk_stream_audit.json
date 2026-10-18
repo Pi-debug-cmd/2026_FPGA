@@ -1,0 +1,50 @@
+{
+  "comparisons": [
+    {
+      "name": "96initial",
+      "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_budget_20261005\\student_corpus\\audio\\SSB04340036.wav",
+      "checkpoint": "None",
+      "normalized_rmse": 0.001219723024405539,
+      "max_abs": 0.0021801963448524475,
+      "bulk_rms": 0.03911856561899185,
+      "stream_rms": 0.03911980614066124
+    },
+    {
+      "name": "96step6400",
+      "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_budget_20261005\\student_corpus\\audio\\SSB04340036.wav",
+      "checkpoint": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_budget_20261005\\small96_identity_training\\checkpoint_step4000.pt",
+      "normalized_rmse": 0.0070610144175589085,
+      "max_abs": 0.019784554839134216,
+      "bulk_rms": 0.05865536630153656,
+      "stream_rms": 0.05866413563489914
+    },
+    {
+      "name": "96step9200",
+      "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_budget_20261005\\student_corpus\\audio\\SSB04340036.wav",
+      "checkpoint": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_budget_20261005\\small96_noise_refinement\\checkpoint_step1200.pt",
+      "normalized_rmse": 0.005520417355000973,
+      "max_abs": 0.01191827654838562,
+      "bulk_rms": 0.0536344014108181,
+      "stream_rms": 0.05363810434937477
+    },
+    {
+      "name": "96phonetic",
+      "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_budget_20261005\\student_corpus\\audio\\SSB04340036.wav",
+      "checkpoint": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_budget_20261005\\small96_phonetic_pilot\\checkpoint_step400.pt",
+      "normalized_rmse": 0.006265302654355764,
+      "max_abs": 0.017511744052171707,
+      "bulk_rms": 0.060576602816581726,
+      "stream_rms": 0.06058697775006294
+    },
+    {
+      "name": "128initial",
+      "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_budget_20261005\\student_corpus\\audio\\SSB04340036.wav",
+      "checkpoint": "None",
+      "normalized_rmse": 0.009791026823222637,
+      "max_abs": 0.0015609990805387497,
+      "bulk_rms": 0.004473126493394375,
+      "stream_rms": 0.004474926274269819
+    }
+  ],
+  "scope": "single existing public validation source, not quality approval"
+}

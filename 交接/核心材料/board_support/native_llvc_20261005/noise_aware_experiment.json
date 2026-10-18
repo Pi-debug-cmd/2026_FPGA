@@ -1,0 +1,79 @@
+{
+  "candidate": "small96_noise_aware_step10400",
+  "parent_total_steps": 9200,
+  "fixed_finetuning_steps": 1200,
+  "parent_checkpoint": "board_budget_20261005/small96_noise_refinement/checkpoint_step1200.pt",
+  "training_speakers_unchanged": true,
+  "validation_test_speakers_not_in_weight_updates": true,
+  "geometry": "E96_D48_173456_parameters, existing native kernel",
+  "speech_rms_range": [
+    0.003,
+    0.1
+  ],
+  "paired_clean_noisy_source_same_content": true,
+  "speech_noise_snr_db": [
+    8,
+    30
+  ],
+  "quiet_noise_rms_range": [
+    5e-05,
+    0.02
+  ],
+  "colored_noise_and_50_60_76p9hz_harmonics": true,
+  "spectral_weight": 5,
+  "content_weight": 12,
+  "speaker_identity_weight": 0.75,
+  "quiet_weight": 6,
+  "sample_consistency_weight": 2,
+  "starting_from_existing_teacher_pairs": true,
+  "not_actual_mic_noise_data": true,
+  "current_board": "accepted original passthrough; no changed candidate weights deployed",
+  "evaluation_plan": "unchanged8-validation Chinese ASR plus same2 public weak-input/colored-noise diagnosis, synthetic quiet diagnosis; rejection screens only, human audition still required",
+  "target_quality_accepted": false,
+  "runtime_gate_added": false,
+  "user_audio_saved": false,
+  "training_complete": true,
+  "training_seconds": 229.81968449999113,
+  "model_sha256": "0fbbedebd0e4283c281a0826d0e03e07264b85fb2a50dc55fc871d4f1fa2f6a8",
+  "offline_rejection_screen": {
+    "checks": {
+      "normal_chinese_no_worse_than_6400": false,
+      "weak_clean_no_worse_than_9200": false,
+      "weak_noisy_chinese_improved": false,
+      "colored_quiet_at_least_6db_lower_than_9200": false,
+      "zero_output_quiet": true,
+      "normal_public_speech_not_suppressed": true
+    },
+    "offline_rejection_screen_passed": false,
+    "validation_chinese": {
+      "split": "validation",
+      "kind": "student",
+      "characters": 152,
+      "edits": 25,
+      "mean_target_cosine": 0.6762964129447937
+    },
+    "weak_gain1_clean": {
+      "condition": "weak_clean",
+      "gain": 1,
+      "edits": 12,
+      "characters": 40,
+      "mean_quiet_rms": 1.2161617632955313e-05
+    },
+    "weak_gain1_noise": {
+      "condition": "weak_synthetic_colored_noise",
+      "gain": 1,
+      "edits": 22,
+      "characters": 40,
+      "mean_quiet_rms": 0.0009887210617307574
+    },
+    "model_sha256": "0fbbedebd0e4283c281a0826d0e03e07264b85fb2a50dc55fc871d4f1fa2f6a8",
+    "human_quality_accepted": false,
+    "asr_not_pronunciation_approval": true,
+    "target_timbre_accepted": false,
+    "actual_mic_noise_not_evaluated": true,
+    "board_candidate_not_deployed": true,
+    "fixed_final_checkpoint_not_test_selected": true
+  },
+  "candidate_rejected": true,
+  "board_candidate_not_deployed": true
+}

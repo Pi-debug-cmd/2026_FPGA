@@ -1,0 +1,69 @@
+{
+  "kind": "world_convert_board_closed_loop",
+  "date": "2026-10-17",
+  "board": {
+    "port": "COM14",
+    "os": "PetaLinux 2022.2",
+    "kernel": "5.15.0-xilinx",
+    "remote_dir": "/tmp/codex_convert_20261017"
+  },
+  "run_log": "report/world_convert_board_20261017.log",
+  "waveform_arm_vs_host": {
+    "seconds_arm": 20.0,
+    "seconds_host": 20.0,
+    "max_abs_diff": 0.0,
+    "correlation": 1.0,
+    "spectral_per_bin_abs_db_max": 0.0,
+    "spectral_per_bin_abs_db_median": 0.0,
+    "total_energy_db": 0.0
+  },
+  "metrics_on_board_output": {
+    "identity_cosine_to_target_centroid": 0.1902761307047773,
+    "leakage_cosine_to_source_window": 0.17185976099719308,
+    "utmos_predicted": 2.035435676574707,
+    "asr_text": "在下午我沿着小路走到公园听见树生的鸟叫",
+    "content_cer_vs_source": {
+      "reference_chars": 18,
+      "hypothesis_chars": 19,
+      "distance": 3,
+      "cer": 0.16666666666666666
+    },
+    "source_asr_text": "下午我沿着小路走到公园听见书上的鸟叫",
+    "segments": [
+      {
+        "start_seconds": 0.0,
+        "seconds": 4.8
+      }
+    ],
+    "seconds": 4.8,
+    "voiced_fraction": 0.5987525987525988,
+    "f0_median_hz": 191.6100051721833,
+    "f0_p10_hz": 165.2543402912199,
+    "f0_p90_hz": 245.01747819321238
+  },
+  "historical_reference_window": {
+    "world_old_window": {
+      "identity": 0.216,
+      "leakage": 0.3833,
+      "utmos": 2.095
+    },
+    "seed30_window": {
+      "identity": 0.5509,
+      "leakage": 0.0205,
+      "utmos": 2.736
+    },
+    "target_self_pairwise_mean": 0.9106
+  },
+  "failures": [],
+  "audio_played": false,
+  "recorded": false,
+  "alsa_touched": false,
+  "pl_switched": false,
+  "limitations": [
+    "板上只做文件读写，未接触 ALSA、未播放、未录音、未切 PL；不是实时链路。",
+    "输入为已有开发句，不是现场录音；注册画像来自已有目标录音切片，不是现场注册。",
+    "映射为逐频点 ±3dB 钳位版本（无 24 阶倒谱平滑），与历史配方不同，不能与历史数字直接等同。",
+    "仍然只有一个源说话人、一句开发语音，非盲评；身份数值只作横向参考。",
+    "ARM 与宿主波形不逐点相同（同一 WORLD 源的两次编译），判据为相关与频谱偏差。"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\deploy_runtime\\deploy_neon_red_v2",
+  "remote": "/home/root/native_llvc_trial_20261005/deploy_neon_red_v2",
+  "sha256": "6025ffc00ecb5b9d6572b44b2fd490f8fca3819029a4d17cf1aba0d82b270d1d",
+  "bytes": 39680,
+  "seconds": 3.219000000000051,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

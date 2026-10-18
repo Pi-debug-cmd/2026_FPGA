@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\deploy_runtime\\profile_reduced_stages_v3",
+  "remote": "/home/root/native_llvc_trial_20261005/profile_reduced_stages_v3",
+  "sha256": "7ed38897a32d6a2a5530126f47eb2eb38d4d966cca87325d12fea18b96e14fde",
+  "bytes": 43892,
+  "seconds": 3.438000000000102,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

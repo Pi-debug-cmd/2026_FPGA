@@ -1,0 +1,2 @@
+out0=3.0 out1=7.0 out255=1023.0
+weight shape (256, 2, 1)

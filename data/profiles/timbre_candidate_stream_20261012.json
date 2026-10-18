@@ -1,0 +1,22 @@
+{
+    "version":  1,
+    "kind":  "offline_world_persistent_synthesis_candidate",
+    "status":  "listening_slightly_blurred_batch_reference_preferred",
+    "selected_output":  "data/registrations/source_20261011/world_stream_comparison_20261012/stream5_arm.wav",
+    "selected_output_sha256":  "b195736de5f3a820faf7a08084cad8ad49ad59fcc9c3f8ddba160fd30f26a290",
+    "ratio_q16":  108722,
+    "effective_formant_warp":  1.0975,
+    "mean_spectrum_correction":  false,
+    "frame_period_ms":  10,
+    "parameter_block_frames":  5,
+    "synthesis_output_samples":  128,
+    "analysis_rate":  16000,
+    "fft_size":  1024,
+    "f0_estimator":  "dio_stonemask_energy_gate_voiced_run_median3",
+    "analysis_mode":  "whole_recording_offline",
+    "synthesis_api":  "WORLD_AddParameters_Synthesis2",
+    "realtime_accepted":  false,
+    "speaker_identity_accepted":  false,
+    "user_feedback":  "三段都可听，持续合成略模糊、差别不大，批量版本第二段最好",
+    "work_state":  "paused_at_user_request_20261012"
+}

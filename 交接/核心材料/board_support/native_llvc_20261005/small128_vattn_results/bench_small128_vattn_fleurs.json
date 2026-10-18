@@ -1,0 +1,1 @@
+{"samples":166080,"chunks":799,"audio_seconds":10.38,"inference_seconds":9.68071,"mean_chunk_ms":12.1009,"max_chunk_ms":16.1425,"peak_rss_kib":4700,"threads":2,"core":"native_fp32_vector_attention_candidate","source_enrollment":false,"real_time_verified":false,"quality_accepted":false}

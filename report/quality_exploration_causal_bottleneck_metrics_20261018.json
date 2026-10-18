@@ -1,0 +1,219 @@
+{
+  "kind": "causal_content_bottleneck_heldout_objective_evaluation",
+  "date": "2026-10-18",
+  "checkpoint_sha256": "848d682e2ac6e3546fe1e8f26295d6fb251fcceef09ac8b17eccae8a31d6b498",
+  "protocol": "current WeSpeaker centroid + UTMOS22 strong + offline whisper-small",
+  "rows": [
+    {
+      "filename": "SSB04340036",
+      "speaker": "SSB0434",
+      "seconds": 4.5,
+      "identity_to_target_centroid": 0.6816073140366861,
+      "source_leakage_cosine": 0.11276617355908179,
+      "utmos_predicted": 1.6610866785049438,
+      "source_asr": "不一定按照第二次往前审報的交低價格來徵稅",
+      "candidate_asr": "不如按照第二次房间升高的交易价格来找谁",
+      "content_cer_raw": {
+        "reference_chars": 20,
+        "hypothesis_chars": 19,
+        "distance": 11,
+        "cer": 0.55
+      },
+      "content_cer_script_normalized": {
+        "reference_chars": 20,
+        "hypothesis_chars": 19,
+        "distance": 10,
+        "cer": 0.5
+      }
+    },
+    {
+      "filename": "SSB04340089",
+      "speaker": "SSB0434",
+      "seconds": 7.61,
+      "identity_to_target_centroid": 0.6632765342333736,
+      "source_leakage_cosine": 0.13271743258196483,
+      "utmos_predicted": 1.4816477981722778,
+      "source_asr": "張繼柯霸賽另有眼前與平與中心各罰5萬了事",
+      "candidate_asr": "張妮可,半分沒有一點強尼心裡中心,惡法無法了解",
+      "content_cer_raw": {
+        "reference_chars": 20,
+        "hypothesis_chars": 21,
+        "distance": 16,
+        "cer": 0.8
+      },
+      "content_cer_script_normalized": {
+        "reference_chars": 20,
+        "hypothesis_chars": 21,
+        "distance": 16,
+        "cer": 0.8
+      }
+    },
+    {
+      "filename": "SSB04340076",
+      "speaker": "SSB0434",
+      "seconds": 5.1,
+      "identity_to_target_centroid": 0.621519807834557,
+      "source_leakage_cosine": 0.07933833758704617,
+      "utmos_predicted": 1.426211953163147,
+      "source_asr": "孫陽現在在蘇州大學讀體育教育專業的研究生",
+      "candidate_asr": "索尹现在在蘇州大学都提议教育专业的研究生。",
+      "content_cer_raw": {
+        "reference_chars": 20,
+        "hypothesis_chars": 20,
+        "distance": 9,
+        "cer": 0.45
+      },
+      "content_cer_script_normalized": {
+        "reference_chars": 20,
+        "hypothesis_chars": 20,
+        "distance": 8,
+        "cer": 0.4
+      }
+    },
+    {
+      "filename": "SSB04340118",
+      "speaker": "SSB0434",
+      "seconds": 5.1,
+      "identity_to_target_centroid": 0.5979386946994685,
+      "source_leakage_cosine": 0.18728492151601805,
+      "utmos_predicted": 1.5617095232009888,
+      "source_asr": "子女们可以通过手机调节摄像头的角度",
+      "candidate_asr": "說你們可以通過手機調節,設下合根角度",
+      "content_cer_raw": {
+        "reference_chars": 17,
+        "hypothesis_chars": 17,
+        "distance": 11,
+        "cer": 0.6470588235294118
+      },
+      "content_cer_script_normalized": {
+        "reference_chars": 17,
+        "hypothesis_chars": 17,
+        "distance": 9,
+        "cer": 0.5294117647058824
+      }
+    },
+    {
+      "filename": "SSB00800053",
+      "speaker": "SSB0080",
+      "seconds": 6.78,
+      "identity_to_target_centroid": 0.6541110848361121,
+      "source_leakage_cosine": 0.3303469115466813,
+      "utmos_predicted": 1.6300208568572998,
+      "source_asr": "金融接控股宣布安邦保险已增持至20%",
+      "candidate_asr": "金融界恐怖宣布帆幫保險已增持至百分之二十。",
+      "content_cer_raw": {
+        "reference_chars": 18,
+        "hypothesis_chars": 20,
+        "distance": 11,
+        "cer": 0.6111111111111112
+      },
+      "content_cer_script_normalized": {
+        "reference_chars": 18,
+        "hypothesis_chars": 20,
+        "distance": 11,
+        "cer": 0.6111111111111112
+      }
+    },
+    {
+      "filename": "SSB00800102",
+      "speaker": "SSB0080",
+      "seconds": 6.06,
+      "identity_to_target_centroid": 0.6809902797307552,
+      "source_leakage_cosine": 0.2786229908631164,
+      "utmos_predicted": 1.721421241760254,
+      "source_asr": "他5月底又被報和朋友到新電山中聚會玩通宵。",
+      "candidate_asr": "他五月底要背包和朋友到新疊山中机会玩风笑。",
+      "content_cer_raw": {
+        "reference_chars": 20,
+        "hypothesis_chars": 20,
+        "distance": 9,
+        "cer": 0.45
+      },
+      "content_cer_script_normalized": {
+        "reference_chars": 20,
+        "hypothesis_chars": 20,
+        "distance": 8,
+        "cer": 0.4
+      }
+    },
+    {
+      "filename": "SSB00800018",
+      "speaker": "SSB0080",
+      "seconds": 6.54,
+      "identity_to_target_centroid": 0.7034919453392903,
+      "source_leakage_cosine": 0.38181327746631444,
+      "utmos_predicted": 2.089611053466797,
+      "source_asr": "參賽作品突出國際化,創新創意的全新設計理念",
+      "candidate_asr": "穿上作品偷修国际化,穿星穿一岛全星设计里面。",
+      "content_cer_raw": {
+        "reference_chars": 20,
+        "hypothesis_chars": 20,
+        "distance": 16,
+        "cer": 0.8
+      },
+      "content_cer_script_normalized": {
+        "reference_chars": 20,
+        "hypothesis_chars": 20,
+        "distance": 16,
+        "cer": 0.8
+      }
+    },
+    {
+      "filename": "SSB00800067",
+      "speaker": "SSB0080",
+      "seconds": 4.47,
+      "identity_to_target_centroid": 0.6627923020746448,
+      "source_leakage_cosine": 0.28820825133154887,
+      "utmos_predicted": 1.7910391092300415,
+      "source_asr": "傑森在我們手上受了很痛苦的折磨",
+      "candidate_asr": "接受照顧,受傷受了很痛苦的僵硬。",
+      "content_cer_raw": {
+        "reference_chars": 15,
+        "hypothesis_chars": 14,
+        "distance": 9,
+        "cer": 0.6
+      },
+      "content_cer_script_normalized": {
+        "reference_chars": 15,
+        "hypothesis_chars": 14,
+        "distance": 9,
+        "cer": 0.6
+      }
+    }
+  ],
+  "summary": {
+    "utterances": 8,
+    "heldout_speakers": [
+      "SSB0080",
+      "SSB0434"
+    ],
+    "identity_mean": 0.6582159953481109,
+    "identity_p10": 0.6144454738940304,
+    "identity_min": 0.5979386946994685,
+    "source_leakage_mean": 0.22388728705647148,
+    "source_leakage_p90": 0.3457868213225712,
+    "source_leakage_max": 0.38181327746631444,
+    "utmos_mean": 1.6703435267944686,
+    "utmos_min": 1.426211953163147,
+    "cer_mean": 0.5800653594771241,
+    "cer_p90": 0.8,
+    "cer_max": 0.8
+  },
+  "gates": {
+    "identity_mean_at_least_0_45": true,
+    "identity_p10_at_least_0_35": true,
+    "source_leakage_mean_at_most_0_10": false,
+    "utmos_mean_at_least_2_3": false,
+    "cer_mean_at_most_0_15": false,
+    "cer_degradation_at_most_0_05": false
+  },
+  "all_objective_gates_pass": false,
+  "board_touched": false,
+  "audio_played": false,
+  "limitations": [
+    "The teacher and model are fixed-target; unseen-target registration is not tested.",
+    "The heldout set has two source speakers and eight utterances.",
+    "CER uses source ASR as its reference and explicit observed-character script normalization.",
+    "Objective metrics do not replace a later blind listening gate."
+  ]
+}

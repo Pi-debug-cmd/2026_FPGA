@@ -1,0 +1,45 @@
+{
+  "what": "PS 侧非周期支路优化评估（只读分析，未及板上原型：本会话预算耗尽，按 Lead 规则停手上报）",
+  "date": "2026-10-18",
+  "status": "ANALYSIS_ONLY_NO_BOARD_MEASUREMENT",
+  "given_board_numbers": {
+    "audio_s": 1.01,
+    "pulses": 215,
+    "voiced_pulses": 93,
+    "minphase_calls": 308,
+    "fft_total": 1139,
+    "aperiodic_total_s": 0.1861,
+    "aper_minphase_s": 0.1163,
+    "aper_noise_s": 0.0209,
+    "aper_log_s": 0.0183,
+    "aper_residual_s": 0.0306,
+    "periodic_s": 0.0880,
+    "ola_s": 0.0033,
+    "timebase_s": 0.0114,
+    "per_log_s": 0.0088
+  },
+  "item_split": {
+    "fft_per_pulse": {"unvoiced": 4, "voiced": 7},
+    "fft_total_check": "122*4 + 93*7 = 488 + 651 = 1139（与实测一致，说明拆解模型自洽）",
+    "fixed_vs_variable": "每脉冲固定：4 次 FFT（未发声）/7 次（发声）+ 513 log + 513 exp/cos/sin（每次最小相位调用）；随参数变化：aper_noise 与 noise_size、aper_log 与 vuv 分支、最小相位次数 = 脉冲数 + 发声脉冲数"
+  },
+  "candidates": {
+    "a_reduce_unvoiced_fft": {
+      "idea": "未发声脉冲 4 次 FFT：噪声前向 FFT 可改为频域直接随机谱（省 1 次）；最小相位/逆 FFT 不可省",
+      "expected_saving": "约 1/4 的未发声 FFT 时间；按 0.0209 中 FFT 占约一半估，约省 0.005-0.01 s/1.01s 音频（RTF 约 -0.005~-0.01）",
+      "risk": "低（统计等价），需验证随机谱分布与白噪声 FFT 一致"
+    },
+    "b_reuse_noise_spectrum": {
+      "idea": "参数 200 ms 不变时缓存噪声谱/最小相位结果，变化小则跳过",
+      "expected_saving": "未发声脉冲最多省 3/4 FFT；上限约 0.03-0.06 s/1.01s（RTF -0.03~-0.06）",
+      "risk": "中高：噪声冻结会产生可闻相关性/“嗡”声，擦音尤其明显；需每脉冲重随机相位，收益会打折"
+    },
+    "c_batch_aperiodic_minphase": {
+      "idea": "非周期最小相位延迟/批量到 200 ms 参数更新时计算，脉冲间插值复谱",
+      "expected_saving": "aper_minphase 0.1163 是最大单项，按 200 脉冲/s vs 5 次更新/s 估，理论上可省 ~0.10 s/1.01s（RTF 约 -0.10），是唯一能显著推动全链的项",
+      "risk": "中：复谱插值/相位误差影响音质；需以相关/RMS/谱差 + 听感门控验证"
+    }
+  },
+  "recommendation": "值不值得：单做 a) 收益太小（<0.01 RTF）不划算；b) 听感风险高；c) 收益最大且参数本就是 200 ms 更新，值得优先做原型。建议顺序：c) -> a) -> 暂不做 b)。",
+  "next": "需另起会话在副本 build/generated/pl_synth_offload/aperiodic_opt/ 做原型 + ARM 板端实测（新基线 -O3 -funroll-loops -fno-math-errno -fno-trapping-math -std=c++11 -mcpu=cortex-a9 -mfpu=neon -mfloat-abi=hard -ffp-contract=off），报告 RTF 与相关/RMS/谱差"
+}

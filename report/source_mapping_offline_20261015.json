@@ -1,0 +1,117 @@
+{
+  "date": "2026-10-15",
+  "kind": "offline_single_source_disjoint_segment_gate",
+  "source": "data\\registrations\\source_20261011\\capture.wav",
+  "source_sha256": "99d39268c2855fb9704727d1fccb1cf09abe502d07dff6c96bd1db4b25f666f3",
+  "split_sample_16k": 120000,
+  "calibration_seconds": 7.5,
+  "test_seconds": 7.5,
+  "calibration_voiced_frames": 406,
+  "test_voiced_frames": 154,
+  "target_enrollment": [
+    {
+      "path": "voice_src\\src_1\\Track 5(1).wav",
+      "sha256": "c3a50c67c7d29a77c482067272624c3a196ed6421dcf11099b5827ccb65e09e3",
+      "channel": 0
+    },
+    {
+      "path": "voice_src\\src_1\\Track 6(1).wav",
+      "sha256": "92ac22ae3f5674e8e5b49c296e0b1c35f38347c72081c3e56e570091f82ffbfa",
+      "channel": 0
+    },
+    {
+      "path": "voice_src\\src_1\\Track 7(1).wav",
+      "sha256": "942b113534ff1e5af211b57a1db7419d1f9e9ba08e1944475931e393671bf5b1",
+      "channel": 0
+    },
+    {
+      "path": "voice_src\\src_1\\Track 8(1).wav",
+      "sha256": "4e07e8ebf0deba90db76de70aec293f544c4695b43bdfec4d6037c3fb7f888f3",
+      "channel": 0
+    }
+  ],
+  "target_holdout_not_loaded": "voice_src\\src_1\\Track 9(1).wav",
+  "pitch_mapping": {
+    "kind": "experimental_source_target_log_f0",
+    "source": {
+      "log_median": 4.763759684148883,
+      "log_p10": 4.683835020598813,
+      "log_p90": 4.850151948119574,
+      "voiced_frames": 406
+    },
+    "target": {
+      "log_median": 5.261408563588507,
+      "log_p10": 5.143287588499806,
+      "log_p90": 5.426325838447676,
+      "voiced_frames": 6750
+    },
+    "scale": 1.7018006174539129,
+    "output_bounds_hz": [
+      75.0,
+      400.0
+    ],
+    "low_source_spread_fallback": false,
+    "speaker_identity_accepted": false
+  },
+  "common_archive_gain": 1.0,
+  "variants": {
+    "identity": {
+      "parameter_f0_median_hz": 114.52910691952675,
+      "parameter_f0_p10_p90_hz": [
+        107.68717970747701,
+        128.5306821757219
+      ],
+      "raw_peak": 0.3018061280095637,
+      "raw_clip_samples": 0,
+      "wav_sha256": "6312e82a5e8021ee155d8d55d8df8d607fb19cede4aa54db571058d19b9ef69a"
+    },
+    "fixed_pitch_only": {
+      "parameter_f0_median_hz": 189.99990177161848,
+      "parameter_f0_p10_p90_hz": [
+        178.64937671136957,
+        213.22803997053276
+      ],
+      "raw_peak": 0.21964112217527035,
+      "raw_clip_samples": 0,
+      "wav_sha256": "b0ba6db8a2724ad886bde9e70b3f98888a771ca93f15c3fb97b639e6e2624c4d"
+    },
+    "fixed_recipe": {
+      "parameter_f0_median_hz": 189.99990177161848,
+      "parameter_f0_p10_p90_hz": [
+        178.64937671136957,
+        213.22803997053276
+      ],
+      "raw_peak": 0.245969855037889,
+      "raw_clip_samples": 0,
+      "wav_sha256": "3dd7fa95b0969ee59e1903e15a606b4ec35a3967ef789a528ed55bf6e09819d2"
+    },
+    "calibrated_pitch_only": {
+      "parameter_f0_median_hz": 185.37585324490516,
+      "parameter_f0_p10_p90_hz": [
+        166.9270519393547,
+        225.57881879481164
+      ],
+      "raw_peak": 0.21964019041319585,
+      "raw_clip_samples": 0,
+      "wav_sha256": "0eb1d30939c67bdaf4246bc5f4fac15967735940e67c146e868f2a3f0172dc18"
+    },
+    "calibrated_timbre": {
+      "parameter_f0_median_hz": 185.37585324490516,
+      "parameter_f0_p10_p90_hz": [
+        166.9270519393547,
+        225.57881879481164
+      ],
+      "raw_peak": 0.25698943410562586,
+      "raw_clip_samples": 0,
+      "wav_sha256": "76b75cd128579443bbe91f0e5fba09a1938e0772e98e1533db1c62ffa540582f"
+    }
+  },
+  "acceptance": {
+    "numeric_render": true,
+    "cross_speaker": false,
+    "listening": false,
+    "realtime": false
+  },
+  "limitations": "Only one known source speaker; halves of one session are not independent sessions. Whole-segment WORLD analysis, not causal runtime. F0 parameter agreement is not speaker identity. Mean envelope mixes phonemes and microphones; unchanged source AP. Raw clipping remains recorded; common archive attenuation is not a live limiter.",
+  "requirements_status": "comparison_only_does_not_meet_uncalibrated_source_requirement"
+}

@@ -1,0 +1,11 @@
+{
+  "review_date": "2026-10-09",
+  "manifest_sha256": "27105ce4ce07bf61e03ddf89392a869d9c19c453e6288401004844a224029495",
+  "scope": "local copied files only; no board access or runtime reproduction",
+  "listed_files": 8399,
+  "checked_files": 8399,
+  "checked_bytes": 4180670234,
+  "problems": [],
+  "unlisted_files": [],
+  "elapsed_seconds": 102.16
+}

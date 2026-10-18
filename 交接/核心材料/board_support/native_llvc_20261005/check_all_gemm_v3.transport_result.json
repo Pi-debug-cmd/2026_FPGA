@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\deploy_runtime\\check_all_gemm_v3",
+  "remote": "/home/root/native_llvc_trial_20261005/check_all_gemm_v3",
+  "sha256": "c352474d4f3ea7e6baed0afad90f84ce398a2ba2ba5291bf1e747eecf22a28fb",
+  "bytes": 43728,
+  "seconds": 3.407000000000153,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

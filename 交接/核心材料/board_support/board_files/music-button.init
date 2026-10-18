@@ -1,0 +1,35 @@
+#!/bin/sh
+
+DAEMON=/usr/local/bin/music-button-listener.sh
+PID_FILE=/var/run/music-button.pid
+LOG_FILE=/tmp/music-button-daemon.log
+
+case "$1" in
+    start)
+        if [ -f "$PID_FILE" ] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
+            exit 0
+        fi
+        "$DAEMON" >> "$LOG_FILE" 2>&1 &
+        echo $! > "$PID_FILE"
+        ;;
+    stop)
+        if [ -f "$PID_FILE" ]; then
+            kill "$(cat "$PID_FILE")" 2>/dev/null || true
+            rm -f "$PID_FILE"
+        fi
+        for old_pid in $(ps w | awk '/[m]usic-button-listener[.]sh/ {print $1}'); do
+            kill "$old_pid" 2>/dev/null || true
+        done
+        killall evtest 2>/dev/null || true
+        ;;
+    restart)
+        "$0" stop
+        "$0" start
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+        ;;
+esac
+
+exit 0

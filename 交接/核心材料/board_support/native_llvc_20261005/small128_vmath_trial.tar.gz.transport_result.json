@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\small128_vmath_trial.tar.gz",
+  "remote": "/home/root/native_llvc_trial_20261005/small128_vmath_trial.tar.gz",
+  "sha256": "4c1afe2854eecbc34e7dfa9fd6aaa97cd0dcb7b5d7c8fb8584bbb3c0df5d9bb4",
+  "bytes": 1155751,
+  "seconds": 51.68372430000454,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

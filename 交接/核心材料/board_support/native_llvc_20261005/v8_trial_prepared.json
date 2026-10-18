@@ -1,0 +1,14 @@
+{
+  "bundle_bytes": 1946275,
+  "bundle_sha256": "d23560f95e4af4050059719d12a0454a55bb0b18c44993ac31cec9ff2c984121",
+  "weight_sha256": "5cf0ca6dcff4d11c4c2a20c21708ba8952cd12de2886774ee53942898ec5cfad",
+  "live_deployed": false,
+  "quality_accepted": false,
+  "live_verified_short_observation": true,
+  "latest_evidence_path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\fargan_v8_live_evidence.json",
+  "human_acceptance_pending": false,
+  "project_completed": false,
+  "candidate_rejected": true,
+  "baseline_restored_verified": true,
+  "human_feedback": "不像，而且声音不清晰，会颤"
+}

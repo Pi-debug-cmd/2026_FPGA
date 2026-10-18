@@ -1,0 +1,44 @@
+{
+  "what": "增量 2 步骤 1：复数 exp 单元 RTL —— 状态：未通过（限时内未修完，已定位根因）",
+  "date": "2026-10-18",
+  "status": "FAIL_NOT_ACCEPTED",
+  "model_status": "PASS",
+  "model_evidence": {
+    "calls": 96,
+    "bins": 49248,
+    "per_bin_max_abs_err": 8.345e-05,
+    "time_domain_ifft_max_err_lsb_q1_17": 1.17,
+    "criterion_lsb": 2.0
+  },
+  "rtl_status": "xsim 比对 0 LSB 未达成：49248/49248 bin 失配",
+  "root_cause_found": "RTL 的 cos/sin 通路只取了 LUT[j]（j=(B_N*41722)>>26），没有用 f_r（frac）做插值；Python 模型是 LUT[j]+((LUT[j+1]-LUT[j])*F>>16)。bin0 的 b=0 → F=0，所以只有 1 LSB 舍入差；bin1 起 F≠0，im 偏差明显。",
+  "minimal_repro": {
+    "bin": "第 0 次调用的 bin1",
+    "a": 0.0948627927845846,
+    "b": -0.04470009172899729,
+    "A_q5_18": 24868,
+    "B_q5_18": -11718,
+    "B_normalized": 1635381,
+    "J": 1016,
+    "F_q0_16": 47617,
+    "expected_y_re": 143969,
+    "expected_y_im": -6429,
+    "rtl_y_re": 143940,
+    "rtl_y_im": -7071,
+    "explanation": "-7071 ≈ e*LUT_sin[1016]/2^17 = 143940*(-6439)/131072，说明 RTL 用了 LUT[j] 未插值；-6429 为 LUT[1016]+0.7266*(LUT[1017]-LUT[1016])"
+  },
+  "fix_plan": [
+    "cos/sin 增加第二次 ROM 读：地址 (j_r+1)&1023，把 LUT[j]、LUT[j+1] 分别寄存，再用 f_r 做与模型相同的插值（无额外舍入）",
+    "exp ROM 改为成对存储 256x36（{e_{i+1}, e_i}）一次读出 lo/hi，去掉同拍双地址读",
+    "指数/角度 pipeline 加一拍对齐（cos/sin 插值结果与 e_q17 同拍进乘法）",
+    "修好后重跑 TB，要求 96 用例 0 LSB；再做 OOC 综合（100 MHz）与后综合 funcsim"
+  ],
+  "not_done": ["RTL 0 LSB 未达成", "OOC 资源/WNS 未测", "后综合 funcsim 未做"],
+  "files": {
+    "rtl": "src/rtl/synth_offload/minphase_exp_unit.v",
+    "tb": "src/rtl/synth_offload/tb_minphase_exp_unit.sv",
+    "rom": "src/rtl/synth_offload/minphase_rom_1024.v",
+    "golden": "build/generated/pl_synth_offload/cpu_breakdown/exp_vectors/",
+    "model": "build/generated/pl_synth_offload/cpu_breakdown/gen_exp_vectors.py"
+  }
+}

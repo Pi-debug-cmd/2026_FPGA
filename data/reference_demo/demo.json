@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "kind": "offline_pitch_only_development_demo",
+  "target_sha256": "c3a50c67c7d29a77c482067272624c3a196ed6421dcf11099b5827ccb65e09e3",
+  "target_channel": 0,
+  "source_speaker": "SSB0434",
+  "source_clips": [
+    {
+      "stem": "SSB04340036",
+      "sha256": "7f5ad67d120d20228f8e7969bc2059991fa042d9e9b4e479c1b69d91fbc09a7a",
+      "samples": 72075
+    },
+    {
+      "stem": "SSB04340089",
+      "sha256": "60f0ec31b6ffbfe216662d6d114bbe6675a4e91b4e38451ddab4ce42097ed9a7",
+      "samples": 121859
+    },
+    {
+      "stem": "SSB04340076",
+      "sha256": "75cc56bdcc3bd76f1cd43535ff49da3d7e06934b0eca2c5f7331a32287427abf",
+      "samples": 81735
+    },
+    {
+      "stem": "SSB04340118",
+      "sha256": "b75c7f309987b5d4bd2da91f89e588896617f70633709b158aa9f0c96363d695",
+      "samples": 81735
+    }
+  ],
+  "source_median_f0_hz": 146.25163847559114,
+  "target_median_f0_hz": 193.8308406827006,
+  "ratio": 1.3253242336498696,
+  "ratio_q16": 86856,
+  "duration_s": 22.73775,
+  "output_samples": 363804,
+  "limitations": [
+    "No target timbre transfer or human listening acceptance",
+    "Previously screened development clips, not an independent test",
+    "No board run or end-to-end delay measurement"
+  ],
+  "target_reference.wav_sha256": "b2ffe9ac3f8f7b92256cb44a9acf5d92eab3b762e2cbd9d03fab067de7e5c4c8",
+  "source_original.wav_sha256": "f61f772c5a63729e6cb92485bb78d9dbeb5856d19326ba19a5d4dba1bede25d6",
+  "pitch_only.wav_sha256": "e6909913792d5515fd71b9fb17d39856a15c6fc6a68b57413e09de9fd6b29e9b"
+}

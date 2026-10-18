@@ -1,0 +1,31 @@
+{
+  "source": "holdout.wav",
+  "evaluation_role": "development_after_listening_feedback",
+  "prepared_log_pitch_scale": 1.718604422478965,
+  "voiced_frames": 904,
+  "f0_percentiles_p10_p50_p90": {
+    "source": [
+      110.65611619848173,
+      119.59622145406095,
+      132.79014740566762
+    ],
+    "old_fixed": [
+      183.57474159746295,
+      198.4060728291079,
+      220.2943482397308
+    ],
+    "prepared": [
+      167.99083735032494,
+      191.98831289105328,
+      229.81727156395954
+    ]
+  },
+  "mapped_over_old_percentiles_p10_p50_p90": [
+    0.915108629579609,
+    0.9676534044936818,
+    1.0432280029846979
+  ],
+  "mapped_boundary_frames": 0,
+  "observation": "Hybrid retains the old spectrum and source AP; it still failed subjective clarity. Mean-spectrum correction alone cannot explain both failed candidates. Log-F0 scale expands source pitch variation, but the cause of muffling is not isolated.",
+  "new_playback_performed": false
+}

@@ -1,0 +1,10 @@
+{
+  "source": "analyze_wide_mic_capture_20261006.py",
+  "remote": "/home/root/native_llvc_trial_20261005/analyze_wide_mic_capture_20261006.py",
+  "sha256": "8d273737ef6d31b09f839c4032bfa62af9b5b2ccd0ece18c3858370a2dee89ee",
+  "bytes": 2200,
+  "seconds": 1.5933932999614626,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

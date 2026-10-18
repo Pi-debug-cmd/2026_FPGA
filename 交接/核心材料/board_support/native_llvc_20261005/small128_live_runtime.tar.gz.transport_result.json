@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\small128_live_runtime.tar.gz",
+  "remote": "/home/root/native_llvc_trial_20261005/small128_live_runtime.tar.gz",
+  "sha256": "41362c0c5a3e5c22137b321c965f44abcb1e20c8c2732225d866d98e09e9d211",
+  "bytes": 720528,
+  "seconds": 32.82751189998817,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

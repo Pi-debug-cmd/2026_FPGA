@@ -1,0 +1,25 @@
+{
+  "audible_mode": "ORIGINAL microphone PCM, exact passthrough verified; NOT conversion playback",
+  "parallel_computation": "9200 neural output computed only for paired diagnostic",
+  "helper": "board_diag_original.sh",
+  "binary": "native_llvc_small96_diag_original_arm",
+  "pids_at_check": {
+    "capture": 25948,
+    "compute": 25949,
+    "playback": 25950
+  },
+  "capture": 43,
+  "headphone": 119,
+  "playback": 222,
+  "input_gain": 1,
+  "output_gain": 1,
+  "ring_seconds": 120.003,
+  "trigger": "/run/voice-neural-live/diag_dump.flag",
+  "prefix": "/home/root/native_llvc_trial_20261005/mic_diagnostic_20261005c",
+  "flag_not_yet_triggered": true,
+  "awaiting_explicit_user_diagnostic_utterance": true,
+  "diagnostic_only_not_source_enrollment": true,
+  "file_save_only_on_trigger": true,
+  "bundle_sha256": "449ad4bc16a83103961eef16a6828afb9bc460cda0762321b326198eb6013def",
+  "caution_status_output_meter_is_computed_neural_not_actual_speaker": true
+}

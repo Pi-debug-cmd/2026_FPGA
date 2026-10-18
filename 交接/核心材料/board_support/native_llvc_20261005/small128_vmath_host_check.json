@@ -1,0 +1,33 @@
+{
+  "checks": [
+    {
+      "case": "silence_416",
+      "nrmse": 1.7622046081474024e-06,
+      "max_absolute_error": 4.4019543565809727e-10
+    },
+    {
+      "case": "tone_1000",
+      "nrmse": 8.922112521080504e-07,
+      "max_absolute_error": 6.332993507385254e-08
+    },
+    {
+      "case": "edge_209",
+      "nrmse": 1.8348348810479099e-06,
+      "max_absolute_error": 4.43833414465189e-10
+    },
+    {
+      "case": "real_16000",
+      "nrmse": 1.8045490389560404e-06,
+      "max_absolute_error": 8.149072527885437e-10
+    },
+    {
+      "case": "fleurs_full",
+      "nrmse": 1.1069921047021034e-06,
+      "max_absolute_error": 1.6530975699424744e-08
+    }
+  ],
+  "host_approximate_activation_matches_reference_within_limit": true,
+  "arm_math_speed_pending": true,
+  "weights_unchanged": true,
+  "quality_not_accepted": true
+}

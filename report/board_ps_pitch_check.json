@@ -1,0 +1,69 @@
+{
+  "port": "COM14",
+  "scope": "PS-only arithmetic and sample-format tests, no audio listening or PL run",
+  "program_sha256": "c2f1c469073e7edcdfd0b118ea463f71032d3fbaa1fea7b03e0c8758019348d7",
+  "binary_matched": true,
+  "invalid_ratio_rejected": true,
+  "cases": [
+    {
+      "format": "PCM",
+      "ratio_q16": 32768,
+      "passed": true
+    },
+    {
+      "format": "PCM",
+      "ratio_q16": 52429,
+      "passed": true
+    },
+    {
+      "format": "PCM",
+      "ratio_q16": 65536,
+      "passed": true
+    },
+    {
+      "format": "PCM",
+      "ratio_q16": 81920,
+      "passed": true
+    },
+    {
+      "format": "PCM",
+      "ratio_q16": 98304,
+      "passed": true
+    },
+    {
+      "format": "PCM",
+      "ratio_q16": 131072,
+      "passed": true
+    },
+    {
+      "format": "NATIVE",
+      "ratio_q16": 32768,
+      "passed": true
+    },
+    {
+      "format": "NATIVE",
+      "ratio_q16": 52429,
+      "passed": true
+    },
+    {
+      "format": "NATIVE",
+      "ratio_q16": 65536,
+      "passed": true
+    },
+    {
+      "format": "NATIVE",
+      "ratio_q16": 81920,
+      "passed": true
+    },
+    {
+      "format": "NATIVE",
+      "ratio_q16": 98304,
+      "passed": true
+    },
+    {
+      "format": "NATIVE",
+      "ratio_q16": 131072,
+      "passed": true
+    }
+  ]
+}

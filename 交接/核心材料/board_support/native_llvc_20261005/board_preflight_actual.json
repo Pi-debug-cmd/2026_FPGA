@@ -1,0 +1,26 @@
+{
+  "board_connected": true,
+  "board_kernel": "Linux5.15.0-xilinx PetaLinux2022.2 armv7l",
+  "mem_total_kib": 1029284,
+  "mem_available_kib_initial": 987108,
+  "root_available_kib_initial": 14533660,
+  "cpu0_frequency_khz_observed": 666666,
+  "audio_card": "xlnx-i2s-snd-card-0 / wm8960-hifi",
+  "capture_pcm_type": "plug -> mmap_emul -> hw:0,1",
+  "playback_pcm_type": "plug -> mmap_emul -> hw:0,0",
+  "network_ipv4_addresses_observed": [
+    "127.0.0.1"
+  ],
+  "sysmon_temperature_c_initial": 61.274304199032,
+  "transfer_baud_probe_verified": 230400,
+  "failed_fast_baud_handshakes": [
+    921600,
+    460800
+  ],
+  "actual_full_model_arm_execution": true,
+  "current_stage": "Full baseline verified; separate small96 experiment and live IO, see realtime_stage_evidence.json",
+  "separate_remote_directory": "/home/root/native_llvc_trial_20261005",
+  "board_original_bitstream_changed": false,
+  "sd_reflashed": false,
+  "boot_services_changed": false
+}

@@ -1,0 +1,30 @@
+{
+  "kind": "historical_llvc_v2_scalar_host_file_gate",
+  "source_snapshots": {
+    "deploy_llvc.c": "c9cca1cb899c5b4df42ec4d4d9f96f1f4abcc2ca714bdd1e1ff68e86e3e6f522",
+    "llvc_runtime.c": "458b86c1e7eb4deca998ad8188fcd91875988f5be0171bfa11f4d33fdc78d4a1",
+    "llvc_runtime.h": "5dc812701488389c319c33d0ebc83da200b6e413d39a8dc8f11423fd277cf4c0",
+    "gemm_ref.c": "99ad3bbf56c3edce2d82ef6c2bf52529acd67e04d49af20cec6ac887134d2e2c",
+    "gemm_backend.h": "3ea2215fcf6ba8e5ee47ac87c0641edaefacfb55e52cceb45465a9eb8f719a22"
+  },
+  "compiler": "D:\\mingw64\\bin\\gcc.exe",
+  "model_sha256": "4e635452493b67b1a83fa70cd356bbfbc3ac605339e7a0c5e37c9c4ed5f5e7bd",
+  "binary_sha256": "37f95d46ff0a6477f3eeb37f81f26fb67c8816e48e5aa99c3439de7078e527f5",
+  "source_sha256": "1c064f8961590df3ed6e2893fb6f74942871be43d9c6aee55da5489c43a66e97",
+  "input_start_s": 1.68,
+  "input_samples": 96000,
+  "output_samples": 96000,
+  "input_gain": 1.0,
+  "elapsed_host_wall_s": 5.351776099996641,
+  "host_wall_rtf": 0.8919626833327735,
+  "output_peak": 0.2365848422050476,
+  "output_rms": 0.024658015488450542,
+  "output_clip_samples": 0,
+  "archive_gain": 1.0,
+  "output_f32_sha256": "bcc7f4bef23e703a8451ffe5bf457d2347db0625b35bc70f6e88b023f830301b",
+  "checkpoint_asset_count_pt_pth_onnx_npz": 374,
+  "previous_checkpoint_missing_claim_corrected": true,
+  "speaker_identity_accepted": false,
+  "board_realtime_accepted": false,
+  "limitations": "Unchanged historical scalar C model, not a newly trained or source-registered model. Host file execution only, no PL/ALSA. Original model parity still needs independent reproduction. This fixed-target v2 model does not demonstrate registering a new target. Six-second development excerpt, one source speaker; no listening or identity acceptance."
+}

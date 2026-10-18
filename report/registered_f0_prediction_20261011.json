@@ -1,0 +1,11 @@
+{
+  "kind": "offline_fixed_reference_prediction_not_physical_output_capture",
+  "ratio_q16": 108722,
+  "source_f0_median_hz": 116.41285340559061,
+  "target_f0_median_hz": 193.125006633167,
+  "predicted_f0_median_hz": 197.02210137474253,
+  "predicted_voiced_coverage_s": 4.5,
+  "frames": 1497,
+  "output_wav": "data\\registrations\\source_20261011\\predicted_registered.wav",
+  "hardware_evidence": "actual ratio PCM32/native_s24 golden and continuous-state checks passed; analog output not recorded"
+}

@@ -1,0 +1,129 @@
+{
+  "kind": "mapper_independent_fargan_target_oracle_evaluation",
+  "date": "2026-10-18",
+  "protocol": "current WeSpeaker centroid + UTMOS22 strong + offline whisper-small",
+  "rows": [
+    {
+      "track": 5,
+      "seconds_original": 28.78,
+      "seconds_reconstructed": 28.78,
+      "identity_to_target_centroid_original": 0.960893925381573,
+      "identity_to_target_centroid_reconstructed": 0.8728676132064908,
+      "identity_to_same_track_original": 0.9034296697487348,
+      "utmos_original": 3.1356499644101206,
+      "utmos_reconstructed": 2.750593034487122,
+      "asr_original": "我有一个好朋友,他有着圆圆的脸蛋笑起来会露出两个浅浅的小酒窝下课的时候我们一起在操场散步分享有趣的小故事每当我遇到难题他会耐心教我他不开心的时候我会陪着他我们一起读书,一起跳绳互相鼓励好朋友就像小太阳带给我温暖我很珍惜这份珍贵的友谊",
+      "asr_reconstructed": "我有一个好朋友,他有着圆圆的脸蛋笑起来会录出两个浅浅的小酒窝下课的时候我们一起在操场散步分享有趣的小故事每当我遇到难题他会耐心教我他不开心的时候我会陪着他我们一起读书一起跳绳互相鼓励好朋友就像小太阳带给我温暖我很珍惜这份珍贵的友谊",
+      "reconstruction_cer_relative_to_original_asr": {
+        "reference_chars": 114,
+        "hypothesis_chars": 114,
+        "distance": 1,
+        "cer": 0.008771929824561403
+      },
+      "reconstruction_cer_script_normalized": {
+        "reference_chars": 114,
+        "hypothesis_chars": 114,
+        "distance": 1,
+        "cer": 0.008771929824561403
+      }
+    },
+    {
+      "track": 6,
+      "seconds_original": 20.6,
+      "seconds_reconstructed": 20.6,
+      "identity_to_target_centroid_original": 0.9665057675284402,
+      "identity_to_target_centroid_reconstructed": 0.8967781027922368,
+      "identity_to_same_track_original": 0.9141053976629919,
+      "utmos_original": 3.1153929927974073,
+      "utmos_reconstructed": 2.792197553856859,
+      "asr_original": "秋天悄悄地來了,大樹換上金黃的衣裳,秋風一吹,樹葉像蝴蝶一樣在空中飛舞,果園裡蘋果紅了臉,梨子掛齊,金黃的燈籠,田野裡,稻子彎下腰,到處都是豐瘦的氣息。",
+      "asr_reconstructed": "秋天悄悄地來了,大樹換上金黃的衣裳,秋風一吹,樹葉像蝴蝶一樣在空中飛舞,果園裡蘋果紅了臉,梨子掛齊,金黃的燈籠,田野裡,稻子彎下腰,到處都是豐瘦的氣息。",
+      "reconstruction_cer_relative_to_original_asr": {
+        "reference_chars": 66,
+        "hypothesis_chars": 66,
+        "distance": 0,
+        "cer": 0.0
+      },
+      "reconstruction_cer_script_normalized": {
+        "reference_chars": 66,
+        "hypothesis_chars": 66,
+        "distance": 0,
+        "cer": 0.0
+      }
+    },
+    {
+      "track": 7,
+      "seconds_original": 26.12,
+      "seconds_reconstructed": 26.12,
+      "identity_to_target_centroid_original": 0.9715474564542025,
+      "identity_to_target_centroid_reconstructed": 0.8750845907877424,
+      "identity_to_same_track_original": 0.8821486740572753,
+      "utmos_original": 2.9944483434259435,
+      "utmos_reconstructed": 2.6105135991416337,
+      "asr_original": "上週六我第一次學騎自行車一開始我很害怕總是搖晃摔了好幾次我差點想放棄爸爸在一旁鼓勵我告訴我眼睛看前方保持平衡我慢慢調整 姿勢不斷練習終於我可以獨自騎一小段路了這件事讓我明白堅持就會成功遇到困難不要輕易認輸",
+      "asr_reconstructed": "上週六我第一次學騎自行車一開始我很害怕總是搖晃摔了好幾次我差點想放棄爸爸在一旁鼓勵我告訴我眼睛看前方保持平衡我慢慢調整 即是不斷練習終於我可以獨自騎一小段路了這件事讓我明白堅持就會成功遇到困難不要輕易認輸",
+      "reconstruction_cer_relative_to_original_asr": {
+        "reference_chars": 101,
+        "hypothesis_chars": 101,
+        "distance": 2,
+        "cer": 0.019801980198019802
+      },
+      "reconstruction_cer_script_normalized": {
+        "reference_chars": 101,
+        "hypothesis_chars": 101,
+        "distance": 2,
+        "cer": 0.019801980198019802
+      }
+    },
+    {
+      "track": 8,
+      "seconds_original": 23.64,
+      "seconds_reconstructed": 23.64,
+      "identity_to_target_centroid_original": 0.9646442152001451,
+      "identity_to_target_centroid_reconstructed": 0.8681537854449981,
+      "identity_to_same_track_original": 0.8938363224460524,
+      "utmos_original": 3.3361412680088565,
+      "utmos_reconstructed": 2.8528363160070427,
+      "asr_original": "我家有一只小貓浑身長著雪白的毛一對尖尖的耳朵圓溜溜的搭眼鏡像兩顆玻璃球小貓特別調皮喜歡追毛線球他吃飯的時候矽腳慢夜睡覺的時候全身一團軟軟的每當我放學回家他就跑過來蹭我的腿他是我最可愛的小夥伴",
+      "asr_reconstructed": "我家有一只小猫浑身长着血白的毛一对尖尖的耳朵圆溜溜的大眼睛像两颗玻璃球小猫特别调皮喜欢追毛线球她吃饭的时候细脚慢咽睡觉的时候全身一团软软的每当我放学回家她就跑过来蹭我的腿她是我最可爱的小伙伴",
+      "reconstruction_cer_relative_to_original_asr": {
+        "reference_chars": 95,
+        "hypothesis_chars": 95,
+        "distance": 34,
+        "cer": 0.35789473684210527
+      },
+      "reconstruction_cer_script_normalized": {
+        "reference_chars": 95,
+        "hypothesis_chars": 95,
+        "distance": 9,
+        "cer": 0.09473684210526316
+      }
+    }
+  ],
+  "summary": {
+    "identity_to_target_centroid_mean": 0.8782210230578671,
+    "identity_to_target_centroid_min": 0.8681537854449981,
+    "identity_to_same_track_mean": 0.8983800159787636,
+    "identity_to_same_track_min": 0.8821486740572753,
+    "utmos_reconstructed_mean": 2.7515351258731644,
+    "utmos_reconstructed_min": 2.6105135991416337,
+    "utmos_drop_from_original_mean": 0.39387301628741767,
+    "cer_relative_to_original_asr_raw_mean": 0.09661716171617162,
+    "cer_script_normalized_mean": 0.030827688031961092,
+    "cer_script_normalized_max": 0.09473684210526316
+  },
+  "gates": {
+    "identity_mean_at_least_0_75": true,
+    "utmos_mean_at_least_2_6": true,
+    "cer_mean_at_most_0_05": true
+  },
+  "oracle_pass": true,
+  "board_touched": false,
+  "audio_played": false,
+  "limitations": [
+    "ASR preservation is measured against the original recording's ASR transcript, not a human transcript.",
+    "CER applies an explicit Traditional-to-Simplified map covering observed Track5-8 characters; raw CER is retained.",
+    "The four recordings belong to one target speaker and do not test target registration or source conversion.",
+    "Objective scores do not replace a later listening gate."
+  ]
+}

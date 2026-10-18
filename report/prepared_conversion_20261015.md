@@ -1,0 +1,131 @@
+# 准备录音生成配置，再启动实时变声
+
+2026-10-15用户明确允许：陌生来源先录入一段音频，算法分析生成类似模型的产物，随后启动实时变声。最新“开始吧”授权推进；每次现场录放仍单独确认。本记录覆盖此前免录入和把准备段留作播放缓存的设想。
+
+本期先生成实验转换配置（音高统计映射、谱包络映射与版本/录音SHA），不是已训练的神经网络。准备录音不属于正式输出，准备时长与运行后持续延迟分别计量。换人后重新准备并加载对应配置；后续新句不得参与该轮配置生成。单目标注册范围不变。
+
+## 实现与证据
+
+- src/reference/world_registration.py：核查准备音频时长/触顶、目标录音SHA、有效有声帧，拟合源到目标配置，原子保存JSON；失败不替换旧配置。复用当前DIO/StoneMask/CheapTrick、log-F0映射与3dB谱修正候选，输出音色身份仍未验收。
+- build/register_world_source.py：准备WAV生成配置，可另给不同WAV生成离线预览；不播放、不连接板卡。保留原始输出峰值/削顶计数，归档增益单独记录。
+- 9项数值/配置测试通过。初次沙箱内3项因Windows临时目录访问权限失败；同一测试在受限外仅使用主机临时文件重跑全部通过，无音频设备操作。
+- 历史capture.wav前7.5秒准备片段含4个近满幅样本，拒绝生成配置；不通过衰减后重新标记为无触顶来绕过检查。
+- 使用8秒双谐波110Hz合成准备音频，只检验入口与配置流程；目标Track5～8校验后参与拟合，Track9不参与。处理历史后7.5秒片段输出峰0.244374、削顶0、归档增益1。该跨来源合成试验不是同一真人准备/转换效果测试，绝不作为相似度证据。
+- 合成配置SHA f56ba570d97c48b349eb3e5157f1e48699f9d2c7100ea40dbca8b19ae3fa28f2；输出SHA 50889724453ccedbf5065c5527970bde0082be7858c355d1ff0957d55237b707；文件位于build/generated/registration_fixture_20261015/。
+- board/capture_source_mapping.py沿用Capture31/boost0，20秒原生录音、保存恢复mixer、独占自己的arecord、超时清理、长度/xrun/触顶检查，并压缩WAV记录SHA。依赖同目录pack_registration_audio.py；需两个文件一同暂存。尚未板验，不直接称可靠性通过。
+
+## 下步
+
+单独请求20秒准备录音确认；确认上电/本次重启，先只读核对COM14/PCM状态，再版本化暂存助手，给出开始提示后录音。当前尚无本日板卡操作。准备录音仅分析不播放；后续留出讲话和对照试听分别确认。新配置尚未接入实时C++，先判定后续句的音色效果，不能把当前固定倍率基线当作新配置实时实现。
+
+WORLD持续运行欠载/削顶、端到端延迟、PL新算法参与和PYNQ仍待解决；大小声专项后置。
+
+
+## 录音起始提示规则（用户2026-10-15新增）
+
+用户要求先有一段提示音再开始录音。以后每轮准备确认须说明音响绿色口已连接并开启，先播放300ms短提示音，播放完成并留150ms间隔后才打开采集；提示音不并入准备录音。每轮实际录放仍先确认准备。board/capture_source_mapping.py已增加该流程和播放失败拒绝启动采集，保存恢复mixer覆盖提示音与录音全过程；尚未执行带提示音的现场测试，不自动重录。
+
+本日首次无提示音20秒准备录音已结束：目录/tmp/codex_source_mapping_20261015/speaker01_calibration_925022275789，采集退出0、录音完整、无overrun及原始触顶，恢复0、录放closed。日志report/source_capture_speaker01_20261015.log。WAV SHA8313d6622dac0a52107ab6df5e34865500987b4de60be4baeb4084665ecac594；gzip SHA943132244e09fdf82e95d482cf30a32ecbe934b424bb6d64f42d1c9a4a6d0059。有效讲话与配置生成尚待下载后的分析，不因采集退出0就判准备语音可用。
+
+
+## speaker01准备录音合格，实验配置已生成
+
+用户另获20秒准备确认后，用cue_v2两声提示后录音。目录speaker01_calibration_1417062603869，采集/恢复0、PCMclosed、无xrun/原始触顶，835有声帧。下载gzip及解压WAV均核对板端SHA。本地data/registrations/source_20261015/speaker01/preparation_cue_v2.wav；configuration_cue_v2.json已生成，SHA7aac203c811ce78be80317bbd6c8ef4c24439d6ee3e21dc092393cb8ef583cf0。配置包含log-F0映射和谱包络候选，身份/实时accepted均false；未将配置部署到C++，尚未新句试听。报告report/source_preparation_speaker01_cue_v2_20261015.json。下一步另确认录20秒留出新句，只作效果评估，不参与配置拟合；保持提示与音量不变。
+
+
+## 冻结配置处理独立新句：文件验证完成，试听待确认
+
+用户明确准备后完成20秒留出句，目录speaker01_holdout_1689120977197；采集退出0、无overrun/原始触顶、恢复0、PCMclosed。下载与解压SHA均核对。data/registrations/source_20261015/speaker01/holdout.wav，904有声帧。build/evaluate_prepared_world.py只加载冻结configuration_cue_v2.json，没有调用register或fit；结束配置SHA仍7aac203c811ce78be80317bbd6c8ef4c24439d6ee3e21dc092393cb8ef583cf0。旧固定配方、按人仅音高、按人谱包络候选输出均20秒完整有限、零原始削顶，峰0.372970、归档增益1。参数F0中位旧198.406Hz、新191.988Hz只是声学参数，不能证明身份改善。24秒对照顺序target/old_fixed/prepared_pitch/prepared_timbre，每段5秒，段间1秒，开头1秒静音。新句统一选2.68秒起5秒有声较多片段，目标Track9选11秒起5秒，选片不用于拟合参数。试听段采用共同RMS（不能保证感知响度一致），峰0.849996、无削顶。WAV SHA c232979530b03e5ba4b3588bee60f72c23bdf1c23f841c66ed01601b096e93e0，gzip SHA5be2d7915ec2e9c41661bc528e9590c3b6840ff527405553dcbdb7432454097a。报告report/prepared_world_holdout_speaker01_20261015.json，音频与manifest在heldout_comparison/。板端暂存/tmp/codex_prepared_comparison_20261015，播放入口play_voice_comparison.py；只上传不播放，待本轮试听准备确认。单个输入者、同一会话不同句、离线整段WORLD、明示顺序对照，非盲评、多人泛化或实时延迟验收。
+
+
+## 首轮听感与组合候选
+
+用户反馈：②旧配方更清晰、音色最像但音高差一点；④完整音色候选音色其次、音高更像但略不清晰；③按人仅音高发闷、不清晰且音色不像。保留②作听感参考，未将③或④升级为通过。结构化report/prepared_world_listening_speaker01_20261015.json。新增prepared_pitch_old_warp：②旧谱变形1.0975 + 已注册log-F0映射，不加平均谱修正。原配置SHA和原三组完整WAV SHA全部不变；新20秒输出完整有限、零削顶，参数中位191.988Hz，音色未试听。开发对照顺序target/old_fixed/prepared_pitch_old_warp/prepared_timbre，24秒、峰0.850005、无削顶。候选WAV SHA6d53a0d02be23002eb98af57b1c392ea7da71cf22498e39e10a4243410889da1，对照gzip SHAb3654424f5dffaf64f6b1e82b114a6b94395210fb146411f6df1fa5c069d502c。新报告report/prepared_world_hybrid_speaker01_20261015.json，输出hybrid_comparison/；板端文件hybrid_manifest.json/hybrid_comparison.wav.gz正在单独暂存，不覆盖原版。这段源/目标语音已影响候选选择，现作开发对照，最终必须另用新句及其他输入者评价；不是多人泛化通过。未接入实时C++。本轮只有离线计算和静态上传，没有自动试听；上传后须另问准备。
+
+
+## 组合候选听感未改善：停止升级本轮候选
+
+用户反馈③清晰度仍不行、听着发闷，③④差不多、④稍好。组合版不通过，不接入实时默认版本；②仍仅作为单人清晰度/音色参考，不能说整体身份或多输入者已达标。结构化report/prepared_world_hybrid_feedback_20261015.json。
+
+离线检查report/prepared_pitch_feedback_audit_20261015.json：log-F0跨度倍率1.718604；旧固定P10/P50/P90=183.575/198.406/220.294Hz，新映射167.991/191.988/229.817Hz，无75/400Hz边界命中。新映射既降低低音段又扩展起伏；不能以中位更接近目标解释为主观更自然。组合候选保持旧谱与源AP仍听感失败，平均谱修正不能单独解释全部问题，发闷根因未隔离。
+
+读取已有神经导出/评估源码，当前主机Python未安装torch/torchaudio/onnxruntime；交接核心材料下pt/pth/onnx/npz检索未见检查点。保留有已导出v2 bin，但不能当作已有可直接加载的PyTorch检查点；旧源码硬编码原机路径和CUDA。v2导出将label=0的嵌入作为常量，不存在已证明的本次目标注册条件接口。暂不安装整套环境、不恢复旧实时服务、不切PL。后续先核查可重现的离线推理入口及目标适配能力，再决定新候选；不连续重复同类参数拼接试听，不把单人效果或纯变调包装为完成。没有新增录放。
+
+
+## ②也稍低沉：离线链路诊断，不认定旧版音色合格
+
+用户补充②也稍低沉；②仅相对参考，未达标。用户再次要求开始，本轮自主离线排查，未获新录放准备确认。build/audit_prepared_clarity.py对同一已有语音做WORLD原音重合成，重新估计各输出F0、共同源有声中心的频带比例，并对照DIO speed1/4和Harvest。起初pyworld要求连续数组，load改为ascontiguousarray后完成同一诊断。报告report/prepared_clarity_audit_20261015.json。
+
+旧输出重估F0中位197.45Hz，目标参考191.41Hz；新映射输出约190.24Hz。DIO不同speed的901共同帧和Harvest/DIO的904共同帧均无大于20%偏差，不能据此排除所有F0错检；有声检出数量不同，尚未人工标注。原录音有声帧1.5～8kHz归一化功率约0.00617，目标约0.06268；旧输出约0.00890，完整候选约0.01209。句子、麦克风、声道及音素不同，不能用这个差异断定硬件故障、调EQ数值或身份相似度。原音重合成无削顶，F0中位119.85Hz接近原119.75Hz；频带未见全面高频崩塌，但听感仍须验证。
+
+生成18秒链路诊断：同一个2.68秒起5秒片段，①原始录音（显式离线重采样）②WORLD原音重合成、无映射 ③旧固定配方。开头1秒静音，段间1秒，共同RMS限制、峰0.849936无削顶。不是新转换参数候选，也不是目标身份试听；用来区分输入自身与分析合成对清晰度的影响。脚本build/create_clarity_diagnostic.py，报告report/prepared_clarity_diagnostic_20261015.json。文件clarity_diagnostic/comparison.wav.gz正在上传到/tmp/codex_prepared_comparison_20261015/clarity_comparison.wav.gz，清单clarity_manifest.json；未播放，上传完另问准备。原配置、实时C++、mixer音量不变，大小声适应专项未启动。
+
+
+## 诊断听感澄清：无明显清晰度损失，源吐气/沙哑低沉仍保留
+
+用户在重听①原声②WORLD原音重合成③旧配方后反馈感觉不到变差，③清晰度和前两段差不多；主要是录入吐气和说话者沙哑低沉音色未去除。此反馈覆盖之前将发闷笼统记作合成清晰度损失的工作假设；不改写之前候选偏好，不将单句主观结果推广为WORLD全部参数无损。结构化report/prepared_clarity_subjective_feedback_20261015.json。
+
+代码核对：world_registration.convert_file与evaluate_prepared_world的D4C源AP原样传入synthesize，只调整F0/谱包络。PyWORLD官方文档分别列F0、SP、AP，参考https://github.com/JeremyCCHsu/Python-Wrapper-for-World-Vocoder。源AP保留是待研究点，不直接等同全部气声/沙哑根因。
+
+新build/audit_source_aperiodicity.py仅离线分析现有准备语音、开发句和Track5～8，不用Track9拟合、不修改配置。频带SP加权AP平方比的有声帧中位：源准备1～3k为0.0101，目标各段0.0040～0.0100；源准备3～8k为0.4769，目标0.4402～0.5144；低于1k源约2.43e-6，目标约3.62e-6～4.28e-6。不同频段结果不同，没有全面过量的证据；有声帧AP不能独立识别非有声吐气、喷麦或喉部沙哑。不能直接将AP全清零、压低全部高频或删除全部清音，会混淆正常发音；本轮不生成这样的候选。报告report/source_aperiodicity_audit_20261015.json。
+
+下一步将待查现象分成麦克风喷气/低频瞬态、发声气噪/沙哑与目标声线映射，先用现有文件定位，不凭一句主观描述认定全是背景噪声或用普通滤波承诺目标身份转换。仍需保留正常送气辅音、可懂度和语调。准备录音生成配置流程已完成，音色映射仍不充分。本轮没有板卡操作、额外录放或增益调整；现场需逐轮准备确认，大小声适应专项仍后置。
+
+
+## 源声线残留后续：低频支线否决，历史神经主机入口已跑通
+
+用户要求继续。仅用已有录音扫描64ms帧低于90Hz功率占比>0.65且RMS>0.003的片段，记录为声学候选而非已识别吐气。准备录音219候选帧、开发句70帧；二者开头0～0.384秒均有强低频瞬态，原因不明，不能自动算讲话喷麦。报告report/low_frequency_events_20261015.json。
+
+新增src/reference/low_frequency_guard.py离线候选：仅未检出F0且低频异常的帧，低频最多衰减6dB、100Hz以上系数不变，平滑权重并重叠相加。4项测试通过：有声污染输入完全旁路、低频减弱但保留、高频噪声不变、静音/错位输入。真实原录音86帧处理、此前5秒片段低频功率约降9.7%；旧WORLD配方输出处理0帧，导出的WAV与原旧版逐字节同SHA be670efcee2f7dd540a1d202a841518423133bdfc8b23faace732a6faa0b5d57。因此不安排这份未变输出试听，不接入实时、不宣称去吐气成功。系数上保护有声帧不等于边界样本绝对不受邻帧影响；该候选64ms中心离线窗也不是已验收实时处理。报告report/low_frequency_guard_gate_20261015.json。
+
+**纠正此前错误检索：** PowerShell原生管道上的带结尾匹配检索漏掉了文件；改为Path.rglob枚举发现374项.pt/.pth/.onnx/.npz资产（该总数包含npz特征，不代表374个模型）。此前“交接目录缺检查点”的说法不成立，不能据此阻止模型复现。当前Python确无torch等依赖的检查仍成立。后续文件列表检查避免依赖该管道的结尾匹配，不能继续沿用旧缺失判断。
+
+新增build/check_llvc_host_reference.py：核对v2模型SHA4e635452493b67b1a83fa70cd356bbfbc3ac605339e7a0c5e37c9c4ed5f5e7bd，只读复制deploy_llvc.c/llvc_runtime.c/.h/gemm_ref.c/gemm_backend.h到独立source_snapshot，以MinGW gcc -O2编译主机标量参考，禁用dump环境变量，仅读写独立文件、不操作PL/ALSA。用本次开发录音1.68秒起6秒、输入增益1处理，输出96000样本完整有限、峰0.236585、削顶0、归档增益1；主机墙钟5.352秒/RTF0.892，仅该机器文件计时，绝非7020实时预算或端到端延迟。原源码和模型未修改，没有新训练，也未应用source注册配置。产物build/generated/llvc_host_audit_20261015/，报告report/llvc_host_reference_20261015.json，输出float SHA bcc7f4bef23e703a8451ffe5bf457d2347db0625b35bc70f6e88b023f830301b。仍需独立数值复现、音色/内容评估；固定目标v2不能替代新目标注册。本轮没有板卡连接、新录音、播放或设备增益改变，没有请求新的现场测试。下一步先核验参考模型数值及条件接口，有可审听证据后再逐轮问准备，不恢复旧持续服务或切PL。
+
+
+## 持续推进：检查点复现、导出差异归因及神经音色对照
+
+用户授权持续推进，现场仍逐轮确认。官方CPU PyTorch2.7.1+cpu已仅安装于build/generated/llvc_cpu_deps，pip缓存也在项目build/generated/pip_cache，不更改现有全局环境或板卡。依赖清单report/llvc_cpu_dependencies_20261015.json。核查官方安装入口https://pytorch.org/get-started/locally/。系统GPU只读CIM查询被沙箱拒绝，未据此推断GPU有无，未改系统设置。
+
+build/llvc_host_model.py只加载原LLVC架构和cached_convnet，复制不可变快照；从交接speechbrain wheel提取PositionalEncoding类，不导入训练脚本、不执行旧settings全局写目录。weights_only=True加载reduced_student_v2/final.pt，strict=True恢复state_dict。checkpoint SHA5a3f5de6f7bef12a29323be5bb88168025d85080b527933e8f3f54cbf07a9641。原LLVCAudioStream按208样本feed，输出96000完整有限、无削顶，Python输出SHA501018df7c0e876b631d6a5bf8bf58ac14025eb76bbd19bbf0aa90ba44491004。
+
+build/check_llvc_python_parity.py首轮原样导出SHA不符故退出1，没有忽略失败；逐区域定位后发现仅FA_LABEL计算常量8个float末位差、最大4.76837e-7（10个字节变化），模型头、全部其余浮点、缩放、int8权重逐字节一致。重新核验加入差异范围/上限断言退出0，仍保留exact_export_matches_historical_bin=false，未修改原bin来伪造一致。重导出SHA4418a337b5125143e7863ceef2857c7dac817eed30fef154fb31f3cecfdf632c。不同算术环境为可能来源，尚未独立证明具体GPU/CPU原因。Python FP32与C int8输出相关0.999216，RMSE0.0009942，相对Python RMS约4.00%，最大误差0.009426；不是逐点精确相同，不单凭相关系数宣称音色/量化损失通过。报告report/llvc_checkpoint_parity_20261015.json。
+
+目标条件接口核对：Net.forward固定生成label=zeros，无参考目标音频参数；该模型目标身份来自训练权重。所以仅作为已有同目标神经对照，不替代新目标注册，更不能说本次源准备录音已训练出此网络。若该输出可听更好，后续还需准备/目标适配设计、内容保持与多人测试及PS/PL预算。
+
+build/create_llvc_listening_gate.py生成18秒3段：目标Track9(11秒起5秒)、WORLD旧配方、神经PythonFP32。后二者对应本次开发语音2.68秒起5秒；神经输入从1.68秒起6秒，丢1秒预热后截5秒，不同分析上下文需保留限制，不把本次开发句当独立最终测试。归档响度处理明确记录、对照峰0.853599、零削顶。报告report/llvc_listening_gate_20261015.json，输出llvc_reference_comparison/。gzip SHA a53fa03ee6481f4ad09074a031a400eee005d4ae0594aa385f3a853eebcfbef0，WAV SHA15f17bcdb7c7df1ca8a86988fc96b4ba9db38cd5bfe41c3cd7f755e3b0f9cd5d。板端/tmp/codex_prepared_comparison_20261015/llvc_manifest.json和llvc_comparison.wav.gz静态上传；未自动播放，上传核SHA结束后单独问准备。本轮只有主机计算与静态上传，无新录音/播放，不改PL、启动分区和mixer。
+
+
+## 神经基线听感失败，回到WORLD低沉残留的受控验证
+
+用户评价神经③几乎与目标①无关、且更不清晰；WORLD②其实很像目标但保留源低沉音色。本轮淘汰历史v2，不迁移板端、不把高数值相关当目标相似度证据；训练/推理资产保留。记录report/llvc_reference_feedback_20261015.json。
+
+新增src/reference/spectral_balance.py与4项测试。先拟合300～4000Hz宽谱斜率，结果-0.263dB/倍频，不支持整体提亮；对应spectral_balance_profile.json及spectral_balance_comparison只是离线探索，未上传/试听/采纳。再比较80～400Hz与1～4kHz归一化几何均值谱能量比例：源准备经旧warp后24.570dB，四段目标注册分别20.620/17.996/18.910/17.870dB，均支持源低频相对偏多，但不是去除身份的证明，录音通道和音素仍混杂。只用本次准备录音和Track5～8拟合；开发句和Track9没有用于拟合。
+
+low_shelf_profile.json将建议相对低频衰减限制为4dB。apply_balance仅有声帧应用固定平滑低频架，逐帧解功率偏移，最终每bin功率增益仍在±4dB以内并保持总谱功率；不是先限幅后归一化导致越界。“4dB”是谱参数约束，不代表波形每个样本或实际听感减少4dB；功率保持偏移也会调整高频相对增益。清音/静音SP保持，旧F0倍率108722/65536、旧warp1.0975和源AP不改，不调设备或软件输入增益。4项检查覆盖已知拟合/限幅、目标方向一致性门槛、最终增益与总功率/清音保持、平谱不变，全部通过。
+
+build/prepare_spectral_balance.py --low-shelf生成源准备参数，evaluate_prepared_world.py --balance-profile复用冻结配置并生成18秒target/old_fixed/balanced_old_fixed。旧版WAV SHA be670efc...不变，候选完整有限、原始削顶0，音高参数中位仍198.406Hz。候选完整WAV SHA e1b64e09facd757252883b3c6270fd92ae1024890a0729f71a01979eb0cc5407；对照峰0.858085、无削顶，gzip SHA313360f170e8135c3c54e761b834f3e3c954d9304c1a3d71970e499a2b4a8290。报告report/world_low_shelf_candidate_20261015.json，输出low_shelf_comparison/。已上传low_shelf_manifest.json，音频正在上传到/tmp/codex_prepared_comparison_20261015/low_shelf_comparison.wav.gz。本轮没有自动播放或录音；上传结束后另问准备，试听只是单人开发对照，不能替代多人/新句或实时预算验收。仍保留旧实时版本，不把该候选注册为已通过声线模型。
+
+
+## 低频候选无可感知改善；准备更完整的电脑质量参考
+
+用户单独确认后低频候选对照播放，反馈“没有减轻，感觉不到变化”。目录comparison_5085099589619，零underrun、恢复0、PCMclosed，日志world_low_shelf_playback_20261015.log及world_low_shelf_playback_state_20261015.log。不采纳、不加强衰减重试、不接入实时。report/world_low_shelf_feedback_20261015.json。统计上低频比例有差异，不等于听感改善或能去掉源身份，本轮结果只否决该参数候选。
+
+继续主机参考：Seed-VC源码按交接seed_source_manifest固定提交51383efd921027683c89e5348211d93ff12ac2a8下载，49,003,480字节SHA72a27a1d20efec1489041eac2854e3e1c9c23d650ac15900821ad3ab367f0290；安全检查归档路径/符号链接后解压，未运行上游安装脚本。脚本build/prepare_seed_reference_source.py，报告seed_reference_source_20261015.json。官方网页固定提交读取曾超时，使用实际下载归档校验替代，不依赖搜索摘要宣称功能已实现。
+
+只读硬件查询确认RTX5060 Laptop GPU；nvidia-smi报告8151MiB、驱动610.74。CIM AdapterRAM为32位字段曾约4GiB，不能当真实总显存；最终用nvidia-smi。当前只用既有Torch2.7.1+cpu，不安装CUDA或更改驱动。
+
+新参考最小依赖分置build/generated/seed_cpu_deps与seed_audio_deps，Torch复用llvc_cpu_deps；torchaudio2.7.1+cpu、transformers4.46.3、hub0.28.1、librosa0.10.2.post1、NumPy2.3.5等，未改全局环境。build/seed_reference_requirements.txt、prepare_seed_asset_plan.py冻结四仓库的公共revision/size/LFS SHA。download_seed_reference_assets.py分块校验下载，共6文件1,521,784,190字节，报告seed_reference_assets_20261015.json complete=true；公开权重只下载，本地语音没有上传。小JSON文件没有LFS SHA，以固定提交加下载SHA留档，不声称全都来自独立SHA。
+
+build/run_seed_cpu_reference.py已准备并启动--steps8本地主机离线计算，尚待结果。保留源树，只修改cpu_runtime副本：语义编码器half转float适应CPU；DAC导入移入未启用的量化分支，不装无关依赖。HF离线模式，按已校验资产映射禁止隐式下载；检查每个学习参数存在且形状匹配，避免上游strict=False静默遗漏。已有源开发录音1.68秒起6秒、目标Track8开头8秒作为参考，分别显式离线RMS0.04归一化并限峰；这不是板卡音量/增益调整，不以此宣称大小声适应通过。不使用Track9拟合，不新训练、现场录音或播放。模型仅电脑质量参考，不声称可在7020实时，后续缩减与新目标注册闭环仍须评估。本次没有恢复旧服务、不切PL或改启动分区。源码与权重stage路径build/generated/seed_reference_20261015/。
+
+
+## Seed参考CPU离线输出完成，约17秒质量对照待试听
+
+run_seed_cpu_reference.py --steps8与--steps30均完成本地CPU文件转换，输出5.990748秒/22050Hz，输入6秒，输出比输入短约9.25ms，不能将时长近似当内容完整验收。8步峰0.517798、30步峰0.471403，均有限/零削顶。报告seed_cpu_reference_steps8_20261015.json及seed_cpu_reference_steps30_20261015.json。30步含加载墙钟21.592秒，原程序显示推理RTF约2.598；不是实时通过，不用于推断7020延迟。
+
+上游加载器strict=False打印3个跳过项。逐条核对并加入允许集合断言：cfm.estimator.input_pos为自动生成位置缓存；length_regulator.extra_codebooks.0.weight与extra_codebook_mask_tokens.0属于当前continuous/is_discrete=False不走的离散码本分支。当前网络全部named_parameters存在且形状匹配；未知跳过项立即拒绝。保留上游下载树，cpu_runtime只将语义编码half转float、未使用DAC导入移进条件分支，原始及修改后SHA已记录。HF离线，资产全核SHA后加载，没有音频上传。环境清单report/seed_cpu_dependencies_20261015.json。
+
+create_seed_listening_gate.py首次遇参考IEEE-float WAV（format3），未修改通用PCM读取器；改用已有soundfile读取该文件后，离线resample_poly转16k，再沿用32k归档插值。只生成17.4秒对照：target/oldWORLD/Seed30，每段4.8秒、间隔1秒、开头1秒；源2.68秒起、目标Track9 11秒起，新参考丢输入对应前1秒后取4.8秒，不补零伪造5秒。参考提示为Track8前8秒，不用Track9作为提示；原始输入和目标显式RMS归一化均留档，不是板端增益调整。输出是已有开发语句，非新句/新说话人/盲测；原WORD和新参考上下文/预处理有差异，不能声称严格单变量比较。
+
+Seed30输出SHA78be5244c6d869b6c9d8558d117718bf326ae024c843a375279c4a4175f346e6；对照WAV SHA7dceba3b50826816240ae22066cf6ebef84155dae8af0881cab22b2c2e8e0180，gzip SHA915d80fa14af09dbbc7aaad198f71e955a408eac4d976acbced4f3d0a89f96cd，峰0.853599、无削顶。报告seed_reference_listening_gate_20261015.json，输出data/registrations/source_20261015/speaker01/seed_reference_comparison/。新文件seed_reference_manifest.json及seed_reference_comparison.wav.gz静态上传至/tmp/codex_prepared_comparison_20261015，校验结束后另问准备。此次仅电脑生成、板上播文件，不是板端推理，更不是完整目标注册产品已完成；若听感无改善不能继续当强教师，若有改善仍需内容/其他输入者及资源压缩路线验证。原实时默认版本和配置、PL、启动分区、mixer保持；本轮尚无新的现场播放/录音。

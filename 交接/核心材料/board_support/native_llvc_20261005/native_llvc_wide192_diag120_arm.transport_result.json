@@ -1,0 +1,10 @@
+{
+  "source": "native_llvc_wide192_diag120_arm",
+  "remote": "/home/root/native_llvc_trial_20261005/native_llvc_wide192_diag120_arm",
+  "sha256": "8cb2352a76461ea6cff4dd26ddb33927cad72dfc348a96c088cf57acb65cbdfd",
+  "bytes": 1991628,
+  "seconds": 88.03186789999017,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

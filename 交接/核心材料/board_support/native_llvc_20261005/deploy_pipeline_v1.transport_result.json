@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\deploy_runtime\\deploy_pipeline_v1",
+  "remote": "/home/root/native_llvc_trial_20261005/deploy_pipeline_v1",
+  "sha256": "e19ca957d1a3b06543d2cd19f07b86529fce212553ff6fec1936d8248c9d280b",
+  "bytes": 40364,
+  "seconds": 3.233999999999469,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

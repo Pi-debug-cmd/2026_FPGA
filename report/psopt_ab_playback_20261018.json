@@ -1,0 +1,43 @@
+{
+  "kind": "psopt_ab_playback",
+  "date": "2026-10-18",
+  "order": [
+    "baseline_synthesis",
+    "optimized_synthesis",
+    "target_reference"
+  ],
+  "duration_s": 17.4,
+  "rate": 32000,
+  "peak": 0.5899205339523916,
+  "wav_sha256": "72d1bbe47d02f1c70d5aea03592c811267d5160b69f788caf75a96ec51313c3d",
+  "gzip_sha256": "5c945f8fb5a6a711de9097fb0ea663bf72ce57381edfba3115be30c740cd4b9e",
+  "board": {
+    "port": "COM14",
+    "remote_dir": "/tmp/codex_psopt_20261018",
+    "run_dir": "/tmp/codex_psopt_20261018/comparison_8026829124512",
+    "play_rc": 0,
+    "comparison_completed": true
+  },
+  "log": "report/psopt_playback_20261018.log",
+  "quality_vs_baseline": {
+    "utterances_tested": 4,
+    "correlation_min": 0.999562,
+    "correlation_max": 0.999859,
+    "spectral_median_db_range": "0.190-0.347",
+    "clipping": 0
+  },
+  "rtf_board": {
+    "baseline": "0.8087(0.6460/0.8279/0.9483)",
+    "optimized": "0.6488(0.4902/0.6726/0.8440)",
+    "delta": "-0.104 ~ -0.160"
+  },
+  "user_feedback": {
+    "raw": "2听起来要更好一些，第一个字比较自然，切换也可以",
+    "interpretation": "优化版（②）听感略优于原版（①）；起音自然、清浊切换无异常。",
+    "preferred_segment": "optimized_synthesis",
+    "artifacts_reported": "无（起音与切换均可接受）",
+    "decision": "采纳 10ms 锚点 + 双 vuv 变体 + 过渡回退 8x 作为新 PS 基线；stride=0 保留为逐位回退路径",
+    "recorded_at": "2026-10-18"
+  },
+  "notes": "优化=10ms 锚点 + 双 vuv 变体 + 过渡回退 8x；评估误差集中于起音与清浊切换。"
+}

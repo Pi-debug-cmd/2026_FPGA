@@ -1,0 +1,31 @@
+{
+  "what": "增量 2 最小相位 PL 路线：归档结论与两条备选路线对比",
+  "date": "2026-10-18",
+  "status": "MINPHASE_PL_ROUTE_NOT_CONVERGED",
+  "archived_fail_evidence": "report/pl_synth_offload_expunit_status.json（模型 PASS 1.17 LSB；RTL FAIL，根因=cos/sin 角度 frac 未进插值/对不齐）",
+  "route_a_cordic_minphase": {
+    "scope": "PL：1024 点 IFFT（log 谱）→PS 折叠→1024 点 FFT→513 bin CORDIC exp/cos/sin；即整个最小相位构建",
+    "resource_estimate_cumulative": {"lut": "3.5k-5k", "bram18": "4-6", "dsp": "8-12"},
+    "precision_estimate": "CORDIC 18-20 级，cos/sin 误差约 1e-5；per-bin 相对误差 <=1e-4、冲激响应 <=2 LSB 可达（需实测）",
+    "throughput": "513 bin x 约20拍 = 10.3k 拍/次；400 次/s -> 4.1M 拍/s -> 4.1% 占空比 @100MHz",
+    "ps_rtf_after": {"synthesis": 0.083, "full_chain": 0.349},
+    "risk": "中：CORDIC 另需范围/移位对齐；但无 frac 插值类问题"
+  },
+  "route_b_fft_only": {
+    "scope": "PL 只卸确定性 FFT：最小相位 log->IFFT 与折叠后 FFT（复用已验证的 1024 蝶形引擎，加正向模式）；exp 留 PS",
+    "resource_estimate_cumulative": {"lut": "约 1.5k-2.5k（蝶形引擎 + 正向模式 + 复数输入）", "bram18": "3-4", "dsp": "4-8"},
+    "precision_estimate": "确定性变换，可与定点模型逐位一致（已有引擎验证方法）",
+    "measured_share": "CPU 拆解：最小相位里两处 FFT 合计 9.25% 合成耗时；响应生成里的 FFT 混在 14.7% 桶内、未单列",
+    "ps_rtf_after": {
+      "if_only_minphase_ffts": {"synthesis": 0.499, "full_chain": 0.765},
+      "if_all_1024_ffts": {"synthesis": "约 0.46-0.50", "full_chain": "约 0.73-0.77"},
+      "note": "按实测占比，FFT-only 达不到 Lead 估的 0.47；0.47 需要把占 62.7% 的 exp 也卸载"
+    },
+    "risk": "低：变换确定性、引擎已验证"
+  },
+  "recommendation": "先走 B（低风险、确定能收敛），收益为 PS 全链约 0.73-0.77 RTF；若必须到 0.47 左右，需在 B 之后再上 A 的 CORDIC exp（两者可叠加）。不建议在角度查表上继续投入。",
+  "next_actions": [
+    "B：扩展增量 1 蝶形为 FFT/IFFT 可切换（共轭输入技巧），接口 1024 复数点，逐样本验证 + 后综合 funcsim",
+    "A：若继续，CORDIC 独立验证（已知角度打表：pi/2->(0,1)，pi/4->(0.707,0.707)），再与 B 串联"
+  ]
+}

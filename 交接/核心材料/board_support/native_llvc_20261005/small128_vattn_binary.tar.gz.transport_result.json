@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\small128_vattn_binary.tar.gz",
+  "remote": "/home/root/native_llvc_trial_20261005/small128_vattn_binary.tar.gz",
+  "sha256": "724fb72371d5ff0da7635aa5cb8543d56ff0147aeb1f05e5e688368bb37e2c16",
+  "bytes": 716720,
+  "seconds": 32.68622979999054,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

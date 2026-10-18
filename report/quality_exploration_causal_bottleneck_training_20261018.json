@@ -1,0 +1,9 @@
+{
+  "training": true,
+  "epochs_completed": 42,
+  "steps_completed": 4200,
+  "best_validation_total": 0.27964159846305847,
+  "checkpoint": "build\\generated\\quality_exploration_20261018\\causal_content_bottleneck_v1.pt",
+  "checkpoint_sha256": "848d682e2ac6e3546fe1e8f26295d6fb251fcceef09ac8b17eccae8a31d6b498",
+  "early_stopped": true
+}

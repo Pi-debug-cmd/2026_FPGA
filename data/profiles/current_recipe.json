@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "kind": "f0_pitch_mapping_only",
+  "hardware": "pitch_control_v2",
+  "source_profile": {
+    "version": 1,
+    "sample_rate": 16000,
+    "kind": "f0_calibration_only",
+    "duration_s": 15.0,
+    "voiced_frame_coverage_s": 4.32,
+    "frames": 1497,
+    "voiced_frames": 432,
+    "clip_fraction": 1.6666666666666667e-05,
+    "rms": 0.05921481459305694,
+    "f0_median_hz": 116.41285340559061,
+    "f0_p10_hz": 108.03131986232225,
+    "f0_p90_hz": 125.16396511827384,
+    "estimator": "yin_40ms_10ms_75_400hz_threshold_0.15",
+    "input_sha256": "99d39268c2855fb9704727d1fccb1cf09abe502d07dff6c96bd1db4b25f666f3",
+    "input_sample_rate": 32000,
+    "input_channel": 0
+  },
+  "target_profile": {
+    "version": 1,
+    "sample_rate": 16000,
+    "kind": "f0_calibration_only",
+    "duration_s": 99.14,
+    "voiced_frame_coverage_s": 53.1,
+    "frames": 9911,
+    "voiced_frames": 5310,
+    "clip_fraction": 0.0,
+    "rms": 0.1300506787621009,
+    "f0_median_hz": 193.125006633167,
+    "f0_p10_hz": 172.2037521381981,
+    "f0_p90_hz": 229.41616991920253,
+    "estimator": "yin_40ms_10ms_75_400hz_threshold_0.15",
+    "source_files": [
+      {
+        "path": "voice_src\\src_1\\Track 5(1).wav",
+        "sha256": "c3a50c67c7d29a77c482067272624c3a196ed6421dcf11099b5827ccb65e09e3",
+        "channel": 0
+      },
+      {
+        "path": "voice_src\\src_1\\Track 6(1).wav",
+        "sha256": "92ac22ae3f5674e8e5b49c296e0b1c35f38347c72081c3e56e570091f82ffbfa",
+        "channel": 0
+      },
+      {
+        "path": "voice_src\\src_1\\Track 7(1).wav",
+        "sha256": "942b113534ff1e5af211b57a1db7419d1f9e9ba08e1944475931e393671bf5b1",
+        "channel": 0
+      },
+      {
+        "path": "voice_src\\src_1\\Track 8(1).wav",
+        "sha256": "4e07e8ebf0deba90db76de70aec293f544c4695b43bdfec4d6037c3fb7f888f3",
+        "channel": 0
+      }
+    ],
+    "held_out_file": "voice_src\\src_1\\Track 9(1).wav",
+    "speaker_consistency": "same speaker, clean speech, confirmed by user"
+  },
+  "source_profile_sha256": "91ebde50dc1b569ce378a9f90f2a3f5c5195ba5f210091e52e72beea4566acfe",
+  "target_profile_sha256": "1d3a9b4bf34c804560bda129e876faa00fde3617fb25d4ba69cc32be1a6efc7a",
+  "ratio": 1.6589663510807164,
+  "ratio_q16": 108722
+}

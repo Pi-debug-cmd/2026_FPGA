@@ -1,0 +1,123 @@
+{
+  "kind": "seed_vc_multi_utterance_target_registration_sweep",
+  "date": "2026-10-18",
+  "device": "cpu",
+  "seed": 20261018,
+  "tag": "controlled_seed20261018",
+  "inputs": [
+    {
+      "role": "source",
+      "original": "data\\registrations\\source_20261015\\speaker01\\holdout.wav",
+      "original_sha256": "1c064f8961590df3ed6e2893fb6f74942871be43d9c6aee55da5489c43a66e97",
+      "crop_start_s": 1.68,
+      "seconds": 6.0,
+      "offline_gain": 4.133361629347908
+    },
+    {
+      "role": "target_registration_segment",
+      "file": "voice_src\\src_1\\Track 5(1).wav",
+      "sha256": "c3a50c67c7d29a77c482067272624c3a196ed6421dcf11099b5827ccb65e09e3",
+      "crop_start_s": 1.93,
+      "seconds": 2.0
+    },
+    {
+      "role": "target_registration_segment",
+      "file": "voice_src\\src_1\\Track 6(1).wav",
+      "sha256": "92ac22ae3f5674e8e5b49c296e0b1c35f38347c72081c3e56e570091f82ffbfa",
+      "crop_start_s": 7.31,
+      "seconds": 2.0
+    },
+    {
+      "role": "target_registration_segment",
+      "file": "voice_src\\src_1\\Track 7(1).wav",
+      "sha256": "942b113534ff1e5af211b57a1db7419d1f9e9ba08e1944475931e393671bf5b1",
+      "crop_start_s": 2.05,
+      "seconds": 2.0
+    },
+    {
+      "role": "target_registration_segment",
+      "file": "voice_src\\src_1\\Track 8(1).wav",
+      "sha256": "4e07e8ebf0deba90db76de70aec293f544c4695b43bdfec4d6037c3fb7f888f3",
+      "crop_start_s": 1.77,
+      "seconds": 2.0
+    },
+    {
+      "role": "target_registration_prompt",
+      "construction": "four_tracks_x_2s_high_activity",
+      "seconds": 8.0,
+      "offline_gain": 0.2331817904721928,
+      "sha256": "20418ce73e8a9c41f20f94baa5d5151c62aac411f35ce8ba4079d7c637548cc4",
+      "holdout_track9_used": false
+    }
+  ],
+  "runtime_changes": {
+    "inference.py": {
+      "upstream_sha256": "58f97976804a8eb8bb4d33e73beeab792f86a5ab2ca83c1319a23da1e71e80a6",
+      "runtime_sha256": "86db0f961c6d4bbae3e9a4691828b98eccbe92360118552c7cb602dc595b2562"
+    },
+    "modules/length_regulator.py": {
+      "upstream_sha256": "7b27440e9b25ea6b77b88910cf45e358e8e76b264acc9108e68ccebbd1bb5dfb",
+      "runtime_sha256": "5f072db7085c43331de88e7eead011cb7455f9b3583e6fc9b80d386820f6a2ab"
+    }
+  },
+  "checkpoint_loading": [
+    {
+      "module": "cfm",
+      "skipped_keys": [
+        "estimator.input_pos"
+      ]
+    },
+    {
+      "module": "length_regulator",
+      "skipped_keys": [
+        "extra_codebook_mask_tokens.0",
+        "extra_codebooks.0.weight"
+      ]
+    },
+    {
+      "module": "cfm",
+      "skipped_keys": [
+        "estimator.input_pos"
+      ]
+    },
+    {
+      "module": "length_regulator",
+      "skipped_keys": [
+        "extra_codebook_mask_tokens.0",
+        "extra_codebooks.0.weight"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "cfg": 0.7,
+      "steps": 30,
+      "path": "build\\generated\\quality_exploration_20261018\\seed_registration_controlled_seed20261018\\cfg_0.70\\vc_source_target_registered_1.0_30_0.7.wav",
+      "sha256": "5e743ac508d0e308d29c068319081b0e99500f09551e92f863bd39f1c19dd1f9",
+      "elapsed_with_load_s": 34.29910580010619,
+      "rate": 22050,
+      "seconds": 5.990748299319728,
+      "peak": 0.5265890955924988,
+      "clip_samples": 0
+    },
+    {
+      "cfg": 0.95,
+      "steps": 30,
+      "path": "build\\generated\\quality_exploration_20261018\\seed_registration_controlled_seed20261018\\cfg_0.95\\vc_source_target_registered_1.0_30_0.95.wav",
+      "sha256": "322830685e970187fa301ae9f5ce966fde59f20788d7bb9e411b3bfa55a32a36",
+      "elapsed_with_load_s": 19.339385300059803,
+      "rate": 22050,
+      "seconds": 5.990748299319728,
+      "peak": 0.5457130074501038,
+      "clip_samples": 0
+    }
+  ],
+  "played": false,
+  "board_touched": false,
+  "target_track9_used_for_registration": false,
+  "limitations": [
+    "Single source speaker and existing development utterance.",
+    "Seed-VC is an offline quality teacher, not a Zynq-7020 runtime candidate.",
+    "Objective scores do not establish absence of AI-like artifacts; listening requires fresh readiness."
+  ]
+}

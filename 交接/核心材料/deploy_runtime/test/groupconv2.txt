@@ -1,0 +1,2 @@
+out0=1.0 out1=1.0 out2=2.0 out3=2.0 out510=256.0 out511=256.0
+weight shape (512, 1, 1)

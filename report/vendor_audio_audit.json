@@ -1,0 +1,10 @@
+{
+  "part": "xc7z020clg400-2",
+  "user_decision": "Use A disk as hardware authority",
+  "matched_ps_parameters": 531,
+  "differences": {},
+  "vendor_bd": "D:\\BaiduNetdiskDownload\\A盘（资料盘）\\2-野火开源图书合集（源代码）\\ebf_zynq7020\\ebf_zynq7020_linux\\vivado_prj_zynq7020\\zynq7020\\zynq7020.srcs\\sources_1\\bd\\zynq\\zynq.bd",
+  "vendor_bd_sha256": "9bb32f66acec77871f598264c38fd228590ffa0fe9cfd3ddbeb0b4e8d155f338",
+  "vendor_xdc_sha256": "58e8906c6ea5c278afaef2d1d7bef0b78b15fabdd3105836dbac79ba9c8a0eb8",
+  "selected_constraints": 24
+}

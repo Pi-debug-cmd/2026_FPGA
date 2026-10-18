@@ -1,0 +1,17 @@
+{
+  "kind": "offline_sliding_analysis_probe",
+  "audio_s": 5.0,
+  "analysis_s": 3.524103,
+  "synthesis_s": 2.648399,
+  "serial_total_s": 6.173072,
+  "analysis_rtf": 0.704821,
+  "synthesis_rtf": 0.52968,
+  "analysis_block_p95_ms": 40.221516,
+  "analysis_block_max_ms": 41.05422,
+  "hop_ms": 40,
+  "history_ms": 160,
+  "future_ms": 40,
+  "synthesis_lookahead_ms": 32,
+  "voiced_frames": 279,
+  "peak": 0.45505181
+}

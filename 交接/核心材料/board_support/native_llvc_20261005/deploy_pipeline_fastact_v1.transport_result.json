@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\deploy_runtime\\deploy_pipeline_fastact_v1",
+  "remote": "/home/root/native_llvc_trial_20261005/deploy_pipeline_fastact_v1",
+  "sha256": "cf95e69ce035c47e8ad8c0187038b7b13af4e793ee5b09d8e3c1809915afc938",
+  "bytes": 40776,
+  "seconds": 3.2659999999996217,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

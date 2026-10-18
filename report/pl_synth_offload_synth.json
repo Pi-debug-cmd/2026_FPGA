@@ -1,0 +1,141 @@
+{
+  "what": "WORLD 合成卸载增量 1：1024 点 IFFT 核 OOC 综合 + 后综合网表仿真证据",
+  "date": "2026-10-18",
+  "tool": "Vivado v.2026.1 (win64) Build 6511674",
+  "part": "xc7z020clg400-2",
+  "flow": "synth_design -mode out_of_context -top ifft1024_stream",
+  "clock": {
+    "name": "clk",
+    "period_ns": 10.0,
+    "frequency_mhz": 100.0
+  },
+  "resources": {
+    "slice_lut": 363,
+    "slice_lut_util_pct": 0.68,
+    "lut_cells_in_netlist": 468,
+    "slice_ff": 154,
+    "slice_ff_util_pct": 0.14,
+    "ramb36": 1,
+    "ramb18": 1,
+    "bram18_equivalent": 3,
+    "bram18_available": 280,
+    "dsp48e1": 4,
+    "dsp_available": 220,
+    "unique_control_sets": 10,
+    "notes": "数据缓冲 1024x36 = 1 个 RAMB36（2 个 RAMB18 当量）；旋转因子 ROM 512x36 = 1 个 RAMB18；4 个 DSP 做一次 18x18 复数乘"
+  },
+  "timing": {
+    "wns_ns": 3.714,
+    "whs_ns": 0.267,
+    "wpws_ns": 4.5,
+    "setup_failing_endpoints": 0,
+    "hold_failing_endpoints": 0,
+    "total_endpoints": 545,
+    "critical_path": {
+      "start": "pr_rr_reg/CLK",
+      "end": "t_re_reg[17]/D",
+      "logic_levels": 10,
+      "note": "DSP 乘积打拍 -> 37 位和差 -> 舍入 -> 饱和 -> t_re 寄存；占用 6.286 ns / 10 ns"
+    }
+  },
+  "targets_from_lead": {
+    "lut_le_10000": true,
+    "bram_le_4": true,
+    "dsp_le_8": true,
+    "wns_ge_0": true,
+    "whs_ge_0": true
+  },
+  "lead_questions": {
+    "q1_synthesis_object": {
+      "answer": "综合对象为 ifft1024_stream（OOC），网表中 DSP48E1=4、RAMB36E1=1、RAMB18E1=1、FDRE=142+FDSE=12=154 FF、LUT 单元 468（报告 Slice LUT 363，部分被 LUT 合并），无黑盒。10 级蝶形共用同一套硬件蝶形（12 态状态机），不存在 512 路并行。",
+      "dsp_note": "DSP 最终映射报告含 4 条：(A*B)'、C-((A*B)')、'PCIN+(A*B)'，乘积寄存器被 DSP 的 MREG/PREG 吸收，因此 FF 只有 154。",
+      "lut_note": "LUT 小是时分复用的必然结果：整个核只有 1 个复数乘（4 DSP）、1 个 37 位和差/舍入/饱和数据通路、两组 10 位地址计算和 12 态 FSM；旋转因子在 BRAM、数据在 BRAM。作为对比，Xilinx FFT IP 1024 点流水线有 10 级蝶形阵列才需要 ~5k LUT。"
+    },
+    "q2_connectivity": {
+      "answer": "后综合 funcsim 网表仿真（见下）6 个用例全部 PASS，且输出与定点模型逐位一致；m_axis_tdata[31:0]/tlast/tvalid、busy、done、s_axis_tready 均有驱动。若输出未接到端口或 RAM 读数据未参与输出，网表仿真不可能逐样本匹配黄金向量。"
+    },
+    "q3_rerun": {
+      "answer": "已用当前 RTL 重跑 xsim（行为级）与后综合 funcsim 网表两级仿真，均为 6/6 PASS、vs 定点模型 0 LSB、vs numpy golden 最大 2 LSB。"
+    }
+  },
+  "post_synth_simulation": {
+    "netlist": "build/generated/pl_synth_offload/synth/ifft1024_stream_funcsim.v",
+    "netlist_size_bytes": 205701,
+    "netlist_primitive_counts": {
+      "RAMB36E1": 1,
+      "RAMB18E1": 1,
+      "DSP48E1": 4,
+      "FDRE": 142,
+      "FDSE": 12,
+      "CARRY4": 40
+    },
+    "result": "6/6 PASS",
+    "rtl_vs_model": "0 LSB（逐位一致）",
+    "max_vs_numpy_golden_abs_err": 1.5259e-05,
+    "workdir": "D:\\xsim_work\\synth_offload\\post_synth",
+    "commands": [
+      "（Vivado MCP）write_verilog -force -mode funcsim .../synth/ifft1024_stream_funcsim.v",
+      "xvlog -sv ifft1024_stream_funcsim.v tb_ifft1024_stream.sv glbl.v",
+      "xelab tb_ifft1024_stream glbl -s post_synth_test -L unisims_ver",
+      "xsim post_synth_test -runall -log xsim.log"
+    ],
+    "evidence": [
+      "build/generated/pl_synth_offload/sim_post_synth/xsim.log",
+      "build/generated/pl_synth_offload/post_synth_verification.json"
+    ]
+  },
+  "throughput": {
+    "n_butterflies_per_frame": 5120,
+    "cycles_per_butterfly": 6,
+    "butterfly_cycles": 30720,
+    "butterfly_time_us_at_100mhz": 307.2,
+    "measured_frame_cycles_with_axis_stalls": 33509,
+    "measured_frame_time_us": 335.09,
+    "frames_per_second_measured": 2984,
+    "world_requirement_fps": 100,
+    "margin_x": 29.8,
+    "duty_cycle_pct_at_100fps": 3.35,
+    "note": "实测帧周期取 xsim 6 个用例的 cycles 均值 33509（含输入随机空拍与输出随机背压）"
+  },
+  "sim": {
+    "pass": true,
+    "cases": 6,
+    "rtl_vs_python_fixed_model": "0 LSB，逐位一致",
+    "max_rtl_vs_numpy_golden_lsb": 2,
+    "max_rtl_vs_numpy_golden_abs_err": 1.5259e-05,
+    "tolerance_lsb": 131,
+    "tolerance_float": 1e-3,
+    "checks": [
+      "513 拍输入 / 1024 拍输出 / TLAST 位置",
+      "输入随机 valid 空拍与输出随机 tready 背压",
+      "背压期间输出数据与 TLAST 保持稳定",
+      "无多余输出、帧间回到空闲可再次接收"
+    ]
+  },
+  "evidence_files": {
+    "utilization": "build/generated/pl_synth_offload/synth/utilization.txt",
+    "utilization_hier": "build/generated/pl_synth_offload/synth/utilization_hier.txt",
+    "timing_summary": "build/generated/pl_synth_offload/synth/timing_summary.txt",
+    "design_analysis": "build/generated/pl_synth_offload/synth/design_analysis.txt",
+    "checkpoint": "build/generated/pl_synth_offload/synth/ifft1024_stream_synth.dcp",
+    "funcsim_netlist": "build/generated/pl_synth_offload/synth/ifft1024_stream_funcsim.v",
+    "synth_console_log": "build/generated/pl_synth_offload/synth/vivado_synth_console.log",
+    "xsim_log": "build/generated/pl_synth_offload/sim/xsim.log",
+    "xsim_post_synth_log": "build/generated/pl_synth_offload/sim_post_synth/xsim.log",
+    "sim_verification": "build/generated/pl_synth_offload/sim_verification.json",
+    "post_synth_verification": "build/generated/pl_synth_offload/post_synth_verification.json",
+    "vectors_meta": "build/generated/pl_synth_offload/vectors.json"
+  },
+  "reproduction": [
+    "python src/rtl/synth_offload/gen_ifft_vectors.py   # 生成黄金向量 + twiddle_rom_1024.v",
+    "把 src/rtl/synth_offload/*.v|sv 与 build/generated/pl_synth_offload/*.hex 拷到 D:\\xsim_work\\synth_offload 后跑 xvlog/xelab/xsim（行为级仿真）",
+    "python build/generated/pl_synth_offload/verify_increment1.py   # RTL vs 定点模型/golden",
+    "Vivado MCP: python tools/mcp_vivado.py start; python tools/mcp_vivado.py exec \"source C:/Users/World/Desktop/2026_FPGA/src/rtl/synth_offload/synth_ifft1024.tcl\"",
+    "（可选）MCP write_verilog -mode funcsim 导出网表，在 D:\\xsim_work\\synth_offload\\post_synth 用 xelab -L unisims_ver 跑后综合仿真"
+  ],
+  "limitations": [
+    "OOC 综合：只约束核内部 clk，不含板级 I/O 约束，未做 place/route；实现后需复测 WNS/WHS",
+    "单帧缓冲：处理一帧期间 s_axis_tready 拉低，上游需缓存约 513 拍（增量 2 加双缓冲）",
+    "输入需 PS 侧按帧归一化满足无溢出契约（真实 WORLD sqrt(包络) 峰值实测约 3.0，需 2^-e 缩放）"
+  ]
+}

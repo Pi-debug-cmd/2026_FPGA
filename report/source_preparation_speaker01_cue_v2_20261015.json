@@ -1,0 +1,62 @@
+{
+  "directory": "/tmp/codex_source_mapping_20261015/speaker01_calibration_1417062603869",
+  "duration_s": 20.0,
+  "sample_rate": 32000,
+  "wav_sha256": "5cd4ff62fba9121a7e0b664d3d7521128bf414c8484aa0575001817d98d3fed8",
+  "voiced_frames": 835,
+  "minimum_voiced_frames": 300,
+  "rms": 0.019081912855445828,
+  "peak": 0.78289794921875,
+  "one_second_rms": [
+    0.05650494721456861,
+    0.0021969415703868606,
+    0.0027548042885049934,
+    0.013445190106196887,
+    0.01319068340898375,
+    0.015551446908945147,
+    0.013542725002253534,
+    0.011125224685905166,
+    0.02002743148402592,
+    0.030405717443490556,
+    0.025658901349312955,
+    0.013335569246534557,
+    0.019280606964890198,
+    0.010117248311513605,
+    0.01381486735054259,
+    0.009469502093812282,
+    0.006293519970665486,
+    0.010279253673195408,
+    0.006617694040555581,
+    0.008237866915005256
+  ],
+  "capture_exit": 0,
+  "restore_exit": 0,
+  "pcm_closed": true,
+  "native_clip_fraction": 0.0,
+  "configuration_generated": true,
+  "speaker_identity_accepted": false,
+  "configuration_sha256": "7aac203c811ce78be80317bbd6c8ef4c24439d6ee3e21dc092393cb8ef583cf0",
+  "pitch_mapping": {
+    "kind": "experimental_source_target_log_f0",
+    "source": {
+      "log_median": 4.786433628963631,
+      "log_p10": 4.703388975282962,
+      "log_p90": 4.868079724501219,
+      "voiced_frames": 835
+    },
+    "target": {
+      "log_median": 5.261408563588507,
+      "log_p10": 5.143287588499806,
+      "log_p90": 5.426325838447676,
+      "voiced_frames": 6750
+    },
+    "scale": 1.718604422478965,
+    "output_bounds_hz": [
+      75.0,
+      400.0
+    ],
+    "low_source_spread_fallback": false,
+    "speaker_identity_accepted": false
+  },
+  "fitted_formant_warp": 1.15
+}

@@ -1,0 +1,16 @@
+{
+  "model_sha256": "eaa08fd14eafdfceb34bd4f9fbbd82f1c4aa870e783df7e596d48a46f5af2361",
+  "bundle_sha256": "7559e014005fafdd8f211eb91adf394ebbd995741d0f6766db56793b23174772",
+  "bundle_bytes": 2170757,
+  "source_path": "D:\\总进度\\目标人物分析\\原台词_模型直接转换检查_2026-10-04\\B_普通男声输入.wav",
+  "source_sha256": "8f74de30711a7ab61e724a82f2128bf6db9e11731c5c9052822325b9f2a4e4a2",
+  "source_is_synthetic_male": true,
+  "source_text": "我的校园很美，走近大门就能看见宽阔的操场。",
+  "samples": 69120,
+  "model_output_rms": 0.043960656970739365,
+  "model_output_peak": 0.3598393201828003,
+  "original_signal_mixed_into_output": false,
+  "source_enrollment": false,
+  "model_quality_accepted": false,
+  "live_board_started": false
+}

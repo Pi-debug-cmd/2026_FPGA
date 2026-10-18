@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\wide192_shallow2_trial.tar.gz",
+  "remote": "/home/root/native_llvc_trial_20261005/wide192_shallow2_trial.tar.gz",
+  "sha256": "f3ea4217103553f790b7f86c6a0644e3fa8cebe2590af2712b743b9b9492cfde",
+  "bytes": 1967191,
+  "seconds": 86.97420660004718,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

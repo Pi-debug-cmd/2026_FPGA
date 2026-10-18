@@ -1,0 +1,25 @@
+{
+  "chunk_frames": 257,
+  "reset_before_every_case": true,
+  "continuous_ratio_q16": 108722,
+  "cases": [
+    {
+      "ratio_q16": 108722,
+      "mode": "pcm32",
+      "frames": 8195,
+      "bytes": 32780,
+      "sha256": "0597ffa68a36f3928438a451b291b1cbac42376c8eef11df678c0da96c618339"
+    },
+    {
+      "ratio_q16": 108722,
+      "mode": "native_s24",
+      "frames": 8195,
+      "bytes": 65560,
+      "sha256": "6b44fe306e0ef5b312be4ca25ec3e27ad1edb130462da3ee4e0c8262ee093ce4"
+    }
+  ],
+  "input_sha256": {
+    "pcm32_input.raw": "2461cee704265652eff504cadcb0665f7c1539f8235b9afb7d3ffb98e6933a24",
+    "native_input.raw": "499706141896c498785ab755cc2f86e7e15fbeef84b5cb9ebc8d3cea462829cc"
+  }
+}

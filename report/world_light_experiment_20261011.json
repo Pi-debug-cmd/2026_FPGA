@@ -1,0 +1,124 @@
+{
+  "kind": "offline_world_timbre_experiment",
+  "variant": "light",
+  "order": [
+    "target",
+    "previous_world_timbre",
+    "world_warp_only",
+    "world_light_timbre"
+  ],
+  "segment_seconds": 5,
+  "gap_seconds": 1,
+  "duration_s": 23.0,
+  "rate": 32000,
+  "ratio_q16": 108722,
+  "formant_warp_fit": 1.15,
+  "strength": 0.65,
+  "gains": [
+    0.643187141482893,
+    2.017631190910412,
+    2.302550452506764,
+    2.216421919819373
+  ],
+  "peak": 0.6923863147586963,
+  "clip_fraction": 0.0,
+  "wav_sha256": "00d86b6bf9aaf903c84598cd02eb8d0033625e57b6b0d2132c393440290f41f6",
+  "gzip_sha256": "7d888f6a094cf52a86fb612d1e2e8392b47f76331399bff0920b44f9115e4603",
+  "enrollment": [
+    {
+      "path": "voice_src\\src_1\\Track 5(1).wav",
+      "sha256": "c3a50c67c7d29a77c482067272624c3a196ed6421dcf11099b5827ccb65e09e3",
+      "channel": 0
+    },
+    {
+      "path": "voice_src\\src_1\\Track 6(1).wav",
+      "sha256": "92ac22ae3f5674e8e5b49c296e0b1c35f38347c72081c3e56e570091f82ffbfa",
+      "channel": 0
+    },
+    {
+      "path": "voice_src\\src_1\\Track 7(1).wav",
+      "sha256": "942b113534ff1e5af211b57a1db7419d1f9e9ba08e1944475931e393671bf5b1",
+      "channel": 0
+    },
+    {
+      "path": "voice_src\\src_1\\Track 8(1).wav",
+      "sha256": "4e07e8ebf0deba90db76de70aec293f544c4695b43bdfec4d6037c3fb7f888f3",
+      "channel": 0
+    }
+  ],
+  "held_out": "voice_src\\src_1\\Track 9(1).wav",
+  "measurements": [
+    {
+      "file": "data\\registrations\\source_20261011\\capture.wav",
+      "analysis_seconds_host": 1.7779186999832746,
+      "audio_seconds": 15.0,
+      "voiced_seconds": 7.655,
+      "f0_median_hz": 117.08093643734802
+    },
+    {
+      "file": "voice_src\\src_1\\Track 5(1).wav",
+      "analysis_seconds_host": 3.3366178999713156,
+      "audio_seconds": 28.78,
+      "voiced_seconds": 23.075,
+      "f0_median_hz": 193.10622697538312
+    },
+    {
+      "file": "voice_src\\src_1\\Track 6(1).wav",
+      "analysis_seconds_host": 2.420208299998194,
+      "audio_seconds": 20.6,
+      "voiced_seconds": 14.575000000000001,
+      "f0_median_hz": 201.33761538852292
+    },
+    {
+      "file": "voice_src\\src_1\\Track 7(1).wav",
+      "analysis_seconds_host": 3.3164889000181574,
+      "audio_seconds": 26.12,
+      "voiced_seconds": 21.11,
+      "f0_median_hz": 191.11238054346362
+    },
+    {
+      "file": "voice_src\\src_1\\Track 8(1).wav",
+      "analysis_seconds_host": 2.827694999985397,
+      "audio_seconds": 23.64,
+      "voiced_seconds": 18.785,
+      "f0_median_hz": 185.62178750970008
+    },
+    {
+      "render": "identity",
+      "synthesis_seconds_host": 0.14775630002259277,
+      "raw_peak": 0.48271577830196966,
+      "raw_clip_fraction": 0.0,
+      "archive_gain": 1.0,
+      "rms": 0.04048988749662081
+    },
+    {
+      "render": "world_pitch",
+      "synthesis_seconds_host": 0.17304200000944547,
+      "raw_peak": 0.48271577830196966,
+      "raw_clip_fraction": 0.0,
+      "archive_gain": 1.0,
+      "rms": 0.032604940529256575
+    },
+    {
+      "render": "world_timbre",
+      "synthesis_seconds_host": 0.17753339998307638,
+      "raw_peak": 0.48271577830196966,
+      "raw_clip_fraction": 0.0,
+      "archive_gain": 1.0,
+      "rms": 0.03557528117758609
+    },
+    {
+      "render": "world_warp_only",
+      "synthesis_seconds_host": 0.1688541999901645,
+      "raw_peak": 0.48271577830196966,
+      "raw_clip_fraction": 0.0,
+      "archive_gain": 1.0,
+      "rms": 0.034444209699498934
+    }
+  ],
+  "versions": {
+    "pyworld": "0.3.5",
+    "numpy": "2.3.5"
+  },
+  "limitation": "Offline host synthesis only; no timbre similarity, board performance or latency acceptance. Mean envelopes confound phonemes and microphones. Source aperiodicity retained."
+}

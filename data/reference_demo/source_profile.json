@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "sample_rate": 16000,
+  "kind": "f0_calibration_only",
+  "duration_s": 22.73775,
+  "voiced_frame_coverage_s": 5.53,
+  "frames": 2270,
+  "voiced_frames": 553,
+  "clip_fraction": 0.0,
+  "rms": 0.03143260333259579,
+  "f0_median_hz": 146.25163847559114,
+  "f0_p10_hz": 117.5067818054624,
+  "f0_p90_hz": 287.93899332437826,
+  "estimator": "yin_40ms_10ms_75_400hz_threshold_0.15"
+}

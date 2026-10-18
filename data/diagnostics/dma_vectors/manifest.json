@@ -1,0 +1,31 @@
+{
+  "ratio_q16": 86856,
+  "samples": 8195,
+  "pcm": "signed PCM16 extended to LE int32",
+  "suggested_chunk_frames": 257,
+  "initial_state": "fresh PL reset, zero-filled RAM",
+  "cross_block_state": "preserved; do not reset on TLAST",
+  "test_order": [
+    "PCM32 first",
+    "native_s24 second, same core state"
+  ],
+  "before_listening": "discard output of 2048 zero samples to remove full-scale test history; this is not a phase reset",
+  "files": {
+    "pcm32_input.raw": {
+      "bytes": 32780,
+      "sha256": "2461cee704265652eff504cadcb0665f7c1539f8235b9afb7d3ffb98e6933a24"
+    },
+    "pcm32_expected.raw": {
+      "bytes": 32780,
+      "sha256": "5e8cceeb72fdf032683199610e649f75b40aa4859ed8f862bdc6667a3bfef8b8"
+    },
+    "native_input.raw": {
+      "bytes": 65560,
+      "sha256": "499706141896c498785ab755cc2f86e7e15fbeef84b5cb9ebc8d3cea462829cc"
+    },
+    "native_expected.raw": {
+      "bytes": 65560,
+      "sha256": "43fc0f6b3402b15f80ffa8a2375da8d08601ce65c21a8d1049327ead33971c9b"
+    }
+  }
+}

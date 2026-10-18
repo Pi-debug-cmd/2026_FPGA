@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-15",
+  "playback_directory": "/tmp/codex_prepared_comparison_20261015/comparison_2078306442262",
+  "user_feedback": "2更清晰，音色上更像，但是音高差一点，4音色仅次于2，有点不清晰，音高更像，3发闷，不清晰，音色也不像",
+  "order": [
+    "target",
+    "old_fixed",
+    "prepared_pitch",
+    "prepared_timbre"
+  ],
+  "playback_underruns": 0,
+  "restore_exit": 0,
+  "pcm_closed": true,
+  "selected_timbre_reference": "old_fixed",
+  "speaker_identity_accepted": false,
+  "prepared_timbre_clearly_better_than_old": false,
+  "next_candidate": "prepared_pitch_old_warp",
+  "evaluation_audio_now_development": true,
+  "new_final_holdout_required": true
+}

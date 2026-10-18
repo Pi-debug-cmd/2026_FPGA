@@ -1,0 +1,14 @@
+{
+  "kind": "full_stream_alignment_native_check",
+  "partition_identical_pcm": true,
+  "whole": {
+    "correlation": 0.9999388028232861,
+    "rmse": 0.00047807937559048456
+  },
+  "excluding_final_80ms": {
+    "correlation": 0.9999999999999999,
+    "rmse": 0.0,
+    "max_error": 0.0
+  },
+  "clip_fraction": 0.0
+}

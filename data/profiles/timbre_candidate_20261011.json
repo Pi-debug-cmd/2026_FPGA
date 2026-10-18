@@ -1,0 +1,26 @@
+{
+    "version":  1,
+    "kind":  "offline_world_warp_candidate",
+    "status":  "preliminary_listening_improvement_budget_pending",
+    "selected_output":  "data/registrations/source_20261011/world_light_experiment/world_warp_only.wav",
+    "selected_output_sha256":  "3b8f2b7cf308dfe4d85bdcf947395e9bd2b9f9c0cdfbe57e99c4fb6e0c9cf26f",
+    "ratio_q16":  108722,
+    "effective_formant_warp":  1.0975,
+    "mean_spectrum_correction":  false,
+    "analysis_rate":  16000,
+    "frame_period_ms":  5,
+    "fft_size":  1024,
+    "f0_estimator":  "harvest_stonemask_energy_gate_voiced_run_median5",
+    "speaker_identity_accepted":  false,
+    "realtime_accepted":  false,
+    "user_feedback":  "厚重感明显减轻，比之前像很多，更接近女声；第三第四段差不多，第四段更小；轻微颤动原因未确认",
+    "selection_reason":  "两段效果接近，先选取消平均谱修正的简单候选",
+    "source_archive":  "data/registrations/source_20261011/capture.wav",
+    "target_enrollment":  [
+                              "Track 5(1).wav",
+                              "Track 6(1).wav",
+                              "Track 7(1).wav",
+                              "Track 8(1).wav"
+                          ],
+    "target_held_out":  "Track 9(1).wav"
+}

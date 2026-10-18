@@ -1,0 +1,6 @@
+{
+  "max_complex_phase_error": 3.0087060852516856e-14,
+  "max_unit_magnitude_error": 3.008704396734174e-14,
+  "coefficient_count": 102,
+  "fft_size": 1024
+}

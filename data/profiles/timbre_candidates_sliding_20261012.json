@@ -1,0 +1,32 @@
+{
+    "version":  1,
+    "kind":  "offline_world_sliding_candidate_pair",
+    "status":  "offline_listening_passed_realtime_pending",
+    "analysis_mode":  "causal_window_simulation_on_preloaded_file",
+    "history_ms":  160,
+    "analysis_future_ms":  40,
+    "synthesis_lookahead_ms":  32,
+    "frame_period_ms":  10,
+    "dio_speed":  4,
+    "ratio_q16":  108722,
+    "effective_formant_warp":  1.0975,
+    "mean_spectrum_correction":  false,
+    "approved_reference":  "data/profiles/timbre_candidate_fast_20261011.json",
+    "realtime_accepted":  false,
+    "speaker_identity_accepted":  false,
+    "variants":  [
+                     {
+                         "hop_ms":  30,
+                         "output":  "data/registrations/source_20261011/world_sliding_comparison_20261012/sliding30_arm.wav",
+                         "wav_sha256":  "1bfbf49091ad2660c9d7663e34bc3225b4e0c0221eaee9739d9165b410f6d9ce"
+                     },
+                     {
+                         "hop_ms":  40,
+                         "output":  "data/registrations/source_20261011/world_sliding_comparison_20261012/sliding40_arm.wav",
+                         "wav_sha256":  "046a95c2e25b31f0e6948464697684fa83be0365be34260c78506d364396a48a"
+                     }
+                 ],
+    "work_state":  "paused_at_user_request",
+    "listening_feedback":  "四段都听到，三段转换差别不大，后两段可能有很小的清晰度提升；未明确偏好30或40ms。",
+    "playback_log":  "report/board_world_sliding_comparison_20261012.log"
+}

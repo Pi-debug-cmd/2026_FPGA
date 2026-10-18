@@ -1,0 +1,62 @@
+{
+  "dry_run": true,
+  "manifest": "C:\\Users\\World\\Desktop\\2026_FPGA\\交接\\核心材料\\board_budget_20261005\\fargan_corpus_expanded\\manifest.json",
+  "train_pairs": 240,
+  "validation_pairs": 8,
+  "train_speakers": [
+    "SSB0005",
+    "SSB0012",
+    "SSB0018",
+    "SSB0033",
+    "SSB0043",
+    "SSB0057",
+    "SSB0073",
+    "SSB0145",
+    "SSB0149",
+    "SSB0193",
+    "SSB0197",
+    "SSB0241",
+    "SSB0273",
+    "SSB0375",
+    "SSB0394",
+    "SSB0407",
+    "SSB0603",
+    "SSB0609",
+    "SSB0623",
+    "SSB0629"
+  ],
+  "heldout_speakers": [
+    "SSB0080",
+    "SSB0434"
+  ],
+  "batch_shapes": {
+    "source": [
+      4,
+      64,
+      20
+    ],
+    "teacher": [
+      4,
+      64,
+      20
+    ],
+    "prosody": [
+      4,
+      64,
+      4
+    ]
+  },
+  "latent_dim": 32,
+  "parameters": 54520,
+  "loss": {
+    "total": 0.9492110013961792,
+    "reconstruction": 0.6141819357872009,
+    "latent_consistency": 0.0072710863314569,
+    "delta": 0.23831261694431305,
+    "speaker_adversary": 3.075623035430908
+  },
+  "causal_prefix_max_abs": 0.0,
+  "deterministic_output_max_abs": 0.0,
+  "deterministic_gradient_max_abs": 0.0,
+  "long_training_started": false
+}

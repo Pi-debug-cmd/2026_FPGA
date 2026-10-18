@@ -1,0 +1,17 @@
+{
+  "mode": "original passthrough",
+  "capture": 43,
+  "headphone": 119,
+  "playback": 222,
+  "pids_at_check": {
+    "capture": 25806,
+    "passthrough": 25807,
+    "playback": 25808
+  },
+  "original_loudness_accepted": true,
+  "model_trial_human_feedback": "很不清晰，很多杂音",
+  "neural9200_same_mixer_accepted": false,
+  "neural_model_stopped": true,
+  "user_audio_not_saved": true,
+  "next": "offline weak-input and colored-noise validation, no human audition yet"
+}

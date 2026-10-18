@@ -1,0 +1,25 @@
+{
+  "mode": "original realtime passthrough; NO conversion model; NO speech files saved",
+  "requested_by_user": true,
+  "helper": "board_bridge_bypass.sh",
+  "pids_at_check": {
+    "capture": 25524,
+    "pcm_passthrough": 25525,
+    "playback": 25526
+  },
+  "capture": 43,
+  "headphone": 119,
+  "playback": 222,
+  "same_mixer_as_previous_neural9200": false,
+  "checked_input_output_sample_counts_equal": 160160,
+  "input_output_rms_equal": 0.000798,
+  "awaiting_human_loudness_noise_feedback": false,
+  "diag120_stopped_without_requested_dump": true,
+  "previous_same_mixer_human_feedback": "Original also too quiet",
+  "gain_change_db_from_same_mixer_original": 6,
+  "previous_gain43_head101_human_feedback": "Still too quiet; user asks for larger single adjustment",
+  "last_output_gain_change_db": 18,
+  "original_loudness_accepted_by_user": true,
+  "user_feedback": "可以了，够了",
+  "active": false
+}

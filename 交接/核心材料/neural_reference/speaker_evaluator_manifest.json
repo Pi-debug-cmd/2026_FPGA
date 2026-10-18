@@ -1,0 +1,26 @@
+{
+  "repo": "microsoft/wavlm-base-plus-sv",
+  "revision": "feb593a6c23c1cc3d9510425c29b0a14d2b07b1e",
+  "local_path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\cache\\hf\\hub\\models--microsoft--wavlm-base-plus-sv\\snapshots\\feb593a6c23c1cc3d9510425c29b0a14d2b07b1e",
+  "files": [
+    {
+      "name": "config.json",
+      "bytes": 58639,
+      "sha256": "c6ac8c0ce55b18d4612677931036fe5ce78093e87361c552a173f00a0bb07514",
+      "lfs_sha256": null
+    },
+    {
+      "name": "preprocessor_config.json",
+      "bytes": 215,
+      "sha256": "99272fe8ccfab114b68b478681ea47ee3a1ce62bb788cb92dd6e4f69fb1f1da2",
+      "lfs_sha256": null
+    },
+    {
+      "name": "pytorch_model.bin",
+      "bytes": 404547053,
+      "sha256": "e906bce2fa42fb497a1d1a9ecf81548adb7e03b12a5644e32d2f42f0d6500fad",
+      "lfs_sha256": "e906bce2fa42fb497a1d1a9ecf81548adb7e03b12a5644e32d2f42f0d6500fad"
+    }
+  ],
+  "purpose": "Relative speaker similarity diagnostics, not human acceptance"
+}

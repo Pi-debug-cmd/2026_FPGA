@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\deploy_runtime\\profile_outtranspose_v1",
+  "remote": "/home/root/native_llvc_trial_20261005/profile_outtranspose_v1",
+  "sha256": "f73d217ee3f1a078ed925aa2b0a0655b16895a293fe16d6920e59bba83feda9b",
+  "bytes": 40048,
+  "seconds": 3.235000000000582,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

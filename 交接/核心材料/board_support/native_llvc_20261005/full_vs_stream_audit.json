@@ -1,0 +1,10 @@
+{
+  "test": "Public normalized speech, same checkpoint, full forward vs reference stream after first512ms",
+  "full_rms": 0.03774134940507855,
+  "stream_rms": 0.037740791051163666,
+  "relative_difference_rms": 0.0005175602146703451,
+  "correlation": 0.9999998661714308,
+  "max_abs_difference": 0.0004686117172241211,
+  "source_enrollment": false,
+  "user_audio_used": false
+}

@@ -1,0 +1,17 @@
+# Minimal CLI training and inference environment; no WebUI or music separation.
+numpy==1.26.4
+scipy>=1.13.1,<2
+soundfile>=0.13,<1
+librosa>=0.10.2,<0.11
+praat-parselmouth>=0.4.5,<1
+transformers>=4.49,<4.50
+tensorboard>=2.19
+matplotlib>=3.8.2,<4
+av>=15.1,<16
+ffmpeg-python>=0.2,<1
+faiss-cpu>=1.13,<2
+einops>=0.8,<1
+local-attention>=1.11,<2
+torchfcpe>=0.0.4,<0.1
+setuptools>=75,<81
+opencc-python-reimplemented==0.1.7

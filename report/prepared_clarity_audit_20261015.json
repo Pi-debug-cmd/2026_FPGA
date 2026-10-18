@@ -1,0 +1,182 @@
+{
+  "source_sha256": "1c064f8961590df3ed6e2893fb6f74942871be43d9c6aee55da5489c43a66e97",
+  "variants": {
+    "source": {
+      "reestimated_voiced_frames": 1095,
+      "reestimated_f0_p10_p50_p90": [
+        109.98622505122705,
+        119.74593782993415,
+        133.67459723181432
+      ],
+      "played_excerpt_f0_p10_p50_p90": [
+        109.28049566871834,
+        120.31434882345914,
+        137.28129223437222
+      ],
+      "peak": 0.42908726044519313,
+      "spectral_metrics": {
+        "frames": 900,
+        "centroid_hz": 260.95595374158734,
+        "normalized_band_power": {
+          "80_500_hz": 0.8852897431571863,
+          "500_1500_hz": 0.0934829224888192,
+          "1500_3000_hz": 0.00393774495295108,
+          "3000_8000_hz": 0.0022341624321241893
+        }
+      }
+    },
+    "world_identity": {
+      "reestimated_voiced_frames": 920,
+      "reestimated_f0_p10_p50_p90": [
+        110.28221407247865,
+        119.8536407904135,
+        133.85533515017724
+      ],
+      "played_excerpt_f0_p10_p50_p90": [
+        110.51835225340619,
+        119.96467418970461,
+        135.46545630715266
+      ],
+      "peak": 0.37297026848782466,
+      "spectral_metrics": {
+        "frames": 900,
+        "centroid_hz": 275.31169654922064,
+        "normalized_band_power": {
+          "80_500_hz": 0.8855560417420605,
+          "500_1500_hz": 0.10231368866359239,
+          "1500_3000_hz": 0.004011734396746361,
+          "3000_8000_hz": 0.0020970846081254687
+        }
+      }
+    },
+    "old_fixed": {
+      "reestimated_voiced_frames": 901,
+      "reestimated_f0_p10_p50_p90": [
+        181.91174600726652,
+        197.45280013878036,
+        219.49346621593168
+      ],
+      "played_excerpt_f0_p10_p50_p90": [
+        182.58053009479505,
+        199.02209841418588,
+        227.93597073989315
+      ],
+      "peak": 0.372955322265625,
+      "spectral_metrics": {
+        "frames": 900,
+        "centroid_hz": 329.5462421553274,
+        "normalized_band_power": {
+          "80_500_hz": 0.8319749939822831,
+          "500_1500_hz": 0.15117412838749722,
+          "1500_3000_hz": 0.005434749816198297,
+          "3000_8000_hz": 0.0034602893787488266
+        }
+      }
+    },
+    "prepared_pitch": {
+      "reestimated_voiced_frames": 892,
+      "reestimated_f0_p10_p50_p90": [
+        165.9683837799836,
+        190.3234088990972,
+        227.25531211040928
+      ],
+      "played_excerpt_f0_p10_p50_p90": [
+        166.49687050671423,
+        192.19369550097443,
+        237.36909427536906
+      ],
+      "peak": 0.372955322265625,
+      "spectral_metrics": {
+        "frames": 900,
+        "centroid_hz": 306.5293409097075,
+        "normalized_band_power": {
+          "80_500_hz": 0.8477582799444575,
+          "500_1500_hz": 0.13217280143321103,
+          "1500_3000_hz": 0.005666025757351038,
+          "3000_8000_hz": 0.003390329441497455
+        }
+      }
+    },
+    "prepared_timbre": {
+      "reestimated_voiced_frames": 909,
+      "reestimated_f0_p10_p50_p90": [
+        166.28501530703826,
+        190.2381176887591,
+        226.72897175906817
+      ],
+      "played_excerpt_f0_p10_p50_p90": [
+        166.79347576339418,
+        192.34561728275074,
+        237.41305767416745
+      ],
+      "peak": 0.372955322265625,
+      "spectral_metrics": {
+        "frames": 900,
+        "centroid_hz": 358.03167641516796,
+        "normalized_band_power": {
+          "80_500_hz": 0.7815177692094624,
+          "500_1500_hz": 0.20000481257769193,
+          "1500_3000_hz": 0.008584294831177869,
+          "3000_8000_hz": 0.0035102439446398704
+        }
+      }
+    },
+    "prepared_pitch_old_warp": {
+      "reestimated_voiced_frames": 906,
+      "reestimated_f0_p10_p50_p90": [
+        166.11652533366106,
+        190.25314172780858,
+        227.23022682473893
+      ],
+      "played_excerpt_f0_p10_p50_p90": [
+        166.8170516215006,
+        192.3692243200389,
+        237.3329456622269
+      ],
+      "peak": 0.372955322265625,
+      "spectral_metrics": {
+        "frames": 900,
+        "centroid_hz": 329.17266815682444,
+        "normalized_band_power": {
+          "80_500_hz": 0.8112000733739053,
+          "500_1500_hz": 0.17087536892189503,
+          "1500_3000_hz": 0.005721656139388144,
+          "3000_8000_hz": 0.0035308907369099585
+        }
+      }
+    }
+  },
+  "identity_raw_clip_samples": 0,
+  "dio_speed1_vs_speed4": {
+    "common_voiced_frames": 901,
+    "over_20_percent_relative_difference_frames": 0
+  },
+  "harvest_vs_dio": {
+    "harvest_voiced_frames": 1385,
+    "common_voiced_frames": 904,
+    "over_20_percent_relative_difference_frames": 0
+  },
+  "target_reference": {
+    "f0_p10_p50_p90": [
+      171.7595724142993,
+      191.41437895791643,
+      225.6169210968211
+    ],
+    "played_excerpt_f0_p10_p50_p90": [
+      174.9430383121678,
+      202.98593529445688,
+      232.7701195231186
+    ],
+    "spectral_metrics": {
+      "frames": 1634,
+      "centroid_hz": 537.3123898972452,
+      "normalized_band_power": {
+        "80_500_hz": 0.7649444874888358,
+        "500_1500_hz": 0.17066634161939198,
+        "1500_3000_hz": 0.03405881497042627,
+        "3000_8000_hz": 0.02862155309517294
+      }
+    }
+  },
+  "limitations": "Same-estimator output pitch is not ground truth. Source/target differ in text, microphone and phonemes; spectral bands diagnose but cannot establish timbre identity or a cause of dullness. Offline whole-recording only; no new playback or configuration fitting."
+}

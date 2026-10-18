@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-15",
+  "playback_directory": "/tmp/codex_prepared_comparison_20261015/comparison_4490279136060",
+  "user_feedback": "3几乎就是跟1没什么关系，而且更不清晰，2的话其实很像1了，但是多了录入者低沉的音色，",
+  "order": [
+    "target",
+    "world_old_fixed",
+    "llvc_python_fp32"
+  ],
+  "llvc_reference_better_than_world": false,
+  "llvc_reference_selected": false,
+  "world_closer_but_source_dark_timbre_remains": true,
+  "speaker_identity_accepted": false,
+  "playback_underruns": 0,
+  "restore_exit": 0
+}

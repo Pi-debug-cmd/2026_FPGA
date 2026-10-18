@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\uart_probe.bin",
+  "remote": "/home/root/native_llvc_trial_20261005/uart_probe.bin",
+  "sha256": "dc404a613fedaeb54034514bc6505f56b933caa5250299ba7d094377a51caa46",
+  "bytes": 8192,
+  "seconds": 1.8593966999906115,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

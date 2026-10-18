@@ -1,0 +1,27 @@
+{
+  "checks": [
+    {
+      "fixture": "silence",
+      "partition_identical_pcm": true,
+      "body_rmse": 0.0,
+      "body_max_error": 0.0,
+      "clip_fraction": 0.0
+    },
+    {
+      "fixture": "low_voice_transitions",
+      "partition_identical_pcm": true,
+      "body_rmse": 0.0,
+      "body_max_error": 0.0,
+      "clip_fraction": 0.0
+    },
+    {
+      "fixture": "high_voice_transitions",
+      "partition_identical_pcm": true,
+      "body_rmse": 0.0,
+      "body_max_error": 0.0,
+      "clip_fraction": 0.0
+    }
+  ],
+  "excluded_tail_ms": 80,
+  "limitation": "Complete-input analysis, not live capture or latency acceptance"
+}

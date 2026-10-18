@@ -1,0 +1,63 @@
+{
+  "_id": "6638676217793edf21e193c4",
+  "id": "Wespeaker/wespeaker-cnceleb-resnet34-LM",
+  "private": false,
+  "tags": [
+    "onnx",
+    "license:apache-2.0",
+    "region:us"
+  ],
+  "downloads": 141,
+  "likes": 4,
+  "modelId": "Wespeaker/wespeaker-cnceleb-resnet34-LM",
+  "author": "Wespeaker",
+  "sha": "ed25c1ecbd9e8d3c7944df95430da02bd3cdcf7a",
+  "lastModified": "2024-05-06T05:19:40.000Z",
+  "gated": false,
+  "disabled": false,
+  "model-index": null,
+  "config": {},
+  "cardData": {
+    "license": "apache-2.0"
+  },
+  "siblings": [
+    {
+      "rfilename": ".gitattributes",
+      "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+      "size": 1519
+    },
+    {
+      "rfilename": "README.md",
+      "blobId": "7b95401dc46245ac339fc25059d4a56d90b4cde5",
+      "size": 31
+    },
+    {
+      "rfilename": "cnceleb_resnet34_LM.onnx",
+      "blobId": "0195aadaaee659e3fc0bf897c670e8711d7d07ee",
+      "size": 26530309,
+      "lfs": {
+        "sha256": "e7584940aeac8d5512d875e58ce6c09ba4ddad65d8128e1dac0d93aadd087ebb",
+        "size": 26530309,
+        "pointerSize": 133
+      }
+    },
+    {
+      "rfilename": "config.yaml",
+      "blobId": "7eb793ee81c30eeb8a9e3d6cbee084cbd2d967fd",
+      "size": 1716
+    },
+    {
+      "rfilename": "model_5.pt",
+      "blobId": "bc9be046fef3473c2b738ef260d4cea01f8b70e2",
+      "size": 35222731,
+      "lfs": {
+        "sha256": "4fed1fbf1bb1e772f794e54f7dd8c5635485a0ccce799ecb429a9232d22596f7",
+        "size": 35222731,
+        "pointerSize": 133
+      }
+    }
+  ],
+  "spaces": [],
+  "createdAt": "2024-05-06T05:15:14.000Z",
+  "usedStorage": 61753040
+}

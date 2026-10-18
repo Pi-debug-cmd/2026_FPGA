@@ -1,0 +1,32 @@
+{
+  "kind": "llvc_original_checkpoint_export_and_scalar_parity",
+  "torch_version": "2.7.1+cpu",
+  "threads": 2,
+  "checkpoint_sha256": "5a3f5de6f7bef12a29323be5bb88168025d85080b527933e8f3f54cbf07a9641",
+  "configuration_sha256": "f14397ddb6677c34341b943fca35c21b07c6bc40ed3b5059e027c3837066681f",
+  "python_source_sha256": {
+    "cached_convnet.py": "ed7dbaef0b4bd98356a091fc1a1a969ebd89636526232e76927ffaa0c7136602",
+    "llvc_online_stream.py": "ad3b09ed5fce760d00a1f467adbd9204abbabd792b99751f44d59d7138ad7028",
+    "model.py": "f84eb72b4770417b8611bbd910f37db6ae1817e3fdb426a0f21300fc25299537"
+  },
+  "exporter_sha256": "47c46205753693614884fefcd8cdbe1095f317f23e16f10e63c05ae186e753c8",
+  "exact_export_matches_historical_bin": false,
+  "all_bytes_outside_computed_label_constant_identical": true,
+  "computed_label_constant_differing_floats": 8,
+  "computed_label_constant_max_abs_difference": 4.76837158203125e-07,
+  "export_attribution": "Only the computed zero-label embedding differs; all other constants, learned floats, scales and packed weights match. Different arithmetic environment is a plausible cause, not independently proven.",
+  "export_sha256": "4418a337b5125143e7863ceef2857c7dac817eed30fef154fb31f3cecfdf632c",
+  "input_samples": 96000,
+  "output_samples": 96000,
+  "python_wall_s": 3.097764800011646,
+  "correlation_fp32_vs_int8_c": 0.9992162102941573,
+  "rmse_fp32_vs_int8_c": 0.0009942193525254647,
+  "normalized_rmse": 0.040046314405143606,
+  "max_abs_error": 0.009426485747098923,
+  "python_clip_samples": 0,
+  "python_output_sha256": "501018df7c0e876b631d6a5bf8bf58ac14025eb76bbd19bbf0aa90ba44491004",
+  "target_condition_interface": "Net.forward creates label=zeros; target identity learned in weights, no reference-audio argument.",
+  "speaker_identity_accepted": false,
+  "board_realtime_accepted": false,
+  "limitations": "FP32 checkpoint compared to int8-weight/activation C; sample equality is not expected. Metrics are this development excerpt only. Numerical parity and exact export do not prove target identity, novel target registration, or board latency."
+}

@@ -1,0 +1,31 @@
+{
+  "kind": "llvc_original_checkpoint_listening_gate",
+  "order": [
+    "target",
+    "world_old_fixed",
+    "llvc_python_fp32"
+  ],
+  "duration_s": 18.0,
+  "rate": 32000,
+  "segment_seconds": 5,
+  "gap_seconds": 1,
+  "leading_silence_seconds": 1,
+  "gains": [
+    0.4889605495545405,
+    7.5359307359307355,
+    2.799347542804708
+  ],
+  "source_crop_start_s": 2.68,
+  "target_crop_start_s": 11.0,
+  "neural_input_start_s": 1.68,
+  "neural_warmup_discarded_s": 1.0,
+  "checkpoint_sha256": "5a3f5de6f7bef12a29323be5bb88168025d85080b527933e8f3f54cbf07a9641",
+  "neural_output_sha256": "501018df7c0e876b631d6a5bf8bf58ac14025eb76bbd19bbf0aa90ba44491004",
+  "peak": 0.8535994628956017,
+  "clip_fraction": 0.0,
+  "wav_sha256": "15f17bcdb7c7df1ca8a86988fc96b4ba9db38cd5bfe41c3cd7f755e3b0f9cd5d",
+  "gzip_sha256": "a53fa03ee6481f4ad09074a031a400eee005d4ae0594aa385f3a853eebcfbef0",
+  "speaker_identity_accepted": false,
+  "realtime_accepted": false,
+  "limitations": "Historical fixed-target original checkpoint, not generated from this source preparation. No new target registration interface. Same development utterance; not blind or independent identity evaluation. Python streaming state warmed with one second, WORLD analyzed the full recording; context differs. Shared loudness target does not guarantee perceived loudness equality. Host output preview, not board computation."
+}

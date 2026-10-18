@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\meter_runtime_bundle.tar.gz",
+  "remote": "/home/root/native_llvc_trial_20261005/meter_runtime_bundle.tar.gz",
+  "sha256": "67a4efba58cb4c1f46f3b9ebef6d44418789fa99f5ccb88aef03ed066c44f6b4",
+  "bytes": 722506,
+  "seconds": 32.93768450000789,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

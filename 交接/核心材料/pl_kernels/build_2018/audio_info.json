@@ -1,0 +1,47 @@
+{
+  "rst_clk_wiz_0_16M": {
+    "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
+    "config": {}
+  },
+  "audio_formatter_0": {
+    "vlnv": "xilinx.com:ip:audio_formatter:1.0",
+    "config": {
+      "C_MAX_NUM_CHANNELS_MM2S": "2"
+    }
+  },
+  "i2s_receiver_0": {
+    "vlnv": "xilinx.com:ip:i2s_receiver:1.0",
+    "config": {
+      "C_32BIT_LR": "0"
+    }
+  },
+  "i2s_transmitter_0": {
+    "vlnv": "xilinx.com:ip:i2s_transmitter:1.0",
+    "config": {}
+  },
+  "util_vector_logic_0": {
+    "vlnv": "xilinx.com:ip:util_vector_logic:2.0",
+    "config": {
+      "C_OPERATION": "or",
+      "C_SIZE": "1"
+    }
+  },
+  "axi_dynclk_0": {
+    "vlnv": "digilentinc.com:ip:axi_dynclk:1.2",
+    "config": {}
+  },
+  "axi_mem_intercon": {
+    "vlnv": "xilinx.com:ip:axi_interconnect:2.1",
+    "config": {
+      "NUM_MI": "1",
+      "NUM_SI": "2"
+    }
+  },
+  "axi_iic_0": {
+    "vlnv": "xilinx.com:ip:axi_iic:2.1",
+    "config": {
+      "C_SCL_INERTIAL_DELAY": "50",
+      "C_SDA_INERTIAL_DELAY": "50"
+    }
+  }
+}

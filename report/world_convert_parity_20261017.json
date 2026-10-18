@@ -1,0 +1,61 @@
+{
+  "kind": "world_convert_host_parity",
+  "date": "2026-10-17",
+  "tool": "src/ps/world_convert.cpp",
+  "input": {
+    "source": "build/generated/world_register_20261016/inputs/source_holdout.wav",
+    "profile": "build/generated/world_register_20261016/profile_t5_8.txt",
+    "seconds": 20.0
+  },
+  "parameters": {
+    "scale": {
+      "cpp": 1.90994,
+      "python": 1.9099395013614517,
+      "abs_diff": 4.986385482297351e-07
+    },
+    "warp": {
+      "cpp": 1.25,
+      "python": 1.25,
+      "abs_diff": 0.0
+    },
+    "delta_db_rms": {
+      "cpp": 2.5944,
+      "python": 2.594442536069408,
+      "abs_diff": 4.253606940807231e-05
+    },
+    "voiced_frames": {
+      "cpp": 904.0,
+      "python": 904
+    }
+  },
+  "waveform": {
+    "cpp_seconds": 20.0,
+    "max_abs_diff": 0.03586625327257432,
+    "rms_diff": 0.0002943404750552685,
+    "reference_rms": 0.008757446521533686,
+    "relative_rms_diff": 0.03361030801975378,
+    "correlation": 0.9994353389198773,
+    "spectral": {
+      "frames": 997,
+      "per_bin_abs_db_max": 0.05010630104581673,
+      "per_bin_abs_db_median": 0.02547305341325158,
+      "total_energy_db": 0.009527255046246137
+    },
+    "peak_cpp": 0.36663818359375,
+    "clipped_cpp": 0
+  },
+  "tolerance": {
+    "map_parameters": 0.001,
+    "waveform_correlation_min": 0.999,
+    "spectral_per_bin_db_max": 0.5
+  },
+  "tolerance_rationale": "映射参数按 C++ printf 精度（6/4 位小数）比对，故取 1e-3。波形不逐点相同：pyworld 预编译包与本次 MinGW/ARM 编译使用的是同一份 WORLD 0.3.5 源码，但浮点求值顺序不同；实测频谱逐 bin 偏差约 0.03～0.06 dB、总能量 0.03 dB、波形相关 0.9994，属相位级差异而非算法差异，因此判据用相关与频谱误差，不伪造逐点相等。",
+  "failures": [],
+  "board_deployed": false,
+  "audio_played": false,
+  "limitations": [
+    "主机 x86_64 运行，不是板端 ARM 结果；板端一致性须另行比对。",
+    "映射为逐频点 ±3dB 钳位版本，未使用历史配方的 24 阶倒谱平滑，因此不是历史配方复现。",
+    "数值一致只说明移植正确，不代表音色有效；身份/自然度/内容由独立指标评价。"
+  ]
+}

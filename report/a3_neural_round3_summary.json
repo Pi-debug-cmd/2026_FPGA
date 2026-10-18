@@ -1,0 +1,268 @@
+{
+  "kind": "a3_neural_round3_summary",
+  "date": "2026-10-18",
+  "scope": "第三轮限时收尾：内容条件（LLVC 6 层编码器）+ 波形级折中 Pareto",
+  "offline_only": true,
+  "board_touched": false,
+  "recorded": false,
+  "played": false,
+  "pl_switched": false,
+  "deadline": "2026-10-21 12:00",
+  "kill_line": {
+    "explained_fraction_min": 0.75,
+    "utmos_min": 1.8,
+    "triggered": true
+  },
+  "protocol": "同 A1：window 2.68s+4.8s，WeSpeaker T5-8 质心，UTMOS，Whisper-small CER vs 源转写",
+  "experiment1_content_conditioning": {
+    "content_encoder": {
+      "source": "reduced LLVC v2 mask_gen.encoder (DilatedCausalConvEncoder, 6 layers, enc_dim=384, 1 kHz latent; label fixed zero)",
+      "checkpoint": "交接/核心材料/board_budget_20261005/reduced_student_v2/final.pt",
+      "loader": "build/llvc_host_model.py",
+      "content_dim_raw": 384,
+      "content_rate_hz": 1000,
+      "pca_dim": 64,
+      "pca_explained_ratio": 0.9576,
+      "context_frames": 2
+    },
+    "regression_head": {
+      "input": "content PCA 64x5 + source CMN 48-band log-mel + 4 source stats + 20 profile dims",
+      "in_dim": 392,
+      "hidden": 192,
+      "parameters": 121969,
+      "int8_size_bytes_estimate": 122225,
+      "output": "target mel residual + target logF0; WORLD synthesis unchanged"
+    },
+    "predictability": {
+      "val_zero_residual_baseline_mae": 2.1744,
+      "val_model_mae": 0.7394,
+      "explained_fraction": 0.66,
+      "explained_round1": 0.624,
+      "explained_round2_dtw": 0.61,
+      "target_0p75_met": false
+    },
+    "metrics_speaker01": {
+      "identity": 0.561,
+      "leakage": 0.0955,
+      "utmos": 1.4013,
+      "cer": 0.0556,
+      "f0_median_hz": 193.63
+    },
+    "heldout_source_speaker_identity_16_sentences": {
+      "teacher": 0.8726,
+      "a3": 0.5318
+    },
+    "previous_round2_best": {
+      "identity": 0.463,
+      "leakage": 0.0351,
+      "utmos": 1.3763,
+      "cer": 0.2778
+    },
+    "deployment_cost_if_continued": {
+      "content_front_parameters": 924000,
+      "content_front_int8_bytes": 924000,
+      "content_front_fp32_bytes": 3696000,
+      "ps_rtf_estimate": [
+        0.5,
+        0.8
+      ],
+      "requirement": "content front must be moved to PL (same int8 GEMM kernels as LLVC); regression head stays tiny",
+      "note": "身份上来了，但“极小 PS 预算”优势被内容编码器吃掉，A3 形态向 LLVC 靠拢"
+    }
+  },
+  "experiment2_waveform_blend": {
+    "a1": "build/generated/world_register_20261016/closed_loop_arm.wav",
+    "a3": "build/generated/a3_neural/output/content_speaker01.wav",
+    "method": "active-frame RMS normalisation then alpha mix, peak limited to 0.9",
+    "target": {
+      "identity": 0.3,
+      "utmos_min": 1.8,
+      "cer_max": 0.22
+    },
+    "rows": [
+      {
+        "alpha": 0.0,
+        "identity": 0.1926,
+        "leakage": 0.1735,
+        "utmos": 2.0365,
+        "cer": 0.111
+      },
+      {
+        "alpha": 0.04,
+        "identity": 0.197,
+        "leakage": 0.159,
+        "utmos": 1.992,
+        "cer": 0.167
+      },
+      {
+        "alpha": 0.08,
+        "identity": 0.2109,
+        "leakage": 0.1514,
+        "utmos": 1.8651,
+        "cer": 0.167
+      },
+      {
+        "alpha": 0.1,
+        "identity": 0.216,
+        "leakage": 0.148,
+        "utmos": 1.779,
+        "cer": 0.167
+      },
+      {
+        "alpha": 0.2,
+        "identity": 0.261,
+        "leakage": 0.114,
+        "utmos": 1.485,
+        "cer": 0.167
+      },
+      {
+        "alpha": 0.3,
+        "identity": 0.339,
+        "leakage": 0.106,
+        "utmos": 1.321,
+        "cer": 0.111
+      },
+      {
+        "alpha": 0.5,
+        "identity": 0.503,
+        "leakage": 0.104,
+        "utmos": 1.259,
+        "cer": 0.167
+      },
+      {
+        "alpha": 1.0,
+        "identity": 0.561,
+        "leakage": 0.097,
+        "utmos": 1.401,
+        "cer": 0.056
+      }
+    ],
+    "usable_point_exists": false,
+    "best_under_utmos_1p8": {
+      "alpha": 0.08,
+      "identity": 0.2109,
+      "utmos": 1.8651,
+      "cer": 0.167
+    },
+    "conclusion": "满足 UTMOS>=1.8 的区段身份最高 0.211，达不到 0.30；身份到 0.30 需 alpha>=0.25，此时 UTMOS ~1.4。折中曲线是单调 trade-off，无可用膝点。",
+    "cer_noise_note": "单句 Whisper 字错有 ±1 字（≈0.056）run-to-run 波动，CER 只作趋势参考"
+  },
+  "verdict": {
+    "a3_continue_modeling": false,
+    "replace_a1": false,
+    "main_line": "A1（身份 0.190 / 泄漏 0.172 / UTMOS 2.035 / 字错 0.167）",
+    "reason": "杀停线两条均触发（解释度 66.0%<75%、UTMOS 1.401<1.8）；波形折中无可用的高身份+高自然度点。",
+    "biggest_win": "内容特征是最强杠杆：身份 0.561（≈Seed-VC 0.551）、字错 0.056，说明参数域方案的身份上限远高于 0.19；瓶颈明确为 WORLD 参数域合成下的自然度。",
+    "bottleneck": "逐帧目标包络可预测性（解释度上限 66%）与 WORLD 合成自然度；非模型容量、非对齐、非前端。",
+    "remaining_uncertainty": [
+      "单目标说话人：profile 条件化与重注册仍无法真实验证",
+      "要有高身份且自然，需换合成/声码器（超出 A3 参数域范围），且内容编码器需上 PL",
+      "单句开发句 + 16 句留出对，非盲评、无真人听测"
+    ],
+    "a3_terminated": true,
+    "postprocessing_can_fix": false
+  },
+  "artifacts": {
+    "report_section": "report/a3_neural_feasibility.md §0c（含 §0b 第二轮）",
+    "content_features": "build/generated/a3_neural/content_features.json",
+    "content_dataset": "build/generated/a3_neural/dataset_content/",
+    "content_pca": "build/generated/a3_neural/content_pca.npz",
+    "content_model": "build/generated/a3_neural/a3_content.pt",
+    "content_training": "build/generated/a3_neural/training_content.json",
+    "content_metrics": "build/generated/a3_neural/eval3_content.json",
+    "content_output": "build/generated/a3_neural/output/content_speaker01.wav",
+    "blend_results": "build/generated/a3_neural/blend3_content3.json + blend3_content3fine.json",
+    "blend_outputs": "build/generated/a3_neural/output/blend3_content3*_a*.wav"
+  },
+  "postprocessing_diagnosis": {
+    "kind": "frozen third-round model output post-processing, no training",
+    "criterion": {
+      "identity_min": 0.45,
+      "utmos_min": 1.8,
+      "cer_max": 0.15
+    },
+    "usable_combination_exists": false,
+    "baseline": {
+      "identity": 0.5610419745104221,
+      "leakage": 0.09550588069700616,
+      "utmos": 1.4013365507125854,
+      "cer": 0.05555555555555555
+    },
+    "rows": [
+      {
+        "tag": "baseline",
+        "identity": 0.5610419745104221,
+        "leakage": 0.09550588069700616,
+        "utmos": 1.4013365507125854,
+        "cer": 0.05555555555555555
+      },
+      {
+        "tag": "smooth3",
+        "identity": 0.54655878988775,
+        "leakage": 0.08349732853251894,
+        "utmos": 1.3664284944534302,
+        "cer": 0.1111111111111111
+      },
+      {
+        "tag": "smooth5",
+        "identity": 0.5184845021040336,
+        "leakage": 0.05601155053182597,
+        "utmos": 1.3173811435699463,
+        "cer": 0.16666666666666666
+      },
+      {
+        "tag": "dct24",
+        "identity": 0.2928347696269105,
+        "leakage": 0.018683338078982002,
+        "utmos": 1.3673235177993774,
+        "cer": 0.16666666666666666
+      },
+      {
+        "tag": "dct32",
+        "identity": 0.35809988936716614,
+        "leakage": 0.04670481368080876,
+        "utmos": 1.3479207754135132,
+        "cer": 0.05555555555555555
+      },
+      {
+        "tag": "dct48",
+        "identity": 0.45937234536823074,
+        "leakage": 0.005661576396653455,
+        "utmos": 1.441123366355896,
+        "cer": 0.2777777777777778
+      },
+      {
+        "tag": "jump75",
+        "identity": 0.5565383241588642,
+        "leakage": 0.08701723664366157,
+        "utmos": 1.3850674629211426,
+        "cer": 0.16666666666666666
+      },
+      {
+        "tag": "jump90",
+        "identity": 0.5600985535612842,
+        "leakage": 0.09348637088553849,
+        "utmos": 1.4043501615524292,
+        "cer": 0.05555555555555555
+      },
+      {
+        "tag": "jump95",
+        "identity": 0.5610772235535724,
+        "leakage": 0.09540450836247014,
+        "utmos": 1.402036190032959,
+        "cer": 0.05555555555555555
+      }
+    ],
+    "train_adjacent_l1_percentiles": {
+      "50": 26.474511981010437,
+      "75": 43.2951877117157,
+      "90": 71.25924277305603,
+      "95": 95.25191330909729,
+      "99": 159.6719557642935
+    },
+    "best_utmos": "dct48",
+    "best_utmos_value": 1.441123366355896,
+    "conclusion": "三组后处理都救不回自然度，无一组达身份>=0.45/UTMOS>=1.8/字错<=0.15；误差是预测包络的系统性形状偏差，不是帧间抖动。A3 正式终结。",
+    "artifact": "build/generated/a3_neural/postproc_sweep.json"
+  }
+}

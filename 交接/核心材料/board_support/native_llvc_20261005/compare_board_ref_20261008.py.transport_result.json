@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\deploy_runtime\\compare_board_ref_20261008.py",
+  "remote": "/home/root/native_llvc_trial_20261005/compare_board_ref_20261008.py",
+  "sha256": "e6f722f576262d9d5eb21a10591e62d9bfe20cf8dee703791e4f6470e887b698",
+  "bytes": 877,
+  "seconds": 1.5160000000000764,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

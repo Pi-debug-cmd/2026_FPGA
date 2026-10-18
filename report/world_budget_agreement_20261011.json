@@ -1,0 +1,30 @@
+{
+  "kind": "offline_arm_world_agreement",
+  "checks": [
+    {
+      "algorithm": "harvest",
+      "correlation": 0.9999999475629818,
+      "rmse": 1.8390209941870165e-05,
+      "f0_median_hz": 196.29127185446632,
+      "voiced_coverage_s": 2.85,
+      "clip_fraction": 0.0
+    },
+    {
+      "algorithm": "dio",
+      "correlation": 0.9999999450154408,
+      "rmse": 1.8401625027446675e-05,
+      "f0_median_hz": 196.13964583786714,
+      "voiced_coverage_s": 2.54,
+      "clip_fraction": 0.0
+    },
+    {
+      "algorithm": "dio_fast_v3",
+      "correlation": 0.9999877127968791,
+      "rmse": 0.00021460777896547767,
+      "f0_median_hz": 196.53918795124758,
+      "voiced_coverage_s": 2.56,
+      "clip_fraction": 0.0
+    }
+  ],
+  "limitation": "Batch processing a five-second crop; not a streaming latency test"
+}

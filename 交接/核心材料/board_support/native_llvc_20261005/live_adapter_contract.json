@@ -1,0 +1,46 @@
+{
+  "cases": [
+    {
+      "samples": 0,
+      "exact_pcm_match": true
+    },
+    {
+      "samples": 1,
+      "exact_pcm_match": true
+    },
+    {
+      "samples": 16,
+      "exact_pcm_match": true
+    },
+    {
+      "samples": 207,
+      "exact_pcm_match": true
+    },
+    {
+      "samples": 208,
+      "exact_pcm_match": true
+    },
+    {
+      "samples": 209,
+      "exact_pcm_match": true
+    },
+    {
+      "samples": 224,
+      "exact_pcm_match": true
+    },
+    {
+      "samples": 416,
+      "exact_pcm_match": true
+    },
+    {
+      "samples": 16000,
+      "exact_pcm_match": true
+    }
+  ],
+  "prefix_224_samples_produced_208_before_eof": true,
+  "host_prefix_wait_seconds": 0.008048599993344396,
+  "host_timing_is_not_board_latency": true,
+  "bounded_pending_samples": 224,
+  "model_geometry": "E96_D48_T13",
+  "actual_microphone_test": false
+}

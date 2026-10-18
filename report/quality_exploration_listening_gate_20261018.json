@@ -1,0 +1,40 @@
+{
+  "kind": "seed_target_registration_quality_listening_gate",
+  "date": "2026-10-18",
+  "order": [
+    "target_track9",
+    "seed_single_track8_cfg070",
+    "seed_multi_track_cfg070_seed20261019",
+    "seed_multi_track_cfg095_seed20261019"
+  ],
+  "duration_s": 23.2,
+  "segment_seconds": 4.8,
+  "gap_seconds": 1.0,
+  "leading_silence_seconds": 1.0,
+  "source_absolute_crop_start_s": 2.68,
+  "target_crop_start_s": 11.0,
+  "input_sha256": {
+    "Track 9(1).wav_0": "d53d24dbb5bb2e01db6bee5483f799644f78be4ebb3c7264482a4d7564093747",
+    "vc_source_target_1.0_30_0.7.wav_1": "78be5244c6d869b6c9d8558d117718bf326ae024c843a375279c4a4175f346e6",
+    "vc_source_target_registered_1.0_30_0.7.wav_2": "85f13aec4042a8cbe04e44ef9fb34bd98b4afc2fd2c5d4ad064ed0fcde563efd",
+    "vc_source_target_registered_1.0_30_0.95.wav_3": "b331d1a82ddd8c0ad86cfeaaf5e02791d992a4e40550547795ce68eeb4d67b2a"
+  },
+  "gains": [
+    0.4820406009903563,
+    1.2824296901796803,
+    1.2882091050746756,
+    1.2612687243124558
+  ],
+  "peak": 0.8499739517571372,
+  "clip_samples": 0,
+  "wav_sha256": "43504481ea6f55d490ce0ed1f0d1d808a6450b10d19dfd0ff486c9625d8f470f",
+  "gzip_sha256": "9532815b7ec6990a620c74464f69ebb46f50de5d952d941123aa5f0eca8e8cc8",
+  "played": false,
+  "board_touched": false,
+  "accepted": false,
+  "limitations": [
+    "Ordered development comparison on one existing source utterance.",
+    "Seed outputs are stochastic PC-only teachers; no Zynq runtime claim.",
+    "Subjective AI-like artifacts and target similarity require fresh playback readiness."
+  ]
+}

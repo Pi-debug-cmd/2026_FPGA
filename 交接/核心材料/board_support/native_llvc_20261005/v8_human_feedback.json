@@ -1,0 +1,15 @@
+{
+  "updated": "2026-10-06T11:36:00.551335",
+  "verbatim": "不像，而且声音不清晰，会颤",
+  "candidate": "fargan_mapper_expanded_v8",
+  "candidate_rejected": true,
+  "quality_accepted": false,
+  "human_acceptance_pending": false,
+  "project_completed": false,
+  "baseline_restored_verified": true,
+  "baseline": "wide192_shallow2_target_anchor",
+  "baseline_target_identity_accepted": false,
+  "machine_score_does_not_mean_high_perceptual_similarity": true,
+  "runtime_snapshot": "fargan_v8_rejected_trial_evidence.json",
+  "current_board_snapshot": "fargan_v8_live_evidence.json"
+}

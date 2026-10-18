@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\deploy_runtime\\profile_multiacc_v1",
+  "remote": "/home/root/native_llvc_trial_20261005/profile_multiacc_v1",
+  "sha256": "4e874a2c9ca19a356cf5dd70a1963ae42ab0e31fc706d41ac9bf96b276c153d6",
+  "bytes": 40048,
+  "seconds": 3.219000000000051,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

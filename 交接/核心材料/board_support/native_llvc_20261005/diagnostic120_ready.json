@@ -1,0 +1,29 @@
+{
+  "mode": "diagnostic neural computation; actual speaker digital zeros",
+  "board_helper": "/home/root/native_llvc_trial_20261005/board_neural_diag120.sh",
+  "pids_at_check": {
+    "capture": 25429,
+    "convert": 25430,
+    "playback": 25431
+  },
+  "ring_seconds": 120.003,
+  "trigger": "/run/voice-neural-live/diag_dump.flag",
+  "prefix": "/home/root/native_llvc_trial_20261005/mic_diagnostic_20261005b",
+  "capture": 35,
+  "headphone": 101,
+  "playback": 222,
+  "micb": "On",
+  "left_adc": "On",
+  "right_adc": "On",
+  "input_signal_is_not_constant": true,
+  "awaiting_user_diagnostic_utterance": true,
+  "target_quality_accepted": false,
+  "hardware_mute_short_check": {
+    "headphone0_input_rms": 0.001022,
+    "headphone0_input_peak": 0.018066,
+    "headphone101_input_rms": 0.00095,
+    "headphone101_input_peak": 0.019928,
+    "micb_on_in_both": true,
+    "mute_alone_not_supported_as_cause_of_prior_constant_capture": true
+  }
+}

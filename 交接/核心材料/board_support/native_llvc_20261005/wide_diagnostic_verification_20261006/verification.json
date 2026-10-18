@@ -1,0 +1,54 @@
+{
+  "checks": [
+    {
+      "samples": 0,
+      "output_bit_exact": true,
+      "captured_input_exact": true,
+      "captured_output_exact": true
+    },
+    {
+      "samples": 1,
+      "output_bit_exact": true,
+      "captured_input_exact": true,
+      "captured_output_exact": true
+    },
+    {
+      "samples": 207,
+      "output_bit_exact": true,
+      "captured_input_exact": true,
+      "captured_output_exact": true
+    },
+    {
+      "samples": 224,
+      "output_bit_exact": true,
+      "captured_input_exact": true,
+      "captured_output_exact": true
+    },
+    {
+      "samples": 16000,
+      "output_bit_exact": true,
+      "captured_input_exact": true,
+      "captured_output_exact": true
+    },
+    {
+      "samples": 69120,
+      "output_bit_exact": true,
+      "captured_input_exact": true,
+      "captured_output_exact": true
+    }
+  ],
+  "ring_wrap": {
+    "format": "S16_LE_mono_16000",
+    "start_sample": 208,
+    "end_sample": 1920256,
+    "samples": 1920048,
+    "realtime_output_not_delayed_by_ring": true,
+    "diagnostic_only_not_source_enrollment": true,
+    "input_exact": true,
+    "output_exact": true
+  },
+  "passed": true,
+  "arm_sha256": "8cb2352a76461ea6cff4dd26ddb33927cad72dfc348a96c088cf57acb65cbdfd",
+  "weights_sha256": "eaa08fd14eafdfceb34bd4f9fbbd82f1c4aa870e783df7e596d48a46f5af2361",
+  "disk_dump_only_after_stream_ends": true
+}

@@ -1,0 +1,65 @@
+{
+  "kind": "seed_tiny_cpu_offline_quality_reference",
+  "steps": 30,
+  "device": "cpu",
+  "inputs": [
+    {
+      "role": "source",
+      "original_sha256": "1c064f8961590df3ed6e2893fb6f74942871be43d9c6aee55da5489c43a66e97",
+      "crop_start_s": 1.68,
+      "seconds": 6,
+      "offline_gain": 4.133361629347908,
+      "input_sha256": "bb24842b29d9ab18725ad482010ecad0723c22fe451c926b067659acdfbfc9cd"
+    },
+    {
+      "role": "target",
+      "original_sha256": "4e07e8ebf0deba90db76de70aec293f544c4695b43bdfec4d6037c3fb7f888f3",
+      "crop_start_s": 0,
+      "seconds": 8,
+      "offline_gain": 0.2945013860462145,
+      "input_sha256": "4278fd0f1a9aec2a1eb5ee37f83d8d7dd6348d2c63997041922a44ed421461f2"
+    }
+  ],
+  "runtime_changes": {
+    "inference.py": {
+      "upstream_sha256": "58f97976804a8eb8bb4d33e73beeab792f86a5ab2ca83c1319a23da1e71e80a6",
+      "runtime_sha256": "86db0f961c6d4bbae3e9a4691828b98eccbe92360118552c7cb602dc595b2562"
+    },
+    "modules/length_regulator.py": {
+      "upstream_sha256": "7b27440e9b25ea6b77b88910cf45e358e8e76b264acc9108e68ccebbd1bb5dfb",
+      "runtime_sha256": "5f072db7085c43331de88e7eead011cb7455f9b3583e6fc9b80d386820f6a2ab"
+    }
+  },
+  "elapsed_with_load_s": 21.59214929997688,
+  "checkpoint_loading": [
+    {
+      "module": "cfm",
+      "all_current_learned_parameters_present": true,
+      "skipped_keys": [
+        "estimator.input_pos"
+      ],
+      "skipped_reason": "Generated position buffer / codebook branch unused for continuous features"
+    },
+    {
+      "module": "length_regulator",
+      "all_current_learned_parameters_present": true,
+      "skipped_keys": [
+        "extra_codebook_mask_tokens.0",
+        "extra_codebooks.0.weight"
+      ],
+      "skipped_reason": "Generated position buffer / codebook branch unused for continuous features"
+    }
+  ],
+  "output": "C:\\Users\\World\\Desktop\\2026_FPGA\\build\\generated\\seed_reference_20261015\\output_steps30\\vc_source_target_1.0_30_0.7.wav",
+  "output_sha256": "78be5244c6d869b6c9d8558d117718bf326ae024c843a375279c4a4175f346e6",
+  "rate": 22050,
+  "output_seconds": 5.990748299319728,
+  "peak": 0.47140276432037354,
+  "clip_samples": 0,
+  "torch_version": "2.7.1+cpu",
+  "weights_trained": false,
+  "source_enrollment_required": false,
+  "speaker_identity_accepted": false,
+  "board_realtime_accepted": false,
+  "limitations": "Offline CPU reference with pretrained general model and target prompt, not a deployable 7020 design. No listening or content acceptance. Timings include model loading; no latency inference. Existing development utterance, no fresh data."
+}

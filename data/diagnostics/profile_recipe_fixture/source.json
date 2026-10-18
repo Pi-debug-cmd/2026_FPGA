@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "sample_rate": 16000,
+  "kind": "f0_calibration_only",
+  "duration_s": 4.0,
+  "voiced_frame_coverage_s": 3.97,
+  "frames": 397,
+  "voiced_frames": 397,
+  "clip_fraction": 0.0,
+  "rms": 0.141422380006896,
+  "f0_median_hz": 160.0081324291317,
+  "f0_p10_hz": 160.0058157094755,
+  "f0_p90_hz": 160.0102739890382,
+  "estimator": "yin_40ms_10ms_75_400hz_threshold_0.15",
+  "input_sha256": "5d993b9f72dbf8c6d77f36a351b55b9e1640114435bb7f2f4a6ccce0796dae74",
+  "input_sample_rate": 16000,
+  "input_channel": 0
+}

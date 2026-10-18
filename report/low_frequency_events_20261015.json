@@ -1,0 +1,327 @@
+{
+  "frame_size": 1024,
+  "hop": 160,
+  "rate": 16000,
+  "experimental_detection": "below90Hz_power_fraction >0.65 and rms >0.003; no human event labels",
+  "recordings": [
+    {
+      "path": "data\\registrations\\source_20261015\\speaker01\\preparation_cue_v2.wav",
+      "sha256": "5cd4ff62fba9121a7e0b664d3d7521128bf414c8484aa0575001817d98d3fed8",
+      "events": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.384,
+          "maximum_below_90hz_fraction": 0.999930485129322,
+          "maximum_rms": 0.19845947041957343
+        },
+        {
+          "start_s": 0.42,
+          "end_s": 0.534,
+          "maximum_below_90hz_fraction": 0.9425965586965862,
+          "maximum_rms": 0.004521035027556069
+        },
+        {
+          "start_s": 0.5,
+          "end_s": 0.604,
+          "maximum_below_90hz_fraction": 0.9509226354318107,
+          "maximum_rms": 0.05605201117708665
+        },
+        {
+          "start_s": 0.6,
+          "end_s": 0.684,
+          "maximum_below_90hz_fraction": 0.9290916577181668,
+          "maximum_rms": 0.013738906190131146
+        },
+        {
+          "start_s": 0.64,
+          "end_s": 0.724,
+          "maximum_below_90hz_fraction": 0.9483450606078965,
+          "maximum_rms": 0.005148544691236069
+        },
+        {
+          "start_s": 0.71,
+          "end_s": 0.864,
+          "maximum_below_90hz_fraction": 0.9968679035709258,
+          "maximum_rms": 0.005126136896430649
+        },
+        {
+          "start_s": 1.29,
+          "end_s": 1.384,
+          "maximum_below_90hz_fraction": 0.9642911008433134,
+          "maximum_rms": 0.003562099897143315
+        },
+        {
+          "start_s": 2.55,
+          "end_s": 2.624,
+          "maximum_below_90hz_fraction": 0.9904630568218646,
+          "maximum_rms": 0.008637883951042877
+        },
+        {
+          "start_s": 4.76,
+          "end_s": 4.894,
+          "maximum_below_90hz_fraction": 0.9506474402829262,
+          "maximum_rms": 0.012768800526382388
+        },
+        {
+          "start_s": 4.97,
+          "end_s": 5.034,
+          "maximum_below_90hz_fraction": 0.6543916567679324,
+          "maximum_rms": 0.0030158697821866176
+        },
+        {
+          "start_s": 5.18,
+          "end_s": 5.324,
+          "maximum_below_90hz_fraction": 0.9169558145009757,
+          "maximum_rms": 0.04809225690362458
+        },
+        {
+          "start_s": 5.41,
+          "end_s": 5.544,
+          "maximum_below_90hz_fraction": 0.8941895539134902,
+          "maximum_rms": 0.015386557999925093
+        },
+        {
+          "start_s": 5.72,
+          "end_s": 5.794,
+          "maximum_below_90hz_fraction": 0.9242686288532442,
+          "maximum_rms": 0.0037619250230729716
+        },
+        {
+          "start_s": 6.16,
+          "end_s": 6.274,
+          "maximum_below_90hz_fraction": 0.9552620426067143,
+          "maximum_rms": 0.017299761851889795
+        },
+        {
+          "start_s": 8.44,
+          "end_s": 8.584,
+          "maximum_below_90hz_fraction": 0.9763818475955426,
+          "maximum_rms": 0.06755177046034051
+        },
+        {
+          "start_s": 9.37,
+          "end_s": 9.514,
+          "maximum_below_90hz_fraction": 0.9712993527282918,
+          "maximum_rms": 0.08197420576946784
+        },
+        {
+          "start_s": 9.53,
+          "end_s": 9.684,
+          "maximum_below_90hz_fraction": 0.902768612370022,
+          "maximum_rms": 0.04320905373919314
+        },
+        {
+          "start_s": 9.78,
+          "end_s": 9.874,
+          "maximum_below_90hz_fraction": 0.8793861291819802,
+          "maximum_rms": 0.018113700813365358
+        },
+        {
+          "start_s": 9.83,
+          "end_s": 9.954,
+          "maximum_below_90hz_fraction": 0.9410412645557227,
+          "maximum_rms": 0.05439153328822508
+        },
+        {
+          "start_s": 10.32,
+          "end_s": 10.494,
+          "maximum_below_90hz_fraction": 0.979523201059945,
+          "maximum_rms": 0.04473654434246632
+        },
+        {
+          "start_s": 10.88,
+          "end_s": 10.954,
+          "maximum_below_90hz_fraction": 0.718540819170198,
+          "maximum_rms": 0.03543023924027322
+        },
+        {
+          "start_s": 10.94,
+          "end_s": 11.044,
+          "maximum_below_90hz_fraction": 0.8586465636733192,
+          "maximum_rms": 0.05348254425959199
+        },
+        {
+          "start_s": 11.13,
+          "end_s": 11.244,
+          "maximum_below_90hz_fraction": 0.9738916380140227,
+          "maximum_rms": 0.00474249483672968
+        },
+        {
+          "start_s": 11.57,
+          "end_s": 11.694,
+          "maximum_below_90hz_fraction": 0.9627606157230058,
+          "maximum_rms": 0.006800707440015891
+        },
+        {
+          "start_s": 11.88,
+          "end_s": 11.984,
+          "maximum_below_90hz_fraction": 0.9002513990318471,
+          "maximum_rms": 0.012047845768409593
+        },
+        {
+          "start_s": 13.23,
+          "end_s": 13.344,
+          "maximum_below_90hz_fraction": 0.8453833995419855,
+          "maximum_rms": 0.01569222450711437
+        },
+        {
+          "start_s": 13.33,
+          "end_s": 13.454,
+          "maximum_below_90hz_fraction": 0.8046153311849447,
+          "maximum_rms": 0.028648823843043264
+        },
+        {
+          "start_s": 14.5,
+          "end_s": 14.624,
+          "maximum_below_90hz_fraction": 0.8189214761982853,
+          "maximum_rms": 0.03380114312597167
+        },
+        {
+          "start_s": 15.24,
+          "end_s": 15.324,
+          "maximum_below_90hz_fraction": 0.9556364173174181,
+          "maximum_rms": 0.005617116867470979
+        },
+        {
+          "start_s": 15.29,
+          "end_s": 15.424,
+          "maximum_below_90hz_fraction": 0.9240936835499924,
+          "maximum_rms": 0.015636565693555298
+        },
+        {
+          "start_s": 15.64,
+          "end_s": 15.734,
+          "maximum_below_90hz_fraction": 0.8142429464715705,
+          "maximum_rms": 0.006159522203879541
+        },
+        {
+          "start_s": 17.1,
+          "end_s": 17.164,
+          "maximum_below_90hz_fraction": 0.6714091158283441,
+          "maximum_rms": 0.003301728968707823
+        },
+        {
+          "start_s": 17.15,
+          "end_s": 17.234,
+          "maximum_below_90hz_fraction": 0.8596046388188487,
+          "maximum_rms": 0.014553230982984475
+        },
+        {
+          "start_s": 19.27,
+          "end_s": 19.344,
+          "maximum_below_90hz_fraction": 0.6621770204985996,
+          "maximum_rms": 0.003921399951768692
+        },
+        {
+          "start_s": 19.68,
+          "end_s": 19.754,
+          "maximum_below_90hz_fraction": 0.8027276384701749,
+          "maximum_rms": 0.0032689671331807345
+        }
+      ],
+      "candidate_frames": 219,
+      "below_90hz_fraction_p50_p90_p99": [
+        0.04834981616298298,
+        0.8441056687076551,
+        0.9975127064934041
+      ]
+    },
+    {
+      "path": "data\\registrations\\source_20261015\\speaker01\\holdout.wav",
+      "sha256": "1c064f8961590df3ed6e2893fb6f74942871be43d9c6aee55da5489c43a66e97",
+      "events": [
+        {
+          "start_s": 0.0,
+          "end_s": 0.384,
+          "maximum_below_90hz_fraction": 0.9999283088800152,
+          "maximum_rms": 0.197393378913208
+        },
+        {
+          "start_s": 1.89,
+          "end_s": 2.034,
+          "maximum_below_90hz_fraction": 0.9915642260701851,
+          "maximum_rms": 0.005396247725322752
+        },
+        {
+          "start_s": 2.5,
+          "end_s": 2.574,
+          "maximum_below_90hz_fraction": 0.8895745175748107,
+          "maximum_rms": 0.0034950967229813454
+        },
+        {
+          "start_s": 3.38,
+          "end_s": 3.454,
+          "maximum_below_90hz_fraction": 0.8818740582040562,
+          "maximum_rms": 0.004387857961871464
+        },
+        {
+          "start_s": 6.02,
+          "end_s": 6.084,
+          "maximum_below_90hz_fraction": 0.7371847019770694,
+          "maximum_rms": 0.004860827857740206
+        },
+        {
+          "start_s": 6.55,
+          "end_s": 6.634,
+          "maximum_below_90hz_fraction": 0.8654990471150408,
+          "maximum_rms": 0.008425294834716929
+        },
+        {
+          "start_s": 9.98,
+          "end_s": 10.104,
+          "maximum_below_90hz_fraction": 0.9597886460673085,
+          "maximum_rms": 0.0057922060118652694
+        },
+        {
+          "start_s": 11.24,
+          "end_s": 11.314,
+          "maximum_below_90hz_fraction": 0.7193204793382885,
+          "maximum_rms": 0.004494493694053719
+        },
+        {
+          "start_s": 12.71,
+          "end_s": 12.784,
+          "maximum_below_90hz_fraction": 0.7561034974041292,
+          "maximum_rms": 0.007643898296985303
+        },
+        {
+          "start_s": 13.15,
+          "end_s": 13.224,
+          "maximum_below_90hz_fraction": 0.7671637814524874,
+          "maximum_rms": 0.003673208011635102
+        },
+        {
+          "start_s": 13.18,
+          "end_s": 13.244,
+          "maximum_below_90hz_fraction": 0.6741512651133108,
+          "maximum_rms": 0.004781094601255441
+        },
+        {
+          "start_s": 13.78,
+          "end_s": 13.874,
+          "maximum_below_90hz_fraction": 0.7743434463106614,
+          "maximum_rms": 0.0036190158796344982
+        },
+        {
+          "start_s": 14.7,
+          "end_s": 14.764,
+          "maximum_below_90hz_fraction": 0.7314814950981053,
+          "maximum_rms": 0.003742043363248647
+        },
+        {
+          "start_s": 16.68,
+          "end_s": 16.744,
+          "maximum_below_90hz_fraction": 0.6545273560134127,
+          "maximum_rms": 0.003181020777812559
+        }
+      ],
+      "candidate_frames": 70,
+      "below_90hz_fraction_p50_p90_p99": [
+        0.006969094417287264,
+        0.33672616859233473,
+        0.998068546882985
+      ]
+    }
+  ],
+  "limitations": "Low-frequency dominance is not a breath or wind label. Detection threshold is an inspection heuristic; does not detect all breaths or glottal rasp. First-second events may be startup/handling; no known cause. No audio modified."
+}

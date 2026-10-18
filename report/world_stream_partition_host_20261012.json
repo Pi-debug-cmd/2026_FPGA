@@ -1,0 +1,17 @@
+{
+  "kind": "offline_stream_parameter_partition_check",
+  "same_analysis_parameters": true,
+  "whole_recording_analysis": true,
+  "output_length": 80000,
+  "partition_5_vs_25": {
+    "correlation": 1.0,
+    "rmse": 0.0,
+    "max_error": 0.0,
+    "identical_pcm": true
+  },
+  "stream_vs_batch": {
+    "correlation": 0.98158377129936,
+    "rmse": 0.008399142962035675
+  },
+  "clip_fraction": 0.0
+}

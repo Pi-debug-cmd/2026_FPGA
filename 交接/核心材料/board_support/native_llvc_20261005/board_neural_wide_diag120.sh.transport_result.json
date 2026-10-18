@@ -1,0 +1,10 @@
+{
+  "source": "board_neural_wide_diag120.sh",
+  "remote": "/home/root/native_llvc_trial_20261005/board_neural_wide_diag120.sh",
+  "sha256": "489de779071879584793a8f973d88e1e531cfb5f055d95865955932d976147b1",
+  "bytes": 4617,
+  "seconds": 1.6863306000013836,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

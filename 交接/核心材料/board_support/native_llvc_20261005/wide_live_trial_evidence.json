@@ -1,0 +1,89 @@
+{
+  "time": "2026-10-05T23:04:28.428789",
+  "board_mode": "live neural conversion: wide192_shallow2_target_anchor; awaiting human quality feedback",
+  "model_sha256": "eaa08fd14eafdfceb34bd4f9fbbd82f1c4aa870e783df7e596d48a46f5af2361",
+  "board_model": "/home/root/native_llvc_trial_20261005/wide192_shallow2_target_anchor_selected.f32",
+  "board_runtime": "/home/root/native_llvc_trial_20261005/native_llvc_wide192_shallow2_meter_arm",
+  "board_helper": "/home/root/native_llvc_trial_20261005/board_neural_wide192.sh",
+  "pids_at_observation": {
+    "capture": 26793,
+    "convert": 26794,
+    "playback": 26795
+  },
+  "observed_live_status": {
+    "input_samples": 5221232,
+    "output_samples": 5221216,
+    "chunks": 25102,
+    "mean_compute_ms": 11.069815,
+    "max_compute_ms": 19.537692,
+    "compute_deadlines_missed": 161,
+    "finished": false,
+    "input_gain": 1,
+    "output_gain": 1,
+    "playback_underruns_total": 1,
+    "playback_underrun_ms": 146.116,
+    "new_playback_underruns_between_98s_and_326s_status": 0,
+    "underrun_occurrence_time_unknown": true
+  },
+  "mixer": {
+    "Capture": 43,
+    "Headphone": 119,
+    "Playback": 222
+  },
+  "original_feedback_accepted": true,
+  "repeat_original_verification_required": false,
+  "original_audio_mixed_into_output": false,
+  "microphone_recorded": false,
+  "source_enrollment": false,
+  "ps_arm_inference": true,
+  "new_pl_acceleration": false,
+  "acoustic_latency_measured": false,
+  "target_quality_accepted": false,
+  "human_new_model_feedback_pending": false,
+  "project_complete": false,
+  "known_gap": "Male source F0 remains near source rather than teacher; target identity incomplete.",
+  "board_numeric_validation": {
+    "normalized_rmse": 3.3788870723583386e-07,
+    "max_abs": 2.086162567138672e-07,
+    "samples": 69120,
+    "benchmark": {
+      "samples": 69120,
+      "chunks": 333,
+      "audio_seconds": 4.32,
+      "inference_seconds": 3.77209,
+      "mean_chunk_ms": 11.3128,
+      "max_chunk_ms": 14.9591,
+      "peak_rss_kib": 4108,
+      "threads": 2,
+      "core": "native_fp32_wide_packed_output_candidate",
+      "source_enrollment": false,
+      "real_time_verified": false,
+      "quality_accepted": false
+    },
+    "original_audio_mixed_into_output": false,
+    "microphone_recorded": false,
+    "quality_accepted": false
+  },
+  "human_feedback": {
+    "date": "2026-10-06",
+    "verbatim": "杂音少了，咬字能接受",
+    "noise_reduced": true,
+    "intelligibility_acceptable": true,
+    "target_identity_accepted": false,
+    "project_complete": false,
+    "request": "Continue autonomous improvement of target voice identity."
+  },
+  "latest_board_observation": {
+    "input_samples": 602810224,
+    "chunks": 2898126,
+    "mean_compute_ms": 11.063855,
+    "max_compute_ms": 26.888497,
+    "compute_deadlines_missed": 15680,
+    "capture_pid": 26793,
+    "convert_pid": 26794,
+    "playback_pid": 26795,
+    "playback_underruns_total": 1,
+    "playback_underrun_ms": 146.116,
+    "observation_note": "Still running approximately10.47hours after start; original single underrun log unchanged."
+  }
+}

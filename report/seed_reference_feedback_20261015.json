@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-15",
+  "comparison": ["target", "world_old_fixed", "seed_tiny_steps30"],
+  "user_feedback": "减少了低沉沙哑的音色，比原来清晰的多，但是有一股ai味，和目标还是有差距，然后今天就到这里了",
+  "source_dark_hoarse_reduced": true,
+  "subjective_clarity_improved": true,
+  "artificial_voice_quality_remaining": true,
+  "target_similarity_accepted": false,
+  "content_completeness_verified": false,
+  "multiple_speakers_verified": false,
+  "board_realtime_verified": false,
+  "reference_execution": "PC CPU offline, 30 steps; board only played generated file",
+  "playback_directory": "/tmp/codex_prepared_comparison_20261015/comparison_6062602211966",
+  "playback_exit_code": 0,
+  "underruns": 0,
+  "mixer_restored": true,
+  "pcm_closed": true,
+  "status": "paused_at_user_request",
+  "next": "Assess naturalness, target similarity and board feasibility before further field tests. Obtain fresh readiness for each recording or audition; defer loudness adaptation as requested."
+}

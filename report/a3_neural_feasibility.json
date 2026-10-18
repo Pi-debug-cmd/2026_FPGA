@@ -1,0 +1,70 @@
+{
+  "kind": "a3_neural_feasibility_summary",
+  "date": "2026-10-18",
+  "route": "A3 参数域目标条件映射（WORLD）",
+  "offline_only": true,
+  "board_touched": false,
+  "recorded": false,
+  "played": false,
+  "pl_switched": false,
+  "data": {
+    "pairs": 192,
+    "source_speakers": 20,
+    "source_seconds": 888.1,
+    "unique_texts": 192,
+    "dev_sentence_in_training": false,
+    "teacher_identity_cos_to_target_centroid": 0.870,
+    "source_identity_cos_mean": 0.116,
+    "target_track9_heldout_identity_cos": 0.940,
+    "target_registration_seconds_T5_8": 99.1,
+    "target_heldout_seconds_T9": 22.8,
+    "target_f0_p10_med_p90_hz": [171.0, 194.0, 242.0],
+    "target_pairwise_cosine_mean": 0.9106,
+    "teacher_world_resynth_identity_ceiling": 0.836,
+    "frontend_reconstruction_ceiling": {"mel48_pinv": 0.756, "mel80_pinv": 0.792, "dct48": 0.831, "dct80": 0.835}
+  },
+  "metrics_same_protocol_as_a1": {
+    "protocol": "mono16k-6s.../window 2.68s+4.8s / WeSpeaker target centroid T5-8 / UTMOS / whisper-small CER vs source transcript",
+    "a1_reference": {"identity": 0.1902761307047773, "leakage": 0.17185976099719308, "utmos": 2.035435676574707, "cer": 0.16666666666666666},
+    "a3_best_balanced_detail075": {"identity": 0.4064, "leakage": 0.0642, "utmos": 1.3997, "cer": 0.2778, "f0_median_hz": 188.1},
+    "a3_lowest_leakage_plain": {"identity": 0.4000, "leakage": 0.0191, "utmos": 1.3213, "cer": 0.5000, "f0_median_hz": 188.0},
+    "source_resynth_control": {"identity": 0.0347, "leakage": 0.8702, "utmos": 2.4801, "cer": 0.0556},
+    "profile_mean_spectrum_control": {"identity": 0.1350, "leakage": -0.0161, "utmos": 1.3173, "cer": 14.22},
+    "a3_v2a_dct64_invalid_f0": {"identity": 0.3658, "leakage": 0.2139, "utmos": 1.2711, "cer": 0.9444, "f0_median_hz": 312.8},
+    "heldout_source_speakers_16_sentences": {"source_cos": 0.032, "teacher_cos": 0.873, "a3_cos": 0.428},
+    "naturalness_attribution": {"teacher_original_utmos": 3.67, "teacher_world_resynth_utmos": 2.67, "a3_pred_env_oracle_f0_utmos": 1.345, "a3_full_utmos": 1.317, "source_resynth_utmos": 1.482}
+  },
+  "model": {
+    "checkpoint": "build/generated/a3_neural/a3_net.pt",
+    "architecture": "per-frame MLP 248->128->128->49 (48 target mel residual + logF0)",
+    "parameters": 54705,
+    "int8_size_bytes": 55876,
+    "macs_per_frame": 54400,
+    "macs_per_audio_second": 5440000,
+    "net_rtf_estimates": {"pessimistic_100MMACs": 0.0544, "conservative_300MMACs": 0.0181, "realistic_1GMACs": 0.0054},
+    "ps_side_rtf_gate_0p3": "PASS for the network (<=0.055); whole WORLD chain stays 0.805-0.854 RTF, same as A1, needs PL synthesis offload to reach 0.3",
+    "pl_compatibility": "3 int8 GEMMs, reuses verified gemm_s8 kernel"
+  },
+  "verdict": {
+    "identity_gate_0p35": "PASS (0.406 / 0.400, and 0.428 on 16 unseen-source-speaker sentences)",
+    "board_realtime": "model passes; full chain still requires PL synthesis offload (same as A1)",
+    "replace_a1_now": false,
+    "continue_a3": true,
+    "reason": "identity ceiling broken (0.19->0.41) with leakage down to 0.064, but UTMOS 1.40 vs 2.035 and CER 0.278 vs 0.167 regress; keep A1 as main line, run A3 as a 1-2 week focused track with hard acceptance line identity>=0.35, UTMOS>=1.9, CER<=0.20, int8 verified",
+    "biggest_uncertainty": "target conditioning unproven: only one target speaker, profile condition is effectively constant; re-registration / other-target generalisation completely unknown",
+    "bottleneck": "frame-level target envelope regression accuracy plus source-teacher intra-utterance alignment (only global shift applied); 62.4% of target envelope deviation explained, 0.93 log-mel residual MAE (~2.7 dB/band)",
+    "next_steps": ["DTW frame alignment", "causal TCN 100-200ms receptive field", "predict source-relative transform instead of absolute envelope", "collect 2-3 more target speakers", "int8 quantisation + A9 timing"]
+  },
+  "artifacts": {
+    "report": "report/a3_neural_feasibility.md",
+    "inventory": "build/generated/a3_neural/inventory.json",
+    "final_metrics": "build/generated/a3_neural/final_metrics.json",
+    "size_budget": "build/generated/a3_neural/size_budget.json",
+    "frontend_compare": "build/generated/a3_neural/frontend_compare.json",
+    "blend_sweep": "build/generated/a3_neural/blend_sweep.json",
+    "detail_sweep": "build/generated/a3_neural/detail_sweep.json",
+    "naturalness_attribution": "build/generated/a3_neural/naturalness_attribution.json",
+    "training_report": "build/generated/a3_neural/training_report.json",
+    "outputs_dir": "build/generated/a3_neural/output/"
+  }
+}

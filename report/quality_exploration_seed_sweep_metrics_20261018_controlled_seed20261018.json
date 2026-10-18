@@ -1,0 +1,79 @@
+{
+  "kind": "seed_registered_prompt_objective_evaluation",
+  "date": "2026-10-18",
+  "protocol": {
+    "candidate_window": {
+      "start_s": 1.0,
+      "seconds": 4.8
+    },
+    "source_reference_window": {
+      "start_s": 2.68,
+      "seconds": 4.8
+    },
+    "target_centroid_tracks": [
+      "Track 5(1).wav",
+      "Track 6(1).wav",
+      "Track 7(1).wav",
+      "Track 8(1).wav"
+    ],
+    "source_asr_text": "下午我沿着小路走到公园听见书上的鸟叫"
+  },
+  "rows": [
+    {
+      "cfg": 0.7,
+      "path": "build\\generated\\quality_exploration_20261018\\seed_registration_controlled_seed20261018\\cfg_0.70\\vc_source_target_registered_1.0_30_0.7.wav",
+      "sha256": "5e743ac508d0e308d29c068319081b0e99500f09551e92f863bd39f1c19dd1f9",
+      "identity_cosine_to_target_centroid": 0.6185856845570608,
+      "leakage_cosine_to_source_window": 0.03463564289109817,
+      "utmos_predicted": 2.854219675064087,
+      "asr_text": "我研究了小路走到公园,听见书生的鸟叫。",
+      "content_cer_vs_source": {
+        "reference_chars": 18,
+        "hypothesis_chars": 17,
+        "distance": 6,
+        "cer": 0.3333333333333333
+      },
+      "seconds": 4.8,
+      "voiced_fraction": 0.841995841995842,
+      "f0_median_hz": 201.8926715873807,
+      "f0_p10_hz": 184.01296648282224,
+      "f0_p90_hz": 224.5504268550238
+    },
+    {
+      "cfg": 0.95,
+      "path": "build\\generated\\quality_exploration_20261018\\seed_registration_controlled_seed20261018\\cfg_0.95\\vc_source_target_registered_1.0_30_0.95.wav",
+      "sha256": "322830685e970187fa301ae9f5ce966fde59f20788d7bb9e411b3bfa55a32a36",
+      "identity_cosine_to_target_centroid": 0.619703157864336,
+      "leakage_cosine_to_source_window": 0.049164054711523984,
+      "utmos_predicted": 2.7078843116760254,
+      "asr_text": "我沿着小路走到公园,听见书生的鸟叫。",
+      "content_cer_vs_source": {
+        "reference_chars": 18,
+        "hypothesis_chars": 16,
+        "distance": 3,
+        "cer": 0.16666666666666666
+      },
+      "seconds": 4.8,
+      "voiced_fraction": 0.8024948024948025,
+      "f0_median_hz": 201.80925563606286,
+      "f0_p10_hz": 184.3154626738884,
+      "f0_p90_hz": 224.36962108811582
+    }
+  ],
+  "historical_single_track8_prompt": {
+    "cfg": 0.7,
+    "identity": 0.5509127618939071,
+    "leakage": 0.020488953208088606,
+    "utmos": 2.7361302375793457,
+    "cer": 0.1111111111111111,
+    "note": "Historical aligned-window result; Track8 was both prompt and part of centroid, so identity is optimistic."
+  },
+  "played": false,
+  "board_touched": false,
+  "accepted": false,
+  "limitations": [
+    "Objective metrics on one existing development source do not establish multi-source generalization.",
+    "AI-like artifacts require a separately authorized listening test.",
+    "Target tracks 5-8 construct both registration prompt and evaluation centroid; Track9 remains held out from registration."
+  ]
+}

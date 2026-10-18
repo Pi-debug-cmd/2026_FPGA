@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\wide_outpack_binary.tar.gz",
+  "remote": "/home/root/native_llvc_trial_20261005/wide_outpack_binary.tar.gz",
+  "sha256": "18ac56dddb90d5b436715b94551aab827aa72039ad1c7f2a4b3cb21e3a33c72c",
+  "bytes": 715868,
+  "seconds": 32.6226605999982,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

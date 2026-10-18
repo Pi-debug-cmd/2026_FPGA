@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\diagnostic_original_bundle.tar.gz",
+  "remote": "/home/root/native_llvc_trial_20261005/diagnostic_original_bundle.tar.gz",
+  "sha256": "449ad4bc16a83103961eef16a6828afb9bc460cda0762321b326198eb6013def",
+  "bytes": 725581,
+  "seconds": 33.07665599999018,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

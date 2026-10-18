@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\pitch_normalizer_benchmark_20261006.tar.gz",
+  "remote": "/home/root/native_llvc_trial_20261005/pitch_normalizer_benchmark_20261006.tar.gz",
+  "sha256": "f8733682b825faed27b46198d07dcaae56e78238c2c1447734e31a6229dbc930",
+  "bytes": 848588,
+  "seconds": 38.38585369999055,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

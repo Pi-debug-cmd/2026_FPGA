@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\small128_pcm_contract.tar.gz",
+  "remote": "/home/root/native_llvc_trial_20261005/small128_pcm_contract.tar.gz",
+  "sha256": "9df23ad0d7ed82aec478bfc27dc785c2afeef60eeb507cae9353368530061d46",
+  "bytes": 8906,
+  "seconds": 1.8957497000228614,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

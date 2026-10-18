@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\fargan_v8_prototype_bundle_20261006.tar.gz",
+  "remote": "/home/root/native_llvc_trial_20261005/fargan_v8_prototype_bundle_20261006.tar.gz",
+  "sha256": "b33e9c2fc3b0a244671d262d56017e7a7dc8e7154090a73f61c937751f4287d2",
+  "bytes": 1020058,
+  "seconds": 45.805479699978605,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

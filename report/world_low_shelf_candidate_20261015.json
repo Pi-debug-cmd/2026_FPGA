@@ -1,0 +1,65 @@
+{
+  "kind": "prepared_world_spectral_balance_development_comparison",
+  "evaluation_role": "development_after_listening_feedback",
+  "balance_profile_sha256": "7a8cc098acf4b1facafdaa481f0467bdb8287380fa0518d7d809affd7735bd2b",
+  "configuration_sha256": "7aac203c811ce78be80317bbd6c8ef4c24439d6ee3e21dc092393cb8ef583cf0",
+  "input_sha256": "1c064f8961590df3ed6e2893fb6f74942871be43d9c6aee55da5489c43a66e97",
+  "target_holdout_sha256": "d53d24dbb5bb2e01db6bee5483f799644f78be4ebb3c7264482a4d7564093747",
+  "configuration_refitted": false,
+  "voiced_frames": 904,
+  "variants": {
+    "old_fixed": {
+      "raw_peak": 0.37297026848782466,
+      "raw_clip_samples": 0,
+      "archive_gain": 1.0,
+      "wav_sha256": "be670efcee2f7dd540a1d202a841518423133bdfc8b23faace732a6faa0b5d57",
+      "parameter_f0_median_hz": 198.4060728291079
+    },
+    "prepared_pitch": {
+      "raw_peak": 0.37297026848782466,
+      "raw_clip_samples": 0,
+      "archive_gain": 1.0,
+      "wav_sha256": "4e3aa954d031ab1b277f7e8fbca355847a4822e5901073c40080d82f6d07c623",
+      "parameter_f0_median_hz": 191.98831289105328
+    },
+    "prepared_timbre": {
+      "raw_peak": 0.37297026848782466,
+      "raw_clip_samples": 0,
+      "archive_gain": 1.0,
+      "wav_sha256": "1c238a2dd926ae9e45546ddfca85e92f40bd4c24bfdb77c2bd61e19c73797f9a",
+      "parameter_f0_median_hz": 191.98831289105328
+    },
+    "balanced_old_fixed": {
+      "raw_peak": 0.37297026848782466,
+      "raw_clip_samples": 0,
+      "archive_gain": 1.0,
+      "wav_sha256": "e1b64e09facd757252883b3c6270fd92ae1024890a0729f71a01979eb0cc5407",
+      "parameter_f0_median_hz": 198.4060728291079
+    }
+  },
+  "order": [
+    "target",
+    "old_fixed",
+    "balanced_old_fixed"
+  ],
+  "source_crop_start_s": 2.68,
+  "target_crop_start_s": 11.0,
+  "segment_seconds": 5,
+  "gap_seconds": 1,
+  "leading_silence_seconds": 1,
+  "rate": 32000,
+  "duration_s": 18.0,
+  "gains": [
+    0.4711249604969285,
+    7.261046649116088,
+    7.157563613908948
+  ],
+  "peak": 0.8580852586664933,
+  "clip_fraction": 0.0,
+  "wav_sha256": "6508fe8e1e1bc729d0cfdb4360f2e7fb23e64fee3c411166f144b0f71a7dbc55",
+  "gzip_sha256": "313360f170e8135c3c54e761b834f3e3c954d9304c1a3d71970e499a2b4a8290",
+  "speaker_identity_accepted": false,
+  "realtime_accepted": false,
+  "requires_new_final_holdout": true,
+  "limitations": "Single source, separate utterance in same session. Offline whole-recording analysis; not causal runtime. Ordered listening preview, not randomized blind evaluation. Equal RMS does not guarantee equal perceived loudness. Speech-rich crops selected for listening only."
+}

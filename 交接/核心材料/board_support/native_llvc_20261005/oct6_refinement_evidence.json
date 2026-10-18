@@ -1,0 +1,248 @@
+{
+  "updated": "2026-10-06T11:36:00.598204",
+  "feedback": "杂音少了，咬字能接受",
+  "accepted_baseline": "wide192_shallow2_target_anchor",
+  "final_target_identity_accepted": false,
+  "project_completed": false,
+  "board_serial": "COM8 115200 root/root",
+  "engineering_directory": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020",
+  "candidates": [
+    {
+      "name": "wide192_causal_pitch_initial",
+      "mos_diagnostic": 1.462135528675042,
+      "hanzi_edits": 14,
+      "characters": 152,
+      "target_cosine": 0.484175119549036,
+      "training_complete": true,
+      "recognizer_used_as_loss": true,
+      "auxiliary_speaker_loss_used": true
+    },
+    {
+      "name": "wide192_causal_pitch_trained",
+      "mos_diagnostic": 1.500440814060247,
+      "hanzi_edits": 20,
+      "characters": 152,
+      "target_cosine": 0.49892616644501686,
+      "training_complete": true,
+      "recognizer_used_as_loss": true,
+      "auxiliary_speaker_loss_used": true
+    },
+    {
+      "name": "wide192_psola_post",
+      "mos_diagnostic": 1.283846109135696,
+      "hanzi_edits": 15,
+      "characters": 152,
+      "target_cosine": 0.4295659251511097,
+      "training_complete": true,
+      "recognizer_used_as_loss": true,
+      "auxiliary_speaker_loss_used": true
+    },
+    {
+      "name": "wide192_psola_oracle",
+      "mos_diagnostic": 1.4618388817536878,
+      "hanzi_edits": 9,
+      "characters": 152,
+      "target_cosine": 0.49654496088624,
+      "training_complete": true,
+      "recognizer_used_as_loss": true,
+      "auxiliary_speaker_loss_used": true
+    },
+    {
+      "name": "fargan_teacher_reconstruction",
+      "mos_diagnostic": 2.9777313583184286,
+      "hanzi_edits": 7,
+      "characters": 152,
+      "target_cosine": 0.7701566219329834,
+      "training_complete": true,
+      "recognizer_used_as_loss": false,
+      "auxiliary_speaker_loss_used": false
+    },
+    {
+      "name": "fargan_mapper_v1",
+      "mos_diagnostic": 1.531720280040266,
+      "hanzi_edits": 17,
+      "characters": 152,
+      "target_cosine": 0.5012016221880913,
+      "training_complete": true,
+      "recognizer_used_as_loss": false,
+      "auxiliary_speaker_loss_used": false
+    },
+    {
+      "name": "fargan_mapper_v2",
+      "mos_diagnostic": 1.5393171457282504,
+      "hanzi_edits": 25,
+      "characters": 152,
+      "target_cosine": 0.5375671349465847,
+      "training_complete": true,
+      "recognizer_used_as_loss": false,
+      "auxiliary_speaker_loss_used": false
+    },
+    {
+      "name": "fargan_cmn_direct",
+      "mos_diagnostic": 1.768204188006153,
+      "hanzi_edits": 11,
+      "characters": 152,
+      "target_cosine": 0.2516670245677233,
+      "training_complete": true,
+      "recognizer_used_as_loss": false,
+      "auxiliary_speaker_loss_used": false
+    },
+    {
+      "name": "fargan_mapper_perceptual",
+      "mos_diagnostic": 1.5668816185616319,
+      "hanzi_edits": 19,
+      "characters": 152,
+      "target_cosine": 0.5157879702746868,
+      "training_complete": true,
+      "recognizer_used_as_loss": true,
+      "auxiliary_speaker_loss_used": true
+    },
+    {
+      "name": "fargan_mapper_truncated",
+      "mos_diagnostic": 1.5201473229426434,
+      "hanzi_edits": 20,
+      "characters": 152,
+      "target_cosine": 0.5501835756003857,
+      "training_complete": true,
+      "recognizer_used_as_loss": true,
+      "auxiliary_speaker_loss_used": true
+    },
+    {
+      "name": "fargan_mapper_pitchaware",
+      "mos_diagnostic": 1.5385848653849101,
+      "hanzi_edits": 23,
+      "characters": 152,
+      "target_cosine": 0.5555957481265068,
+      "training_complete": true,
+      "recognizer_used_as_loss": false,
+      "auxiliary_speaker_loss_used": false
+    },
+    {
+      "name": "fargan_teacher_source_energy",
+      "mos_diagnostic": 2.6507860035996558,
+      "hanzi_edits": 8,
+      "characters": 152,
+      "target_cosine": 0.73905149102211,
+      "training_complete": true,
+      "recognizer_used_as_loss": false,
+      "auxiliary_speaker_loss_used": false
+    },
+    {
+      "name": "fargan_teacher_source_energy_periodicity",
+      "mos_diagnostic": 2.3929283325994843,
+      "hanzi_edits": 6,
+      "characters": 152,
+      "target_cosine": 0.7207287028431892,
+      "training_complete": true,
+      "recognizer_used_as_loss": false,
+      "auxiliary_speaker_loss_used": false
+    },
+    {
+      "name": "fargan_mapper_expanded_v8",
+      "mos_diagnostic": 1.637187250183697,
+      "hanzi_edits": 15,
+      "characters": 152,
+      "target_cosine": 0.5711241140961647,
+      "training_complete": true,
+      "recognizer_used_as_loss": false,
+      "auxiliary_speaker_loss_used": false
+    }
+  ],
+  "source_enrollment": false,
+  "target_track9_training": false,
+  "test_audio_used": false,
+  "latest_board_snapshot": {
+    "snapshot_monotonic": 70362.879453662,
+    "board_wall_time": 1520851881.5967693,
+    "project_completed": false,
+    "quality_accepted": false,
+    "acoustic_latency_measured": false,
+    "inference_location": "7020 PS CPU0/CPU1",
+    "pl_acceleration_implemented": false,
+    "processes": {
+      "capture": {
+        "pid": 30659,
+        "cmdline": "arecord -q -D neural_capture -t raw -f S16_LE -r 16000 -c 1 --period-size=208 --buffer-size=832 /run/voice-neural-live/input.fifo "
+      },
+      "convert": {
+        "pid": 30660,
+        "cmdline": "/home/root/native_llvc_trial_20261005/native_llvc_wide192_shallow2_meter_arm --stream /home/root/native_llvc_trial_20261005/wide192_shallow2_target_anchor_selected.f32 /run/voice-neural-live/status.json "
+      },
+      "playback": {
+        "pid": 30661,
+        "cmdline": "aplay -q -D neural_play -t raw -f S16_LE -r 16000 -c 1 --period-size=208 --buffer-size=832 --start-delay=39000 /run/voice-neural-live/output.fifo "
+      },
+      "watchdog": {
+        "pid": 30662,
+        "cmdline": "python3 -u /home/root/native_llvc_trial_20261005/live_watchdog.py "
+      }
+    },
+    "status": {
+      "input_samples": 3043056,
+      "output_samples": 3043040,
+      "chunks": 14630,
+      "mean_compute_ms": 11.300379,
+      "max_compute_ms": 20.294179,
+      "compute_deadlines_missed": 103,
+      "format": "S16_LE_mono_16000",
+      "bounded_lookahead_samples": 16,
+      "finished": false,
+      "target_quality_accepted": false,
+      "acoustic_latency_measured": false,
+      "meter_window_input": {
+        "rms": 3.1e-05,
+        "peak": 3.1e-05,
+        "samples": 16016,
+        "clips": 0
+      },
+      "meter_window_raw_model": {
+        "rms": 2.1e-05,
+        "peak": 2.2e-05,
+        "samples": 16016,
+        "clips": 0
+      },
+      "meter_window_output": {
+        "rms": 2.1e-05,
+        "peak": 2.2e-05,
+        "samples": 16016,
+        "clips": 0
+      },
+      "input_gain": 1.0,
+      "output_gain": 1.0
+    },
+    "logs": {
+      "capture.log": "",
+      "convert.log": "",
+      "playback.log": "underrun!!! (at least 146.374 ms long)\n",
+      "watchdog.log": "",
+      "affinity.log": "AUDIO_CPU0 capture 30505\nAUDIO_CPU0 playback 30507\nAUDIO_CPU0 watchdog 30508\n"
+    },
+    "temperature_c": 65.82681274394,
+    "sha256": {
+      "native_fargan_v8_arm": "b0fcf2d97e3eb5b38d5da5cc32f486d910f0e61c5b55f13faaa6b51aabad6f32",
+      "fargan_mapper_v8_selected.f32": "5cf0ca6dcff4d11c4c2a20c21708ba8952cd12de2886774ee53942898ec5cfad",
+      "board_neural_fargan.sh": "3b82748e48babd36bc4e0d40fc92e66bfe297c36ee3df9891df4b9920c35f334",
+      "fargan_live_watchdog.py": "a3a6e037bcceedc526f6710485f6ba41d756aafe4d6c7329865f1bff2ad4a856",
+      "audio_affinity.py": "3473f725a3eb37d87e86fc1a00c0077e2dfb4ed2ecbd3f6e7ef723fc3ff5b192"
+    },
+    "v8_live_deployed": false,
+    "live_verified_short_observation": false
+  },
+  "v8_live_trial_deployed": false,
+  "v8_human_acceptance_pending": false,
+  "v8_human_feedback": {
+    "updated": "2026-10-06T11:36:00.551335",
+    "verbatim": "不像，而且声音不清晰，会颤",
+    "candidate": "fargan_mapper_expanded_v8",
+    "candidate_rejected": true,
+    "quality_accepted": false,
+    "human_acceptance_pending": false,
+    "project_completed": false,
+    "baseline_restored_verified": true,
+    "baseline": "wide192_shallow2_target_anchor",
+    "baseline_target_identity_accepted": false,
+    "machine_score_does_not_mean_high_perceptual_similarity": true,
+    "runtime_snapshot": "fargan_v8_rejected_trial_evidence.json",
+    "current_board_snapshot": "fargan_v8_live_evidence.json"
+  }
+}

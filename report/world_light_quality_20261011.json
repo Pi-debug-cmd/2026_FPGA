@@ -1,0 +1,29 @@
+{
+  "checks": [
+    {
+      "name": "identity",
+      "f0_median_hz_yin": 116.39545621602741,
+      "voiced_coverage_seconds_yin": 5.29,
+      "clip_fraction_pcm16": 0.0
+    },
+    {
+      "name": "world_pitch",
+      "f0_median_hz_yin": 192.9861555612184,
+      "voiced_coverage_seconds_yin": 5.3100000000000005,
+      "clip_fraction_pcm16": 0.0
+    },
+    {
+      "name": "world_timbre",
+      "f0_median_hz_yin": 193.12576089316997,
+      "voiced_coverage_seconds_yin": 5.42,
+      "clip_fraction_pcm16": 0.0
+    },
+    {
+      "name": "world_warp_only",
+      "f0_median_hz_yin": 193.2109019951258,
+      "voiced_coverage_seconds_yin": 5.47,
+      "clip_fraction_pcm16": 0.0
+    }
+  ],
+  "limitation": "F0 checks do not measure timbre identity or audible flutter"
+}

@@ -1,0 +1,8 @@
+{
+  "all_outputs": true,
+  "ratio_bits": 18,
+  "default_dsp_reset_asserted": true,
+  "clock_domain_shared": true,
+  "dsp_reset_does_not_reset_dma": true,
+  "control_base": "0x41200000"
+}

@@ -1,0 +1,276 @@
+{
+  "updated": "2026-10-06T14:45:35.758624",
+  "user_instruction": "一直执行，只有需要协助、值得试听或遇到无法独立解决的问题才停",
+  "accepted_baseline": "wide192_shallow2_target_anchor",
+  "original_route_accepted": true,
+  "rejected_live_v8_feedback": "不像，而且声音不清晰，会颤",
+  "project_completed": false,
+  "new_candidate_live_deployed": false,
+  "target_identity_accepted": false,
+  "candidates": [
+    {
+      "name": "fargan_v8_dynamics",
+      "quality_accepted": false,
+      "board_live_deployed": false,
+      "training_decision": {
+        "complete": true,
+        "steps": 4000,
+        "parameters": 203411,
+        "mapper_sha256": "9dc99998a4cea631e9121136c4a9513ebcc40ba509fb0bf8d86cd603830357c2",
+        "parent_sha256": "ee80fe0fe1043169114a8e04069686879f54cae931e7d06f90e1cb7a51e11101",
+        "source_enrollment": false,
+        "raw_waveform_mix": false,
+        "recognizer_used_as_loss": false,
+        "test_audio_used": false,
+        "target_track9_used": false,
+        "training_frames": 400,
+        "warmup_frames": 16
+      },
+      "development_gate": {
+        "candidate": "fargan_v8_dynamics",
+        "characters": 152,
+        "hanzi_edits": 16,
+        "target_cosine": 0.6109717488288879,
+        "naturalness_diagnostic": 1.8493289599163303,
+        "baseline_hanzi_edits": 7,
+        "content_gate_passed": false,
+        "quality_accepted": false,
+        "project_completed": false,
+        "board_live_deployed": false,
+        "development_evaluation_not_blind": true,
+        "asr_and_speaker_scores_not_human_acceptance": true
+      },
+      "dynamics_audit": {
+        "source": {
+          "adjacent_pairs": 2009,
+          "mean_semitone_step": 0.18543342042912767,
+          "over_two_semitones": 1
+        },
+        "teacher": {
+          "adjacent_pairs": 2410,
+          "mean_semitone_step": 0.20734282424093778,
+          "over_two_semitones": 0
+        },
+        "candidate": {
+          "adjacent_pairs": 2398,
+          "mean_semitone_step": 0.20768921465004753,
+          "over_two_semitones": 0
+        }
+      },
+      "native_host_verification": {
+        "native_mapper_nrmse": 1.0752923174095486e-07,
+        "native_mapper_max_abs": 2.2649765014648438e-06,
+        "samples": 69120,
+        "rms": 0.03693145141005516,
+        "peak": 0.32928466796875,
+        "clips": 0,
+        "quiet_rms": 3.4119689598080287e-07,
+        "quiet_peak": 3.0517578125e-05,
+        "quality_accepted": false,
+        "board_live_deployed": false,
+        "same_text": "我的校园很美，走近大门就能看见宽阔的操场。",
+        "source_enrollment": false,
+        "raw_waveform_mix": false
+      }
+    },
+    {
+      "name": "fargan_context_v9",
+      "quality_accepted": false,
+      "board_live_deployed": false,
+      "training_decision": {
+        "complete": true,
+        "steps": 10000,
+        "parameters": 205715,
+        "mapper_sha256": "430f923634411fbf7d9a89c74ec36fcf236f589f370a8c0bf2c63084d7227b36",
+        "parent_sha256": "2ca206803a139627bfe956a3074aa4fbff1d647fb92563eb74ba0d68ce12c7ef",
+        "source_enrollment": false,
+        "raw_waveform_mix": false,
+        "recognizer_used_as_loss": false,
+        "test_audio_used": false,
+        "target_track9_used": false,
+        "training_frames": 400,
+        "warmup_frames": 16
+      },
+      "development_gate": {
+        "candidate": "fargan_context_v9",
+        "characters": 152,
+        "hanzi_edits": 18,
+        "target_cosine": 0.6090247556567192,
+        "naturalness_diagnostic": 1.832491615559519,
+        "baseline_hanzi_edits": 7,
+        "content_gate_passed": false,
+        "quality_accepted": false,
+        "project_completed": false,
+        "board_live_deployed": false,
+        "development_evaluation_not_blind": true,
+        "asr_and_speaker_scores_not_human_acceptance": true
+      },
+      "dynamics_audit": {
+        "source": {
+          "adjacent_pairs": 2009,
+          "mean_semitone_step": 0.18543342042912767,
+          "over_two_semitones": 1
+        },
+        "teacher": {
+          "adjacent_pairs": 2410,
+          "mean_semitone_step": 0.20734282424093778,
+          "over_two_semitones": 0
+        },
+        "candidate": {
+          "adjacent_pairs": 2439,
+          "mean_semitone_step": 0.20434357109813722,
+          "over_two_semitones": 0
+        }
+      },
+      "native_host_verification": {
+        "native_mapper_nrmse": 1.2142479022259067e-07,
+        "native_mapper_max_abs": 1.6689300537109375e-06,
+        "samples": 69120,
+        "rms": 0.034919604659080505,
+        "peak": 0.2320556640625,
+        "clips": 0,
+        "quiet_rms": 0.0,
+        "quiet_peak": 0.0,
+        "quality_accepted": false,
+        "board_live_deployed": false,
+        "same_text": "我的校园很美，走近大门就能看见宽阔的操场。",
+        "source_enrollment": false,
+        "raw_waveform_mix": false
+      }
+    }
+  ],
+  "phonetic_guides": [
+    {
+      "name": "fargan_phone_guidance",
+      "summary": [
+        {
+          "kind": "source",
+          "correct": 17,
+          "total": 153,
+          "accuracy": 0.1111111111111111,
+          "body_sequence_edits": 127,
+          "body_sequence_length": 152,
+          "sequence_error_rate": 0.8355263157894737
+        },
+        {
+          "kind": "teacher",
+          "correct": 54,
+          "total": 153,
+          "accuracy": 0.35294117647058826,
+          "body_sequence_edits": 85,
+          "body_sequence_length": 152,
+          "sequence_error_rate": 0.5592105263157895
+        }
+      ],
+      "gate_passed": false,
+      "used_for_conversion_training": false,
+      "board_deployed": false
+    },
+    {
+      "name": "fargan_phone_ctc",
+      "summary": [
+        {
+          "kind": "source",
+          "correct": 22,
+          "total": 152,
+          "accuracy": 0.14473684210526316,
+          "body_sequence_edits": 99,
+          "body_sequence_length": 152,
+          "sequence_error_rate": 0.6513157894736842
+        },
+        {
+          "kind": "teacher",
+          "correct": 39,
+          "total": 152,
+          "accuracy": 0.2565789473684211,
+          "body_sequence_edits": 65,
+          "body_sequence_length": 152,
+          "sequence_error_rate": 0.4276315789473684
+        }
+      ],
+      "gate_passed": false,
+      "used_for_conversion_training": false,
+      "board_deployed": false
+    },
+    {
+      "name": "fargan_phone_cmn",
+      "summary": [
+        {
+          "kind": "source",
+          "correct": 29,
+          "total": 152,
+          "accuracy": 0.19078947368421054,
+          "body_sequence_edits": 104,
+          "body_sequence_length": 152,
+          "sequence_error_rate": 0.6842105263157895
+        },
+        {
+          "kind": "teacher",
+          "correct": 36,
+          "total": 152,
+          "accuracy": 0.23684210526315788,
+          "body_sequence_edits": 74,
+          "body_sequence_length": 152,
+          "sequence_error_rate": 0.4868421052631579
+        }
+      ],
+      "gate_passed": false,
+      "used_for_conversion_training": false,
+      "board_deployed": false
+    }
+  ],
+  "wide_ram_diagnostic_verification": {
+    "checks": [
+      {
+        "samples": 0,
+        "output_bit_exact": true,
+        "captured_input_exact": true,
+        "captured_output_exact": true
+      },
+      {
+        "samples": 1,
+        "output_bit_exact": true,
+        "captured_input_exact": true,
+        "captured_output_exact": true
+      },
+      {
+        "samples": 207,
+        "output_bit_exact": true,
+        "captured_input_exact": true,
+        "captured_output_exact": true
+      },
+      {
+        "samples": 224,
+        "output_bit_exact": true,
+        "captured_input_exact": true,
+        "captured_output_exact": true
+      },
+      {
+        "samples": 16000,
+        "output_bit_exact": true,
+        "captured_input_exact": true,
+        "captured_output_exact": true
+      },
+      {
+        "samples": 69120,
+        "output_bit_exact": true,
+        "captured_input_exact": true,
+        "captured_output_exact": true
+      }
+    ],
+    "ring_wrap": {
+      "format": "S16_LE_mono_16000",
+      "start_sample": 208,
+      "end_sample": 1920256,
+      "samples": 1920048,
+      "realtime_output_not_delayed_by_ring": true,
+      "diagnostic_only_not_source_enrollment": true,
+      "input_exact": true,
+      "output_exact": true
+    },
+    "passed": true,
+    "arm_sha256": "8cb2352a76461ea6cff4dd26ddb33927cad72dfc348a96c088cf57acb65cbdfd",
+    "weights_sha256": "eaa08fd14eafdfceb34bd4f9fbbd82f1c4aa870e783df7e596d48a46f5af2361",
+    "disk_dump_only_after_stream_ends": true
+  }
+}

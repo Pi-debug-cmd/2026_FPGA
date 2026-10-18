@@ -1,0 +1,111 @@
+{
+  "cases": [
+    {
+      "case": "silence_416",
+      "native": {
+        "samples": 416,
+        "chunks": 2,
+        "audio_seconds": 0.026,
+        "inference_seconds": 0.811098,
+        "mean_chunk_ms": 405.539,
+        "max_chunk_ms": 407.147,
+        "peak_rss_kib": 16936,
+        "core": "native_fp32",
+        "source_enrollment": false,
+        "real_time_verified": false,
+        "quality_accepted": false,
+        "wall_seconds": 1.0161027999999988,
+        "temperature_before_c": 63.119915771292,
+        "temperature_peak_c": 63.735119628712006,
+        "binary_sha256": "f5e977a83313126fdb2730ada00e69e5e81677e0c6a029fa93aa38be5511b743",
+        "model_sha256": "e9d039938958c3b1de93144e2b81259d6acbe7887df5d03a203ae8629e6bc5d5",
+        "actual_arm_execution": true
+      },
+      "normalized_rmse": 1.1018783579433647e-06,
+      "max_absolute_error": 1.8189894035458565e-10,
+      "output_sha256": "7513c6eb610aa568902dd8f5b76cf32128661c392963501f6531fa750208d51c",
+      "migration_pass": true
+    },
+    {
+      "case": "tone_1000",
+      "native": {
+        "samples": 1000,
+        "chunks": 5,
+        "audio_seconds": 0.0625,
+        "inference_seconds": 2.02053,
+        "mean_chunk_ms": 404.096,
+        "max_chunk_ms": 409.075,
+        "peak_rss_kib": 17164,
+        "core": "native_fp32",
+        "source_enrollment": false,
+        "real_time_verified": false,
+        "quality_accepted": false,
+        "wall_seconds": 2.2785284089998186,
+        "temperature_before_c": 63.612078857228,
+        "temperature_peak_c": 64.5964050291,
+        "binary_sha256": "f5e977a83313126fdb2730ada00e69e5e81677e0c6a029fa93aa38be5511b743",
+        "model_sha256": "e9d039938958c3b1de93144e2b81259d6acbe7887df5d03a203ae8629e6bc5d5",
+        "actual_arm_execution": true
+      },
+      "normalized_rmse": 9.316462725878631e-07,
+      "max_absolute_error": 1.932494342327118e-08,
+      "output_sha256": "ed1716730c5b3fc8f060d95973128767c3dd692b9c0a052b09f08fac99706261",
+      "migration_pass": true
+    },
+    {
+      "case": "edge_209",
+      "native": {
+        "samples": 209,
+        "chunks": 2,
+        "audio_seconds": 0.0130625,
+        "inference_seconds": 0.809762,
+        "mean_chunk_ms": 404.87,
+        "max_chunk_ms": 409.799,
+        "peak_rss_kib": 16932,
+        "core": "native_fp32",
+        "source_enrollment": false,
+        "real_time_verified": false,
+        "quality_accepted": false,
+        "wall_seconds": 1.0161914860000252,
+        "temperature_before_c": 63.981201171680006,
+        "temperature_peak_c": 64.350323486132,
+        "binary_sha256": "f5e977a83313126fdb2730ada00e69e5e81677e0c6a029fa93aa38be5511b743",
+        "model_sha256": "e9d039938958c3b1de93144e2b81259d6acbe7887df5d03a203ae8629e6bc5d5",
+        "actual_arm_execution": true
+      },
+      "normalized_rmse": 1.7996770420631735e-06,
+      "max_absolute_error": 6.166374078020453e-10,
+      "output_sha256": "a6a71c31d0ed853d2e57a148877b4953bec27356eaa81aa214e916cffa915bf9",
+      "migration_pass": true
+    },
+    {
+      "case": "real_16000",
+      "native": {
+        "samples": 16000,
+        "chunks": 77,
+        "audio_seconds": 1,
+        "inference_seconds": 31.2346,
+        "mean_chunk_ms": 405.634,
+        "max_chunk_ms": 414.573,
+        "peak_rss_kib": 17060,
+        "core": "native_fp32",
+        "source_enrollment": false,
+        "real_time_verified": false,
+        "quality_accepted": false,
+        "wall_seconds": 31.574198275999834,
+        "temperature_before_c": 63.735119628712006,
+        "temperature_peak_c": 66.195935058392,
+        "binary_sha256": "f5e977a83313126fdb2730ada00e69e5e81677e0c6a029fa93aa38be5511b743",
+        "model_sha256": "e9d039938958c3b1de93144e2b81259d6acbe7887df5d03a203ae8629e6bc5d5",
+        "actual_arm_execution": true
+      },
+      "normalized_rmse": 7.888975886994093e-06,
+      "max_absolute_error": 5.862148100277409e-09,
+      "output_sha256": "0907c9e5fc99d3167cbd1b87ba9e1941557d2c7e1f1080190445bfa2a5eb8f39",
+      "migration_pass": true
+    }
+  ],
+  "all_passed": true,
+  "speech_quality_accepted": false,
+  "continuous_real_time_verified": false
+}

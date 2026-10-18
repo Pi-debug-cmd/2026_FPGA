@@ -1,0 +1,57 @@
+{
+  "kind": "prepared_world_single_speaker_heldout_comparison",
+  "configuration_sha256": "7aac203c811ce78be80317bbd6c8ef4c24439d6ee3e21dc092393cb8ef583cf0",
+  "input_sha256": "1c064f8961590df3ed6e2893fb6f74942871be43d9c6aee55da5489c43a66e97",
+  "target_holdout_sha256": "d53d24dbb5bb2e01db6bee5483f799644f78be4ebb3c7264482a4d7564093747",
+  "configuration_refitted": false,
+  "voiced_frames": 904,
+  "variants": {
+    "old_fixed": {
+      "raw_peak": 0.37297026848782466,
+      "raw_clip_samples": 0,
+      "archive_gain": 1.0,
+      "wav_sha256": "be670efcee2f7dd540a1d202a841518423133bdfc8b23faace732a6faa0b5d57",
+      "parameter_f0_median_hz": 198.4060728291079
+    },
+    "prepared_pitch": {
+      "raw_peak": 0.37297026848782466,
+      "raw_clip_samples": 0,
+      "archive_gain": 1.0,
+      "wav_sha256": "4e3aa954d031ab1b277f7e8fbca355847a4822e5901073c40080d82f6d07c623",
+      "parameter_f0_median_hz": 191.98831289105328
+    },
+    "prepared_timbre": {
+      "raw_peak": 0.37297026848782466,
+      "raw_clip_samples": 0,
+      "archive_gain": 1.0,
+      "wav_sha256": "1c238a2dd926ae9e45546ddfca85e92f40bd4c24bfdb77c2bd61e19c73797f9a",
+      "parameter_f0_median_hz": 191.98831289105328
+    }
+  },
+  "order": [
+    "target",
+    "old_fixed",
+    "prepared_pitch",
+    "prepared_timbre"
+  ],
+  "source_crop_start_s": 2.68,
+  "target_crop_start_s": 11.0,
+  "segment_seconds": 5,
+  "gap_seconds": 1,
+  "leading_silence_seconds": 1,
+  "rate": 32000,
+  "duration_s": 24.0,
+  "gains": [
+    0.46101089447253346,
+    7.105167187459225,
+    7.305987833537787,
+    6.813345965595201
+  ],
+  "peak": 0.8499959539303888,
+  "clip_fraction": 0.0,
+  "wav_sha256": "c232979530b03e5ba4b3588bee60f72c23bdf1c23f841c66ed01601b096e93e0",
+  "gzip_sha256": "5be2d7915ec2e9c41661bc528e9590c3b6840ff527405553dcbdb7432454097a",
+  "speaker_identity_accepted": false,
+  "realtime_accepted": false,
+  "limitations": "Single source, separate utterance in same session. Offline whole-recording analysis; not causal runtime. Ordered listening preview, not randomized blind evaluation. Equal RMS does not guarantee equal perceived loudness. Speech-rich crops selected for listening only."
+}

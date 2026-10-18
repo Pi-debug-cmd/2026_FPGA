@@ -1,0 +1,33 @@
+{
+  "tests": [
+    {
+      "name": "silence_416",
+      "samples": 416,
+      "source_kind": "numerical contract control",
+      "input_sha256": "755ba9519eb08efb2d4c68ccfee9d69ceb372301b3a701ad6a3ac309ba37edb6",
+      "reference_sha256": "7ceb2b82d353610872aea832ccf06c34a343bc10a7c13f2338ea2050c61ddd9e"
+    },
+    {
+      "name": "tone_1000",
+      "samples": 1000,
+      "source_kind": "numerical contract control",
+      "input_sha256": "c638f8bfea21077394ccd77ce962cdf4e7b8dc5700242fb7b08569a0bc2bedbb",
+      "reference_sha256": "56c4270f1bcb9263ec7015850420d6c0e04ad08b0bd404ef1c928ceb48d813f4"
+    },
+    {
+      "name": "real_16000",
+      "samples": 16000,
+      "source_kind": "frozen real FLEURS",
+      "input_sha256": "00f5c198c7138368149b4fbabda2b1c92116561a53a0d5ae30fa9fb712bb67fe",
+      "reference_sha256": "b15c87e8d9d31d209aa26474e7a49948996cb340f479e8a0d2a2061444344ca3"
+    },
+    {
+      "name": "edge_209",
+      "samples": 209,
+      "source_kind": "frozen real FLEURS",
+      "input_sha256": "cce8a5fca34f1d60e96d3c22b97fa7832cdc09f48c11b6a568dc8cc2a3bfae8b",
+      "reference_sha256": "013f7d800bf56c60959aedbd5c84cad9a780465ba9254bbf1b9ea4e45b52ce68"
+    }
+  ],
+  "reference": "Unmodified PyTorch exact checkpoint LLVCAudioStream"
+}

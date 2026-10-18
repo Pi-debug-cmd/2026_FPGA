@@ -1,0 +1,103 @@
+{
+  "candidate": "small96_phonetic_pilot",
+  "parent6400_additional400_total6800": true,
+  "training_seconds": 256.9677823999664,
+  "weight_sha256": "f0caf5fd50d8a3c4e755541da66b4e1e8d9ee82021a9c9ffbd2fc84245b2b4cb",
+  "recognizer_operator_and_wave_gradient_verified": true,
+  "recognizer_used_as_loss_not_independent": true,
+  "normal_validation": [
+    {
+      "split": "validation",
+      "kind": "source",
+      "characters": 152,
+      "edits": 5,
+      "mean_target_cosine": 0.18924534507095814
+    },
+    {
+      "split": "validation",
+      "kind": "teacher",
+      "characters": 152,
+      "edits": 9,
+      "mean_target_cosine": 0.8725310191512108
+    },
+    {
+      "split": "validation",
+      "kind": "student",
+      "characters": 152,
+      "edits": 20,
+      "mean_target_cosine": 0.6754974871873856
+    }
+  ],
+  "weak_validation": [
+    {
+      "condition": "weak_clean",
+      "gain": 1,
+      "edits": 8,
+      "characters": 40,
+      "mean_quiet_rms": 0.0004486158868530765
+    },
+    {
+      "condition": "weak_clean",
+      "gain": 4,
+      "edits": 4,
+      "characters": 40,
+      "mean_quiet_rms": 0.0004486158868530765
+    },
+    {
+      "condition": "weak_clean",
+      "gain": 8,
+      "edits": 4,
+      "characters": 40,
+      "mean_quiet_rms": 0.0004486158868530765
+    },
+    {
+      "condition": "weak_synthetic_colored_noise",
+      "gain": 1,
+      "edits": 11,
+      "characters": 40,
+      "mean_quiet_rms": 0.0043108409736305475
+    },
+    {
+      "condition": "weak_synthetic_colored_noise",
+      "gain": 4,
+      "edits": 16,
+      "characters": 40,
+      "mean_quiet_rms": 0.02027509082108736
+    },
+    {
+      "condition": "weak_synthetic_colored_noise",
+      "gain": 8,
+      "edits": 20,
+      "characters": 40,
+      "mean_quiet_rms": 0.039577458053827286
+    }
+  ],
+  "independent_predicted_naturalness": [
+    {
+      "kind": "phonetic_pilot",
+      "mean_predicted_naturalness": 1.234841733486379
+    },
+    {
+      "kind": "source",
+      "mean_predicted_naturalness": 2.445223064512274
+    },
+    {
+      "kind": "student6400",
+      "mean_predicted_naturalness": 1.2345961350372434
+    },
+    {
+      "kind": "student9200",
+      "mean_predicted_naturalness": 1.2329207917737723
+    },
+    {
+      "kind": "teacher",
+      "mean_predicted_naturalness": 3.5696794727709906
+    }
+  ],
+  "worth_human_audition": false,
+  "reason": "Chinese20/152 mildly improves over640022/152; colored quiet output0.00431 vs92000.00142 is worse; UTMOS1.23484 vs64001.23460 shows no naturalness progress",
+  "human_acceptance": false,
+  "board_deployed": false,
+  "new_runtime_candidate": "E128 FP32 SIMD normalization, math host tested; actual ARM speed/math pending",
+  "mask1_audit_does_not_prove_small_encoder_is_broken": "full512 unmasked reconstruction also poor, so mask1 diagnostic alone cannot establish cropping as root cause"
+}

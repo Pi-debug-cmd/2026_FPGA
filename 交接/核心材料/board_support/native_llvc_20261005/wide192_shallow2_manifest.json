@@ -1,0 +1,917 @@
+{
+  "config": {
+    "label_len": 1,
+    "L": 16,
+    "enc_dim": 192,
+    "num_enc_layers": 2,
+    "dec_dim": 96,
+    "num_dec_layers": 1,
+    "dec_buf_len": 13,
+    "dec_chunk_size": 13,
+    "out_buf_len": 4,
+    "use_pos_enc": true,
+    "decoder_dropout": 0.1,
+    "convnet_config": {
+      "convnet_prenet": true,
+      "out_channels": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "kernel_sizes": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "dilations": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "dropout": 0.5,
+      "combine_residuals": null,
+      "skip_connection": "add",
+      "use_residual_blocks": true
+    }
+  },
+  "selection": {
+    "encoder_indices": [
+      0,
+      1,
+      4,
+      5,
+      10,
+      11,
+      16,
+      17,
+      20,
+      21,
+      26,
+      27,
+      32,
+      33,
+      36,
+      37,
+      42,
+      43,
+      48,
+      49,
+      52,
+      53,
+      58,
+      59,
+      64,
+      65,
+      68,
+      69,
+      74,
+      75,
+      80,
+      81,
+      84,
+      85,
+      90,
+      91,
+      96,
+      97,
+      100,
+      101,
+      106,
+      107,
+      112,
+      113,
+      116,
+      117,
+      122,
+      123,
+      128,
+      129,
+      132,
+      133,
+      138,
+      139,
+      144,
+      145,
+      148,
+      149,
+      154,
+      155,
+      160,
+      161,
+      164,
+      165,
+      170,
+      171,
+      176,
+      177,
+      180,
+      181,
+      186,
+      187,
+      192,
+      193,
+      196,
+      197,
+      202,
+      203,
+      208,
+      209,
+      212,
+      213,
+      218,
+      219,
+      224,
+      225,
+      228,
+      229,
+      234,
+      235,
+      240,
+      241,
+      244,
+      245,
+      250,
+      251,
+      256,
+      257,
+      260,
+      261,
+      266,
+      267,
+      272,
+      273,
+      276,
+      277,
+      282,
+      283,
+      288,
+      289,
+      292,
+      293,
+      298,
+      299,
+      304,
+      305,
+      308,
+      309,
+      314,
+      315,
+      320,
+      321,
+      324,
+      325,
+      330,
+      331,
+      336,
+      337,
+      340,
+      341,
+      346,
+      347,
+      352,
+      353,
+      356,
+      357,
+      362,
+      363,
+      368,
+      369,
+      372,
+      373,
+      378,
+      379,
+      384,
+      385,
+      388,
+      389,
+      394,
+      395,
+      400,
+      401,
+      404,
+      405,
+      410,
+      411,
+      416,
+      417,
+      420,
+      421,
+      426,
+      427,
+      432,
+      433,
+      436,
+      437,
+      442,
+      443,
+      448,
+      449,
+      452,
+      453,
+      458,
+      459,
+      464,
+      465,
+      468,
+      469,
+      474,
+      475,
+      480,
+      481,
+      484,
+      485,
+      490,
+      491,
+      496,
+      497,
+      500,
+      501,
+      506,
+      507
+    ],
+    "decoder_indices": [
+      0,
+      2,
+      5,
+      8,
+      10,
+      13,
+      16,
+      18,
+      21,
+      24,
+      26,
+      29,
+      32,
+      34,
+      37,
+      40,
+      42,
+      45,
+      48,
+      50,
+      53,
+      56,
+      58,
+      61,
+      64,
+      66,
+      69,
+      72,
+      74,
+      77,
+      80,
+      82,
+      85,
+      88,
+      90,
+      93,
+      96,
+      98,
+      101,
+      104,
+      106,
+      109,
+      112,
+      114,
+      117,
+      120,
+      122,
+      125,
+      128,
+      130,
+      133,
+      136,
+      138,
+      141,
+      144,
+      146,
+      149,
+      152,
+      154,
+      157,
+      160,
+      162,
+      165,
+      168,
+      170,
+      173,
+      176,
+      178,
+      181,
+      184,
+      186,
+      189,
+      192,
+      194,
+      197,
+      200,
+      202,
+      205,
+      208,
+      210,
+      213,
+      216,
+      218,
+      221,
+      224,
+      226,
+      229,
+      232,
+      234,
+      237,
+      240,
+      242,
+      245,
+      248,
+      250,
+      253
+    ],
+    "shapes": {
+      "convnet_pre.down_convs.0.filter.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.0.filter.bias": [
+        1
+      ],
+      "convnet_pre.down_convs.0.gate.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.0.gate.bias": [
+        1
+      ],
+      "convnet_pre.down_convs.1.filter.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.1.filter.bias": [
+        1
+      ],
+      "convnet_pre.down_convs.1.gate.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.1.gate.bias": [
+        1
+      ],
+      "convnet_pre.down_convs.2.filter.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.2.filter.bias": [
+        1
+      ],
+      "convnet_pre.down_convs.2.gate.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.2.gate.bias": [
+        1
+      ],
+      "convnet_pre.down_convs.3.filter.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.3.filter.bias": [
+        1
+      ],
+      "convnet_pre.down_convs.3.gate.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.3.gate.bias": [
+        1
+      ],
+      "convnet_pre.down_convs.4.filter.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.4.filter.bias": [
+        1
+      ],
+      "convnet_pre.down_convs.4.gate.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.4.gate.bias": [
+        1
+      ],
+      "convnet_pre.down_convs.5.filter.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.5.filter.bias": [
+        1
+      ],
+      "convnet_pre.down_convs.5.gate.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.5.gate.bias": [
+        1
+      ],
+      "convnet_pre.down_convs.6.filter.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.6.filter.bias": [
+        1
+      ],
+      "convnet_pre.down_convs.6.gate.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.6.gate.bias": [
+        1
+      ],
+      "convnet_pre.down_convs.7.filter.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.7.filter.bias": [
+        1
+      ],
+      "convnet_pre.down_convs.7.gate.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.7.gate.bias": [
+        1
+      ],
+      "convnet_pre.down_convs.8.filter.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.8.filter.bias": [
+        1
+      ],
+      "convnet_pre.down_convs.8.gate.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.8.gate.bias": [
+        1
+      ],
+      "convnet_pre.down_convs.9.filter.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.9.filter.bias": [
+        1
+      ],
+      "convnet_pre.down_convs.9.gate.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.9.gate.bias": [
+        1
+      ],
+      "convnet_pre.down_convs.10.filter.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.10.filter.bias": [
+        1
+      ],
+      "convnet_pre.down_convs.10.gate.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.10.gate.bias": [
+        1
+      ],
+      "convnet_pre.down_convs.11.filter.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.11.filter.bias": [
+        1
+      ],
+      "convnet_pre.down_convs.11.gate.weight": [
+        1,
+        1,
+        3
+      ],
+      "convnet_pre.down_convs.11.gate.bias": [
+        1
+      ],
+      "in_conv.0.weight": [
+        192,
+        1,
+        48
+      ],
+      "label_embedding.0.weight": [
+        512,
+        1
+      ],
+      "label_embedding.0.bias": [
+        512
+      ],
+      "label_embedding.1.weight": [
+        512
+      ],
+      "label_embedding.1.bias": [
+        512
+      ],
+      "label_embedding.3.weight": [
+        192,
+        512
+      ],
+      "label_embedding.3.bias": [
+        192
+      ],
+      "label_embedding.4.weight": [
+        192
+      ],
+      "label_embedding.4.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_0.layers.0.weight": [
+        192,
+        1,
+        3
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_0.layers.0.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_0.layers.1.weight": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_0.layers.1.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_0.layers.3.weight": [
+        192,
+        192,
+        1
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_0.layers.3.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_0.layers.4.weight": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_0.layers.4.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_1.layers.0.weight": [
+        192,
+        1,
+        3
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_1.layers.0.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_1.layers.1.weight": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_1.layers.1.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_1.layers.3.weight": [
+        192,
+        192,
+        1
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_1.layers.3.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_1.layers.4.weight": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_1.layers.4.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_2.layers.0.weight": [
+        192,
+        1,
+        3
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_2.layers.0.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_2.layers.1.weight": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_2.layers.1.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_2.layers.3.weight": [
+        192,
+        192,
+        1
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_2.layers.3.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_2.layers.4.weight": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_2.layers.4.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_3.layers.0.weight": [
+        192,
+        1,
+        3
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_3.layers.0.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_3.layers.1.weight": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_3.layers.1.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_3.layers.3.weight": [
+        192,
+        192,
+        1
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_3.layers.3.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_3.layers.4.weight": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_3.layers.4.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_4.layers.0.weight": [
+        192,
+        1,
+        3
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_4.layers.0.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_4.layers.1.weight": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_4.layers.1.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_4.layers.3.weight": [
+        192,
+        192,
+        1
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_4.layers.3.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_4.layers.4.weight": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_4.layers.4.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_5.layers.0.weight": [
+        192,
+        1,
+        3
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_5.layers.0.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_5.layers.1.weight": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_5.layers.1.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_5.layers.3.weight": [
+        192,
+        192,
+        1
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_5.layers.3.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_5.layers.4.weight": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_5.layers.4.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_6.layers.0.weight": [
+        192,
+        1,
+        3
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_6.layers.0.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_6.layers.1.weight": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_6.layers.1.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_6.layers.3.weight": [
+        192,
+        192,
+        1
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_6.layers.3.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_6.layers.4.weight": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_6.layers.4.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_7.layers.0.weight": [
+        192,
+        1,
+        3
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_7.layers.0.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_7.layers.1.weight": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_7.layers.1.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_7.layers.3.weight": [
+        192,
+        192,
+        1
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_7.layers.3.bias": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_7.layers.4.weight": [
+        192
+      ],
+      "mask_gen.encoder.dcc_layers.dcc_7.layers.4.bias": [
+        192
+      ],
+      "mask_gen.proj_e2d_e.0.weight": [
+        96,
+        2,
+        1
+      ],
+      "mask_gen.proj_e2d_e.0.bias": [
+        96
+      ],
+      "mask_gen.proj_e2d_l.0.weight": [
+        96,
+        2,
+        1
+      ],
+      "mask_gen.proj_e2d_l.0.bias": [
+        96
+      ],
+      "mask_gen.proj_d2e.0.weight": [
+        192,
+        1,
+        1
+      ],
+      "mask_gen.proj_d2e.0.bias": [
+        192
+      ],
+      "mask_gen.decoder.pos_enc.pe": [
+        1,
+        200,
+        96
+      ],
+      "mask_gen.decoder.tf_dec_layers.0.self_attn.in_proj_weight": [
+        288,
+        96
+      ],
+      "mask_gen.decoder.tf_dec_layers.0.self_attn.in_proj_bias": [
+        288
+      ],
+      "mask_gen.decoder.tf_dec_layers.0.self_attn.out_proj.weight": [
+        96,
+        96
+      ],
+      "mask_gen.decoder.tf_dec_layers.0.self_attn.out_proj.bias": [
+        96
+      ],
+      "mask_gen.decoder.tf_dec_layers.0.multihead_attn.in_proj_weight": [
+        288,
+        96
+      ],
+      "mask_gen.decoder.tf_dec_layers.0.multihead_attn.in_proj_bias": [
+        288
+      ],
+      "mask_gen.decoder.tf_dec_layers.0.multihead_attn.out_proj.weight": [
+        96,
+        96
+      ],
+      "mask_gen.decoder.tf_dec_layers.0.multihead_attn.out_proj.bias": [
+        96
+      ],
+      "mask_gen.decoder.tf_dec_layers.0.linear1.weight": [
+        192,
+        96
+      ],
+      "mask_gen.decoder.tf_dec_layers.0.linear1.bias": [
+        192
+      ],
+      "mask_gen.decoder.tf_dec_layers.0.linear2.weight": [
+        96,
+        192
+      ],
+      "mask_gen.decoder.tf_dec_layers.0.linear2.bias": [
+        96
+      ],
+      "mask_gen.decoder.tf_dec_layers.0.norm1.weight": [
+        96
+      ],
+      "mask_gen.decoder.tf_dec_layers.0.norm1.bias": [
+        96
+      ],
+      "mask_gen.decoder.tf_dec_layers.0.norm2.weight": [
+        96
+      ],
+      "mask_gen.decoder.tf_dec_layers.0.norm2.bias": [
+        96
+      ],
+      "mask_gen.decoder.tf_dec_layers.0.norm3.weight": [
+        96
+      ],
+      "mask_gen.decoder.tf_dec_layers.0.norm3.bias": [
+        96
+      ],
+      "out_conv.0.weight": [
+        192,
+        1,
+        80
+      ]
+    },
+    "original_checkpoint_sha256": "8e59d86f3eaed1221e24568bc5eedff0335f88936a62a8f2c7298bd73a34cb35",
+    "encoder_stages_retained": [
+      0,
+      1
+    ],
+    "encoder_history_samples": 96,
+    "output_basis_channels": 192,
+    "decoder_channels": 96,
+    "initialization_does_not_preserve_voice_quality": true
+  },
+  "parameters": 315968,
+  "weights_bytes": 1346795,
+  "weights_sha256": "d9d53221b91a7b81b386c46b08896de1be11ea9acdc1a1b5d08c4c574044f8c6",
+  "trained": false,
+  "quality_accepted": false,
+  "board_realtime_verified": false,
+  "source_enrollment": false
+}

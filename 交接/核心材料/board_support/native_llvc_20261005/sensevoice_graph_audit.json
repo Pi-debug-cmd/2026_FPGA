@@ -1,0 +1,226 @@
+{
+  "bytes": 941081423,
+  "nodes": 9070,
+  "ops": {
+    "Shape": 284,
+    "Constant": 2900,
+    "Gather": 284,
+    "Cast": 365,
+    "Range": 3,
+    "Unsqueeze": 565,
+    "Less": 1,
+    "Mul": 495,
+    "Add": 848,
+    "Div": 144,
+    "Sub": 143,
+    "Neg": 1,
+    "Exp": 1,
+    "Concat": 422,
+    "Reshape": 493,
+    "Sin": 1,
+    "Cos": 1,
+    "ReduceMean": 284,
+    "Pow": 142,
+    "Sqrt": 142,
+    "MatMul": 423,
+    "Split": 70,
+    "Transpose": 492,
+    "ConstantOfShape": 70,
+    "Slice": 70,
+    "Pad": 70,
+    "Conv": 70,
+    "Equal": 1,
+    "Where": 140,
+    "Softmax": 70,
+    "Relu": 71,
+    "Squeeze": 1,
+    "ReduceSum": 1,
+    "LogSoftmax": 2
+  },
+  "initializers": 920,
+  "parameters": 234863846,
+  "inputs": [
+    "feats",
+    "feats_lens"
+  ],
+  "outputs": [
+    "hanzi_log_probs",
+    "pinyin_log_probs",
+    "encoder_lens"
+  ],
+  "first_initializer_names": [
+    [
+      "sense_voice.encoder.encoders0.0.self_attn.linear_out.bias",
+      [
+        512
+      ]
+    ],
+    [
+      "sense_voice.encoder.encoders0.0.self_attn.linear_q_k_v.bias",
+      [
+        1536
+      ]
+    ],
+    [
+      "sense_voice.encoder.encoders0.0.self_attn.fsmn_block.weight",
+      [
+        512,
+        1,
+        11
+      ]
+    ],
+    [
+      "sense_voice.encoder.encoders0.0.feed_forward.w_1.bias",
+      [
+        2048
+      ]
+    ],
+    [
+      "sense_voice.encoder.encoders0.0.feed_forward.w_2.bias",
+      [
+        512
+      ]
+    ],
+    [
+      "sense_voice.encoder.encoders.0.self_attn.linear_out.bias",
+      [
+        512
+      ]
+    ],
+    [
+      "sense_voice.encoder.encoders.0.self_attn.linear_q_k_v.bias",
+      [
+        1536
+      ]
+    ],
+    [
+      "sense_voice.encoder.encoders.0.self_attn.fsmn_block.weight",
+      [
+        512,
+        1,
+        11
+      ]
+    ],
+    [
+      "sense_voice.encoder.encoders.0.feed_forward.w_1.bias",
+      [
+        2048
+      ]
+    ],
+    [
+      "sense_voice.encoder.encoders.0.feed_forward.w_2.bias",
+      [
+        512
+      ]
+    ],
+    [
+      "sense_voice.encoder.encoders.1.self_attn.linear_out.bias",
+      [
+        512
+      ]
+    ],
+    [
+      "sense_voice.encoder.encoders.1.self_attn.linear_q_k_v.bias",
+      [
+        1536
+      ]
+    ],
+    [
+      "sense_voice.encoder.encoders.1.self_attn.fsmn_block.weight",
+      [
+        512,
+        1,
+        11
+      ]
+    ],
+    [
+      "sense_voice.encoder.encoders.1.feed_forward.w_1.bias",
+      [
+        2048
+      ]
+    ],
+    [
+      "sense_voice.encoder.encoders.1.feed_forward.w_2.bias",
+      [
+        512
+      ]
+    ],
+    [
+      "sense_voice.encoder.encoders.2.self_attn.linear_out.bias",
+      [
+        512
+      ]
+    ]
+  ],
+  "first_nodes": [
+    [
+      "Shape",
+      [
+        "feats"
+      ],
+      [
+        "/encoder/Shape_output_0"
+      ]
+    ],
+    [
+      "Constant",
+      [],
+      [
+        "/encoder/Constant_output_0"
+      ]
+    ],
+    [
+      "Gather",
+      [
+        "/encoder/Shape_output_0",
+        "/encoder/Constant_output_0"
+      ],
+      [
+        "/encoder/Gather_output_0"
+      ]
+    ],
+    [
+      "Constant",
+      [],
+      [
+        "/encoder/Constant_1_output_0"
+      ]
+    ],
+    [
+      "Cast",
+      [
+        "/encoder/Gather_output_0"
+      ],
+      [
+        "/encoder/Cast_output_0"
+      ]
+    ],
+    [
+      "Constant",
+      [],
+      [
+        "/encoder/Constant_2_output_0"
+      ]
+    ],
+    [
+      "Range",
+      [
+        "/encoder/Constant_1_output_0",
+        "/encoder/Cast_output_0",
+        "/encoder/Constant_2_output_0"
+      ],
+      [
+        "/encoder/Range_output_0"
+      ]
+    ],
+    [
+      "Cast",
+      [
+        "/encoder/Range_output_0"
+      ],
+      [
+        "/encoder/Cast_1_output_0"
+      ]
+    ]
+  ]
+}

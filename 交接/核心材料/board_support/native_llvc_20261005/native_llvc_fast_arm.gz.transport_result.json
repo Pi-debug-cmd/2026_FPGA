@@ -1,0 +1,10 @@
+{
+  "source": "native_llvc_fast_arm.gz",
+  "remote": "/home/root/native_llvc_trial_20261005/native_llvc_fast_arm_fixed.gz",
+  "sha256": "22b078bf386240724cc9ba88797254d0506a9fb624a9b1bb5e698575a232ae8f",
+  "bytes": 718666,
+  "seconds": 32.75629980000667,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

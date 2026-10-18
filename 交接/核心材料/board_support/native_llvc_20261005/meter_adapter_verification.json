@@ -1,0 +1,18 @@
+{
+  "default_gain_pcm_parity": [
+    {
+      "samples": 0,
+      "identical_to_original_stream": true
+    },
+    {
+      "samples": 224,
+      "identical_to_original_stream": true
+    },
+    {
+      "samples": 16000,
+      "identical_to_original_stream": true
+    }
+  ],
+  "input_meter_rms_checked": true,
+  "microphone_audio_saved": false
+}

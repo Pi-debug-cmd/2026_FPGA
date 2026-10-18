@@ -1,0 +1,117 @@
+{
+  "archive_sha256": "a5177ec6fb7d15058e99e57029746100121f68e4890b1467d4094aa336b6013e",
+  "repo_url": "https://github.com/xiph/opus",
+  "source_zip_sha256": "8a2120b256f3b5816bee9141f4c965826f79e451ab03d8bac1a60811442bebd2",
+  "extracted": [
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\Opus_FARGAN_reference\\opus-main\\dnn\\models\\fargan_sq1Ab_adv_50.pth",
+      "bytes": 13775086,
+      "sha256": "2eb56f36f71f246174d769658b5712fa81214650bd425cf050c740c8d6b4464c"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\Opus_FARGAN_reference\\opus-main\\dnn\\lace_data.c",
+      "bytes": 8122540,
+      "sha256": "ec16b05efe06199daa511ea4ccbafe922d2869142403753115f5c2e2764322b5"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\Opus_FARGAN_reference\\opus-main\\dnn\\lace_data.h",
+      "bytes": 3558,
+      "sha256": "d1c5a3785d621d8f64a6474b4a2ccefa5c815edf94b0295460585cbb242a6b18"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\Opus_FARGAN_reference\\opus-main\\dnn\\nolace_data.c",
+      "bytes": 22230714,
+      "sha256": "2cc33d95fd83401b22d2001c4b056751d96007309363cb0361e4d77ec75c13e2"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\Opus_FARGAN_reference\\opus-main\\dnn\\nolace_data.h",
+      "bytes": 8930,
+      "sha256": "6f09e1e96ec08da3cc279acba26e965532f473f97a3207f4e0ff3578eb1917a6"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\Opus_FARGAN_reference\\opus-main\\dnn\\fargan_data.c",
+      "bytes": 21978624,
+      "sha256": "68ba6e8731007f7184be862d7d1afe4cef096a7c9bcbfa115962340f725e004c"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\Opus_FARGAN_reference\\opus-main\\dnn\\fargan_data.h",
+      "bytes": 1844,
+      "sha256": "402e691f4975d6d156903f0fe12da3385e20ec6dd6155c3387e9dad536f654cd"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\Opus_FARGAN_reference\\opus-main\\dnn\\pitchdnn_data.c",
+      "bytes": 1788613,
+      "sha256": "b086f190fbba4179bc4995169910a0178b0be608a608800d2090ddbf64b42b3e"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\Opus_FARGAN_reference\\opus-main\\dnn\\pitchdnn_data.h",
+      "bytes": 795,
+      "sha256": "55b4f52dafae0f5599c4bfa4afa9f71411da42bb16536e602f857e55de0e4164"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\Opus_FARGAN_reference\\opus-main\\dnn\\plc_data.c",
+      "bytes": 11253223,
+      "sha256": "c4749556aff81d3cae6ca180e568832cfdcb21b352964dac915f09e24ede2a34"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\Opus_FARGAN_reference\\opus-main\\dnn\\plc_data.h",
+      "bytes": 683,
+      "sha256": "b0db9231882cc347e9e65246188a633ff5484d5450f7cd5e66b37ac56306c71d"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\Opus_FARGAN_reference\\opus-main\\dnn\\dred_rdovae_constants.h",
+      "bytes": 560,
+      "sha256": "5df7e762f6a55299879f7626535451cfc7c9396c30ce754fa3dd364ca26ac543"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\Opus_FARGAN_reference\\opus-main\\dnn\\dred_rdovae_stats_data.h",
+      "bytes": 665,
+      "sha256": "d6ac08f6a5d8c52c7c76325416e918ca51be5b52919e25b4354d2dd799f3ee1e"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\Opus_FARGAN_reference\\opus-main\\dnn\\dred_rdovae_enc_data.h",
+      "bytes": 2232,
+      "sha256": "aa2d4eaf40ae8997f08387a8abd7eddc57bf95c59593dcdfbf5a6551377ea195"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\Opus_FARGAN_reference\\opus-main\\dnn\\dred_rdovae_stats_data.c",
+      "bytes": 24285,
+      "sha256": "d6de1a982d3f7664049c132e90fed6a652900d201a70916fd990cd58371b991d"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\Opus_FARGAN_reference\\opus-main\\dnn\\dred_rdovae_dec_data.h",
+      "bytes": 2539,
+      "sha256": "17cd70293c8340bc6be82cc751b48dddaea89fe519a4260c5b68b8a65eb9ea63"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\Opus_FARGAN_reference\\opus-main\\dnn\\dred_rdovae_enc_data.c",
+      "bytes": 5173559,
+      "sha256": "a258e32d48ab51a4b0106b69ffdf533072b5efd23e5c3ee38f32c72e0c59083b"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\Opus_FARGAN_reference\\opus-main\\dnn\\dred_rdovae_dec_data.c",
+      "bytes": 6500386,
+      "sha256": "11dce082ad761d0cb1b5065383c5b97a586728a6d2297e370db1c10f81fb9089"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\Opus_FARGAN_reference\\opus-main\\dnn\\lossgen_data.c",
+      "bytes": 50682,
+      "sha256": "d9eb4654b9886ab0bd38f4dbc1e6c0725de409cb183597d3f1084efaecc80c45"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\Opus_FARGAN_reference\\opus-main\\dnn\\lossgen_data.h",
+      "bytes": 740,
+      "sha256": "3b2ca6f5435c5b0ccf7b3c2faced3f9ae7bd6d9d77a49fc4cb4750aee06d35c8"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\Opus_FARGAN_reference\\opus-main\\dnn\\bbwenet_data.h",
+      "bytes": 4387,
+      "sha256": "fb34d4dfa4f54ecbc03d76e2c685d53c4e1b2509e0bac071c5e1b8c6e948a30a"
+    },
+    {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\Opus_FARGAN_reference\\opus-main\\dnn\\bbwenet_data.c",
+      "bytes": 9626771,
+      "sha256": "64d95f4ac400a6e2a2ec182cad6eea211c91ebac983a741741beb5957db6e0c3"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "neon_accumulation_order_emulated": true,
+  "not_executed_on_arm_yet": true,
+  "tests": [
+    {
+      "name": "silence_416",
+      "normalized_rmse": 1.2386468269426464e-06,
+      "max_absolute_error": 2.455635694786906e-10
+    },
+    {
+      "name": "tone_1000",
+      "normalized_rmse": 7.925614127281977e-07,
+      "max_absolute_error": 1.7695128917694092e-08
+    },
+    {
+      "name": "real_16000",
+      "normalized_rmse": 6.566886300017609e-06,
+      "max_absolute_error": 3.983586793765426e-09
+    },
+    {
+      "name": "edge_209",
+      "normalized_rmse": 1.2382598407299694e-05,
+      "max_absolute_error": 3.028617356903851e-09
+    }
+  ],
+  "empty_short_eof_lengths_passed": [
+    0,
+    1,
+    16,
+    207,
+    208,
+    224,
+    416
+  ],
+  "nonfinite_input_rejected": true,
+  "board_deployed": false,
+  "real_time_verified": false
+}

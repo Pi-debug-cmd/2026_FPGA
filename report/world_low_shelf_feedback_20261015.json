@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-15",
+  "user_feedback": "没有减轻，感觉不到变化",
+  "playback_directory": "/tmp/codex_prepared_comparison_20261015/comparison_5085099589619",
+  "order": [
+    "target",
+    "old_fixed",
+    "balanced_old_fixed"
+  ],
+  "perceived_improvement": false,
+  "candidate_selected": false,
+  "speaker_identity_accepted": false,
+  "playback_underruns": 0,
+  "restore_exit": 0,
+  "pcm_closed": true
+}

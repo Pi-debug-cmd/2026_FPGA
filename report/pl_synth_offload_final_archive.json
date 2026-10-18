@@ -1,0 +1,20 @@
+{
+  "what": "最小相位 PL 路线（含 CORDIC 版 exp 单元）最终归档",
+  "date": "2026-10-18",
+  "status": "MINPHASE_PL_ROUTE_NOT_CONVERGED_ARCHIVED",
+  "reason": "LUT+插值版 RTL 未过功能门槛（cos/sin 角度 frac 对齐问题）；CORDIC 版在本会话剩余时间内未完成实现与验证，按 Lead 规则归档停止，不再迭代",
+  "accepted_evidence_kept": [
+    "report/pl_synth_offload_cpu_breakdown.json（三段占比：最小相位 84.99% / 响应 14.70% / OLA 0.31%）",
+    "report/pl_synth_offload_minphase_expunit.json（LUT 定点模型：96 次、49,248 bin、冲激 1.17 LSB）",
+    "report/pl_synth_offload_expunit_status.json（RTL FAIL 根因与最小复现）"
+  ],
+  "corrected_ps_rtf": {
+    "note": "板端实测修正值（Lead 提供），取代此前按 0.55x占比估算的 0.349",
+    "offload_minphase_ps_full_chain_rtf": 0.52
+  },
+  "next": "转去支持 Lead 下一项：PS 侧非周期（aperiodic）支路优化评估",
+  "boundaries_respected": [
+    "只改 src/rtl/synth_offload/、build/generated/pl_synth_offload/、D:\\xsim_work\\synth_offload\\、report/pl_synth_offload_*",
+    "未改 src/reference/ 音色算法、build/generated/a3_neural/、report/a3_neural_*、data/registrations/ 音色配置、plan.md/project_status.md/ai_worklog.md"
+  ]
+}

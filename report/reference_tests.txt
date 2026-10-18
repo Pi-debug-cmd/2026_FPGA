@@ -1,0 +1,22 @@
+test_bypass_is_exact (test_pitch_shift.PitchShiftTests.test_bypass_is_exact) ... ok
+test_chunk_boundaries_preserve_state (test_pitch_shift.PitchShiftTests.test_chunk_boundaries_preserve_state) ... ok
+test_reject_invalid_input (test_pitch_shift.PitchShiftTests.test_reject_invalid_input) ... ok
+test_reset_reproduces_startup (test_pitch_shift.PitchShiftTests.test_reset_reproduces_startup) ... ok
+test_silence_and_amplitude_bounds (test_pitch_shift.PitchShiftTests.test_silence_and_amplitude_bounds) ... ok
+test_sine_frequency_ratio (test_pitch_shift.PitchShiftTests.test_sine_frequency_ratio) ... ok
+test_wav_cli_preserves_pcm_and_format_in_bypass (test_pitch_shift.PitchShiftTests.test_wav_cli_preserves_pcm_and_format_in_bypass) ... ok
+test_blocks_and_reset (test_pitch_shift_fixed.FixedPitchTests.test_blocks_and_reset) ... ok
+test_bypass_and_range (test_pitch_shift_fixed.FixedPitchTests.test_bypass_and_range) ... ok
+test_float_error_with_same_quantized_ratio (test_pitch_shift_fixed.FixedPitchTests.test_float_error_with_same_quantized_ratio) ... ok
+test_invalid_samples_and_ratio (test_pitch_shift_fixed.FixedPitchTests.test_invalid_samples_and_ratio) ... ok
+test_fir_rejects_alias_and_retains_voice_frequency (test_voice_profile.VoiceProfileTests.test_fir_rejects_alias_and_retains_voice_frequency) ... ok
+test_invalid_registration_preserves_profile (test_voice_profile.VoiceProfileTests.test_invalid_registration_preserves_profile) ... ok
+test_known_f0_and_ratio (test_voice_profile.VoiceProfileTests.test_known_f0_and_ratio) ... ok
+test_pcm24_channel_decode (test_voice_profile.VoiceProfileTests.test_pcm24_channel_decode) ... ok
+test_short_recording_and_out_of_range_mapping_rejected (test_voice_profile.VoiceProfileTests.test_short_recording_and_out_of_range_mapping_rejected) ... ok
+test_silence_clipping_and_noise_rejected (test_voice_profile.VoiceProfileTests.test_silence_clipping_and_noise_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 1.335s
+
+OK

@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\deploy_runtime\\review_int8_20261008.zlib",
+  "remote": "/home/root/native_llvc_trial_20261005/review_int8_20261008.zlib",
+  "sha256": "77eb7dae017c9496454118905786715dcbaa28702c951d72f0cf663388ffed35",
+  "bytes": 257799,
+  "seconds": 12.688000000000102,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

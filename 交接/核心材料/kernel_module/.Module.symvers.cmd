@@ -1,0 +1,1 @@
+cmd_/d/Tools_FPGA/workspace/voice_conversion_zynq7020/kernel_module/Module.symvers := sed 's/\.ko$$/\.o/' /d/Tools_FPGA/workspace/voice_conversion_zynq7020/kernel_module/modules.order | scripts/mod/modpost -m   -o /d/Tools_FPGA/workspace/voice_conversion_zynq7020/kernel_module/Module.symvers -e    -n -w -T -

@@ -1,0 +1,424 @@
+{
+  "device_tree_nodes": [
+    {
+      "path": "amba_pl",
+      "compatible": [
+        "simple-bus"
+      ],
+      "status": "okay (implicit)"
+    },
+    {
+      "path": "amba_pl/v_tc@43c00000",
+      "compatible": [
+        "xlnx,v-tc-6.2",
+        "xlnx,v-tc-6.1"
+      ],
+      "reg_u32": [
+        1136656384,
+        65536
+      ],
+      "interrupts_u32": [
+        0,
+        29,
+        4
+      ],
+      "interrupt-parent_u32": [
+        4
+      ],
+      "clocks_u32": [
+        21,
+        1,
+        15
+      ],
+      "status": "okay (implicit)"
+    },
+    {
+      "path": "amba_pl/misc_clk_0",
+      "compatible": [
+        "fixed-clock"
+      ],
+      "status": "okay (implicit)"
+    },
+    {
+      "path": "amba_pl/i2s_transmitter@43c60000",
+      "compatible": [
+        "xlnx,i2s-transmitter-1.0",
+        "xlnx,i2s-transmitter-1.0"
+      ],
+      "reg_u32": [
+        1137049600,
+        65536
+      ],
+      "interrupts_u32": [
+        0,
+        32,
+        4
+      ],
+      "interrupt-parent_u32": [
+        4
+      ],
+      "clocks_u32": [
+        1,
+        15,
+        62,
+        0,
+        1,
+        15
+      ],
+      "status": "okay (implicit)"
+    },
+    {
+      "path": "amba_pl/v_tc@43c80000",
+      "compatible": [
+        "xlnx,bridge-v-tc-6.1"
+      ],
+      "reg_u32": [
+        1137180672,
+        65536
+      ],
+      "interrupts_u32": [
+        0,
+        53,
+        4
+      ],
+      "interrupt-parent_u32": [
+        4
+      ],
+      "clocks_u32": [
+        21,
+        1,
+        15
+      ],
+      "status": "okay (implicit)"
+    },
+    {
+      "path": "amba_pl/v_frmbuf_rd@43ca0000",
+      "compatible": [
+        "xlnx,v-frmbuf-rd-2.4",
+        "xlnx,axi-frmbuf-rd-v2.2"
+      ],
+      "reg_u32": [
+        1137311744,
+        65536
+      ],
+      "interrupts_u32": [
+        0,
+        52,
+        4
+      ],
+      "interrupt-parent_u32": [
+        4
+      ],
+      "clocks_u32": [
+        1,
+        17
+      ],
+      "status": "okay (implicit)"
+    },
+    {
+      "path": "amba_pl/i2c@41600000",
+      "compatible": [
+        "xlnx,axi-iic-2.1",
+        "xlnx,xps-iic-2.00.a"
+      ],
+      "reg_u32": [
+        1096810496,
+        65536
+      ],
+      "interrupts_u32": [
+        0,
+        31,
+        4
+      ],
+      "interrupt-parent_u32": [
+        4
+      ],
+      "clocks_u32": [
+        1,
+        15
+      ],
+      "status": "okay (implicit)"
+    },
+    {
+      "path": "amba_pl/i2c@41600000/camera@3c",
+      "compatible": [
+        "ovti,ov5640"
+      ],
+      "reg_u32": [
+        60
+      ],
+      "clocks_u32": [
+        76
+      ],
+      "status": "okay"
+    },
+    {
+      "path": "amba_pl/serial@42c00000",
+      "compatible": [
+        "xlnx,axi-uartlite-2.0",
+        "xlnx,xps-uartlite-1.00.a"
+      ],
+      "reg_u32": [
+        1119879168,
+        65536
+      ],
+      "interrupts_u32": [
+        0,
+        30,
+        1
+      ],
+      "interrupt-parent_u32": [
+        4
+      ],
+      "clocks_u32": [
+        1,
+        15
+      ],
+      "status": "okay (implicit)"
+    },
+    {
+      "path": "amba_pl/v_frmbuf_rd@43c70000",
+      "compatible": [
+        "xlnx,v-frmbuf-rd-2.4",
+        "xlnx,axi-frmbuf-rd-v2.2"
+      ],
+      "reg_u32": [
+        1137115136,
+        65536
+      ],
+      "interrupts_u32": [
+        0,
+        36,
+        4
+      ],
+      "interrupt-parent_u32": [
+        4
+      ],
+      "clocks_u32": [
+        1,
+        17
+      ],
+      "status": "okay (implicit)"
+    },
+    {
+      "path": "amba_pl/audio_formatter@43c40000",
+      "compatible": [
+        "xlnx,audio-formatter-1.0",
+        "xlnx,audio-formatter-1.0"
+      ],
+      "reg_u32": [
+        1136918528,
+        65536
+      ],
+      "interrupts_u32": [
+        0,
+        33,
+        4,
+        0,
+        34,
+        4
+      ],
+      "interrupt-parent_u32": [
+        4
+      ],
+      "clocks_u32": [
+        1,
+        15,
+        1,
+        15,
+        62,
+        0,
+        1,
+        15
+      ],
+      "status": "okay (implicit)"
+    },
+    {
+      "path": "amba_pl/xlnx_hdmi",
+      "compatible": [
+        "ebf,hdmi"
+      ],
+      "clocks_u32": [
+        67,
+        0
+      ],
+      "status": "okay"
+    },
+    {
+      "path": "amba_pl/drm_pl_disp_hdmi",
+      "compatible": [
+        "xlnx,pl-disp"
+      ],
+      "status": "okay (implicit)"
+    },
+    {
+      "path": "amba_pl/ov5640_to_lcd@43c30000",
+      "compatible": [
+        "xlnx,ov5640-to-lcd-1.0"
+      ],
+      "reg_u32": [
+        1136852992,
+        65536
+      ],
+      "clocks_u32": [
+        1,
+        15
+      ],
+      "status": "okay (implicit)"
+    },
+    {
+      "path": "amba_pl/i2s_receiver@43c50000",
+      "compatible": [
+        "xlnx,i2s-receiver-1.0",
+        "xlnx,i2s-receiver-1.0"
+      ],
+      "reg_u32": [
+        1136984064,
+        65536
+      ],
+      "interrupts_u32": [
+        0,
+        35,
+        4
+      ],
+      "interrupt-parent_u32": [
+        4
+      ],
+      "clocks_u32": [
+        1,
+        15,
+        62,
+        0,
+        1,
+        15
+      ],
+      "status": "okay (implicit)"
+    },
+    {
+      "path": "amba_pl/v_frmbuf_wr@43cb0000",
+      "compatible": [
+        "xlnx,v-frmbuf-wr-2.4",
+        "xlnx,axi-frmbuf-wr-v2.2"
+      ],
+      "reg_u32": [
+        1137377280,
+        65536
+      ],
+      "interrupts_u32": [
+        0,
+        54,
+        4
+      ],
+      "interrupt-parent_u32": [
+        4
+      ],
+      "clocks_u32": [
+        1,
+        16
+      ],
+      "status": "okay (implicit)"
+    },
+    {
+      "path": "amba_pl/axi_dynclk@43cc0000",
+      "compatible": [
+        "xlnx,axi-dynclk-1.2"
+      ],
+      "reg_u32": [
+        1137442816,
+        65536
+      ],
+      "clocks_u32": [
+        1,
+        15,
+        1,
+        15
+      ],
+      "status": "okay (implicit)"
+    },
+    {
+      "path": "amba_pl/vcap_dvp",
+      "compatible": [
+        "xlnx,video"
+      ],
+      "status": "okay"
+    },
+    {
+      "path": "amba_pl/axi_dynclk@43c90000",
+      "compatible": [
+        "dglnt,axi-dynclk"
+      ],
+      "reg_u32": [
+        1137246208,
+        65536
+      ],
+      "clocks_u32": [
+        1,
+        15,
+        1,
+        15
+      ],
+      "status": "okay (implicit)"
+    },
+    {
+      "path": "amba_pl/tft_lcd@43c10000",
+      "compatible": [
+        "xlnx,tft-lcd-1.0"
+      ],
+      "reg_u32": [
+        1136721920,
+        65536
+      ],
+      "clocks_u32": [
+        21,
+        1,
+        15
+      ],
+      "status": "okay (implicit)"
+    },
+    {
+      "path": "amba_pl/gpio@41210000",
+      "compatible": [
+        "xlnx,axi-gpio-2.0",
+        "xlnx,xps-gpio-1.00.a"
+      ],
+      "reg_u32": [
+        1092681728,
+        65536
+      ],
+      "clocks_u32": [
+        1,
+        15
+      ],
+      "status": "okay (implicit)"
+    },
+    {
+      "path": "amba_pl/axi_dynclk@43c20000",
+      "compatible": [
+        "dglnt,axi-dynclk"
+      ],
+      "reg_u32": [
+        1136787456,
+        65536
+      ],
+      "clocks_u32": [
+        1,
+        15,
+        1,
+        15
+      ],
+      "status": "okay (implicit)"
+    },
+    {
+      "path": "axi/i2c@e0004000/codec@1a",
+      "compatible": [
+        "wlf,wm8960"
+      ],
+      "reg_u32": [
+        26
+      ],
+      "status": "okay (implicit)"
+    }
+  ],
+  "iomem": "00000000-3fffffff : System RAM\n  00008000-009fffff : Kernel code\n  00b00000-00b5eaf3 : Kernel data\n41210000-4121ffff : 41210000.gpio gpio@41210000\n41600000-4160ffff : 41600000.i2c i2c@41600000\n42c00000-42c0000f : uartlite\n43c00000-43c0ffff : 43c00000.v_tc v_tc@43c00000\n43c20000-43c2ffff : 43c20000.axi_dynclk axi_dynclk@43c20000\n43c40000-43c4ffff : 43c40000.audio_formatter audio_formatter@43c40000\n43c50000-43c5ffff : 43c50000.i2s_receiver i2s_receiver@43c50000\n43c60000-43c6ffff : 43c60000.i2s_transmitter i2s_transmitter@43c60000\n43c70000-43c7ffff : 43c70000.v_frmbuf_rd v_frmbuf_rd@43c70000\n43c80000-43c8ffff : 43c80000.v_tc v_tc@43c80000\n43c90000-43c9ffff : 43c90000.axi_dynclk axi_dynclk@43c90000\n43ca0000-43caffff : 43ca0000.v_frmbuf_rd v_frmbuf_rd@43ca0000\n43cb0000-43cbffff : 43cb0000.v_frmbuf_wr v_frmbuf_wr@43cb0000\ne0000000-e0000fff : xuartps\ne0001000-e0001fff : xuartps\ne0002000-e0002fff : usb@e0002000\n  e0002000-e0002fff : ci_hdrc.0 usb@e0002000\ne0004000-e0004fff : e0004000.i2c i2c@e0004000\ne0005000-e0005fff : e0005000.i2c i2c@e0005000\ne0008000-e0008fff : e0008000.can can@e0008000\ne000a000-e000afff : e000a000.gpio gpio@e000a000\ne000b000-e000bfff : e000b000.ethernet ethernet@e000b000\ne000c000-e000cfff : e000c000.ethernet ethernet@e000c000\ne000d000-e000dfff : e000d000.spi spi@e000d000\ne0100000-e0100fff : e0100000.mmc mmc@e0100000\ne0101000-e0101fff : e0101000.mmc mmc@e0101000\nf8001000-f8001fff : f8001000.timer timer@f8001000\nf8003000-f8003fff : dmac@f8003000\n  f8003000-f8003fff : f8003000.dmac dmac@f8003000\nf8005000-f8005fff : f8005000.watchdog watchdog@f8005000\nf8007000-f80070ff : f8007000.devcfg devcfg@f8007000\nf8007100-f800711f : f8007100.adc adc@f8007100\nf8801000-f8801fff : etb@f8801000\nf8803000-f8803fff : tpiu@f8803000\nf8804000-f8804fff : funnel@f8804000\nf889c000-f889cfff : ptm@f889c000\nf889d000-f889dfff : ptm@f889d000\nfffc0000-fffcffff : fffc0000.sram sram@fffc0000\n",
+  "interrupts": "           CPU0       CPU1       \n 24:          0          0     GIC-0  27 Edge      gt\n 25:     566907     520602     GIC-0  29 Edge      twd\n 26:          0          0     GIC-0  37 Level     arm-pmu\n 27:          0          0     GIC-0  38 Level     arm-pmu\n 28:         43          0     GIC-0  39 Level     f8007100.adc\n 31:       2735          0     GIC-0  57 Level     cdns-i2c\n 32:          0          0     GIC-0  80 Level     cdns-i2c\n 34:      10918          0     GIC-0  59 Level     xuartps\n 36:          3          0     GIC-0  51 Level     e000d000.spi\n 37:          0          0     GIC-0  54 Level     eth0\n 38:          0          0     GIC-0  77 Level     eth1\n 39:      16094          0     GIC-0  56 Level     mmc0\n 40:        225          0     GIC-0  79 Level     mmc1\n 41:          0          0     GIC-0  45 Level     f8003000.dmac\n 42:          0          0     GIC-0  46 Level     f8003000.dmac\n 43:          0          0     GIC-0  47 Level     f8003000.dmac\n 44:          0          0     GIC-0  48 Level     f8003000.dmac\n 45:          0          0     GIC-0  49 Level     f8003000.dmac\n 46:          0          0     GIC-0  72 Level     f8003000.dmac\n 47:          0          0     GIC-0  73 Level     f8003000.dmac\n 48:          0          0     GIC-0  74 Level     f8003000.dmac\n 49:          0          0     GIC-0  75 Level     f8003000.dmac\n 50:          0          0     GIC-0  40 Level     f8007000.devcfg\n 55:          0          0     GIC-0  70 Level     ttc_clockevent\n 57:         31          0     GIC-0  53 Level     e0002000.usb\n 58:          0          0     GIC-0  41 Edge      f8005000.watchdog\n 59:      16540          0     GIC-0  65 Level     xlnx_formatter_pcm_mm2s_irq\n 60:      13626          0     GIC-0  66 Level     xlnx_formatter_pcm_s2mm_irq\n 63:          1          0     GIC-0  63 Level     41600000.i2c\n 65:          0          0     GIC-0  86 Level     xilinx_framebuffer\n 66:          0          0     GIC-0  84 Level     xilinx_framebuffer\n 68:          0          0     GIC-0  68 Level     xilinx_framebuffer\n 70:          0          0  zynq-gpio  66 Edge      hdmi\n 71:          0          0  zynq-gpio  61 Edge      gpio_keys\n 72:          0          0  zynq-gpio  60 Edge      gpio_keys\n 73:          0          0  zynq-gpio  59 Edge      gpio_keys\n 74:          0          0  zynq-gpio  58 Edge      gpio_keys\n 75:          0          0  zynq-gpio  11 Edge      gpio_keys\n 76:          0          0  zynq-gpio  10 Edge      gpio_keys\nIPI0:          0          0  CPU wakeup interrupts\nIPI1:          0          0  Timer broadcast interrupts\nIPI2:     108369     121007  Rescheduling interrupts\nIPI3:        568        407  Function call interrupts\nIPI4:          0          0  CPU stop interrupts\nIPI5:          0          0  IRQ work interrupts\nIPI6:          0          0  completion interrupts\nErr:          0\n"
+}

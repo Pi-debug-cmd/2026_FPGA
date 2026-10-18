@@ -1,0 +1,35 @@
+{
+  "version": "v5",
+  "date": "2026-10-10",
+  "status": "short_live_listening_verified",
+  "script": "board\\live_pitch_low_latency_trial.sh",
+  "script_sha256": "eafb6a845e566065c76c1f03ffc097b72cea84a887a0b9c90fecb57044ede1af",
+  "port": "COM14",
+  "sample_rate": 32000,
+  "format": "S24_LE",
+  "channels": 2,
+  "ratio_q16": 86856,
+  "capture_actual": {
+    "period_frames": 512,
+    "buffer_frames": 3072
+  },
+  "playback_actual": {
+    "device": "default",
+    "period_frames": 512,
+    "buffer_frames": 3072,
+    "start_threshold_frames": 1024
+  },
+  "listening_seconds": 20,
+  "continuous_check_seconds": 60,
+  "capture_overruns": 0,
+  "playback_underruns": 0,
+  "feedback": "Delay noticeably reduced; continuously audible; no obvious interruptions, noise or tremolo.",
+  "end_to_end_latency_ms": null,
+  "pl_loaded": false,
+  "logs": [
+    "report/board_live_pitch_v5_20261010.log",
+    "report/board_live_v5_state_20261010.log",
+    "report/board_live_pitch_v5_stability_20261010.log",
+    "report/board_live_v5_stability_state_20261010.log"
+  ]
+}

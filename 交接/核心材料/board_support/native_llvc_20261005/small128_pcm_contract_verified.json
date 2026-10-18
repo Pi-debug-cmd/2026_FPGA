@@ -1,0 +1,19 @@
+{
+  "checks": [
+    {
+      "case": "real_16000",
+      "samples": 16000,
+      "max_pcm_lsb_error": 0,
+      "unequal_samples": 0
+    },
+    {
+      "case": "edge_209",
+      "samples": 209,
+      "max_pcm_lsb_error": 0,
+      "unequal_samples": 0
+    }
+  ],
+  "mic_recorded": false,
+  "quality_accepted": false,
+  "live_acoustic_latency_verified": false
+}

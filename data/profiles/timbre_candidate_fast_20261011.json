@@ -1,0 +1,29 @@
+{
+    "version":  1,
+    "kind":  "offline_world_warp_candidate",
+    "status":  "offline_listening_preferred_realtime_optimization_pending",
+    "selected_output":  "data/registrations/source_20261011/world_budget_comparison/dio_fast_v3_arm.wav",
+    "selected_output_sha256":  "c4fa9d018df5411bcc4a548ee1b1d991da0e7dfdf709b453f22a628cb5c8b911",
+    "ratio_q16":  108722,
+    "effective_formant_warp":  1.0975,
+    "mean_spectrum_correction":  false,
+    "analysis_rate":  16000,
+    "frame_period_ms":  10,
+    "fft_size":  1024,
+    "f0_estimator":  "dio_stonemask_energy_gate_voiced_run_median3",
+    "speaker_identity_accepted":  false,
+    "realtime_accepted":  false,
+    "user_feedback":  "快速A和B都听到，相比认可候选没有变差，第四段B略好；未单独确认颤动消除",
+    "selection_reason":  "用户认为快速B略优，作为下一步优化候选；实时尚未验收",
+    "source_archive":  "data/registrations/source_20261011/capture.wav",
+    "target_enrollment":  [
+                              "Track 5(1).wav",
+                              "Track 6(1).wav",
+                              "Track 7(1).wav",
+                              "Track 8(1).wav"
+                          ],
+    "target_held_out":  "Track 9(1).wav",
+    "parallel_analysis":  true,
+    "board_budget_seconds_for_5s":  5.003886,
+    "work_state":  "active_at_user_request_20261012"
+}

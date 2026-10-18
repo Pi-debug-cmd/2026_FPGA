@@ -1,0 +1,181 @@
+{
+  "kind": "ps_opt_aperiodic_realtime",
+  "date": "2026-10-18",
+  "round": 3,
+  "status": "STREAMING_IMPLEMENTED_MEASURED_ON_BOARD_ZERO_UNDERRUN_ZERO_CLIP",
+  "one_line": "已采纳的 10ms 锚点+双变体+回退 8x 已落地到流式合成器（22 slot 滚动窗口、峰值 257 KB、惰性预取）：60 s 文件回放板端 0 欠载 0 削顶，与同框架基线相关 0.99958、谱差中位 0.294 dB，渲染 RTF 0.46→0.29；真实 live 框架 60 s 退出 0、零削顶、render RTF 0.51→0.35。与离线 batch 相关 0.9745，但未改的上游流式版同样只有 0.9742（WORLD 实时实现固有差异）。",
+  "write_scope": ["build/generated/ps_opt_20261018/", "report/ps_opt_*"],
+  "upstream_untouched": true,
+  "no_pl_no_partition_no_audio_device": true,
+  "implementation": {
+    "files": {
+      "synthesisrealtime_prototype": "build/generated/ps_opt_20261018/synthesisrealtime.cpp",
+      "shadow_header": "build/generated/ps_opt_20261018/world/synthesisrealtime.h",
+      "stream_probe": "build/generated/ps_opt_20261018/world_stream_probe.cpp",
+      "build_script": "build/generated/ps_opt_20261018/build_psopt_stream.ps1",
+      "board_scripts": ["build/generated/ps_opt_20261018/board_run_stream.ps1",
+                        "build/generated/ps_opt_20261018/board_run_live60.ps1"],
+      "input_builder": "build/generated/ps_opt_20261018/make_stream_input_60s.py"
+    },
+    "sha256": {
+      "upstream_synthesisrealtime": "01403f641a1dce3de564335859b82815162bdee2ae7e25b5fa2288930539f5f2",
+      "prototype_synthesisrealtime": "ee61eb12e1453d0ac5d42f83ba7d661cc55754900a92d48d4441bb25e577dbf0",
+      "upstream_header": "a0f21ec940cc6e692ef6e4cdce6e920c79ae3faff605bb5816ef19686dc60739",
+      "shadow_header": "f593156471a795839e8f877f367da39d2b95fd4dbaf653208101a45e0ab11803",
+      "stream_probe_base_arm": "25561994e2cd29ddc1d795dddbed9c3c1d4bde00a9bac3760fa0f083dd5d6508",
+      "stream_probe_opt_arm": "9cb110f2b190bdff59a8c0f9362733783727814fa2289236bde37d798b1f0253",
+      "live_stream_base_arm": "53656984c7a0d19c5f260c83cfc434abf018133261b88a847709a7ee0cb05bb4",
+      "live_stream_opt_arm": "f12da25e93a520b7f5255ce952a3cb9b5d1bbca474133b1bc529d8c8e18349b7"
+    },
+    "integration": "drop-in：src/ps/world_live_stream.cpp 未改，优化构建把本目录前置为 include 路径并用改造版 synthesisrealtime.cpp 替换上游同名文件；WORLD 流式 API 不变",
+    "interface": {
+      "init": "InitializeSynthesizer(16000, 10, 1024, 128, 16, &synth)",
+      "per_200ms": "AddParameters(f0_block, 20, sp_rows, ap_rows, &synth); 然后 while (需要输出 && Synthesis2(&synth)) 每次取 128 样点（每块 25 次）",
+      "anchor_timing": "锚点不在 AddParameters 集中计算：Synthesis2→GetOneFrameSegment 首次用到该帧时按需构建（22 槽环形窗口 frame%size），并惰性预取 frame_high+1，把每块约 13 ms 摊到约 80 个脉冲（单次构建约 0.62 ms）",
+      "parameter_rows": "FindParameterRow() 在存活参数环 [current_pointer2, head_pointer) 内按绝对帧索引取 sp/ap 行；锚点拷贝完成后块释放，无悬垂引用",
+      "fallback": "与离线版一致：相邻锚点滤波能量比 >8 时该脉冲走逐脉冲最小相位",
+      "rollback": "WORLD_AP_MINPHASE_STRIDE=0 → anchor_active=0，走上游逐脉冲路径；实测输出与基线逐位相同"
+    },
+    "knobs": {
+      "WORLD_AP_ANCHOR_WINDOW": "锚点槽数，默认 22（4–128）",
+      "WORLD_AP_MINPHASE_STRIDE": "0=回退上游逐脉冲路径；非 0=启用锚点（默认 1）",
+      "WORLD_AP_INTERP_MODE": "0=复谱插值（默认），1=幅值校正",
+      "WORLD_AP_FALLBACK_RATIO": "过渡回退阈值，默认 8"
+    },
+    "memory": {
+      "anchor_window_slots": 22,
+      "anchor_bytes_per_filter": 8208,
+      "anchor_peak_bytes_measured": 262656,
+      "scratch_bytes": 49152,
+      "extension_total_approx_bytes": 311808,
+      "target_range_bytes": [180000, 345000]
+    }
+  },
+  "board_probe_60s": {
+    "input": {
+      "path": "build/generated/ps_opt_20261018/stream_input_60s.wav",
+      "sha256": "6aa1fd2eb54ea0d46b26c2921a1dc1dd252b7cdf4ec06297e8107eb4d9c8abf1",
+      "seconds": 60.0,
+      "rate": 16000,
+      "composition": "speaker01 holdout 20s + preparation 20s + target t5_8 20s（既有素材拼接，未新录音）",
+      "frames": 6001,
+      "blocks_200ms": 301
+    },
+    "baseline": {
+      "analysis_s": 11.499741, "analysis_rtf": 0.191662,
+      "render_s": 27.603516, "render_rtf": 0.460059,
+      "block_ms": {"min": 3.774, "max": 135.990, "p50": 92.318, "p95": 115.047, "mean": 91.402},
+      "underruns_over_200ms": 0, "clipped_samples": 0, "peak": 0.966132205
+    },
+    "optimized": {
+      "runs": 2,
+      "analysis_s": 11.496655, "analysis_rtf": 0.191611,
+      "render_s": 17.299280, "render_rtf": 0.288321,
+      "block_ms": {"min": 4.423, "max": 103.193, "p50": 52.802, "p95": 89.124, "mean": 57.282},
+      "anchor_ms_per_200ms": {"min": 0.0, "max": 18.832, "p50": 12.376, "p95": 15.660,
+                               "total_s": 3.906179},
+      "underruns_over_200ms": 0, "clipped_samples": 0, "peak": 0.966171784,
+      "anchor_builds": 6316, "anchor_interpolated_pulses": 23337,
+      "anchor_fallback_pulses": 2216, "fallback_fraction": 0.0867,
+      "anchor_peak_bytes": 262656, "anchor_window": 22
+    },
+    "delta": {"render_s": -10.304236, "render_rtf": -0.171738, "render_relative": -0.3733,
+              "block_mean_ms": -34.12, "block_p50_ms": -39.52}
+  },
+  "board_live_60s": {
+    "framework": "src/ps/world_live_stream.cpp（未改）raw 文件管道，输出增益 0.75（49152 q16）",
+    "baseline": {
+      "exit_code": 0, "played16k": 960000, "clipped_samples": 0, "output_peak": 0.911543637,
+      "analysis_rtf": 0.447527, "analysis_max_ms": 39.410826,
+      "render_rtf_including_output_wait": 0.509905, "elapsed_s": 32.948232,
+      "parameter_queue_peak": 8, "live_parameters_max": 3
+    },
+    "optimized": {
+      "exit_code": 0, "played16k": 960000, "clipped_samples": 0, "output_peak": 0.885593184,
+      "analysis_rtf": 0.454449, "analysis_max_ms": 37.499316,
+      "render_rtf_including_output_wait": 0.346075, "elapsed_s": 27.581994,
+      "parameter_queue_peak": 3, "live_parameters_max": 3
+    },
+    "delta": {"render_rtf": -0.16383, "render_relative": -0.3213, "elapsed_s": -5.366238},
+    "note": "文件回放为全速运行、分析与渲染线程并行；优化后渲染（20.8 s）已低于分析（27.3 s），总耗时变为分析受限，因此 elapsed 只省 5.37 s，但渲染余量从 0.51 降到 0.35 RTF"
+  },
+  "quality_60s": {
+    "method": "eval_quality.py：相关/RMS 差/STFT 逐 bin 谱差 dB（有效 bin 掩码）/削顶；宿主与板端输出 SHA 逐位一致",
+    "probe_opt_vs_base": {
+      "correlation": 0.999584, "rms_difference_relative": 0.02888,
+      "spectral_median_db": 0.294, "spectral_p95_db": 2.550,
+      "candidate_clip_samples": 0,
+      "gate": {"correlation_ge_0.999": true, "spectral_median_le_0.5db": true, "no_new_clipping": true}
+    },
+    "live_opt_vs_base": {
+      "correlation": 0.999524, "rms_difference_relative": 0.03096,
+      "spectral_median_db": 0.299, "spectral_p95_db": 2.557,
+      "candidate_clip_samples": 0,
+      "gate": {"correlation_ge_0.999": true, "spectral_median_le_0.5db": true, "no_new_clipping": true}
+    },
+    "probe_opt_vs_offline_batch": {
+      "correlation": 0.974485, "rms_difference_relative": 0.22786,
+      "spectral_median_db": 0.587, "spectral_p95_db": 8.876
+    },
+    "probe_base_vs_offline_batch": {
+      "correlation": 0.974217, "rms_difference_relative": 0.22932,
+      "spectral_median_db": 1.119, "spectral_p95_db": 9.029
+    },
+    "offline_gate_explanation": "实时合成器与离线 batch 有固有差异（realtime DC remover 重新实现、128 样点分块 OLA）；未改动的上游实时版与离线 batch 也只有 0.9742，因此“流式 vs 离线 ≥0.999”对任何实时实现都不成立。优化在流式框架内的保真度是 0.99958（同框架基线），且与离线版相关略高于基线（0.9745 vs 0.9742）、谱差中位减半（0.59 vs 1.12 dB）。"
+  },
+  "requirements": {
+    "copy_and_modify_streaming_source": true,
+    "upstream_untouched": true,
+    "anchor_window_22_42_and_180_345kb": true,
+    "anchors_per_200ms_spread_by_lazy_prefetch": true,
+    "file_playback_ge_60s": true,
+    "zero_underruns": true,
+    "zero_clipped_samples": true,
+    "quality_vs_same_framework_baseline": true,
+    "quality_vs_offline_batch_ge_0.999": false,
+    "per_200ms_extra_time_reported": {"p50_ms": 12.376, "p95_ms": 15.660, "max_ms": 18.832,
+                                       "budget_ms": 200.0, "max_budget_fraction": 0.094},
+    "notes": "唯一未达标项是“流式 vs 离线 batch ≥0.999”，原因见 quality_60s.offline_gate_explanation；未改基线同样不达标。"
+  },
+  "risks": [
+    "实时性仅为文件回放 + 200 ms 节拍模型，未做 ALSA 实际录放（任务禁止），真实实时场景仍需用户确认后现场 60 s 验证。",
+    "优化后分析成为瓶颈（live analysis_rtf 0.45、analysis_max_ms 39 ms），下一步应看 D4C/CheapTrick。",
+    "实时框架与离线 batch 存在固有差异（相关 0.974），若要求与离线音色一致需另改 realtime DC/分块逻辑（超出本任务）。",
+    "回退比例随素材变化（本 60 s 为 8.7%），收益随非周期占比波动。",
+    "锚点窗口 22 对连续脉冲足够；参数块跳变 >22 帧会重建槽位（功能正确、只是多算），真实 live 中 live_parameters_max=3 无跳变。"
+  ],
+  "verdict": {
+    "adopt": true,
+    "summary": "流式实时化达标，建议作为新流式基线；rollback 保留 stride=0。",
+    "next": [
+      "用户确认准备后做真实 ALSA 录放 60 s 现场验证（watchdog/监督流程沿用 board/live_world_trial.py）",
+      "瓶颈转向分析：D4C/CheapTrick 优化",
+      "如要求与离线 batch 音色一致，单独评估 realtime DC/分块差异"
+    ]
+  },
+  "evidence": {
+    "board_logs": ["report/ps_opt_realtime_board.log", "report/ps_opt_realtime_live_board.log"],
+    "build_manifest": "build/generated/ps_opt_20261018/stream_build_manifest.json",
+    "quality_json": ["build/generated/ps_opt_20261018/quality_stream_opt_vs_base_60s.json",
+                     "build/generated/ps_opt_20261018/quality_live60_opt_vs_base.json",
+                     "build/generated/ps_opt_20261018/quality_stream_opt_vs_batch_60s.json",
+                     "build/generated/ps_opt_20261018/quality_stream_base_vs_batch_60s.json"],
+    "output_sha256": {
+      "probe_base": "5e726a452edc2e4ef70259c32f9929201bb2a0ac4221581cbb4f4d46bf5e93f1",
+      "probe_opt": "bd61ca7394c10b5bd309a3d361b127781742db918e8579b71b221c3d840c1c09",
+      "probe_batch_ref": "cad86b7f9c35a015c4aa38d67bdd43f7fee46fe32dda0c6ba7fc2485fe04e650",
+      "live_base": "44f8121e04ddaa195b2059cc44a1f4f8581070ea0f1472531f46b370277f378e",
+      "live_opt": "0031d090111646ed15380b3e249cab00f3a4addef7b891fb236ba4db5e181684"
+    },
+    "host_arm_bit_identical": true,
+    "rollback_verified": {
+      "probe_stride0_equals_baseline": true,
+      "live_stride0_equals_baseline": true
+    }
+  },
+  "limitations": [
+    "60 s 输入由既有素材拼接（holdout/preparation/target t5_8），非真人实时说话；但已覆盖不同说话人与硬切边界（起音冲击）。",
+    "未做 ALSA 录放与真实 200 ms 节拍下的欠载计数（任务禁止录音放音）；欠载判定用“每 200 ms 块计算耗时 >200 ms”模型。",
+    "分析阶段为整段离线计算（探针）或 live 滑窗；live 框架测试为文件管道全速运行，不是实时节拍。"
+  ]
+}

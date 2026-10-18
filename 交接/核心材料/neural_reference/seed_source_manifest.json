@@ -1,0 +1,12 @@
+{
+  "repository": "Plachtaa/seed-vc",
+  "revision": "51383efd921027683c89e5348211d93ff12ac2a8",
+  "source": {
+    "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\seed_vc_source.zip",
+    "url": "https://codeload.github.com/Plachtaa/seed-vc/zip/51383efd921027683c89e5348211d93ff12ac2a8",
+    "sha256": "72a27a1d20efec1489041eac2854e3e1c9c23d650ac15900821ad3ab367f0290",
+    "bytes": 49003480,
+    "cached": false
+  },
+  "root": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\Seed-VC"
+}

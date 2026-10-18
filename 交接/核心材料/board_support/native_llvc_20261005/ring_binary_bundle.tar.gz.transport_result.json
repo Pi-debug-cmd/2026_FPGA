@@ -1,0 +1,10 @@
+{
+  "source": "ring_binary_bundle.tar.gz",
+  "remote": "/home/root/native_llvc_trial_20261005/ring_binary_bundle.tar.gz",
+  "sha256": "37841ef852bfef2052c796ef8c9ef075f883f68adef5b17da7fd33a5923c5608",
+  "bytes": 1437475,
+  "seconds": 63.995744100015145,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

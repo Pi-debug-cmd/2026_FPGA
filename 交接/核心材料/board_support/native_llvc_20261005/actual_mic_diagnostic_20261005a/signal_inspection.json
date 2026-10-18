@@ -1,0 +1,79 @@
+{
+  "manifest": {
+    "format": "S16_LE_mono_16000",
+    "start_sample": 49233600,
+    "end_sample": 49553504,
+    "samples": 319904,
+    "realtime_output_not_delayed_by_ring": true,
+    "diagnostic_only_not_source_enrollment": true
+  },
+  "signals": [
+    {
+      "role": "input",
+      "samples": 319904,
+      "rms": 3.0517578125e-05,
+      "peak": 3.0517578125e-05,
+      "dc": -3.0517578125e-05,
+      "std": 0.0,
+      "unique_pcm_values": 1,
+      "most_common_values": [
+        [
+          -1,
+          319904
+        ]
+      ],
+      "frame_100ms_rms_max": 3.0517578125e-05,
+      "frame_100ms_rms_min": 3.0517578125e-05,
+      "sha256": "d6a6434478604a91548c3a1a8cb9aaf5a93e4cb59de8ca3e4393f4530f32539b",
+      "wav": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\actual_mic_diagnostic_20261005a\\input.wav"
+    },
+    {
+      "role": "output",
+      "samples": 319904,
+      "rms": 2.608796430252412e-05,
+      "peak": 0.0001220703125,
+      "dc": 8.803147536057693e-07,
+      "std": 2.6073107359583296e-05,
+      "unique_pcm_values": 8,
+      "most_common_values": [
+        [
+          0,
+          244542
+        ],
+        [
+          -1,
+          24608
+        ],
+        [
+          1,
+          16918
+        ],
+        [
+          2,
+          13842
+        ],
+        [
+          -2,
+          10766
+        ],
+        [
+          3,
+          4614
+        ],
+        [
+          -3,
+          3076
+        ],
+        [
+          4,
+          1538
+        ]
+      ],
+      "frame_100ms_rms_max": 2.6604607809696492e-05,
+      "frame_100ms_rms_min": 2.4944736822924523e-05,
+      "sha256": "fbfc5257b4be9bc7854c820ced9223aafc5603e2113ced2d202daa86c2f7057b",
+      "wav": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\actual_mic_diagnostic_20261005a\\output.wav"
+    }
+  ],
+  "diagnostic_only_not_speaker_enrollment": true
+}

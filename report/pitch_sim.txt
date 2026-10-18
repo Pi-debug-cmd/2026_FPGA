@@ -1,0 +1,26 @@
+#-----------------------------------------------------------
+# xsim v2018.3 (64-bit)
+# SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
+# IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+# Start of session at: Sun Oct 11 20:50:35 2026
+# Process ID: 28064
+# Current directory: C:/Users/World/Desktop/2026_FPGA/build/generated/pitch_sim
+# Command line: xsim.exe -log xsim.log -mode tcl -source {xsim.dir/pitch_test/xsim_script.tcl}
+# Log file: C:/Users/World/Desktop/2026_FPGA/build/generated/pitch_sim/xsim.log
+# Journal file: C:/Users/World/Desktop/2026_FPGA/build/generated/pitch_sim\xsim.jou
+#-----------------------------------------------------------
+source xsim.dir/pitch_test/xsim_script.tcl
+# xsim {pitch_test} -autoloadwcfg -runall
+Vivado Simulator 2018.3
+Time resolution is 1 ps
+run -all
+Case 0 ratio_q16=32768: 4096 exact samples, cycles=61879
+Case 1 ratio_q16=52429: 4096 exact samples, cycles=62081
+Case 2 ratio_q16=65536: 4096 exact samples, cycles=22663
+Case 3 ratio_q16=81920: 4096 exact samples, cycles=62294
+Case 4 ratio_q16=98304: 4096 exact samples, cycles=61628
+Case 5 ratio_q16=131072: 4096 exact samples, cycles=61924
+PASS: 24576 exact samples, random stalls, TLAST, RAM/phase wraps, reset
+$finish called at time : 3345700 ns : File "C:/Users/World/Desktop/2026_FPGA/sim/tb_axis_pitch_shift.v" Line 110
+exit
+INFO: [Common 17-206] Exiting xsim at Sun Oct 11 20:50:39 2026...

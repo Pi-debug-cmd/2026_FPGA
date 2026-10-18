@@ -1,0 +1,20 @@
+#-----------------------------------------------------------
+# xsim v2018.3 (64-bit)
+# SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
+# IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+# Start of session at: Fri Oct  9 22:36:38 2026
+# Process ID: 36064
+# Current directory: C:/Users/World/Desktop/2026_FPGA/build/generated/axis_bypass_sim
+# Command line: xsim.exe -log xsim.log -mode tcl -source {xsim.dir/bypass_test/xsim_script.tcl}
+# Log file: C:/Users/World/Desktop/2026_FPGA/build/generated/axis_bypass_sim/xsim.log
+# Journal file: C:/Users/World/Desktop/2026_FPGA/build/generated/axis_bypass_sim\xsim.jou
+#-----------------------------------------------------------
+source xsim.dir/bypass_test/xsim_script.tcl
+# xsim {bypass_test} -autoloadwcfg -runall
+Vivado Simulator 2018.3
+Time resolution is 1 ps
+run -all
+PASS: 1024 samples, signed boundaries, random stalls, TLAST, pending reset
+$finish called at time : 16440 ns : File "C:/Users/World/Desktop/2026_FPGA/sim/tb_axis_audio_bypass.v" Line 130
+exit
+INFO: [Common 17-206] Exiting xsim at Fri Oct  9 22:36:42 2026...

@@ -1,0 +1,112 @@
+{
+  "kind": "offline_arm_world_budget",
+  "rows": [
+    {
+      "algorithm": "harvest",
+      "audio_s": 5.0,
+      "pitch_s": 23.845185,
+      "refine_s": 0.544057,
+      "envelope_s": 1.403448,
+      "ap_s": 3.549612,
+      "warp_s": 0.356179,
+      "synthesis_s": 2.443508,
+      "total_compute_s": 32.141988,
+      "rtf": 6.428398,
+      "voiced_frames": 771,
+      "peak": 0.311364562,
+      "rms": 0.043466327
+    },
+    {
+      "algorithm": "dio",
+      "audio_s": 5.0,
+      "pitch_s": 0.735556,
+      "refine_s": 0.383571,
+      "envelope_s": 1.403817,
+      "ap_s": 2.750509,
+      "warp_s": 0.268774,
+      "synthesis_s": 2.542137,
+      "total_compute_s": 8.084365,
+      "rtf": 1.616873,
+      "voiced_frames": 581,
+      "peak": 0.457966885,
+      "rms": 0.042936636
+    }
+  ],
+  "binary_sha256": "a7fb99000be47b4504db14fa4cca6eac50327c502efc42b400be27b3d266c27e",
+  "input": {
+    "kind": "offline_board_budget_input",
+    "source_start_s": 4,
+    "duration_s": 5,
+    "files": {
+      "input16k.wav": "9e5925c515a708555de5f64976eedb2969c6e93a6126163b7e0b098fbd5f7fbb"
+    }
+  },
+  "build_flags": [
+    "O3",
+    "cortex-a9",
+    "neon",
+    "hard-float",
+    "no-fast-math",
+    "static"
+  ],
+  "compiler": "Vivado SDK ARM GCC 7.3.1",
+  "streaming_accepted": false,
+  "optimized_variant": {
+    "binary_sha256": "d80a60e0dced45167632a1fe6525bcbc9b1c9a7cee08ae6c5836c6aadd2b83ed",
+    "full_crop": {
+      "algorithm": "dio",
+      "frame_period_ms": 10.0,
+      "parallel_analysis": true,
+      "audio_s": 5.0,
+      "pitch_s": 0.735046,
+      "refine_s": 0.198562,
+      "envelope_s": 0.689124,
+      "ap_s": 1.393322,
+      "warp_s": 0.136374,
+      "synthesis_s": 2.531448,
+      "total_compute_s": 5.003886,
+      "rtf": 1.000777,
+      "voiced_frames": 293,
+      "peak": 0.438965701,
+      "rms": 0.04315956
+    },
+    "short_crops": [
+      {
+        "algorithm": "dio",
+        "frame_period_ms": 10.0,
+        "parallel_analysis": true,
+        "audio_s": 0.25,
+        "pitch_s": 0.029419,
+        "refine_s": 0.006802,
+        "envelope_s": 0.036548,
+        "ap_s": 0.049742,
+        "warp_s": 0.004659,
+        "synthesis_s": 0.133098,
+        "total_compute_s": 0.223979,
+        "rtf": 0.895917,
+        "voiced_frames": 10,
+        "peak": 0.093531333,
+        "rms": 0.021375559
+      },
+      {
+        "algorithm": "dio",
+        "frame_period_ms": 10.0,
+        "parallel_analysis": true,
+        "audio_s": 0.5,
+        "pitch_s": 0.062858,
+        "refine_s": 0.009992,
+        "envelope_s": 0.070345,
+        "ap_s": 0.071545,
+        "warp_s": 0.006988,
+        "synthesis_s": 0.276884,
+        "total_compute_s": 0.428631,
+        "rtf": 0.857263,
+        "voiced_frames": 15,
+        "peak": 0.093531155,
+        "rms": 0.016924521
+      }
+    ],
+    "realtime_accepted": false,
+    "reason": "Five-second representative crop is at RTF 1.0008 before I/O or overlap. Short crops contain fewer voiced frames and do not prove streaming headroom."
+  }
+}

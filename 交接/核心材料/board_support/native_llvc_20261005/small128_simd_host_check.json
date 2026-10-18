@@ -1,0 +1,28 @@
+{
+  "checks": [
+    {
+      "case": "silence_416",
+      "nrmse": 1.8423596109390268e-06,
+      "max_absolute_error": 3.7834979593753815e-10
+    },
+    {
+      "case": "tone_1000",
+      "nrmse": 9.466701004426816e-07,
+      "max_absolute_error": 5.21540641784668e-08
+    },
+    {
+      "case": "edge_209",
+      "nrmse": 1.4021919141957173e-06,
+      "max_absolute_error": 3.2741809263825417e-10
+    },
+    {
+      "case": "real_16000",
+      "nrmse": 1.8554746436234485e-06,
+      "max_absolute_error": 8.585629984736443e-10
+    }
+  ],
+  "host_scalar_fp32_norm_matches_torch_reference": true,
+  "arm_neon_math_not_yet_verified": true,
+  "model_unchanged": true,
+  "larger_model_quality_not_accepted": true
+}

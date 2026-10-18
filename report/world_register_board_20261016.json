@@ -1,0 +1,268 @@
+{
+  "kind": "world_register_board_run",
+  "date": "2026-10-16",
+  "tool": "src/ps/world_register.cpp",
+  "arm_binary_sha256": "D5BDB272A513202D5D980464709AA5584BA742B68BBD87C093F89F4F896567D2",
+  "remote_dir": "/tmp/codex_reg_20261016",
+  "board": {
+    "port": "COM14",
+    "os": "PetaLinux 2022.2",
+    "kernel": "5.15.0-xilinx",
+    "probe_log": "report\\board_probe_20261016.log"
+  },
+  "board_run_log": "report\\world_register_board_20261016.log",
+  "board_summary": {
+    "t8_10s": "OK voiced=672 f0_median=184.291 f0_p10=165.930 f0_p90=216.080 exit=0",
+    "t5_8_20s": "OK voiced=1065 f0_median=194.357 f0_p10=170.641 f0_p90=242.487 exit=0",
+    "reject_too_short": "REJECTED too_short exit=3",
+    "reject_silent": "REJECTED silent_input exit=5"
+  },
+  "files": [
+    {
+      "name": "target_t8_10s",
+      "arm_file": "arm_p_t8.txt",
+      "host_file": "target_t8_10s.profile.txt",
+      "arm_sha256": "25aa74ae3f4f603ea084c704902dc83b4e6167907a110e8426da7e91e7ab90ff",
+      "host_sha256": "0a2a19102afa3937715181afb425aacba501edb5e05af96cfc3f81648e214cbb",
+      "bytes_identical": false,
+      "max_abs_diff": 0.0,
+      "spectrum_identical": true,
+      "comparison": {
+        "ap_mean_1000_3000": {
+          "arm": 0.150788,
+          "host": 0.150788,
+          "abs_diff": 0.0
+        },
+        "ap_mean_3000_8000": {
+          "arm": 0.732642,
+          "host": 0.732642,
+          "abs_diff": 0.0
+        },
+        "ap_mean_below_1000": {
+          "arm": 0.038876,
+          "host": 0.038876,
+          "abs_diff": 0.0
+        },
+        "band_db_1000_2000": {
+          "arm": -11.637614,
+          "host": -11.637614,
+          "abs_diff": 0.0
+        },
+        "band_db_2000_4000": {
+          "arm": -21.672036,
+          "host": -21.672036,
+          "abs_diff": 0.0
+        },
+        "band_db_4000_8000": {
+          "arm": -25.776051,
+          "host": -25.776051,
+          "abs_diff": 0.0
+        },
+        "band_db_400_1000": {
+          "arm": -5.397349,
+          "host": -5.397349,
+          "abs_diff": 0.0
+        },
+        "band_db_80_400": {
+          "arm": -3.150862,
+          "host": -3.150862,
+          "abs_diff": 0.0
+        },
+        "f0_max_hz": {
+          "arm": 257.670124,
+          "host": 257.670124,
+          "abs_diff": 0.0
+        },
+        "f0_median_hz": {
+          "arm": 184.291425,
+          "host": 184.291425,
+          "abs_diff": 0.0
+        },
+        "f0_min_hz": {
+          "arm": 104.469405,
+          "host": 104.469405,
+          "abs_diff": 0.0
+        },
+        "f0_p10_hz": {
+          "arm": 165.929823,
+          "host": 165.929823,
+          "abs_diff": 0.0
+        },
+        "f0_p90_hz": {
+          "arm": 216.079558,
+          "host": 216.079558,
+          "abs_diff": 0.0
+        },
+        "fft_size": {
+          "arm": 1024.0,
+          "host": 1024.0,
+          "abs_diff": 0.0
+        },
+        "frame_period_ms": {
+          "arm": 10.0,
+          "host": 10.0,
+          "abs_diff": 0.0
+        },
+        "frames": {
+          "arm": 1001.0,
+          "host": 1001.0,
+          "abs_diff": 0.0
+        },
+        "rate": {
+          "arm": 16000.0,
+          "host": 16000.0,
+          "abs_diff": 0.0
+        },
+        "samples": {
+          "arm": 160000.0,
+          "host": 160000.0,
+          "abs_diff": 0.0
+        },
+        "spectrum_bins": {
+          "arm": 513.0,
+          "host": 513.0,
+          "abs_diff": 0.0
+        },
+        "voiced_fraction": {
+          "arm": 0.671329,
+          "host": 0.671329,
+          "abs_diff": 0.0
+        },
+        "voiced_frames": {
+          "arm": 672.0,
+          "host": 672.0,
+          "abs_diff": 0.0
+        }
+      }
+    },
+    {
+      "name": "target_t5_8_20s",
+      "arm_file": "arm_p_t5_8.txt",
+      "host_file": "target_t5_8_20s.profile.txt",
+      "arm_sha256": "adac3ccb182441dd6e854d84b4e2f89b11736a41eea2fac3bcaa75ff7b9418c3",
+      "host_sha256": "a158f58da6e59f55439f3fe04fe7cf642c915d724bf49d5c877e52711015117d",
+      "bytes_identical": false,
+      "max_abs_diff": 0.0,
+      "spectrum_identical": true,
+      "comparison": {
+        "ap_mean_1000_3000": {
+          "arm": 0.150715,
+          "host": 0.150715,
+          "abs_diff": 0.0
+        },
+        "ap_mean_3000_8000": {
+          "arm": 0.713278,
+          "host": 0.713278,
+          "abs_diff": 0.0
+        },
+        "ap_mean_below_1000": {
+          "arm": 0.045338,
+          "host": 0.045338,
+          "abs_diff": 0.0
+        },
+        "band_db_1000_2000": {
+          "arm": -11.289218,
+          "host": -11.289218,
+          "abs_diff": 0.0
+        },
+        "band_db_2000_4000": {
+          "arm": -20.905441,
+          "host": -20.905441,
+          "abs_diff": 0.0
+        },
+        "band_db_4000_8000": {
+          "arm": -24.156099,
+          "host": -24.156099,
+          "abs_diff": 0.0
+        },
+        "band_db_400_1000": {
+          "arm": -5.262568,
+          "host": -5.262568,
+          "abs_diff": 0.0
+        },
+        "band_db_80_400": {
+          "arm": -3.288635,
+          "host": -3.288635,
+          "abs_diff": 0.0
+        },
+        "f0_max_hz": {
+          "arm": 438.746401,
+          "host": 438.746401,
+          "abs_diff": 0.0
+        },
+        "f0_median_hz": {
+          "arm": 194.356702,
+          "host": 194.356702,
+          "abs_diff": 0.0
+        },
+        "f0_min_hz": {
+          "arm": 133.385702,
+          "host": 133.385702,
+          "abs_diff": 0.0
+        },
+        "f0_p10_hz": {
+          "arm": 170.641343,
+          "host": 170.641343,
+          "abs_diff": 0.0
+        },
+        "f0_p90_hz": {
+          "arm": 242.487308,
+          "host": 242.487308,
+          "abs_diff": 0.0
+        },
+        "fft_size": {
+          "arm": 1024.0,
+          "host": 1024.0,
+          "abs_diff": 0.0
+        },
+        "frame_period_ms": {
+          "arm": 10.0,
+          "host": 10.0,
+          "abs_diff": 0.0
+        },
+        "frames": {
+          "arm": 2001.0,
+          "host": 2001.0,
+          "abs_diff": 0.0
+        },
+        "rate": {
+          "arm": 16000.0,
+          "host": 16000.0,
+          "abs_diff": 0.0
+        },
+        "samples": {
+          "arm": 320000.0,
+          "host": 320000.0,
+          "abs_diff": 0.0
+        },
+        "spectrum_bins": {
+          "arm": 513.0,
+          "host": 513.0,
+          "abs_diff": 0.0
+        },
+        "voiced_fraction": {
+          "arm": 0.532234,
+          "host": 0.532234,
+          "abs_diff": 0.0
+        },
+        "voiced_frames": {
+          "arm": 1065.0,
+          "host": 1065.0,
+          "abs_diff": 0.0
+        }
+      }
+    }
+  ],
+  "failures": [],
+  "alembic": {
+    "audio_played": false,
+    "recorded": false,
+    "alsa_touched": false,
+    "pl_switched": false
+  },
+  "limitations": [
+    "板上只做了文件读写，未接触 ALSA、未播放、未录音、未切 PL。",
+    "输入是已有目标录音切片，不是现场注册录音；现场噪声/电平与换人重注册、回退流程未验证。",
+    "ARM 与宿主逐字节一致只说明移植正确，不代表画像对目标音色有效；身份效果仍由 param_candidate_audit 与后续转换评测决定。"
+  ]
+}

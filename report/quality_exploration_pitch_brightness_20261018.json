@@ -1,0 +1,66 @@
+{
+  "kind": "seed_registration_pitch_brightness_analysis",
+  "date": "2026-10-18",
+  "analysis_window_seconds": 4.8,
+  "metrics": {
+    "target_track9": {
+      "f0_voiced_frames": 767,
+      "f0_median_hz": 207.51443779655904,
+      "f0_p10_hz": 175.37995089138033,
+      "f0_p90_hz": 247.57011148976525,
+      "active_frame_count": 849,
+      "spectral_centroid_median_hz": 404.1662829956166,
+      "spectral_centroid_mean_hz": 823.8901328249353,
+      "high_2k_7k5_to_low_300_2k_median_db": -17.94887961132946,
+      "high_2k_7k5_to_low_300_2k_mean_db": -15.980678448086845
+    },
+    "seed_single_track8_cfg070": {
+      "f0_voiced_frames": 776,
+      "f0_median_hz": 186.68604846730636,
+      "f0_p10_hz": 173.77374791920911,
+      "f0_p90_hz": 215.2414589310793,
+      "active_frame_count": 828,
+      "spectral_centroid_median_hz": 408.82271248810576,
+      "spectral_centroid_mean_hz": 705.775121792218,
+      "high_2k_7k5_to_low_300_2k_median_db": -22.287001484766705,
+      "high_2k_7k5_to_low_300_2k_mean_db": -21.034134969278526
+    },
+    "seed_multi_cfg070": {
+      "f0_voiced_frames": 821,
+      "f0_median_hz": 200.49989566706356,
+      "f0_p10_hz": 179.82065228244224,
+      "f0_p90_hz": 228.34342582769386,
+      "active_frame_count": 837,
+      "spectral_centroid_median_hz": 431.1335781997358,
+      "spectral_centroid_mean_hz": 702.7005389429253,
+      "high_2k_7k5_to_low_300_2k_median_db": -20.50532427604495,
+      "high_2k_7k5_to_low_300_2k_mean_db": -19.30032897786817
+    },
+    "seed_multi_cfg095": {
+      "f0_voiced_frames": 821,
+      "f0_median_hz": 200.84994557805825,
+      "f0_p10_hz": 179.9805051238454,
+      "f0_p90_hz": 228.50629003787446,
+      "active_frame_count": 835,
+      "spectral_centroid_median_hz": 438.5967446276696,
+      "spectral_centroid_mean_hz": 710.9150253876835,
+      "high_2k_7k5_to_low_300_2k_median_db": -20.24096736307927,
+      "high_2k_7k5_to_low_300_2k_mean_db": -19.20704248973455
+    }
+  },
+  "aligned_cfg095_vs_cfg070": {
+    "both_voiced_frame_count": 816,
+    "cfg095_minus_cfg070_f0_median_cents": 0.3505415191267257,
+    "cfg095_minus_cfg070_f0_mean_cents": -0.5204036994846588,
+    "cfg095_f0_more_than_20_cents_higher_fraction": 0.028186274509803922,
+    "cfg095_f0_more_than_20_cents_lower_fraction": 0.023284313725490197,
+    "cfg095_minus_cfg070_centroid_median_hz": 7.4631664279338,
+    "cfg095_minus_cfg070_high_low_median_db": 0.26435691296567754
+  },
+  "interpretation_rule": "A near-zero aligned F0 delta with positive centroid/high-low deltas supports spectral brightness rather than a global pitch raise.",
+  "limitations": [
+    "One utterance and one stochastic seed only.",
+    "Spectral centroid can also move with phoneme timing and synthesis artifacts.",
+    "This analysis does not establish target similarity or deployability."
+  ]
+}

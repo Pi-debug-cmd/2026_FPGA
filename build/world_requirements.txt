@@ -1,0 +1,2 @@
+pyworld==0.3.5
+# Uses the project's existing NumPy 2.3.5; install it in a fresh environment.

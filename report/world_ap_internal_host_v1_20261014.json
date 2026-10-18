@@ -1,0 +1,19 @@
+{
+  "kind": "world_d4c_internal_benchmark",
+  "rounds": 100,
+  "processed_frames": 400,
+  "internal_fft": 2048,
+  "bands": 1,
+  "checksum": 131306.3322,
+  "stage_s": {
+    "setup": 0.0109426,
+    "vuv": 0.0172457,
+    "centroid": 0.0394131,
+    "power": 0.014234699,
+    "group_delay": 0.0088524,
+    "coarse": 0.0095508,
+    "conversion": 0.0136566,
+    "cleanup": 0.001169299
+  },
+  "limitation": "Synthetic calls to private upstream helpers; no ALSA, voice recording, or end-to-end latency."
+}

@@ -1,0 +1,109 @@
+{
+  "kind": "board_realtime_stage_budget",
+  "date": "2026-10-17",
+  "board": {
+    "port": "COM14",
+    "os": "PetaLinux 2022.2",
+    "kernel": "5.15.0-xilinx",
+    "cpu": "双核 Cortex-A9（本测量单线程，envelope 与 ap 并行）"
+  },
+  "tool": {
+    "binary": "build/generated/world_budget_20261017/world_budget_probe_arm",
+    "sha256": "a967310ea546e21cba480ec6c618a80cd78638cb5bbf782859f4ec8f956e4f42",
+    "source": "src/ps/world_budget.cpp + WORLD 0.3.5 + optimized d4c",
+    "compiler": "Vivado 2026.1 自带 GCC 13.4.0（armv7-a/neon/cortex-a9，-O3，静态）",
+    "config": "dio speed4, frame_period 10ms, fft1024, fast4(并行 envelope/ap)"
+  },
+  "summary": {
+    "continuous": {
+      "chunks": 2,
+      "audio_s": 5.0,
+      "stage_seconds_mean": {
+        "pitch_s": 0.162557,
+        "refine_s": 0.098908,
+        "envelope_s": 0.5327145,
+        "ap_s": 0.9864445,
+        "warp_s": 0.0728955,
+        "synthesis_s": 2.750958
+      },
+      "stage_rtf": {
+        "pitch_s": 0.0325114,
+        "refine_s": 0.0197816,
+        "envelope_s": 0.1065429,
+        "ap_s": 0.1972889,
+        "warp_s": 0.014579100000000001,
+        "synthesis_s": 0.5501916
+      },
+      "total_compute_s_mean": 4.080787,
+      "rtf_json_mean": 0.816157,
+      "voiced_frames_mean": 263
+    },
+    "realistic": {
+      "chunks": 2,
+      "audio_s": 5.0,
+      "stage_seconds_mean": {
+        "pitch_s": 0.16197050000000002,
+        "refine_s": 0.1424675,
+        "envelope_s": 0.5456544999999999,
+        "ap_s": 0.86362,
+        "warp_s": 0.0542275,
+        "synthesis_s": 2.168295
+      },
+      "stage_rtf": {
+        "pitch_s": 0.0323941,
+        "refine_s": 0.028493499999999998,
+        "envelope_s": 0.10913089999999999,
+        "ap_s": 0.17272400000000002,
+        "warp_s": 0.0108455,
+        "synthesis_s": 0.433659
+      },
+      "total_compute_s_mean": 3.3996155000000003,
+      "rtf_json_mean": 0.679923,
+      "voiced_frames_mean": 195
+    }
+  },
+  "derived": {
+    "analysis_rtf_parallel": 0.2495819,
+    "synthesis_rtf": 0.5501916,
+    "mapping_rtf": 0.014579100000000001,
+    "analysis_share_of_total": null,
+    "headroom_at_rtf1": 0.18384299999999998,
+    "synthesis_share_of_total_compute": 0.674124378459351,
+    "ap_share_of_total_compute": 0.24172898511978202,
+    "envelope_share_of_total_compute": 0.1305420988647533,
+    "pitch_share_of_total_compute": 0.0640721997987153
+  },
+  "pl_offload_priority": [
+    {
+      "rank": 1,
+      "stage": "synthesis",
+      "rtf": 0.5501916,
+      "why": "单段最大开销，结构为逐帧 IFFT + 最小相位滤波 + 重叠相加，适合 PL 流水"
+    },
+    {
+      "rank": 2,
+      "stage": "d4c (ap)",
+      "rtf": 0.1972889,
+      "why": "迭代式非周期性估计，指令密集、适合 PL 并行"
+    },
+    {
+      "rank": 3,
+      "stage": "cheaptrick (envelope)",
+      "rtf": 0.1065429,
+      "why": "以 FFT + 倒谱平滑为主，PL 有现成 IP"
+    },
+    {
+      "rank": 4,
+      "stage": "dio + stonemask",
+      "rtf": 0.052293000000000006,
+      "why": "已用 speed4，开销占比小，可最后处理"
+    }
+  ],
+  "caveats": [
+    "单线程测量：只有 envelope 与 ap 并行；真实 streaming 还要加上 I/O、调度与抖动余量。",
+    "本测量是整个 5 秒文件的离线处理，不是端到端延迟，也不是流式实时性能。",
+    "编译器由 2018.3 的 GCC 7.3 换成 2026.1 的 GCC 13.4，不能与历史 RTF 数字直接比较。",
+    "输入为 5 秒片段（探针限制 4000～80000 样本）；每段含少量静音，连续语音的实际占比更高。",
+    "尚未包含 world_convert 那种逐帧包络目标化映射（更贵），也未包含录音/播放 I/O。"
+  ]
+}

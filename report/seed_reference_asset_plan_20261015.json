@@ -1,0 +1,68 @@
+{
+  "kind": "pinned_seed_tiny_asset_plan",
+  "repositories": [
+    {
+      "repository": "Plachta/Seed-VC",
+      "revision": "257283f9f41585055e8f858fba4fd044e5caed6e",
+      "files": [
+        {
+          "name": "DiT_uvit_tat_xlsr_ema.pth",
+          "size": 142112203,
+          "sha256": "c853ea578b409f625f961bcb15d5cff1f8ef9a75f3209ec21d9b7c73ab422e88",
+          "url": "https://huggingface.co/Plachta/Seed-VC/resolve/257283f9f41585055e8f858fba4fd044e5caed6e/DiT_uvit_tat_xlsr_ema.pth"
+        }
+      ]
+    },
+    {
+      "repository": "funasr/campplus",
+      "revision": "e4b6ede7ce16997aff4ae69fbca1f0175e2afede",
+      "files": [
+        {
+          "name": "campplus_cn_common.bin",
+          "size": 28036335,
+          "sha256": "3388cf5fd3493c9ac9c69851d8e7a8badcfb4f3dc631020c4961371646d5ada8",
+          "url": "https://huggingface.co/funasr/campplus/resolve/e4b6ede7ce16997aff4ae69fbca1f0175e2afede/campplus_cn_common.bin"
+        }
+      ]
+    },
+    {
+      "repository": "FunAudioLLM/CosyVoice-300M",
+      "revision": "24c40509c3c5ea6fe06b5f8790ff99e3714a6bee",
+      "files": [
+        {
+          "name": "hift.pt",
+          "size": 81896716,
+          "sha256": "91e679b6ca1eff71187ffb4f3ab0444935594cdcc20a9bd12afad111ef8d6012",
+          "url": "https://huggingface.co/FunAudioLLM/CosyVoice-300M/resolve/24c40509c3c5ea6fe06b5f8790ff99e3714a6bee/hift.pt"
+        }
+      ]
+    },
+    {
+      "repository": "facebook/wav2vec2-xls-r-300m",
+      "revision": "1a640f32ac3e39899438a2931f9924c02f080a54",
+      "files": [
+        {
+          "name": "config.json",
+          "size": 1568,
+          "sha256": null,
+          "url": "https://huggingface.co/facebook/wav2vec2-xls-r-300m/resolve/1a640f32ac3e39899438a2931f9924c02f080a54/config.json"
+        },
+        {
+          "name": "preprocessor_config.json",
+          "size": 212,
+          "sha256": null,
+          "url": "https://huggingface.co/facebook/wav2vec2-xls-r-300m/resolve/1a640f32ac3e39899438a2931f9924c02f080a54/preprocessor_config.json"
+        },
+        {
+          "name": "pytorch_model.bin",
+          "size": 1269737156,
+          "sha256": "d5e490574712ad0a6736923b9ed11d4cd51c78609c36205f704fc4e87b11d2e0",
+          "url": "https://huggingface.co/facebook/wav2vec2-xls-r-300m/resolve/1a640f32ac3e39899438a2931f9924c02f080a54/pytorch_model.bin"
+        }
+      ]
+    }
+  ],
+  "total_bytes": 1521784190,
+  "weights_downloaded": false,
+  "board_deployed": false
+}

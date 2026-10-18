@@ -1,0 +1,10 @@
+{
+  "source": "small_geometry_bundle.tar.gz",
+  "remote": "/home/root/native_llvc_trial_20261005/small_geometry_bundle.tar.gz",
+  "sha256": "0f1e658c6a3e8ab875709253a420afb9704493ef1ee1a7ceec52cc247a2465fe",
+  "bytes": 3200060,
+  "seconds": 140.52147080004215,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

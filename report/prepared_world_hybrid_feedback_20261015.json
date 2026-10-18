@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-15",
+  "playback_directory": "/tmp/codex_prepared_comparison_20261015/comparison_2477638957637",
+  "user_feedback": "清晰度还是不行，音高还是感觉发闷，3和4其实差不多，4会稍微好一点",
+  "order": [
+    "target",
+    "old_fixed",
+    "prepared_pitch_old_warp",
+    "prepared_timbre"
+  ],
+  "hybrid_improvement_verified": false,
+  "speaker_identity_accepted": false,
+  "realtime_accepted": false,
+  "playback_underruns": 0,
+  "restore_exit": 0,
+  "next_action": "Offline diagnosis and model feasibility audit; no automatic further playback",
+  "retained_clarity_reference": "old_fixed_from_first_comparison"
+}

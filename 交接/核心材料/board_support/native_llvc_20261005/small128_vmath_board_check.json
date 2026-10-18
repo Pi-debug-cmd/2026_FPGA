@@ -1,0 +1,70 @@
+{
+  "numerical_checks": [
+    {
+      "case": "real_16000",
+      "samples": 16000,
+      "normalized_rmse": 1.7501486127002863e-06,
+      "maximum_absolute_error": 1.0622898116707802e-09
+    },
+    {
+      "case": "tone_1000",
+      "samples": 1000,
+      "normalized_rmse": 9.133707976616279e-07,
+      "maximum_absolute_error": 4.842877388000488e-08
+    },
+    {
+      "case": "fleurs_full",
+      "samples": 166080,
+      "normalized_rmse": 1.1168788205395686e-06,
+      "maximum_absolute_error": 1.6763806343078613e-08
+    }
+  ],
+  "board_benchmarks": [
+    {
+      "samples": 16000,
+      "chunks": 77,
+      "audio_seconds": 1,
+      "inference_seconds": 0.944488,
+      "mean_chunk_ms": 12.257,
+      "max_chunk_ms": 12.7413,
+      "peak_rss_kib": 3580,
+      "threads": 2,
+      "core": "native_fp32_vector_math_candidate",
+      "source_enrollment": false,
+      "real_time_verified": false,
+      "quality_accepted": false
+    },
+    {
+      "samples": 166080,
+      "chunks": 799,
+      "audio_seconds": 10.38,
+      "inference_seconds": 9.84115,
+      "mean_chunk_ms": 12.3019,
+      "max_chunk_ms": 16.2276,
+      "peak_rss_kib": 4700,
+      "threads": 2,
+      "core": "native_fp32_vector_math_candidate",
+      "source_enrollment": false,
+      "real_time_verified": false,
+      "quality_accepted": false
+    },
+    {
+      "samples": 1000,
+      "chunks": 5,
+      "audio_seconds": 0.0625,
+      "inference_seconds": 0.0611194,
+      "mean_chunk_ms": 12.2146,
+      "max_chunk_ms": 13.0799,
+      "peak_rss_kib": 3580,
+      "threads": 2,
+      "core": "native_fp32_vector_math_candidate",
+      "source_enrollment": false,
+      "real_time_verified": false,
+      "quality_accepted": false
+    }
+  ],
+  "trained": false,
+  "quality_accepted": false,
+  "live_acoustic_latency_verified": false,
+  "original_audio_unchanged": true
+}

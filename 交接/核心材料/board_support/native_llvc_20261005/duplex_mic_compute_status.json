@@ -1,0 +1,1 @@
+{"input_samples":160000,"output_samples":160000,"chunks":770,"mean_compute_ms":11.134512,"max_compute_ms":12.093366,"compute_deadlines_missed":0,"format":"S16_LE_mono_16000","bounded_lookahead_samples":16,"finished":true,"target_quality_accepted":false,"acoustic_latency_measured":false}

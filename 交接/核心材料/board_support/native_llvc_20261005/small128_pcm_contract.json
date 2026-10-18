@@ -1,0 +1,14 @@
+{
+  "cases": [
+    {
+      "case": "edge_209",
+      "samples": 209
+    },
+    {
+      "case": "real_16000",
+      "samples": 16000
+    }
+  ],
+  "bundle_sha256": "9df23ad0d7ed82aec478bfc27dc785c2afeef60eeb507cae9353368530061d46",
+  "scope": "Synthetic and existing public file input only, no mic capture"
+}

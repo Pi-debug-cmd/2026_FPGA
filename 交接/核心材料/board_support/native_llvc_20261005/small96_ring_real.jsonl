@@ -1,0 +1,1 @@
+{"samples":16000,"chunks":77,"audio_seconds":1,"inference_seconds":0.844857,"mean_chunk_ms":10.9635,"max_chunk_ms":11.5337,"peak_rss_kib":2788,"threads":2,"core":"native_fp32_ring_candidate","source_enrollment":false,"real_time_verified":false,"quality_accepted":false}

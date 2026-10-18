@@ -1,0 +1,95 @@
+{
+  "model_sha256": "f0caf5fd50d8a3c4e755541da66b4e1e8d9ee82021a9c9ffbd2fc84245b2b4cb",
+  "cases": [
+    {
+      "case": "zero",
+      "input_rms": 0.0,
+      "output_rms": 0.00045158612192608416,
+      "steady_output_rms": 0.00044883943420752056,
+      "steady_output_dc": 0.0003712371472271343,
+      "output_peak": 0.004456634633243084,
+      "output_energy_below_200hz_fraction": 0.2613147039135842,
+      "steady_strongest_non_dc_frequency_hz": 2000.0,
+      "host_diagnostic_not_acoustic_board_test": true
+    },
+    {
+      "case": "dc_0.001",
+      "input_rms": 0.0010000000474974513,
+      "output_rms": 0.0004966068081557751,
+      "steady_output_rms": 0.0004936326291354533,
+      "steady_output_dc": 0.0004069229701297843,
+      "output_peak": 0.004846628755331039,
+      "output_energy_below_200hz_fraction": 0.25170042534395726,
+      "steady_strongest_non_dc_frequency_hz": 2000.0,
+      "host_diagnostic_not_acoustic_board_test": true
+    },
+    {
+      "case": "hum50_rms0.001",
+      "input_rms": 0.0010000000474974513,
+      "output_rms": 0.0005124954041093588,
+      "steady_output_rms": 0.0005144274002147081,
+      "steady_output_dc": 0.00037189017356496377,
+      "output_peak": 0.004603670910000801,
+      "output_energy_below_200hz_fraction": 0.6121496739103068,
+      "steady_strongest_non_dc_frequency_hz": 50.0,
+      "host_diagnostic_not_acoustic_board_test": true
+    },
+    {
+      "case": "noise_rms0.001",
+      "input_rms": 0.000998683157376945,
+      "output_rms": 0.00549529492855072,
+      "steady_output_rms": 0.0056679143383006475,
+      "steady_output_dc": 0.0009531383379851945,
+      "output_peak": 0.03492676094174385,
+      "output_energy_below_200hz_fraction": 0.019181447790651868,
+      "steady_strongest_non_dc_frequency_hz": 3000.0,
+      "host_diagnostic_not_acoustic_board_test": true
+    },
+    {
+      "case": "noise_rms0.002",
+      "input_rms": 0.0020080155227333307,
+      "output_rms": 0.011250167153775692,
+      "steady_output_rms": 0.011548579448395161,
+      "steady_output_dc": 0.0011579252567549005,
+      "output_peak": 0.08068251609802246,
+      "output_energy_below_200hz_fraction": 0.005004680864074823,
+      "steady_strongest_non_dc_frequency_hz": 3000.0,
+      "host_diagnostic_not_acoustic_board_test": true
+    },
+    {
+      "case": "noise_rms0.004",
+      "input_rms": 0.004005283582955599,
+      "output_rms": 0.016387423500418663,
+      "steady_output_rms": 0.016949448648188394,
+      "steady_output_dc": 0.0013908334784823353,
+      "output_peak": 0.12982535362243652,
+      "output_energy_below_200hz_fraction": 0.004517743705358373,
+      "steady_strongest_non_dc_frequency_hz": 3000.0,
+      "host_diagnostic_not_acoustic_board_test": true
+    },
+    {
+      "case": "public_speech_rms0.002",
+      "input_rms": 0.0020000000949949026,
+      "output_rms": 0.009431874379515648,
+      "steady_output_rms": 0.013327107220618539,
+      "steady_output_dc": 0.00042301927415292086,
+      "output_peak": 0.27260977029800415,
+      "output_energy_below_200hz_fraction": 0.04933941480884013,
+      "steady_strongest_non_dc_frequency_hz": 2000.0,
+      "host_diagnostic_not_acoustic_board_test": true
+    },
+    {
+      "case": "public_speech_rms0.04",
+      "input_rms": 0.04000000283122063,
+      "output_rms": 0.043031174689531326,
+      "steady_output_rms": 0.05940141603343809,
+      "steady_output_dc": 0.0008684984423119886,
+      "output_peak": 0.7346466779708862,
+      "output_energy_below_200hz_fraction": 0.1414697799929243,
+      "steady_strongest_non_dc_frequency_hz": 249.0,
+      "host_diagnostic_not_acoustic_board_test": true
+    }
+  ],
+  "human_audio_saved": false,
+  "naturalness_not_accepted": true
+}

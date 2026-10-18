@@ -1,0 +1,31 @@
+{
+  "mode": "neural realtime conversion small96_noise_step9200, SAME accepted original mixer",
+  "helper": "board_neural_calibrated.sh",
+  "capture": 43,
+  "headphone": 119,
+  "playback": 222,
+  "input_gain": 1,
+  "output_gain": 1,
+  "pids_at_check": {
+    "capture": 25700,
+    "convert": 25701,
+    "playback": 25702
+  },
+  "speech_not_saved": true,
+  "model_changed": false,
+  "original_loudness_accepted": true,
+  "conversion_quality_accepted": false,
+  "awaiting_loudness_noise_human_comparison": true,
+  "checked_chunks": 924,
+  "mean_compute_ms": 11.338789,
+  "max_compute_ms": 15.421746,
+  "missed_compute_deadlines": 26,
+  "acoustic_latency_measured": false,
+  "startup_retry": {
+    "first_attempt_failed": true,
+    "watchdog_reason": "capture exited",
+    "playback_log": "snd_pcm_plugin_status assertion",
+    "cause_not_determined": true,
+    "retry_running_after_12_seconds": true
+  }
+}

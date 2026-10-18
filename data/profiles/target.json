@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "sample_rate": 16000,
+  "kind": "f0_calibration_only",
+  "duration_s": 99.14,
+  "voiced_frame_coverage_s": 53.1,
+  "frames": 9911,
+  "voiced_frames": 5310,
+  "clip_fraction": 0.0,
+  "rms": 0.1300506787621009,
+  "f0_median_hz": 193.125006633167,
+  "f0_p10_hz": 172.2037521381981,
+  "f0_p90_hz": 229.41616991920253,
+  "estimator": "yin_40ms_10ms_75_400hz_threshold_0.15",
+  "source_files": [
+    {
+      "path": "voice_src\\src_1\\Track 5(1).wav",
+      "sha256": "c3a50c67c7d29a77c482067272624c3a196ed6421dcf11099b5827ccb65e09e3",
+      "channel": 0
+    },
+    {
+      "path": "voice_src\\src_1\\Track 6(1).wav",
+      "sha256": "92ac22ae3f5674e8e5b49c296e0b1c35f38347c72081c3e56e570091f82ffbfa",
+      "channel": 0
+    },
+    {
+      "path": "voice_src\\src_1\\Track 7(1).wav",
+      "sha256": "942b113534ff1e5af211b57a1db7419d1f9e9ba08e1944475931e393671bf5b1",
+      "channel": 0
+    },
+    {
+      "path": "voice_src\\src_1\\Track 8(1).wav",
+      "sha256": "4e07e8ebf0deba90db76de70aec293f544c4695b43bdfec4d6037c3fb7f888f3",
+      "channel": 0
+    }
+  ],
+  "held_out_file": "voice_src\\src_1\\Track 9(1).wav",
+  "speaker_consistency": "same speaker, clean speech, confirmed by user"
+}

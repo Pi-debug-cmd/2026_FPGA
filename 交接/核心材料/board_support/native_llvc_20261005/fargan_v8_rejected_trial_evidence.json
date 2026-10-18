@@ -1,0 +1,79 @@
+{
+  "snapshot_monotonic": 70128.380832439,
+  "board_wall_time": 1520851647.0981426,
+  "project_completed": false,
+  "quality_accepted": false,
+  "acoustic_latency_measured": false,
+  "inference_location": "7020 PS CPU0/CPU1",
+  "pl_acceleration_implemented": false,
+  "processes": {
+    "capture": {
+      "pid": 30505,
+      "cmdline": "arecord -q -D neural_capture -t raw -f S16_LE -r 16000 -c 1 --period-size=208 --buffer-size=832 /run/voice-neural-live/input.fifo "
+    },
+    "convert": {
+      "pid": 30506,
+      "cmdline": "/home/root/native_llvc_trial_20261005/native_fargan_v8_arm /home/root/native_llvc_trial_20261005/fargan_mapper_v8_selected.f32 /run/voice-neural-live/status.json "
+    },
+    "playback": {
+      "pid": 30507,
+      "cmdline": "aplay -q -D neural_play -t raw -f S16_LE -r 16000 -c 1 --period-size=208 --buffer-size=832 --start-delay=39000 /run/voice-neural-live/output.fifo "
+    },
+    "watchdog": {
+      "pid": 30508,
+      "cmdline": "python3 -u /home/root/native_llvc_trial_20261005/fargan_live_watchdog.py "
+    }
+  },
+  "status": {
+    "frames": 25200,
+    "producer_frames": 25201,
+    "input_samples": 4032160,
+    "output_samples": 4031760,
+    "mean_compute_ms": 8.927644,
+    "max_compute_ms": 23.569452,
+    "analysis_mapper_mean_ms": 3.510357,
+    "vocoder_mean_ms": 8.927644,
+    "serial_compute_sum_mean_ms": 12.438001,
+    "compute_deadlines_missed": 246,
+    "producer_deadlines_missed": 28,
+    "vocoder_deadlines_missed": 246,
+    "wall_elapsed_ms": 253031.084214,
+    "frame_audio_ms": 10,
+    "pipeline_threads": 2,
+    "max_pending_frames": 2,
+    "finished": false,
+    "raw_waveform_mix": false,
+    "source_enrollment": false,
+    "target_quality_accepted": false,
+    "acoustic_latency_measured": false,
+    "meter_window_input": {
+      "rms": 0.002268,
+      "peak": 0.008148,
+      "samples": 16000,
+      "clips": 0
+    },
+    "meter_window_output": {
+      "rms": 0.001122,
+      "peak": 0.004669,
+      "samples": 16000,
+      "clips": 0
+    }
+  },
+  "logs": {
+    "capture.log": "",
+    "convert.log": "",
+    "playback.log": "",
+    "watchdog.log": "",
+    "affinity.log": "AUDIO_CPU0 capture 30505\nAUDIO_CPU0 playback 30507\nAUDIO_CPU0 watchdog 30508\n"
+  },
+  "temperature_c": 68.16458740213601,
+  "sha256": {
+    "native_fargan_v8_arm": "b0fcf2d97e3eb5b38d5da5cc32f486d910f0e61c5b55f13faaa6b51aabad6f32",
+    "fargan_mapper_v8_selected.f32": "5cf0ca6dcff4d11c4c2a20c21708ba8952cd12de2886774ee53942898ec5cfad",
+    "board_neural_fargan.sh": "3b82748e48babd36bc4e0d40fc92e66bfe297c36ee3df9891df4b9920c35f334",
+    "fargan_live_watchdog.py": "a3a6e037bcceedc526f6710485f6ba41d756aafe4d6c7329865f1bff2ad4a856",
+    "audio_affinity.py": "3473f725a3eb37d87e86fc1a00c0077e2dfb4ed2ecbd3f6e7ef723fc3ff5b192"
+  },
+  "v8_live_deployed": true,
+  "live_verified_short_observation": true
+}

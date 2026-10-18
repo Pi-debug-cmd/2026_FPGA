@@ -1,0 +1,281 @@
+{
+  "kind": "parametric_candidate_identity_audit",
+  "date": "2026-10-16",
+  "protocol": "mono16k-6s-nonoverlap-tail1.5s-fbank80hamming-cmn-noVAD-rms0.04-utmosFP32-cpu-v1",
+  "read_only": true,
+  "audio_generated": false,
+  "board_touched": false,
+  "played": false,
+  "window": {
+    "start_s": 2.68,
+    "seconds": 4.8,
+    "rate": 16000,
+    "note": "所有候选与源、目标用同一窗口口径，便于横向比较"
+  },
+  "summary": {
+    "target_pairwise_mean": 0.9106115193613583,
+    "target_pairwise_min": 0.8861137033621659,
+    "best_candidate_by_identity": "seed30_window",
+    "prepared_pitch_minus_world_old_identity": -0.15165189351431677,
+    "prepared_pitch_minus_world_old_leakage": 0.24934592660064542,
+    "prepared_timbre_minus_world_old_identity": -0.028944097384554918,
+    "prepared_timbre_minus_world_old_leakage": -0.017979754684994964,
+    "prepared_pitch_old_warp_minus_world_old_identity": -0.016339307045147244,
+    "prepared_pitch_old_warp_minus_world_old_leakage": -0.013291879135170326,
+    "balanced_low_shelf_minus_world_old_identity": -0.017456426623277926,
+    "balanced_low_shelf_minus_world_old_leakage": 0.012049606558940107,
+    "balanced_spectral_minus_world_old_identity": 0.005786897287986897,
+    "balanced_spectral_minus_world_old_leakage": 0.0019399700687896537,
+    "seed30_window_minus_world_old_identity": 0.33489173474509115,
+    "seed30_window_minus_world_old_leakage": -0.3627981060730283
+  },
+  "files": [
+    {
+      "label": "source_dev_window",
+      "role": "source_speaker (本人)",
+      "path": null,
+      "sha256": null,
+      "seconds": 4.8,
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "seconds": 4.8
+        }
+      ],
+      "identity_cosine_to_target_centroid": 0.11450746322315788,
+      "leakage_cosine_to_source_window": 1.0000000000000002,
+      "utmos_predicted": 2.9932126998901367,
+      "voiced_fraction": 0.7338877338877339,
+      "f0_median_hz": 119.77868303703167,
+      "f0_p10_hz": 108.70067255760343,
+      "f0_p90_hz": 137.49917010878528,
+      "asr_text": "下午我沿着小路走到公园听见书上的鸟叫",
+      "content_cer_vs_source": {
+        "reference_chars": 18,
+        "hypothesis_chars": 18,
+        "distance": 0,
+        "cer": 0.0
+      }
+    },
+    {
+      "label": "target_track9_window",
+      "role": "target held-out track",
+      "path": null,
+      "sha256": null,
+      "seconds": 4.8,
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "seconds": 4.8
+        }
+      ],
+      "identity_cosine_to_target_centroid": 0.8981322025003234,
+      "leakage_cosine_to_source_window": 0.1317777161432746,
+      "utmos_predicted": 2.910048246383667,
+      "voiced_fraction": 0.7879417879417879,
+      "f0_median_hz": 202.68400853006932,
+      "f0_p10_hz": 172.98906255337127,
+      "f0_p90_hz": 232.7915852871844
+    },
+    {
+      "label": "world_old_fixed",
+      "role": "现役旧固定配方（对照基线）",
+      "path": "data/registrations/source_20261015/speaker01/hybrid_comparison/old_fixed.wav",
+      "sha256": "be670efcee2f7dd540a1d202a841518423133bdfc8b23faace732a6faa0b5d57",
+      "seconds": 4.8,
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "seconds": 4.8
+        }
+      ],
+      "identity_cosine_to_target_centroid": 0.21602102714881596,
+      "leakage_cosine_to_source_window": 0.3832870592811169,
+      "utmos_predicted": 2.095083236694336,
+      "voiced_fraction": 0.6216216216216216,
+      "f0_median_hz": 198.4151224146167,
+      "f0_p10_hz": 182.5157693603132,
+      "f0_p90_hz": 228.1242218523954,
+      "asr_text": "我研究了小路子到公园听见书生的鸟叫",
+      "content_cer_vs_source": {
+        "reference_chars": 18,
+        "hypothesis_chars": 17,
+        "distance": 7,
+        "cer": 0.3888888888888889
+      }
+    },
+    {
+      "label": "prepared_pitch",
+      "role": "按人仅音高映射",
+      "path": "data/registrations/source_20261015/speaker01/heldout_comparison/prepared_pitch.wav",
+      "sha256": "4e3aa954d031ab1b277f7e8fbca355847a4822e5901073c40080d82f6d07c623",
+      "seconds": 4.8,
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "seconds": 4.8
+        }
+      ],
+      "identity_cosine_to_target_centroid": 0.0643691336344992,
+      "leakage_cosine_to_source_window": 0.6326329858817623,
+      "utmos_predicted": 1.969582438468933,
+      "voiced_fraction": 0.6091476091476091,
+      "f0_median_hz": 191.38095952598707,
+      "f0_p10_hz": 166.60393136963657,
+      "f0_p90_hz": 237.39524369854615,
+      "asr_text": "我研究了小路走到公园听见树上的鸟叫",
+      "content_cer_vs_source": {
+        "reference_chars": 18,
+        "hypothesis_chars": 17,
+        "distance": 6,
+        "cer": 0.3333333333333333
+      }
+    },
+    {
+      "label": "prepared_timbre",
+      "role": "按人谱包络（音色）候选",
+      "path": "data/registrations/source_20261015/speaker01/heldout_comparison/prepared_timbre.wav",
+      "sha256": "1c238a2dd926ae9e45546ddfca85e92f40bd4c24bfdb77c2bd61e19c73797f9a",
+      "seconds": 4.8,
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "seconds": 4.8
+        }
+      ],
+      "identity_cosine_to_target_centroid": 0.18707692976426105,
+      "leakage_cosine_to_source_window": 0.36530730459612193,
+      "utmos_predicted": 2.0540575981140137,
+      "voiced_fraction": 0.604989604989605,
+      "f0_median_hz": 190.7211997236988,
+      "f0_p10_hz": 166.4382818142711,
+      "f0_p90_hz": 239.38863804203206,
+      "asr_text": "我研究小路走到公园听见树生的鸟叫",
+      "content_cer_vs_source": {
+        "reference_chars": 18,
+        "hypothesis_chars": 16,
+        "distance": 6,
+        "cer": 0.3333333333333333
+      }
+    },
+    {
+      "label": "prepared_pitch_old_warp",
+      "role": "旧谱变形+按人音高",
+      "path": "data/registrations/source_20261015/speaker01/hybrid_comparison/prepared_pitch_old_warp.wav",
+      "sha256": "6d53a0d02be23002eb98af57b1c392ea7da71cf22498e39e10a4243410889da1",
+      "seconds": 4.8,
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "seconds": 4.8
+        }
+      ],
+      "identity_cosine_to_target_centroid": 0.19968172010366872,
+      "leakage_cosine_to_source_window": 0.36999518014594657,
+      "utmos_predicted": 2.050896406173706,
+      "voiced_fraction": 0.6112266112266113,
+      "f0_median_hz": 190.48106252787358,
+      "f0_p10_hz": 166.53603778902263,
+      "f0_p90_hz": 237.42676175780556,
+      "asr_text": "我研究小路走到公园听见树生的鸟叫",
+      "content_cer_vs_source": {
+        "reference_chars": 18,
+        "hypothesis_chars": 16,
+        "distance": 6,
+        "cer": 0.3333333333333333
+      }
+    },
+    {
+      "label": "balanced_low_shelf",
+      "role": "低频架 4dB 衰减候选",
+      "path": "data/registrations/source_20261015/speaker01/low_shelf_comparison/balanced_old_fixed.wav",
+      "sha256": "e1b64e09facd757252883b3c6270fd92ae1024890a0729f71a01979eb0cc5407",
+      "seconds": 4.8,
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "seconds": 4.8
+        }
+      ],
+      "identity_cosine_to_target_centroid": 0.19856460052553804,
+      "leakage_cosine_to_source_window": 0.395336665840057,
+      "utmos_predicted": 1.9891849756240845,
+      "voiced_fraction": 0.6257796257796258,
+      "f0_median_hz": 198.35841031233713,
+      "f0_p10_hz": 182.21140608689328,
+      "f0_p90_hz": 227.92228926246293,
+      "asr_text": "我沿着小路走到公园听见书生的鸟叫",
+      "content_cer_vs_source": {
+        "reference_chars": 18,
+        "hypothesis_chars": 16,
+        "distance": 3,
+        "cer": 0.16666666666666666
+      }
+    },
+    {
+      "label": "balanced_spectral",
+      "role": "谱平衡候选",
+      "path": "data/registrations/source_20261015/speaker01/spectral_balance_comparison/balanced_old_fixed.wav",
+      "sha256": "1785fb808e2d9009c36b307a016a49c86cb42893738e32627a8ed384d417dfa2",
+      "seconds": 4.8,
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "seconds": 4.8
+        }
+      ],
+      "identity_cosine_to_target_centroid": 0.22180792443680286,
+      "leakage_cosine_to_source_window": 0.38522702934990655,
+      "utmos_predicted": 2.107762098312378,
+      "voiced_fraction": 0.6216216216216216,
+      "f0_median_hz": 198.38601661457562,
+      "f0_p10_hz": 182.5519167949204,
+      "f0_p90_hz": 228.13557402420022,
+      "asr_text": "我研究了小路子到公园听见书生的鸟叫",
+      "content_cer_vs_source": {
+        "reference_chars": 18,
+        "hypothesis_chars": 17,
+        "distance": 7,
+        "cer": 0.3888888888888889
+      }
+    },
+    {
+      "label": "seed30_window",
+      "role": "Seed-VC 30步 (离线上限参考)",
+      "path": "build/generated/seed_reference_20261015/output_steps30/vc_source_target_1.0_30_0.7.wav",
+      "sha256": "78be5244c6d869b6c9d8558d117718bf326ae024c843a375279c4a4175f346e6",
+      "seconds": 4.8,
+      "segments": [
+        {
+          "start_seconds": 0.0,
+          "seconds": 4.8
+        }
+      ],
+      "identity_cosine_to_target_centroid": 0.5509127618939071,
+      "leakage_cosine_to_source_window": 0.020488953208088606,
+      "utmos_predicted": 2.7361302375793457,
+      "voiced_fraction": 0.7817047817047817,
+      "f0_median_hz": 183.04248084526978,
+      "f0_p10_hz": 172.97918412100006,
+      "f0_p90_hz": 213.13671180104785,
+      "asr_text": "我沿着小路走到公园,听见书上的鸟叫",
+      "content_cer_vs_source": {
+        "reference_chars": 18,
+        "hypothesis_chars": 16,
+        "distance": 2,
+        "cer": 0.1111111111111111
+      }
+    }
+  ],
+  "elapsed_seconds": 54.82703757286072,
+  "speaker_identity_accepted": false,
+  "naturalness_accepted": false,
+  "content_verified": false,
+  "board_realtime_accepted": false,
+  "limitations": [
+    "目标质心包含 Track8，而历史候选的注册/拟合也用过 Track5～8，因此候选与目标的分数都偏乐观，只能横向比较。",
+    "单个源说话人、单个开发句、非盲评；候选音频是历史版本，未重新生成。",
+    "ASR 对照为转写对转写，不是内容真值；UTMOS 为域外预测自然度，不是身份。",
+    "这些候选均非“现场在板上建模”的产物，不能作为脱机构型的验收证据。"
+  ]
+}

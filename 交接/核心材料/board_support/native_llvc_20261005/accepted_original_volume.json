@@ -1,0 +1,16 @@
+{
+  "capture": 43,
+  "headphone": 119,
+  "playback": 222,
+  "adc_pcm": 190,
+  "mic_linput1_boost": 1,
+  "original_loudness_accepted_by_user": true,
+  "user_feedback": "可以了，够了",
+  "original_noise_quality_not_explicitly_accepted": false,
+  "conversion_quality_not_accepted": true,
+  "neural_input_gain": 1,
+  "neural_output_gain": 1,
+  "no_boot_changes": true,
+  "latest_feedback": "现在是清晰的，没什么杂音",
+  "original_clarity_and_noise_accepted": true
+}

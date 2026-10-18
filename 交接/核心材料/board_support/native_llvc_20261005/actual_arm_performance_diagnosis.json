@@ -1,0 +1,87 @@
+{
+  "actual_board_execution": true,
+  "profile_cases": [
+    {
+      "file": "actual_arm_profile.jsonl",
+      "stats": {
+        "samples": 416,
+        "chunks": 2,
+        "audio_seconds": 0.026,
+        "inference_seconds": 0.790409,
+        "mean_chunk_ms": 395.196,
+        "max_chunk_ms": 397.744,
+        "peak_rss_kib": 16936,
+        "core": "native_fp32",
+        "source_enrollment": false,
+        "real_time_verified": false,
+        "quality_accepted": false
+      },
+      "dense_ms_per_chunk": 346.0301,
+      "other_ms_per_chunk": 49.158645999999976,
+      "exclusive_sum_ms_per_chunk": 395.188746,
+      "fractions": {
+        "attention": 0.028602029066890484,
+        "decoder": 0.00202844845181902,
+        "encoder": 0.0442265883755708,
+        "input_conv": 0.007431157971284942,
+        "linear_256x256_t13": 0.0586781638766606,
+        "linear_256x256_t26": 0.1107911104330891,
+        "linear_256x512_t13": 0.0290209428180427,
+        "linear_512x256_t13": 0.028443370702666722,
+        "linear_512x512_t13": 0.6486735834324594,
+        "norm": 0.012494093138978203,
+        "output_conv": 0.022696496524220355,
+        "prenet": 0.004342127698140473,
+        "process": 0.0017183434671998478,
+        "project_e2d": 0.0008535440429773778
+      },
+      "output_bit_identical_to_verified_baseline": true
+    },
+    {
+      "file": "actual_arm_profile_tone.jsonl",
+      "stats": {
+        "samples": 1000,
+        "chunks": 5,
+        "audio_seconds": 0.0625,
+        "inference_seconds": 1.973,
+        "mean_chunk_ms": 394.593,
+        "max_chunk_ms": 397.62,
+        "peak_rss_kib": 17164,
+        "core": "native_fp32",
+        "source_enrollment": false,
+        "real_time_verified": false,
+        "quality_accepted": false
+      },
+      "dense_ms_per_chunk": 346.19759999999997,
+      "other_ms_per_chunk": 48.38961800000004,
+      "exclusive_sum_ms_per_chunk": 394.587218,
+      "fractions": {
+        "attention": 0.0281972134231677,
+        "decoder": 0.0020225490426301644,
+        "encoder": 0.04298177747866125,
+        "input_conv": 0.007512508932815963,
+        "linear_256x256_t13": 0.058671946134859335,
+        "linear_256x256_t26": 0.11078311208752839,
+        "linear_256x512_t13": 0.029274440410282116,
+        "linear_512x256_t13": 0.028413185953732538,
+        "linear_512x512_t13": 0.6502237991905758,
+        "norm": 0.012407041527635089,
+        "output_conv": 0.022692372158897453,
+        "prenet": 0.004268455548400455,
+        "process": 0.0016871757868243973,
+        "project_e2d": 0.0008644223239892174
+      },
+      "output_bit_identical_to_verified_baseline": true
+    }
+  ],
+  "profiling_is_a_separate_binary": true,
+  "baseline_source_unchanged": true,
+  "actual_model": "checkpoint_step20.pt; 2 sentences, 20 steps, quality unaccepted",
+  "continuous_real_time_verified": false,
+  "current_realtime_gate": "FAIL: 13 ms audio costs about 405 ms baseline compute",
+  "native_dense_kernel_theoretical_ms": 8.52428,
+  "ideal_dense_replacement_plus_measured_other_ms": 56.91389800000004,
+  "hybrid_estimate_warning": "Mixed fixed-point PL/FP32 PS estimate only; excludes transfers, conversion, driver, DDR stalls, audio IO and quantization quality; not measured hybrid performance.",
+  "user_microphone_trial_cancelled": true,
+  "next_stage": "Reduce/accelerate full model under 13ms budget, then validate target quality and continuous microphone IO."
+}

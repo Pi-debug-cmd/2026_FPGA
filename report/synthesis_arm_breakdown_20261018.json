@@ -1,0 +1,62 @@
+{
+  "kind": "synthesis_arm_breakdown",
+  "date": "2026-10-18",
+  "method": {
+    "binary": "build/generated/arm_bench_20261018/bench_arm（插桩版 synthesis_bench.cpp + common_bench.cpp，ARM 静态）",
+    "input": "holdout.wav 2.68s 起 1.0s（101 帧 / 215 脉冲 / 93 有声脉冲 / 308 次最小相位调用）",
+    "accuracy": {
+      "max_abs_diff_vs_pyworld": 9.714451465e-17,
+      "rms_diff_vs_pyworld": 1.094936256e-17,
+      "runs": 3
+    }
+  },
+  "arm_seconds": {
+    "total_synthesis": 0.312136479,
+    "minphase_all": 0.168586062,
+    "minphase_periodic": 0.053106342,
+    "minphase_aperiodic": 0.116278461,
+    "aperiodic_total": 0.186140202,
+    "aper_noise": 0.020857214,
+    "aper_log": 0.018342242,
+    "periodic_total": 0.088026163,
+    "periodic_rest": 0.025182072,
+    "ola": 0.003337138,
+    "timebase": 0.011350872,
+    "per_log": 0.00876748
+  },
+  "shares": {
+    "minphase_all": 0.5401036832993813,
+    "aperiodic": 0.5963423518979337,
+    "periodic": 0.28201177664979044,
+    "ola": 0.010691278413504497,
+    "timebase": 0.03636509271958565,
+    "per_log": 0.02808861055935727
+  },
+  "minphase_subparts": {
+    "mirror": 0.001789662,
+    "fft1_cepstrum_ifft": 0.025594266,
+    "fold": 0.003294072,
+    "fft2_forward": 0.044550732,
+    "exp_cos_sin": 0.084115717
+  },
+  "fastmath": {
+    "baseline_synthesis_s": 2.714212,
+    "fastmath_synthesis_s": 2.654345,
+    "speedup": 1.0226,
+    "baseline_rtf": 0.825404,
+    "fastmath_rtf": 0.813739,
+    "verdict": "宿主 1.98×、板上 1.02×，否决该捷径"
+  },
+  "conclusions": [
+    "板端合成里最小相位合计占 54.0%（其中非周期性部分 37.3%），不是宿主拆解给的 85%。",
+    "非周期性合成整体占 59.6%，是最大单项；周期性占 28.2%；OLA 仅 1.1%。",
+    "exp/cos/sin 在最小相位子项中占 0.0841 s（合成 27%），但自写快速数学在板上只快 2.2%，说明 ARM 的 libm 已足够快，此路不可取。",
+    "PL 卸载最小相位的预期收益修正为：PS 全链 0.816 → 约 0.52（原估 0.35 基于宿主占比，过于乐观）。",
+    "若再卸载非周期噪声/对数（约 0.039 s），可再降约 0.07 RTF。"
+  ],
+  "limitations": [
+    "1.0 秒片段，有声帧 76/101；全片占比会随静音比例变化。",
+    "bench 为离线整段调用，不含流式 I/O 与调度；PS RTF 为按占比线性外推的估算。",
+    "插桩本身有微小开销（两次运行差异约 0.3%）。"
+  ]
+}

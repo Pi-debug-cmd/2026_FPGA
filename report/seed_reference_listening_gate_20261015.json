@@ -1,0 +1,28 @@
+{
+  "kind": "seed_tiny_cpu_quality_listening_gate",
+  "order": [
+    "target",
+    "world_old_fixed",
+    "seed_tiny_steps30"
+  ],
+  "duration_s": 17.4,
+  "rate": 32000,
+  "segment_seconds": 4.8,
+  "gap_seconds": 1,
+  "leading_silence_seconds": 1,
+  "source_crop_start_s": 2.68,
+  "target_crop_start_s": 11.0,
+  "reference_output_sha256": "78be5244c6d869b6c9d8558d117718bf326ae024c843a375279c4a4175f346e6",
+  "gains": [
+    0.48839209968118663,
+    7.5359307359307355,
+    1.2993273342402087
+  ],
+  "peak": 0.8535994628956017,
+  "clip_fraction": 0.0,
+  "wav_sha256": "7dceba3b50826816240ae22066cf6ebef84155dae8af0881cab22b2c2e8e0180",
+  "gzip_sha256": "915d80fa14af09dbbc7aaad198f71e955a408eac4d976acbced4f3d0a89f96cd",
+  "speaker_identity_accepted": false,
+  "board_realtime_accepted": false,
+  "limitations": "PC offline quality reference only. General pretrained weights plus Track8 target prompt; no source enrollment used. Not the historical LLVC model. Full-context reference vs WORLD have different analysis context and preprocessing; timing/level differ. Existing development utterance, not final blind evaluation. Not deployed or assumed deployable on Zynq."
+}

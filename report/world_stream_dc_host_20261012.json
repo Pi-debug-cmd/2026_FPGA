@@ -1,0 +1,12 @@
+{
+  "partition_identical_pcm": true,
+  "original_stream": {
+    "correlation": 0.98158377129936,
+    "rmse": 0.008399142962035675
+  },
+  "aligned_dc_stream": {
+    "correlation": 0.9793529236464983,
+    "rmse": 0.012109051311689024
+  },
+  "clip_fraction": 0.0
+}

@@ -1,0 +1,206 @@
+{
+  "kind": "world_register_host_parity",
+  "date": "2026-10-16",
+  "tool": "src/ps/world_register.cpp",
+  "protocol": {
+    "rate": 16000,
+    "bits": 16,
+    "frame_period_ms": 10.0,
+    "f0_floor": 71.0,
+    "f0_ceil": 800.0,
+    "q1": -0.15,
+    "d4c_threshold": 0.85,
+    "comparison": "relative quantities only (scale invariant)"
+  },
+  "tolerance_rationale": "容差 1e-5 覆盖累加顺序带来的浮点差异：C++ 按帧顺序累加 513 个频点，numpy 用成对求和；实测最大差约 4e-7，属算术顺序而非算法差异。两者共用同一份 WORLD 0.3.5 C++ 核，f0 与声道统计应逐项吻合。",
+  "files": [
+    {
+      "name": "target_t8_10s",
+      "source": "Track 8(1).wav 前10秒",
+      "seconds": 10.0,
+      "exit_code": 0,
+      "stdout": "OK samples=160000 frames=1001 voiced=672 voiced_fraction=0.671329 f0_median=184.291 f0_p10=165.930 f0_p90=216.080 profile=C:\\Users\\World\\Desktop\\2026_FPGA\\build\\generated\\world_register_20261016\\target_t8_10s.profile.txt",
+      "stderr": "",
+      "profile_sha256": null,
+      "comparison": {
+        "voiced_frames": {
+          "cpp": 672.0,
+          "pyworld": 672.0,
+          "abs_diff": 0.0
+        },
+        "voiced_fraction": {
+          "cpp": 0.671329,
+          "pyworld": 0.6713286713286714,
+          "abs_diff": 3.286713285977072e-07
+        },
+        "f0_median_hz": {
+          "cpp": 184.291425,
+          "pyworld": 184.29142513493815,
+          "abs_diff": 1.3493814776666113e-07
+        },
+        "f0_p10_hz": {
+          "cpp": 165.929823,
+          "pyworld": 165.92982315241844,
+          "abs_diff": 1.524184369827708e-07
+        },
+        "f0_p90_hz": {
+          "cpp": 216.079558,
+          "pyworld": 216.07955793116318,
+          "abs_diff": 6.88368118062499e-08
+        },
+        "band_db_80_400": {
+          "cpp": -3.150862,
+          "pyworld": -3.150862184516865,
+          "abs_diff": 1.8451686489839858e-07
+        },
+        "band_db_400_1000": {
+          "cpp": -5.397349,
+          "pyworld": -5.397349163365899,
+          "abs_diff": 1.6336589858667594e-07
+        },
+        "band_db_1000_2000": {
+          "cpp": -11.637614,
+          "pyworld": -11.637613877403208,
+          "abs_diff": 1.225967913853765e-07
+        },
+        "band_db_2000_4000": {
+          "cpp": -21.672036,
+          "pyworld": -21.67203610635991,
+          "abs_diff": 1.0635991287699653e-07
+        },
+        "band_db_4000_8000": {
+          "cpp": -25.776051,
+          "pyworld": -25.776051108894627,
+          "abs_diff": 1.0889462842555986e-07
+        },
+        "ap_mean_below_1000": {
+          "cpp": 0.038876,
+          "pyworld": 0.03887613304987837,
+          "abs_diff": 1.330498783716494e-07
+        },
+        "ap_mean_1000_3000": {
+          "cpp": 0.150788,
+          "pyworld": 0.15078817171634012,
+          "abs_diff": 1.7171634011936554e-07
+        },
+        "ap_mean_3000_8000": {
+          "cpp": 0.732642,
+          "pyworld": 0.7326416149994742,
+          "abs_diff": 3.850005257932665e-07
+        }
+      },
+      "max_abs_diff": 3.850005257932665e-07,
+      "tolerance": 1e-05,
+      "within_tolerance": true
+    },
+    {
+      "name": "target_t5_8_20s",
+      "source": "Track 5～8 各前5秒拼接",
+      "seconds": 20.0,
+      "exit_code": 0,
+      "stdout": "OK samples=320000 frames=2001 voiced=1065 voiced_fraction=0.532234 f0_median=194.357 f0_p10=170.641 f0_p90=242.487 profile=C:\\Users\\World\\Desktop\\2026_FPGA\\build\\generated\\world_register_20261016\\target_t5_8_20s.profile.txt",
+      "stderr": "",
+      "profile_sha256": null,
+      "comparison": {
+        "voiced_frames": {
+          "cpp": 1065.0,
+          "pyworld": 1065.0,
+          "abs_diff": 0.0
+        },
+        "voiced_fraction": {
+          "cpp": 0.532234,
+          "pyworld": 0.5322338830584707,
+          "abs_diff": 1.1694152923791279e-07
+        },
+        "f0_median_hz": {
+          "cpp": 194.356702,
+          "pyworld": 194.35670233209333,
+          "abs_diff": 3.3209332173100847e-07
+        },
+        "f0_p10_hz": {
+          "cpp": 170.641343,
+          "pyworld": 170.64134308778063,
+          "abs_diff": 8.778062010605936e-08
+        },
+        "f0_p90_hz": {
+          "cpp": 242.487308,
+          "pyworld": 242.48730816654648,
+          "abs_diff": 1.665464708366926e-07
+        },
+        "band_db_80_400": {
+          "cpp": -3.288635,
+          "pyworld": -3.2886352667070136,
+          "abs_diff": 2.667070133632876e-07
+        },
+        "band_db_400_1000": {
+          "cpp": -5.262568,
+          "pyworld": -5.262567573054636,
+          "abs_diff": 4.269453635075138e-07
+        },
+        "band_db_1000_2000": {
+          "cpp": -11.289218,
+          "pyworld": -11.28921793110731,
+          "abs_diff": 6.889269066334691e-08
+        },
+        "band_db_2000_4000": {
+          "cpp": -20.905441,
+          "pyworld": -20.905441045729244,
+          "abs_diff": 4.572924439116832e-08
+        },
+        "band_db_4000_8000": {
+          "cpp": -24.156099,
+          "pyworld": -24.156099379240782,
+          "abs_diff": 3.792407810010445e-07
+        },
+        "ap_mean_below_1000": {
+          "cpp": 0.045338,
+          "pyworld": 0.04533754700629404,
+          "abs_diff": 4.5299370596274535e-07
+        },
+        "ap_mean_1000_3000": {
+          "cpp": 0.150715,
+          "pyworld": 0.15071525275188646,
+          "abs_diff": 2.527518864758882e-07
+        },
+        "ap_mean_3000_8000": {
+          "cpp": 0.713278,
+          "pyworld": 0.7132783500206497,
+          "abs_diff": 3.500206496864777e-07
+        }
+      },
+      "max_abs_diff": 4.5299370596274535e-07,
+      "tolerance": 1e-05,
+      "within_tolerance": true
+    },
+    {
+      "name": "reject_too_short",
+      "source": "0.5秒片段",
+      "seconds": 0.5,
+      "exit_code": 3,
+      "stdout": "",
+      "stderr": "REJECTED too_short samples=8000 need=16000",
+      "expect_reject": 3,
+      "reject_correct": true
+    },
+    {
+      "name": "reject_silent",
+      "source": "2秒全静音",
+      "seconds": 2.0,
+      "exit_code": 5,
+      "stdout": "",
+      "stderr": "REJECTED silent_input",
+      "expect_reject": 5,
+      "reject_correct": true
+    }
+  ],
+  "failures": [],
+  "host_binary": "build\\generated\\world_register_20261016\\world_register_host.exe",
+  "board_deployed": false,
+  "board_run": false,
+  "audio_played": false,
+  "limitations": [
+    "主机 x86_64 编译结果，不是板端 ARM 运行结果；板端一致性须另行上传核对。",
+    "输入为已有目标录音切片，不是现场注册录音；未验证真实现场噪声与电平条件。",
+    "画像与 PC 端 pyworld 同源（同一份 WORLD 0.3.5 C++），所以一致只说明移植正确，不代表算法有效。"
+  ]
+}

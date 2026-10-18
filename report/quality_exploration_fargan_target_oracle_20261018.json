@@ -1,0 +1,63 @@
+{
+  "kind": "mapper_independent_fargan_target_oracle",
+  "date": "2026-10-18",
+  "official_pretrained_vocoder": true,
+  "mapper_used": false,
+  "board_touched": false,
+  "audio_played": false,
+  "outputs": [
+    {
+      "track": 5,
+      "feature_path": "交接\\核心材料\\board_budget_20261005\\fargan_corpus\\target_track5.features.f32",
+      "feature_sha256": "42bda45dbfd8d1fe19f4b2d01dc06bd47014c173ae399f2ef72ce360c418cc13",
+      "feature_frames": 2878,
+      "recorded_input_samples_in_legacy_manifest": 460480,
+      "output_pcm_samples": 460480,
+      "duration_seconds": 28.78,
+      "wav_path": "build\\generated\\quality_exploration_20261018\\fargan_target_oracle\\target_track5_fargan_oracle.wav",
+      "wav_sha256": "501bcc0eb23d4d565cb2a09fcf43c0f025ddedd1b9bfa8576e3efc2f8b0881f2",
+      "synthesis_stats_path": "build\\generated\\quality_exploration_20261018\\fargan_target_oracle\\target_track5_fargan_oracle.stats.json"
+    },
+    {
+      "track": 6,
+      "feature_path": "交接\\核心材料\\board_budget_20261005\\fargan_corpus\\target_track6.features.f32",
+      "feature_sha256": "dce7998db67a73c39e3078d87b7ea9563bb0589c657396c89d809c660bec43e7",
+      "feature_frames": 2060,
+      "recorded_input_samples_in_legacy_manifest": 329600,
+      "output_pcm_samples": 329600,
+      "duration_seconds": 20.6,
+      "wav_path": "build\\generated\\quality_exploration_20261018\\fargan_target_oracle\\target_track6_fargan_oracle.wav",
+      "wav_sha256": "c55e01b00baa8cac1c23a809ed715a5f195371a464a0fcbb9f76030a7813f929",
+      "synthesis_stats_path": "build\\generated\\quality_exploration_20261018\\fargan_target_oracle\\target_track6_fargan_oracle.stats.json"
+    },
+    {
+      "track": 7,
+      "feature_path": "交接\\核心材料\\board_budget_20261005\\fargan_corpus\\target_track7.features.f32",
+      "feature_sha256": "bbd4a77fb00cda95a739d3615199d87af5f83ab0b69bf11989b29a2424a3b363",
+      "feature_frames": 2612,
+      "recorded_input_samples_in_legacy_manifest": 417920,
+      "output_pcm_samples": 417920,
+      "duration_seconds": 26.12,
+      "wav_path": "build\\generated\\quality_exploration_20261018\\fargan_target_oracle\\target_track7_fargan_oracle.wav",
+      "wav_sha256": "b753446094858db1ed41c167c60230429064b98271bbc5626ad7772afd188fe3",
+      "synthesis_stats_path": "build\\generated\\quality_exploration_20261018\\fargan_target_oracle\\target_track7_fargan_oracle.stats.json"
+    },
+    {
+      "track": 8,
+      "feature_path": "交接\\核心材料\\board_budget_20261005\\fargan_corpus\\target_track8.features.f32",
+      "feature_sha256": "1800391d5aee85362f2c8450f4ad913e8419e7295876bfc138581f6255b52b31",
+      "feature_frames": 2364,
+      "recorded_input_samples_in_legacy_manifest": 378240,
+      "output_pcm_samples": 378240,
+      "duration_seconds": 23.64,
+      "wav_path": "build\\generated\\quality_exploration_20261018\\fargan_target_oracle\\target_track8_fargan_oracle.wav",
+      "wav_sha256": "cd296983c72a93f71dc7f876b0e9bdefb697d123fa529f12b9a48c7836ccb64f",
+      "synthesis_stats_path": "build\\generated\\quality_exploration_20261018\\fargan_target_oracle\\target_track8_fargan_oracle.stats.json"
+    }
+  ],
+  "limitations": [
+    "Cached features were extracted from target Track5-8 by the legacy official encoder.",
+    "This establishes only the vocoder reconstruction ceiling.",
+    "No target registration, unseen-source conversion, subjective acceptance, or board runtime is claimed."
+  ]
+}

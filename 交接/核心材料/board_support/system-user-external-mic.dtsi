@@ -1,0 +1,82 @@
+/*
+ * Prepared WM8960 route for the Wildfire Zynq-7020 board.
+ *
+ * This is based on the vendor Linux audio device tree. It keeps the onboard
+ * right-channel microphone route and also powers the pink jack's left-channel
+ * microphone inputs. It must be built into the board DTB before it takes effect.
+ */
+
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/input/input.h>
+#include <dt-bindings/interrupt-controller/irq.h>
+#include <dt-bindings/phy/phy.h>
+
+/ {
+    model = "Embedfire ZYNQ Board";
+    compatible = "xlnx,zynq-ebf", "xlnx,zynq-7000";
+    cpus {
+        cpu@0 {
+            operating-points = <666667 1000000 333334 1000000>;
+        };
+    };
+    chosen {
+        bootargs = "console=ttyPS0,115200 earlycon";
+        stdout-path = "serial0:115200n8";
+    };
+};
+
+&i2c0 {
+    #address-cells = <1>;
+    #size-cells = <0>;
+    wm8960: codec@1a {
+        compatible = "wlf,wm8960";
+        reg = <0x1a>;
+        wlf,shared-lrclk;
+        wlf,hp-cfg = <3 3 3>;
+    };
+};
+
+&audio_axi_dynclk_0 {
+    compatible = "dglnt,axi-dynclk";
+    #clock-cells = <1>;
+    clock-output-names = "audio-clk-out1";
+};
+
+&audio_audio_formatter_0 {
+    clocks = <&clkc 15>, <&clkc 15>, <&audio_axi_dynclk_0 0>, <&clkc 15>;
+    audio-codec = <&wm8960>;
+    audio-routing =
+        "LINPUT1", "MICB",
+        "LINPUT2", "MICB",
+        "RINPUT1", "MICB",
+        "RINPUT2", "MICB";
+};
+
+&audio_i2s_receiver_0 {
+    clocks = <&clkc 15>, <&audio_axi_dynclk_0 0>, <&clkc 15>;
+};
+
+&audio_i2s_transmitter_0 {
+    clocks = <&clkc 15>, <&audio_axi_dynclk_0 0>, <&clkc 15>;
+};
+
+&qspi {
+    w25q128: w25q128@0 {
+        #address-cells = <1>;
+        #size-cells = <1>;
+        spi-rx-bus-width = <4>;
+        spi-tx-bus-width = <4>;
+        compatible = "w25q128", "jedec,spi-nor";
+        reg = <0>;
+        spi-max-frequency = <50000000>;
+    };
+};
+
+&gem0 {
+    local-mac-address = [00 0a 35 20 8b 89];
+    phy-handle = <&phy0>;
+    phy0: ethernet-phy@1 {
+        reg = <1>;
+        device_type = "ethernet-phy";
+    };
+};

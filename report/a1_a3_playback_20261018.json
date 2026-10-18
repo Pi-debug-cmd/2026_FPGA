@@ -1,0 +1,46 @@
+{
+  "kind": "a1_vs_a3_playback",
+  "date": "2026-10-18",
+  "order": [
+    "target_track9",
+    "a1_closed_loop",
+    "a3_identity056"
+  ],
+  "duration_s": 17.4,
+  "peak": 0.8643732197169338,
+  "wav_sha256": "0c07549fc305259b19d095a6b90406438ac12dda855a3658d6de4d0ef597cb9d",
+  "gzip_sha256": "616bfe88e53a382a230bb0d36796f5d056946de5424bfe2b84422f67e2be2d89",
+  "board": {
+    "port": "COM14",
+    "remote_dir": "/tmp/codex_compare_20261018",
+    "run_dir": "/tmp/codex_compare_20261018/comparison_3901576672868",
+    "play_rc": 0,
+    "comparison_completed": true,
+    "mixer_restored": true
+  },
+  "log": "report/a1_a3_playback_20261018.log",
+  "metrics_reference": {
+    "a1": {
+      "identity": 0.19,
+      "leakage": 0.172,
+      "utmos": 2.035,
+      "cer": 0.167
+    },
+    "a3": {
+      "identity": 0.561,
+      "leakage": 0.095,
+      "utmos": 1.401,
+      "cer": 0.056
+    },
+    "target_self_pairwise": 0.911
+  },
+  "user_feedback": {
+    "raw": "2更像，3听起来模糊",
+    "interpretation": "第②段（A1 闭环）更接近目标①；第③段（A3-0.561）主观模糊。",
+    "preferred_segment": "a1_closed_loop",
+    "a3_artifacts_reported": "模糊（blurry / muffled）",
+    "decision": "主线采 A1；A3 不采用（与 UTMOS 1.401 的客观指示一致）",
+    "recorded_at": "2026-10-18"
+  },
+  "notes": "同一开发句、单源单目标；A3 为离线 CPU 产物，非板端推理。"
+}

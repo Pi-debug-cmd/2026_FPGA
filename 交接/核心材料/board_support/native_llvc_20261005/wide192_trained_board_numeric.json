@@ -1,0 +1,22 @@
+{
+  "normalized_rmse": 3.3788870723583386e-07,
+  "max_abs": 2.086162567138672e-07,
+  "samples": 69120,
+  "benchmark": {
+    "samples": 69120,
+    "chunks": 333,
+    "audio_seconds": 4.32,
+    "inference_seconds": 3.77209,
+    "mean_chunk_ms": 11.3128,
+    "max_chunk_ms": 14.9591,
+    "peak_rss_kib": 4108,
+    "threads": 2,
+    "core": "native_fp32_wide_packed_output_candidate",
+    "source_enrollment": false,
+    "real_time_verified": false,
+    "quality_accepted": false
+  },
+  "original_audio_mixed_into_output": false,
+  "microphone_recorded": false,
+  "quality_accepted": false
+}

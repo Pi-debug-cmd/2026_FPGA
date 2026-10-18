@@ -1,0 +1,107 @@
+{
+  "kind": "a3_neural_round2_summary",
+  "date": "2026-10-18",
+  "scope": "第二轮：DTW 帧级对齐 / 内容保持约束 / 条件有效性自检 / 验收线",
+  "offline_only": true,
+  "board_touched": false,
+  "recorded": false,
+  "played": false,
+  "pl_switched": false,
+  "protocol": "同 A1：window 2.68s+4.8s，WeSpeaker T5-8 质心，UTMOS，Whisper-small CER vs 源转写",
+  "round1_best": {"identity": 0.4064, "leakage": 0.0642, "utmos": 1.3997, "cer": 0.2778},
+  "a1_reference": {"identity": 0.1903, "leakage": 0.1719, "utmos": 2.0354, "cer": 0.1667},
+  "item1_dtw_alignment": {
+    "method": "librosa.sequence.dtw on CMN 48-band log-mel + 1.5*voiced indicator, monotone path, per-source-frame mean teacher index",
+    "pairs": 192,
+    "lag_abs_mean_frames": 0.69,
+    "lag_abs_max_frames": 26,
+    "files_with_local_warp_over_100ms": 9,
+    "files_with_local_warp_over_200ms": 2,
+    "explained_fraction_round1": 0.624,
+    "explained_fraction_round2": 0.610,
+    "val_zero_baseline_mae_round1": 2.482,
+    "val_zero_baseline_mae_round2": 2.174,
+    "val_model_mae_round1": 0.934,
+    "val_model_mae_round2": 0.849,
+    "absolute_spec_mae_reduction": 0.091,
+    "target_explained_fraction_0p8_met": false,
+    "conclusion": "DTW 对少数句有局部漂移修正，但解释度没有上升（61.0% vs 62.4%），对齐不是主瓶颈；瓶颈判断需修正。指标上身份 0.400->0.463、字错 0.500->0.278，仍有收益。",
+    "metrics_after_dtw_plain": {"identity": 0.4630, "leakage": 0.0351, "utmos": 1.3763, "cer": 0.2778, "val_identity": 0.4585}
+  },
+  "item2_content_preservation": {
+    "per_bin_soft_clamp_relative_to_source_db": {
+      "4": {"identity": 0.0313, "leakage": 0.5532, "utmos": 1.5279},
+      "6": {"identity": 0.0273, "leakage": 0.5473, "utmos": 1.5308},
+      "8": {"identity": 0.0573, "leakage": 0.5429, "utmos": 1.5474}
+    },
+    "why_clamp_fails": "目标音色本身是相对源包络的大幅逐 bin 静态偏差（画像均值谱 L1 0.61），限幅等于把转换拉回源，身份崩到源水平。",
+    "effective_lever": "源包络时域细节注入 (pred + beta*(src - smooth(src)))",
+    "detail_beta_0p5": {"identity": 0.4345, "leakage": 0.0204, "utmos": 1.4501, "cer": 0.2778},
+    "targets": {"utmos_min": 1.9, "cer_max": 0.20},
+    "targets_met": false
+  },
+  "item3_condition_effectiveness": {
+    "pseudo_targets": {"B": {"f0_ratio": 1.26, "formant_scale": 1.15, "in_training": true},
+                        "C": {"f0_ratio": 0.80, "formant_scale": 0.90, "in_training": false}},
+    "conditioned_model_parameters": 56753,
+    "profile_input": "4 F0 stats + 16 DCT of profile mean spectrum; output = profile mean + residual",
+    "evidence": {
+      "f0_ratio_B_over_A": [1.2561, 1.2600],
+      "A_output_closer_to_A_profile": true,
+      "B_output_closer_to_B_profile": true,
+      "C_output_closer_to_C_profile": true,
+      "A_output_closer_to_centroid_A_than_B": true,
+      "B_output_closer_to_centroid_B_than_A": true,
+      "residual_A_to_residual_B_l1": [0.5158, 0.5315],
+      "mu_A_to_mu_B_l1": 0.6132,
+      "output_diff_over_mu_diff": [1.0165, 1.1842]
+    },
+    "c_extrapolation": {"f0_ratio_observed": 0.896, "f0_ratio_intended": 0.80,
+                         "envelope_closest_to_C": true,
+                         "centroid_C_confounded": true,
+                         "note": "合成同人变换不能当真正第二说话人质心；C 输出声纹反而更像真实 A（0.439 vs 0.245）"},
+    "conclusion": "条件对分布内伪目标 A/B 确实生效（F0/包络/声纹三路一致，残差随画像改变）；对训练外变换只部分外推；真实多目标泛化仍需 2-3 个真实目标说话人语料。条件模型在真实目标 A 上身份 0.369（无条件 0.463），条件输入会稀释单目标精度。"
+  },
+  "item4_acceptance": {
+    "identity_min_0p35": {"target": 0.35, "best": 0.4630, "pass": true},
+    "utmos_min_1p9": {"target": 1.9, "best": 1.4501, "pass": false},
+    "cer_max_0p20": {"target": 0.20, "best": 0.2778, "pass": false},
+    "int8_usable": {
+      "simulation": "折叠标准化 + per-output-channel 权重 int8 + 逐维输入/隐层激活 int8 模拟",
+      "fp32_equivalence_selfcheck": {"residual_max_abs_diff": 5.2e-06, "logf0_max_abs_diff": 1.9e-06},
+      "val_spec_mae_delta": 0.00048,
+      "sim_metrics": {"identity": 0.4200, "leakage": 0.0201, "utmos": 1.3294},
+      "qat_done": false,
+      "note": "数值可用；未做 QAT/定点内核，激活量化仍有可见损失（身份 0.42 vs fp32 0.463）"
+    },
+    "ps_rtf_max_0p3": {"network_rtf": [0.0054, 0.0544], "chain_rtf": [0.8052, 0.8542],
+                       "pass": "模型过；整链需 PL 承担 WORLD 合成 0.550，A3 不改变实时预算结构"}
+  },
+  "verdict": {
+    "pass_acceptance_line": false,
+    "replace_a1_now": false,
+    "keep_a3_parallel": true,
+    "reason": "身份门槛通过且第二轮回升到 0.463，但 UTMOS 1.45<1.9、字错 0.278>0.20；自然度/内容仍是替换 A1 的阻断项。",
+    "bottleneck_revised": "不是帧级对齐，而是逐帧目标包络可预测性（解释度卡在 61%）；跨过 1.9 需更强时序/声学建模、教师标签审查或换模型族。",
+    "next_steps": [
+      "2-3 个真实目标说话人语料，验证条件化与重注册（当前最大空白）",
+      "更强时序建模（因果 TCN/长上下文）或教师标签质量审查，解释度目标 >75%",
+      "int8 QAT / per-channel 激活量化，保住身份",
+      "止损：两周内 UTMOS 仍 <1.8，A3 只作为技术报告结论，主线回 A1"
+    ]
+  },
+  "artifacts": {
+    "report_section": "report/a3_neural_feasibility.md §0b",
+    "dtw_alignment": "build/generated/a3_neural/dtw_alignment.json",
+    "dtw_model": "build/generated/a3_neural/a3_dtw.pt",
+    "dtw_training": "build/generated/a3_neural/training_dtw.json",
+    "dtw_metrics": "build/generated/a3_neural/eval2_dtw_clamp0_detail0.json",
+    "detail_metrics": "build/generated/a3_neural/eval2_dtw_clamp0_detail0.5.json",
+    "clamp_sweep": "build/generated/a3_neural/eval2_dtw_clamp*.json",
+    "condition_model": "build/generated/a3_neural/a3_cond.pt",
+    "condition_evidence": "build/generated/a3_neural/condition_effectiveness.json",
+    "condition_training": "build/generated/a3_neural/training_cond.json",
+    "int8_simulation": "build/generated/a3_neural/int8_simulation.json",
+    "outputs_dir": "build/generated/a3_neural/output/"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "native_nrmse": 2.102965504925241e-05,
+  "native_max_absolute_error": 4.7963112592697144e-08,
+  "actual_arm_benchmark": {
+    "samples": 16000,
+    "chunks": 77,
+    "audio_seconds": 1,
+    "inference_seconds": 0.8596,
+    "mean_chunk_ms": 11.1548,
+    "max_chunk_ms": 12.526,
+    "peak_rss_kib": 2784,
+    "threads": 2,
+    "core": "native_fp32_ring_candidate",
+    "source_enrollment": false,
+    "real_time_verified": false,
+    "quality_accepted": false
+  },
+  "actual_arm_output_sha256": "ca7a32934db47b59a565415b5983b80d21181b578c0d5591682ee7659834b95f",
+  "bounded_noise_and_speech_level_checks_passed": true,
+  "synthetic_noise_output_reduction_db": -18.63891754761385,
+  "steady_zero_output_reduction_db": -24.20703052889124,
+  "public_normal_level_voice_change_db": -1.4135910847417346,
+  "validation_student_character_edits": 27,
+  "validation_previous_edits": 22,
+  "validation_characters": 152,
+  "content_regression": true,
+  "overall_quality_passed": false,
+  "deployment_scope": "Temporary microphone noise/volume audition ONLY, content regression disclosed. Not final model acceptance.",
+  "human_noise_acceptance_pending": true,
+  "target_timbre_accepted": false,
+  "board_acoustic_latency_measured": false
+}

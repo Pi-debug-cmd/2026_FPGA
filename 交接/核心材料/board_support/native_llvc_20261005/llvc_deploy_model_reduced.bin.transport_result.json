@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_budget_20261005\\llvc_deploy_model_reduced.bin",
+  "remote": "/home/root/native_llvc_trial_20261005/llvc_deploy_model_reduced_v2.bin",
+  "sha256": "4e635452493b67b1a83fa70cd356bbfbc3ac605339e7a0c5e37c9c4ed5f5e7bd",
+  "bytes": 2604928,
+  "seconds": 114.59299999999985,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

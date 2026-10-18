@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-15",
+  "playback_directory": "/tmp/codex_prepared_comparison_20261015/comparison_3184003729622",
+  "order": [
+    "original_capture",
+    "world_identity_no_conversion",
+    "old_fixed_recipe"
+  ],
+  "user_feedback": "感觉不到变差，3的清晰度其实和前两段差不多，其实主要是没有过滤掉录入声音中的说话吐气声音，和说话者比较沙哑低沉的音色",
+  "subjective_identity_resynthesis_degradation_detected": false,
+  "old_recipe_clarity_comparable_to_source": true,
+  "source_breath_and_hoarse_dark_timbre_retained": true,
+  "speaker_identity_accepted": false,
+  "new_playback_or_recording": false,
+  "ap_audit": "report/source_aperiodicity_audit_20261015.json",
+  "ap_global_suppression_supported": false,
+  "interpretation_limit": "One utterance/one listener. Does not isolate microphone wind, glottal breathiness, rasp or identity; do not generalize to all WORLD settings."
+}

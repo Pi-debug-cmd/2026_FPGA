@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\small128_simd_binary.tar.gz",
+  "remote": "/home/root/native_llvc_trial_20261005/small128_simd_binary.tar.gz",
+  "sha256": "a7346f38a271a36db8c2bc22bb639be431b294dbe7be6782c107b9e0cfba83f0",
+  "bytes": 720292,
+  "seconds": 32.790069499984384,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

@@ -1,0 +1,19 @@
+{
+  "audible_mode": "original-only PCM passthrough",
+  "parallel_neural_computation": false,
+  "diagnostic_cancelled": true,
+  "mic_diagnostic_c_saved": false,
+  "capture": 43,
+  "headphone": 119,
+  "playback": 222,
+  "pids_at_check": {
+    "capture": 26078,
+    "passthrough": 26079,
+    "playback": 26080
+  },
+  "original_loudness_clarity_low_noise_accepted": true,
+  "user_feedback": "原声播放没问题了，没过多杂音，音量也够",
+  "user_not_required_to_repeat_original_acceptance": true,
+  "model_quality_still_failed": true,
+  "next_work_use_existing_audio_and_public_validation": true
+}

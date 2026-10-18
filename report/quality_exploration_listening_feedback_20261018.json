@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-18",
+  "comparison_order": [
+    "target_track9",
+    "seed_single_track8_cfg070",
+    "seed_multi_track_cfg070_seed20261019",
+    "seed_multi_track_cfg095_seed20261019"
+  ],
+  "user_feedback": "三和四更像一些，比二少了一些闷的声音，三和四差异不是很明显，貌似四的音要高一些",
+  "multi_utterance_registration_preferred_over_single_prompt": true,
+  "muffled_quality_reduced_in_multi_utterance_candidates": true,
+  "cfg070_vs_cfg095_difference_large": false,
+  "cfg095_perceived_pitch_higher": true,
+  "objective_followup": {
+    "report": "report/quality_exploration_pitch_brightness_20261018.json",
+    "cfg095_minus_cfg070_f0_median_cents": 0.3505415191267257,
+    "cfg095_minus_cfg070_spectral_centroid_median_hz": 7.4631664279338,
+    "cfg095_minus_cfg070_high_low_median_db": 0.26435691296567754,
+    "interpretation": "The perceived height is better explained by a small brightness change than a global F0 rise."
+  },
+  "ai_artifact_accepted": false,
+  "target_similarity_final_accepted": false,
+  "multiple_sources_verified": false,
+  "board_realtime_verified": false,
+  "playback_directory": "/tmp/codex_quality_20261018/comparison_6057153765715",
+  "underruns": 0,
+  "mixer_restored": true,
+  "pcm_closed": true,
+  "decision": "Adopt multi-utterance target registration for the offline teacher. Keep CFG 0.70 and 0.95 as equivalent candidates until spectral analysis and independent sources; do not claim final target similarity or Zynq runtime."
+}

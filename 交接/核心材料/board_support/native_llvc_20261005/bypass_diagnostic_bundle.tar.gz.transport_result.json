@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\bypass_diagnostic_bundle.tar.gz",
+  "remote": "/home/root/native_llvc_trial_20261005/bypass_diagnostic_bundle.tar.gz",
+  "sha256": "175c32d79331ffbb67d0e0ff30feb6f74df410fb3b0bbdd3e07f58fb2d03e0d4",
+  "bytes": 622909,
+  "seconds": 28.62924079998629,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

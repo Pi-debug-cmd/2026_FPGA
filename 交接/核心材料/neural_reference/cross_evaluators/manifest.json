@@ -1,0 +1,37 @@
+[
+  {
+    "evaluator": "WeSpeaker Chinese ResNet34-LM",
+    "repository": "Wespeaker/wespeaker-cnceleb-resnet34-LM",
+    "revision": "ed25c1ecbd9e8d3c7944df95430da02bd3cdcf7a",
+    "card": {
+      "license": "apache-2.0"
+    },
+    "weight": {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\cross_evaluators\\cnceleb_resnet34_LM.onnx",
+      "url": "https://huggingface.co/Wespeaker/wespeaker-cnceleb-resnet34-LM/resolve/ed25c1ecbd9e8d3c7944df95430da02bd3cdcf7a/cnceleb_resnet34_LM.onnx",
+      "sha256": "e7584940aeac8d5512d875e58ce6c09ba4ddad65d8128e1dac0d93aadd087ebb",
+      "bytes": 26530309,
+      "cached": false
+    }
+  },
+  {
+    "evaluator": "UTMOS22 Strong SpeechMOS implementation",
+    "repository": "tarepan/SpeechMOS",
+    "revision": "ed25eacbfa42b99156c36ebec67a733b5dbb9b79",
+    "source": {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\cross_evaluators\\SpeechMOS_source.zip",
+      "url": "https://codeload.github.com/tarepan/SpeechMOS/zip/ed25eacbfa42b99156c36ebec67a733b5dbb9b79",
+      "sha256": "2c948956d7b07b4f7eed11e249fed5a1b617802749f5a55a200c11dcbd271ed6",
+      "bytes": 15803,
+      "cached": false
+    },
+    "source_directory": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\cross_evaluators\\SpeechMOS-ed25eacbfa42b99156c36ebec67a733b5dbb9b79",
+    "weight": {
+      "path": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\neural_reference\\cross_evaluators\\utmos22_strong_step7459_v1.pt",
+      "url": "https://github.com/tarepan/SpeechMOS/releases/download/v1.0.0/utmos22_strong_step7459_v1.pt",
+      "sha256": "38aa51ab79e2a4e09a1449758a4b37e9cbb2e8235a49662a732d33a9ba1e9bff",
+      "bytes": 411179119,
+      "cached": false
+    }
+  }
+]

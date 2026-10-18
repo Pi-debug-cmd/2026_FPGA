@@ -1,0 +1,85 @@
+{
+  "status": "native_numerical_comparison",
+  "tests": [
+    {
+      "name": "silence_416",
+      "samples": 416,
+      "normalized_rmse": 1.0243449864527425e-06,
+      "max_absolute_error": 2.0372681319713593e-10,
+      "native_stats": {
+        "samples": 416,
+        "chunks": 2,
+        "audio_seconds": 0.026,
+        "inference_seconds": 0.056522,
+        "mean_chunk_ms": 28.261,
+        "max_chunk_ms": 28.331,
+        "peak_rss_kib": 0,
+        "core": "native_fp32",
+        "source_enrollment": false,
+        "real_time_verified": false,
+        "quality_accepted": false
+      }
+    },
+    {
+      "name": "tone_1000",
+      "samples": 1000,
+      "normalized_rmse": 9.714030523561892e-07,
+      "max_absolute_error": 2.0372681319713593e-08,
+      "native_stats": {
+        "samples": 1000,
+        "chunks": 5,
+        "audio_seconds": 0.0625,
+        "inference_seconds": 0.135711,
+        "mean_chunk_ms": 27.1422,
+        "max_chunk_ms": 27.841,
+        "peak_rss_kib": 0,
+        "core": "native_fp32",
+        "source_enrollment": false,
+        "real_time_verified": false,
+        "quality_accepted": false
+      }
+    },
+    {
+      "name": "real_16000",
+      "samples": 16000,
+      "normalized_rmse": 9.23096555784887e-06,
+      "max_absolute_error": 6.373738870024681e-09,
+      "native_stats": {
+        "samples": 16000,
+        "chunks": 77,
+        "audio_seconds": 1,
+        "inference_seconds": 2.11717,
+        "mean_chunk_ms": 27.4958,
+        "max_chunk_ms": 29.353,
+        "peak_rss_kib": 0,
+        "core": "native_fp32",
+        "source_enrollment": false,
+        "real_time_verified": false,
+        "quality_accepted": false
+      }
+    },
+    {
+      "name": "edge_209",
+      "samples": 209,
+      "normalized_rmse": 2.6154180114657944e-05,
+      "max_absolute_error": 6.326445145532489e-09,
+      "native_stats": {
+        "samples": 209,
+        "chunks": 2,
+        "audio_seconds": 0.0130625,
+        "inference_seconds": 0.054734,
+        "mean_chunk_ms": 27.367,
+        "max_chunk_ms": 27.718,
+        "peak_rss_kib": 0,
+        "core": "native_fp32",
+        "source_enrollment": false,
+        "real_time_verified": false,
+        "quality_accepted": false
+      }
+    }
+  ],
+  "reference": "Exact unmodified LLVC step20 PyTorch stream",
+  "quality_accepted": false,
+  "real_time_verified": false,
+  "board_deployed": false
+}

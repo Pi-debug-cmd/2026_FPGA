@@ -1,0 +1,77 @@
+{
+  "snapshot_monotonic": 70362.879453662,
+  "board_wall_time": 1520851881.5967693,
+  "project_completed": false,
+  "quality_accepted": false,
+  "acoustic_latency_measured": false,
+  "inference_location": "7020 PS CPU0/CPU1",
+  "pl_acceleration_implemented": false,
+  "processes": {
+    "capture": {
+      "pid": 30659,
+      "cmdline": "arecord -q -D neural_capture -t raw -f S16_LE -r 16000 -c 1 --period-size=208 --buffer-size=832 /run/voice-neural-live/input.fifo "
+    },
+    "convert": {
+      "pid": 30660,
+      "cmdline": "/home/root/native_llvc_trial_20261005/native_llvc_wide192_shallow2_meter_arm --stream /home/root/native_llvc_trial_20261005/wide192_shallow2_target_anchor_selected.f32 /run/voice-neural-live/status.json "
+    },
+    "playback": {
+      "pid": 30661,
+      "cmdline": "aplay -q -D neural_play -t raw -f S16_LE -r 16000 -c 1 --period-size=208 --buffer-size=832 --start-delay=39000 /run/voice-neural-live/output.fifo "
+    },
+    "watchdog": {
+      "pid": 30662,
+      "cmdline": "python3 -u /home/root/native_llvc_trial_20261005/live_watchdog.py "
+    }
+  },
+  "status": {
+    "input_samples": 3043056,
+    "output_samples": 3043040,
+    "chunks": 14630,
+    "mean_compute_ms": 11.300379,
+    "max_compute_ms": 20.294179,
+    "compute_deadlines_missed": 103,
+    "format": "S16_LE_mono_16000",
+    "bounded_lookahead_samples": 16,
+    "finished": false,
+    "target_quality_accepted": false,
+    "acoustic_latency_measured": false,
+    "meter_window_input": {
+      "rms": 3.1e-05,
+      "peak": 3.1e-05,
+      "samples": 16016,
+      "clips": 0
+    },
+    "meter_window_raw_model": {
+      "rms": 2.1e-05,
+      "peak": 2.2e-05,
+      "samples": 16016,
+      "clips": 0
+    },
+    "meter_window_output": {
+      "rms": 2.1e-05,
+      "peak": 2.2e-05,
+      "samples": 16016,
+      "clips": 0
+    },
+    "input_gain": 1.0,
+    "output_gain": 1.0
+  },
+  "logs": {
+    "capture.log": "",
+    "convert.log": "",
+    "playback.log": "underrun!!! (at least 146.374 ms long)\n",
+    "watchdog.log": "",
+    "affinity.log": "AUDIO_CPU0 capture 30505\nAUDIO_CPU0 playback 30507\nAUDIO_CPU0 watchdog 30508\n"
+  },
+  "temperature_c": 65.82681274394,
+  "sha256": {
+    "native_fargan_v8_arm": "b0fcf2d97e3eb5b38d5da5cc32f486d910f0e61c5b55f13faaa6b51aabad6f32",
+    "fargan_mapper_v8_selected.f32": "5cf0ca6dcff4d11c4c2a20c21708ba8952cd12de2886774ee53942898ec5cfad",
+    "board_neural_fargan.sh": "3b82748e48babd36bc4e0d40fc92e66bfe297c36ee3df9891df4b9920c35f334",
+    "fargan_live_watchdog.py": "a3a6e037bcceedc526f6710485f6ba41d756aafe4d6c7329865f1bff2ad4a856",
+    "audio_affinity.py": "3473f725a3eb37d87e86fc1a00c0077e2dfb4ed2ecbd3f6e7ef723fc3ff5b192"
+  },
+  "v8_live_deployed": false,
+  "live_verified_short_observation": false
+}

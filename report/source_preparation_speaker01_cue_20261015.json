@@ -1,0 +1,9 @@
+{
+  "voiced_frames": 0,
+  "minimum_voiced_frames": 300,
+  "user_heard_cue": false,
+  "capture_exit": 0,
+  "restore_exit": 0,
+  "configuration_generated": false,
+  "valid_cued_enrollment": false
+}

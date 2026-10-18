@@ -1,0 +1,176 @@
+{
+  "source_preparation": {
+    "sha256": "5cd4ff62fba9121a7e0b664d3d7521128bf414c8484aa0575001817d98d3fed8",
+    "voiced_frames": 835,
+    "unvoiced_frames": 1166,
+    "bands": {
+      "below_1k": {
+        "aperiodic_power_ratio_p10_p50_p90": [
+          1.8312710117673163e-06,
+          2.43102382966305e-06,
+          6.240371955318669e-06
+        ]
+      },
+      "1k_3k": {
+        "aperiodic_power_ratio_p10_p50_p90": [
+          0.0011543634096439575,
+          0.010092340622290717,
+          0.0616377020725493
+        ]
+      },
+      "3k_8k": {
+        "aperiodic_power_ratio_p10_p50_p90": [
+          0.20553515170302036,
+          0.4769118070862411,
+          0.6789738402035486
+        ]
+      }
+    }
+  },
+  "source_development_sentence": {
+    "sha256": "1c064f8961590df3ed6e2893fb6f74942871be43d9c6aee55da5489c43a66e97",
+    "voiced_frames": 904,
+    "unvoiced_frames": 1097,
+    "bands": {
+      "below_1k": {
+        "aperiodic_power_ratio_p10_p50_p90": [
+          1.9074121876813656e-06,
+          2.658803588718421e-06,
+          5.909653081214663e-06
+        ]
+      },
+      "1k_3k": {
+        "aperiodic_power_ratio_p10_p50_p90": [
+          0.002219977955065506,
+          0.0125011161080914,
+          0.07029218207805457
+        ]
+      },
+      "3k_8k": {
+        "aperiodic_power_ratio_p10_p50_p90": [
+          0.14891256604194542,
+          0.4139605608925876,
+          0.6582942972973148
+        ]
+      }
+    }
+  },
+  "target_enrollment": {
+    "Track 5(1).wav": {
+      "sha256": "c3a50c67c7d29a77c482067272624c3a196ed6421dcf11099b5827ccb65e09e3",
+      "voiced_frames": 2025,
+      "unvoiced_frames": 854,
+      "bands": {
+        "below_1k": {
+          "aperiodic_power_ratio_p10_p50_p90": [
+            2.1215767021652465e-06,
+            3.6150951604124497e-06,
+            1.2135269971227162e-05
+          ]
+        },
+        "1k_3k": {
+          "aperiodic_power_ratio_p10_p50_p90": [
+            0.0008118763476689708,
+            0.007243560820282432,
+            0.09629739480774442
+          ]
+        },
+        "3k_8k": {
+          "aperiodic_power_ratio_p10_p50_p90": [
+            0.16640734063934398,
+            0.4903794267909635,
+            0.7729767312818993
+          ]
+        }
+      }
+    },
+    "Track 6(1).wav": {
+      "sha256": "92ac22ae3f5674e8e5b49c296e0b1c35f38347c72081c3e56e570091f82ffbfa",
+      "voiced_frames": 1256,
+      "unvoiced_frames": 805,
+      "bands": {
+        "below_1k": {
+          "aperiodic_power_ratio_p10_p50_p90": [
+            2.326916483905824e-06,
+            3.938675796751763e-06,
+            1.0830423490466161e-05
+          ]
+        },
+        "1k_3k": {
+          "aperiodic_power_ratio_p10_p50_p90": [
+            0.0008210023171184874,
+            0.00856551287976617,
+            0.06219208501390981
+          ]
+        },
+        "3k_8k": {
+          "aperiodic_power_ratio_p10_p50_p90": [
+            0.1366625490379484,
+            0.4402102839460808,
+            0.7636172653621622
+          ]
+        }
+      }
+    },
+    "Track 7(1).wav": {
+      "sha256": "942b113534ff1e5af211b57a1db7419d1f9e9ba08e1944475931e393671bf5b1",
+      "voiced_frames": 1860,
+      "unvoiced_frames": 753,
+      "bands": {
+        "below_1k": {
+          "aperiodic_power_ratio_p10_p50_p90": [
+            2.1572815311836424e-06,
+            4.153878126633751e-06,
+            1.2907442674227356e-05
+          ]
+        },
+        "1k_3k": {
+          "aperiodic_power_ratio_p10_p50_p90": [
+            0.0002840979124536322,
+            0.0039561653314357905,
+            0.06975638287464958
+          ]
+        },
+        "3k_8k": {
+          "aperiodic_power_ratio_p10_p50_p90": [
+            0.18076938854000008,
+            0.5143608467380569,
+            0.7802975244169283
+          ]
+        }
+      }
+    },
+    "Track 8(1).wav": {
+      "sha256": "4e07e8ebf0deba90db76de70aec293f544c4695b43bdfec4d6037c3fb7f888f3",
+      "voiced_frames": 1609,
+      "unvoiced_frames": 756,
+      "bands": {
+        "below_1k": {
+          "aperiodic_power_ratio_p10_p50_p90": [
+            2.2934247530820964e-06,
+            4.282331188127209e-06,
+            1.2353946186693922e-05
+          ]
+        },
+        "1k_3k": {
+          "aperiodic_power_ratio_p10_p50_p90": [
+            0.0008574128826260461,
+            0.010013834739774581,
+            0.10045732968675258
+          ]
+        },
+        "3k_8k": {
+          "aperiodic_power_ratio_p10_p50_p90": [
+            0.19743366246419183,
+            0.49949193752936577,
+            0.7709053304890988
+          ]
+        }
+      }
+    }
+  },
+  "target_holdout_used_to_fit": false,
+  "configuration_changed": false,
+  "new_recording_or_playback": false,
+  "limitations": "AP is a vocoder parameter, not a standalone breath/hoarseness detector. Text, pitch, microphone and phonemes confound comparisons. Unvoiced breaths and consonants require a different distinction; suppressing all unvoiced material is not valid. No causal or identity acceptance from these metrics."
+}

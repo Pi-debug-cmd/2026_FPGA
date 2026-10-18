@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\snapshot_fargan_v8_20261006.py",
+  "remote": "/home/root/native_llvc_trial_20261005/snapshot_fargan_v8_20261006.py",
+  "sha256": "d7af048697405fd8e7c2cd2228423270d9f8b4c6e37d2dac84a67c36b7828153",
+  "bytes": 2190,
+  "seconds": 1.586190500005614,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

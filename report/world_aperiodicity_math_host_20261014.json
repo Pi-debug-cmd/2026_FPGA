@@ -1,0 +1,9 @@
+{
+  "range_db": [
+    -600,
+    0
+  ],
+  "points": 200001,
+  "max_absolute_error": 1.1102230246251565e-16,
+  "max_relative_error": 1.4888796183451136e-14
+}

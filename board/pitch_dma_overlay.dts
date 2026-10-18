@@ -1,0 +1,41 @@
+/dts-v1/;
+/plugin/;
+
+/* Compile-only candidate: apply only after validated PL and driver recovery. */
+/ {
+    fragment@0 {
+        target-path = "/amba_pl";
+        __overlay__ {
+            #address-cells = <1>;
+            #size-cells = <1>;
+            pitch_dma: dma@40400000 {
+                compatible = "xlnx,axi-dma-1.00.a";
+                reg = <0x40400000 0x10000>;
+                #dma-cells = <1>;
+                #address-cells = <1>;
+                #size-cells = <1>;
+                dma-ranges = <0 0 0x40000000>;
+                xlnx,addrwidth = <32>;
+                xlnx,sg-length-width = <23>;
+                interrupt-parent = <&intc>;
+                clocks = <&clkc 15>, <&clkc 15>, <&clkc 15>;
+                clock-names = "s_axi_lite_aclk", "m_axi_mm2s_aclk", "m_axi_s2mm_aclk";
+                dma-channel-mm2s {
+                    compatible = "xlnx,axi-dma-mm2s-channel";
+                    interrupts = <0 56 4>;
+                    xlnx,datawidth = <32>;
+                };
+                dma-channel-s2mm {
+                    compatible = "xlnx,axi-dma-s2mm-channel";
+                    interrupts = <0 57 4>;
+                    xlnx,datawidth = <32>;
+                };
+            };
+            pitch-dma-proxy {
+                compatible = "codex,pitch-dma-proxy";
+                dmas = <&pitch_dma 0>, <&pitch_dma 1>;
+                dma-names = "tx", "rx";
+            };
+        };
+    };
+};

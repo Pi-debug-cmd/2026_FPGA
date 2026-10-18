@@ -1,0 +1,54 @@
+{
+  "cpu_parity": [
+    {
+      "batch": 1,
+      "T": 16,
+      "cpu_seconds": 0.31200000003445894,
+      "outputs": [
+        {
+          "name": "hanzi_log_probs",
+          "max_absolute_error": 3.4332275390625e-05
+        },
+        {
+          "name": "pinyin_log_probs",
+          "max_absolute_error": 0.000133514404296875
+        },
+        {
+          "name": "encoder_lens",
+          "max_absolute_error": 0.0
+        }
+      ]
+    },
+    {
+      "batch": 2,
+      "T": 24,
+      "cpu_seconds": 0.26600000000325963,
+      "outputs": [
+        {
+          "name": "hanzi_log_probs",
+          "max_absolute_error": 2.6702880859375e-05
+        },
+        {
+          "name": "pinyin_log_probs",
+          "max_absolute_error": 0.00016021728515625
+        },
+        {
+          "name": "encoder_lens",
+          "max_absolute_error": 0.0
+        }
+      ]
+    }
+  ],
+  "wave_parity_errors": [
+    3.337860107421875e-05,
+    0.00023651123046875,
+    0.0
+  ],
+  "model_sha256": "1a1a95e868021e80f41a4cfe0a345328429a7e2ebfea6a090ca06d81631f4849",
+  "waveform_gradient_finite": true,
+  "waveform_gradient_rms": 75.71019744873047,
+  "cuda_forward_backward_seconds": 1.7349999999860302,
+  "cuda_max_allocated": 1043078656,
+  "recognizer_frozen_buffers_only": true,
+  "use_scope": "Offline loss only; loses independent-evaluator status after training use; not a7020 component"
+}

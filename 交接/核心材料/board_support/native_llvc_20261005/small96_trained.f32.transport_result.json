@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_budget_20261005\\small96_identity_training\\small96_trained.f32",
+  "remote": "/home/root/native_llvc_trial_20261005/small96_step6400.f32",
+  "sha256": "dbe07ea6d3f9dba5d81e8fdd44fa84b0426966fe67f684546e91946a97681ce8",
+  "bytes": 740939,
+  "seconds": 33.75280570000177,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

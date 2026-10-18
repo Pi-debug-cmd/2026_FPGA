@@ -1,0 +1,18 @@
+[
+  {
+    "name": "sliding30",
+    "correlation": 1.0,
+    "rmse": 0.0,
+    "f0_median_hz": 195.36052280890664,
+    "voiced_coverage_s": 2.35,
+    "clip_fraction": 0.0
+  },
+  {
+    "name": "sliding40",
+    "correlation": 0.9999999999999999,
+    "rmse": 0.0,
+    "f0_median_hz": 195.7296536582294,
+    "voiced_coverage_s": 2.43,
+    "clip_fraction": 0.0
+  }
+]

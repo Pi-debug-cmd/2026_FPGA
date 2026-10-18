@@ -1,0 +1,9 @@
+{
+  "duration_s": 20,
+  "voiced_frames": 0,
+  "minimum_voiced_frames": 300,
+  "configuration_generated": false,
+  "capture_restore_exit": 0,
+  "pcm_closed": true,
+  "next_capture_requires_start_tone": true
+}

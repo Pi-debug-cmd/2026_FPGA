@@ -1,0 +1,10 @@
+{
+  "source": "stream_runtime_complete_bundle.tar.gz",
+  "remote": "/home/root/native_llvc_trial_20261005/stream_runtime_complete_bundle.tar.gz",
+  "sha256": "a498b31547f96f241baf91d40c797f082444fc0ab3e6adf97e45f67e4184a5fb",
+  "bytes": 863790,
+  "seconds": 39.01717690000078,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

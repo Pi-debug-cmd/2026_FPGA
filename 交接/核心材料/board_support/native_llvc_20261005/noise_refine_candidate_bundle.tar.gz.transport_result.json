@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\noise_refine_candidate_bundle.tar.gz",
+  "remote": "/home/root/native_llvc_trial_20261005/noise_refine_candidate_bundle.tar.gz",
+  "sha256": "03a540401fadebd181cd25c987816a58f1f655431f02ed1471b8bcb0542be952",
+  "bytes": 683334,
+  "seconds": 31.24850069999229,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}

@@ -1,0 +1,84 @@
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Local scratch space
+tmp/
+tmp*/
+.Xil/
+NA/
+
+# Generated build products
+build/generated/
+**/*.runs/
+**/*.cache/
+**/*.gen/
+**/*.sim/
+**/*.ip_user_files/
+*.jou
+*.log
+*.pb
+*.dcp
+*.bit
+*.ltx
+*.wdb
+*.str
+*.xsa
+*.hdf
+*.elf
+*.o
+*.obj
+*.a
+*.lib
+*.ko
+*.dtbo
+
+# Downloaded models, checkpoints, and firmware images
+**/cache/
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.safetensors
+*.tflite
+*.bin
+*.img
+*.pdb
+*.whl
+*.zst
+*.zlib
+*.tar.gz
+*.s16
+**/*_arm
+**/*_arm.gz
+交接/核心材料/board_budget_20261005/
+交接/核心材料/g_build/
+交接/核心材料/vendor_base_2022_2/
+交接/核心材料/官方启动镜像/
+交接/核心材料/neural_reference/RVC/
+交接/核心材料/neural_reference/Opus_FARGAN_reference/
+交接/核心材料/neural_reference/LLVC/
+
+# Raw/private voice material and generated audio
+*.pcm
+*.f32
+*.wav
+*.wav.gz
+data/diagnostics/captured_excerpt.wav.zlib
+voice_src/
+data/registrations/source_*/
+交接/核心材料/目标人物原始语音/
+交接/核心材料/目标参考/
+
+# Historical compiled diagnostic utilities (sources are kept)
+交接/核心材料/验收记录/tools/check_gemm_clean
+交接/核心材料/验收记录/tools/check_gemm_dbg
+交接/核心材料/验收记录/tools/gemm_decide
+
+# Downloaded host executables
+/vivado-mcp-server-windows-amd64-*.exe
+*.dll
+*.exe

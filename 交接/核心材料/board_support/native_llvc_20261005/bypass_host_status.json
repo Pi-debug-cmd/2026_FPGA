@@ -1,0 +1,1 @@
+{"mode":"diagnostic_original_passthrough_NOT_voice_conversion","input_samples":208,"output_samples":208,"chunks":1,"mean_compute_ms":0,"finished":true,"meter_window_input":{"rms":0.000093,"peak":0.000275,"samples":208,"clips":0},"meter_window_output":{"rms":0.000093,"peak":0.000275,"samples":208,"clips":0}}

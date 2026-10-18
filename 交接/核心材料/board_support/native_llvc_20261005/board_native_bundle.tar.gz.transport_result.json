@@ -1,0 +1,10 @@
+{
+  "source": "D:\\Tools_FPGA\\workspace\\voice_conversion_zynq7020\\board_support\\native_llvc_20261005\\board_native_bundle.tar.gz",
+  "remote": "/home/root/native_llvc_trial_20261005/board_native_bundle.tar.gz",
+  "sha256": "d63dbf8abec77c9d47e5ec49b0cee9d7f5c533352ee01b9ea1eac728da30c222",
+  "bytes": 13131369,
+  "seconds": 571.7626463000197,
+  "full_sha_verified": true,
+  "baud_restored_115200": true,
+  "root_shell_visible": true
+}
