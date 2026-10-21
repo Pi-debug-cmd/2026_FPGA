@@ -1,0 +1,71 @@
+{
+  "kind": "pl_capacity_ledger",
+  "date": "2026-10-19",
+  "source": "report/audio_pitch_dma_2026_impl_utilization.txt",
+  "device": "xc7z020clg400-2",
+  "tool": "Vivado 2026.1（实现后报告）",
+  "resources": {
+    "lut": {
+      "used": 8105,
+      "available": 53200,
+      "free": 45095,
+      "used_pct": 15.23
+    },
+    "ff": {
+      "used": 13529,
+      "available": 106400,
+      "free": 92871,
+      "used_pct": 12.72
+    },
+    "bram": {
+      "used": 5,
+      "available": 140,
+      "free": 135,
+      "used_pct": 3.57
+    },
+    "dsp": {
+      "used": 6,
+      "available": 220,
+      "free": 214,
+      "used_pct": 2.73
+    }
+  },
+  "timing": {
+    "clock_mhz": 100.0,
+    "wns_ns": 1.696,
+    "failing_endpoints": 0,
+    "note": "实现后 WNS，来自 report/audio_pitch_dma_2026_impl_timing.txt"
+  },
+  "cycle_budget": {
+    "clock_mhz": 100.0,
+    "cycles_per_frame": 1000000,
+    "cycles_per_update": 20000000,
+    "frames_per_update": 20
+  },
+  "bandwidth": {
+    "audio_bytes_per_s": 256000,
+    "audio_mbit_per_s": 2.048,
+    "param_bytes_per_frame": 12312,
+    "param_mbit_per_s": 9.85,
+    "note": "音频与参数流量相对 HP 端口带宽可忽略；PL 加速的约束是计算与存储，不是带宽。"
+  },
+  "memory": {
+    "bram_total_kb": 630.0,
+    "bram_used_kb": 22.5,
+    "bram_free_kb": 607.5,
+    "note": "BRAM36 按 4.5 KB 计；实际可用还受布线/时钟域分布影响，保守按 80% 折算。"
+  },
+  "compute": {
+    "dsp_total": 220,
+    "dsp_free": 214,
+    "macs_per_update_at_half_rate": 2140000000,
+    "macs_per_frame_at_half_rate": 107000000,
+    "note": "只按当前工程空闲 DSP 计算，并按每 DSP 0.5 MAC/cycle 保守估算。"
+  },
+  "verdict_rules": {
+    "weights": "权重 ≤ 可用 BRAM 的 80% 视为可静态驻留；超出则需 DDR 流式或 LUTRAM 分片。",
+    "cycles": "每 200 ms 参数块的计算必须 ≤ cycles_per_update；超了就降频次或换算法。",
+    "dsp": "MAC 数 ≤ macs_per_update_at_half_rate 视为吞吐可行。",
+    "latency": "单帧处理延迟需远小于 200 ms（建议 ≤ 20 ms）才能保住实时余量。"
+  }
+}

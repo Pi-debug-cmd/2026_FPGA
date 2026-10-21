@@ -1,0 +1,166 @@
+{
+  "kind": "llvc_content_to_fargan_ps_candidate_v1_objective_screen",
+  "date": "2026-10-19",
+  "protocol": "current WeSpeaker centroid + UTMOS22 strong + offline whisper-small",
+  "rows": [
+    {
+      "file": "SSB03940102.wav",
+      "speaker": "SSB0394",
+      "source_asr": "湯米听到这个消息是不禁痛哭起来",
+      "candidate": {
+        "seconds": 3.05,
+        "identity_to_target_centroid": 0.6047169113884617,
+        "source_leakage_cosine": 0.08057787508761531,
+        "utmos_predicted": 1.6279385089874268,
+        "asr": "看到米平的消息時不禁碰不起來",
+        "content_cer_script_normalized": {
+          "reference_chars": 15,
+          "hypothesis_chars": 14,
+          "distance": 9,
+          "cer": 0.6
+        }
+      },
+      "teacher_oracle": {
+        "seconds": 3.05,
+        "identity_to_target_centroid": 0.7473275187241415,
+        "source_leakage_cosine": 0.01982766082808369,
+        "utmos_predicted": 3.498262643814087,
+        "asr": "湯米聽到這個消息是不禁痛哭起來",
+        "content_cer_script_normalized": {
+          "reference_chars": 15,
+          "hypothesis_chars": 15,
+          "distance": 2,
+          "cer": 0.13333333333333333
+        }
+      }
+    },
+    {
+      "file": "SSB03940003.wav",
+      "speaker": "SSB0394",
+      "source_asr": "政經會共受理涉嫌老鼠倉案件",
+      "candidate": {
+        "seconds": 4.33,
+        "identity_to_target_centroid": 0.6816952020188409,
+        "source_leakage_cosine": 0.06273224819174876,
+        "utmos_predicted": 1.52597975730896,
+        "asr": "終究會奔手以赦先,饒腐蒼見",
+        "content_cer_script_normalized": {
+          "reference_chars": 13,
+          "hypothesis_chars": 12,
+          "distance": 12,
+          "cer": 0.9230769230769231
+        }
+      },
+      "teacher_oracle": {
+        "seconds": 4.33,
+        "identity_to_target_centroid": 0.818512763073741,
+        "source_leakage_cosine": 0.11386485890468685,
+        "utmos_predicted": 3.5711112022399902,
+        "asr": "證金會共受李涉嫌勞府倉案件",
+        "content_cer_script_normalized": {
+          "reference_chars": 13,
+          "hypothesis_chars": 13,
+          "distance": 5,
+          "cer": 0.38461538461538464
+        }
+      }
+    },
+    {
+      "file": "SSB03940075.wav",
+      "speaker": "SSB0394",
+      "source_asr": "能和你们交流时我荣幸非常感谢",
+      "candidate": {
+        "seconds": 3.28,
+        "identity_to_target_centroid": 0.6601986866849382,
+        "source_leakage_cosine": 0.03126322341729175,
+        "utmos_predicted": 1.6043682098388672,
+        "asr": "如何你們加入師,我榮幸非常感謝。",
+        "content_cer_script_normalized": {
+          "reference_chars": 14,
+          "hypothesis_chars": 14,
+          "distance": 8,
+          "cer": 0.5714285714285714
+        }
+      },
+      "teacher_oracle": {
+        "seconds": 3.28,
+        "identity_to_target_centroid": 0.7968287029398513,
+        "source_leakage_cosine": -0.053480641755673734,
+        "utmos_predicted": 3.109086751937866,
+        "asr": "能和你们交流时我荣幸非常感谢",
+        "content_cer_script_normalized": {
+          "reference_chars": 14,
+          "hypothesis_chars": 14,
+          "distance": 0,
+          "cer": 0.0
+        }
+      }
+    },
+    {
+      "file": "SSB03940077.wav",
+      "speaker": "SSB0394",
+      "source_asr": "不是让你给成千上万的美国人判死刑的",
+      "candidate": {
+        "seconds": 3.49,
+        "identity_to_target_centroid": 0.6768204689365859,
+        "source_leakage_cosine": 0.08343448062239364,
+        "utmos_predicted": 1.8809199333190918,
+        "asr": "不是讓你對成千傷案的美國人判死刑的",
+        "content_cer_script_normalized": {
+          "reference_chars": 17,
+          "hypothesis_chars": 17,
+          "distance": 4,
+          "cer": 0.23529411764705882
+        }
+      },
+      "teacher_oracle": {
+        "seconds": 3.49,
+        "identity_to_target_centroid": 0.8208208790732349,
+        "source_leakage_cosine": 0.043596424172614785,
+        "utmos_predicted": 3.3718910217285156,
+        "asr": "不是讓你給成千上萬的美國人判死刑的",
+        "content_cer_script_normalized": {
+          "reference_chars": 17,
+          "hypothesis_chars": 17,
+          "distance": 3,
+          "cer": 0.17647058823529413
+        }
+      }
+    }
+  ],
+  "summaries": {
+    "candidate": {
+      "identity_mean": 0.6558578172572066,
+      "identity_p10": 0.6213614439774047,
+      "source_leakage_mean": 0.06450195682976237,
+      "utmos_mean": 1.6598016023635864,
+      "utmos_min": 1.52597975730896,
+      "cer_mean": 0.5824499030381383,
+      "cer_max": 0.9230769230769231
+    },
+    "teacher_oracle": {
+      "identity_mean": 0.7958724659527422,
+      "identity_p10": 0.7621778739888544,
+      "source_leakage_mean": 0.030952075537427896,
+      "utmos_mean": 3.3875879049301147,
+      "utmos_min": 3.109086751937866,
+      "cer_mean": 0.17360482654600304,
+      "cer_max": 0.38461538461538464
+    }
+  },
+  "gates": {
+    "identity_mean_at_least_0_45": true,
+    "identity_p10_at_least_0_35": true,
+    "source_leakage_mean_at_most_0_10": true,
+    "utmos_mean_at_least_2_3": false,
+    "cer_mean_at_most_0_15": false
+  },
+  "all_objective_gates_pass": false,
+  "board_touched": false,
+  "audio_played": false,
+  "limitations": [
+    "This preliminary screen has four utterances from one speaker-disjoint validation speaker.",
+    "The fixed target is known during training; live target registration is not implemented.",
+    "Objective scores do not replace a later blind listening gate."
+  ]
+}

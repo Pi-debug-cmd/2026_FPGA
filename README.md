@@ -1,13 +1,18 @@
 # 可注册目标声线实时变声器（2026 嵌赛 FPGA 赛道）
 
-平台：野火 Zynq-7020（`xc7z020clg400-2`），Vivado 2018.3，优先本板适配的 PYNQ。目标：**只注册目标声线，任何未录入、未校准的陌生说话人对麦克风讲话，即可在板上实时转换并输出同一目标音色**；截止 2026-11-06。
+平台：野火 Zynq-7020（`xc7z020clg400-2`），当前使用 Vivado 2026.1。目标：**只注册目标声线，任何未录入、未校准的陌生说话人对麦克风讲话，即可在板上实时转换并输出同一目标音色**；截止 2026-11-06。
 
 当前阶段：**基础链已验证，目标音色未达标**。浮点/定点参考、17 项自动验证、变调 RTL 比对与独立综合、板端 PS 数值 12 组、PS-only 实时升调听辨、WORLD 实时 v22 现场、Seed-VC 参考离线审计均已完成；目标音色、多人泛化、板上现场注册闭环与定量延迟尚未通过。
 
-## 先读这两个
+## Agent 与协作者先读
 
-- [项目查阅指引](project_guide.md)：**唯一入口**，含现行硬约束、当前技术判断、位置与可运行入口、板端事实。
-- [总计划](plan.md)：截止日期、日历与 G1～G7 门槛、技术顺序、风险决策。
+1. [Agent 强制规则](AGENTS.md)
+2. [项目查阅指引](project_guide.md)
+3. 最新的 `handoff_<日期>.md`
+4. [Agent 协作窗口](coummucation.md)
+5. [总计划](plan.md)
+
+远端无板卡协作者主要负责 PS/电脑端算法、客观评测和 Cortex-A9 预算；本地负责真人试听、板卡验证和 PL。每完成一轮方案或一轮测试，都必须更新 `coummucation.md`、提交并推送 GitHub。
 
 其余常用入口：接手清单见 [项目状态](team_project/project_status.md)，开发记录见 [协作记录](report/ai_worklog.md)，硬件事实见 [硬件核查](board/hardware_inventory.md)，现场测试见 [实时测试说明](board/world_live_trial.md)，队友历史成果见 [交接审阅](team_project/handoff_review.md)。
 
@@ -49,13 +54,13 @@ python -m build.run_reference_demo
 | `交接/` | 队友历史总交接与核心材料；`交接/归档_md_20261016/` 为本次整理的归档 |
 | `tmp/` | 临时产物，可清理 |
 
-根目录只保留 `AGENTS.md`、`code_rule.md`、`README.md`、`project_guide.md`、`plan.md` 与最新的 `handoff_<日期>.md`；历史 md 一律进 `交接/归档_md_20261016/`。生成文件放 `build/generated/` 或 `tmp/`，正式证据放 `report/`，不往厂商资料盘写输出。
+根目录只保留 `AGENTS.md`、`code_rule.md`、`README.md`、`project_guide.md`、`plan.md`、`coummucation.md` 与最新的 `handoff_<日期>.md`；历史 md 一律进 `交接/归档_md_20261016/`。生成文件放 `build/generated/` 或 `tmp/`，正式证据放 `report/`，不往厂商资料盘写输出。
 
 独立综合复现：
 
 ```powershell
 New-Item -ItemType Directory -Force build/generated/axis_bypass_synth | Out-Null
-& 'D:/USER_Software/Xilinx_Vivado/Vivado/2018.3/bin/vivado.bat' -mode batch -nojournal -log build/generated/axis_bypass_synth/vivado.log -source build/synth_bypass.tcl
+& 'D:/USER_Software/vivado/2026.1/bin/vivado.bat' -mode batch -nojournal -log build/generated/axis_bypass_synth/vivado.log -source build/synth_bypass.tcl
 ```
 
 综合阶段报告有时钟源/偏斜估计限制，也没有完整输入输出时序约束，不能当作整机实现时序通过。当前没有发布 bitstream。

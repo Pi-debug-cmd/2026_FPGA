@@ -556,3 +556,71 @@ ps-opt 把非周期最小相位优化移植进流式路径（改造 synthesisrea
 用户指示本轮完成后暂停。已在根目录写 `handoff_20261018.md`，记录：速度线收口（PS 非周期最小相位 10ms 锚点优化，实时化后 60 秒零欠载、渲染 RTF 0.346）、A3 终结与听感裁决、PL 最小相位路线归档、未完成项（板上注册闭环、多人验证、真实 ALSA 60 秒录放、Vivado 2018.3 装回）与协作边界。
 
 停工状态：无正在运行的板端操作，未切 PL、未改启动分区、未录音放音；MCP 守护进程可能空闲自退，恢复时 `python tools/mcp_vivado.py status` 会自动拉起。
+
+## 2026-10-19 [Lead] Vivado 2026.1 迁移完成（PL 可复现地基）
+
+用户决定走 B（用 2026.1 重建，不再装 2018.3）。在 MCP 会话 vivado-20261019-210903-9ec967fe 中从零重建音频链工程：
+
+- 派生脚本 `build/create_audio_pitch_dma_2026.tcl`（tag 固定 audio_pitch_dma_2026、去掉 exit）与 `build/{synth,implement}_audio_pitch_dma_2026.tcl`；
+- 唯一 IP 版本改动：`axi_iic:2.0 → 2.1`（2026.1 目录仅有 v2_1），其余 IP 版本全部存在；
+- 流程：create（52 s，`AUDIO_PITCH_DMA_VALIDATED_2026`）→ synth（约 16 min）→ impl 到写位流（3.4 min）；
+- 位流：`build/generated/audio_pitch_dma_2026/voice7020.runs/impl_1/zynq_wrapper.bit`（3.86 MB）。
+
+| 指标 | 2018.3 | 2026.1 |
+| --- | --- | --- |
+| LUT（实现后） | 8302 | **8105** |
+| FF | 13179 | 13529 |
+| BRAM / DSP | 5 / 6 | 5 / 6 |
+| WNS @100 MHz | +2.160 ns | **+1.696 ns**（0 失败端点） |
+| 位流大小 | 3.90 MB | 3.86 MB |
+
+**未上板加载**新位流（涉及 PL 重配置与设备树一致性，需用户批准）。报告：report/pl_vivado_20261_migration.md。工作循环已按用户 2026-10-19 指示固化于 report/workflow_pl_first_20261019.md（六步：音色方案→PL 评估→PL 部署验证→音色下降先改 PL→多轮不改回算法→通过后做 PL 实时优化；重点在 PL）。
+
+## 2026-10-19 [Lead] 第 2 步准备：PL 容量账本与评估模板
+
+依据 2026.1 实现后报告（`report/audio_pitch_dma_2026_impl_utilization.txt`）算出可用余量：
+
+| 资源 | 已用 | 可用 | 空闲 |
+| --- | --- | --- | --- |
+| LUT | 8105 | 53200 | 45095 |
+| FF | 13529 | 106400 | 92871 |
+| BRAM | 5 | 140 | 135（约 607 KB） |
+| DSP48E1 | 6 | 220 | 214 |
+
+周期预算：每 200 ms 参数块 2×10^7 cycles；每 10 ms 帧 10^6 cycles。带宽：音频 2.05 Mbit/s、参数 9.85 Mbit/s（可忽略，约束在计算与存储）。
+
+产出：`build/pl_capacity_ledger.py`、`report/pl_capacity_ledger_20261019.json`、`report/pl_step2_eval_template.md`（候选评估表 + 三档结论 PASS/SCALE/FAIL + 已知参照规模）。
+
+结论要点：A3 那类 55.9 KB int8 小模型在 PL 上**放得下**（权重仅占 BRAM 的 9%）；0.92 MB 的内容前端**放不下静态**，需 DDR 流式或分片；任何浮点实现默认按定点重估。
+
+## 2026-10-19 [Lead] 2026.1 位流上板验证（部分通过）
+
+**位流格式关键发现**：Zynq fpga_manager 要求**4 字节交换**的 .bin（旧包名 swap 即此意）。直接加载报 `could not find a sync word`；逐 4 字节反转后同步字 `66 55 99 aa` 正确。gzip 后 332 KB（压缩 12.2×）。
+
+**加载成功**：`fpgautil -b audio_pitch_dma_2026.bin -f Full` → `BIN FILE loaded through FPGA manager successfully`（81 ms），state=operating，无挂死。
+
+**音频通路未完成验证**：加载后 `Device or resource busy`（杀掉一个卡死的 `aplay /opt/hardware_test/test.wav` PID 15649），随后 `Sample format non available`；解绑/重绑驱动后声卡能注册但仍 set_params 失败。**A/B 对照：旧位流同流程同样失败** → 与 2026.1 位流无关，是重载流程不完整。冷启动后基线音频恢复（aplay rc=0）。
+
+另：串口由 COM14 变为 **COM4**（CH340 重枚举）；上传脚本只允许 /tmp 前缀，固件需板上再 cp 到 /lib/firmware。
+
+下一步：改用项目已验证的 `board/load_pitch_candidate.py` 完整序列（含停监听器、firmware_class.path 加载、重绑、mixer 恢复、dtbo/proxy），并补 wm8960 编解码器重绑。报告：report/pl_2026_bitstream_board_verification.md。
+
+## 2026-10-19 [Lead] 2026.1 位流上板验证通过（加载+播放+采集）
+
+补上 wm8960 重绑后，完整序列成功：停监听器 → 保存 mixer → 解绑 snd_card/formatter/i2s_tx/i2s_rx/dynclk/wm8960 → `fpgautil` 加载 → 按序重绑（驱动延迟探测自动绑定 i2s/formatter/snd_card，EBUSY 属正常）→ 恢复 mixer。
+
+- 播放：`aplay -D default tone.wav` rc=0（32 kHz S16_LE）。
+- 采集：`arecord -D hw:0,1 -f S24_LE -r 32000 -c 2 -d 2` rc=0，512,044 字节（**采集只支持 S24_LE**）。
+- `fpga_manager state = operating`。
+
+结论：2026.1 位流功能验证通过；此前失败是流程缺 wm8960 重绑。脚本 `board/pl_reload_verify_2026.py`（Python 3.8 兼容、带 journal）。注意串口现为 COM4；位流必须 4 字节交换（`_swap.bin`），gzip 后约 332 KB。
+
+**待用户决定**：是否把新位流写入启动流程（需改启动分区，本轮未动）；当前板上运行新位流，重启后回到启动分区的旧位流。
+
+## 2026-10-21 [Lead] GitHub 多 Agent 协作基线与证据修订
+
+新增根目录 `coummucation.md` 作为唯一任务/结果交流窗口，并在 `AGENTS.md`、`README.md`、`project_guide.md`、`plan.md` 和最新 handoff 中建立强制入口。远端无板卡 Agent 负责 PS/电脑端算法和客观证据；本地负责试听、板卡和 PL。每完成一轮方案或测试都必须更新交流窗口、提交并推送，失败轮次同样保留。
+
+当前远端任务为 `PS-20261021-01`（HuBERT 语义教师 → 目标 FARGAN 质量上限）；客观五门通过前不进入本地试听和 PL。`LLVC content → FARGAN v1` 已按 UTMOS 1.660、CER 0.582 判为失败并提交证据。
+
+同时审阅 2026.1 板卡记录并收紧结论：历史命令日志只证明位流加载、ALSA 播放命令和采集命令成功，未证明采集非静音、真人听感、pitch DMA 数值或长期稳定。资源账本改为仅按 214 个空闲 DSP 计算，保守预算为每 10 ms 107M MAC、每 200 ms 2.14G MAC。移除会产生假阳性的临时重绑/自检脚本，保留并加固 `board/pl_reload_verify_2026.py`；任何再次执行仍须先取得当轮现场准备确认。
