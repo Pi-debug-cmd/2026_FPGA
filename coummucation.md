@@ -96,6 +96,20 @@
 - 仍缺：完整训练/留出语料、FARGAN 可复现合成器和 HuBERT 权重仍未随 Git 提供。
 - 下一责任方：Remote-PS-C。
 
+### [DOCS-20261021-03] 协作者提交需求冲突审查
+- 日期：2026-10-21
+- 角色/Agent：Hardware-A / Codex
+- 状态：ACCEPTED（文档审查完成，不代表音色或板端通过）
+- 基准提交：`308928b6680497a080eed9a5152405fd3984813a`
+- 目标与本轮唯一变量：核对协作者新增音频、厂商板卡资料和 `板载资料/说明.md` 是否改变现行项目需求；未运行现场测试。
+- 修改路径：`板载资料/说明.md`、`report/collaborator_submission_audit_20261021.md`、`coummucation.md`
+- 复现命令：`python tools/check_collaboration_policy.py --base 5fbc646 --head 308928b`
+- 结果：音频和厂商资料可作为受控输入/参考资产；`04fcc7e` 中“目标声音可在演示前准备”和“子目录说明覆盖 project_guide”与板上现场注册硬要求冲突，已修正。规则生效后的 `8789c04`、`75d0edf`、`04fcc7e` 同时违反任务编号、交流记录和任务分支/PR规则。
+- 限制：只做仓库静态审查，未试听、未操作板卡、未运行 Vivado；现有一组男声不足以证明陌生多人泛化。
+- 报告链接：`report/collaborator_submission_audit_20261021.md`
+- 提交或 PR：`agent/Pi-debug-cmd/DOCS-20261021-03`，https://github.com/Pi-debug-cmd/2026_FPGA/pull/1
+- 下一责任方：Maintainer 审核；Remote-PS-C 继续 `PS-20261021-01`，Hardware-A/B 等待客观门通过后本地验证。
+
 ### [PS-20261019-01] LLVC content → FARGAN v1
 - 日期：2026-10-19
 - 角色/Agent：Hardware-A / Codex（离线实验）
@@ -112,7 +126,7 @@
 ### [PS-20261021-01] HuBERT 语义教师到目标 FARGAN 的质量上限
 - 日期：2026-10-21
 - 角色/Agent：待认领的 `Remote-PS-C`
-- 状态：OPEN
+- 状态：SUPERSEDED（由 `PS-20261021-10` 取代，内容只可作为候选对照）
 - 目标：先验证高质量语义特征是否足以预测目标 FARGAN 20 维特征，同时保住内容、自然度、目标身份和低源泄漏。
 - 范围：只做电脑端离线实验，不接板卡，不改 RTL/Vivado，不播放音频。
 - 开始前资产核对：Git 已包含目标 Track 5～9 和一组男声评测录音，但不包含 `build/generated/`、模型权重、完整训练语料或 `board_budget_20261005`。认领者必须核对 FARGAN 合成器、训练/留出语料与 HuBERT 权重；缺任一项就把本任务标为 `BLOCKED`，列出缺失项和 SHA/获取方式，不得用占位文件生成结果。
@@ -126,19 +140,79 @@
 远端首次操作建议：从 `main` 创建 `agent/<账号>/PS-20261021-01`；先追加一条 `CLAIMED` 或 `BLOCKED` 记录并提交。若资产齐全，再以本轮唯一变量“内容表示由 LLVC latent 改为 HuBERT teacher”实现独立训练/评测入口，禁止修改本地板卡与 PL 文件。
 
 ### [PS-20261021-02] 小型因果语义编码器蒸馏
-- 状态：BLOCKED
+- 状态：SUPERSEDED（改由 `PS-20261021-11` 管理）
 - 恢复条件：`PS-20261021-01` 五门全部通过。
 - 目标：蒸馏为 Cortex-A9 可运行的因果学生，先做 PS 文件转换，不进入 PL。
 - 下一责任方：Remote-PS-C。
 
 ### [LOCAL-PS-20261021-01] Cortex-A9 文件转换与试听
-- 状态：BLOCKED
+- 状态：SUPERSEDED（改由 `LOCAL-PS-20261021-10` 管理）
 - 恢复条件：远端候选客观门全部通过并标记 `WAIT_LOCAL_TEST`。
 - 内容：本地做 ARM 文件转换、运行时间/内存测量，再按用户当轮准备确认进行试听。
 - 下一责任方：Hardware-A 或 Hardware-B。
 
 ### [PL-20261021-01] 候选资源评估与部署
-- 状态：BLOCKED
+- 状态：SUPERSEDED（改由 `PL-20261021-10` 管理）
 - 恢复条件：`LOCAL-PS-20261021-01` 音色通过。
 - 内容：资源评估、定点/量化、PL 部署、音色回归与实时加速。
 - 下一责任方：Hardware-A 或 Hardware-B。
+
+## 2026-10-21 三级路线重置
+
+### [DOCS-20261021-04] 重写保底、进阶、最终三级计划
+- 日期：2026-10-21
+- 角色/Agent：Maintainer / Codex
+- 状态：ACCEPTED（用户确认的路线定义）
+- 基准提交：`308928b6680497a080eed9a5152405fd3984813a`
+- 目标与本轮唯一变量：废止旧 `plan.md` 的日历与阶段顺序，建立“固定两人保底 → 陌生多人进阶 → 现场注册最终”的严格串行门控。
+- 修改路径：`plan.md`、`AGENTS.md`、`project_guide.md`、`handoff_20261021.md`、`coummucation.md`
+- 复现命令：`git diff --check origin/main..HEAD`；`python tools/check_collaboration_policy.py --base origin/main --head HEAD`
+- 输入与数据切分：保底和进阶统一以 `人物音频资料/女声/Track 5～8.wav` 建模，`Track 9.wav` 锁定目标留出；历史 `voice_src/src_1` 五个文件 SHA 与其逐一相同，不重复计数。
+- 结果：当前只开放第一级。保底允许固定两人各自源配置，但必须两人分别通过软件音色、PS 文件、试听、PL 音质、实时和稳定性；之后才取消源档案做陌生多人，最后才实现板上现场目标注册。
+- 成功门槛对照：每级沿用身份均值/P10、源泄漏、UTMOS、CER 和真人试听门，并新增 PL 质量回归、p95 延迟与 30 分钟稳定性出口门，详见 `plan.md`。
+- 已知限制：现有仓库明确只有 `Fixed-A` 一组男声素材；第二名 `Fixed-B` 尚未采集。公开语料和无效历史诊断录音不能冒充第二人。
+- 报告链接：`plan.md`
+- 提交或 PR：`agent/Pi-debug-cmd/DOCS-20261021-04`，https://github.com/Pi-debug-cmd/2026_FPGA/pull/2
+- 下一责任方：Remote-PS-C 或任一硬件方先认领 `PS-20261021-10`；后续级别保持关闭。
+
+### [PS-20261021-10] 固定两名输入者到既定女声的质量上限
+- 状态：BLOCKED（缺少 `Fixed-B` 五段真实录音与 SHA）
+- 范围：按句子/录制会话隔离冻结同两名输入者，再建立两人分别可验收的固定目标音色上限；允许源专用配置，不接板卡、不改 RTL/Vivado。说话人隔离只用于第二级。
+- 目标资产：`人物音频资料/女声/Track 5～8.wav`；`Track 9.wav` 只作留出。
+- 输入资产：`Fixed-A` 使用男声标准录音 1～3 训练、4 验证、5 锁定验收；`Fixed-B` 按 `board/fallback_source_capture.md` 采集同样的 3/1/1 文件，并写入 `report/fallback_two_source_assets_20261021.json`。
+- 出口：两名输入者在各自未见句上逐人通过身份均值 ≥0.45、P10 ≥0.35、源泄漏 ≤0.10、UTMOS ≥2.30、CER ≤0.15，并标记 `WAIT_LOCAL_TEST`。
+- 下一责任方：待认领的 Remote-PS-C、Hardware-A 或 Hardware-B；认领者先补 `CLAIMED` 记录。
+
+### [PS-20261021-11] 保底方案因果压缩
+- 状态：BLOCKED
+- 恢复条件：`PS-20261021-10` 两名输入者质量上限全部通过。
+
+### [LOCAL-PS-20261021-10] 保底 Cortex-A9 文件与两人试听
+- 状态：BLOCKED
+- 恢复条件：`PS-20261021-11` 客观门通过并标为 `WAIT_LOCAL_TEST`。
+
+### [PL-20261021-10] 保底 PL 部署与音质回归
+- 状态：BLOCKED
+- 恢复条件：`LOCAL-PS-20261021-10` 两名输入者试听通过。
+
+### [TEST-20261021-10] 保底实时完整验收
+- 状态：BLOCKED
+- 恢复条件：`PL-20261021-10` 音质回归通过。
+- 出口：固定两人板上实时转换、p95 延迟、30 分钟稳定性、冷启动和恢复全部通过后，才开放进阶方案。
+
+旧 `PS-20261021-01/02`、`LOCAL-PS-20261021-01`、`PL-20261021-01` 的队列顺序从本节起标记为 **SUPERSEDED**；其证据保留，候选内容只能在新任务编号下重新认领和验收。
+
+### [DOCS-20261021-05] 统一三阶段基线与两人素材协议
+- 日期：2026-10-21
+- 角色/Agent：Maintainer / Codex
+- 状态：ACCEPTED（待统一 PR 合并 main）
+- 基准提交：`308928b6680497a080eed9a5152405fd3984813a`
+- 目标与本轮唯一变量：合并原 PR #1/#2 的相容要求，确认第三级现场板上注册是最终硬标准，并修正第一级数据切分与素材阻塞。
+- 修改路径：原 PR #1/#2 全部文档，以及 `board/fallback_source_capture.md`、`board/capture_source_mapping.py`、`report/fallback_two_source_assets_20261021.json`
+- 复现命令：`python -m json.tool report/fallback_two_source_assets_20261021.json`；`python board/capture_source_mapping.py --help`；`git diff --check origin/main..HEAD`；`python tools/check_collaboration_policy.py --base origin/main --head HEAD`
+- 输入与数据切分：`Fixed-A` 使用标准录音 1～3 训练、4 验证、5锁定验收；`Fixed-B` 待按同样 3/1/1 角色采集。第一级按同一说话人的句子/录制会话隔离，第二级才按说话人隔离。
+- 结果：公开语料、目标女声、转换输出和历史无效诊断均不得替代 `Fixed-B`；当前任务准确状态为 `BLOCKED（缺少 Fixed-B 资产）`。
+- 已知限制：`Fixed-A` 五个文件是否跨日期录制没有证据，最终验收仍需冻结模型后的新会话句。
+- 报告链接：`report/fallback_two_source_assets_20261021.json`、`board/fallback_source_capture.md`
+- 提交或 PR：`agent/Pi-debug-cmd/DOCS-20261021-05`，https://github.com/Pi-debug-cmd/2026_FPGA/pull/3
+- 下一责任方：Hardware-A/B 在第二名固定人员在场后采集 `Fixed-B`；采集前必须取得当次准备确认。

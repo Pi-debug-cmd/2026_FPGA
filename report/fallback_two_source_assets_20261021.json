@@ -1,0 +1,31 @@
+{
+  "task": "PS-20261021-10",
+  "date": "2026-10-21",
+  "split_definition": "same-speaker utterance/session isolation for stage 1; speaker isolation starts at stage 2",
+  "target": {
+    "canonical_directory": "人物音频资料/女声",
+    "development": ["Track 5.wav", "Track 6.wav", "Track 7.wav", "Track 8.wav"],
+    "locked_holdout": ["Track 9.wav"]
+  },
+  "fixed_sources": {
+    "Fixed-A": {
+      "status": "PROVISIONAL_COMPLETE",
+      "limitation": "Five independent files exist, but cross-date session separation is not proven; collect one post-freeze new-session sentence for final acceptance.",
+      "files": [
+        {"role": "train1", "path": "人物音频资料/男声/标准录音 1.wav", "bytes": 3463724, "sha256": "bffd53e9873a829ff8855bd191d4610b64436fb7054401d2598eecf9b862b11e"},
+        {"role": "train2", "path": "人物音频资料/男声/标准录音 2.wav", "bytes": 3217964, "sha256": "7ebcc5ece683ad580df039cea09957d4133582803cd62a0e1a92619c03f1f51f"},
+        {"role": "train3", "path": "人物音频资料/男声/标准录音 3.wav", "bytes": 3747884, "sha256": "2d13fa98c976c967d3ad0d36b0eaf26c3e10029449f135c9556ab4968d9a1293"},
+        {"role": "validation", "path": "人物音频资料/男声/标准录音 4.wav", "bytes": 3494444, "sha256": "f4a026e5c97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c"},
+        {"role": "holdout", "path": "人物音频资料/男声/标准录音 5.wav", "bytes": 4554284, "sha256": "f8676108d127ca286a502c1acf20444bd75bbbc2a2c088c92820fd2c21c99cad"}
+      ]
+    },
+    "Fixed-B": {
+      "status": "WAIT_CAPTURE",
+      "required_roles": ["train1", "train2", "train3", "validation", "holdout"],
+      "protocol": "board/fallback_source_capture.md",
+      "reason": "No second real fixed speaker with verified provenance and consent is currently present in the repository. Public corpus speakers, target female WAVs, converted outputs, and the historical constant-minus-one diagnostic are ineligible substitutes."
+    }
+  },
+  "task_status": "BLOCKED",
+  "block_reason": "Fixed-B assets are not captured yet."
+}
