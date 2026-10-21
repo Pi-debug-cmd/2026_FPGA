@@ -1,5 +1,7 @@
 # 三人团队分工与交接
 
+> **历史职责草案：**这里的 A/B/C 和 D1～D20 排期不是现行三写作者权限。当前 Hardware-A、Hardware-B 都有板卡和 Vivado；Remote-PS-C 没有。能力边界与任务认领以根目录 [AGENTS.md](../AGENTS.md)、[plan.md](../plan.md) 和 [coummucation.md](../coummucation.md) 为准。
+
 2026-10-09更新：用户要求由Codex全盘接手，不再等待人员分配。本文件的A/B/C仅作为PL、PS和算法三类职责参考；实际执行由根目录[总计划](../plan.md)统筹。
 
 适用题目：可注册目标声线实时变声器。对应[开发规划](development_plan.md)。本期单目标，多目标后续提升。

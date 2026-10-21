@@ -37,6 +37,7 @@
 - 成功门槛对照：
 - 已知限制：
 - 报告链接：
+- 模型产物：Release 标签 / 附件名 / 字节数 / SHA-256 / 获取命令；本轮未产生则写“无”
 - 提交或 PR：
 - 下一责任方：Hardware-A | Hardware-B | Remote-PS-C | Maintainer
 ```
@@ -121,7 +122,9 @@
 - 报告：`report/quality_exploration_llvc_content_fargan_v1_20261019.json`、`report/quality_exploration_ps_round_20261019.md`。
 - 下一责任方：Remote-PS-C。
 
-## 当前任务队列
+## 历史任务队列（已由下方三级路线重置取代）
+
+以下 `PS-20261021-01/02`、`LOCAL-PS-20261021-01`、`PL-20261021-01` 均已 `SUPERSEDED`，不得按旧任务说明认领。当前唯一开放的算法任务是下方 `PS-20261021-10`。
 
 ### [PS-20261021-01] HuBERT 语义教师到目标 FARGAN 的质量上限
 - 日期：2026-10-21
@@ -137,7 +140,7 @@
 - 停止条件：teacher 语义上限仍不能同时通过五门时，停止 FARGAN 特征预测路线并提交失败证据。
 - 下一责任方：Remote-PS-C 加入后认领并在本节下方追加记录。
 
-远端首次操作建议：从 `main` 创建 `agent/<账号>/PS-20261021-01`；先追加一条 `CLAIMED` 或 `BLOCKED` 记录并提交。若资产齐全，再以本轮唯一变量“内容表示由 LLVC latent 改为 HuBERT teacher”实现独立训练/评测入口，禁止修改本地板卡与 PL 文件。
+历史操作建议（已失效，不要执行）：当时要求从 `main` 创建 `agent/<账号>/PS-20261021-01`。现行任务应从下方 `PS-20261021-10` 认领，遵守 `plan.md` 的固定男性一对一切分。
 
 ### [PS-20261021-02] 小型因果语义编码器蒸馏
 - 状态：SUPERSEDED（改由 `PS-20261021-11` 管理）
@@ -232,3 +235,20 @@
 - 报告链接：`report/fallback_one_to_one_assets_20261021.json`、`board/fallback_one_to_one_capture.md`
 - 提交或 PR：`agent/Pi-debug-cmd/DOCS-20261021-06`
 - 下一责任方：Remote-PS-C、Hardware-A 或 Hardware-B 先追加 `CLAIMED`，再开展 `PS-20261021-10` 的一对一男转女软件音色上限探索。
+
+### [DOCS-20261021-07] 统一当前入口与跨电脑模型交付规则
+- 日期：2026-10-21
+- 角色/Agent：Hardware-A / Codex
+- 状态：PROPOSED（文档修正，待维护者审核合并）
+- 基准提交：`d4150311be83d19685be4b89c291799f1679873e`
+- 目标与本轮唯一变量：把仍指向旧 `PS-20261021-01`/G1 的入口纠正为 `PS-20261021-10`，并明确 Claude 在另一台电脑做好的模型如何可取回、校验、复现。
+- 修改路径：`AGENTS.md`、`ARTIFACTS.md`、`README.md`、`project_guide.md`、`team_project/README.md`、`team_project/team_roles.md`、`team_project/project_status.md`、`team_project/development_plan.md`、`coummucation.md`
+- 复现命令：`git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD`（仓库历史 Markdown 为 CRLF）；`python tools/check_collaboration_policy.py --base origin/main --head HEAD`；检查上述入口与 `ARTIFACTS.md` 的 Release/SHA-256 规则。
+- 输入与数据切分：未改变；固定男性 1～3 训练、4 验证、5 锁定验收；目标女声 Track 5～8 建模、Track 9 留出。
+- 结果：文档统一现行三级路线；规定模型权重不得仅留在某台电脑，候选必须有可下载的私有 Release 资产、完整依赖、逐件 SHA-256 和推理复现说明。Git 克隆本身不含模型权重。
+- 成功门槛对照：本轮仅修文档，未运行算法、板卡或真人试听，未宣称任何音色、7020 部署或实时门槛通过。
+- 已知限制：当前尚无新候选模型或 Release 附件；未来 Claude 仍需依本规则交付，硬件方再验证可部署性。
+- 报告链接：`ARTIFACTS.md`、`plan.md`
+- 模型产物：无。
+- 提交或 PR：`agent/loranke00-ship-it/DOCS-20261021-07`（PR 待创建）
+- 下一责任方：Maintainer 审核；Remote-PS-C 或硬件方认领 `PS-20261021-10`。
