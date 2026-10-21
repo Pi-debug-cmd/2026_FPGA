@@ -250,5 +250,5 @@
 - 已知限制：当前尚无新候选模型或 Release 附件；未来 Claude 仍需依本规则交付，硬件方再验证可部署性。
 - 报告链接：`ARTIFACTS.md`、`plan.md`
 - 模型产物：无。
-- 提交或 PR：`agent/loranke00-ship-it/DOCS-20261021-07`（PR 待创建）
+- 提交或 PR：`4b688f7`，`agent/loranke00-ship-it/DOCS-20261021-07`，https://github.com/Pi-debug-cmd/2026_FPGA/pull/5
 - 下一责任方：Maintainer 审核；Remote-PS-C 或硬件方认领 `PS-20261021-10`。
