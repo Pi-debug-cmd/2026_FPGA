@@ -135,7 +135,8 @@ def main():
     action.add_argument('--run', action='store_true')
     action.add_argument('--cue-only', action='store_true')
     parser.add_argument('--speaker', default='speaker01')
-    parser.add_argument('--role', choices=['calibration', 'holdout'], default='calibration')
+    parser.add_argument('--role', choices=['calibration', 'train1', 'train2', 'train3',
+                                           'validation', 'holdout'], default='calibration')
     parser.add_argument('--seconds', type=int, default=20, choices=range(10, 31))
     args = parser.parse_args()
     if not re.fullmatch(r'[a-zA-Z0-9_]{1,32}', args.speaker):
