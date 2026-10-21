@@ -162,7 +162,7 @@
 ### [DOCS-20261021-04] 重写保底、进阶、最终三级计划
 - 日期：2026-10-21
 - 角色/Agent：Maintainer / Codex
-- 状态：ACCEPTED（用户确认的路线定义）
+- 状态：SUPERSEDED（三级顺序继续有效；其中“两名固定输入者”的错误定义由 `DOCS-20261021-06` 纠正）
 - 基准提交：`308928b6680497a080eed9a5152405fd3984813a`
 - 目标与本轮唯一变量：废止旧 `plan.md` 的日历与阶段顺序，建立“固定两人保底 → 陌生多人进阶 → 现场注册最终”的严格串行门控。
 - 修改路径：`plan.md`、`AGENTS.md`、`project_guide.md`、`handoff_20261021.md`、`coummucation.md`
@@ -175,37 +175,37 @@
 - 提交或 PR：`agent/Pi-debug-cmd/DOCS-20261021-04`，https://github.com/Pi-debug-cmd/2026_FPGA/pull/2
 - 下一责任方：Remote-PS-C 或任一硬件方先认领 `PS-20261021-10`；后续级别保持关闭。
 
-### [PS-20261021-10] 固定两名输入者到既定女声的质量上限
-- 状态：BLOCKED（缺少 `Fixed-B` 五段真实录音与 SHA）
-- 范围：按句子/录制会话隔离冻结同两名输入者，再建立两人分别可验收的固定目标音色上限；允许源专用配置，不接板卡、不改 RTL/Vivado。说话人隔离只用于第二级。
+### [PS-20261021-10] 固定男性到既定女声的一对一质量上限
+- 状态：OPEN（现有男性 3/1/1 素材足以启动）
+- 范围：按句子/录制会话隔离冻结唯一固定男性输入者，建立该男性到既定女性目标声的一对一音色上限；允许源专用配置，不接板卡、不改 RTL/Vivado。说话人隔离只用于第二级。
 - 目标资产：`人物音频资料/女声/Track 5～8.wav`；`Track 9.wav` 只作留出。
-- 输入资产：`Fixed-A` 使用男声标准录音 1～3 训练、4 验证、5 锁定验收；`Fixed-B` 按 `board/fallback_source_capture.md` 采集同样的 3/1/1 文件，并写入 `report/fallback_two_source_assets_20261021.json`。
-- 出口：两名输入者在各自未见句上逐人通过身份均值 ≥0.45、P10 ≥0.35、源泄漏 ≤0.10、UTMOS ≥2.30、CER ≤0.15，并标记 `WAIT_LOCAL_TEST`。
+- 输入资产：`Fixed-Male` 使用男声标准录音 1～3 训练、4 验证、5 锁定验收，清单见 `report/fallback_one_to_one_assets_20261021.json`；最终验收前按 `board/fallback_one_to_one_capture.md` 补一段冻结模型后的新会话句。
+- 出口：固定男性输入者在未见句上通过身份均值 ≥0.45、P10 ≥0.35、源泄漏 ≤0.10、UTMOS ≥2.30、CER ≤0.15，并标记 `WAIT_LOCAL_TEST`。
 - 下一责任方：待认领的 Remote-PS-C、Hardware-A 或 Hardware-B；认领者先补 `CLAIMED` 记录。
 
 ### [PS-20261021-11] 保底方案因果压缩
 - 状态：BLOCKED
-- 恢复条件：`PS-20261021-10` 两名输入者质量上限全部通过。
+- 恢复条件：`PS-20261021-10` 一对一男转女质量上限通过。
 
-### [LOCAL-PS-20261021-10] 保底 Cortex-A9 文件与两人试听
+### [LOCAL-PS-20261021-10] 保底 Cortex-A9 文件与一对一男转女试听
 - 状态：BLOCKED
 - 恢复条件：`PS-20261021-11` 客观门通过并标为 `WAIT_LOCAL_TEST`。
 
 ### [PL-20261021-10] 保底 PL 部署与音质回归
 - 状态：BLOCKED
-- 恢复条件：`LOCAL-PS-20261021-10` 两名输入者试听通过。
+- 恢复条件：`LOCAL-PS-20261021-10` 一对一男转女试听通过。
 
 ### [TEST-20261021-10] 保底实时完整验收
 - 状态：BLOCKED
 - 恢复条件：`PL-20261021-10` 音质回归通过。
-- 出口：固定两人板上实时转换、p95 延迟、30 分钟稳定性、冷启动和恢复全部通过后，才开放进阶方案。
+- 出口：固定男性到固定女声的板上实时转换、p95 延迟、30 分钟稳定性、冷启动和恢复全部通过后，才开放进阶方案。
 
 旧 `PS-20261021-01/02`、`LOCAL-PS-20261021-01`、`PL-20261021-01` 的队列顺序从本节起标记为 **SUPERSEDED**；其证据保留，候选内容只能在新任务编号下重新认领和验收。
 
 ### [DOCS-20261021-05] 统一三阶段基线与两人素材协议
 - 日期：2026-10-21
 - 角色/Agent：Maintainer / Codex
-- 状态：ACCEPTED（待统一 PR 合并 main）
+- 状态：SUPERSEDED（其中“两名固定输入者”定义由 `DOCS-20261021-06` 纠正；其余三级顺序和第三级现场注册要求继续有效）
 - 基准提交：`308928b6680497a080eed9a5152405fd3984813a`
 - 目标与本轮唯一变量：合并原 PR #1/#2 的相容要求，确认第三级现场板上注册是最终硬标准，并修正第一级数据切分与素材阻塞。
 - 修改路径：原 PR #1/#2 全部文档，以及 `board/fallback_source_capture.md`、`board/capture_source_mapping.py`、`report/fallback_two_source_assets_20261021.json`
@@ -215,4 +215,20 @@
 - 已知限制：`Fixed-A` 五个文件是否跨日期录制没有证据，最终验收仍需冻结模型后的新会话句。
 - 报告链接：`report/fallback_two_source_assets_20261021.json`、`board/fallback_source_capture.md`
 - 提交或 PR：`agent/Pi-debug-cmd/DOCS-20261021-05`，https://github.com/Pi-debug-cmd/2026_FPGA/pull/3
-- 下一责任方：Hardware-A/B 在第二名固定人员在场后采集 `Fixed-B`；采集前必须取得当次准备确认。
+- 下一责任方：由 `DOCS-20261021-06` 重新开放 `PS-20261021-10`，不再采集 `Fixed-B`。
+
+### [DOCS-20261021-06] 将保底方案纠正为一对一男转女
+- 日期：2026-10-21
+- 角色/Agent：Maintainer / Codex
+- 状态：ACCEPTED（用户明确纠正范围）
+- 基准提交：`6304247b18298808cc55cf011c1c77ff5ec467c4`
+- 目标与本轮唯一变量：把第一级从“固定两名输入者”纠正为“固定一名男性输入者到既定女性目标声的一对一转换”；第二级陌生多人和第三级现场注册定义不变。
+- 修改路径：`plan.md`、`AGENTS.md`、`project_guide.md`、`handoff_20261021.md`、`coummucation.md`、`board/fallback_one_to_one_capture.md`、`report/fallback_one_to_one_assets_20261021.json`
+- 复现命令：`python -m json.tool report/fallback_one_to_one_assets_20261021.json`；`rg -n "Fixed-B|fallback_two_source|固定两名输入者|两人专用" AGENTS.md project_guide.md plan.md handoff_20261021.md board report/fallback_one_to_one_assets_20261021.json`（应无输出）；`git diff --check origin/main..HEAD`；`python tools/check_collaboration_policy.py --base origin/main --head HEAD`
+- 输入与数据切分：唯一 `Fixed-Male` 使用男声标准录音 1～3 训练、4 验证、5 锁定验收；固定女性目标使用 Track 5～8 建模、Track 9 锁定留出。第一级按同一男性说话人的句子/录制会话隔离。
+- 结果：删除 `Fixed-B` 和第二名输入者要求，`PS-20261021-10` 从资产阻塞改为 `OPEN`；最终验收前只需同一男性补一段冻结模型后的新会话句。
+- 量化结果：源素材 5 个文件，角色切分 3/1/1；目标素材 5 个文件，角色切分 4/1；本轮未运行算法、板卡或听感测试。
+- 已知限制：现有五段男声是否跨日期录制没有证据；该限制由最终新会话验收覆盖，不阻塞电脑端方案启动。
+- 报告链接：`report/fallback_one_to_one_assets_20261021.json`、`board/fallback_one_to_one_capture.md`
+- 提交或 PR：`agent/Pi-debug-cmd/DOCS-20261021-06`
+- 下一责任方：Remote-PS-C、Hardware-A 或 Hardware-B 先追加 `CLAIMED`，再开展 `PS-20261021-10` 的一对一男转女软件音色上限探索。
