@@ -73,6 +73,18 @@
 - 仓库检查：PR 和直接推送都会运行 `verify-round-record`。当前私有仓库套餐不支持 GitHub branch protection，因此该检查能明确标记违规提交，但无法在服务器端阻止有 write 权限者直接推送；协作者仍必须使用任务分支和 PR。
 - 下一责任方：Remote-PS。
 
+### [BASE-20261021-02] 协作者音频资产接收
+- 日期：2026-10-21
+- 角色/Agent：Remote-PS 上传，Local-HW/Codex 只读审计
+- 状态：ACCEPTED（资产清单，不代表音质通过）
+- 被审计提交：`dfd61fb`、`5d5b137`
+- 结果：仓库现有女声目标 Track 5～9 共 5 段、男声输入共 5 段；合计 10 个 WAV、53,629,014 字节、218.22 秒。女声为 48 kHz/双声道/24-bit，男声为 48 kHz/双声道/16-bit。
+- 审计方式：仅解析 WAV 文件头并计算 SHA-256，未播放、未听辨、未操作板卡。
+- 数据边界：女声 Track 5～8 可沿用为目标注册/建模素材，Track 9 保持目标留出；本批男声只作为源侧补充评测，不参与目标建模，也不足以证明多人泛化。
+- 证据：`report/collaborator_audio_assets_20261021.json`
+- 仍缺：完整训练/留出语料、FARGAN 可复现合成器和 HuBERT 权重仍未随 Git 提供。
+- 下一责任方：Remote-PS。
+
 ### [PS-20261019-01] LLVC content → FARGAN v1
 - 日期：2026-10-19
 - 角色/Agent：Local-HW / Codex（离线实验）
@@ -92,7 +104,7 @@
 - 状态：OPEN
 - 目标：先验证高质量语义特征是否足以预测目标 FARGAN 20 维特征，同时保住内容、自然度、目标身份和低源泄漏。
 - 范围：只做电脑端离线实验，不接板卡，不改 RTL/Vivado，不播放音频。
-- 开始前资产核对：Git 不包含真人 WAV、`build/generated/`、模型权重和 `board_budget_20261005`。认领者必须先核对自己是否有目标 Track 5～9、训练/留出语料、FARGAN 合成器与 HuBERT 权重；缺任一项就把本任务标为 `BLOCKED`，列出缺失项和 SHA/获取方式，不得用占位文件生成结果。
+- 开始前资产核对：Git 已包含目标 Track 5～9 和一组男声评测录音，但不包含 `build/generated/`、模型权重、完整训练语料或 `board_budget_20261005`。认领者必须核对 FARGAN 合成器、训练/留出语料与 HuBERT 权重；缺任一项就把本任务标为 `BLOCKED`，列出缺失项和 SHA/获取方式，不得用占位文件生成结果。
 - 数据：沿用现有说话人隔离切分；不得使用验证说话人选择 checkpoint；需记录数据和模型 SHA。
 - 最小对照：教师 FARGAN oracle、已拒绝的 direct-20D bottleneck、本轮 LLVC-content/FARGAN v1。
 - 输出：训练/推理脚本、四项指标 JSON、模型规模和每秒 MAC、是否值得蒸馏的明确结论。

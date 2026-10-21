@@ -1,0 +1,119 @@
+{
+  "kind": "collaborator_audio_asset_inventory",
+  "date": "2026-10-21",
+  "inspection": "tracked WAV header/hash only; no playback",
+  "files": [
+    {
+      "path": "人物音频资料/女声/Track 5.wav",
+      "bytes": 8292736,
+      "sha256": "c3a50c67c7d29a77c482067272624c3a196ed6421dcf11099b5827ccb65e09e3",
+      "channels": 2,
+      "sample_width_bytes": 3,
+      "sample_rate_hz": 48000,
+      "frames": 1381440,
+      "seconds": 28.78,
+      "compression": "NONE"
+    },
+    {
+      "path": "人物音频资料/女声/Track 6.wav",
+      "bytes": 5936896,
+      "sha256": "92ac22ae3f5674e8e5b49c296e0b1c35f38347c72081c3e56e570091f82ffbfa",
+      "channels": 2,
+      "sample_width_bytes": 3,
+      "sample_rate_hz": 48000,
+      "frames": 988800,
+      "seconds": 20.6,
+      "compression": "NONE"
+    },
+    {
+      "path": "人物音频资料/女声/Track 7.wav",
+      "bytes": 7526656,
+      "sha256": "942b113534ff1e5af211b57a1db7419d1f9e9ba08e1944475931e393671bf5b1",
+      "channels": 2,
+      "sample_width_bytes": 3,
+      "sample_rate_hz": 48000,
+      "frames": 1253760,
+      "seconds": 26.12,
+      "compression": "NONE"
+    },
+    {
+      "path": "人物音频资料/女声/Track 8.wav",
+      "bytes": 6812410,
+      "sha256": "4e07e8ebf0deba90db76de70aec293f544c4695b43bdfec4d6037c3fb7f888f3",
+      "channels": 2,
+      "sample_width_bytes": 3,
+      "sample_rate_hz": 48000,
+      "frames": 1134719,
+      "seconds": 23.64,
+      "compression": "NONE"
+    },
+    {
+      "path": "人物音频资料/女声/Track 9.wav",
+      "bytes": 6582016,
+      "sha256": "d53d24dbb5bb2e01db6bee5483f799644f78be4ebb3c7264482a4d7564093747",
+      "channels": 2,
+      "sample_width_bytes": 3,
+      "sample_rate_hz": 48000,
+      "frames": 1096320,
+      "seconds": 22.84,
+      "compression": "NONE"
+    },
+    {
+      "path": "人物音频资料/男声/标准录音 1.wav",
+      "bytes": 3463724,
+      "sha256": "bffd53e9873a829ff8855bd191d4610b64436fb7054401d2598eecf9b862b11e",
+      "channels": 2,
+      "sample_width_bytes": 2,
+      "sample_rate_hz": 48000,
+      "frames": 865920,
+      "seconds": 18.04,
+      "compression": "NONE"
+    },
+    {
+      "path": "人物音频资料/男声/标准录音 2.wav",
+      "bytes": 3217964,
+      "sha256": "7ebcc5ece683ad580df039cea09957d4133582803cd62a0e1a92619c03f1f51f",
+      "channels": 2,
+      "sample_width_bytes": 2,
+      "sample_rate_hz": 48000,
+      "frames": 804480,
+      "seconds": 16.76,
+      "compression": "NONE"
+    },
+    {
+      "path": "人物音频资料/男声/标准录音 3.wav",
+      "bytes": 3747884,
+      "sha256": "2d13fa98c976c967d3ad0d36b0eaf26c3e10029449f135c9556ab4968d9a1293",
+      "channels": 2,
+      "sample_width_bytes": 2,
+      "sample_rate_hz": 48000,
+      "frames": 936960,
+      "seconds": 19.52,
+      "compression": "NONE"
+    },
+    {
+      "path": "人物音频资料/男声/标准录音 4.wav",
+      "bytes": 3494444,
+      "sha256": "f4a026e5c97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c",
+      "channels": 2,
+      "sample_width_bytes": 2,
+      "sample_rate_hz": 48000,
+      "frames": 873600,
+      "seconds": 18.2,
+      "compression": "NONE"
+    },
+    {
+      "path": "人物音频资料/男声/标准录音 5.wav",
+      "bytes": 4554284,
+      "sha256": "f8676108d127ca286a502c1acf20444bd75bbbc2a2c088c92820fd2c21c99cad",
+      "channels": 2,
+      "sample_width_bytes": 2,
+      "sample_rate_hz": 48000,
+      "frames": 1138560,
+      "seconds": 23.72,
+      "compression": "NONE"
+    }
+  ],
+  "count": 10,
+  "total_bytes": 53629014
+}
