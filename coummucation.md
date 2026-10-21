@@ -269,5 +269,5 @@
 - 已知限制：Claude Code/GitHub CLI/系统可能仍在用户配置目录写入少量设置或凭据；不能保证 `C:` 绝对零写入。若非系统盘容量不足，需先向该机操作者确认目标盘位或扩容办法。
 - 报告链接：`交接/远端模型交付与接收.md`、`ARTIFACTS.md`
 - 模型产物：无。
-- 提交或 PR：`agent/loranke00-ship-it/DOCS-20261021-08`（待创建 PR）
+- 提交或 PR：`f30472e`，`agent/loranke00-ship-it/DOCS-20261021-08`，https://github.com/Pi-debug-cmd/2026_FPGA/pull/6
 - 下一责任方：Remote-PS-C 开工前执行存储步骤并在本文件记录实际选盘；Hardware-A/B 接收模型时独立核对。
