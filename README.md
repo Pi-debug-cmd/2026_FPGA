@@ -12,7 +12,7 @@
 4. [Agent 协作窗口](coummucation.md)
 5. [总计划](plan.md)
 
-远端无板卡协作者主要负责 PS/电脑端算法、客观评测和 Cortex-A9 预算；本地负责真人试听、板卡验证和 PL。每完成一轮方案或一轮测试，都必须更新 `coummucation.md`、提交并推送 GitHub。
+项目共有三个写作者：当前已经提交的两位写作者都有板卡和 Vivado，可认领板测、RTL、PL 和集成；尚未加入的第三位写作者没有板卡和 Vivado，只负责电脑端/PS 音色方案、客观评测和 Cortex-A9 预算，再交由前两位验证。每完成一轮方案或一轮测试，都必须更新 `coummucation.md`、提交并推送 GitHub。
 
 其余常用入口：接手清单见 [项目状态](team_project/project_status.md)，开发记录见 [协作记录](report/ai_worklog.md)，硬件事实见 [硬件核查](board/hardware_inventory.md)，现场测试见 [实时测试说明](board/world_live_trial.md)，队友历史成果见 [交接审阅](team_project/handoff_review.md)。
 

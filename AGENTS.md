@@ -14,12 +14,13 @@
 
 先执行 `git status` 和 `git pull --rebase origin main`。发现他人未提交改动、冲突或同一任务已被认领时，不得覆盖；在 `coummucation.md` 留言协调。
 
-## 当前协作边界
+## 三个写作者与协作边界
 
-- **远端协作者 / Remote-PS Agent**：没有板卡，负责电脑端和 PS 类算法，包括数据审计、训练、离线推理、客观评测、压缩/量化、ARM/Cortex-A9 预算与可复现脚本。不得宣称已通过板卡、实时、音色听感或 PL 验证。
-- **本地硬件方 / Local-HW Agent**：负责用户试听、真人音色裁决、板卡采录放、ARM 实测、Vivado/RTL、PL 加速、PS/PL 集成及现场证据。
-- 远端方案达到客观门后，在 `coummucation.md` 标为 `WAIT_LOCAL_TEST`；本地完成试听或板测后，用相同任务编号回填结果。
-- 每次实际录音、播放、试听或需要用户操作板卡前，必须先询问用户是否准备好；以前的授权不得复用。
+- **Hardware-A**：已经在仓库提交，拥有 Zynq-7020 板卡和 Vivado 环境，可负责用户侧试听、板卡采录放、ARM 实测、Vivado/RTL、PL 加速和 PS/PL 集成。
+- **Hardware-B**：已经在仓库提交，同样拥有板卡和 Vivado 环境；权限和 Hardware-A 相同，可独立认领硬件、Vivado、RTL、PL 与板端验证任务。
+- **Remote-PS-C**：尚未加入仓库，没有板卡，也没有 Vivado 环境；只能在自己的电脑上开发和运行 PS/软件音色方案、训练、离线推理、客观评测、压缩量化及 Cortex-A9 预算。不得认领或宣称板卡、Vivado、RTL、PL、实时和真人听感通过。
+- Remote-PS-C 的方案达到客观门后，在 `coummucation.md` 标为 `WAIT_LOCAL_TEST`；Hardware-A 或 Hardware-B 用同一任务编号完成板端和音色验证。
+- 三个写作者都必须先认领任务，避免两名硬件方同时改同一工程。任何需要现场人员操作、录音、播放或试听的测试，开始前仍须询问当次操作者是否准备好。
 
 ## GitHub 硬性规则
 
@@ -29,7 +30,7 @@
 2. **完成一轮测试就提交 GitHub**：测试条件、提交 SHA、原始证据、结论和 `coummucation.md` 必须提交并推送。
 3. 不得积累多轮未发布结果；失败轮次也必须提交，避免其他 Agent 重复失败路线。
 4. 提交前运行与改动相符的检查；生成物、模型、真人音频和位流遵守 `.gitignore`，正式摘要和小型 JSON/TXT 证据放 `report/`。
-5. 远端 Agent 使用 `agent/<github账号>/<任务编号>` 分支，完成每轮后推送分支并创建或更新 Pull Request。维护者审核后合并 `main`。
+5. 所有写作者使用 `agent/<github账号>/<任务编号>` 分支，完成每轮后推送分支并创建或更新 Pull Request。维护者审核后合并 `main`。
 6. 每次提交只对应一个方案轮次或一个测试轮次。提交信息使用：`<任务编号>: <结果>`，例如 `PS-20261021-01: reject HuBERT-FARGAN teacher ceiling`。
 7. 推送前再次拉取并处理冲突。共享文件只追加或做最小修改，不删除他人证据，不改写用户听感结论。
 8. Pull Request 会运行 `.github/workflows/collaboration-policy.yml`：每个非合并提交都必须使用任务编号开头；修改方案、测试、板卡或报告文件的提交必须同时修改 `coummucation.md`。
@@ -57,7 +58,7 @@
 ## 代码与证据规范
 
 - 写代码前阅读根目录 `code_rule.md`；只做满足当前验收目标的最小改动。
-- 远端 Agent 不得修改本地板卡状态、启动分区或声卡配置，也不得伪造现场测试结论。
+- Remote-PS-C 不得修改或宣称修改板卡状态、启动分区、声卡、Vivado 或 PL，也不得伪造现场测试结论。
 - 正式源代码放 `src/`、`build/`、`board/` 或 `sim/`；生成文件放 `build/generated/` 或 `tmp/`；正式报告放 `report/`。
 - 不提交模型权重、生成语音、位流、缓存、编译产物或未经团队明确批准的真人语音。仓库现有 `人物音频资料/` 是团队主动共享的受控输入；新增语音仍需维护者确认并记录 SHA。
 - 模型、训练语料和生成目录不会随 Git 克隆获得。远端任务依赖外部资产时，先在 `coummucation.md` 记录资产清单和 SHA；缺失就标记 `BLOCKED`，不得用空文件或不一致数据代替。
