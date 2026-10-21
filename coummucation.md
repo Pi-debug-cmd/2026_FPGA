@@ -96,6 +96,20 @@
 - 仍缺：完整训练/留出语料、FARGAN 可复现合成器和 HuBERT 权重仍未随 Git 提供。
 - 下一责任方：Remote-PS-C。
 
+### [DOCS-20261021-03] 协作者提交需求冲突审查
+- 日期：2026-10-21
+- 角色/Agent：Hardware-A / Codex
+- 状态：ACCEPTED（文档审查完成，不代表音色或板端通过）
+- 基准提交：`308928b6680497a080eed9a5152405fd3984813a`
+- 目标与本轮唯一变量：核对协作者新增音频、厂商板卡资料和 `板载资料/说明.md` 是否改变现行项目需求；未运行现场测试。
+- 修改路径：`板载资料/说明.md`、`report/collaborator_submission_audit_20261021.md`、`coummucation.md`
+- 复现命令：`python tools/check_collaboration_policy.py --base 5fbc646 --head 308928b`
+- 结果：音频和厂商资料可作为受控输入/参考资产；`04fcc7e` 中“目标声音可在演示前准备”和“子目录说明覆盖 project_guide”与板上现场注册硬要求冲突，已修正。规则生效后的 `8789c04`、`75d0edf`、`04fcc7e` 同时违反任务编号、交流记录和任务分支/PR规则。
+- 限制：只做仓库静态审查，未试听、未操作板卡、未运行 Vivado；现有一组男声不足以证明陌生多人泛化。
+- 报告链接：`report/collaborator_submission_audit_20261021.md`
+- 提交或 PR：`agent/Pi-debug-cmd/DOCS-20261021-03`，https://github.com/Pi-debug-cmd/2026_FPGA/pull/1
+- 下一责任方：Maintainer 审核；Remote-PS-C 继续 `PS-20261021-01`，Hardware-A/B 等待客观门通过后本地验证。
+
 ### [PS-20261019-01] LLVC content → FARGAN v1
 - 日期：2026-10-19
 - 角色/Agent：Hardware-A / Codex（离线实验）
