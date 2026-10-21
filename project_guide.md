@@ -41,10 +41,10 @@
 
 ## 最短查阅顺序
 
-1. [接手状态与已完成清单](team_project/project_status.md)：已真正验证的成果、待办、信息缺口。
-2. [总计划](plan.md)：目标、日历与 G1～G7 门槛、技术顺序、风险决策。
+1. [现行三级计划](plan.md)：固定男性到固定女声保底 → 陌生多人进阶 → 板上现场注册最终；以其中当前任务编号和出口门为准。
+2. [接手状态与已完成清单](team_project/project_status.md)：已验证成果及历史限制；旧任务编号不能覆盖现行计划。
 3. 按工作选读：算法/RTL 读 `src/`、`sim/`、[接口草案](team_project/interface_draft.md)；音频/板卡读 [硬件核查](board/hardware_inventory.md)、[实时测试说明](board/world_live_trial.md)；契约读 [定点契约](team_project/fixed_point_contract.md)、[PL 接入](team_project/pl_integration.md)；复用队友成果读 [交接审阅](team_project/handoff_review.md)。
-4. 需要原始证据时按总结里的链接打开 `report/` 下的日志与 JSON，不把历史摘要当当前实测。
+4. 需要原始证据时按总结里的链接打开 `report/` 下的日志与 JSON，不把历史摘要当当前实测。远端写作者交付模型及板卡方接收必须读 [远端模型交付与接收](交接/远端模型交付与接收.md) 和 [资产规则](ARTIFACTS.md)；仅克隆仓库不会取得模型。
 5. 每轮结束先更新 `coummucation.md`，再更新 `team_project/project_status.md` 与 [协作记录](report/ai_worklog.md)，提交并推送 GitHub。
 
 ## 位置与可运行入口
