@@ -3,6 +3,8 @@ name: collaboration-policy
 on:
   pull_request:
     branches: [main]
+  push:
+    branches: [main]
 
 jobs:
   verify-round-record:
@@ -14,5 +16,5 @@ jobs:
       - name: Check task commits and communication record
         run: >-
           python tools/check_collaboration_policy.py
-          --base "${{ github.event.pull_request.base.sha }}"
-          --head "${{ github.event.pull_request.head.sha }}"
+          --base "${{ github.event.pull_request.base.sha || github.event.before }}"
+          --head "${{ github.event.pull_request.head.sha || github.sha }}"

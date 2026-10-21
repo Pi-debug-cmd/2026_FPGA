@@ -70,6 +70,7 @@
 - 学生客观门：身份均值 ≥0.45、身份 P10 ≥0.35、源泄漏均值 ≤0.10、UTMOS ≥2.30、CER ≤0.15。
 - 现场门：客观门全过后，本地盲听相对 A1 的目标相似偏好 ≥70%。
 - 证据：`report/quality_exploration_route_20261018.md`、`report/quality_exploration_ps_round_20261019.md`。
+- 仓库检查：PR 和直接推送都会运行 `verify-round-record`。当前私有仓库套餐不支持 GitHub branch protection，因此该检查能明确标记违规提交，但无法在服务器端阻止有 write 权限者直接推送；协作者仍必须使用任务分支和 PR。
 - 下一责任方：Remote-PS。
 
 ### [PS-20261019-01] LLVC content → FARGAN v1
