@@ -19,12 +19,13 @@ Claude 或其他远端写作者把候选交给另一台电脑复现或板端验�
 
 每个候选的 `report/` 报告和 `coummucation.md` 记录至少包含：源提交 SHA、任务编号、模型用途（电脑音质上限/因果部署候选/板端实测）、Release 标签、每个附件的文件名/字节数/SHA-256、完整依赖和获取命令、预处理与输入输出格式、推理命令、复现指标、模型大小/算量/峰值内存/速度，以及尚未通过的门槛。只有可由另一台有仓库权限的电脑实际下载、校验并运行的候选，才能写“模型已交付”。电脑端音质上限不能因此宣称能部署到 Zynq-7020；板端能力仍按 `plan.md` 完成 Cortex-A9、PL、实时和真人试听验证。
 
-例如，报告列出 Release 标签和附件名后，在具有该私有仓库读取权限且已登录 GitHub CLI 的电脑执行（先替换前两行的示例文字）：
+例如，报告列出 Release 标签和附件名后，在具有该私有仓库读取权限且已登录 GitHub CLI 的电脑执行（先把前三行改为本机实际值，`E:` 仅是非系统盘示例）：
 
 ```powershell
 $releaseTag = '填入报告中的标签'
 $assetName = '填入报告中的附件名'
-$modelDir = Join-Path 'D:\2026_FPGA_models' $releaseTag
+$workspaceRoot = 'E:\2026_FPGA_workspace'
+$modelDir = Join-Path (Join-Path $workspaceRoot 'models') $releaseTag
 New-Item -ItemType Directory -Force -Path $modelDir | Out-Null
 gh release download $releaseTag -R Pi-debug-cmd/2026_FPGA -p $assetName -D $modelDir
 Get-FileHash -Algorithm SHA256 (Join-Path $modelDir $assetName)

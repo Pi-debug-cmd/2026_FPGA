@@ -32,6 +32,7 @@
 - 目标与本轮唯一变量：
 - 修改路径：
 - 复现命令：
+- 远端存储：所选非系统盘总目录 / 主要缓存与临时目录 / 空间不足或无法重定向的例外；非远端任务写“无”
 - 输入与数据切分：
 - 结果：身份 / P10 / 泄漏 / UTMOS / CER / 速度 / 模型大小
 - 成功门槛对照：
@@ -252,3 +253,21 @@
 - 模型产物：无。
 - 提交或 PR：`4b688f7`，`agent/loranke00-ship-it/DOCS-20261021-07`，https://github.com/Pi-debug-cmd/2026_FPGA/pull/5
 - 下一责任方：Maintainer 审核；Remote-PS-C 或硬件方认领 `PS-20261021-10`。
+
+### [DOCS-20261021-08] 远端电脑非系统盘集中存储约束
+- 日期：2026-10-21
+- 角色/Agent：Hardware-A / Codex
+- 状态：PROPOSED（待文档 PR 合并）
+- 基准提交：`bac29329d4062c74d7ac28d7864e0733aaa84e82`
+- 目标与本轮唯一变量：落实用户要求，Claude 在另一台电脑克隆、下载和训练前先选择空间充足的非系统盘，把必要的大型项目数据集中在单一项目总目录，尽量避免占用 `C:`。
+- 修改路径：`AGENTS.md`、`ARTIFACTS.md`、`README.md`、`handoff_20261021.md`、`project_guide.md`、`交接/远端模型交付与接收.md`、`coummucation.md`
+- 复现命令：`git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD`；`python tools/check_collaboration_policy.py --base origin/main --head HEAD`；检查交接清单的根目录、环境变量和 Release 包路径是否一致。
+- 远端存储：先检查另一台电脑实际固定盘的剩余容量；盘符未知，不预设 `D:`。选定后把仓库、虚拟环境、数据、模型、缓存、检查点、临时文件、日志及交付包放在同一非系统盘项目总目录；系统工具不可避免的少量配置例外需记录。
+- 输入与数据切分：无变化。
+- 结果：交接清单增加选盘、容量和缓存重定向步骤；Release 上传示例改用选定的总目录；旧机器绝对路径标为不可照搬。
+- 成功门槛对照：本轮仅修文档；未在 Claude 的另一台电脑执行下载、训练或板测，不能声称实际磁盘占用已受控。
+- 已知限制：Claude Code/GitHub CLI/系统可能仍在用户配置目录写入少量设置或凭据；不能保证 `C:` 绝对零写入。若非系统盘容量不足，需先向该机操作者确认目标盘位或扩容办法。
+- 报告链接：`交接/远端模型交付与接收.md`、`ARTIFACTS.md`
+- 模型产物：无。
+- 提交或 PR：`f30472e`，`agent/loranke00-ship-it/DOCS-20261021-08`，https://github.com/Pi-debug-cmd/2026_FPGA/pull/6
+- 下一责任方：Remote-PS-C 开工前执行存储步骤并在本文件记录实际选盘；Hardware-A/B 接收模型时独立核对。
