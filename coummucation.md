@@ -240,7 +240,7 @@
 ### [DOCS-20261021-07] 统一当前入口与跨电脑模型交付规则
 - 日期：2026-10-21
 - 角色/Agent：Hardware-A / Codex
-- 状态：PROPOSED（文档修正，待维护者审核合并）
+- 状态：ACCEPTED（PR #5 已合并 `main`；仅文档与交付规则通过）
 - 基准提交：`d4150311be83d19685be4b89c291799f1679873e`
 - 目标与本轮唯一变量：把仍指向旧 `PS-20261021-01`/G1 的入口纠正为 `PS-20261021-10`，并明确 Claude 在另一台电脑做好的模型如何可取回、校验、复现。
 - 修改路径：`AGENTS.md`、`ARTIFACTS.md`、`README.md`、`project_guide.md`、`plan.md`、`handoff_20261021.md`、`team_project/README.md`、`team_project/team_roles.md`、`team_project/project_status.md`、`team_project/development_plan.md`、`交接/远端模型交付与接收.md`、`coummucation.md`
@@ -251,13 +251,13 @@
 - 已知限制：当前尚无新候选模型或 Release 附件；未来 Claude 仍需依本规则交付，硬件方再验证可部署性。
 - 报告链接：`ARTIFACTS.md`、`plan.md`
 - 模型产物：无。
-- 提交或 PR：`4b688f7`，`agent/loranke00-ship-it/DOCS-20261021-07`，https://github.com/Pi-debug-cmd/2026_FPGA/pull/5
-- 下一责任方：Maintainer 审核；Remote-PS-C 或硬件方认领 `PS-20261021-10`。
+- 提交或 PR：`bac29329d4062c74d7ac28d7864e0733aaa84e82`（`main` 合并提交），https://github.com/Pi-debug-cmd/2026_FPGA/pull/5
+- 下一责任方：Remote-PS-C 或硬件方先追加 `CLAIMED`，再认领 `PS-20261021-10`。
 
 ### [DOCS-20261021-08] 远端电脑非系统盘集中存储约束
 - 日期：2026-10-21
 - 角色/Agent：Hardware-A / Codex
-- 状态：PROPOSED（待文档 PR 合并）
+- 状态：ACCEPTED（PR #6 已合并 `main`；仅存储约束文档通过）
 - 基准提交：`bac29329d4062c74d7ac28d7864e0733aaa84e82`
 - 目标与本轮唯一变量：落实用户要求，Claude 在另一台电脑克隆、下载和训练前先选择空间充足的非系统盘，把必要的大型项目数据集中在单一项目总目录，尽量避免占用 `C:`。
 - 修改路径：`AGENTS.md`、`ARTIFACTS.md`、`README.md`、`handoff_20261021.md`、`project_guide.md`、`交接/远端模型交付与接收.md`、`coummucation.md`
@@ -269,5 +269,23 @@
 - 已知限制：Claude Code/GitHub CLI/系统可能仍在用户配置目录写入少量设置或凭据；不能保证 `C:` 绝对零写入。若非系统盘容量不足，需先向该机操作者确认目标盘位或扩容办法。
 - 报告链接：`交接/远端模型交付与接收.md`、`ARTIFACTS.md`
 - 模型产物：无。
-- 提交或 PR：`f30472e`，`agent/loranke00-ship-it/DOCS-20261021-08`，https://github.com/Pi-debug-cmd/2026_FPGA/pull/6
+- 提交或 PR：`0cbb29f2d5434e7faaf201d0dd5ca217c361637f`（`main` 合并提交），https://github.com/Pi-debug-cmd/2026_FPGA/pull/6
 - 下一责任方：Remote-PS-C 开工前执行存储步骤并在本文件记录实际选盘；Hardware-A/B 接收模型时独立核对。
+
+### [DOCS-20261021-09] 审查远端交付与存储规则
+- 日期：2026-10-21
+- 角色/Agent：Hardware-A / Codex
+- 状态：ACCEPTED（文档一致性审查完成，不代表模型、音色或板端通过）
+- 基准提交：`0cbb29f2d5434e7faaf201d0dd5ca217c361637f`
+- 目标与本轮唯一变量：审查 PR #5/#6 合并后的三级路线、任务入口、模型 Release 交付、非系统盘存储和协作状态是否一致，并修正可导致 Agent 误判的文字。
+- 修改路径：`AGENTS.md`、`coummucation.md`
+- 复现命令：核对 `main` 文件树和 PR #5/#6 diff；检查新文档相对链接；扫描 `PROPOSED`、旧任务入口、`Fixed-B` 与一对一男转女定义；运行 `git diff --check` 和协作策略工作流。
+- 远端存储：无；本轮只读 GitHub `main` 和修改文档，没有下载模型或训练资产。
+- 输入与数据切分：无变化；固定男性 1～3 训练、4 验证、5 锁定验收，目标女声 Track 5～8 建模、Track 9 留出。
+- 结果：三级路线和当前 `PS-20261021-10` 入口正确；PR #5/#6 的仓库内链接检查无缺失。把两条已合并记录从 `PROPOSED` 更新为 `ACCEPTED`，并明确“模型权重不进入 Git 历史，但可按规则进入私有 Release”，消除 `AGENTS.md` 的表面矛盾。
+- 成功门槛对照：本轮未运行算法、板卡、Vivado 或真人试听；未改变任何技术门槛。
+- 已知限制：远端存储规则尚未在 Remote-PS-C 的实际电脑执行；当前仍无新候选模型或 Release 附件。
+- 报告链接：`AGENTS.md`、`ARTIFACTS.md`、`交接/远端模型交付与接收.md`
+- 模型产物：无。
+- 提交或 PR：`agent/Pi-debug-cmd/DOCS-20261021-09`
+- 下一责任方：Remote-PS-C 或硬件方先在本文件追加 `CLAIMED`，再开展 `PS-20261021-10`；Remote-PS-C 同时记录实际非系统盘总目录。
