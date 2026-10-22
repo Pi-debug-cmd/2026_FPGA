@@ -289,3 +289,20 @@
 - 模型产物：无。
 - 提交或 PR：`agent/Pi-debug-cmd/DOCS-20261021-09`
 - 下一责任方：Remote-PS-C 或硬件方先在本文件追加 `CLAIMED`，再开展 `PS-20261021-10`；Remote-PS-C 同时记录实际非系统盘总目录。
+
+### [PS-20261021-10] 固定男性到既定女声一对一质量上限（认领）
+- 日期：2026-10-22
+- 角色/Agent：Hardware-A / Pi-debug-cmd（本机有 Zynq-7020 与 Vivado；本轮只做电脑端离线实验，不播放、不录音、不碰板卡、不启动 Vivado）
+- 状态：CLAIMED
+- 基准提交：`2720ebe8f81a12a9cb0df3a4230ef6855c7c72a9`
+- 目标与本轮唯一变量：先验证 FARGAN 20 维声学特征域的电脑端质量上限。第一步复现官方部署 C 特征提取与 FARGAN 合成的往返门（固定男声与目标女声各自重建）；第二步在“固定目标谱检索 + 源 F0/能量韵律保留”的非因果教师候选上做单一变量对照：检索空间用说话人归一化谱特征或说话人无关内容特征，输出只替换 17 维谱，不把源音色跳连带入输出。本轮不训练部署候选，不接板卡。
+- 修改路径：`coummucation.md`、`build/quality_exploration/**`、`report/**`、`build/generated/quality_exploration_20261022/**`
+- 复现命令：待本轮脚本落盘后回填；基线检查 `git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD`、`python tools/check_collaboration_policy.py --base origin/main --head HEAD`
+- 远端存储：无（本机已有 `交接/核心材料/board_budget_20261005`、官方 C 特征提取与 FARGAN 合成探针、目标女声与固定男声素材；本轮不下载新资产）
+- 输入与数据切分：`Fixed-Male` = `人物音频资料/男声/标准录音 1～5.wav`（1～3 训练、4 验证、5 锁定验收）；目标女声 = `人物音频资料/女声/Track 5～8.wav` 建模、`Track 9.wav` 锁定留出。Track 9 不参与任何选参；验收只在录音 5 上运行一次，录音 4 只用于验证阶段调参。
+- 结果：待回填；当前仅为认领与资产核对，没有生成客观结果。
+- 已知限制：FARGAN 20 维特征域本身有表示上限；官方探针是离线合成，不代表 Cortex-A9/PL 实时可行；本机未装 CUDA 版 PyTorch，训练与推理走 CPU，需记录耗时。
+- 报告链接：待本轮报告生成后回填
+- 模型产物：本轮不产生
+- 提交或 PR：`agent/Pi-debug-cmd/PS-20261021-10`（PR 创建后回填）
+- 下一责任方：Hardware-A/Pi-debug-cmd 完成本轮并回填 `PROPOSED` 或 `REJECTED`。
