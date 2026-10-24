@@ -8,7 +8,7 @@
 | --- | --- | --- |
 | `Hardware-A` | 已在仓库提交；有板卡和 Vivado，可做板卡采录放、ARM、Vivado/RTL、PL、集成和现场证据 | 在没有可复现提交时替其他写作者补写结论 |
 | `Hardware-B` | 已在仓库提交；有板卡和 Vivado，能力与 Hardware-A 相同，可独立认领硬件和 PL 任务 | 覆盖 Hardware-A 已认领的工程或改写其测试证据 |
-| `Remote-PS-C` | 尚未加入；仅能在自己的电脑做 PS/软件算法、训练、离线推理、客观指标、压缩量化和 Cortex-A9 预算 | 板卡、Vivado、RTL、PL、实时和真人音色通过 |
+| `Remote-PS-C / GPT+Codex` | 第三位合作者；GPT 与 Codex 按同一位写作者协作，仅能在自己的电脑做 PS/软件算法、训练、离线推理、客观指标、压缩量化和 Cortex-A9 预算 | 板卡、Vivado、RTL、PL、Cortex-A9 实机、实时和真人音色通过 |
 | `Maintainer` | 分配任务、审核 PR、合并 main、冻结基线 | 删除失败证据或改写用户反馈 |
 
 ## 状态
@@ -26,7 +26,7 @@
 ```markdown
 ### [任务编号] 标题
 - 日期：YYYY-MM-DD
-- 角色/Agent：Hardware-A | Hardware-B | Remote-PS-C / 名称
+- 角色/Agent：Hardware-A | Hardware-B | Remote-PS-C / GPT+Codex
 - 状态：CLAIMED | PROPOSED | WAIT_LOCAL_TEST
 - 基准提交：<git SHA>
 - 目标与本轮唯一变量：
@@ -40,7 +40,7 @@
 - 报告链接：
 - 模型产物：Release URL/标签 / 源提交 SHA / 附件名、字节数及 SHA-256 / 获取与推理命令 / 干净目录下载运行证据；本轮未产生则写“无”
 - 提交或 PR：
-- 下一责任方：Hardware-A | Hardware-B | Remote-PS-C | Maintainer
+- 下一责任方：Hardware-A | Hardware-B | Remote-PS-C / GPT+Codex | Maintainer
 ```
 
 ## 本地测试回填模板
@@ -79,8 +79,8 @@
 ### [BASE-20261021-03] 三写作者能力边界修正
 - 日期：2026-10-21
 - 角色/Agent：Maintainer
-- 状态：ACCEPTED（用户确认）
-- 事实：项目共有三个写作者。当前已经提交的两位写作者都有 Zynq-7020 板卡和 Vivado 环境；尚未加入的第三位写作者没有板卡和 Vivado，只能在自己的电脑运行 PS/软件方案。
+- 状态：SUPERSEDED（第三位身份信息由 `DOCS-20261024-02` 更新；三写作者能力边界继续有效）
+- 事实（2026-10-21 当时）：项目共有三个写作者。已经提交的两位写作者都有 Zynq-7020 板卡和 Vivado 环境；当时尚未加入的第三位写作者没有板卡和 Vivado，只能在自己的电脑运行 PS/软件方案。
 - 分工：Hardware-A 与 Hardware-B 均可认领板端、Vivado、RTL、PL、集成和硬件验证；Remote-PS-C 只提交可复现的软件候选和客观指标，再由任一硬件方验证。
 - 冲突规则：两名硬件方修改同一 Vivado/RTL/板端任务前必须先在本文件标记 `CLAIMED`；未认领不得并行改同一组文件。
 - 现场规则：需要人员操作、录音、播放或试听前，当轮先询问操作者是否准备好。
@@ -289,3 +289,18 @@
 - 模型产物：无。
 - 提交或 PR：`agent/Pi-debug-cmd/DOCS-20261021-09`
 - 下一责任方：Remote-PS-C 或硬件方先在本文件追加 `CLAIMED`，再开展 `PS-20261021-10`；Remote-PS-C 同时记录实际非系统盘总目录。
+
+### [DOCS-20261024-02] 登记第三位 GPT+Codex 远端 PS 合作者
+- 日期：2026-10-24
+- 角色/Agent：Hardware-A / Codex（协作规则维护）
+- 状态：ACCEPTED（协作身份与权限边界文档完成，不代表任何算法、板卡或音质门槛通过）
+- 基准提交：`2720ebe8f81a12a9cb0df3a4230ef6855c7c72a9`
+- 目标与本轮唯一变量：把第三位合作者从“尚未加入的 Claude”更新为已经确定的 `Remote-PS-C / GPT+Codex`，统一其任务认领、GitHub 交付和无板卡边界；不修改算法、模型、板卡或现有技术门槛。
+- 修改路径：`AGENTS.md`、`README.md`、`project_guide.md`、`plan.md`、`handoff_20261024.md`、`ARTIFACTS.md`、`交接/远端模型交付与接收.md`、`team_project/project_status.md`、`team_project/team_roles.md`、`coummucation.md`。
+- 复现命令：`rg -n "Remote-PS-C / GPT\\+Codex|GPT 与 Codex" AGENTS.md README.md project_guide.md plan.md handoff_20261024.md ARTIFACTS.md 交接/远端模型交付与接收.md team_project/project_status.md team_project/team_roles.md coummucation.md`；`git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD`；`python tools/check_collaboration_policy.py --base origin/main --head HEAD`。
+- 量化结果：保持 3 名写作者、2 名硬件方、1 名纯 PS 远端方；GPT 与 Codex 计作 1 名写作者并共用 1 条任务认领；同步 10 个协作文档，本轮未运行音频、板卡或 Vivado 测试。
+- 已知限制：第三位合作者没有板卡和 Vivado 环境，不能验证或宣称 Cortex-A9 实机、PL、实时和真人听感通过。
+- 报告链接：`AGENTS.md`、`handoff_20261024.md`、`交接/远端模型交付与接收.md`。
+- 模型产物：无。
+- 提交或 PR：`agent/Pi-debug-cmd/DOCS-20261024-02`，https://github.com/Pi-debug-cmd/2026_FPGA/pull/9
+- 下一责任方：Remote-PS-C / GPT+Codex 按新身份认领纯 PS 任务；Hardware-A/B 继续承担所有板端验证。

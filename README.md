@@ -14,11 +14,11 @@
 4. [Agent 协作窗口](coummucation.md)
 5. [总计划](plan.md)
 
-项目共有三个写作者：当前已经提交的两位写作者都有板卡和 Vivado，可认领板测、RTL、PL 和集成；尚未加入的第三位写作者没有板卡和 Vivado，只负责电脑端/PS 音色方案、客观评测和 Cortex-A9 预算，再交由前两位验证。每完成一轮方案或一轮测试，都必须更新 `coummucation.md`、提交并推送 GitHub。
+项目共有三个写作者：Hardware-A 与 Hardware-B 都有板卡和 Vivado，可认领板测、RTL、PL 和集成；第三位 `Remote-PS-C / GPT+Codex` 没有板卡和 Vivado，只负责电脑端/PS 音色方案、客观评测和 Cortex-A9 预算，再交由前两位验证。GPT 与 Codex 按同一位写作者协作，共用任务认领、分支和结果记录。每完成一轮方案或一轮测试，都必须更新 `coummucation.md`、提交并推送 GitHub。
 
 其余常用入口：接手清单见 [项目状态](team_project/project_status.md)，开发记录见 [协作记录](report/ai_worklog.md)，硬件事实见 [硬件核查](board/hardware_inventory.md)，现场测试见 [实时测试说明](board/world_live_trial.md)，队友历史成果见 [交接审阅](team_project/handoff_review.md)。
 
-**跨电脑交接模型：**仓库已保存代码和批准共享的 `人物音频资料/`，但模型权重/生成目录不随 Git 克隆取得。Claude 完成候选时必须按 [远端模型交付与接收清单](交接/远端模型交付与接收.md) 把完整模型上传为本私有仓库的 Release 附件，提交下载清单并从空目录复测；[资产规则](ARTIFACTS.md)说明取回方法。收到新模型时先按报告取回并核对 SHA-256，再判断是否达到板端部署门槛。
+**跨电脑交接模型：**仓库已保存代码和批准共享的 `人物音频资料/`，但模型权重/生成目录不随 Git 克隆取得。Remote-PS-C / GPT+Codex 完成候选时必须按 [远端模型交付与接收清单](交接/远端模型交付与接收.md) 把完整模型上传为本私有仓库的 Release 附件，提交下载清单并从空目录复测；[资产规则](ARTIFACTS.md)说明取回方法。收到新模型时先按报告取回并核对 SHA-256，再判断是否达到板端部署门槛。
 
 另一台电脑开始克隆或下载前，先按上述清单选择空间充足的非系统盘，建立单一项目总目录，把仓库、依赖、模型、缓存和实验输出集中存放；不要默认占用 `C:`。
 
