@@ -1,0 +1,33 @@
+{
+  "task": "PS-20261021-10",
+  "date": "2026-10-24",
+  "status": "REJECTED",
+  "base_commit": "e7f5218",
+  "fixed": {
+    "model": "Seed-VC V2",
+    "target_mode": "multi3x2_track8x4",
+    "cfg": 1.1,
+    "seed": 20261019,
+    "steps": 30,
+    "source_onset_trim": true,
+    "tail_start_s": 12.0,
+    "crossfade_ms": 100.0
+  },
+  "round12_search": [
+    {"semitones": 0.5, "identity": 0.56090967934225, "identity_p10": 0.502332965347133, "leakage": 0.0800730784582845, "utmos": 2.30958946545919, "cer": 0.0204081632653061, "all_gates_pass": true, "sha256": "00a69e6400d8be0f6746530506fd3b6532f0f4171ae293d6d5fb0b45da3a4d84"},
+    {"semitones": 1.0, "identity": 0.565955206724905, "identity_p10": 0.514442231065503, "leakage": 0.140916736226444, "utmos": 2.30652642250061, "cer": 0.0816326530612245, "all_gates_pass": false, "sha256": "c0280abf60874e728582c881fd1ecd3fb73ae2a6613056f488a8a5ce364e3f8c"},
+    {"semitones": 1.5, "identity": 0.547968321834363, "identity_p10": 0.471273707328203, "leakage": 0.17938634039372, "utmos": 2.29557736714681, "cer": 0.224489795918367, "all_gates_pass": false, "sha256": "f91a91a32e29cfad3055b0b2f4a2bdedf3d72b6b7a50859096fe7891a0c8ee63"}
+  ],
+  "fixed_half_semitone_regression": [
+    {"dataset": "Round 12", "identity": 0.56090967934225, "identity_p10": 0.502332965347133, "leakage": 0.0800730784582845, "utmos": 2.30958946545919, "cer": 0.0204081632653061, "all_gates_pass": true},
+    {"dataset": "recording 4", "identity": 0.632235597327389, "identity_p10": 0.58544438776301, "leakage": 0.0554011851187051, "utmos": 2.40315024058024, "cer": 0.235294117647059, "all_gates_pass": false},
+    {"dataset": "recording 5", "identity": 0.624835922479984, "identity_p10": 0.583599554451364, "leakage": 0.138678174365544, "utmos": 2.10640639066696, "cer": 0.15, "all_gates_pass": false},
+    {"dataset": "Round 3", "identity": 0.599263141717401, "identity_p10": 0.578993243702677, "leakage": 0.0914421374416596, "utmos": 2.28353599707286, "cer": 0.131147540983607, "all_gates_pass": false},
+    {"dataset": "Round 7", "identity": 0.672133755452234, "identity_p10": 0.670588538568388, "leakage": 0.0779168699309062, "utmos": 2.85139799118042, "cer": 0.0769230769230769, "all_gates_pass": true},
+    {"dataset": "Round 9", "identity": 0.602296722384454, "identity_p10": 0.526212575967154, "leakage": 0.0842568240965785, "utmos": 2.34166649977366, "cer": 0.0816326530612245, "all_gates_pass": true}
+  ],
+  "decision": "reject fixed 12-second tail pitch processing because only three of six datasets pass",
+  "played": false,
+  "board_touched": false,
+  "generated_audio_committed": false
+}
