@@ -1,0 +1,57 @@
+{
+  "task": "PS-20261021-10",
+  "date": "2026-10-24",
+  "status": "REJECTED_NEW_SESSION_REGRESSION",
+  "fixed": {
+    "model": "Seed-VC V2",
+    "steps": 30,
+    "seed": 20261018,
+    "target_prompt": "Track 8.wav high-activity 1.76s+12.0s",
+    "target_prompt_sha256": "982e36786031fe8be41e03e61178f24a1ac2fd33042f1301161530b6be0192dd"
+  },
+  "swept_cfg": [1.1, 1.25, 1.4, 1.7],
+  "gates": {
+    "identity": 0.45,
+    "identity_p10": 0.35,
+    "leakage": 0.1,
+    "utmos": 2.3,
+    "cer": 0.15
+  },
+  "validation_recording_4": [
+    {"cfg": 1.1, "identity": 0.5836571060034236, "identity_p10": 0.5440908067936338, "leakage": 0.06443991822627787, "utmos": 2.9656167030334473, "cer": 0.19117647058823528, "all_gates_pass": false},
+    {"cfg": 1.25, "identity": 0.596256497980749, "identity_p10": 0.560409232869005, "leakage": 0.0686664463365118, "utmos": 2.92014416058858, "cer": 0.176470588235294, "all_gates_pass": false},
+    {"cfg": 1.4, "identity": 0.584236156434799, "identity_p10": 0.544238856864477, "leakage": 0.0523631087812386, "utmos": 2.79139447212219, "cer": 0.176470588235294, "all_gates_pass": false},
+    {"cfg": 1.7, "identity": 0.591176817172474, "identity_p10": 0.552655159508121, "leakage": 0.0671300076941057, "utmos": 2.84278575579325, "cer": 0.147058823529412, "all_gates_pass": true, "output_sha256": "9bbffff90aad4027b6bd8c992d469cd47386173993b0705e310f6bfdda6b1091"}
+  ],
+  "selected_cfg": 1.7,
+  "exposed_recording_5_regression": {
+    "identity": 0.562086833912064,
+    "identity_p10": 0.512224685932487,
+    "leakage": 0.066434225999798,
+    "utmos": 2.98045569658279,
+    "cer": 0.0375,
+    "all_gates_pass": true,
+    "output_sha256": "02221715fb4270293cf52efccdbe0ed25c98aa9a17030046def1ba65f5a811cf"
+  },
+  "exposed_round3_session_regression": {
+    "identity": 0.507814898347005,
+    "identity_p10": 0.472813355420745,
+    "leakage": 0.0661375815779762,
+    "utmos": 2.72223728895187,
+    "cer": 0.967213114754098,
+    "candidate_asr": "正确的正确的",
+    "all_gates_pass": false,
+    "failed_gates": ["cer"],
+    "output_sha256": "8b12bf78f2f38e6669bb3138c861a7d2c361956462d9640164c67ffa256fbe5a"
+  },
+  "user_feedback": {
+    "verbatim": "刚刚进行了两段试音，我觉得第一个改进好些，第二就没什么改进",
+    "clarification": "就是你在进行验收的过程中，我听到了提示音，然后我说话可以转化",
+    "attribution": "v23 board fallback after capture cue; not Seed-VC candidates",
+    "candidate_comparison": false
+  },
+  "target_track9_used": false,
+  "seed_candidates_played": false,
+  "board_candidate_changed": false,
+  "generated_audio_committed": false
+}
