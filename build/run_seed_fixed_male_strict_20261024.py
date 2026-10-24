@@ -28,6 +28,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--cfg", type=float, nargs="+", required=True)
     parser.add_argument("--seed", type=int, nargs="+", required=True)
     parser.add_argument("--steps", type=int, default=30)
+    parser.add_argument(
+        "--target-mode",
+        choices=("multi4x2", "track8_first8", "track8_active8"),
+        default="multi4x2",
+    )
     return parser.parse_args()
 
 
@@ -53,7 +58,7 @@ def select_speech_window(signal, rate: int, seconds: float):
     return start, np.asarray(signal[start : start + count], dtype=np.float64).copy()
 
 
-def prepare_inputs(base: Path, source_original: Path):
+def prepare_inputs(base: Path, source_original: Path, target_mode: str):
     import numpy as np
     from src.reference.audio_io import downsample_16k, file_sha256, read_pcm_wav, write_pcm16
 
@@ -79,11 +84,16 @@ def prepare_inputs(base: Path, source_original: Path):
 
     parts = []
     fade = np.linspace(0.0, 1.0, round(0.01 * 16000), endpoint=False)
-    for name in TARGET_NAMES:
+    names = TARGET_NAMES if target_mode == "multi4x2" else ["Track 8.wav"]
+    seconds = 2.0 if target_mode == "multi4x2" else 8.0
+    for name in names:
         original = ROOT / "人物音频资料" / "女声" / name
         rate, signal = read_pcm_wav(original)
         signal = downsample_16k(rate, signal)
-        start, part = select_speech_window(signal, 16000, 2.0)
+        if target_mode == "track8_first8":
+            start, part = 0, np.asarray(signal[: round(seconds * 16000)], dtype=np.float64).copy()
+        else:
+            start, part = select_speech_window(signal, 16000, seconds)
         part[: len(fade)] *= fade
         part[-len(fade) :] *= fade[::-1]
         parts.append(part)
@@ -106,7 +116,7 @@ def prepare_inputs(base: Path, source_original: Path):
     records.append(
         {
             "role": "target_registration_prompt",
-            "construction": "Track 5-8, deterministic 2 s high-activity window each",
+            "construction": target_mode,
             "seconds": len(target) / 16000,
             "offline_gain": target_gain,
             "sha256": file_sha256(target_path),
@@ -143,7 +153,7 @@ def main() -> None:
 
     base = generated / "seed_fixed_male_20261024" / args.tag
     base.mkdir(parents=True, exist_ok=True)
-    input_records, source_path, target_path = prepare_inputs(base, source_original)
+    input_records, source_path, target_path = prepare_inputs(base, source_original, args.target_mode)
 
     seed_base = external_generated / "seed_reference_20261015"
     upstream = next((seed_base / "source").glob("seed-vc-*"))
