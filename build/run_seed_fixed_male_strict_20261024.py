@@ -37,6 +37,7 @@ def parse_args() -> argparse.Namespace:
         "--target-mode",
         choices=(
             "multi4x2",
+            "multi3x2_track8x4",
             "track8_first8",
             "track8_active8",
             "track8_active10",
@@ -129,15 +130,20 @@ def prepare_inputs(base: Path, source_original: Path, target_mode: str, source_o
 
     parts = []
     fade = np.linspace(0.0, 1.0, round(0.01 * 16000), endpoint=False)
-    names = TARGET_NAMES if target_mode == "multi4x2" else ["Track 8.wav"]
-    seconds = {
-        "multi4x2": 2.0,
-        "track8_first8": 8.0,
-        "track8_active8": 8.0,
-        "track8_active10": 10.0,
-        "track8_active12": 12.0,
+    segment_plan = {
+        "multi4x2": [(name, 2.0) for name in TARGET_NAMES],
+        "multi3x2_track8x4": [
+            ("Track 5.wav", 2.0),
+            ("Track 6.wav", 2.0),
+            ("Track 7.wav", 2.0),
+            ("Track 8.wav", 4.0),
+        ],
+        "track8_first8": [("Track 8.wav", 8.0)],
+        "track8_active8": [("Track 8.wav", 8.0)],
+        "track8_active10": [("Track 8.wav", 10.0)],
+        "track8_active12": [("Track 8.wav", 12.0)],
     }[target_mode]
-    for name in names:
+    for name, seconds in segment_plan:
         original = ROOT / "人物音频资料" / "女声" / name
         rate, signal = read_pcm_wav(original)
         signal = downsample_16k(rate, signal)
