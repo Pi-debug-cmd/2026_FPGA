@@ -4,11 +4,13 @@
 
 角色：Hardware-A / Codex
 
-状态：**ACCEPTED_OBJECTIVE / WAIT_MODEL_DELIVERY**
+状态：**ACCEPTED_OBJECTIVE / WAIT_LOCAL_LISTENING**
 
 ## 结论
 
-Round 8 冻结规则在第三条、不同文本的新会话上只运行一次，身份、身份 P10、源泄漏、UTMOS 和 CER 五项客观门槛全部通过。固定男性到既定女性目标的电脑端离线候选因此达到当前客观出口门；下一步是按仓库交付规范完成模型与依赖的私有 Release 交付和干净目录复现，之后才进入真人试听。
+Round 8 冻结规则在第三条、不同文本的新会话上只运行一次，身份、身份 P10、源泄漏、UTMOS 和 CER 五项客观门槛全部通过。固定男性到既定女性目标的电脑端离线候选因此达到当前客观出口门；下一步是在 Hardware-A 当前完整环境上进行真人试听。
+
+第三位 Remote-PS-C 合作者只负责独立的电脑端方案探索，不负责复现或验证 Hardware-A 的这一候选。本轮候选已经在 Hardware-A 本机完整运行，因此本地试听前不要求为 Remote-PS-C 制作模型 Release；只有以后确实需要跨电脑交付某个候选时，才执行 `ARTIFACTS.md` 的交付流程。
 
 本结论不代表板端、实时、Cortex-A9、Vivado、RTL 或 PL 通过。Seed-VC 仍是约 363M 参数、30 步、非因果的电脑端离线方案；板上没有部署它，仍运行 v23 最大音量保底。
 
@@ -47,4 +49,4 @@ D:\Anaconda\envs\yolo\python.exe -S build\evaluate_seed_fixed_male_strict_202610
 
 采录后已恢复单实例 `/opt/world_voice/world_voice_autostart.sh`；录放 PCM 均为 `RUNNING`，Headphone `127/127 (100%, +6 dB)`，Playback `255/255 (100%, 0 dB)`。当前上电方案仍是 v23 最大音量保底。
 
-下一步按 `ARTIFACTS.md` 和 `交接/远端模型交付与接收.md` 打包完整模型、依赖、SHA-256 与复现说明，上传私有 GitHub Release，并在干净目录重新下载验证。交付完成后状态才能转为 `WAIT_LOCAL_TEST` 并请求真人试听。
+下一步由 Hardware-A 在操作者再次明确“准备好了”后播放本轮生成结果并收集真人听感。Remote-PS-C 不参与本方案验证；如未来确需把候选交给另一台电脑，再另行执行 `ARTIFACTS.md` 的跨电脑交付流程。

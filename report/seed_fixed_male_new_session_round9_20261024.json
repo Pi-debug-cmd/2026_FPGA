@@ -1,7 +1,7 @@
 {
   "task": "PS-20261021-10",
   "date": "2026-10-24",
-  "status": "ACCEPTED_OBJECTIVE_WAIT_MODEL_DELIVERY",
+  "status": "ACCEPTED_OBJECTIVE_WAIT_LOCAL_LISTENING",
   "base_commit": "015304f",
   "candidate": {
     "model": "Seed-VC V2",
@@ -84,7 +84,8 @@
   "played": false,
   "generated_audio_committed": false,
   "seed_vc_deployed_to_board": false,
-  "model_delivery_complete": false,
+  "remote_ps_c_validation_required": false,
+  "model_delivery_required_before_local_listening": false,
   "limitations": [
     "PC-side noncausal offline evaluation only",
     "No human listening result",
