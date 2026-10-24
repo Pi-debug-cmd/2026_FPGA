@@ -34,6 +34,7 @@ def parse_args() -> argparse.Namespace:
             "multi4x2",
             "track8_first8",
             "track8_active8",
+            "track8_active10",
             "track8_active12",
         ),
         default="multi4x2",
@@ -94,6 +95,7 @@ def prepare_inputs(base: Path, source_original: Path, target_mode: str):
         "multi4x2": 2.0,
         "track8_first8": 8.0,
         "track8_active8": 8.0,
+        "track8_active10": 10.0,
         "track8_active12": 12.0,
     }[target_mode]
     for name in names:
