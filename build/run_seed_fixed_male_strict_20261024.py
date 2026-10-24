@@ -38,6 +38,7 @@ def parse_args() -> argparse.Namespace:
         choices=(
             "multi4x2",
             "multi3x2_track8x4",
+            "multi3x1_track8x7",
             "track8_first8",
             "track8_active8",
             "track8_active10",
@@ -137,6 +138,12 @@ def prepare_inputs(base: Path, source_original: Path, target_mode: str, source_o
             ("Track 6.wav", 2.0),
             ("Track 7.wav", 2.0),
             ("Track 8.wav", 4.0),
+        ],
+        "multi3x1_track8x7": [
+            ("Track 5.wav", 1.0),
+            ("Track 6.wav", 1.0),
+            ("Track 7.wav", 1.0),
+            ("Track 8.wav", 7.0),
         ],
         "track8_first8": [("Track 8.wav", 8.0)],
         "track8_active8": [("Track 8.wav", 8.0)],
