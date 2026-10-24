@@ -1,0 +1,73 @@
+{
+  "task": "PS-20261021-10",
+  "date": "2026-10-24",
+  "status": "REJECTED_MULTIPLE_GATES",
+  "candidate": {
+    "model": "Seed-VC V2",
+    "steps": 30,
+    "cfg": 1.1,
+    "seed": 20261018,
+    "target_prompt": "Track 8.wav high-activity 1.76s+10.0s",
+    "frozen_before_capture": true
+  },
+  "capture": {
+    "port": "COM4",
+    "duration_s": 20.0,
+    "sample_rate": 32000,
+    "channels": 1,
+    "sample_width_bytes": 2,
+    "wav_bytes": 1280044,
+    "wav_sha256": "da1737af90da8ebeb0578719816e6d381fcfe74469d1a9f18519d250ef78fa3e",
+    "gzip_bytes": 798933,
+    "gzip_sha256": "2c196752a9bcdcbbaa73562c120802e0c297fbd9df28e88583fbd192779aac07",
+    "native_raw_sha256": "5667e0296c5566391e1bed38035b456d53a63bc4b42b95400b12d30a5fdceffb",
+    "native_clip_fraction": 0.0,
+    "mono_rms": 0.01740159676748114,
+    "mono_dbfs": -35.188217982062085,
+    "mono_peak": 0.3492431640625,
+    "peak_dbfs": -9.137441716529858,
+    "clip_fraction": 0.0,
+    "silent_20ms_fraction_below_minus_50dbfs": 0.379,
+    "active_20ms_fraction_above_minus_35dbfs": 0.163,
+    "offline_gain": 2.2996282968755617,
+    "transferred_by_serial_after_explicit_round_authorization": true,
+    "human_audio_committed": false
+  },
+  "board_restore": {
+    "fallback": "v23 maximum-volume autostart",
+    "autostart_process_count": 1,
+    "capture_pcm_running": true,
+    "playback_pcm_running": true,
+    "capture_script_restored_headphone": "105,105",
+    "capture_script_restored_playback": "230,230",
+    "corrected_headphone": "127,127",
+    "corrected_playback": "255,255"
+  },
+  "gates": {
+    "identity": 0.45,
+    "identity_p10": 0.35,
+    "leakage": 0.1,
+    "utmos": 2.3,
+    "cer": 0.15
+  },
+  "result": {
+    "identity": 0.4334289476003587,
+    "identity_p10": 0.249136310698575,
+    "leakage": 0.10669252588607805,
+    "leakage_window_mean": 0.07263375488370336,
+    "leakage_aggregate": 0.10669252588607805,
+    "utmos": 2.582094132900238,
+    "cer": 0.15384615384615385,
+    "identity_by_chunk": [0.152928244369866, 0.5631487555791521, 0.5440169916535208, 0.47362179879889604],
+    "utmos_by_chunk": [1.9587044715881348, 2.987481117248535, 2.7402257919311523, 2.64196515083313],
+    "all_gates_pass": false,
+    "failed_gates": ["identity", "identity_p10", "leakage", "cer"],
+    "output_sha256": "fbe91f84c136dc1631618d0deeb2f05a4c90963ac2a8f0ecbdaa705209e2088d",
+    "elapsed_s": 58.93328970001312
+  },
+  "target_track9_used": false,
+  "played": false,
+  "request_listening": false,
+  "generated_audio_committed": false,
+  "next_requirement": "Treat this session as exposed regression data and diagnose the first-window failure before freezing another candidate."
+}
