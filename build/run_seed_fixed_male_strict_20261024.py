@@ -30,7 +30,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--steps", type=int, default=30)
     parser.add_argument(
         "--target-mode",
-        choices=("multi4x2", "track8_first8", "track8_active8"),
+        choices=(
+            "multi4x2",
+            "track8_first8",
+            "track8_active8",
+            "track8_active12",
+        ),
         default="multi4x2",
     )
     return parser.parse_args()
@@ -85,7 +90,12 @@ def prepare_inputs(base: Path, source_original: Path, target_mode: str):
     parts = []
     fade = np.linspace(0.0, 1.0, round(0.01 * 16000), endpoint=False)
     names = TARGET_NAMES if target_mode == "multi4x2" else ["Track 8.wav"]
-    seconds = 2.0 if target_mode == "multi4x2" else 8.0
+    seconds = {
+        "multi4x2": 2.0,
+        "track8_first8": 8.0,
+        "track8_active8": 8.0,
+        "track8_active12": 12.0,
+    }[target_mode]
     for name in names:
         original = ROOT / "人物音频资料" / "女声" / name
         rate, signal = read_pcm_wav(original)
