@@ -1,0 +1,26 @@
+{
+  "task": "PS-20261021-10",
+  "date": "2026-10-24",
+  "status": "REJECTED",
+  "base_commit": "3c0088b",
+  "dataset": "exposed Round 12 new-session recording",
+  "fixed": {
+    "target_mode": "multi3x2_track8x4",
+    "cfg": 1.1,
+    "steps": 30,
+    "source_onset_trim": true,
+    "seed_bank": [20261018, 20261019, 20261020, 20261021]
+  },
+  "selection_rule": "among candidates passing all five gates, select the highest target identity",
+  "rows": [
+    {"seed": 20261018, "identity": 0.5665856, "identity_p10": 0.5081783, "leakage": 0.1250056, "utmos": 2.77036, "cer": 0.0408163, "all_gates_pass": false, "source": "Round 12"},
+    {"seed": 20261019, "identity": 0.4985416457087907, "identity_p10": 0.35935929841748393, "leakage": 0.10201796373102637, "utmos": 2.7635777791341147, "cer": 0.061224489795918366, "all_gates_pass": false, "output_sha256": "e73dc34128df910d6bd4f44cbba1346232dc94887d3e16cb3200c29d0e1a0353"},
+    {"seed": 20261020, "identity": 0.5178323289357867, "identity_p10": 0.40426380360369046, "leakage": 0.1128534919258236, "utmos": 2.9086316426595054, "cer": 0.061224489795918366, "all_gates_pass": false, "output_sha256": "b6b33b70226cd760956b9e22b557f830680c09335ac13863d11a4ea323d9aa87"},
+    {"seed": 20261021, "identity": 0.5683192113857806, "identity_p10": 0.49611095921615034, "leakage": 0.14720251551207236, "utmos": 2.766779104868571, "cer": 0.04081632653061224, "all_gates_pass": false, "output_sha256": "d892a17d8522a924b0e1b39d4adb7228c815deb83192ca64da3cd524757ba9c4"}
+  ],
+  "decision": "reject seed-bank selection because no candidate passes all five gates",
+  "closest_candidate": {"seed": 20261019, "leakage_excess": 0.00201796373102637},
+  "played": false,
+  "board_touched": false,
+  "generated_audio_committed": false
+}

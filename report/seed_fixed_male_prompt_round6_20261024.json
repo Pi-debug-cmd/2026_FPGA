@@ -1,0 +1,50 @@
+{
+  "task": "PS-20261021-10",
+  "date": "2026-10-24",
+  "status": "PROPOSED_WAIT_NEW_SESSION",
+  "candidate": {
+    "model": "Seed-VC V2",
+    "steps": 30,
+    "cfg": 1.1,
+    "seed": 20261018,
+    "target_prompt": "Track 8.wav high-activity 1.76s+10.0s",
+    "target_prompt_sha256": "ba901d5196d8b96508826e61f0236379638a02ec93e6924872890c998a7bc6a4"
+  },
+  "gates": {
+    "identity": 0.45,
+    "identity_p10": 0.35,
+    "leakage": 0.1,
+    "utmos": 2.3,
+    "cer": 0.15
+  },
+  "validation_recording_4_sweep": [
+    {"cfg": 1.1, "identity": 0.580977527880206, "identity_p10": 0.558093074564043, "leakage": 0.0677516959356539, "utmos": 2.8603982925415, "cer": 0.147058823529412, "all_gates_pass": true, "output_sha256": "e5d4e5b58c60ca95aa9527d0e4e5b306d2d06b5f245ce067438d725c07a88428"},
+    {"cfg": 1.4, "identity": 0.582940760738982, "identity_p10": 0.55377095949082, "leakage": 0.0702940584753464, "utmos": 2.89163406689962, "cer": 0.147058823529412, "all_gates_pass": true, "output_sha256": "81d1861f86e4b7e8a10892edc9ed09828a133039b23729f03d41052afcddeecc"},
+    {"cfg": 1.7, "identity": 0.592999526082239, "identity_p10": 0.583129539533077, "leakage": 0.0601532044595649, "utmos": 2.8880623181661, "cer": 0.161764705882353, "all_gates_pass": false, "output_sha256": "6370d254ef3fd2285cca1f1e75448496cbb6eb351d7d394cbc935bb011eeca37"}
+  ],
+  "exposed_recording_5_regression": {
+    "identity": 0.559104387160472,
+    "identity_p10": 0.487865066619871,
+    "leakage": 0.0903215765569155,
+    "utmos": 2.89881581068039,
+    "cer": 0.05,
+    "all_gates_pass": true,
+    "output_sha256": "91db1253c6bc948bd3aaecc59db5cf9bc17c4237ea3a4ee34f86c700ac0d0fe1"
+  },
+  "exposed_round3_session_regression": {
+    "identity": 0.481840750054061,
+    "identity_p10": 0.417400256435913,
+    "leakage": 0.0679038673802478,
+    "utmos": 2.72606039047241,
+    "cer": 0.0983606557377049,
+    "all_gates_pass": true,
+    "output_sha256": "103ab718c2264ea24e74339129850f1ea55033289c1da63ff41ec54d03669f03"
+  },
+  "selection_rule": "Use the lowest CFG that passes all validation gates; regressions are pass/fail only.",
+  "target_track9_used": false,
+  "new_session_required": true,
+  "request_listening": false,
+  "deploy_to_board": false,
+  "board_touched": false,
+  "generated_audio_committed": false
+}

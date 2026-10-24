@@ -1,0 +1,16 @@
+{
+  "task": "PS-20261021-10",
+  "date": "2026-10-24",
+  "status": "REJECTED",
+  "base_commit": "cf1a079",
+  "fixed": {"target_mode": "multi3x2_track8x4", "steps": 30, "seed": 20261018, "source_onset_trim": true},
+  "dataset": "exposed Round 12 new-session recording",
+  "rows": [
+    {"cfg": 1.25, "identity": 0.563650798418711, "identity_p10": 0.508642598977024, "leakage": 0.114518973784133, "utmos": 2.7475794951121, "cer": 0.0816326530612245, "all_gates_pass": false, "output_sha256": "c225fbc6d150743a383009a5446d3c116cd65b852980772c3226ebd36449f3a7"},
+    {"cfg": 1.40, "identity": 0.575288077251361, "identity_p10": 0.496101045630205, "leakage": 0.134300200973511, "utmos": 2.78321520487467, "cer": 0.0816326530612245, "all_gates_pass": false, "output_sha256": "fbfe7fde51f64c168a7741eb2ea7f15b0b3b3702b0bfa45d614d6f1378f90636"}
+  ],
+  "decision": "reject CFG strengthening; 1.25 improved leakage but did not pass, while 1.40 regressed",
+  "played": false,
+  "board_touched": false,
+  "generated_audio_committed": false
+}

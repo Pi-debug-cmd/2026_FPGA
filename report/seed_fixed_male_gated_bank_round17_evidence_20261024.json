@@ -1,0 +1,34 @@
+{
+  "task": "PS-20261021-10",
+  "date": "2026-10-24",
+  "candidate_definitions": {
+    "A": "seed=20261018, multi3x2_track8x4, CFG=1.10, 30 steps, onset trim, no postprocess",
+    "B": "seed=20261019, otherwise A, plus +0.5 semitone from 12.0 s with 100 ms crossfade"
+  },
+  "datasets": [
+    {"dataset": "recording 4", "candidates": [
+      {"candidate": "A", "metrics": {"identity": 0.641108108175237, "identity_p10": 0.624355826279796, "leakage": 0.0886923780287869, "utmos": 2.75821844736735, "cer": 0.117647058823529}, "sha256": "ae9d52dc9507142164667a97c86dc016ae3dd858c2a33d6e43c332987f3e2bed"},
+      {"candidate": "B", "metrics": {"identity": 0.632235597327389, "identity_p10": 0.58544438776301, "leakage": 0.0554011851187051, "utmos": 2.40315024058024, "cer": 0.235294117647059}, "sha256": "d88c269e9c1f46c049a59609fcaa65d20dd135f384363fac9d75c1a718c8133b"}
+    ]},
+    {"dataset": "recording 5", "candidates": [
+      {"candidate": "A", "metrics": {"identity": 0.637146461404555, "identity_p10": 0.579898658583753, "leakage": 0.095173675705672, "utmos": 2.90583246946335, "cer": 0.0375}, "sha256": "83c4ee7626c903bb849fa54b6e05a3fde1fa8eafa1214ae3164d7147a085696e"},
+      {"candidate": "B", "metrics": {"identity": 0.624835922479984, "identity_p10": 0.583599554451364, "leakage": 0.138678174365544, "utmos": 2.10640639066696, "cer": 0.15}, "sha256": "133d46a07c13e39374b6fe827351dfa02851df201640612013961378ffb8c123"}
+    ]},
+    {"dataset": "Round 3", "candidates": [
+      {"candidate": "A", "metrics": {"identity": 0.543806835246696, "identity_p10": 0.467730322144185, "leakage": 0.0645807433056359, "utmos": 2.74689730008443, "cer": 0.131147540983607}, "sha256": "7dc8ad497d3f80178902d383da0f7e79b7e4878025e32acc38b8889dd65b8090"},
+      {"candidate": "B", "metrics": {"identity": 0.599263141717401, "identity_p10": 0.578993243702677, "leakage": 0.0914421374416596, "utmos": 2.28353599707286, "cer": 0.131147540983607}, "sha256": "d84a3f70fb71e5bc1eecedafec31a8a361f4382f9371557bbdee3bf88a87690e"}
+    ]},
+    {"dataset": "Round 7", "candidates": [
+      {"candidate": "A", "metrics": {"identity": 0.65916207502868, "identity_p10": 0.646639393780383, "leakage": 0.0714013363597071, "utmos": 2.79599642753601, "cer": 0.0769230769230769}, "sha256": "060ad5387191a48f18b190df45634e305b0d7372e6d4d0e6fe7ac976d781a509"},
+      {"candidate": "B", "metrics": {"identity": 0.672133755452234, "identity_p10": 0.670588538568388, "leakage": 0.0779168699309062, "utmos": 2.85139799118042, "cer": 0.0769230769230769}, "sha256": "d6bea877a59cb8ff39f11ebefd22798c68f0b7d01ef7150f5fb8044759614ec2"}
+    ]},
+    {"dataset": "Round 9", "candidates": [
+      {"candidate": "A", "metrics": {"identity": 0.591331437582572, "identity_p10": 0.579969211601487, "leakage": 0.0762029529481744, "utmos": 2.93137828509013, "cer": 0.142857142857143}, "sha256": "156b38854d641cfb68cb889b422a047e91a37fddff9a33fe276a41ce39ac66ac"},
+      {"candidate": "B", "metrics": {"identity": 0.602296722384454, "identity_p10": 0.526212575967154, "leakage": 0.0842568240965785, "utmos": 2.34166649977366, "cer": 0.0816326530612245}, "sha256": "b3f4ac62d2cfb00f6aabfb84696dc9e5e66ddb8baf525b06df0fb9552534a507"}
+    ]},
+    {"dataset": "Round 12", "candidates": [
+      {"candidate": "A", "metrics": {"identity": 0.5665856, "identity_p10": 0.5081783, "leakage": 0.1250056, "utmos": 2.77036, "cer": 0.0408163}, "sha256": "b811d766e162aae7a817a8275dcd62cf4c475409238a25ff8ec3cf3027c59ccf"},
+      {"candidate": "B", "metrics": {"identity": 0.56090967934225, "identity_p10": 0.502332965347133, "leakage": 0.0800730784582845, "utmos": 2.30958946545919, "cer": 0.0204081632653061}, "sha256": "00a69e6400d8be0f6746530506fd3b6532f0f4171ae293d6d5fb0b45da3a4d84"}
+    ]}
+  ]
+}

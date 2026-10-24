@@ -1,0 +1,45 @@
+{
+  "task": "PS-20261021-10",
+  "date": "2026-10-24",
+  "status": "PROPOSED_WAIT_NEW_SESSION",
+  "candidate": {
+    "model": "Seed-VC V2",
+    "steps": 30,
+    "cfg": 1.1,
+    "seed": 20261018,
+    "target_prompt": "Track 8.wav high-activity 1.76s+10.0s",
+    "source_onset_trim": {
+      "frame_ms": 20,
+      "active_threshold_dbfs": -40,
+      "window_s": 2.0,
+      "minimum_active_ratio": 0.3,
+      "preroll_s": 0.25,
+      "minimum_crop_s": 2.0
+    }
+  },
+  "gates": {
+    "identity": 0.45,
+    "identity_p10": 0.35,
+    "leakage": 0.1,
+    "utmos": 2.3,
+    "cer": 0.15
+  },
+  "regressions": {
+    "recording_4": {"crop_start_s": 0.0, "identity": 0.580977527880206, "identity_p10": 0.558093074564043, "leakage": 0.0677516959356539, "utmos": 2.8603982925415, "cer": 0.147058823529412, "all_gates_pass": true, "output_sha256": "d7ea4c9ae7fc49927108b3570aec851e01846992a2cdbebe6a300bf13bea6af4"},
+    "recording_5": {"crop_start_s": 0.0, "identity": 0.559104387160472, "identity_p10": 0.487865066619871, "leakage": 0.0903215765569155, "utmos": 2.89881581068039, "cer": 0.05, "all_gates_pass": true, "output_sha256": "2b4b8f80bdaac2e43f1d7e8c3d3d3c8ac0938a6dc93727862370a0e47d7d006f"},
+    "round3_new_session": {"crop_start_s": 4.47, "identity": 0.488292161489411, "identity_p10": 0.433960376399996, "leakage": 0.0560347083687835, "utmos": 2.66236821810404, "cer": 0.0819672131147541, "all_gates_pass": true, "output_sha256": "f286a1e105f1824eb3a645d363cc0bb91766a833532da26159bf97ec813f6464"},
+    "round7_new_session": {"crop_start_s": 6.87, "identity": 0.582759448356373, "identity_p10": 0.551169454296887, "leakage": 0.0627798876755194, "utmos": 2.85875594615936, "cer": 0.115384615384615, "all_gates_pass": true, "output_sha256": "4c4e64526bd7462a3f58bc4f809b830e7aec0476ab17809407b4d1a430107d51"}
+  },
+  "discarded_probe": {
+    "description": "A provisional rule cropped 0.57 s from recording 5",
+    "cer": 0.1875,
+    "all_gates_pass": false,
+    "reason": "Natural short lead-in must not be trimmed; final rule requires at least 2.0 s crop."
+  },
+  "target_track9_used": false,
+  "new_session_required": true,
+  "request_listening": false,
+  "deploy_to_board": false,
+  "board_touched": false,
+  "generated_audio_committed": false
+}

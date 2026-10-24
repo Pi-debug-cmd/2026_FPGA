@@ -1,0 +1,27 @@
+{
+  "task": "PS-20261021-10",
+  "date": "2026-10-24",
+  "status": "REJECTED_SUBJECTIVE",
+  "base_commit": "d45568d",
+  "selected_candidate": "A",
+  "candidate_sha256": "4b613d2430793b0489f76a83d656817cde4dd48aac47dff975a26298291c6fe0",
+  "objective_metrics": {"identity": 0.579278428843122, "identity_p10": 0.538019921189293, "leakage": 0.084603026016687, "utmos": 2.80779027938843, "cer": 0.125, "all_gates_pass": true},
+  "playback": {
+    "ready_confirmed": true,
+    "seconds": 16.6255,
+    "rate": 32000,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "wav_sha256": "72e6dfb9d681447c1df92aed7445e992ae396c5d52bd2fe997cae85822c8d650",
+    "gzip_sha256": "f683fa6357c1a2df769c626e93cdd094038b48d5ea8c16f32babf83be88c53bf",
+    "play_rc": 0,
+    "underrun_detected": false,
+    "successful_plays": 1
+  },
+  "user_verdict_verbatim": "男声感强烈，感觉seed方案进行这么多轮次，效果不是很好，原来的world方案为什么不用了",
+  "target_female_similarity_pass": false,
+  "male_residual": "strong",
+  "decision": "reject candidate and stop extending the Seed route; return optimization focus to the deployed WORLD fallback",
+  "board_restored": {"scheme": "WORLD v23", "single_parent": true, "capture_pcm": "RUNNING", "playback_pcm": "RUNNING", "headphone": 127, "playback": 255},
+  "generated_audio_committed": false
+}

@@ -1,0 +1,49 @@
+{
+  "task": "PS-20261021-10",
+  "date": "2026-10-24",
+  "status": "PROPOSED_WAIT_NEW_SESSION",
+  "base_commit": "efcb5f2",
+  "candidate": {
+    "model": "Seed-VC V2",
+    "steps": 30,
+    "cfg": 1.1,
+    "seed": 20261018,
+    "target_mode": "multi3x2_track8x4",
+    "target_prompt": [
+      {"track": 5, "seconds": 2.0},
+      {"track": 6, "seconds": 2.0},
+      {"track": 7, "seconds": 2.0},
+      {"track": 8, "seconds": 4.0}
+    ],
+    "target_prompt_seconds": 10.0,
+    "target_prompt_sha256": "0f70b18eef37614ce0f866f989cf5376bd237e410ffb6f1e85b70ec4c2909391",
+    "source_onset_trim": true
+  },
+  "gates": {
+    "identity": 0.45,
+    "identity_p10": 0.35,
+    "leakage": 0.1,
+    "utmos": 2.3,
+    "cer": 0.15
+  },
+  "regressions": {
+    "recording_4": {"identity": 0.641108108175237, "identity_p10": 0.624355826279796, "leakage": 0.0886923780287869, "utmos": 2.75821844736735, "cer": 0.117647058823529, "all_gates_pass": true, "output_sha256": "ae9d52dc9507142164667a97c86dc016ae3dd858c2a33d6e43c332987f3e2bed"},
+    "recording_5": {"identity": 0.637146461404555, "identity_p10": 0.579898658583753, "leakage": 0.095173675705672, "utmos": 2.90583246946335, "cer": 0.0375, "all_gates_pass": true, "output_sha256": "83c4ee7626c903bb849fa54b6e05a3fde1fa8eafa1214ae3164d7147a085696e"},
+    "round3_new_session": {"identity": 0.543806835246696, "identity_p10": 0.467730322144185, "leakage": 0.0645807433056359, "utmos": 2.74689730008443, "cer": 0.131147540983607, "all_gates_pass": true, "output_sha256": "7dc8ad497d3f80178902d383da0f7e79b7e4878025e32acc38b8889dd65b8090"},
+    "round7_new_session": {"identity": 0.65916207502868, "identity_p10": 0.646639393780383, "leakage": 0.0714013363597071, "utmos": 2.79599642753601, "cer": 0.0769230769230769, "all_gates_pass": true, "output_sha256": "060ad5387191a48f18b190df45634e305b0d7372e6d4d0e6fe7ac976d781a509"},
+    "round9_new_session": {"identity": 0.591331437582572, "identity_p10": 0.579969211601487, "leakage": 0.0762029529481744, "utmos": 2.93137828509013, "cer": 0.142857142857143, "all_gates_pass": true, "output_sha256": "156b38854d641cfb68cb889b422a047e91a37fddff9a33fe276a41ce39ac66ac"}
+  },
+  "discarded_probe": {
+    "target_mode": "multi4x2",
+    "cfg": 0.95,
+    "dataset": "recording_5",
+    "leakage": 0.114752674115097,
+    "all_gates_pass": false,
+    "reason": "pure four-track prompt retained excessive source identity on recording 5"
+  },
+  "human_evidence_basis": "2026-10-18 multi-track prompts were preferred over single-track prompt for target similarity and reduced muddiness",
+  "new_session_required": true,
+  "request_listening": false,
+  "board_touched": false,
+  "generated_audio_committed": false
+}

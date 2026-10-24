@@ -1,0 +1,40 @@
+{
+  "task": "PS-20261021-10",
+  "date": "2026-10-24",
+  "status": "REJECTED_CER",
+  "change": "Track 8 high-activity target prompt increased from 8.0 seconds to 12.0 seconds",
+  "candidate": {
+    "model": "Seed-VC V2",
+    "steps": 30,
+    "cfg": 1.1,
+    "seed": 20261018,
+    "target_prompt": "Track 8.wav high-activity 1.76s+12.0s",
+    "target_prompt_sha256": "982e36786031fe8be41e03e61178f24a1ac2fd33042f1301161530b6be0192dd"
+  },
+  "gates": {
+    "identity": 0.45,
+    "identity_p10": 0.35,
+    "leakage": 0.1,
+    "utmos": 2.3,
+    "cer": 0.15
+  },
+  "validation_recording_4": {
+    "identity": 0.5836571060034236,
+    "identity_p10": 0.5440908067936338,
+    "leakage": 0.06443991822627787,
+    "leakage_window_mean": 0.06029206179042845,
+    "leakage_aggregate": 0.06443991822627787,
+    "utmos": 2.9656167030334473,
+    "cer": 0.19117647058823528,
+    "all_gates_pass": false,
+    "failed_gates": ["cer"],
+    "output_sha256": "9d33756ee9dd6388a2238b6d6c6680ca7cd38e5f9d1219e24ebc545b5af3bc86",
+    "elapsed_s": 151.64488800003892
+  },
+  "selection_data_only": "人物音频资料/男声/标准录音 4.wav",
+  "exposed_regressions_run": false,
+  "target_track9_used": false,
+  "played": false,
+  "board_touched": false,
+  "generated_audio_committed": false
+}

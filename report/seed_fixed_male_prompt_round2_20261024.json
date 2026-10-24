@@ -1,0 +1,38 @@
+{
+  "task": "PS-20261021-10",
+  "date": "2026-10-24",
+  "status": "PROPOSED_WAIT_NEW_SESSION",
+  "candidate": {
+    "model": "Seed-VC V2",
+    "steps": 30,
+    "cfg": 1.1,
+    "seed": 20261018,
+    "target_prompt": "Track 8.wav high-activity 1.77s+8.0s",
+    "target_prompt_sha256": "f9f0caeb1518d18fc4d245389e1711ee38b9e629c76324745babb2d86cacfa19"
+  },
+  "gates": {"identity": 0.45, "identity_p10": 0.35, "leakage": 0.1, "utmos": 2.3, "cer": 0.15},
+  "validation_recording_4": {
+    "identity": 0.5515210597622017,
+    "identity_p10": 0.5121449432191618,
+    "leakage": 0.07528098673085878,
+    "utmos": 2.813840707143148,
+    "cer": 0.14705882352941177,
+    "all_gates_pass": true,
+    "output_sha256": "5fab6917df7970d3337c05572d28cd1279365d3c18b17907a18e46f354bdbc21"
+  },
+  "exposed_recording_5_regression": {
+    "identity": 0.5335844214507743,
+    "identity_p10": 0.5162688051148117,
+    "leakage": 0.09190816916510894,
+    "utmos": 2.9339669942855835,
+    "cer": 0.05,
+    "all_gates_pass": true,
+    "output_sha256": "614d621b9c32fd38c9776f1ac0e3cb9d2a73aacb087a0ef2a5bffd4c982447d3"
+  },
+  "target_track9_used": false,
+  "new_session_required": true,
+  "request_listening": false,
+  "deploy_to_board": false,
+  "board_touched": false,
+  "generated_audio_committed": false
+}
