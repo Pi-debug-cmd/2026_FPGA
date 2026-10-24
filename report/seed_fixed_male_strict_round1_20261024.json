@@ -1,0 +1,39 @@
+{
+  "task": "PS-20261021-10",
+  "date": "2026-10-24",
+  "status": "REJECTED",
+  "candidate": {"model": "Seed-VC V2", "steps": 30, "cfg": 1.1, "seed": 20261018},
+  "gates": {"identity": 0.45, "identity_p10": 0.35, "leakage": 0.1, "utmos": 2.3, "cer": 0.15},
+  "validation_recording_4": {
+    "identity": 0.599173988636263,
+    "identity_p10": 0.562412408358543,
+    "leakage": 0.0978995614007588,
+    "utmos": 2.74536903699239,
+    "cer": 0.14705882352941177,
+    "all_gates_pass": true
+  },
+  "locked_recording_5": {
+    "identity": 0.578363598652315,
+    "identity_p10": 0.527846954583134,
+    "leakage_window_mean": 0.10045451788076754,
+    "leakage_aggregate": 0.1078752714026537,
+    "leakage_strict": 0.1078752714026537,
+    "utmos": 2.7941343188285828,
+    "cer": 0.0625,
+    "all_gates_pass": false,
+    "failed": ["leakage"]
+  },
+  "protocol": {
+    "source_profile": "标准录音 1-3",
+    "selection_only": "标准录音 4",
+    "locked_after_freeze": "标准录音 5",
+    "target_prompt_and_centroid": "Track 5-8",
+    "target_track9_used": false,
+    "cer_normalization": "punctuation removal plus OpenCC 0.1.7 t2s",
+    "leakage_rule": "max(window cosine mean, length-weighted aggregate-vector cosine)"
+  },
+  "deploy_to_board": false,
+  "request_listening": false,
+  "generated_audio_committed": false,
+  "board_touched": false
+}
