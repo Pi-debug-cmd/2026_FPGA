@@ -29,6 +29,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--seed", type=int, nargs="+", required=True)
     parser.add_argument("--steps", type=int, default=30)
     parser.add_argument(
+        "--source-onset-trim",
+        action="store_true",
+        help="Remove leading non-speech before the first sustained active window",
+    )
+    parser.add_argument(
         "--target-mode",
         choices=(
             "multi4x2",
@@ -64,7 +69,34 @@ def select_speech_window(signal, rate: int, seconds: float):
     return start, np.asarray(signal[start : start + count], dtype=np.float64).copy()
 
 
-def prepare_inputs(base: Path, source_original: Path, target_mode: str):
+def trim_sustained_onset(signal, rate: int):
+    """Retain 250 ms before the first 2 s window with >=30% active frames."""
+    import numpy as np
+
+    frame = round(0.02 * rate)
+    usable = len(signal) // frame * frame
+    if usable < round(2.0 * rate):
+        return 0, signal
+    framed = np.asarray(signal[:usable], dtype=np.float64).reshape(-1, frame)
+    rms = np.sqrt(np.mean(framed * framed, axis=1))
+    active = rms >= 10 ** (-40 / 20)
+    window_frames = round(2.0 / 0.02)
+    ratios = np.convolve(
+        active.astype(np.float64),
+        np.ones(window_frames, dtype=np.float64) / window_frames,
+        mode="valid",
+    )
+    candidates = np.flatnonzero(ratios >= 0.30)
+    if not len(candidates):
+        return 0, signal
+    onset = int(candidates[0]) * frame
+    start = max(0, onset - round(0.25 * rate))
+    if start < round(2.0 * rate):
+        return 0, signal
+    return start, np.asarray(signal[start:], dtype=np.float64).copy()
+
+
+def prepare_inputs(base: Path, source_original: Path, target_mode: str, source_onset_trim: bool):
     import numpy as np
     from src.reference.audio_io import downsample_16k, file_sha256, read_pcm_wav, write_pcm16
 
@@ -72,6 +104,10 @@ def prepare_inputs(base: Path, source_original: Path, target_mode: str):
     inputs.mkdir(parents=True, exist_ok=True)
     rate, source = read_pcm_wav(source_original)
     source = downsample_16k(rate, source)
+    original_source_seconds = len(source) / 16000
+    source_crop_start, source = (
+        trim_sustained_onset(source, 16000) if source_onset_trim else (0, source)
+    )
     source_gain = min(
         0.04 / max(float(np.sqrt(np.mean(source**2))), 1e-12),
         0.9 / max(float(np.max(np.abs(source))), 1e-12),
@@ -84,6 +120,9 @@ def prepare_inputs(base: Path, source_original: Path, target_mode: str):
             "path": str(source_original.relative_to(ROOT)).replace("\\", "/"),
             "sha256": file_sha256(source_original),
             "seconds": len(source) / 16000,
+            "original_seconds": original_source_seconds,
+            "crop_start_s": source_crop_start / 16000,
+            "onset_trim": source_onset_trim,
             "offline_gain": source_gain,
         }
     ]
@@ -165,7 +204,9 @@ def main() -> None:
 
     base = generated / "seed_fixed_male_20261024" / args.tag
     base.mkdir(parents=True, exist_ok=True)
-    input_records, source_path, target_path = prepare_inputs(base, source_original, args.target_mode)
+    input_records, source_path, target_path = prepare_inputs(
+        base, source_original, args.target_mode, args.source_onset_trim
+    )
 
     seed_base = external_generated / "seed_reference_20261015"
     upstream = next((seed_base / "source").glob("seed-vc-*"))
