@@ -432,3 +432,14 @@
 - 模型产物：复用现有 Seed-VC 资产，无新权重；生成 WAV 未提交或发布。
 - 提交或 PR：分支 `agent/Pi-debug-cmd/PS-20261021-10`，继续更新 PR [#10](https://github.com/Pi-debug-cmd/2026_FPGA/pull/10)；结果提交待回填。
 - 下一责任方：Hardware-A / Codex 固定 12 秒提示，另开一轮只调整 CFG，尝试恢复 CER 且保留泄漏余量。
+
+### [PS-20261021-10] Seed-VC 12 秒提示 CFG 优化 Round 5 认领
+- 日期：2026-10-24
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`528244d`
+- 唯一变量：固定 Track 8 高活动 12 秒提示、Seed-VC V2、30 步、seed=20261018 和严格评估器，只在验证录音 4 上提高 CFG，目标是把 CER 恢复到 ≤0.15，同时保持严格泄漏 ≤0.10。
+- 数据纪律：只用录音 4 选 CFG；录音 5 与 Round 3 新会话只在候选选定后做已暴露回归，不作为选择依据。
+- 限制：通过回归仍需冻结后的另一条全新会话；无试听、板卡、实时、Cortex-A9、Vivado、RTL 或 PL 工作。
+- 提交或 PR：分支 `agent/Pi-debug-cmd/PS-20261021-10`，继续更新 PR [#10](https://github.com/Pi-debug-cmd/2026_FPGA/pull/10)。
+- 下一责任方：Hardware-A / Codex 完成 CFG 筛选并按结果提交。
