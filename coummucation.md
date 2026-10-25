@@ -849,6 +849,18 @@
 - 限制：不训练、不推理、不合成、不使用 Track 9 或固定男性输入、不播放；板卡保持关机。
 - 下一责任方：Hardware-A / Codex 完成一致性判定并提交 GO/NO-GO。
 
+### [PS-20261021-10] 动态欠方差一致性预检 Round 36 结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线预检）
+- 状态：GO_VARIANCE_MATCHING
+- 基准提交：`97fbd87`
+- 修改路径：`report/dynamic_variance_consistency_round36_20261025.{md,json}`、`coummucation.md`。
+- 结果：谱/log-F0/能量/AP 的 8/8 句 lag-1 动态比全部 <1；均值 `0.6462/0.5177/0.8200/0.6750`，变异系数 `0.0377/0.1643/0.0669/0.1170`，均通过 <0.25 门。
+- 判定：允许下一轮仅增加固定 `0.05` 权重的四组 lag-1 log-RMS 匹配训练项；推理网络、参数、MAC 与延迟不变。
+- 限制：未训练、推理、合成或重新使用 Track 9；未用固定男性输入、未播放，板卡保持关机。
+- 报告链接：`report/dynamic_variance_consistency_round36_20261025.md`、`report/dynamic_variance_consistency_round36_20261025.json`。
+- 下一责任方：Hardware-A / Codex 提交预检后另行认领方差匹配训练。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）

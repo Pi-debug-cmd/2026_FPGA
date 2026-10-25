@@ -1,0 +1,22 @@
+{
+  "task": "PS-20261021-10",
+  "round": 36,
+  "date": "2026-10-25",
+  "status": "GO_VARIANCE_MATCHING",
+  "validation_rows": 8,
+  "groups": {
+    "spectrum": {"mean": 0.6461856961932965, "minimum": 0.598690649675532, "maximum": 0.6733571889322058, "below_one": 8, "coefficient_of_variation": 0.037714701513626936},
+    "log_f0": {"mean": 0.5177241984112382, "minimum": 0.44346829386728476, "maximum": 0.7178134676738774, "below_one": 8, "coefficient_of_variation": 0.16426612798589832},
+    "energy": {"mean": 0.8200469399338393, "minimum": 0.7440572754575053, "maximum": 0.9184377144499879, "below_one": 8, "coefficient_of_variation": 0.06685516528193519},
+    "aperiodicity": {"mean": 0.6749820473411993, "minimum": 0.5211315830544332, "maximum": 0.7931994534567889, "below_one": 8, "coefficient_of_variation": 0.11696587772118272}
+  },
+  "decision_gate": {"below_one_rows_per_group": 8, "maximum_coefficient_of_variation": 0.25},
+  "next_single_variable": "add 0.05-weight four-group lag-1 log-RMS matching loss",
+  "runtime_cost_added": false,
+  "training_started": false,
+  "track9_used": false,
+  "fixed_male_used": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}
