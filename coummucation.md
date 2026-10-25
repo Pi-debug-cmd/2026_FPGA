@@ -10,6 +10,16 @@
 - 限制：本轮只改协作入口和任务队列，不宣称任何候选通过，不启动板卡、训练、试听或 PL。
 - 下一责任方：Maintainer / Codex 更新 `AGENTS.md`、`plan.md`、`project_guide.md` 和本协作窗口后提交 PR。
 
+### [DOCS-20261025-01] Seed-VC 分流错误纠正
+- 日期：2026-10-25
+- 角色/Agent：Maintainer / Codex
+- 状态：CORRECTED（覆盖本任务上一条中的 Seed-VC 分配，不改写历史记录）
+- 纠正依据：Seed-VC 已被真人试听明确否决为“男声残留明显、没有更像目标女声”；`report/quality_exploration_ps_round_20261019.md` 也规定不再作为质量主线。客观旧排名不能覆盖真人否决。
+- 正确分流：Hardware-A 继续配对 HuBERT→WORLD 因果 GRU；Remote-PS-C 独立负责 HuBERT teacher→FARGAN；Hardware-B 负责固定男性平行数据 GMM/DIFFGMM→WORLD 的板端友好候选。
+- 淘汰锁：Seed-VC、A3、direct-20D/LLVC→FARGAN 只保留历史对照，除非用户明确重新开放，否则任何写作者不得认领继续优化。
+- 限制：尚未修改正式任务矩阵；本条只立即消除错误分配，避免其他协作者误领。
+- 下一责任方：Maintainer / Codex 按纠正后的三路更新协作入口。
+
 > **规范文件名：`coummucation.md`。** 拼写按用户要求保留。所有 Agent 开始工作前必须阅读本文件；所有方案轮次和测试轮次结束后必须更新本文件、提交并推送 GitHub。
 
 ## 角色
