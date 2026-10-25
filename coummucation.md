@@ -682,6 +682,19 @@
 - 限制：不训练、不重新使用 Track 9、不使用固定男性输入、不播放；板卡保持关机。
 - 下一责任方：Hardware-A / Codex 完成诊断并提交结论。
 
+### [PS-20261021-10] Round 28 动态恢复归因 Round 29 结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：ROOT_CAUSE_REFINED
+- 基准提交：`3af19c0`
+- 修改路径：`build/audit_paired_world_dynamics_round27_20261025.py`、`report/paired_world_dynamics_recovery_round29_20261025.{md,json}`、`coummucation.md`。
+- UTMOS：8 条独立验证句教师均值 `2.5855`；Round 28 预测均值 `1.8335`，比 Round 26 的 `1.7218` 提高 `0.1117`。
+- 动态变化：谱 lag-1 比 `0.6107→0.6356`、能量 `0.7815→0.7994`、AP `0.6138→0.6609`；log-F0 却从 `0.4795→0.4669`。
+- 根因细化：动态损失对连续维总平均，60 维谱主导，单维 log-F0/能量权重被稀释；下一唯一变量为四参数组等权的多尺度动态项，总权重和 lag 不变。
+- 限制：未训练、未重新使用 Track 9、未用固定男性输入、未播放；板卡保持关机。
+- 报告链接：`report/paired_world_dynamics_recovery_round29_20261025.md`、`report/paired_world_dynamics_recovery_round29_20261025.json`。
+- 下一责任方：Hardware-A / Codex 提交归因后另行认领组平衡训练。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）

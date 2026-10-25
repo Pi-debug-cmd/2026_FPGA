@@ -1,0 +1,25 @@
+{
+  "task": "PS-20261021-10",
+  "round": 29,
+  "date": "2026-10-25",
+  "status": "ROOT_CAUSE_REFINED",
+  "validation_rows": 8,
+  "teacher_utmos_mean": 2.585537526081866,
+  "round26_prediction_utmos_mean": 1.721794913251569,
+  "round28_prediction_utmos_mean": 1.8335171107232102,
+  "round28_utmos_gain": 0.11172219747164114,
+  "dynamic_ratios": {
+    "spectrum": {"round26_std": 0.6735880677770466, "round28_std": 0.6858344719263509, "round26_delta": 0.6106669804649455, "round28_delta": 0.6356092434902174},
+    "log_f0": {"round26_std": 0.75718759134216, "round28_std": 0.6936723964846967, "round26_delta": 0.4794612403205002, "round28_delta": 0.4668814212712487},
+    "energy": {"round26_std": 0.9616647308397874, "round28_std": 0.9428916047137167, "round26_delta": 0.7814957742575677, "round28_delta": 0.7994334682188913},
+    "aperiodicity": {"round26_std": 0.8600831655616532, "round28_std": 0.8877716041568976, "round26_delta": 0.6138488525890462, "round28_delta": 0.660893374526237}
+  },
+  "root_cause_refinement": "dimension-averaged dynamic loss underweights one-dimensional log-F0 and energy relative to 60-dimensional spectrum",
+  "next_single_variable": "group-balanced multiscale dynamic loss with equal spectrum/log-F0/energy/AP group weights",
+  "training_started": false,
+  "track9_reused": false,
+  "fixed_male_used": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

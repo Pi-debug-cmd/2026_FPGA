@@ -47,7 +47,12 @@ def main() -> None:
     parser.add_argument("--asset-root", required=True, type=Path)
     parser.add_argument("--output", type=Path,
                         default=ROOT / "build/generated/hubert_world_round27_20261025")
+    parser.add_argument("--checkpoint", type=Path,
+                        default=ROOT / "build/generated/hubert_world_round26_20261025/paired_causal_gru.pt")
+    parser.add_argument("--experiment-round", type=int, default=27)
     args = parser.parse_args()
+    args.output = args.output.resolve()
+    args.checkpoint = args.checkpoint.resolve()
     args.output.mkdir(parents=True, exist_ok=True)
     # Load the established evaluator from the asset root so its model paths are valid.
     spec = importlib.util.spec_from_file_location(
@@ -58,8 +63,7 @@ def main() -> None:
     round25 = ROOT / "build/generated/hubert_world_round25_20261025"
     manifest = json.loads((round25 / "cache_manifest.json").read_text(encoding="utf-8"))
     cache = round25 / "cache"
-    checkpoint_path = ROOT / "build/generated/hubert_world_round26_20261025/paired_causal_gru.pt"
-    checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
+    checkpoint = torch.load(args.checkpoint, map_location="cpu", weights_only=False)
     model = prior.CausalWorldGRU(); model.load_state_dict(checkpoint["model"]); model.eval()
     mean = checkpoint["pca_mean"]; projection = checkpoint["pca_projection"]
     x_mean = checkpoint["x_mean"]; x_std = checkpoint["x_std"]
@@ -127,8 +131,9 @@ def main() -> None:
         aggregate_ratios[group] = {
             metric: float(np.mean([row["ratios"][group][metric] for row in rows]))
             for metric in rows[0]["ratios"][group]}
-    summary = {"task": "PS-20261021-10", "round": 27,
+    summary = {"task": "PS-20261021-10", "round": args.experiment_round,
                "kind": "paired_teacher_prediction_dynamics_audit",
+               "checkpoint_sha256": base.sha256(args.checkpoint),
                "validation_rows": len(rows),
                "teacher_utmos_mean": float(np.mean([row["teacher"]["utmos"] for row in rows])),
                "prediction_utmos_mean": float(np.mean([row["prediction"]["utmos"] for row in rows])),
