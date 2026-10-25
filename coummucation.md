@@ -634,6 +634,19 @@
 - 限制：板卡保持关机；不录音、不播放、不访问板卡，无实时、Cortex-A9、Vivado、RTL 或 PL 结论。
 - 下一责任方：Hardware-A / Codex 完成 8 句成对诊断并提交唯一根因结论。
 
+### [PS-20261021-10] 配对教师与预测动态归因 Round 27 结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：ROOT_CAUSE_CONFIRMED
+- 基准提交：`68bcaaf`
+- 修改路径：`build/audit_paired_world_dynamics_round27_20261025.py`、`report/paired_world_dynamics_audit_round27_20261025.{md,json}`、`coummucation.md`。
+- UTMOS：8 个独立验证句教师 WORLD 重建均值 `2.5855`，Round 26 预测重建均值 `1.7218`，平均下降 `0.8637`；教师 7/8 句高于 2.30，预测 0/8 高于 2.30。
+- 动态比：预测/教师的谱一阶动态 `0.6107`、log-F0 `0.4795`、能量 `0.7815`、AP `0.6138`；能量静态方差仍有 `0.9617`。根因为谱/F0/AP 预测动态过平滑。
+- 判定：教师整体质量不是主因，SP60/AP12 已由 Round 24 排除；下一轮唯一变量为更强的多尺度动态损失，保持架构、数据、锚点比例、表示和验证切分不变。
+- 限制：未训练、未使用 Track 9 或固定男性录音；诊断 WAV 未播放。板卡保持关机，无硬件结论。
+- 报告链接：`report/paired_world_dynamics_audit_round27_20261025.md`、`report/paired_world_dynamics_audit_round27_20261025.json`。
+- 下一责任方：Hardware-A / Codex 提交归因；随后另行认领单变量多尺度动态训练。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
