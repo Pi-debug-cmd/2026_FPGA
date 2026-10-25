@@ -598,6 +598,17 @@
 - 报告链接：`report/paired_hubert_world_preflight_round25_20261025.md`、`report/paired_hubert_world_preflight_round25_20261025.json`。
 - 下一责任方：Hardware-A / Codex 提交预检；随后另行认领长训练 Round 26。
 
+### [PS-20261021-10] 扩展配对因果 GRU 长训练 Round 26 认领
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`2606e1c`
+- 方案：复用 Round 25 完整缓存，PCA/归一化只拟合 192 训练对；两层单向 GRU 在 HuBERT 20 ms 帧率预测 SP60/AP12 WORLD 参数，训练批次混入 Tracks 5～8 目标自重建锚点，VUV 独立分类并保留一阶动态损失。
+- 验证与冻结：仅用 2 名未训练验证说话人的 8 对教师句早停；Track 9 不参与训练、归一化或模型选择，只在冻结后作已暴露目标重建回归。目标重建核心门失败则不运行固定男性 4/5。
+- 资源边界：本轮训练教师上限，不宣称 GRU 可上板；过门后才蒸馏并评估 PL。缓存、checkpoint 和 WAV 留在忽略目录。
+- 限制：板卡保持关机；不录音、不播放、不访问板卡，无 Cortex-A9、实时、Vivado、RTL 或 PL 结论。
+- 下一责任方：Hardware-A / Codex 完成长训练、因果性验证和冻结 Track 9 回归。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
