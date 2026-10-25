@@ -1,0 +1,39 @@
+{
+  "task": "PS-20261021-10",
+  "round": 28,
+  "date": "2026-10-25",
+  "status": "REJECTED_IMPROVED",
+  "single_variable": {
+    "from": {"weight": 0.2, "lags": [1]},
+    "to": {"weight": 0.75, "lags": [1, 2, 4], "reduction": "mean"}
+  },
+  "parameters": 477771,
+  "paired_train": 192,
+  "paired_validation": 8,
+  "anchor_probability": 0.25,
+  "best_step": 600,
+  "steps_completed": 1400,
+  "validation_total": 0.5949436500668526,
+  "causal_prefix_max_abs": 0.0,
+  "objective": {
+    "identity": 0.6554933517754359,
+    "identity_p10": 0.644041139744118,
+    "male_centroid_cosine": 0.1661331709977706,
+    "utmos": 1.5965913236141205,
+    "cer": 0.10869565217391304
+  },
+  "target_reconstruction_gates": {
+    "identity": true,
+    "identity_p10": true,
+    "utmos": false,
+    "cer": true
+  },
+  "male_leakage_gate_applicable": false,
+  "checkpoint_sha256": "907015bac6f0f7b0ba26bdbed60c2809ac93565504e3230a9d45175ebe7d4bfc",
+  "reconstruction_sha256": "b57db7826d3063d2b745ff55fae6f1792e5da1c21aa89fa73e9693192656f6e1",
+  "first_attempt_manifest_only_failure": true,
+  "fixed_male_evaluated": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

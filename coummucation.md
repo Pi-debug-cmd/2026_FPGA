@@ -658,6 +658,20 @@
 - 限制：不播放、不使用固定男性输入、不触碰板卡；板卡继续关机，无 Cortex-A9、实时、Vivado、RTL 或 PL 结论。
 - 下一责任方：Hardware-A / Codex 实现并运行本轮单变量训练，失败也提交完整证据。
 
+### [PS-20261021-10] 多尺度动态损失 Round 28 结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED_IMPROVED
+- 基准提交：`e5770df`
+- 修改路径：`build/train_paired_hubert_world_gru_round26_20261025.py`、`report/paired_hubert_world_multiscale_round28_20261025.{md,json}`、`coummucation.md`。
+- 训练结果：固定 `0.75 × mean(lag 1/2/4)`；477,771 参数，192/8 配对，25% 锚点；第 600 步验证最佳 `0.594944`，第 1400 步早停，因果差异 `0.0`。
+- Track 9：**0.6555/0.6440/0.1661/1.5966/0.1087**（身份/P10/男性质心余弦/UTMOS/CER）。目标自重建不应用男性泄漏门；身份、P10、CER 通过，UTMOS 失败。
+- 对比 Round 26：身份 `+0.0321`、P10 `+0.0342`、UTMOS `+0.1338`、CER `-0.0435`；方向有效但距离自然度门仍有 `0.7034`。
+- 执行说明：第一次完整训练后只在末端清单相对路径处理失败；修复后同 seed 完整重跑，日志与哈希一致。checkpoint SHA `907015ba…7d4bfc`，WAV SHA `b57db782…6f6e1`。
+- 限制：未播放、未使用固定男性输入；板卡保持关机，无 Cortex-A9、实时、Vivado、RTL 或 PL 结论。
+- 报告链接：`report/paired_hubert_world_multiscale_round28_20261025.md`、`report/paired_hubert_world_multiscale_round28_20261025.json`。
+- 下一责任方：Hardware-A / Codex 提交本轮；下一轮先量化 Round 28 动态恢复，不直接扩大损失权重。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）

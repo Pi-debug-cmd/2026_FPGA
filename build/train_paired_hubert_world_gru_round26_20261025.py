@@ -45,15 +45,41 @@ def load_cache(cache: Path, record: dict) -> tuple[np.ndarray, np.ndarray]:
     return content, target
 
 
+def loss_terms(prediction: torch.Tensor, target: torch.Tensor, target_vuv: torch.Tensor,
+               positive_weight: torch.Tensor, multiscale: bool) -> tuple[torch.Tensor, dict]:
+    if not multiscale:
+        return prior.loss_terms(prediction, target, target_vuv, positive_weight)
+    continuous_prediction = prediction[..., prior.CONTINUOUS]
+    continuous_target = target[..., prior.CONTINUOUS]
+    reconstruction = torch.nn.functional.smooth_l1_loss(continuous_prediction, continuous_target)
+    vuv = torch.nn.functional.binary_cross_entropy_with_logits(
+        prediction[..., VUV_INDEX], target_vuv, pos_weight=positive_weight)
+    deltas = []
+    for lag in (1, 2, 4):
+        deltas.append(torch.nn.functional.smooth_l1_loss(
+            continuous_prediction[:, lag:] - continuous_prediction[:, :-lag],
+            continuous_target[:, lag:] - continuous_target[:, :-lag]))
+    multiscale_delta = torch.stack(deltas).mean()
+    total = reconstruction + 0.35 * vuv + 0.75 * multiscale_delta
+    return total, {"total": float(total.detach()),
+                   "reconstruction": float(reconstruction.detach()),
+                   "vuv_bce": float(vuv.detach()),
+                   "multiscale_delta": float(multiscale_delta.detach()),
+                   "delta_lag1": float(deltas[0].detach()),
+                   "delta_lag2": float(deltas[1].detach()),
+                   "delta_lag4": float(deltas[2].detach())}
+
+
 def validate(model: prior.CausalWorldGRU, rows: list[tuple[np.ndarray, np.ndarray]],
-             positive_weight: torch.Tensor) -> dict:
+             positive_weight: torch.Tensor, multiscale: bool) -> dict:
     metrics = []
     model.eval()
     with torch.inference_mode():
         for x, target in rows:
             prediction = model(torch.from_numpy(x[None]))
-            _, row = prior.loss_terms(prediction, torch.from_numpy(target[None]),
-                                      torch.from_numpy(target[None, :, VUV_INDEX]), positive_weight)
+            _, row = loss_terms(prediction, torch.from_numpy(target[None]),
+                                torch.from_numpy(target[None, :, VUV_INDEX]), positive_weight,
+                                multiscale)
             metrics.append(row)
     return {key: float(np.mean([row[key] for row in metrics])) for key in metrics[0]}
 
@@ -63,7 +89,13 @@ def main() -> None:
     parser.add_argument("--asset-root", required=True, type=Path)
     parser.add_argument("--output", type=Path,
                         default=ROOT / "build/generated/hubert_world_round26_20261025")
+    parser.add_argument("--multiscale-dynamics", action="store_true",
+                        help="Round 28: use fixed 0.75 x mean(lag 1/2/4) dynamic loss")
     args = parser.parse_args()
+    if args.multiscale_dynamics and args.output.name == "hubert_world_round26_20261025":
+        raise ValueError("Round 28 requires a separate --output directory")
+    args.output = args.output.resolve()
+    experiment_round = 28 if args.multiscale_dynamics else 26
     started = time.monotonic()
     args.output.mkdir(parents=True, exist_ok=True)
     os.environ.update({"HF_HUB_OFFLINE": "1", "TRANSFORMERS_OFFLINE": "1"})
@@ -133,11 +165,12 @@ def main() -> None:
             batch_x.append(x[start:start + CROP]); batch_y.append(target[start:start + CROP])
         x = torch.from_numpy(np.stack(batch_x)); target = torch.from_numpy(np.stack(batch_y))
         prediction = model(x)
-        loss, metrics = prior.loss_terms(prediction, target, target[..., VUV_INDEX], positive_weight)
+        loss, metrics = loss_terms(prediction, target, target[..., VUV_INDEX], positive_weight,
+                                   args.multiscale_dynamics)
         optimizer.zero_grad(set_to_none=True); loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0); optimizer.step(); scheduler.step()
         if step == 1 or step % CHECK_EVERY == 0:
-            valid = validate(model, validation, positive_weight)
+            valid = validate(model, validation, positive_weight, args.multiscale_dynamics)
             record = {"step": step, "train": metrics, "validation": valid,
                       "learning_rate": optimizer.param_groups[0]["lr"]}
             history.append(record); print(json.dumps(record), flush=True)
@@ -152,7 +185,9 @@ def main() -> None:
     model.load_state_dict(best.pop("state"))
     causal_difference = prior.verify_causality(model, validation[0][0])
     checkpoint = args.output / "paired_causal_gru.pt"
-    torch.save({"format": "paired_hubert_world_causal_gru_round26_v1",
+    checkpoint_format = ("paired_hubert_world_causal_gru_round28_multiscale_v1"
+                         if args.multiscale_dynamics else "paired_hubert_world_causal_gru_round26_v1")
+    torch.save({"format": checkpoint_format,
                 "model": model.state_dict(), "pca_mean": mean, "pca_projection": projection,
                 "x_mean": x_mean, "x_std": x_std, "y_mean": y_mean, "y_std": y_std,
                 "best": best, "history": history,
@@ -178,25 +213,32 @@ def main() -> None:
              "log_sp_lo": float(np.percentile(log_sp, 0.05)),
              "log_sp_hi": float(np.percentile(log_sp, 99.95))}
     reconstructed, synthesis = base.synthesize(prediction, stats)
-    wav_path = args.output / "track9_paired_causal_gru.wav"
+    wav_path = args.output / ("track9_paired_causal_gru_multiscale.wav"
+                              if args.multiscale_dynamics else "track9_paired_causal_gru.wav")
     base.sf.write(wav_path, reconstructed, base.SAMPLE_RATE, subtype="PCM_16")
-    summary = {"task": "PS-20261021-10", "round": 26,
-               "kind": "paired_hubert_world_causal_gru", "parameters":
+    summary = {"task": "PS-20261021-10", "round": experiment_round,
+               "kind": ("paired_hubert_world_causal_gru_multiscale"
+                        if args.multiscale_dynamics else "paired_hubert_world_causal_gru"), "parameters":
                sum(parameter.numel() for parameter in model.parameters()),
                "best": best, "steps_completed": history[-1]["step"],
                "early_stopped": stale >= PATIENCE, "causal_prefix_max_abs": causal_difference,
                "paired_train": len(train), "paired_validation": len(validation),
                "excluded_short_train_pairs": excluded_short_pairs,
                "anchor_probability": ANCHOR_PROBABILITY, "target_track9_used_for_selection": False,
+               "dynamic_loss": ({"weight": 0.75, "lags": [1, 2, 4], "reduction": "mean"}
+                                if args.multiscale_dynamics
+                                else {"weight": 0.20, "lags": [1], "reduction": "mean"}),
                "synthesis": synthesis, "checkpoint_sha256": base.sha256(checkpoint),
                "reconstruction_sha256": base.sha256(wav_path),
                "elapsed_seconds": time.monotonic() - started,
                "played": False, "board_touched": False}
     (args.output / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n",
                                               encoding="utf-8")
+    candidate = ("track9_paired_causal_gru_multiscale" if args.multiscale_dynamics
+                 else "track9_paired_causal_gru")
     manifest_out = {"inputs": [{"role": "source", "path": "人物音频资料/女声/Track 9.wav"}],
-                    "outputs": [{"candidate": "track9_paired_causal_gru",
-                                 "path": "build/generated/hubert_world_round26_20261025/track9_paired_causal_gru.wav"}]}
+                    "outputs": [{"candidate": candidate,
+                                 "path": str(wav_path.relative_to(ROOT)).replace("\\", "/")}]}
     (args.output / "strict_manifest.json").write_text(json.dumps(manifest_out, ensure_ascii=False, indent=2) + "\n",
                                                       encoding="utf-8")
     print(json.dumps(summary, ensure_ascii=False, indent=2), flush=True)
