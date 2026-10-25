@@ -1,0 +1,35 @@
+{
+  "task": "PS-20261021-10",
+  "round": 26,
+  "date": "2026-10-25",
+  "status": "REJECTED_ROUTE_EFFECTIVE",
+  "parameters": 477771,
+  "paired_train": 192,
+  "paired_validation": 8,
+  "excluded_short_train_pairs": 8,
+  "anchor_probability": 0.25,
+  "best_step": 500,
+  "steps_completed": 1300,
+  "validation_total": 0.369932122528553,
+  "causal_prefix_max_abs": 0.0,
+  "objective": {
+    "identity": 0.6234,
+    "identity_p10": 0.6098,
+    "male_centroid_cosine": 0.1591,
+    "utmos": 1.4628,
+    "cer": 0.1522
+  },
+  "target_reconstruction_gates": {
+    "identity": true,
+    "identity_p10": true,
+    "utmos": false,
+    "cer": false
+  },
+  "male_leakage_gate_applicable": false,
+  "checkpoint_sha256": "f0fe08dc22c69711458c201108cbc75fb066843b1ae0fc84eff377b4ce903d4c",
+  "reconstruction_sha256": "812556fa341dfc11af7cfbe83ea6da42b3e4bcad084d14618f757643f08edf6d",
+  "fixed_male_evaluated": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

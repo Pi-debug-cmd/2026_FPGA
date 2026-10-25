@@ -609,6 +609,20 @@
 - 限制：板卡保持关机；不录音、不播放、不访问板卡，无 Cortex-A9、实时、Vivado、RTL 或 PL 结论。
 - 下一责任方：Hardware-A / Codex 完成长训练、因果性验证和冻结 Track 9 回归。
 
+### [PS-20261021-10] 扩展配对因果 GRU 长训练 Round 26 结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED / ROUTE_EFFECTIVE
+- 基准提交：`99ea180`
+- 修改路径：`build/train_paired_hubert_world_gru_round26_20261025.py`、`report/paired_hubert_world_gru_round26_20261025.{md,json}`、`coummucation.md`。
+- 训练结果：477,771 参数两层单向 GRU；192 训练对、8 独立验证对、25% 目标锚点；8 个短训练句从裁剪池排除。第 500 步验证最佳 `0.369932`，第 1300 步早停并恢复；因果前缀差异 `0.0`。
+- 量化结果：已暴露 Track 9 为 **0.6234/0.6098/0.1591/1.4628/0.1522**（身份/P10/固定男性质心余弦/UTMOS/CER）。目标自重建不应用男性泄漏门；身份两门通过，CER仅超门 `0.0022`，UTMOS仍失败。
+- 对比：相对 Round 23，身份 `0.5622→0.6234`、UTMOS `1.3388→1.4628`、CER `0.3804→0.1522`，证明扩展配对监督有效，但自然度仍不足。
+- 判定：不运行固定男性 4/5、不请求试听、不进入蒸馏/PL。下一轮应针对过平滑动态和教师自然度，而不是扩大模型或表示维数。
+- 限制：板卡保持关机；未录音、未播放、未访问板卡，无实时、Cortex-A9、Vivado、RTL 或 PL 结论。
+- 报告链接：`report/paired_hubert_world_gru_round26_20261025.md`、`report/paired_hubert_world_gru_round26_20261025.json`。
+- 下一责任方：Hardware-A / Codex 提交本轮；审计教师 WORLD 重建与预测动态差异后再定下一轮唯一变量。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
