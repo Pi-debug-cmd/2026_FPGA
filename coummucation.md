@@ -896,6 +896,19 @@
 - 限制：不训练、不重新使用 Track 9、不使用固定男性输入、不播放；板卡保持关机。
 - 下一责任方：Hardware-A / Codex 完成独立验证并提交 KEEP/REVERT。
 
+### [PS-20261021-10] 方差匹配独立验证 Round 38 结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：KEEP_VARIANCE_MATCHING
+- 基准提交：`61414b9`
+- 修改路径：`report/variance_matching_validation_round38_20261025.{md,json}`、`coummucation.md`。
+- UTMOS：8 条验证句均值 `2.0055`，高于 Round 33 的 `1.9006`；7/8 句提高，余下一句仅约 `-0.00001`。
+- 动态比：谱/log-F0/能量/AP 为 `0.7776/1.1186/0.9162/0.7582`，全部 ≤1.20；F0 已略高于教师，谱/AP 仍不足。
+- 判定：保留方差匹配，但禁止整体提高 0.05 权重；后续若训练，必须分离 F0 与其余组，避免 F0 过增强。
+- 限制：未训练、未重新使用 Track 9、未用固定男性输入、未播放；板卡保持关机。
+- 报告链接：`report/variance_matching_validation_round38_20261025.md`、`report/variance_matching_validation_round38_20261025.json`。
+- 下一责任方：Hardware-A / Codex 提交验证；下一轮另行认领分组方差目标。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
