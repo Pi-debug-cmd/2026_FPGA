@@ -985,6 +985,16 @@
 - 报告链接：`report/round37_oracle_attribution_round41_20261025.md`、`report/round37_oracle_attribution_round41_20261025.json`。
 - 下一责任方：Hardware-A / Codex 提交诊断；另行认领 log-F0 与 VUV 拆分 oracle。
 
+### [PS-20261021-10] log-F0 与 VUV 拆分 oracle Round 42 认领
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：CLAIMED
+- 基准提交：`b7a59ec`
+- 唯一变量：在 Round41 同一逐位复现基线上，把联合 `log-F0+VUV` oracle 拆成仅真值 log-F0 和仅真值 VUV；其余预测参数、Track 9、合成器及严格评估器全部不变。
+- 决策门：相对 Round37 UTMOS 增量较大的单项作为下一训练主目标；若两项各自均小于 `+0.10`、但联合仍为 `+0.1359`，则按交互问题处理，不盲目提高单项损失。
+- 限制：oracle 依赖未来真值、不可部署；不训练、不播放、不使用固定男性输入、不触碰板卡，板卡保持关机。
+- 下一责任方：Hardware-A / Codex 运行拆分诊断并提交指标。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
