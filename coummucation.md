@@ -780,6 +780,20 @@
 - 限制：离线特征仍非因果，不播放、不触碰板卡；通过客观门后才进入因果特征一致性和固定男性验证。
 - 下一责任方：Hardware-A / Codex 实现并运行单变量训练，失败也提交。
 
+### [PS-20261021-10] 显式源韵律条件训练 Round 33 结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED_IMPROVED
+- 基准提交：`0922c22`
+- 修改路径：`build/train_paired_hubert_world_gru_round26_20261025.py`、`report/paired_hubert_world_source_prosody_round33_20261025.{md,json}`、`coummucation.md`。
+- 训练：输入 99 维、478347 参数；第 800 步验证最佳 `0.594895`，第 1600 步早停，因果前缀差异 `0.0`。
+- Track 9：**0.6757/0.6549/0.1754/1.7038/0.1304**（身份/P10/男性质心余弦/UTMOS/CER）。目标自重建不应用泄漏门；UTMOS 失败。
+- 对比 Round 28：身份 `+0.0202`、P10 `+0.0109`、UTMOS `+0.1072`、CER `+0.0217` 且仍过门；源韵律方向有效，但距离 UTMOS 门仍有 `0.5962`。
+- 哈希：checkpoint `7e3c75be…9989696`，WAV `7d8c91f1…7d5ef9`；生成物未提交。
+- 限制：源韵律为离线非因果特征，未播放、未使用固定男性输入；板卡保持关机。
+- 报告链接：`report/paired_hubert_world_source_prosody_round33_20261025.md`、`report/paired_hubert_world_source_prosody_round33_20261025.json`。
+- 下一责任方：Hardware-A / Codex 提交本轮；下一轮先审计独立验证集的 F0/能量/VUV 恢复，不直接增加更多输入或模型容量。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
