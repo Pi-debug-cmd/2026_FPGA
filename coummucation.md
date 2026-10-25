@@ -720,6 +720,16 @@
 - 报告链接：`report/paired_hubert_world_group_balanced_round30_20261025.md`、`report/paired_hubert_world_group_balanced_round30_20261025.json`。
 - 下一责任方：Hardware-A / Codex 提交失败轮次；后续恢复 Round 28 基线，只隔离 F0 轨迹项。
 
+### [PS-20261021-10] 组平衡回退归因 Round 31 认领
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：CLAIMED
+- 基准提交：`91e6109`
+- 范围：沿用 Round 27/29 的 8 条独立验证句和教师对照，仅替换为 Round 30 checkpoint，量化四组动态和 UTMOS 相对 Round 28 的变化。
+- 决策：若 F0 动态恢复但整体质量下降，则停止四组等权并评估较弱 F0 专项项；若 F0 也未恢复，则停止当前动态回归加权路线。
+- 限制：不训练、不重新使用 Track 9、不使用固定男性输入、不播放；板卡保持关机。
+- 下一责任方：Hardware-A / Codex 完成诊断并提交路线结论。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
