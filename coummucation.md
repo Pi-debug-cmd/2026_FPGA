@@ -524,6 +524,19 @@
 - 报告链接：`report/hubert_world_path_round22_20261025.md`、`report/hubert_world_path_round22_20261025.json`。
 - 下一责任方：Hardware-A / Codex 提交失败轮；评审序列解码器最小设计后另行认领。
 
+### [PS-20261021-10] HuBERT→WORLD 因果 GRU 序列教师 Round 23 认领
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`eeaf7f3`
+- 根因证据：Round 20 帧独立 MLP 丢失动态，Round 21/22 检索虽将身份最高提高到 `0.7108`，但逐帧拼接或连续路径均无法兼顾内容与自然度；Round 22 CER `0.4783`、UTMOS `1.4125`。
+- 方案：冻结同一 HuBERT/PCA 输入，按 5 ms WORLD 帧训练两层单向 GRU 序列解码器；谱包络、连续 log-F0、能量和 AP 用归一化回归头，VUV 用独立 BCE logit，并加入一阶动态损失。无源频谱残差、源谱跳连或未来方向 GRU。
+- 数据与选择：仅 Track 5～8；每轨前 80% 训练、后 20% 内部验证并早停。Track 9 已暴露，只在模型冻结后作开发回归，不参与 PCA、归一化、早停或超参数选择。
+- PL 边界：本轮只判教师声学上限；GRU 不直接宣称可上板。过门后再蒸馏为定点友好的因果 TCN/小 GRU，并单独评估 PL 资源。
+- 止损：Track 9 严格五门任一失败即提交结果，不请求试听、不运行固定男性转换、不接触板卡。
+- 限制：用户已关闭板卡；本轮无需上电、录音或播放，无 Cortex-A9、实时、Vivado、RTL 或 PL 结论。
+- 下一责任方：Hardware-A / Codex 实现确定性训练、验证因果性并运行一次冻结回归。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
