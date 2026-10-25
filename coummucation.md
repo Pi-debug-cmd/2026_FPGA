@@ -20,6 +20,20 @@
 - 限制：尚未修改正式任务矩阵；本条只立即消除错误分配，避免其他协作者误领。
 - 下一责任方：Maintainer / Codex 按纠正后的三路更新协作入口。
 
+### [DOCS-20261025-01] 三写作者按候选方案分流结果
+- 日期：2026-10-25
+- 角色/Agent：Maintainer / Codex
+- 状态：PROPOSED（待 Maintainer 合并后对所有协作者生效）
+- 基准提交：`9a63aec`
+- 修改路径：`AGENTS.md`、`plan.md`、`project_guide.md`、`report/candidate_lane_split_20261025.md`、`coummucation.md`。
+- 结果：Hardware-A 固定负责 `PS-20261021-10` 配对 HuBERT→WORLD；Remote-PS-C 独立负责 `PS-20261025-20` HuBERT teacher→FARGAN；Hardware-B 固定负责 `PS-20261025-21` 平行 GMM/DIFFGMM→WORLD。
+- 防重规则：启动时必须同时拉取 main 和检查开放 PR；只能认领分配给自己的路线，换线须 Maintainer 明确重新分配。
+- 淘汰锁：Seed-VC、A3、direct-20D/LLVC→FARGAN 禁止重新认领；Seed-VC 的旧客观高分不得覆盖真人否决。
+- 阶段边界：三路只在第一级电脑端音色候选阶段并行；各自五门通过前不启动该路线的 Cortex-A9、试听或 PL。Remote-PS-C 不负责复现或验证硬件方方案。
+- 复现命令：`git diff --check`；`python tools/check_collaboration_policy.py --base origin/main --head HEAD`。
+- 报告链接：`report/candidate_lane_split_20261025.md`。
+- 下一责任方：Maintainer 合并当前 PR；三位写作者随后只认领各自任务编号。
+
 > **规范文件名：`coummucation.md`。** 拼写按用户要求保留。所有 Agent 开始工作前必须阅读本文件；所有方案轮次和测试轮次结束后必须更新本文件、提交并推送 GitHub。
 
 ## 角色
