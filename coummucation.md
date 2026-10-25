@@ -585,6 +585,19 @@
 - 限制：板卡保持关机；本轮无需录音、播放或访问板卡，无 Cortex-A9、实时、Vivado、RTL 或 PL 结论。
 - 下一责任方：Hardware-A / Codex 完成缓存与数据泄漏审计，运行教师/验证预检并按结果决定是否启动长训练。
 
+### [PS-20261021-10] 扩展教师配对 HuBERT→WORLD Round 25 预检结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：READY_LONG_TRAIN
+- 基准提交：`e5ae8ee`
+- 修改路径：`build/prepare_hubert_world_pairs_round25_20261025.py`、`report/paired_hubert_world_preflight_round25_20261025.{md,json}`、`coummucation.md`。
+- 资产结果：200/200 对缓存成功；训练 192 对/20 人/`888.1089 s`，验证 8 对/2 人/`46.1948 s`，说话人交集为空。缓存 200 文件、79,280,418 字节，清单 SHA-256 `57dc9d95bb4b485ca5325b4e318766ef852bdfd29d49e5c197c804de8980d053`。
+- 数据纪律：Track 9 和固定男性录音未用于缓存、训练或选择；每个源/教师 `.f32` 均按既有 manifest 核对 SHA。抽检首/中/末缓存均为 `(T,768)` 内容与 `(T,75)` WORLD 目标且全部有限。
+- 判定：资产与切分满足启动独立长训练轮次；本轮未启动长训练。CosyVoice3 教师未获真人接受，最终仍须固定男性五门和真人试听。
+- 限制：板卡保持关机；未录音、未播放、未访问板卡，无实时、Cortex-A9、Vivado、RTL 或 PL 结论。
+- 报告链接：`report/paired_hubert_world_preflight_round25_20261025.md`、`report/paired_hubert_world_preflight_round25_20261025.json`。
+- 下一责任方：Hardware-A / Codex 提交预检；随后另行认领长训练 Round 26。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
