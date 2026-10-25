@@ -743,6 +743,17 @@
 - 报告链接：`report/group_balance_failure_audit_round31_20261025.md`、`report/group_balance_failure_audit_round31_20261025.json`。
 - 下一责任方：Hardware-A / Codex 提交诊断；下一轮另行认领源韵律输入预检。
 
+### [PS-20261021-10] 显式源韵律输入预检 Round 32 认领
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线预检）
+- 状态：CLAIMED
+- 基准提交：`5a40f19`
+- 范围：对 Round 25 的 200 对源音频逐件复核 SHA，提取并按 HuBERT 帧对齐源 log-F0、VUV、log-energy，量化其与教师目标韵律的相关性和覆盖率。
+- 预算：计算把 GRU 输入从 96 维扩为 99 维的新增参数/MAC；源韵律提取只允许复用现有 WORLD/板端分析链，不把离线 PyWORLD 耗时宣称为板端实时结果。
+- 成功标准：200/200 资产可追溯且有限；至少 F0 或能量提供非退化、正相关信息；增量参数和逐帧 MAC <1%，才允许下一轮训练。
+- 限制：不训练、不使用 Track 9 或固定男性录音、不播放、不访问板卡；板卡保持关机。
+- 下一责任方：Hardware-A / Codex 完成预检并提交是否进入源韵律条件训练的结论。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
