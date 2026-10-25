@@ -695,6 +695,17 @@
 - 报告链接：`report/paired_world_dynamics_recovery_round29_20261025.md`、`report/paired_world_dynamics_recovery_round29_20261025.json`。
 - 下一责任方：Hardware-A / Codex 提交归因后另行认领组平衡训练。
 
+### [PS-20261021-10] 参数组平衡动态损失 Round 30 认领
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`7fd8a0d`
+- 唯一变量：将 Round 28 的逐连续维总平均改为谱、log-F0、能量、AP 四组先各自平均、再四组等权平均。
+- 冻结项：动态总权重 `0.75`、lag `1/2/4`、重建/VUV 项、Round 25 数据与切分、477771 参数 GRU、25% 锚点、优化器、早停和评估器均不变。
+- 判定：仍只按 8 条独立验证句选 checkpoint，完成后 Track 9 仅运行一次；目标自重建按身份/P10/UTMOS/CER 门判断，不应用男性泄漏门。
+- 限制：不播放、不使用固定男性输入、不触碰板卡；板卡继续关机。
+- 下一责任方：Hardware-A / Codex 实现并运行本轮单变量训练。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
