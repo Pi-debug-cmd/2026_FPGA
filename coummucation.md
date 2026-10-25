@@ -730,6 +730,19 @@
 - 限制：不训练、不重新使用 Track 9、不使用固定男性输入、不播放；板卡保持关机。
 - 下一责任方：Hardware-A / Codex 完成诊断并提交路线结论。
 
+### [PS-20261021-10] 组平衡回退归因 Round 31 结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：ROUTE_STOPPED
+- 基准提交：`c561201`
+- 修改路径：`report/group_balance_failure_audit_round31_20261025.{md,json}`、`coummucation.md`。
+- UTMOS：8 条验证句 Round 30 预测均值 `1.6838`，低于 Round 28 的 `1.8335`，下降 `0.1497`。
+- 动态比：Round 30 的谱/log-F0/能量/AP lag-1 比为 `0.6233/0.4598/0.8501/0.6722`；F0 低于 Round 28 的 `0.4669`，未因四组等权恢复。
+- 判定：停止动态回归权重变体；下一假设为 HuBERT-only 输入缺少因果韵律，先预检显式源 F0/能量输入与 Cortex-A9/PL 预算。
+- 限制：未训练、未重新使用 Track 9、未用固定男性输入、未播放；板卡保持关机。
+- 报告链接：`report/group_balance_failure_audit_round31_20261025.md`、`report/group_balance_failure_audit_round31_20261025.json`。
+- 下一责任方：Hardware-A / Codex 提交诊断；下一轮另行认领源韵律输入预检。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
