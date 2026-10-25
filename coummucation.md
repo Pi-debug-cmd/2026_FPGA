@@ -1512,4 +1512,5 @@
 - 复现命令与逐项结果：见 `report/ps_20261025_20_asset_recovery_blocked_20261026.md`。
 - 量化结果：未训练、未推理、未运行五项指标；无模型质量结论。未播放或录制音频，未接触板卡/Vivado/RTL/PL。
 - 下一步恢复条件：补齐并校验官方 FARGAN、UTMOS、Whisper 与 teacher/配对训练语料；然后按既定冻结切分运行电脑端评测。
-- 下一责任方：Remote-PS-C。
+- 提交：本地提交 `2839e3867a81d8fb1523e8c3af39e9a3b9bf49b6`；Git push 因 Git Credential Manager 无可用凭证失败，GitHub App 创建分支 ref 返回 HTTP 403，尚无远端分支或 PR。
+- 下一责任方：Remote-PS-C（需 GitHub 仓库写权限/凭证后推送本提交并创建 PR，再补齐缺失资产继续评测）。
