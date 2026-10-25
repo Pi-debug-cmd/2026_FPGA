@@ -511,6 +511,19 @@
 - 限制：不录音、不播放、不访问板卡、不修改 v23 最大音量上电保底；无 Cortex-A9、实时、Vivado、RTL 或 PL 结论。
 - 下一责任方：Hardware-A / Codex 实现留一轨路径选择、冻结参数并运行严格回归。
 
+### [PS-20261021-10] HuBERT→WORLD 路径级连续检索 Round 22 结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`d47a86f`
+- 修改路径：`build/run_hubert_world_path_round22_20261025.py`、`report/hubert_world_path_round22_20261025.{md,json}`、`coummucation.md`。
+- 选参结果：仅用 Track 5～8 四折留一；惩罚 `0/0.10/0.25/0.50/1.00` 的均值分数为 `0.9917/1.0181/1.0309/1.0369/1.0454`，冻结选择 `0.0`。非零约束降低跳转率但持续增加声学误差。
+- 量化结果：已暴露 Track 9 为 **0.7108/0.6894/0.1757/1.4125/0.4783**（身份/P10/固定男性泄漏/UTMOS/CER）；身份两门通过，泄漏、UTMOS、CER 失败，且 CER 相对 Round 21 恶化。
+- 判定：拒绝路径级检索；不扩大候选或惩罚网格。下一轮必须改用连续序列解码器并分离建模 VUV/能量/AP。
+- 限制：用户已关闭板卡；本轮未要求上电、未录音、未播放、未访问板卡，无 Cortex-A9、实时、Vivado、RTL 或 PL 结论。
+- 报告链接：`report/hubert_world_path_round22_20261025.md`、`report/hubert_world_path_round22_20261025.json`。
+- 下一责任方：Hardware-A / Codex 提交失败轮；评审序列解码器最小设计后另行认领。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
