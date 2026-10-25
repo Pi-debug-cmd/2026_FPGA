@@ -672,6 +672,16 @@
 - 报告链接：`report/paired_hubert_world_multiscale_round28_20261025.md`、`report/paired_hubert_world_multiscale_round28_20261025.json`。
 - 下一责任方：Hardware-A / Codex 提交本轮；下一轮先量化 Round 28 动态恢复，不直接扩大损失权重。
 
+### [PS-20261021-10] Round 28 动态恢复归因 Round 29 认领
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：CLAIMED
+- 基准提交：`b072322`
+- 范围：沿用 Round 27 的 8 条说话人独立验证句、教师参数、合成器与评估器，只把冻结 checkpoint 换成 Round 28，并与 Round 26 的动态比直接比较。
+- 输出：谱、log-F0、能量、AP 的帧标准差与 lag-1 动态 RMS 恢复率，以及教师/预测 UTMOS；据此冻结下一轮唯一变量。
+- 限制：不训练、不重新使用 Track 9、不使用固定男性输入、不播放；板卡保持关机。
+- 下一责任方：Hardware-A / Codex 完成诊断并提交结论。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
