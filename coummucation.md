@@ -817,6 +817,16 @@
 - 报告链接：`report/source_prosody_gain_audit_round34_20261025.md`、`report/source_prosody_gain_audit_round34_20261025.json`。
 - 下一责任方：Hardware-A / Codex 提交本轮；下一轮另行认领有限前视必要性诊断。
 
+### [PS-20261021-10] 有限前视必要性诊断 Round 35 认领
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：CLAIMED
+- 基准提交：`699c5eb`
+- 范围：冻结 Round 33 checkpoint，在相同 8 条独立验证句上把预测与教师目标按 `-4…+4` 个 HuBERT 帧错位比较，统计总体及谱/log-F0/能量/AP 的归一化 Smooth-L1 和逐句最佳 lag。
+- 决策门：非零 lag 必须相对 lag 0 聚合改善至少 `1%`，且至少 5/8 验证句最佳 lag 方向一致，才允许下一轮有限前视训练；否则拒绝增加延迟。
+- 限制：不训练、不合成、不重新使用 Track 9、不使用固定男性输入、不播放；板卡保持关机。
+- 下一责任方：Hardware-A / Codex 完成 lag 审计并提交 GO/NO-GO。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
