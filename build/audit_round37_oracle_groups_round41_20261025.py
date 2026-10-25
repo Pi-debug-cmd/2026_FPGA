@@ -29,6 +29,8 @@ def main() -> None:
     parser.add_argument("--asset-root", required=True, type=Path)
     parser.add_argument("--checkpoint", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--split-f0-vuv", action="store_true",
+                        help="Round 42: isolate log-F0 and VUV from the joint oracle")
     args = parser.parse_args()
     args.checkpoint = args.checkpoint.resolve()
     args.output = args.output.resolve()
@@ -84,14 +86,17 @@ def main() -> None:
              "log_sp_lo": float(np.percentile(log_sp, 0.05)),
              "log_sp_hi": float(np.percentile(log_sp, 99.95))}
 
-    groups = {
-        "round37_baseline": (),
-        "oracle_spectrum": (slice(0, base.SP_DIM),),
-        "oracle_f0_vuv": (slice(base.SP_DIM, base.SP_DIM + 2),),
-        "oracle_energy": (slice(base.SP_DIM + 2, base.SP_DIM + 3),),
-        "oracle_aperiodicity": (slice(base.SP_DIM + 3, base.OUTPUT_DIM),),
-        "oracle_all": (slice(0, base.OUTPUT_DIM),),
-    }
+    groups = ({"round37_baseline": (),
+               "oracle_log_f0": (slice(base.SP_DIM, base.SP_DIM + 1),),
+               "oracle_vuv": (slice(base.SP_DIM + 1, base.SP_DIM + 2),),
+               "oracle_f0_vuv": (slice(base.SP_DIM, base.SP_DIM + 2),)}
+              if args.split_f0_vuv else
+              {"round37_baseline": (),
+               "oracle_spectrum": (slice(0, base.SP_DIM),),
+               "oracle_f0_vuv": (slice(base.SP_DIM, base.SP_DIM + 2),),
+               "oracle_energy": (slice(base.SP_DIM + 2, base.SP_DIM + 3),),
+               "oracle_aperiodicity": (slice(base.SP_DIM + 3, base.OUTPUT_DIM),),
+               "oracle_all": (slice(0, base.OUTPUT_DIM),)})
     outputs = []
     for name, slices in groups.items():
         parameters = prediction.copy()
@@ -113,8 +118,9 @@ def main() -> None:
                             for row in outputs]}
     (args.output / "strict_manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    summary = {"task": "PS-20261021-10", "round": 41,
-               "kind": "round37_world_group_oracle_attribution",
+    summary = {"task": "PS-20261021-10", "round": 42 if args.split_f0_vuv else 41,
+               "kind": ("round37_f0_vuv_split_oracle"
+                        if args.split_f0_vuv else "round37_world_group_oracle_attribution"),
                "checkpoint_sha256": base.sha256(args.checkpoint),
                "baseline_bit_identical": True, "outputs": outputs,
                "oracle_non_deployable": True, "played": False,

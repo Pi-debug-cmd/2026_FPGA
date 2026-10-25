@@ -995,6 +995,18 @@
 - 限制：oracle 依赖未来真值、不可部署；不训练、不播放、不使用固定男性输入、不触碰板卡，板卡保持关机。
 - 下一责任方：Hardware-A / Codex 运行拆分诊断并提交指标。
 
+### [PS-20261021-10] log-F0 与 VUV 拆分 oracle Round 42 结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：GO_LOG_F0_TRAINING
+- 基准提交：`10fac9f`
+- 修改路径：`build/audit_round37_oracle_groups_round41_20261025.py`、`report/round37_f0_vuv_split_round42_20261025.{md,json}`、`coummucation.md`。
+- 量化结果：Round37 基线 UTMOS `1.8616`；仅真值 log-F0 `2.0086`（`+0.1470`）；仅真值 VUV `1.8635`（`+0.0019`）；联合 `1.9975`（`+0.1359`）。仅 F0 同时为身份/P10/CER `0.7440/0.7157/0.0870`。
+- 判定：自然度收益来自连续 log-F0，不来自 VUV；下一训练轮只增强 log-F0 回归，不提高 VUV 分类权重。
+- 限制：oracle 使用 Track 9 未来真值、不可部署；目标自重建不应用男性泄漏门。未训练、未播放、未用固定男性输入，板卡保持关机。
+- 报告链接：`report/round37_f0_vuv_split_round42_20261025.md`、`report/round37_f0_vuv_split_round42_20261025.json`。
+- 下一责任方：Hardware-A / Codex 提交诊断；另行认领单变量 log-F0 训练项。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
