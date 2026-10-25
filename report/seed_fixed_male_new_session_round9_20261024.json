@@ -1,0 +1,94 @@
+{
+  "task": "PS-20261021-10",
+  "date": "2026-10-24",
+  "status": "ACCEPTED_OBJECTIVE_WAIT_LOCAL_LISTENING",
+  "base_commit": "015304f",
+  "candidate": {
+    "model": "Seed-VC V2",
+    "steps": 30,
+    "cfg": 1.1,
+    "seed": 20261018,
+    "target_prompt": "Track 8.wav high-activity 1.76s+10.0s",
+    "target_prompt_sha256": "ba901d5196d8b96508826e61f0236379638a02ec93e6924872890c998a7bc6a4",
+    "source_onset_trim": {
+      "frame_ms": 20,
+      "active_threshold_dbfs": -40,
+      "window_s": 2.0,
+      "minimum_active_ratio": 0.3,
+      "preroll_s": 0.25,
+      "minimum_crop_s": 2.0
+    }
+  },
+  "capture": {
+    "operator_ready": true,
+    "transfer_authorized": true,
+    "board_wav_sha256": "72ab2217f1480e5241cd28d41f3c7c4ba3f286d428ad69f9a27793c448d45876",
+    "board_raw_sha256": "f35692a7b749cba57414e5caba5f2be27d7f746b533e73217c9017fb73485c4b",
+    "transport_gzip_sha256": "1af79310ca49a5e7f275cef5f503b18b0764e67f986bd975128273d87be403d7",
+    "transport_gzip_bytes": 711507,
+    "rate": 32000,
+    "channels": 1,
+    "format": "PCM16",
+    "seconds": 20.0,
+    "rms": 0.01239031196238936,
+    "rms_dbfs": -38.1384,
+    "peak": 0.33197021484375,
+    "peak_dbfs": -9.5780,
+    "clip_fraction": 0.0,
+    "frames_below_minus_50_dbfs": 0.526,
+    "frames_above_minus_35_dbfs": 0.029
+  },
+  "frozen_run": {
+    "run_count": 1,
+    "source_crop_start_s": 5.95,
+    "processed_source_seconds": 14.05,
+    "source_offline_gain": 4.887463378790824,
+    "elapsed_s": 46.143466800043825,
+    "output_sha256": "f6880252d63839e7ba64b5141a7d3babd6cdc2ddd451915ca99062622234d0ac",
+    "output_rate": 22050,
+    "output_seconds": 14.048072562358277,
+    "output_peak": 0.5637020468711853,
+    "output_clip_samples": 0
+  },
+  "gates": {
+    "identity": 0.45,
+    "identity_p10": 0.35,
+    "leakage": 0.1,
+    "utmos": 2.3,
+    "cer": 0.15
+  },
+  "metrics": {
+    "identity": 0.5199543823357371,
+    "identity_p10": 0.4718687183335736,
+    "leakage": 0.05910193883302597,
+    "leakage_window_mean": 0.05910193883302597,
+    "leakage_aggregate": 0.05175327030572639,
+    "utmos": 3.0788954893747964,
+    "cer": 0.10204081632653061,
+    "all_gates_pass": true
+  },
+  "chunks": {
+    "identity": [0.54078913848324, 0.5644353952278145, 0.45463861329615696],
+    "leakage": [0.0311159008187236, 0.04954923038731164, 0.09664068529304265],
+    "utmos": [2.940208911895752, 3.2602782249450684, 3.0361993312835693]
+  },
+  "board_after_test": {
+    "scheme": "v23 maximum-volume fallback",
+    "autostart_instances": 1,
+    "capture_pcm_running": true,
+    "playback_pcm_running": true,
+    "headphone": "127/127 (100%, +6 dB)",
+    "playback": "255/255 (100%, 0 dB)"
+  },
+  "target_track9_used": false,
+  "played": false,
+  "generated_audio_committed": false,
+  "seed_vc_deployed_to_board": false,
+  "remote_ps_c_validation_required": false,
+  "model_delivery_required_before_local_listening": false,
+  "limitations": [
+    "PC-side noncausal offline evaluation only",
+    "No human listening result",
+    "No Cortex-A9, board real-time, Vivado, RTL, or PL acceptance"
+  ]
+}

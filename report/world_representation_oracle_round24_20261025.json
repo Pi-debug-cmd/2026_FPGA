@@ -1,0 +1,21 @@
+{
+  "task": "PS-20261021-10",
+  "round": 24,
+  "date": "2026-10-25",
+  "status": "ACCEPTED_COMPONENT_ORACLE",
+  "conclusion": "SP60/AP12 is not the limiting factor; HuBERT-to-WORLD prediction is the bottleneck",
+  "rows": {
+    "full_world": {"identity": 0.8408, "identity_p10": 0.8232, "male_centroid_cosine": 0.1349, "utmos": 2.4801, "cer": 0.0},
+    "sp60_ap12": {"identity": 0.8380, "identity_p10": 0.8204, "male_centroid_cosine": 0.1266, "utmos": 2.4581, "cer": 0.0},
+    "sp120_ap24": {"identity": 0.8368, "identity_p10": 0.8185, "male_centroid_cosine": 0.1286, "utmos": 2.4674, "cer": 0.0},
+    "sp180_ap48": {"identity": 0.8372, "identity_p10": 0.8201, "male_centroid_cosine": 0.1290, "utmos": 2.4678, "cer": 0.0}
+  },
+  "male_leakage_gate_applicable": false,
+  "reason": "Even full target-speaker WORLD resynthesis has cosine 0.1349 to the fixed-male centroid; this is not source leakage",
+  "keep_representation": {"spectrum_dct": 60, "aperiodicity_dct": 12},
+  "track9_already_exposed": true,
+  "conversion_acceptance": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

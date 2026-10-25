@@ -1,0 +1,26 @@
+{
+  "task": "PS-20261021-10",
+  "round": 42,
+  "date": "2026-10-25",
+  "status": "GO_LOG_F0_TRAINING",
+  "checkpoint_sha256": "efcda700ddc0e769ebcf4eb5afae8ff14528c21dd800d737a78c577e973bd2a2",
+  "baseline_bit_identical": true,
+  "objective": {
+    "round37_baseline": {"identity": 0.6953644994517209, "identity_p10": 0.6794271893132231, "utmos": 1.8615962862968445, "cer": 0.10869565217391304},
+    "oracle_log_f0": {"identity": 0.7439945219442115, "identity_p10": 0.7157208402856393, "utmos": 2.0085827112197876, "cer": 0.08695652173913043},
+    "oracle_vuv": {"identity": 0.6941377233213204, "identity_p10": 0.671883747890507, "utmos": 1.8635218441486359, "cer": 0.10869565217391304},
+    "oracle_f0_vuv": {"identity": 0.7471797897334105, "identity_p10": 0.7164683519213237, "utmos": 1.9975315630435944, "cer": 0.11956521739130435}
+  },
+  "utmos_delta_from_baseline": {
+    "oracle_log_f0": 0.1469864249229431,
+    "oracle_vuv": 0.0019255578517914,
+    "oracle_f0_vuv": 0.1359352767467499
+  },
+  "male_leakage_gate_applicable": false,
+  "decision": "prioritize continuous log-F0 regression; do not increase VUV classification weight",
+  "oracle_non_deployable": true,
+  "fixed_male_evaluated": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

@@ -1,0 +1,28 @@
+{
+  "task": "PS-20261021-10",
+  "date": "2026-10-24",
+  "status": "REJECTED",
+  "base_commit": "421fed6",
+  "candidate": {
+    "target_mode": "multi3x1_track8x7",
+    "target_prompt_sha256": "828cfcfc0551bd516c324930f77c2bee13847269dd96a9fdbaed7007f02dbc7a",
+    "steps": 30,
+    "cfg": 1.1,
+    "seed": 20261018,
+    "source_onset_trim": true
+  },
+  "dataset": "exposed Round 12 new-session recording",
+  "metrics": {
+    "identity": 0.491620211159425,
+    "identity_p10": 0.452347940735095,
+    "leakage": 0.13822847458735,
+    "utmos": 2.62731615702311,
+    "cer": 0.0612244897959184,
+    "all_gates_pass": false
+  },
+  "output_sha256": "22221760b7d08eb4e31d2b26be80ccfd0e7377950b391089d065ee6b68405f99",
+  "decision": "reject: reducing Tracks 5-7 to one second and expanding Track 8 to seven seconds worsened both target identity and source leakage",
+  "played": false,
+  "board_touched": false,
+  "generated_audio_committed": false
+}

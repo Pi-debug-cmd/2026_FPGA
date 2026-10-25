@@ -1,0 +1,24 @@
+{
+  "task": "PS-20261021-10",
+  "round": 25,
+  "date": "2026-10-25",
+  "status": "READY_LONG_TRAIN",
+  "pairs": {"train": 192, "validation": 8, "total": 200},
+  "seconds": {"train": 888.1089375000003, "validation": 46.1948125, "total": 934.3037500000003},
+  "speakers": {"train": 20, "validation": 2, "disjoint": true},
+  "cache": {
+    "files": 200,
+    "bytes": 79280418,
+    "manifest_sha256": "57dc9d95bb4b485ca5325b4e318766ef852bdfd29d49e5c197c804de8980d053",
+    "content_dim": 768,
+    "world_dim": 75,
+    "finite_sample_audit": true
+  },
+  "target_track9_used": false,
+  "fixed_male_audio_used": false,
+  "teacher_human_quality_accepted": false,
+  "long_training_started": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

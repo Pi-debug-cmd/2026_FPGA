@@ -1,0 +1,43 @@
+{
+  "task": "PS-20261021-10",
+  "round": 33,
+  "date": "2026-10-25",
+  "status": "REJECTED_IMPROVED",
+  "single_variable": "append normalized source log-F0, VUV, and log-energy",
+  "input_dimensions": 99,
+  "parameters": 478347,
+  "paired_train": 192,
+  "paired_validation": 8,
+  "anchor_probability": 0.25,
+  "best_step": 800,
+  "steps_completed": 1600,
+  "validation_total": 0.5948951914906502,
+  "causal_prefix_max_abs": 0.0,
+  "objective": {
+    "identity": 0.6757137457100691,
+    "identity_p10": 0.6548997971133379,
+    "male_centroid_cosine": 0.175374188402131,
+    "utmos": 1.7038105726242065,
+    "cer": 0.13043478260869565
+  },
+  "target_reconstruction_gates": {
+    "identity": true,
+    "identity_p10": true,
+    "utmos": false,
+    "cer": true
+  },
+  "male_leakage_gate_applicable": false,
+  "delta_from_round28": {
+    "identity": 0.0202203939346332,
+    "identity_p10": 0.0108586573692199,
+    "utmos": 0.107219249010086,
+    "cer": 0.02173913043478261
+  },
+  "checkpoint_sha256": "7e3c75be28114453d809201995371d4398f3f862bdcc3ee6f9558a5239989696",
+  "reconstruction_sha256": "7d8c91f1c70810cdd537840e9bf2063702399cbee6718d4063663d28847d5ef9",
+  "offline_source_prosody_noncausal": true,
+  "fixed_male_evaluated": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

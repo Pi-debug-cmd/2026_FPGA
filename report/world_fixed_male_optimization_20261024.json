@@ -1,0 +1,112 @@
+{
+  "task": "PS-20261021-10",
+  "date": "2026-10-24",
+  "status": "REJECTED",
+  "scope": "offline fixed-male source-specific WORLD optimization; no board, playback, or live test",
+  "protocol": {
+    "source_profile": ["标准录音 1.wav", "标准录音 2.wav", "标准录音 3.wav"],
+    "selection_only": "标准录音 4.wav",
+    "locked_holdout_after_freeze": "标准录音 5.wav",
+    "target_profile": ["Track 5.wav", "Track 6.wav", "Track 7.wav", "Track 8.wav"],
+    "target_holdout_not_used_for_selection": "Track 9.wav",
+    "metrics": "WeSpeaker target-centroid identity and source leakage, UTMOS22 Strong, offline Whisper-small CER"
+  },
+  "gates": {
+    "identity_min": 0.45,
+    "identity_p10_min": 0.35,
+    "leakage_max": 0.10,
+    "utmos_min": 2.30,
+    "cer_max": 0.15
+  },
+  "reference": {
+    "historical_a1_world": {
+      "identity": 0.1903,
+      "leakage": 0.1719,
+      "utmos": 2.0354,
+      "cer": 0.1667
+    }
+  },
+  "rounds": [
+    {
+      "name": "source_specific_world_grid",
+      "selection_candidates": 23,
+      "frozen_candidate": {
+        "name": "warp1.200",
+        "warp": 1.2,
+        "strength": 1.0,
+        "detail": 0.75,
+        "clamp_db": 9.0,
+        "ap_mix": 0.0,
+        "pitch_strength": 1.0
+      },
+      "locked_holdout": {
+        "identity": 0.35573163515201045,
+        "leakage": 0.24494788424013925,
+        "utmos": 1.625774565474782,
+        "cer": 0.125
+      },
+      "passed": ["cer"],
+      "failed": ["identity", "leakage", "utmos"]
+    },
+    {
+      "name": "world_a3_parameter_blend",
+      "selection_candidates": 18,
+      "frozen_candidate": {
+        "name": "flat_0.60",
+        "world_weight": 0.4,
+        "a3_weight": 0.6,
+        "pitch_a3_weight": 0.6
+      },
+      "locked_holdout": {
+        "identity": 0.5650445802199083,
+        "leakage": 0.1967540467227452,
+        "utmos": 1.9631137841869566,
+        "cer": 0.10
+      },
+      "passed": ["identity", "cer"],
+      "failed": ["leakage", "utmos"]
+    }
+  ],
+  "decision": {
+    "all_objective_gates_pass": false,
+    "deploy_to_board": false,
+    "request_listening": false,
+    "reason": "The high-identity branch improves identity and content, but no validation-selected point simultaneously reaches leakage <= 0.10 and UTMOS >= 2.30. Frequency-selective blending also fails to create an overlap region."
+  },
+  "external_assets": [
+    {
+      "name": "a3_content.pt",
+      "bytes": 491321,
+      "sha256": "46ebff5951216b8b63ab7fd7a509c2dc10ddec7dbcbdb93e65fa8490d5d96b13",
+      "location": "local ignored build/generated/a3_neural/a3_content.pt",
+      "delivered_in_git": false
+    },
+    {
+      "name": "reduced_student_v2/final.pt",
+      "bytes": 6607655,
+      "sha256": "5a3f5de6f7bef12a29323be5bb88168025d85080b527933e8f3f54cbf07a9641",
+      "location": "交接/核心材料/board_budget_20261005/reduced_student_v2/final.pt",
+      "delivered_in_git": false
+    }
+  ],
+  "input_sha256": {
+    "人物音频资料/男声/标准录音 1.wav": "bffd53e9873a829ff8855bd191d4610b64436fb7054401d2598eecf9b862b11e",
+    "人物音频资料/男声/标准录音 2.wav": "7ebcc5ece683ad580df039cea09957d4133582803cd62a0e1a92619c03f1f51f",
+    "人物音频资料/男声/标准录音 3.wav": "2d13fa98c976c967d3ad0d36b0eaf26c3e10029449f135c9556ab4968d9a1293",
+    "人物音频资料/男声/标准录音 4.wav": "f4a026e5c97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c",
+    "人物音频资料/男声/标准录音 5.wav": "f8676108d127ca286a502c1acf20444bd75bbbc2a2c088c92820fd2c21c99cad",
+    "人物音频资料/女声/Track 5.wav": "c3a50c67c7d29a77c482067272624c3a196ed6421dcf11099b5827ccb65e09e3",
+    "人物音频资料/女声/Track 6.wav": "92ac22ae3f5674e8e5b49c296e0b1c35f38347c72081c3e56e570091f82ffbfa",
+    "人物音频资料/女声/Track 7.wav": "942b113534ff1e5af211b57a1db7419d1f9e9ba08e1944475931e393671bf5b1",
+    "人物音频资料/女声/Track 8.wav": "4e07e8ebf0deba90db76de70aec293f544c4695b43bdfec4d6037c3fb7f888f3",
+    "人物音频资料/女声/Track 9.wav": "d53d24dbb5bb2e01db6bee5483f799644f78be4ebb3c7264482a4d7564093747"
+  },
+  "artifacts": {
+    "generated_audio_committed": false,
+    "model_weights_committed": false,
+    "raw_results": [
+      "build/generated/world_fixed_male_20261024/result.json",
+      "build/generated/world_a3_blend_20261024/result.json"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "task": "PS-20261021-10",
+  "round": 30,
+  "date": "2026-10-25",
+  "status": "REJECTED_REGRESSION",
+  "single_variable": "equal group reduction for spectrum/log-F0/energy/aperiodicity",
+  "parameters": 477771,
+  "best_step": 600,
+  "steps_completed": 1400,
+  "validation_total": 0.4459969326853752,
+  "causal_prefix_max_abs": 0.0,
+  "objective": {
+    "identity": 0.6426665850886865,
+    "identity_p10": 0.6067382370233529,
+    "male_centroid_cosine": 0.17215924795417434,
+    "utmos": 1.473786622285843,
+    "cer": 0.13043478260869565
+  },
+  "delta_from_round28": {
+    "identity": -0.0128,
+    "identity_p10": -0.0373,
+    "utmos": -0.1228,
+    "cer": 0.0217
+  },
+  "male_leakage_gate_applicable": false,
+  "checkpoint_sha256": "fb04fecaf725d8a0d497d25ee0322caa0f14d23fc4ec5eba45bff2799288b231",
+  "reconstruction_sha256": "c8a23c1d20c4805550a8ba866b30f4940270292df872bbabf9e697e3148ef280",
+  "fixed_male_evaluated": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

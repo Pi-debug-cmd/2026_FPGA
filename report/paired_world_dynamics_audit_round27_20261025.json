@@ -1,0 +1,24 @@
+{
+  "task": "PS-20261021-10",
+  "round": 27,
+  "date": "2026-10-25",
+  "status": "ROOT_CAUSE_CONFIRMED",
+  "validation_rows": 8,
+  "teacher_utmos_mean": 2.585537526081866,
+  "prediction_utmos_mean": 1.721794913251569,
+  "utmos_drop_mean": 0.8637426128302972,
+  "dynamic_ratio_prediction_over_teacher": {
+    "spectrum": {"std": 0.6735880677770466, "delta_rms": 0.6106669804649455},
+    "log_f0": {"std": 0.75718759134216, "delta_rms": 0.4794612403205002},
+    "energy": {"std": 0.9616647308397874, "delta_rms": 0.7814957742575677},
+    "aperiodicity": {"std": 0.8600831655616532, "delta_rms": 0.6138488525890462}
+  },
+  "root_cause": "prediction temporal oversmoothing",
+  "next_single_variable": "replace first-order 0.2 dynamic loss with stronger multiscale dynamic loss",
+  "training_started": false,
+  "track9_used": false,
+  "fixed_male_used": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

@@ -1,0 +1,69 @@
+{
+  "task": "PS-20261021-10",
+  "date": "2026-10-24",
+  "status": "REJECTED_LEAKAGE",
+  "candidate": {
+    "model": "Seed-VC V2",
+    "steps": 30,
+    "cfg": 1.1,
+    "seed": 20261018,
+    "target_prompt": "Track 8.wav high-activity 1.77s+8.0s",
+    "frozen_before_capture": true
+  },
+  "capture": {
+    "port": "COM4",
+    "duration_s": 20.0,
+    "sample_rate": 32000,
+    "channels": 1,
+    "sample_width_bytes": 2,
+    "wav_bytes": 1280044,
+    "wav_sha256": "fd4aaf53a7637cccf458442feffe8232d3e8ca9317da69d332666e3babb02db2",
+    "gzip_bytes": 772936,
+    "gzip_sha256": "2f9aee9e09cc30d7d398934ab63afab75a30e8e410107b5580dfb02d6faf7723",
+    "native_raw_sha256": "b63483b1d780b663672b3f50766d17b289094ea352fc90e9cbda7b524d7c5169",
+    "native_clip_fraction": 0.0,
+    "mono_rms": 0.013111462951216363,
+    "mono_dbfs": -37.64697695766498,
+    "mono_peak": 0.997650146484375,
+    "peak_dbfs": -0.020434586859282802,
+    "clip_fraction": 0.0,
+    "silent_20ms_fraction_below_minus_50dbfs": 0.434,
+    "active_20ms_fraction_above_minus_35dbfs": 0.031,
+    "offline_gain": 2.5626752290368895,
+    "transferred_by_serial_after_explicit_authorization": true,
+    "human_audio_committed": false
+  },
+  "board_restore": {
+    "fallback": "v23 maximum-volume autostart",
+    "autostart_process_count": 1,
+    "capture_pcm_running": true,
+    "playback_pcm_running": true,
+    "headphone": "127,127",
+    "playback": "255,255"
+  },
+  "gates": {
+    "identity": 0.45,
+    "identity_p10": 0.35,
+    "leakage": 0.1,
+    "utmos": 2.3,
+    "cer": 0.15
+  },
+  "result": {
+    "identity": 0.5006528264911362,
+    "identity_p10": 0.4431330400534845,
+    "leakage": 0.12230510550562236,
+    "leakage_window_mean": 0.11272798258416586,
+    "leakage_aggregate": 0.12230510550562236,
+    "utmos": 2.8355584144592285,
+    "cer": 0.11475409836065574,
+    "all_gates_pass": false,
+    "failed_gates": ["leakage"],
+    "output_sha256": "5bf9e0a3259633c190e51ee70a77cdbc6e7e194a38a95b06121a0d80372ba9d1",
+    "elapsed_s": 52.98670639999909
+  },
+  "target_track9_used": false,
+  "played": false,
+  "request_listening": false,
+  "generated_audio_committed": false,
+  "next_requirement": "Develop only on existing exposed recordings, freeze a new candidate, then acquire another unseen session."
+}

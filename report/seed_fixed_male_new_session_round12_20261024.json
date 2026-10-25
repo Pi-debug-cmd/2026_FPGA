@@ -1,0 +1,66 @@
+{
+  "task": "PS-20261021-10",
+  "date": "2026-10-24",
+  "status": "REJECTED",
+  "base_commit": "0daf836",
+  "candidate": {
+    "model": "Seed-VC V2",
+    "steps": 30,
+    "cfg": 1.1,
+    "seed": 20261018,
+    "target_mode": "multi3x2_track8x4",
+    "target_prompt_sha256": "0f70b18eef37614ce0f866f989cf5376bd237e410ffb6f1e85b70ec4c2909391",
+    "source_onset_trim": true
+  },
+  "capture": {
+    "operator_ready": true,
+    "transfer_authorized": true,
+    "wav_sha256": "f61e055288a7b0dc63db256f45e4b0d6fa60ccae1d0aa382b9a45f22e90a2702",
+    "raw_sha256": "ea92645783a8144378fa1ab0e733c61670331547e1e9886f5063823cc034efcb",
+    "gzip_sha256": "677fc17f27e3f57ce436023d0ea889ecb9b109addf6ea3f961de5b1c89417c7c",
+    "gzip_bytes": 721310,
+    "rate": 32000,
+    "channels": 1,
+    "format": "PCM16",
+    "seconds": 20.0,
+    "rms_dbfs": -38.47512464776995,
+    "peak_dbfs": -9.452764863051401,
+    "clip_fraction": 0.0
+  },
+  "frozen_run": {
+    "run_count": 1,
+    "source_crop_start_s": 2.15,
+    "processed_source_seconds": 17.85,
+    "elapsed_s": 114.04466350004077,
+    "output_sha256": "b811d766e162aae7a817a8275dcd62cf4c475409238a25ff8ec3cf3027c59ccf",
+    "output_seconds": 17.84453514739229,
+    "output_clip_samples": 0
+  },
+  "gates": {"identity": 0.45, "identity_p10": 0.35, "leakage": 0.1, "utmos": 2.3, "cer": 0.15},
+  "metrics": {
+    "identity": 0.566585559140997,
+    "identity_p10": 0.5081783469694255,
+    "leakage": 0.12500559112293416,
+    "leakage_window_mean": 0.11721536299911788,
+    "leakage_aggregate": 0.12500559112293416,
+    "utmos": 2.7703606287638345,
+    "cer": 0.04081632653061224,
+    "all_gates_pass": false
+  },
+  "chunks": {
+    "identity": [0.5961558588776923, 0.6174168495529396, 0.48618396899235883],
+    "leakage": [0.10051859857805982, 0.08743276361880846, 0.16369472680048536],
+    "utmos": [2.7797820568084717, 2.7281558513641357, 2.8031439781188965]
+  },
+  "failure_gate": "leakage",
+  "played": false,
+  "generated_audio_committed": false,
+  "board_after_test": {
+    "scheme": "v23 maximum-volume fallback",
+    "autostart_instances": 1,
+    "capture_pcm_running": true,
+    "playback_pcm_running": true,
+    "headphone": "127/127 (100%, +6 dB)",
+    "playback": "255/255 (100%, 0 dB)"
+  }
+}

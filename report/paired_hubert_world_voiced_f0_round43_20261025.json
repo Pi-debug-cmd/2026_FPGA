@@ -1,0 +1,43 @@
+{
+  "task": "PS-20261021-10",
+  "round": 43,
+  "date": "2026-10-25",
+  "status": "REJECTED_BEST_SO_FAR",
+  "single_variable": "add 0.05-weight normalized log-F0 Smooth-L1 on target-voiced frames",
+  "parameters": 478347,
+  "best_step": 1200,
+  "steps_completed": 2000,
+  "validation_total": 0.6227413341403008,
+  "validation_voiced_f0_reconstruction": 0.09213022328913212,
+  "causal_prefix_max_abs": 0.0,
+  "objective": {
+    "identity": 0.7054361063539638,
+    "identity_p10": 0.6844474995893229,
+    "male_centroid_cosine": 0.14241844034379955,
+    "utmos": 1.9519165456295013,
+    "cer": 0.09782608695652174
+  },
+  "target_reconstruction_gates": {
+    "identity": true,
+    "identity_p10": true,
+    "utmos": false,
+    "cer": true
+  },
+  "male_leakage_gate_applicable": false,
+  "delta_from_round37": {
+    "identity": 0.0100716069022429,
+    "identity_p10": 0.0050203102760998,
+    "male_centroid_cosine": 0.0074673761991676,
+    "utmos": 0.0903202593326568,
+    "cer": -0.0108695652173913
+  },
+  "decision": "retain Round 43 as the new best paired HuBERT-to-WORLD checkpoint, but do not advance because UTMOS remains below 2.30",
+  "checkpoint_sha256": "4acf292f6074e6cddc8f15dab318f03935ab98aa9715deae74e8deed3c815b6b",
+  "reconstruction_sha256": "45e74e0670405de9804102c99bf91c50d325a1343830883abce662af82b94149",
+  "inference_cost_changed": false,
+  "offline_source_prosody_noncausal": true,
+  "fixed_male_evaluated": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

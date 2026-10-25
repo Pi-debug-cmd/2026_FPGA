@@ -1,0 +1,53 @@
+{
+  "task": "PS-20261021-10",
+  "date": "2026-10-24",
+  "status": "ACCEPTED_OBJECTIVE_WAIT_LISTENING",
+  "base_commit": "4422a94",
+  "capture": {
+    "ready_confirmed": true,
+    "transfer_authorized": true,
+    "seconds": 20.0,
+    "rate": 32000,
+    "channels": 1,
+    "wav_sha256": "dc3b4a61854e2f00b299dbe3ad0016f6cc087cc4e2ce9836366bd65fa59a5ad1",
+    "gzip_sha256": "19392b6f6efc2654a7dd100386a9ce2e64fb055d2c0f36a6fbfb46c38b03e8fa",
+    "gzip_bytes": 710394,
+    "rms_dbfs": -38.1418,
+    "peak_dbfs": -8.7922,
+    "clip_samples": 0,
+    "crop_start_s": 3.37,
+    "processed_seconds": 16.63
+  },
+  "gates": {"identity": 0.45, "identity_p10": 0.35, "leakage": 0.10, "utmos": 2.30, "cer": 0.15},
+  "candidates": [
+    {
+      "candidate": "A",
+      "definition": "seed=20261018, multi3x2_track8x4, CFG=1.10, 30 steps, onset trim, no postprocess",
+      "identity": 0.579278428843122,
+      "identity_p10": 0.538019921189293,
+      "leakage": 0.084603026016687,
+      "utmos": 2.80779027938843,
+      "cer": 0.125,
+      "all_gates_pass": true,
+      "sha256": "4b613d2430793b0489f76a83d656817cde4dd48aac47dff975a26298291c6fe0"
+    },
+    {
+      "candidate": "B",
+      "definition": "seed=20261019, otherwise A, plus +0.5 semitone from 12.0 s with 100 ms crossfade",
+      "identity": 0.572136387040788,
+      "identity_p10": 0.476544208185078,
+      "leakage": 0.0786683214335512,
+      "utmos": 2.25751936435699,
+      "cer": 0.0625,
+      "all_gates_pass": false,
+      "failed_gates": ["utmos"],
+      "sha256": "0da7f8c7246c22ec09114391839c0cc146569f9e92f6c525b1ffd759bf9f60db"
+    }
+  ],
+  "selected": "A",
+  "selection_reason": "A passes all five gates; frozen B fails UTMOS and is ineligible",
+  "request_listening": true,
+  "played": false,
+  "board_restored": {"scheme": "v23", "single_parent": true, "capture_pcm": "RUNNING", "playback_pcm": "RUNNING", "headphone": 127, "playback": 255},
+  "generated_audio_committed": false
+}

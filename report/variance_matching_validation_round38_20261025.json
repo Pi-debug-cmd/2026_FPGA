@@ -1,0 +1,26 @@
+{
+  "task": "PS-20261021-10",
+  "round": 38,
+  "date": "2026-10-25",
+  "status": "KEEP_VARIANCE_MATCHING",
+  "validation_rows": 8,
+  "teacher_utmos_mean": 2.585537526081866,
+  "round33_prediction_utmos_mean": 1.9006429152695212,
+  "round37_prediction_utmos_mean": 2.0054535861090415,
+  "utmos_gain": 0.1048106708395203,
+  "utmos_rows_improved": 7,
+  "dynamic_ratios": {
+    "spectrum": 0.777621822056868,
+    "log_f0": 1.118621053120694,
+    "energy": 0.9162334033398891,
+    "aperiodicity": 0.7582194329353296
+  },
+  "decision_gate": {"mean_improved": true, "rows_improved_at_least_6": true, "all_ratios_at_most_1_20": true},
+  "decision": "keep variance matching; do not raise global weight",
+  "training_started": false,
+  "track9_reused": false,
+  "fixed_male_used": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

@@ -1,0 +1,25 @@
+{
+  "task": "PS-20261021-10",
+  "round": 31,
+  "date": "2026-10-25",
+  "status": "ROUTE_STOPPED",
+  "validation_rows": 8,
+  "teacher_utmos_mean": 2.585537526081866,
+  "round28_prediction_utmos_mean": 1.8335171107232102,
+  "round30_prediction_utmos_mean": 1.6838118659229728,
+  "round30_minus_round28_utmos": -0.1497052448002374,
+  "round30_dynamic_ratios": {
+    "spectrum": {"std": 0.6743245077105471, "delta": 0.6232669941264894},
+    "log_f0": {"std": 0.6885410941918311, "delta": 0.4598249841027121},
+    "energy": {"std": 0.9465714495917799, "delta": 0.8501000106246945},
+    "aperiodicity": {"std": 0.8879192148881547, "delta": 0.6722190176315295}
+  },
+  "decision": "stop dynamic regression reweighting",
+  "next_hypothesis": "HuBERT-only input lacks sufficient causal prosody; preflight explicit source F0 and energy input",
+  "training_started": false,
+  "track9_reused": false,
+  "fixed_male_used": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

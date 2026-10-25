@@ -1,0 +1,51 @@
+{
+  "task": "PS-20261021-10",
+  "date": "2026-10-24",
+  "status": "REJECTED_SUBJECTIVE",
+  "base_commit": "36aa531",
+  "candidate": {
+    "name": "Round 9 frozen Seed-VC candidate",
+    "source_output_sha256": "f6880252d63839e7ba64b5141a7d3babd6cdc2ddd451915ca99062622234d0ac",
+    "playback_wav_sha256": "7f595754207da7f872aae23ea478d5b2b1c3d5eec38e1f3f12c2de312433fd23",
+    "playback_format": "32000 Hz, stereo, PCM24",
+    "playback_seconds": 14.04809375
+  },
+  "objective_gate_from_round9": {
+    "identity": 0.5199543823357371,
+    "identity_p10": 0.4718687183335736,
+    "leakage": 0.05910193883302597,
+    "utmos": 3.0788954893747964,
+    "cer": 0.10204081632653061,
+    "all_gates_pass": true
+  },
+  "playback": {
+    "operator_ready": true,
+    "successful_play_count": 1,
+    "successful_play_rc": 0,
+    "underrun_detected": false,
+    "failed_format_probe": {
+      "format": "22050 Hz mono PCM16",
+      "play_rc": 1,
+      "audible": false,
+      "reason": "board playback interface rejected the sample format"
+    }
+  },
+  "user_feedback_verbatim": "清晰度比以前好，但是没有更像目标女声，男声残留明显",
+  "subjective": {
+    "clarity_improved": true,
+    "closer_to_target_female": false,
+    "male_source_residual_obvious": true,
+    "target_timbre_pass": false
+  },
+  "decision": "reject candidate for target-timbre acceptance despite all objective gates passing",
+  "board_after_test": {
+    "scheme": "v23 maximum-volume fallback",
+    "autostart_instances": 1,
+    "capture_pcm_running": true,
+    "playback_pcm_running": true,
+    "headphone": "127/127 (100%, +6 dB)",
+    "playback": "255/255 (100%, 0 dB)"
+  },
+  "seed_vc_deployed_to_board": false,
+  "generated_audio_committed": false
+}

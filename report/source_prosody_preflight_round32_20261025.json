@@ -1,0 +1,36 @@
+{
+  "task": "PS-20261021-10",
+  "round": 32,
+  "date": "2026-10-25",
+  "status": "READY_PROSODY_TRAIN",
+  "source_sha_verified": 200,
+  "finite": true,
+  "cache_manifest_sha256": "57dc9d95bb4b485ca5325b4e318766ef852bdfd29d49e5c197c804de8980d053",
+  "aggregate": {
+    "centered_log_f0_correlation": 0.5581518830717658,
+    "delta_log_f0_correlation": 0.15581318336867508,
+    "normalized_energy_correlation": 0.9409023263558468,
+    "vuv_accuracy": 0.8684532629002126,
+    "vuv_f1": 0.9210220973106774,
+    "joint_voiced_frames": 35720
+  },
+  "budget": {
+    "input_dimensions_before": 96,
+    "input_dimensions_after": 99,
+    "parameters_before": 477771,
+    "parameters_after": 478347,
+    "added_parameters": 576,
+    "parameter_increase_percent": 0.12055984980252045,
+    "added_macs_per_frame": 576,
+    "mac_increase_percent": 0.12121212121212122,
+    "added_macs_per_second_at_50hz": 28800
+  },
+  "offline_extractor_noncausal": true,
+  "causal_parity_tested": false,
+  "track9_used": false,
+  "fixed_male_used": false,
+  "training_started": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

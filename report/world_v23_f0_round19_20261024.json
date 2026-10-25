@@ -1,0 +1,51 @@
+{
+  "task": "PS-20261021-10",
+  "date": "2026-10-24",
+  "status": "REJECTED",
+  "scope": "offline WORLD v23 spectrum/AP control versus registered log-F0 mapping on authorized Round 18 capture",
+  "gates": {"identity": 0.45, "identity_p10": 0.35, "leakage": 0.10, "utmos": 2.30, "cer": 0.15},
+  "input": {
+    "path": "build/generated/seed_fixed_male_20261024/round18_capture.wav",
+    "sha256": "dc3b4a61854e2f00b299dbe3ad0016f6cc087cc4e2ce9836366bd65fa59a5ad1",
+    "crop_start_s": 3.37,
+    "processed_seconds": 16.63
+  },
+  "frozen_common_processing": {
+    "effective_formant_warp": 1.0975,
+    "mean_spectrum_correction": false,
+    "aperiodicity": "source retained",
+    "target_track9_used": false
+  },
+  "rows": [
+    {
+      "candidate": "v23_fixed_ratio",
+      "identity": 0.22063605734255445,
+      "identity_p10": 0.19190640005088985,
+      "leakage": 0.32873080809408417,
+      "utmos": 1.7539048194885254,
+      "cer": 0.14583333333333334,
+      "f0_p10_median_p90_hz": [179.64519337297583, 196.04271543257423, 215.5478705858496],
+      "sha256": "99e695098554dfb3736d91cab3f2c8a67cbe21f39059dcc4fddd034ac300b460",
+      "all_gates_pass": false
+    },
+    {
+      "candidate": "v23_registered_log_f0",
+      "identity": 0.24752586180769617,
+      "identity_p10": 0.22216701985670886,
+      "leakage": 0.3302245221835147,
+      "utmos": 1.8270516792933147,
+      "cer": 0.0625,
+      "f0_p10_median_p90_hz": [152.9830651660238, 168.544043506598, 187.23907786504074],
+      "sha256": "dfe26ef1b7d816dc9a778bf3a8854049152f07816d8f331bad4768c236d73320",
+      "all_gates_pass": false
+    }
+  ],
+  "decision": {
+    "deploy_to_board": false,
+    "request_listening": false,
+    "reason": "Registered F0 improves identity, P10, UTMOS and CER but fails identity, P10, leakage and UTMOS; strict leakage is slightly worse than the v23 control."
+  },
+  "generated_audio_committed": false,
+  "board_touched": false,
+  "played": false
+}
