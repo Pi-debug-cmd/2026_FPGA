@@ -794,6 +794,16 @@
 - 报告链接：`report/paired_hubert_world_source_prosody_round33_20261025.md`、`report/paired_hubert_world_source_prosody_round33_20261025.json`。
 - 下一责任方：Hardware-A / Codex 提交本轮；下一轮先审计独立验证集的 F0/能量/VUV 恢复，不直接增加更多输入或模型容量。
 
+### [PS-20261021-10] 源韵律增益归因 Round 34 认领
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：CLAIMED
+- 基准提交：`9ae9408`
+- 范围：在 Round 27/29 相同的 8 条独立验证句上加载 Round 33 checkpoint，使用相同教师、合成器和评估器，量化四组动态与 UTMOS，并与 Round 28 直接比较。
+- 决策：确认改进来自 F0、能量、VUV 或其他组；只据独立验证证据冻结下一单变量，不增加模型容量或再次调动态损失。
+- 限制：不训练、不重新使用 Track 9、不使用固定男性输入、不播放；板卡保持关机。
+- 下一责任方：Hardware-A / Codex 完成审计并提交下一路线结论。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
