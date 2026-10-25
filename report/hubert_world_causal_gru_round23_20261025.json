@@ -1,0 +1,39 @@
+{
+  "task": "PS-20261021-10",
+  "round": 23,
+  "date": "2026-10-25",
+  "status": "REJECTED",
+  "parameters": 477771,
+  "best_step": 100,
+  "steps_completed": 900,
+  "early_stopped": true,
+  "causal_prefix_max_abs": 0.0,
+  "objective": {
+    "identity": 0.5622,
+    "identity_p10": 0.5463,
+    "source_leakage": 0.1567,
+    "utmos": 1.3388,
+    "cer": 0.3804
+  },
+  "gates": {
+    "identity": true,
+    "identity_p10": true,
+    "source_leakage": false,
+    "utmos": false,
+    "cer": false
+  },
+  "feature_mae": {
+    "spectrum_dct_mean": 2.8029017448425293,
+    "log_f0": 0.1369655728340149,
+    "vuv_probability": 0.09425699710845947,
+    "energy": 0.9991552233695984,
+    "aperiodicity_dct_mean": 5.2040276527404785
+  },
+  "checkpoint_sha256": "3bdbb0f8a11ac94dc65e7fb4ddf350eb1a2a2df96f92636be5bf943d118e441b",
+  "reconstruction_sha256": "36d2b76ff40af9277ab7814b4e4298be788d74b582e734e5f69e1a4114e861b9",
+  "all_gates_pass": false,
+  "track9_already_exposed": true,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

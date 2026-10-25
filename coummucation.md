@@ -537,6 +537,19 @@
 - 限制：用户已关闭板卡；本轮无需上电、录音或播放，无 Cortex-A9、实时、Vivado、RTL 或 PL 结论。
 - 下一责任方：Hardware-A / Codex 实现确定性训练、验证因果性并运行一次冻结回归。
 
+### [PS-20261021-10] HuBERT→WORLD 因果 GRU 序列教师 Round 23 结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`9f8e435`
+- 修改路径：`build/train_hubert_world_causal_gru_round23_20261025.py`、`report/hubert_world_causal_gru_round23_20261025.{md,json}`、`coummucation.md`。
+- 训练结果：477,771 参数两层单向 GRU；第 100 步内部验证最佳 `0.4007`，第 900 步早停并恢复最佳；因果前缀差异 `0.0`。
+- 量化结果：已暴露 Track 9 为 **0.5622/0.5463/0.1567/1.3388/0.3804**（身份/P10/固定男性泄漏/UTMOS/CER）；身份两门通过，后三门失败。
+- 判定：拒绝；谱包络误差下降但能量/AP 误差和过拟合仍严重。下一轮先验证当前 60D SP/12D AP 表示的无模型 WORLD 重建上限，不再直接更换网络。
+- 限制：板卡保持关机；未录音、未播放、未访问板卡，无 Cortex-A9、实时、Vivado、RTL 或 PL 结论。
+- 报告链接：`report/hubert_world_causal_gru_round23_20261025.md`、`report/hubert_world_causal_gru_round23_20261025.json`。
+- 下一责任方：Hardware-A / Codex 提交失败轮；随后另行认领 WORLD 表示 oracle。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
