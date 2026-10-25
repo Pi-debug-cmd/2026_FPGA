@@ -872,6 +872,20 @@
 - 限制：离线源韵律非因果；不播放、不使用固定男性输入、不触碰板卡。方差项只用于训练，推理成本不变。
 - 下一责任方：Hardware-A / Codex 实现并运行单变量训练，失败也提交。
 
+### [PS-20261021-10] 动态方差匹配训练 Round 37 结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED_BEST_SO_FAR
+- 基准提交：`0c0272a`
+- 修改路径：`build/train_paired_hubert_world_gru_round26_20261025.py`、`report/paired_hubert_world_variance_matching_round37_20261025.{md,json}`、`coummucation.md`。
+- 训练：478347 参数不变；第 1200 步验证最佳 `0.617570`，第 2000 步停止并恢复，因果前缀差异 `0.0`。
+- Track 9：**0.6954/0.6794/0.1350/1.8616/0.1087**（身份/P10/男性质心余弦/UTMOS/CER）。目标自重建不应用泄漏门；UTMOS 失败。
+- 对比 Round 33：身份 `+0.0197`、P10 `+0.0245`、UTMOS `+0.1578`、CER `-0.0217`、男性质心余弦 `-0.0404`；当前配对 WORLD 路线最佳。
+- 哈希：checkpoint `efcda700…3bd2a2`，WAV `cebbc5f5…355eef`；推理参数/MAC/延迟不变。
+- 限制：离线源韵律非因果；未播放、未使用固定男性输入，板卡保持关机。
+- 报告链接：`report/paired_hubert_world_variance_matching_round37_20261025.md`、`report/paired_hubert_world_variance_matching_round37_20261025.json`。
+- 下一责任方：Hardware-A / Codex 提交本轮；下一轮先审计独立验证动态与自然度，不直接改变方差权重。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）

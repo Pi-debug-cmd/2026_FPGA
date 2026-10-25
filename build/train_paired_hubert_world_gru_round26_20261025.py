@@ -54,7 +54,8 @@ def load_cache(cache: Path, record: dict) -> tuple[np.ndarray, np.ndarray]:
 
 def loss_terms(prediction: torch.Tensor, target: torch.Tensor, target_vuv: torch.Tensor,
                positive_weight: torch.Tensor, multiscale: bool,
-               group_balanced: bool = False) -> tuple[torch.Tensor, dict]:
+               group_balanced: bool = False,
+               variance_matching: bool = False) -> tuple[torch.Tensor, dict]:
     if not multiscale:
         return prior.loss_terms(prediction, target, target_vuv, positive_weight)
     continuous_prediction = prediction[..., prior.CONTINUOUS]
@@ -85,6 +86,18 @@ def loss_terms(prediction: torch.Tensor, target: torch.Tensor, target_vuv: torch
                "delta_lag1": float(deltas[0].detach()),
                "delta_lag2": float(deltas[1].detach()),
                "delta_lag4": float(deltas[2].detach())}
+    if variance_matching:
+        prediction_delta = continuous_prediction[:, 1:] - continuous_prediction[:, :-1]
+        target_delta = continuous_target[:, 1:] - continuous_target[:, :-1]
+        variance_terms = []
+        for group in groups:
+            prediction_rms = torch.sqrt(torch.mean(prediction_delta[..., group] ** 2) + 1e-6)
+            target_rms = torch.sqrt(torch.mean(target_delta[..., group] ** 2) + 1e-6)
+            variance_terms.append((torch.log(prediction_rms) - torch.log(target_rms)) ** 2)
+        variance_match = torch.stack(variance_terms).mean()
+        total = total + 0.05 * variance_match
+        metrics["total"] = float(total.detach())
+        metrics["variance_match"] = float(variance_match.detach())
     if group_balanced:
         for name, index in (("spectrum", 0), ("log_f0", 1), ("energy", 2), ("aperiodicity", 3)):
             metrics[f"delta_{name}"] = float(torch.stack(
@@ -93,7 +106,8 @@ def loss_terms(prediction: torch.Tensor, target: torch.Tensor, target_vuv: torch
 
 
 def validate(model: prior.CausalWorldGRU, rows: list[tuple[np.ndarray, np.ndarray]],
-             positive_weight: torch.Tensor, multiscale: bool, group_balanced: bool) -> dict:
+             positive_weight: torch.Tensor, multiscale: bool, group_balanced: bool,
+             variance_matching: bool) -> dict:
     metrics = []
     model.eval()
     with torch.inference_mode():
@@ -101,7 +115,7 @@ def validate(model: prior.CausalWorldGRU, rows: list[tuple[np.ndarray, np.ndarra
             prediction = model(torch.from_numpy(x[None]))
             _, row = loss_terms(prediction, torch.from_numpy(target[None]),
                                 torch.from_numpy(target[None, :, VUV_INDEX]), positive_weight,
-                                multiscale, group_balanced)
+                                multiscale, group_balanced, variance_matching)
             metrics.append(row)
     return {key: float(np.mean([row[key] for row in metrics])) for key in metrics[0]}
 
@@ -117,15 +131,20 @@ def main() -> None:
                         help="Round 30: average spectrum/log-F0/energy/AP dynamic groups equally")
     parser.add_argument("--source-prosody", action="store_true",
                         help="Round 33: append normalized source log-F0/VUV/log-energy")
+    parser.add_argument("--variance-matching", action="store_true",
+                        help="Round 37: add fixed 0.05 x four-group lag-1 log-RMS loss")
     args = parser.parse_args()
     if args.group_balanced_dynamics and not args.multiscale_dynamics:
         raise ValueError("group-balanced dynamics requires --multiscale-dynamics")
     if args.source_prosody and (not args.multiscale_dynamics or args.group_balanced_dynamics):
         raise ValueError("source prosody requires Round-28 multiscale loss without group balancing")
+    if args.variance_matching and not args.source_prosody:
+        raise ValueError("variance matching requires --source-prosody")
     if args.multiscale_dynamics and args.output.name == "hubert_world_round26_20261025":
         raise ValueError("Round 28 requires a separate --output directory")
     args.output = args.output.resolve()
-    experiment_round = (33 if args.source_prosody else
+    experiment_round = (37 if args.variance_matching else
+                        33 if args.source_prosody else
                         30 if args.group_balanced_dynamics else
                         28 if args.multiscale_dynamics else 26)
     started = time.monotonic()
@@ -233,12 +252,13 @@ def main() -> None:
         x = torch.from_numpy(np.stack(batch_x)); target = torch.from_numpy(np.stack(batch_y))
         prediction = model(x)
         loss, metrics = loss_terms(prediction, target, target[..., VUV_INDEX], positive_weight,
-                                   args.multiscale_dynamics, args.group_balanced_dynamics)
+                                   args.multiscale_dynamics, args.group_balanced_dynamics,
+                                   args.variance_matching)
         optimizer.zero_grad(set_to_none=True); loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0); optimizer.step(); scheduler.step()
         if step == 1 or step % CHECK_EVERY == 0:
             valid = validate(model, validation, positive_weight, args.multiscale_dynamics,
-                             args.group_balanced_dynamics)
+                             args.group_balanced_dynamics, args.variance_matching)
             record = {"step": step, "train": metrics, "validation": valid,
                       "learning_rate": optimizer.param_groups[0]["lr"]}
             history.append(record); print(json.dumps(record), flush=True)
@@ -253,7 +273,9 @@ def main() -> None:
     model.load_state_dict(best.pop("state"))
     causal_difference = prior.verify_causality(model, validation[0][0])
     checkpoint = args.output / "paired_causal_gru.pt"
-    checkpoint_format = ("paired_hubert_world_causal_gru_round33_source_prosody_v1"
+    checkpoint_format = ("paired_hubert_world_causal_gru_round37_variance_matching_v1"
+                         if args.variance_matching else
+                         "paired_hubert_world_causal_gru_round33_source_prosody_v1"
                          if args.source_prosody else
                          "paired_hubert_world_causal_gru_round30_group_balanced_v1"
                          if args.group_balanced_dynamics else
@@ -291,7 +313,9 @@ def main() -> None:
              "log_sp_lo": float(np.percentile(log_sp, 0.05)),
              "log_sp_hi": float(np.percentile(log_sp, 99.95))}
     reconstructed, synthesis = base.synthesize(prediction, stats)
-    wav_path = args.output / ("track9_paired_causal_gru_source_prosody.wav"
+    wav_path = args.output / ("track9_paired_causal_gru_variance_matching.wav"
+                              if args.variance_matching else
+                              "track9_paired_causal_gru_source_prosody.wav"
                               if args.source_prosody else
                               "track9_paired_causal_gru_group_balanced.wav"
                               if args.group_balanced_dynamics else
@@ -299,7 +323,9 @@ def main() -> None:
                               if args.multiscale_dynamics else "track9_paired_causal_gru.wav")
     base.sf.write(wav_path, reconstructed, base.SAMPLE_RATE, subtype="PCM_16")
     summary = {"task": "PS-20261021-10", "round": experiment_round,
-               "kind": ("paired_hubert_world_causal_gru_source_prosody"
+               "kind": ("paired_hubert_world_causal_gru_variance_matching"
+                        if args.variance_matching else
+                        "paired_hubert_world_causal_gru_source_prosody"
                         if args.source_prosody else
                         "paired_hubert_world_causal_gru_group_balanced"
                         if args.group_balanced_dynamics else
@@ -313,6 +339,9 @@ def main() -> None:
                "anchor_probability": ANCHOR_PROBABILITY, "target_track9_used_for_selection": False,
                "input_dimensions": 99 if args.source_prosody else 96,
                "source_prosody": args.source_prosody,
+               "variance_matching": ({"weight": 0.05, "lag": 1,
+                                      "groups": ["spectrum", "log_f0", "energy", "aperiodicity"]}
+                                     if args.variance_matching else None),
                "dynamic_loss": ({"weight": 0.75, "lags": [1, 2, 4], "reduction": "mean"}
                                 if args.multiscale_dynamics
                                 else {"weight": 0.20, "lags": [1], "reduction": "mean"}),
@@ -324,7 +353,8 @@ def main() -> None:
                                               encoding="utf-8")
     if args.group_balanced_dynamics:
         summary["dynamic_loss"]["reduction"] = "equal_mean_of_spectrum_log_f0_energy_aperiodicity"
-    candidate = ("track9_paired_causal_gru_source_prosody" if args.source_prosody else
+    candidate = ("track9_paired_causal_gru_variance_matching" if args.variance_matching else
+                 "track9_paired_causal_gru_source_prosody" if args.source_prosody else
                  "track9_paired_causal_gru_group_balanced" if args.group_balanced_dynamics else
                  "track9_paired_causal_gru_multiscale" if args.multiscale_dynamics else
                  "track9_paired_causal_gru")

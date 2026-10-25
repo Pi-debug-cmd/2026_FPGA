@@ -1,0 +1,42 @@
+{
+  "task": "PS-20261021-10",
+  "round": 37,
+  "date": "2026-10-25",
+  "status": "REJECTED_BEST_SO_FAR",
+  "single_variable": "add 0.05-weight four-group lag-1 log-RMS matching loss",
+  "input_dimensions": 99,
+  "parameters": 478347,
+  "best_step": 1200,
+  "steps_completed": 2000,
+  "validation_total": 0.6175698637962341,
+  "causal_prefix_max_abs": 0.0,
+  "objective": {
+    "identity": 0.6953644994517209,
+    "identity_p10": 0.6794271893132231,
+    "male_centroid_cosine": 0.13495106414463193,
+    "utmos": 1.8615962862968445,
+    "cer": 0.10869565217391304
+  },
+  "target_reconstruction_gates": {
+    "identity": true,
+    "identity_p10": true,
+    "utmos": false,
+    "cer": true
+  },
+  "male_leakage_gate_applicable": false,
+  "delta_from_round33": {
+    "identity": 0.0196507537416518,
+    "identity_p10": 0.0245273921998852,
+    "male_centroid_cosine": -0.0404231242574991,
+    "utmos": 0.157785713672638,
+    "cer": -0.02173913043478261
+  },
+  "checkpoint_sha256": "efcda700ddc0e769ebcf4eb5afae8ff14528c21dd800d737a78c577e973bd2a2",
+  "reconstruction_sha256": "cebbc5f51b7816b94526f07aaad3839188e66b30a10bb8d68c84d51946355eef",
+  "inference_cost_changed": false,
+  "offline_source_prosody_noncausal": true,
+  "fixed_male_evaluated": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}
