@@ -1033,6 +1033,16 @@
 - 报告链接：`report/paired_hubert_world_voiced_f0_round43_20261025.md`、`report/paired_hubert_world_voiced_f0_round43_20261025.json`。
 - 下一责任方：Hardware-A / Codex 提交本轮；下一轮先在独立验证句审计 F0 误差与 UTMOS 是否同步改善，不直接扫描更大权重。
 
+### [PS-20261021-10] Round43 独立验证回归 Round 44 认领
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：CLAIMED
+- 基准提交：`c62fe48`
+- 范围：在与 Round38 相同的 8 条独立验证句上加载 Round43 checkpoint，以相同教师、合成器和 UTMOS 评估器复测，并与 Round37 逐句比较；同时报告 log-F0 动态比。
+- 决策门：Round43 平均 UTMOS 高于 Round37，且至少 6/8 句不退步，才允许保留 log-F0 辅助项作为后续基线；否则视为 Track 9 偶然收益并回退 Round37。
+- 限制：不训练、不使用 Track 9、不使用固定男性输入、不播放；不触碰板卡，板卡保持关机。
+- 下一责任方：Hardware-A / Codex 运行独立验证并提交 KEEP/REVERT。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
