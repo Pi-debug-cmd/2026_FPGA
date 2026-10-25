@@ -623,6 +623,17 @@
 - 报告链接：`report/paired_hubert_world_gru_round26_20261025.md`、`report/paired_hubert_world_gru_round26_20261025.json`。
 - 下一责任方：Hardware-A / Codex 提交本轮；审计教师 WORLD 重建与预测动态差异后再定下一轮唯一变量。
 
+### [PS-20261021-10] 配对教师与预测动态归因 Round 27 认领
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：CLAIMED
+- 基准提交：`5aa14e7`
+- 目标：在 Round 26 的 8 个独立验证句上，对同一 SP60/AP12 表示分别合成真实教师参数与冻结模型预测参数，比较 UTMOS、谱/F0/能量/AP 的帧方差和一阶动态，定位 `UTMOS=1.4628` 的主因。
+- 数据边界：只读 Round 25 验证缓存和 Round 26 冻结 checkpoint；不训练、不调参、不读取 Track 9 选择结果，不使用固定男性录音。
+- 决策：若教师重建 UTMOS 已低，则下一轮先处理教师质量；若教师明显合格而预测明显低且动态比收缩，则下一轮只修改动态/多分辨率损失。不得同时换教师和损失。
+- 限制：板卡保持关机；不录音、不播放、不访问板卡，无实时、Cortex-A9、Vivado、RTL 或 PL 结论。
+- 下一责任方：Hardware-A / Codex 完成 8 句成对诊断并提交唯一根因结论。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
