@@ -754,6 +754,20 @@
 - 限制：不训练、不使用 Track 9 或固定男性录音、不播放、不访问板卡；板卡保持关机。
 - 下一责任方：Hardware-A / Codex 完成预检并提交是否进入源韵律条件训练的结论。
 
+### [PS-20261021-10] 显式源韵律输入预检 Round 32 结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线预检）
+- 状态：READY_PROSODY_TRAIN
+- 基准提交：`af3253c`
+- 修改路径：`build/audit_source_prosody_round32_20261025.py`、`report/source_prosody_preflight_round32_20261025.{md,json}`、`coummucation.md`。
+- 数据：200/200 源音频通过 declaration/cache 双重 SHA 校验，特征全部有限；未使用 Track 9 或固定男性录音。
+- 相关性：句内 F0 轮廓 `0.5582`、F0 一阶动态 `0.1558`、能量 `0.9409`、VUV 准确率/F1 `0.8685/0.9210`；源韵律具备非退化增量信息。
+- 预算：输入 `96→99`，参数 `477771→478347`，新增 576（`0.1206%`）；每帧新增 576 MAC（`0.1212%`，50 Hz 为 28800 MAC/s）。
+- 判定：允许下一轮仅增加源 log-F0/VUV/log-energy 输入的训练；保持 Round 28 损失、数据、模型宽深、锚点比例与验证切分不变。
+- 限制：离线提取器非因果，未做板端/PL 实测；不播放，板卡保持关机。
+- 报告链接：`report/source_prosody_preflight_round32_20261025.md`、`report/source_prosody_preflight_round32_20261025.json`。
+- 下一责任方：Hardware-A / Codex 提交预检后另行认领源韵律条件训练。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
