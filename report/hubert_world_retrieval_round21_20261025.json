@@ -1,0 +1,38 @@
+{
+  "task": "PS-20261021-10",
+  "round": 21,
+  "date": "2026-10-25",
+  "status": "REJECTED",
+  "kind": "hubert_content_knn_target_world_retrieval",
+  "k": 4,
+  "library_frames": 4953,
+  "train_tracks": [5, 6, 7, 8],
+  "development_track": 9,
+  "track9_already_exposed": true,
+  "objective": {
+    "identity": 0.6749,
+    "identity_p10": 0.6613,
+    "source_leakage": 0.1545,
+    "utmos": 1.3833,
+    "cer": 0.3261
+  },
+  "gates": {
+    "identity": true,
+    "identity_p10": true,
+    "source_leakage": false,
+    "utmos": false,
+    "cer": false
+  },
+  "world_feature_mae": {
+    "spectrum_dct_mean": 2.8946645259857178,
+    "log_f0": 0.13453607261180878,
+    "vuv_probability": 0.07991203665733337,
+    "energy": 0.869830310344696,
+    "aperiodicity_dct_mean": 5.133429050445557
+  },
+  "reconstruction_sha256": "bb717ac304031f6f10b18507f8d86dae5890c26f55b2a924fb7c16fe649c0ccf",
+  "all_gates_pass": false,
+  "played": false,
+  "board_touched": false,
+  "board_fallback_changed": false
+}

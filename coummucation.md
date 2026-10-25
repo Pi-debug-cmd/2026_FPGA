@@ -485,6 +485,20 @@
 - 限制：不录音、不播放、不访问板卡、不修改 v23 最大音量上电保底；无 Cortex-A9、实时、Vivado、RTL 或 PL 结论。
 - 下一责任方：Hardware-A / Codex 完成确定性 kNN-WORLD 教师、严格评估并按结果提交。
 
+### [PS-20261021-10] HuBERT 内容检索→WORLD 时序教师 Round 21 结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`122c114`
+- 修改路径：`build/run_hubert_world_retrieval_round21_20261025.py`、`report/hubert_world_retrieval_round21_20261025.{md,json}`、`coummucation.md`。
+- 方案：Tracks 5～8 建立 4,953 帧目标 HuBERT/WORLD 库；k=4 内容近邻加权检索真实目标 WORLD 参数，无源频谱跳连、不训练新回归器。
+- 量化结果：Track 9 已暴露回归为 **0.6749/0.6613/0.1545/1.3833/0.3261**（身份/P10/固定男性泄漏/UTMOS/CER）；身份两门通过，泄漏、UTMOS、CER 失败。相对 Round 20，身份与 CER 改善，但离门槛仍远。
+- 判定：独立帧近邻能增强目标身份，但跨句拼帧连续性不足；拒绝，不通过调 k 继续搜索。后续仅允许段级/路径级连续检索或序列解码器新轮次。
+- 数据纪律：Track 9 已暴露，只能作开发回归；无最终盲测结论。
+- 限制：未录音、未播放、未访问板卡，v23 最大音量上电保底不变；无 Cortex-A9、实时、Vivado、RTL 或 PL 新结论。
+- 报告链接：`report/hubert_world_retrieval_round21_20261025.md`、`report/hubert_world_retrieval_round21_20261025.json`。
+- 下一责任方：Hardware-A / Codex 提交失败轮并设计路径级连续检索；通过目标重建上限前不进入板端阶段。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
