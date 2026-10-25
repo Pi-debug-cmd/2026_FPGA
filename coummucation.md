@@ -839,6 +839,16 @@
 - 报告链接：`report/prediction_lag_audit_round35_20261025.md`、`report/prediction_lag_audit_round35_20261025.json`。
 - 下一责任方：Hardware-A / Codex 提交 NO-GO；后续仅考虑零前视下的动态分布约束，不再做时序平移。
 
+### [PS-20261021-10] 动态欠方差一致性预检 Round 36 认领
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线预检）
+- 状态：CLAIMED
+- 基准提交：`8bb733c`
+- 范围：只读取 Round 34 的 8 条独立验证原始审计，统计谱/log-F0/能量/AP 的逐句 lag-1 动态比、低于教师的句数和变异系数。
+- 决策门：四组都必须 8/8 句动态比 <1，且跨句变异系数 <0.25，才允许下一轮直接方差匹配；否则停止该路线。
+- 限制：不训练、不推理、不合成、不使用 Track 9 或固定男性输入、不播放；板卡保持关机。
+- 下一责任方：Hardware-A / Codex 完成一致性判定并提交 GO/NO-GO。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
