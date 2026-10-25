@@ -1043,6 +1043,19 @@
 - 限制：不训练、不使用 Track 9、不使用固定男性输入、不播放；不触碰板卡，板卡保持关机。
 - 下一责任方：Hardware-A / Codex 运行独立验证并提交 KEEP/REVERT。
 
+### [PS-20261021-10] Round43 独立验证回归 Round 44 结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：REVERT_ROUND43_RETAIN_ROUND37
+- 基准提交：`7c0e40c`
+- 修改路径：`report/round43_validation_round44_20261025.{md,json}`、`coummucation.md`。
+- UTMOS：Round43 在 8 条验证句均值 `2.00370`，Round37 为 `2.00545`，差 `-0.00176`；仅 `5/8` 句改善，未达到至少 `6/8` 门。最大单句回退 `-0.18786`。
+- F0：标准差比由 `0.8548` 改善到 `0.9902`，动态 RMS 比由 `1.1186` 到 `1.1085`，但未稳定转化为 UTMOS。
+- 判定：Round43 的 Track 9 提升不具稳定泛化，保留证据但回退 Round37 为稳健基线；禁止直接扫描更大 F0 权重。
+- 限制：未训练、未使用 Track 9、未播放、未使用固定男性输入；板卡保持关机。
+- 报告链接：`report/round43_validation_round44_20261025.md`、`report/round43_validation_round44_20261025.json`。
+- 下一责任方：Hardware-A / Codex 提交诊断；下一轮先分析按句/说话人的 F0 归一化与收益方向，不直接训练。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）

@@ -1,0 +1,27 @@
+{
+  "task": "PS-20261021-10",
+  "round": 44,
+  "date": "2026-10-25",
+  "status": "REVERT_ROUND43_RETAIN_ROUND37",
+  "validation_rows": 8,
+  "teacher_utmos_mean": 2.585537526081866,
+  "round37_prediction_utmos_mean": 2.0054535861090415,
+  "round43_prediction_utmos_mean": 2.003696418183995,
+  "utmos_delta": -0.0017571679250463,
+  "utmos_rows_improved": 5,
+  "largest_regression": {"stem": "SSB04340036", "utmos_delta": -0.1878558397293091},
+  "log_f0_ratios": {
+    "round37_std_prediction_over_teacher": 0.8548009440590734,
+    "round43_std_prediction_over_teacher": 0.9901615023351157,
+    "round37_delta_rms_prediction_over_teacher": 1.118621053120694,
+    "round43_delta_rms_prediction_over_teacher": 1.1085417770447639
+  },
+  "decision_gate": {"mean_improved": false, "rows_improved_at_least_6": false},
+  "decision": "retain Round 37 as the robust baseline; Round 43 is a non-generalizing Track-9 improvement",
+  "training_started": false,
+  "track9_reused": false,
+  "fixed_male_used": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}
