@@ -550,6 +550,17 @@
 - 报告链接：`report/hubert_world_causal_gru_round23_20261025.md`、`report/hubert_world_causal_gru_round23_20261025.json`。
 - 下一责任方：Hardware-A / Codex 提交失败轮；随后另行认领 WORLD 表示 oracle。
 
+### [PS-20261021-10] WORLD 表示压缩上限 Round 24 认领
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：CLAIMED
+- 基准提交：`51b689b`
+- 目标：隔离判断 Round 20～23 的低自然度是否首先受当前 60 维谱包络 DCT/12 维 AP DCT 表示限制，而不是继续更换预测网络。
+- 固定对照：同一已暴露 Track 9，仅比较完整 WORLD 参数重建、SP60/AP12、SP120/AP24、SP180/AP48；所有候选使用 Track 9 自身真实 F0/VUV/能量，不含 HuBERT、映射器、源频谱或目标训练。
+- 决策：若完整 WORLD 过门而压缩版本失败，下一轮先重构表示；若全部版本均失败，则停止把当前 PyWorld 合成器作为学习式保底声码器。该 oracle 不是他人到目标转换成果，不请求试听。
+- 限制：Track 9 已暴露，仅作组件诊断；板卡保持关机，不录音、不播放、不访问板卡，无实时、Cortex-A9、Vivado、RTL 或 PL 结论。
+- 下一责任方：Hardware-A / Codex 生成四个确定性重建、运行同一严格评估并提交。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
