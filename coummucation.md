@@ -573,6 +573,18 @@
 - 报告链接：`report/world_representation_oracle_round24_20261025.md`、`report/world_representation_oracle_round24_20261025.json`。
 - 下一责任方：Hardware-A / Codex 以 SP60/AP12 固定表示重新设计有足够监督的数据路线；不得继续靠扩大特征维数优化。
 
+### [PS-20261021-10] 扩展教师配对 HuBERT→WORLD Round 25 认领
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`7754463`
+- 依据：Round 24 证明 SP60/AP12 自重建身份 `0.8380`、UTMOS `2.4581`、CER `0`，表示上限充足；Round 20～23 的主瓶颈是仅用 99 秒目标自重建学习跨说话人映射。
+- 数据：复用现有 `full_train_corpus_16k` 的 192 训练 + 8 独立验证 CosyVoice3 源/目标教师配对（约 15.6 分钟），以及 Tracks 5～8 四个目标自重建锚点；资产已本机逐项解析，源/教师各 200 个 `.f32`，无缺失。Track 9 和固定男性验证录音不参与训练或选择。
+- 方案：冻结 HuBERT 内容输入，预测已通过 oracle 的 SP60/AP12 WORLD 表示；配对教师提供跨说话人内容→目标声学监督，目标锚点约束目标本人重建。先完成特征缓存、教师 WORLD oracle 抽检和确定性训练干跑，再决定长训练。
+- 风险：CosyVoice3 教师波形未获真人听感接受，只能作监督，不作为验收真值；最终必须在固定男性未训练输出上通过五门和真人试听。
+- 限制：板卡保持关机；本轮无需录音、播放或访问板卡，无 Cortex-A9、实时、Vivado、RTL 或 PL 结论。
+- 下一责任方：Hardware-A / Codex 完成缓存与数据泄漏审计，运行教师/验证预检并按结果决定是否启动长训练。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
