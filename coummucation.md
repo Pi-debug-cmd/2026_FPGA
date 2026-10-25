@@ -804,6 +804,19 @@
 - 限制：不训练、不重新使用 Track 9、不使用固定男性输入、不播放；板卡保持关机。
 - 下一责任方：Hardware-A / Codex 完成审计并提交下一路线结论。
 
+### [PS-20261021-10] 源韵律增益归因 Round 34 结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：GAIN_CONFIRMED
+- 基准提交：`1b88116`
+- 修改路径：`build/audit_paired_world_dynamics_round27_20261025.py`、`report/source_prosody_gain_audit_round34_20261025.{md,json}`、`coummucation.md`。
+- UTMOS：8 条独立验证句预测均值 `1.9006`，高于 Round 28 的 `1.8335`，增加 `0.0671`；教师均值 `2.5855`。
+- 动态比：Round 33 的谱/log-F0/能量/AP lag-1 比为 `0.6462/0.5177/0.8200/0.6750`，四组均高于 Round 28 的 `0.6356/0.4669/0.7994/0.6609`。
+- 判定：源韵律增益在独立验证集成立；下一步先测 ±4 HuBERT 帧内的预测/教师固定时延，不增加容量或再调损失。
+- 限制：未训练、未重新使用 Track 9、未用固定男性输入、未播放；离线源特征非因果，板卡保持关机。
+- 报告链接：`report/source_prosody_gain_audit_round34_20261025.md`、`report/source_prosody_gain_audit_round34_20261025.json`。
+- 下一责任方：Hardware-A / Codex 提交本轮；下一轮另行认领有限前视必要性诊断。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）

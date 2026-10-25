@@ -1,0 +1,24 @@
+{
+  "task": "PS-20261021-10",
+  "round": 34,
+  "date": "2026-10-25",
+  "status": "GAIN_CONFIRMED",
+  "validation_rows": 8,
+  "teacher_utmos_mean": 2.585537526081866,
+  "round28_prediction_utmos_mean": 1.8335171107232102,
+  "round33_prediction_utmos_mean": 1.9006429152695212,
+  "utmos_gain": 0.067125804546311,
+  "round33_dynamic_ratios": {
+    "spectrum": {"std": 0.7012049969849099, "delta": 0.6461856961932966},
+    "log_f0": {"std": 0.7581803784028724, "delta": 0.5177241984112382},
+    "energy": {"std": 0.9668345066755388, "delta": 0.8200469399338393},
+    "aperiodicity": {"std": 0.8941410166894135, "delta": 0.6749820473411992}
+  },
+  "next_single_diagnostic": "estimate prediction-to-teacher lag within plus/minus four HuBERT frames",
+  "training_started": false,
+  "track9_reused": false,
+  "fixed_male_used": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

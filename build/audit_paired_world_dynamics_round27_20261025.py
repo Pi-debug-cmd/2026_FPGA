@@ -13,6 +13,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "build"))
 import train_hubert_world_teacher_round20_20261025 as base  # noqa: E402
 import train_hubert_world_causal_gru_round23_20261025 as prior  # noqa: E402
+import train_paired_hubert_world_gru_round26_20261025 as paired  # noqa: E402
+import audit_source_prosody_round32_20261025 as prosody_audit  # noqa: E402
 import numpy as np  # noqa: E402
 import torch  # noqa: E402
 
@@ -64,10 +66,19 @@ def main() -> None:
     manifest = json.loads((round25 / "cache_manifest.json").read_text(encoding="utf-8"))
     cache = round25 / "cache"
     checkpoint = torch.load(args.checkpoint, map_location="cpu", weights_only=False)
-    model = prior.CausalWorldGRU(); model.load_state_dict(checkpoint["model"]); model.eval()
+    uses_source_prosody = bool(checkpoint.get("source_prosody", False))
+    model = paired.ProsodyCausalWorldGRU() if uses_source_prosody else prior.CausalWorldGRU()
+    model.load_state_dict(checkpoint["model"]); model.eval()
     mean = checkpoint["pca_mean"]; projection = checkpoint["pca_projection"]
     x_mean = checkpoint["x_mean"]; x_std = checkpoint["x_std"]
     y_mean = checkpoint["y_mean"]; y_std = checkpoint["y_std"]
+    prosody_mean = checkpoint.get("prosody_mean"); prosody_std = checkpoint.get("prosody_std")
+    declared = None
+    corpus = args.asset_root / "交接/核心材料/board_budget_20261005/full_train_corpus_16k"
+    if uses_source_prosody:
+        declaration = json.loads((corpus / "manifest.json").read_text(encoding="utf-8"))
+        declared = {row["stem"]: row for split in ("train", "validation")
+                    for row in declaration[split]}
 
     train_targets = []
     for record in manifest["records"]:
@@ -94,6 +105,17 @@ def main() -> None:
         content = data["content"].astype(np.float32)
         teacher20 = data["target"].astype(np.float32)
         x = (((content - mean) @ projection - x_mean) / x_std).astype(np.float32)
+        if uses_source_prosody:
+            declaration_row = declared[record["stem"]]
+            source_path = prosody_audit.resolve(corpus, "src", declaration_row["src"])
+            digest = base.sha256(source_path)
+            if digest != declaration_row["src_sha"] or digest != record["source_sha256"]:
+                raise ValueError(f"source SHA mismatch: {record['stem']}")
+            source = prosody_audit.read_raw(source_path)
+            source_prosody = prosody_audit.resample_rows(
+                prosody_audit.source_prosody(source), len(content))
+            x = np.concatenate((x, ((source_prosody - prosody_mean) / prosody_std).astype(np.float32)),
+                               axis=1)
         with torch.inference_mode(): raw = model(torch.from_numpy(x[None]))[0].numpy()
         prediction20 = raw * y_std + y_mean
         prediction_probability = 1.0 / (1.0 + np.exp(-np.clip(raw[:, VUV_INDEX], -20.0, 20.0)))
@@ -134,6 +156,7 @@ def main() -> None:
     summary = {"task": "PS-20261021-10", "round": args.experiment_round,
                "kind": "paired_teacher_prediction_dynamics_audit",
                "checkpoint_sha256": base.sha256(args.checkpoint),
+               "source_prosody": uses_source_prosody,
                "validation_rows": len(rows),
                "teacher_utmos_mean": float(np.mean([row["teacher"]["utmos"] for row in rows])),
                "prediction_utmos_mean": float(np.mean([row["prediction"]["utmos"] for row in rows])),
