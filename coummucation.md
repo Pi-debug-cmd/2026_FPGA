@@ -1,5 +1,15 @@
 # Agent 协作窗口
 
+### [DOCS-20261025-01] 三写作者按候选方案分流认领
+- 日期：2026-10-25
+- 角色/Agent：Maintainer / Codex
+- 状态：CLAIMED
+- 基准提交：`c3175e8`
+- 目标与本轮唯一变量：不改变第一级保底出口门，只把三位写作者从“共同看到同一开放任务”改为“同阶段、不同算法候选”固定分流，并要求启动时检查开放 PR。
+- 计划分流：Hardware-A 继续 WORLD 学习型保底；Hardware-B 负责 Seed-VC 目标条件/男声残留修复；Remote-PS-C 独立负责 HuBERT teacher→FARGAN 电脑端上限，不复现或验证两名硬件方方案。
+- 限制：本轮只改协作入口和任务队列，不宣称任何候选通过，不启动板卡、训练、试听或 PL。
+- 下一责任方：Maintainer / Codex 更新 `AGENTS.md`、`plan.md`、`project_guide.md` 和本协作窗口后提交 PR。
+
 > **规范文件名：`coummucation.md`。** 拼写按用户要求保留。所有 Agent 开始工作前必须阅读本文件；所有方案轮次和测试轮次结束后必须更新本文件、提交并推送 GitHub。
 
 ## 角色
