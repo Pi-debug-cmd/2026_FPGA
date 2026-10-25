@@ -961,6 +961,17 @@
 - 报告链接：`report/paired_hubert_world_half_f0_variance_round40_20261025.md`、`report/paired_hubert_world_half_f0_variance_round40_20261025.json`。
 - 下一责任方：Hardware-A / Codex 提交失败轮次；下一轮不得继续扫描 F0 方差权重，应改查 UTMOS 短板的其他可解释因素。
 
+### [PS-20261021-10] Round37 参数组 oracle 自然度归因 Round 41 认领
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：CLAIMED
+- 基准提交：`a717375`
+- 范围：固定 Round37 checkpoint、Track 9、裁剪边界、WORLD 合成器与严格评估器；分别仅用 Track 9 真值替换预测的谱 DCT、log-F0+VUV、能量或 AP DCT，并增加全真值 WORLD 重合成上限。
+- 决策门：以同一 Round37 基线比较 UTMOS 增量；只有单组 oracle 能带来至少 `+0.10` UTMOS，才允许下一训练轮优先攻该组。oracle 仅用于归因，不是可部署候选，也不参与音色方案验收。
+- 数据纪律：Track 9 已是冻结后开发回归，只用于诊断；不选 checkpoint、不训练、不使用固定男性输入、不播放。
+- 限制：所有 oracle 都依赖未来真值，明确不可部署；不触碰板卡，板卡保持关机。
+- 下一责任方：Hardware-A / Codex 实现一次性诊断并提交全部输出指标，失败也提交。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
