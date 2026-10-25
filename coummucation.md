@@ -647,6 +647,17 @@
 - 报告链接：`report/paired_world_dynamics_audit_round27_20261025.md`、`report/paired_world_dynamics_audit_round27_20261025.json`。
 - 下一责任方：Hardware-A / Codex 提交归因；随后另行认领单变量多尺度动态训练。
 
+### [PS-20261021-10] 多尺度动态损失 Round 28 认领
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`a32a72c`
+- 唯一变量：把 Round 26 的 `0.20 × lag-1` 一阶动态损失替换为 `0.75 × mean(lag-1, lag-2, lag-4)` 多尺度动态损失。
+- 冻结项：Round 25 配对缓存与验证切分、477771 参数双层单向 GRU、SP60/AP12、25% 目标锚点、batch/crop/学习率/早停规则和客观评估器全部不变，不做权重或 lag 扫描。
+- 判定：仍只按独立验证集选 checkpoint，完成后仅运行一次 Track 9；身份门 `≥0.45`、P10 `≥0.35`、UTMOS `≥2.30`、CER `≤0.15`。目标自重建不适用男性泄漏门。
+- 限制：不播放、不使用固定男性输入、不触碰板卡；板卡继续关机，无 Cortex-A9、实时、Vivado、RTL 或 PL 结论。
+- 下一责任方：Hardware-A / Codex 实现并运行本轮单变量训练，失败也提交完整证据。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
