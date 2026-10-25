@@ -1,0 +1,45 @@
+{
+  "task": "PS-20261021-10",
+  "round": 41,
+  "date": "2026-10-25",
+  "status": "GO_SPLIT_F0_VUV",
+  "checkpoint_sha256": "efcda700ddc0e769ebcf4eb5afae8ff14528c21dd800d737a78c577e973bd2a2",
+  "baseline_bit_identical": true,
+  "utmos": {
+    "round37_baseline": 1.8615962862968445,
+    "oracle_spectrum": 1.9156263768672943,
+    "oracle_f0_vuv": 1.9975315630435944,
+    "oracle_energy": 1.5682688355445862,
+    "oracle_aperiodicity": 1.8122934401035309,
+    "oracle_all": 2.5429007411003113
+  },
+  "utmos_delta_from_baseline": {
+    "oracle_spectrum": 0.0540300905704498,
+    "oracle_f0_vuv": 0.1359352767467499,
+    "oracle_energy": -0.2933274507522583,
+    "oracle_aperiodicity": -0.0493028461933136,
+    "oracle_all": 0.6813044548034668
+  },
+  "oracle_f0_vuv_metrics": {
+    "identity": 0.7471797897334105,
+    "identity_p10": 0.7164683519213237,
+    "male_centroid_cosine": 0.1657322317068406,
+    "utmos": 1.9975315630435944,
+    "cer": 0.11956521739130435
+  },
+  "oracle_all_metrics": {
+    "identity": 0.841245286569643,
+    "identity_p10": 0.8274804212831622,
+    "male_centroid_cosine": 0.13828873391443877,
+    "utmos": 2.5429007411003113,
+    "cer": 0.0
+  },
+  "male_leakage_gate_applicable": false,
+  "decision_threshold_utmos_delta": 0.1,
+  "decision": "split log-F0 and VUV oracles before choosing a training loss; do not target energy or aperiodicity",
+  "oracle_non_deployable": true,
+  "fixed_male_evaluated": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

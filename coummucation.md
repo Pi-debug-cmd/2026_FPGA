@@ -972,6 +972,19 @@
 - 限制：所有 oracle 都依赖未来真值，明确不可部署；不触碰板卡，板卡保持关机。
 - 下一责任方：Hardware-A / Codex 实现一次性诊断并提交全部输出指标，失败也提交。
 
+### [PS-20261021-10] Round37 参数组 oracle 自然度归因 Round 41 结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：GO_SPLIT_F0_VUV
+- 基准提交：`fa6cb57`
+- 修改路径：`build/audit_round37_oracle_groups_round41_20261025.py`、`report/round37_oracle_attribution_round41_20261025.{md,json}`、`coummucation.md`。
+- 可复现性：Round37 基线 WAV 逐位一致，SHA-256 `cebbc5f5…355eef`；checkpoint `efcda700…3bd2a2`。
+- UTMOS：基线 `1.8616`；真值谱 `1.9156`（`+0.0540`）；真值 log-F0+VUV `1.9975`（`+0.1359`）；真值能量 `1.5683`（`-0.2933`）；真值 AP `1.8123`（`-0.0493`）；全真值 `2.5429`（`+0.6813`）。
+- 判定：F0+VUV 是唯一超过预设 `+0.10` 的单组，但下一轮必须先拆分两者再选训练目标；谱暂列第二，能量/AP 不单独强化。全真值超过 UTMOS 门，证明 WORLD 合成上限足够。
+- 限制：oracle 使用 Track 9 未来真值、不可部署；目标自重建不应用男性泄漏门。未训练、未播放、未用固定男性输入，板卡保持关机。
+- 报告链接：`report/round37_oracle_attribution_round41_20261025.md`、`report/round37_oracle_attribution_round41_20261025.json`。
+- 下一责任方：Hardware-A / Codex 提交诊断；另行认领 log-F0 与 VUV 拆分 oracle。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
