@@ -886,6 +886,16 @@
 - 报告链接：`report/paired_hubert_world_variance_matching_round37_20261025.md`、`report/paired_hubert_world_variance_matching_round37_20261025.json`。
 - 下一责任方：Hardware-A / Codex 提交本轮；下一轮先审计独立验证动态与自然度，不直接改变方差权重。
 
+### [PS-20261021-10] 方差匹配独立验证 Round 38 认领
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：CLAIMED
+- 基准提交：`36372e1`
+- 范围：在 Round 27/29/34 相同的 8 条独立验证句上加载 Round 37 checkpoint，以相同教师、合成器和评估器计算 UTMOS 与四组动态，并与 Round 33 直接比较。
+- 决策门：UTMOS 均值必须高于 Round 33，至少 6/8 句 UTMOS 不退步，且谱/log-F0/能量/AP 聚合动态比均 ≤1.20，才保留方差匹配方向。
+- 限制：不训练、不重新使用 Track 9、不使用固定男性输入、不播放；板卡保持关机。
+- 下一责任方：Hardware-A / Codex 完成独立验证并提交 KEEP/REVERT。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
