@@ -921,6 +921,20 @@
 - 限制：离线源韵律非因果；不播放、不使用固定男性输入、不触碰板卡。
 - 下一责任方：Hardware-A / Codex 实现并运行单变量训练，失败也提交。
 
+### [PS-20261021-10] 非 F0 方差匹配训练 Round 39 结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED_REGRESSION
+- 基准提交：`c070216`
+- 修改路径：`build/train_paired_hubert_world_gru_round26_20261025.py`、`report/paired_hubert_world_non_f0_variance_round39_20261025.{md,json}`、`coummucation.md`。
+- 训练：478347 参数不变；第 1100 步验证最佳 `0.620411`，第 1900 步早停，因果前缀差异 `0.0`。
+- Track 9：**0.6863/0.6581/0.1759/1.5796/0.1304**（身份/P10/男性质心余弦/UTMOS/CER），UTMOS 失败。
+- 对比 Round 37：身份 `-0.0091`、P10 `-0.0213`、UTMOS `-0.2820`、CER `+0.0217`、男性质心余弦 `+0.0409`；明显回退。
+- 判定：F0 方差项不可删除；拒绝 Round39，保留 Round37 当前最佳。checkpoint `e89a27ee…ffedc4`，WAV `d89ce2e9…ae18d6`。
+- 限制：未播放、未使用固定男性输入；离线源韵律非因果，板卡保持关机。
+- 报告链接：`report/paired_hubert_world_non_f0_variance_round39_20261025.md`、`report/paired_hubert_world_non_f0_variance_round39_20261025.json`。
+- 下一责任方：Hardware-A / Codex 提交失败轮次；不得继续删除 F0 或整体增大方差权重。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）

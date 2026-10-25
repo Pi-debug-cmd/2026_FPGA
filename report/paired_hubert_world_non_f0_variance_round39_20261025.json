@@ -1,0 +1,33 @@
+{
+  "task": "PS-20261021-10",
+  "round": 39,
+  "date": "2026-10-25",
+  "status": "REJECTED_REGRESSION",
+  "single_variable": "remove log-F0 from the fixed 0.05 variance matching loss",
+  "parameters": 478347,
+  "best_step": 1100,
+  "steps_completed": 1900,
+  "validation_total": 0.6204111725091934,
+  "causal_prefix_max_abs": 0.0,
+  "objective": {
+    "identity": 0.6863074927459212,
+    "identity_p10": 0.6581084761734778,
+    "male_centroid_cosine": 0.17589159103469115,
+    "utmos": 1.579582691192627,
+    "cer": 0.13043478260869565
+  },
+  "delta_from_round37": {
+    "identity": -0.0090570067057997,
+    "identity_p10": -0.0213187131397453,
+    "male_centroid_cosine": 0.0409405268900592,
+    "utmos": -0.2820135951042175,
+    "cer": 0.02173913043478261
+  },
+  "decision": "reject and retain Round 37",
+  "checkpoint_sha256": "e89a27ee87afff4e8a86e0629e832db005f32eedc8f8f65e55f17c21b8ffedc4",
+  "reconstruction_sha256": "d89ce2e9db2f9eccc75e72726eb49fb62779a16971352298fbf8c5555cae18d6",
+  "fixed_male_evaluated": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}
