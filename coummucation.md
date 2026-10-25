@@ -561,6 +561,18 @@
 - 限制：Track 9 已暴露，仅作组件诊断；板卡保持关机，不录音、不播放、不访问板卡，无实时、Cortex-A9、Vivado、RTL 或 PL 结论。
 - 下一责任方：Hardware-A / Codex 生成四个确定性重建、运行同一严格评估并提交。
 
+### [PS-20261021-10] WORLD 表示压缩上限 Round 24 结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：ACCEPTED_COMPONENT_ORACLE（仅表示上限，不是转换接受）
+- 基准提交：`caf401c`
+- 修改路径：`build/run_world_representation_oracle_round24_20261025.py`、`report/world_representation_oracle_round24_20261025.{md,json}`、`coummucation.md`。
+- 量化结果：完整 WORLD 为 **0.8408/0.8232/0.1349/2.4801/0.0000**；SP60/AP12 为 **0.8380/0.8204/0.1266/2.4581/0.0000**（身份/P10/固定男性质心余弦/UTMOS/CER）。更高 SP120/AP24 与 SP180/AP48 无实质收益。
+- 判定：保留 SP60/AP12；表示压缩不是 Round 20～23 主瓶颈，问题在 HuBERT→WORLD 参数预测。目标自重建的男性质心余弦门不适用：完整目标参数自身也为 `0.1349`，不能称源泄漏；`≤0.10` 只用于真正男性转换。
+- 限制：组件 oracle，不是男性到目标转换；Track 9 已暴露，不请求试听。板卡保持关机，未录音、未播放、未访问板卡。
+- 报告链接：`report/world_representation_oracle_round24_20261025.md`、`report/world_representation_oracle_round24_20261025.json`。
+- 下一责任方：Hardware-A / Codex 以 SP60/AP12 固定表示重新设计有足够监督的数据路线；不得继续靠扩大特征维数优化。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
