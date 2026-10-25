@@ -1,0 +1,49 @@
+{
+  "task": "PS-20261021-10",
+  "round": 20,
+  "date": "2026-10-25",
+  "status": "REJECTED",
+  "train_tracks": [5, 6, 7, 8],
+  "heldout_track": 9,
+  "heldout_now_exposed": true,
+  "source_audio_used_for_training": false,
+  "source_spectrum_skip": false,
+  "hubert_checkpoint_sha256": "cc8c20f4b90a520757260197a3ff2505705a7adbd20ad9eeaa4e1a9b38442ef5",
+  "checkpoint_sha256": "d03944c13ce0b8c824abd2e8f69133616cf970a93fd2e63442f3e223038316da",
+  "reconstruction_sha256": "a903abb1320278f64f80dce17f93c75b782e8cfbae519c472d6f6b8d50993604",
+  "parameters": 361419,
+  "training_frames": 19832,
+  "objective": {
+    "identity": 0.5986386279362244,
+    "identity_p10": 0.5690788470953141,
+    "source_leakage": 0.14705046043819703,
+    "utmos": 1.3547548055648804,
+    "cer": 0.43478260869565216
+  },
+  "gates": {
+    "identity": true,
+    "identity_p10": true,
+    "source_leakage": false,
+    "utmos": false,
+    "cer": false
+  },
+  "all_gates_pass": false,
+  "world_feature_mae": {
+    "spectrum_dct_mean": 3.238861560821533,
+    "log_f0": 0.18502061069011688,
+    "energy": 0.8690374493598938,
+    "aperiodicity_dct_mean": 5.415945053100586
+  },
+  "vuv_fixed_voiced_fraction": 0.8467936091048369,
+  "first_failed_trial": {
+    "cause": "clipped VUV probability was consumed as a zero-boundary logit, producing all-voiced synthesis",
+    "identity": 0.6004,
+    "identity_p10": 0.5788,
+    "source_leakage": 0.1391,
+    "utmos": 1.3652,
+    "cer": 0.3587
+  },
+  "played": false,
+  "board_touched": false,
+  "board_fallback_changed": false
+}
