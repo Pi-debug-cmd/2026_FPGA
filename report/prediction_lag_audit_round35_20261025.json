@@ -1,0 +1,31 @@
+{
+  "task": "PS-20261021-10",
+  "round": 35,
+  "date": "2026-10-25",
+  "status": "NO_GO_LOOKAHEAD",
+  "validation_rows": 8,
+  "lag_definition": "prediction[t] compared with teacher[t+lag]",
+  "overall_loss_by_lag": {
+    "-4": 0.4215477593243122,
+    "-3": 0.39083489030599594,
+    "-2": 0.349231593310833,
+    "-1": 0.3005943186581135,
+    "0": 0.2745202016085386,
+    "1": 0.3024335838854313,
+    "2": 0.3501926138997078,
+    "3": 0.39238331839442253,
+    "4": 0.42423025518655777
+  },
+  "aggregate_best_lag": 0,
+  "aggregate_best_lag_ms": 0,
+  "aggregate_improvement_percent": 0.0,
+  "per_row_best_lag_signs": {"negative": 0, "zero": 8, "positive": 0},
+  "limited_lookahead_go": false,
+  "checkpoint_sha256": "7e3c75be28114453d809201995371d4398f3f862bdcc3ee6f9558a5239989696",
+  "training_started": false,
+  "track9_used": false,
+  "fixed_male_used": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

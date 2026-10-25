@@ -827,6 +827,18 @@
 - 限制：不训练、不合成、不重新使用 Track 9、不使用固定男性输入、不播放；板卡保持关机。
 - 下一责任方：Hardware-A / Codex 完成 lag 审计并提交 GO/NO-GO。
 
+### [PS-20261021-10] 有限前视必要性诊断 Round 35 结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：NO_GO_LOOKAHEAD
+- 基准提交：`b96a399`
+- 修改路径：`build/audit_prediction_lag_round35_20261025.py`、`report/prediction_lag_audit_round35_20261025.{md,json}`、`coummucation.md`。
+- 结果：8/8 独立验证句总体最佳 lag 均为 0；聚合 lag 0 损失 `0.27452`，lag -1/+1 已升至 `0.30059/0.30243`，±2～4 更差。
+- 判定：非零 lag 改善 `0%`，未满足 ≥1% 且 ≥5/8 同向门；拒绝有限前视和额外 20～80 ms 延迟，保持严格零前视。
+- 限制：未训练、未合成、未重新使用 Track 9、未用固定男性输入、未播放；板卡保持关机。
+- 报告链接：`report/prediction_lag_audit_round35_20261025.md`、`report/prediction_lag_audit_round35_20261025.json`。
+- 下一责任方：Hardware-A / Codex 提交 NO-GO；后续仅考虑零前视下的动态分布约束，不再做时序平移。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
