@@ -706,6 +706,20 @@
 - 限制：不播放、不使用固定男性输入、不触碰板卡；板卡继续关机。
 - 下一责任方：Hardware-A / Codex 实现并运行本轮单变量训练。
 
+### [PS-20261021-10] 参数组平衡动态损失 Round 30 结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED_REGRESSION
+- 基准提交：`c599085`
+- 修改路径：`build/train_paired_hubert_world_gru_round26_20261025.py`、`report/paired_hubert_world_group_balanced_round30_20261025.{md,json}`、`coummucation.md`。
+- 训练结果：四组等权、其余冻结；第 600 步验证最佳 `0.445997`，第 1400 步早停，因果差异 `0.0`。
+- Track 9：**0.6427/0.6067/0.1722/1.4738/0.1304**（身份/P10/男性质心余弦/UTMOS/CER）。目标自重建不应用泄漏门；UTMOS 失败。
+- 对比 Round 28：身份 `-0.0128`、P10 `-0.0373`、UTMOS `-0.1228`、CER `+0.0217`；四组完全等权回退，拒绝。
+- 哈希：checkpoint `fb04feca…8b231`，WAV `c8a23c1d…ef280`。
+- 限制：未播放、未使用固定男性输入；板卡保持关机，无 Cortex-A9、实时、Vivado、RTL 或 PL 结论。
+- 报告链接：`report/paired_hubert_world_group_balanced_round30_20261025.md`、`report/paired_hubert_world_group_balanced_round30_20261025.json`。
+- 下一责任方：Hardware-A / Codex 提交失败轮次；后续恢复 Round 28 基线，只隔离 F0 轨迹项。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）

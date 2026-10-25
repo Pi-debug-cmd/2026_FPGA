@@ -46,7 +46,8 @@ def load_cache(cache: Path, record: dict) -> tuple[np.ndarray, np.ndarray]:
 
 
 def loss_terms(prediction: torch.Tensor, target: torch.Tensor, target_vuv: torch.Tensor,
-               positive_weight: torch.Tensor, multiscale: bool) -> tuple[torch.Tensor, dict]:
+               positive_weight: torch.Tensor, multiscale: bool,
+               group_balanced: bool = False) -> tuple[torch.Tensor, dict]:
     if not multiscale:
         return prior.loss_terms(prediction, target, target_vuv, positive_weight)
     continuous_prediction = prediction[..., prior.CONTINUOUS]
@@ -55,23 +56,37 @@ def loss_terms(prediction: torch.Tensor, target: torch.Tensor, target_vuv: torch
     vuv = torch.nn.functional.binary_cross_entropy_with_logits(
         prediction[..., VUV_INDEX], target_vuv, pos_weight=positive_weight)
     deltas = []
+    group_deltas = []
+    groups = (slice(0, base.SP_DIM), slice(base.SP_DIM, base.SP_DIM + 1),
+              slice(base.SP_DIM + 1, base.SP_DIM + 2),
+              slice(base.SP_DIM + 2, base.OUTPUT_DIM - 1))
     for lag in (1, 2, 4):
-        deltas.append(torch.nn.functional.smooth_l1_loss(
-            continuous_prediction[:, lag:] - continuous_prediction[:, :-lag],
-            continuous_target[:, lag:] - continuous_target[:, :-lag]))
+        prediction_delta = continuous_prediction[:, lag:] - continuous_prediction[:, :-lag]
+        target_delta = continuous_target[:, lag:] - continuous_target[:, :-lag]
+        per_group = [torch.nn.functional.smooth_l1_loss(prediction_delta[..., group],
+                                                        target_delta[..., group])
+                     for group in groups]
+        group_deltas.append(per_group)
+        deltas.append(torch.stack(per_group).mean() if group_balanced else
+                      torch.nn.functional.smooth_l1_loss(prediction_delta, target_delta))
     multiscale_delta = torch.stack(deltas).mean()
     total = reconstruction + 0.35 * vuv + 0.75 * multiscale_delta
-    return total, {"total": float(total.detach()),
-                   "reconstruction": float(reconstruction.detach()),
-                   "vuv_bce": float(vuv.detach()),
-                   "multiscale_delta": float(multiscale_delta.detach()),
-                   "delta_lag1": float(deltas[0].detach()),
-                   "delta_lag2": float(deltas[1].detach()),
-                   "delta_lag4": float(deltas[2].detach())}
+    metrics = {"total": float(total.detach()),
+               "reconstruction": float(reconstruction.detach()),
+               "vuv_bce": float(vuv.detach()),
+               "multiscale_delta": float(multiscale_delta.detach()),
+               "delta_lag1": float(deltas[0].detach()),
+               "delta_lag2": float(deltas[1].detach()),
+               "delta_lag4": float(deltas[2].detach())}
+    if group_balanced:
+        for name, index in (("spectrum", 0), ("log_f0", 1), ("energy", 2), ("aperiodicity", 3)):
+            metrics[f"delta_{name}"] = float(torch.stack(
+                [per_lag[index] for per_lag in group_deltas]).mean().detach())
+    return total, metrics
 
 
 def validate(model: prior.CausalWorldGRU, rows: list[tuple[np.ndarray, np.ndarray]],
-             positive_weight: torch.Tensor, multiscale: bool) -> dict:
+             positive_weight: torch.Tensor, multiscale: bool, group_balanced: bool) -> dict:
     metrics = []
     model.eval()
     with torch.inference_mode():
@@ -79,7 +94,7 @@ def validate(model: prior.CausalWorldGRU, rows: list[tuple[np.ndarray, np.ndarra
             prediction = model(torch.from_numpy(x[None]))
             _, row = loss_terms(prediction, torch.from_numpy(target[None]),
                                 torch.from_numpy(target[None, :, VUV_INDEX]), positive_weight,
-                                multiscale)
+                                multiscale, group_balanced)
             metrics.append(row)
     return {key: float(np.mean([row[key] for row in metrics])) for key in metrics[0]}
 
@@ -91,11 +106,16 @@ def main() -> None:
                         default=ROOT / "build/generated/hubert_world_round26_20261025")
     parser.add_argument("--multiscale-dynamics", action="store_true",
                         help="Round 28: use fixed 0.75 x mean(lag 1/2/4) dynamic loss")
+    parser.add_argument("--group-balanced-dynamics", action="store_true",
+                        help="Round 30: average spectrum/log-F0/energy/AP dynamic groups equally")
     args = parser.parse_args()
+    if args.group_balanced_dynamics and not args.multiscale_dynamics:
+        raise ValueError("group-balanced dynamics requires --multiscale-dynamics")
     if args.multiscale_dynamics and args.output.name == "hubert_world_round26_20261025":
         raise ValueError("Round 28 requires a separate --output directory")
     args.output = args.output.resolve()
-    experiment_round = 28 if args.multiscale_dynamics else 26
+    experiment_round = (30 if args.group_balanced_dynamics else
+                        28 if args.multiscale_dynamics else 26)
     started = time.monotonic()
     args.output.mkdir(parents=True, exist_ok=True)
     os.environ.update({"HF_HUB_OFFLINE": "1", "TRANSFORMERS_OFFLINE": "1"})
@@ -166,11 +186,12 @@ def main() -> None:
         x = torch.from_numpy(np.stack(batch_x)); target = torch.from_numpy(np.stack(batch_y))
         prediction = model(x)
         loss, metrics = loss_terms(prediction, target, target[..., VUV_INDEX], positive_weight,
-                                   args.multiscale_dynamics)
+                                   args.multiscale_dynamics, args.group_balanced_dynamics)
         optimizer.zero_grad(set_to_none=True); loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0); optimizer.step(); scheduler.step()
         if step == 1 or step % CHECK_EVERY == 0:
-            valid = validate(model, validation, positive_weight, args.multiscale_dynamics)
+            valid = validate(model, validation, positive_weight, args.multiscale_dynamics,
+                             args.group_balanced_dynamics)
             record = {"step": step, "train": metrics, "validation": valid,
                       "learning_rate": optimizer.param_groups[0]["lr"]}
             history.append(record); print(json.dumps(record), flush=True)
@@ -185,7 +206,9 @@ def main() -> None:
     model.load_state_dict(best.pop("state"))
     causal_difference = prior.verify_causality(model, validation[0][0])
     checkpoint = args.output / "paired_causal_gru.pt"
-    checkpoint_format = ("paired_hubert_world_causal_gru_round28_multiscale_v1"
+    checkpoint_format = ("paired_hubert_world_causal_gru_round30_group_balanced_v1"
+                         if args.group_balanced_dynamics else
+                         "paired_hubert_world_causal_gru_round28_multiscale_v1"
                          if args.multiscale_dynamics else "paired_hubert_world_causal_gru_round26_v1")
     torch.save({"format": checkpoint_format,
                 "model": model.state_dict(), "pca_mean": mean, "pca_projection": projection,
@@ -213,11 +236,15 @@ def main() -> None:
              "log_sp_lo": float(np.percentile(log_sp, 0.05)),
              "log_sp_hi": float(np.percentile(log_sp, 99.95))}
     reconstructed, synthesis = base.synthesize(prediction, stats)
-    wav_path = args.output / ("track9_paired_causal_gru_multiscale.wav"
+    wav_path = args.output / ("track9_paired_causal_gru_group_balanced.wav"
+                              if args.group_balanced_dynamics else
+                              "track9_paired_causal_gru_multiscale.wav"
                               if args.multiscale_dynamics else "track9_paired_causal_gru.wav")
     base.sf.write(wav_path, reconstructed, base.SAMPLE_RATE, subtype="PCM_16")
     summary = {"task": "PS-20261021-10", "round": experiment_round,
-               "kind": ("paired_hubert_world_causal_gru_multiscale"
+               "kind": ("paired_hubert_world_causal_gru_group_balanced"
+                        if args.group_balanced_dynamics else
+                        "paired_hubert_world_causal_gru_multiscale"
                         if args.multiscale_dynamics else "paired_hubert_world_causal_gru"), "parameters":
                sum(parameter.numel() for parameter in model.parameters()),
                "best": best, "steps_completed": history[-1]["step"],
@@ -234,8 +261,11 @@ def main() -> None:
                "played": False, "board_touched": False}
     (args.output / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n",
                                               encoding="utf-8")
-    candidate = ("track9_paired_causal_gru_multiscale" if args.multiscale_dynamics
-                 else "track9_paired_causal_gru")
+    if args.group_balanced_dynamics:
+        summary["dynamic_loss"]["reduction"] = "equal_mean_of_spectrum_log_f0_energy_aperiodicity"
+    candidate = ("track9_paired_causal_gru_group_balanced" if args.group_balanced_dynamics else
+                 "track9_paired_causal_gru_multiscale" if args.multiscale_dynamics else
+                 "track9_paired_causal_gru")
     manifest_out = {"inputs": [{"role": "source", "path": "人物音频资料/女声/Track 9.wav"}],
                     "outputs": [{"candidate": candidate,
                                  "path": str(wav_path.relative_to(ROOT)).replace("\\", "/")}]}
