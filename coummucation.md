@@ -1484,3 +1484,32 @@
 - 止损：若两个 CFG 都未降低泄漏或造成 CER 失败，本路线立即停止，不追加更高 CFG；既有 1.70 已有内容塌缩证据。
 - 限制：电脑端离线开发，不播放、不改板上 v23；Remote-PS-C 不负责验证本方案。
 - 下一责任方：Hardware-A / Codex 完成 CFG 筛选并按结果提交。
+
+### [PS-20261025-20] Remote-PS-C HuBERT→目标 FARGAN 电脑端上限认领
+- 日期：2026-10-26
+- 角色/Agent：Remote-PS-C / Codex
+- 状态：CLAIMED（正在恢复可复现资产；尚未运行训练或音质评估）
+- 基准提交：`ba48816b449a256bc5a331476999831b3ee444f6`（已执行 `git pull --rebase origin main`；任务分支 `agent/ymheee/PS-20261025-20`）
+- 本轮目标：仅评估 HuBERT teacher→目标 FARGAN 电脑端质量上限；使用项目固定 HuBERT Base（期望 SHA-256 `cc8c20f4b90a520757260197a3ff2505705a7adbd20ad9eeaa4e1a9b38442ef5`）、批准的 Fixed-Male 1–5 和女声 Track 5–9，不改变切分或五项门槛。
+- 修改路径：`coummucation.md`（本认领记录）。
+- 复现命令：待固定版本资产校验和运行环境准备后补充。
+- 量化结果：尚未运行训练、推理或指标评估；当前无质量分数。
+- 资产/限制：D 盘可用空间约 396 GB，机器配有 RTX 4060 8 GB；当前运行时缺少 PyTorch。仅使用本地电脑，不进行板卡、Vivado、RTL、PL、实时或真人试听测试。
+- PR 协调：开放 PR #9 也修改 `coummucation.md`，但与本任务分工不同；本分支只追加本任务记录，推送前将从最新 `main` 更新并检查差异。
+- 报告链接：首轮资产恢复/评测完成后新增正式结果报告。
+- 模型产物：无。
+- 提交或 PR：暂未提交；本记录只在任务分支本地，等待资产恢复和评测结果。
+- 下一责任方：Remote-PS-C 按固定来源/SHA 准备 HuBERT 与 FARGAN 运行链，随后执行电脑端五门评测。
+
+### [PS-20261025-20] Remote-PS-C 资产恢复阻塞记录
+- 日期：2026-10-26
+- 角色/Agent：Remote-PS-C / Codex
+- 状态：BLOCKED（网络连接与运行资产不足，未进入训练或评估）
+- 基准提交：`ba48816b449a256bc5a331476999831b3ee444f6`
+- 检查：初次 fetch 使用失效的本机代理失败；用命令级直连 `git -c http.proxy= fetch origin --prune` 成功，确认 `origin/main` 仍为 PR #10 合并提交 `ba48816b449a256bc5a331476999831b3ee444f6`。只读抓取并检查 PR #9；它也修改共享 `coummucation.md`，提交前须保留双方内容。
+- 环境：`build/generated/remote_ps_c_env` 使用 Python 3.12.14；按项目锁文件安装全部依赖，PyTorch/torchaudio 使用官方 `2.7.1+cpu` wheel，CUDA 不可用。
+- 资产：批准的 Fixed-Male 1～5、目标 Track 5～9 WAV 均在仓库。Pinned HuBERT `pytorch_model.bin` 已下载且 SHA-256 为 `cc8c20f4b90a520757260197a3ff2505705a7adbd20ad9eeaa4e1a9b38442ef5`；WeSpeaker ONNX SHA-256 与清单一致（`e7584940aeac8d5512d875e58ce6c09ba4ddad65d8128e1dac0d93aadd087ebb`）。FARGAN 官方模型/源码及 UTMOS、Whisper 权重下载受连接重置或超时影响，尚缺；旧训练语料/配对特征清单也不在本 checkout。未使用替代模型或缓存。
+- 复现命令与逐项结果：见 `report/ps_20261025_20_asset_recovery_blocked_20261026.md`。
+- 量化结果：未训练、未推理、未运行五项指标；无模型质量结论。未播放或录制音频，未接触板卡/Vivado/RTL/PL。
+- 下一步恢复条件：补齐并校验官方 FARGAN、UTMOS、Whisper 与 teacher/配对训练语料；然后按既定冻结切分运行电脑端评测。
+- 下一责任方：Remote-PS-C。
