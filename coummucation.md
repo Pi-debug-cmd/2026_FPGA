@@ -768,6 +768,18 @@
 - 报告链接：`report/source_prosody_preflight_round32_20261025.md`、`report/source_prosody_preflight_round32_20261025.json`。
 - 下一责任方：Hardware-A / Codex 提交预检后另行认领源韵律条件训练。
 
+### [PS-20261021-10] 显式源韵律条件训练 Round 33 认领
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`a7aab4e`
+- 唯一变量：在 Round 28 的 96 维 HuBERT-PCA 输入后追加训练集归一化的源 log-F0、VUV、log-energy 三维特征，输入变为 99 维。
+- 冻结项：Round 25 配对数据与说话人切分、Round 28 的 `0.75 × mean(lag 1/2/4)` 损失、双层 192 GRU、25% 锚点、batch/crop/学习率/早停及评估器均不变。
+- 防泄漏：源韵律归一化只拟合 192 训练对；验证不参与统计或选参；Track 9 只在冻结 checkpoint 后运行一次；固定男性录音本轮不使用。
+- 判定：目标自重建身份 `≥0.45`、P10 `≥0.35`、UTMOS `≥2.30`、CER `≤0.15`；男性泄漏门不适用于目标自重建。
+- 限制：离线特征仍非因果，不播放、不触碰板卡；通过客观门后才进入因果特征一致性和固定男性验证。
+- 下一责任方：Hardware-A / Codex 实现并运行单变量训练，失败也提交。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
