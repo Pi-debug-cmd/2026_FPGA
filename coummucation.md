@@ -947,6 +947,20 @@
 - 限制：离线源韵律非因果；不播放、不使用固定男性输入、不触碰板卡。
 - 下一责任方：Hardware-A / Codex 实现并运行本轮，失败也提交。
 
+### [PS-20261021-10] 半权 F0 方差匹配训练 Round 40 结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED_MIXED_NO_MATERIAL_GAIN
+- 基准提交：`819e231`
+- 修改路径：`build/train_paired_hubert_world_gru_round26_20261025.py`、`report/paired_hubert_world_half_f0_variance_round40_20261025.{md,json}`、`coummucation.md`。
+- 训练：478347 参数不变；第 1200 步验证最佳 `0.619410`，第 2000 步早停并恢复，因果前缀差异 `0.0`。
+- Track 9：**0.6969/0.6686/0.1350/1.8639/0.0978**（身份/P10/男性质心余弦/UTMOS/CER）。目标自重建不应用泄漏门；UTMOS 失败。
+- 对比 Round37：身份 `+0.0015`、UTMOS `+0.0023`、CER `-0.0109`，但 P10 `-0.0108`，验证总目标退步 `+0.001840`；无材料级净收益。
+- 判定：拒绝 Round40，停止 F0 方差权重插值并保留 Round37 当前最佳。checkpoint `d9220b7b…c3b734`，WAV `dd66251d…ce811`。
+- 限制：未播放、未使用固定男性输入；离线源韵律非因果，板卡保持关机。
+- 报告链接：`report/paired_hubert_world_half_f0_variance_round40_20261025.md`、`report/paired_hubert_world_half_f0_variance_round40_20261025.json`。
+- 下一责任方：Hardware-A / Codex 提交失败轮次；下一轮不得继续扫描 F0 方差权重，应改查 UTMOS 短板的其他可解释因素。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）

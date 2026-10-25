@@ -1,0 +1,43 @@
+{
+  "task": "PS-20261021-10",
+  "round": 40,
+  "date": "2026-10-25",
+  "status": "REJECTED_MIXED_NO_MATERIAL_GAIN",
+  "single_variable": "weight log-F0 variance at 0.5 while spectrum, energy, and aperiodicity remain at 1.0; normalize by 3.5",
+  "parameters": 478347,
+  "best_step": 1200,
+  "steps_completed": 2000,
+  "validation_total": 0.6194102019071579,
+  "causal_prefix_max_abs": 0.0,
+  "objective": {
+    "identity": 0.6969033609984662,
+    "identity_p10": 0.6685909603816812,
+    "male_centroid_cosine": 0.13497146526227882,
+    "utmos": 1.8638983070850372,
+    "cer": 0.09782608695652174
+  },
+  "target_reconstruction_gates": {
+    "identity": true,
+    "identity_p10": true,
+    "utmos": false,
+    "cer": true
+  },
+  "male_leakage_gate_applicable": false,
+  "delta_from_round37": {
+    "identity": 0.0015388615467453,
+    "identity_p10": -0.0108362289315419,
+    "male_centroid_cosine": 0.00002040111764689,
+    "utmos": 0.0023020207881927,
+    "cer": -0.0108695652173913,
+    "validation_total": 0.0018403381109238
+  },
+  "decision": "reject, stop F0 variance-weight interpolation, and retain Round 37",
+  "checkpoint_sha256": "d9220b7be2cb21e80c8144b2d5bcf9be2383c04959d0e1c12a20ec0ea9c3b734",
+  "reconstruction_sha256": "dd66251df440125d69c055f4b61c6f3f7f079abbed96a2eb20bd8f0c104ce811",
+  "inference_cost_changed": false,
+  "offline_source_prosody_noncausal": true,
+  "fixed_male_evaluated": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}
