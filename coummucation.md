@@ -1019,6 +1019,20 @@
 - 限制：离线源韵律非因果；不播放、不使用固定男性输入、不触碰板卡，板卡保持关机。
 - 下一责任方：Hardware-A / Codex 实现并训练本轮，失败也提交。
 
+### [PS-20261021-10] 有声 log-F0 辅助回归 Round 43 结果
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED_BEST_SO_FAR
+- 基准提交：`d0c5fc0`
+- 修改路径：`build/train_paired_hubert_world_gru_round26_20261025.py`、`report/paired_hubert_world_voiced_f0_round43_20261025.{md,json}`、`coummucation.md`。
+- 训练：478347 参数不变；第 1200 步验证最佳 `0.622741`，有声 F0 辅助误差 `0.092130`；第 2000 步早停并恢复，因果前缀差异 `0.0`。
+- Track 9：**0.7054/0.6844/0.1424/1.9519/0.0978**（身份/P10/男性质心余弦/UTMOS/CER）。目标自重建不应用泄漏门；UTMOS 失败。
+- 对比 Round37：身份 `+0.0101`、P10 `+0.0050`、UTMOS `+0.0903`、CER `-0.0109`；全部适用指标改善，更新为当前配对 WORLD 最佳。
+- 哈希：checkpoint `4acf292f…15b6b`，WAV `45e74e06…94149`；推理参数/MAC/延迟不变。
+- 限制：离线源韵律非因果；未播放、未使用固定男性输入，板卡保持关机。
+- 报告链接：`report/paired_hubert_world_voiced_f0_round43_20261025.md`、`report/paired_hubert_world_voiced_f0_round43_20261025.json`。
+- 下一责任方：Hardware-A / Codex 提交本轮；下一轮先在独立验证句审计 F0 误差与 UTMOS 是否同步改善，不直接扫描更大权重。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
