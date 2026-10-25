@@ -861,6 +861,17 @@
 - 报告链接：`report/dynamic_variance_consistency_round36_20261025.md`、`report/dynamic_variance_consistency_round36_20261025.json`。
 - 下一责任方：Hardware-A / Codex 提交预检后另行认领方差匹配训练。
 
+### [PS-20261021-10] 动态方差匹配训练 Round 37 认领
+- 日期：2026-10-25
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`02c8c55`
+- 唯一变量：在 Round 33 总损失上增加 `0.05 × mean_group((log RMS(Δpred)-log RMS(Δtarget))²)`，四组为谱/log-F0/能量/AP，Δ 仅用 lag 1。
+- 冻结项：99 维源韵律输入、478347 参数双层 192 GRU、Round 25 数据与切分、25% 锚点、Round 28 多尺度项、优化器、早停和评估器均不变。
+- 判定：仍只按 8 条独立验证句选 checkpoint，冻结后 Track 9 运行一次；目标自重建身份/P10/UTMOS/CER 门不变。
+- 限制：离线源韵律非因果；不播放、不使用固定男性输入、不触碰板卡。方差项只用于训练，推理成本不变。
+- 下一责任方：Hardware-A / Codex 实现并运行单变量训练，失败也提交。
+
 ### [PS-20261021-10] 多轨提示 CFG 增强 Round 14 结果
 - 日期：2026-10-24
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
