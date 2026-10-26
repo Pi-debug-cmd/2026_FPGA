@@ -1548,3 +1548,13 @@
 - 量化结果：UTMOS 权重 411179119 字节，SHA 与项目清单完全一致；Whisper-small revision 973afd24965f72e36ca33b3055d56a652f456b4d 仍只有未完成缓存片段。没有训练、推理或五项评分。
 - 限制：配对 HuBERT→FARGAN 训练特征及清单缺失，Whisper 评估器未完整恢复；电脑端质量结论无。未播放/录音、板卡、Vivado、RTL、PL、实时或真人试听。
 - 下一责任方：Remote-PS-C 恢复批准的配对训练资产与 Whisper 固定修订权重，之后运行电脑端五门评测。
+### [PS-20261025-20] Whisper-small 固定版本恢复及加载检查
+- 日期：2026-10-26
+- 角色/Agent：Remote-PS-C / Codex
+- 状态：BLOCKED（FARGAN、UTMOS、Whisper 权重已恢复；配对训练语料/清单仍缺）
+- 基准提交：ba48816b449a256bc5a331476999831b3ee444f6；分支 agent/ymheee/PS-20261025-20；PR #11。
+- 修改路径：report/ps_20261025_20_fargan_asset_recovery_20261026.md、coummucation.md。
+- 复现：`$env:HF_HOME='D:\fpga\.git-repair\build\generated\remote_ps_c_assets\hf_home'; $env:HF_HUB_OFFLINE='1'; build/generated/remote_ps_c_env/Scripts/python.exe -c "from transformers import WhisperProcessor,WhisperForConditionalGeneration; p='D:/fpga/.git-repair/build/generated/remote_ps_c_assets/hf_home/hub/models--openai--whisper-small/snapshots/973afd24965f72e36ca33b3055d56a652f456b4d'; q=WhisperProcessor.from_pretrained(p,local_files_only=True); m=WhisperForConditionalGeneration.from_pretrained(p,local_files_only=True); print(len(q.tokenizer),sum(x.numel() for x in m.parameters()))"`
+- 量化结果：Whisper revision `973afd24965f72e36ca33b3055d56a652f456b4d`，11/11 需要文件齐全，权重 966995080 字节；离线加载成功，词表 51865，参数 241734912。只验证加载，不转写/不报 CER。固定 FARGAN 训练 corpus、expanded corpus 与原始训练 corpus 路径均不存在。
+- 限制：缺少批准的 HuBERT→目标 FARGAN 配对训练特征及 manifest；没有训练、推理或五项评分，也无候选质量结论。未播放/录音、板卡、Vivado、RTL、PL、实时或真人试听。
+- 下一责任方：Remote-PS-C 待恢复有来源和 SHA 的配对训练语料后，继续电脑端方案训练与客观评测。

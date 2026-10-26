@@ -36,3 +36,9 @@ The pinned UTMOS22 Strong weight was downloaded from the exact URL in `交接/�
 | `utmos22_strong_step7459_v1.pt` | 411179119 | `38aa51ab79e2a4e09a1449758a4b37e9cbb2e8235a49662a732d33a9ba1e9bff` |
 
 The digest and byte count match the project manifest. Whisper-small remains incomplete. Its frozen revision is `973afd24965f72e36ca33b3055d56a652f456b4d`; existing local Hugging Face entries are `.incomplete` and are not accepted as an evaluator. The approved paired HuBERT/target-FARGAN training feature corpus and manifest remain absent. No training, inference, or five-gate evaluation has run.
+
+## Whisper-small restored and load-tested
+
+Downloaded the project-pinned `openai/whisper-small` revision `973afd24965f72e36ca33b3055d56a652f456b4d` into the ignored D: Hugging Face cache. All 11 requested files are present; `model.safetensors` is 966995080 bytes. With `HF_HUB_OFFLINE=1`, local-only loading completed using the project Python environment: tokenizer vocabulary 51865, model vocabulary 51865, 241734912 parameters. This verifies local asset completeness/loading only; no source or candidate transcription and no CER score was generated.
+
+The pinned FARGAN paired feature corpus, expanded corpus, and original training corpus manifests are absent both at the repository's archived `交接/核心材料/board_budget_20261005/` paths and the recorded legacy `D:\Tools_FPGA\workspace\voice_conversion_zynq7020\` tree. The HuBERT-to-target FARGAN mapper therefore remains untrainable from the available approved assets. Status remains `BLOCKED`; no data substitution was made.
