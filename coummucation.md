@@ -1664,3 +1664,15 @@
 - 报告/路径：`report/ps_20261025_20_model_archive_local_smoke_20261026.md`、`report/model_delivery_PS-20261025-20_hubert_fargan_v1_20261026.json`、原始 smoke TXT、状态/日志。完整复现命令与全部文件 SHA 在报告/清单中。
 - 阻塞：仓库实际公开（API `private=false`），与 ARTIFACTS.md:18/交付说明:39 的私有 Release 要求冲突。未上传附件或更改仓库可见性/规则；已请求用户指定允许的私有交付位置或明确允许当前公开仓库发布。当前仅本地归档复现，未声称 GitHub 下载或跨电脑交付通过。
 - 下一责任方：Remote-PS-C 在用户明确交付位置后发布此精确包并从空目录下载推理，提交独立接收记录。质量失败仍阻止任何试听/硬件阶段。无播放/录音/真人/硬件/实时验收。
+
+
+### [PS-20261025-20] 用户授权公开 Release 与 GitHub 干净下载复现
+- 日期：2026-10-26；角色：Remote-PS-C / Codex；基准分支提交 `58f85c02c16d404a11c03cd359887e1ee337e5dc`；模型源码 `94d2aa2237d9053d76616f22bc166ac1b7f92437`。
+- 状态：交付 VERIFIED_GITHUB_DOWNLOAD_AND_INFERENCE；质量仍 REJECTED（泄漏/CER 失败），不进入 WAIT_LOCAL_TEST。
+- 授权：用户明确回复“授权在当前公开仓库发布完整模型包”。此轮按该授权解决此前私有 Release 约束冲突；仓库仍公开，没有改任务分配、规则或可见性。
+- 资产：https://github.com/Pi-debug-cmd/2026_FPGA/releases/tag/model-PS-20261025-20-hubert-fargan-v1；附件 `PS-20261025-20_hubert_fargan_v1_windows_cpu.zip`，198734997 bytes，SHA-256 `9532fe32d5ab707a51662b224f82a95abba901d9fc4fcc4276cedd0cf2ca4e6a`；GitHub server digest/标签目标/下载大小与 SHA/466 内部文件全核对。
+- 测试：空 github-download 目录从 GitHub 下载，download-code 新干净精确检出+空模型目录解包，独立 venv（复制锁定依赖，未测试新 pip 安装），文件访问审计无原生成目录访问。相对路径 infer 命令退出 0；16kHz mono PCM16/291200 samples，输出 SHA `ee548f1aef80fc9a032e3557b08090091d1bb91f05a512b20b1b654ed56af109` 与原评价相同。
+- 量化：推理 2.734 秒，RTF 0.150219780，封装耗时 8.387427 秒，Python 峰值工作集 1111740416 bytes/pagefile 2381811712 bytes（不含 native 子进程）。原五门 0.778814512/0.751711670/0.252929151/2.418009599/0.235294118；WAV 完全相同故未重复评分。
+- 改动/复现：`report/ps_20261025_20_github_model_receipt_20261026.md`（完整下载/校验/环境/推理命令）、同名 JSON、原始 smoke TXT、model_delivery JSON（保留历史本地测试）、状态/工作日志、`coummucation.md`。
+- 限制：同一电脑隔离接收测试，不是第二台实体电脑实测；非因果离线候选，电脑速度/内存不代表板端。男性 5/Track9 保持锁定。无播放/录音/试听/板卡/Cortex-A9/Vivado/RTL/PL/实时验收。
+- 下一责任方：Remote-PS-C 保存失败 v1 与完整交付证据；Hardware-A/B 不据此启动试听或板测，后续仍须独立通过全部客观门。

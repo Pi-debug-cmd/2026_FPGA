@@ -105,3 +105,5 @@
 2026-10-26 Remote-PS-C / PS-20261025-20：HuBERT→目标 FARGAN v1 首轮电脑端筛选 **REJECTED**。身份 0.778815/P10 0.751712/UTMOS 2.418010 达标，源泄漏 0.252929、CER 0.235294 未达标；未启动试听/板测。辅助 192/8 训练选择检查点后仅评价固定男性 4，男性 5/Track 9 保持锁定。证据：`report/ps_20261025_20_hubert_fargan_v1_20261026.md`；完整数值、代码/资产 SHA 与历史见同名 JSON。模型交付接收测试另轮记录。
 
 2026-10-26 Remote-PS-C / PS-20261025-20：修复 portable CLI 路径后，完整模型归档 198734997 bytes/466 文件在新干净检出本地 smoke PASS，输出 SHA 与评价 WAV 相同。质量仍 REJECTED；线上交付 BLOCKED：仓库 API 显示公开，与私有 Release 约束冲突，尚未上传模型。证据：`report/ps_20261025_20_model_archive_local_smoke_20261026.md` 及 model_delivery JSON；下一步仅在交付位置明确后做线上下载复现。
+
+2026-10-26 Remote-PS-C / PS-20261025-20：用户明确授权当前公开仓库发布完整模型包后，已发布 `model-PS-20261025-20-hubert-fargan-v1`（源码 94d2aa2、198734997 bytes、SHA 9532fe32d5ab707a51662b224f82a95abba901d9fc4fcc4276cedd0cf2ca4e6a），GitHub 空目录重新下载/466 文件校验/干净检出推理 PASS，输出 SHA 与原评价完全相同。交付 VERIFIED，质量仍 REJECTED（泄漏/CER），不进入 WAIT_LOCAL_TEST。完整接收证据和复现命令：`report/ps_20261025_20_github_model_receipt_20261026.md`；保留此前阻塞历史，未改规则/可见性/分工，无试听或硬件验收。
