@@ -640,3 +640,11 @@ ps-opt 把非周期最小相位优化移植进流式路径（改造 synthesisrea
 2026-10-26 Remote-PS-C / PS-20261025-20：用户明确授权当前公开仓库发布完整模型包后，已发布 `model-PS-20261025-20-hubert-fargan-v1`（源码 94d2aa2、198734997 bytes、SHA 9532fe32d5ab707a51662b224f82a95abba901d9fc4fcc4276cedd0cf2ca4e6a），GitHub 空目录重新下载/466 文件校验/干净检出推理 PASS，输出 SHA 与原评价完全相同。交付 VERIFIED，质量仍 REJECTED（泄漏/CER），不进入 WAIT_LOCAL_TEST。完整接收证据和复现命令：`report/ps_20261025_20_github_model_receipt_20261026.md`；保留此前阻塞历史，未改规则/可见性/分工，无试听或硬件验收。
 
 2026-10-26 Remote-PS-C / PS-20261025-20：冻结 v1 完成配对标签/能量时移/模型动态诊断，800 项资产 SHA、200 个缓存 target 全匹配；400 次重提取整体 MAE 小但音高/周期相关有局部极值，完整逐对证据未隐藏。辅助 validation 8 对/4616 帧上归一化 MAE 0.452730745 vs 训练均值 0.806939065；高阶倒谱及音高一阶差分 RMS 比 teacher 约 0.23–0.33。能量时移最大 20ms 仅能描述轮廓，不证明音素对齐或失败根因。诊断脚本、完整 JSON/MD/TXT 和复现准备步骤进入本轮提交；初始 WinError623 与输入类型错误记录保留，最终 host 运行退出 0、26.734 秒。没有新权重、训练、五门评分或验收集读取；v1 质量仍 REJECTED，无试听/板卡/Cortex-A9/Vivado/RTL/PL/实时验收。下一单变量候选可调整差分损失权重，尚未执行。
+
+
+### [PS-20261025-20] v2 delta=1.0 单变量结果
+- 日期：2026-10-26；角色：Remote-PS-C / Codex；状态：REJECTED；基准 e8bb8e016caf987ad0f2dc99521794c97b8fd192；main 9c42263ea3aa12898ad451f3c00915e816f039c4；开放 PR #9/#11/#13 无本任务冲突。
+- 路径/复现：build/remote_ps_c_hubert_fargan_v2.py train --cache-root build/generated/remote_ps_c_hubert_fargan_v1，然后 infer，再运行原 strict evaluator；report/ps_20261025_20_hubert_fargan_v2_20261026.md/JSON/TXT 保存完整命令/日志/转写/哈希。共享入口只增加版本输出名与显式缓存复用；状态/工作日志追加。
+- 唯一训练变量：delta loss 0.25→1.0；其余配置逐项相同，200 缓存 SHA 已核验，重算统计数组与 v1 完全相同；v1 权重/统计/缓存不变。辅助 validation 最优step400、停止step1200、损失0.2605001032、272.828秒；跨权重总损失不可直接比较。
+- 一次 Male4 原五门：身份 0.778145609 / P10 0.755978229 / 泄漏 0.255133692 / UTMOS 2.574109713 / CER 0.235294118；通过项 {'identity': True, 'identity_p10': True, 'leakage': False, 'utmos': True, 'cer': False}。输出SHA 9e7f37895e8188b96909edad73b140fbcf5e7a14ebd3c1202605a27b339745e7；mapper 610f592539fd51420409ca413e04232f3cd20da57f885957d050c6157569791c。
+- 限制/下一责任方：仅电脑端；辅助192train/8validation，未拟合Fixed-Male1–3；Male5/Track9锁定；无参数扫描/门槛更改/录音/播放/试听/板卡/ARM/Vivado/RTL/PL/实时验收。Remote-PS-C 完成版本化模型归档与干净下载；未全过不进入 WAIT_LOCAL_TEST，不给Hardware-A/B启动板测。

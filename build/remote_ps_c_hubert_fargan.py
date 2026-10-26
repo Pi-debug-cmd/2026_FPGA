@@ -38,6 +38,8 @@ CONFIG = {"seed": 20261026, "pca_dim": 96, "hidden": 192, "layers": 2,
           "bidirectional": True, "crop_frames": 192, "batch": 8,
           "steps": 2000, "check_every": 100, "patience_checks": 8,
           "learning_rate": 0.001, "delta_weight": 0.25}
+DEFAULT_OUTPUT = GENERATED / "remote_ps_c_hubert_fargan_v1"
+CANDIDATE = "Remote-PS-C_HuBERT_BiGRU_FARGAN_v1"
 
 
 def sha256(path: Path) -> str:
@@ -151,10 +153,11 @@ def train(args) -> None:
     started = time.monotonic()
     torch.manual_seed(CONFIG["seed"])
     rng = np.random.default_rng(CONFIG["seed"])
-    manifest = json.loads((args.output / "cache_manifest.json").read_text(encoding="utf-8"))
+    cache_root = args.cache_root or args.output
+    manifest = json.loads((cache_root / "cache_manifest.json").read_text(encoding="utf-8"))
     data = {split: [] for split in ("train", "validation")}
     for row in manifest["records"]:
-        path = args.output / "cache" / row["cache"]
+        path = cache_root / "cache" / row["cache"]
         if sha256(path) != row["cache_sha256"]:
             raise ValueError("cache SHA mismatch")
         with np.load(path) as item:
@@ -210,7 +213,7 @@ def train(args) -> None:
             if validation < best_loss:
                 best_loss, best_step = validation, step
                 torch.save({"state_dict": model.state_dict(), "config": CONFIG,
-                            "cache_manifest_sha256": sha256(args.output / "cache_manifest.json"),
+                            "cache_manifest_sha256": sha256(cache_root / "cache_manifest.json"),
                             "step": step}, args.output / "mapper.pt")
             if step - best_step >= CONFIG["patience_checks"] * CONFIG["check_every"]:
                 break
@@ -270,7 +273,7 @@ def infer(args) -> None:
     save_json(args.output / "inference.json", summary)
     save_json(args.output / "evaluation_manifest.json", {
         "inputs": [{"role": "source", "path": source.relative_to(ROOT).as_posix()}],
-        "outputs": [{"candidate": "Remote-PS-C_HuBERT_BiGRU_FARGAN_v1",
+        "outputs": [{"candidate": CANDIDATE,
                      "path": output.relative_to(ROOT).as_posix()}]})
     print(json.dumps(summary, indent=2))
 
@@ -279,7 +282,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("stage", choices=("cache", "train", "infer"))
     parser.add_argument("--assets", type=Path, default=GENERATED / "remote_ps_c_assets")
-    parser.add_argument("--output", type=Path, default=GENERATED / "remote_ps_c_hubert_fargan_v1")
+    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--cache-root", type=Path, help="reuse a SHA-verified cache for training")
     parser.add_argument("--native", type=Path, default=GENERATED / "remote_ps_c_native/fargan_probe_host.exe")
     args = parser.parse_args()
     args.assets = args.assets.resolve()

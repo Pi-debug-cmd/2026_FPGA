@@ -1,0 +1,45 @@
+
+=== train ===
+{"step": 1, "train_loss": 0.5358725786209106, "validation_loss": 0.5322311818599701, "elapsed_seconds": 4.0310000000026776}
+{"step": 100, "train_loss": 0.26986318826675415, "validation_loss": 0.29365039616823196, "elapsed_seconds": 26.0}
+{"step": 200, "train_loss": 0.2570952773094177, "validation_loss": 0.2741958983242512, "elapsed_seconds": 47.85900000001129}
+{"step": 300, "train_loss": 0.23625065386295319, "validation_loss": 0.2646703254431486, "elapsed_seconds": 69.875}
+{"step": 400, "train_loss": 0.2205742746591568, "validation_loss": 0.26050010323524475, "elapsed_seconds": 91.88999999999942}
+{"step": 500, "train_loss": 0.20920953154563904, "validation_loss": 0.2607913464307785, "elapsed_seconds": 113.82800000000861}
+{"step": 600, "train_loss": 0.1944781243801117, "validation_loss": 0.2610604241490364, "elapsed_seconds": 136.28100000000268}
+{"step": 700, "train_loss": 0.1915358603000641, "validation_loss": 0.2671656459569931, "elapsed_seconds": 159.42200000000594}
+{"step": 800, "train_loss": 0.17327359318733215, "validation_loss": 0.26427413523197174, "elapsed_seconds": 184.8590000000113}
+{"step": 900, "train_loss": 0.1794862002134323, "validation_loss": 0.26445565931499004, "elapsed_seconds": 206.92200000000594}
+{"step": 1000, "train_loss": 0.18068543076515198, "validation_loss": 0.2686600498855114, "elapsed_seconds": 228.65600000000268}
+{"step": 1100, "train_loss": 0.18476057052612305, "validation_loss": 0.26989316940307617, "elapsed_seconds": 250.81200000000536}
+{"step": 1200, "train_loss": 0.16485920548439026, "validation_loss": 0.26934322714805603, "elapsed_seconds": 272.7810000000027}
+
+=== infer ===
+{
+  "samples": 291200,
+  "peak": 0.488525390625,
+  "rms": 0.070537006879904,
+  "sha256": "9e7f37895e8188b96909edad73b140fbcf5e7a14ebd3c1202605a27b339745e7",
+  "clipping_fraction": 0.0,
+  "task": "PS-20261025-20",
+  "source_sha256": "f4a026e5c97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c",
+  "source_samples": 291200,
+  "frames": 1820,
+  "inference_seconds": 2.4060000000026776,
+  "rtf_host_full_chain": 0.13219780219794933,
+  "mapper_sha256": "610f592539fd51420409ca413e04232f3cd20da57f885957d050c6157569791c",
+  "native_sha256": "0e5eb4d457741820564d4397e0b69f8dd58b25c896259bb66d8e84fb88a3dc14",
+  "male5_used": false,
+  "target_track9_used": false,
+  "played": false,
+  "board_touched": false
+}
+
+=== evaluate ===
+D:\fpga\.git-repair\build\generated\remote_ps_c_env\Lib\site-packages\torch\nn\utils\weight_norm.py:143: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+You have passed task=transcribe, but also have set `forced_decoder_ids` to [[1, None], [2, 50359]] which creates a conflict. `forced_decoder_ids` will be ignored in favor of task=transcribe.
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Remote-PS-C_HuBERT_BiGRU_FARGAN_v2_delta1 identity=0.7781 identity_p10=0.7560 leakage=0.2551 leakage_window_mean=0.2434 leakage_aggregate=0.2551 utmos=2.5741 cer=0.2353 pass=False
+SELECTED Remote-PS-C_HuBERT_BiGRU_FARGAN_v2_delta1
+REPORT build\generated\remote_ps_c_hubert_fargan_v2\evaluation.json

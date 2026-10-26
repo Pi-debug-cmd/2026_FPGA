@@ -1692,3 +1692,18 @@
 - 模型结果：冻结辅助 validation 8 对/4616 帧，归一化 MAE 0.452730745 vs 训练均值基线 0.806939065；20 维 MSE 均优于常数基线。维度 14–18 的差分 RMS 比 teacher 为 0.266/0.270/0.329/0.228/0.263，提示动态偏弱，但未证明这是 CER/泄漏根因，也不能排除 teacher 分析抖动。最终退出 0、26.734 秒；此前 WinError623 与诊断类型错误已保留原始失败记录并修正执行/输入类型。
 - 限制：没有新权重、训练或新五门评分；原身份/P10/泄漏/UTMOS/CER 仍 0.778814512/0.751711670/0.252929151/2.418009599/0.235294118，泄漏/CER 失败。未读取 Fixed-Male/目标 WAV，Male5/Track9 锁定；无试听/硬件/实时验收，非 WAIT_LOCAL_TEST。
 - 下一责任方：Remote-PS-C；下一候选可只改 delta loss 权重 0.25→1.0，沿用其余训练规则，在辅助 validation 选 checkpoint 后仅做一次 Male4 原口径筛选；该候选本轮尚未训练。Hardware-A/B 不据此进入板测。
+
+### [PS-20261025-20] v2 单变量 delta=1.0 实验认领
+- 日期：2026-10-26；角色：Remote-PS-C / Codex；状态：CLAIMED；基准 e8bb8e016caf987ad0f2dc99521794c97b8fd192；main 9c42263ea3aa12898ad451f3c00915e816f039c4。已 fetch 并核对开放 PR #9/#11/#13，无本任务冲突；保留已发布历史，不 rebase/force push。
+- 假设/范围：只把一阶时间差分 SmoothL1 权重从 0.25 调到 1.0，检验动态监督是否改善；其余数据切分、seed、PCA、结构、优化器、检查点选择、五项门槛不变。200 份既有缓存按 SHA 校验复用；v1 权重/统计/Release 不覆盖。
+- 路径/复现：build/remote_ps_c_hubert_fargan.py 最小共享入口调整；新增 build/remote_ps_c_hubert_fargan_v2.py；train --cache-root build/generated/remote_ps_c_hubert_fargan_v1 后 infer；build/evaluate_seed_fixed_male_strict_20261024.py 对 v2 evaluation_manifest.json 仅筛选一次。生成物进入 build/generated/remote_ps_c_hubert_fargan_v2/；正式报告 report/ps_20261025_20_hubert_fargan_v2_20261026.*。
+- 量化：待运行；只在辅助 validation 8 对选检查点，再做一次 Fixed-Male4 原五门；不因结果追加本轮参数扫描。Male5/Track9 保持锁定。
+- 限制/下一责任方：Remote-PS-C 完成此轮、失败同样提交 PR #11；未全过不进入 WAIT_LOCAL_TEST。无录音/播放/试听/板卡/Cortex-A9/Vivado/RTL/PL/实时验收，不改分配或规则。
+
+
+### [PS-20261025-20] v2 delta=1.0 单变量结果
+- 日期：2026-10-26；角色：Remote-PS-C / Codex；状态：REJECTED；基准 e8bb8e016caf987ad0f2dc99521794c97b8fd192；main 9c42263ea3aa12898ad451f3c00915e816f039c4；开放 PR #9/#11/#13 无本任务冲突。
+- 路径/复现：build/remote_ps_c_hubert_fargan_v2.py train --cache-root build/generated/remote_ps_c_hubert_fargan_v1，然后 infer，再运行原 strict evaluator；report/ps_20261025_20_hubert_fargan_v2_20261026.md/JSON/TXT 保存完整命令/日志/转写/哈希。共享入口只增加版本输出名与显式缓存复用；状态/工作日志追加。
+- 唯一训练变量：delta loss 0.25→1.0；其余配置逐项相同，200 缓存 SHA 已核验，重算统计数组与 v1 完全相同；v1 权重/统计/缓存不变。辅助 validation 最优step400、停止step1200、损失0.2605001032、272.828秒；跨权重总损失不可直接比较。
+- 一次 Male4 原五门：身份 0.778145609 / P10 0.755978229 / 泄漏 0.255133692 / UTMOS 2.574109713 / CER 0.235294118；通过项 {'identity': True, 'identity_p10': True, 'leakage': False, 'utmos': True, 'cer': False}。输出SHA 9e7f37895e8188b96909edad73b140fbcf5e7a14ebd3c1202605a27b339745e7；mapper 610f592539fd51420409ca413e04232f3cd20da57f885957d050c6157569791c。
+- 限制/下一责任方：仅电脑端；辅助192train/8validation，未拟合Fixed-Male1–3；Male5/Track9锁定；无参数扫描/门槛更改/录音/播放/试听/板卡/ARM/Vivado/RTL/PL/实时验收。Remote-PS-C 完成版本化模型归档与干净下载；未全过不进入 WAIT_LOCAL_TEST，不给Hardware-A/B启动板测。
