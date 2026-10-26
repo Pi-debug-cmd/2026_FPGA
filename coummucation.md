@@ -1749,3 +1749,17 @@
 - 止损：若两个 CFG 都未降低泄漏或造成 CER 失败，本路线立即停止，不追加更高 CFG；既有 1.70 已有内容塌缩证据。
 - 限制：电脑端离线开发，不播放、不改板上 v23；Remote-PS-C 不负责验证本方案。
 - 下一责任方：Hardware-A / Codex 完成 CFG 筛选并按结果提交。
+
+### [PS-20261021-10] 零均值源谱动态残差 Round 55 结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`47667df`
+- 修改路径：`build/apply_world_temporal_postfilter_round47_20261026.py`、`report/fixed_male_centered_residual_round55_20261026.{md,json}`、`coummucation.md`。
+- 复现命令：在 Round37 checkpoint 与 Round25 cache 上运行后滤波脚本，固定 gain1.6，参数 `--source-residual-alphas 0 0.1 0.2 0.3 0.4 --source-residual-cutoff 8 --source-relative 人物音频资料/男声/标准录音 4.wav`，再运行严格评估器。
+- 量化结果：alpha0.0/0.1/0.2/0.3/0.4 的身份为 `.6946/.6976/.7001/.7037/.7059`，泄漏为 `.1046/.1101/.1131/.1197/.1214`，UTMOS为 `2.2746/2.3042/2.3390/2.3722/2.3991`，CER为 `.2500/.2500/.3235/.3088/.2941`；五门均未全过。
+- 判定：拒绝。中心化谱残差可提高身份和自然度，但单调增加源泄漏且未修复内容；录音5保持锁定。
+- 报告链接：`report/fixed_male_centered_residual_round55_20261026.md`、`report/fixed_male_centered_residual_round55_20261026.json`。
+- 限制：只使用录音4；未使用录音5或 Track 9，未播放、未录音、未接触板卡。
+- 下一责任方：Hardware-A / Codex 在 Round56 只测试源VUV时序融合，判断清辅音边界能否降低CER且不引入音色谱。
+

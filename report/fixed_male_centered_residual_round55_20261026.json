@@ -1,0 +1,23 @@
+{
+  "task": "PS-20261021-10",
+  "round": 55,
+  "date": "2026-10-26",
+  "status": "REJECTED_CENTERED_SOURCE_RESIDUAL",
+  "source": "人物音频资料/男声/标准录音 4.wav",
+  "gain": 1.6,
+  "source_spectrum_dct_range": [8, 60],
+  "alphas": [0.0, 0.1, 0.2, 0.3, 0.4],
+  "rows": [
+    {"alpha": 0.0, "identity": 0.6946, "identity_p10": 0.6766, "leakage": 0.1046, "utmos": 2.2746, "cer": 0.2500},
+    {"alpha": 0.1, "identity": 0.6976, "identity_p10": 0.6813, "leakage": 0.1101, "utmos": 2.3042, "cer": 0.2500},
+    {"alpha": 0.2, "identity": 0.7001, "identity_p10": 0.6858, "leakage": 0.1131, "utmos": 2.3390, "cer": 0.3235},
+    {"alpha": 0.3, "identity": 0.7037, "identity_p10": 0.6916, "leakage": 0.1197, "utmos": 2.3722, "cer": 0.3088},
+    {"alpha": 0.4, "identity": 0.7059, "identity_p10": 0.6946, "leakage": 0.1214, "utmos": 2.3991, "cer": 0.2941}
+  ],
+  "selected_alpha": 0.0,
+  "all_gates_passed": false,
+  "locked_recording5_used": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

@@ -39,6 +39,8 @@ def main() -> None:
     parser.add_argument("--gains", nargs="+", type=float)
     parser.add_argument("--source-detail-alphas", nargs="+", type=float)
     parser.add_argument("--source-detail-cutoffs", nargs="+", type=int)
+    parser.add_argument("--source-residual-alphas", nargs="+", type=float)
+    parser.add_argument("--source-residual-cutoff", type=int, default=8)
     parser.add_argument("--experiment-round", type=int, default=47)
     parser.add_argument("--source-relative", default="人物音频资料/女声/Track 9.wav")
     parser.add_argument("--candidate-label")
@@ -54,6 +56,11 @@ def main() -> None:
                                        or any(cutoff < 1 or cutoff >= base.SP_DIM
                                               for cutoff in args.source_detail_cutoffs)):
         raise ValueError("cutoff sweep requires one alpha and cutoffs within spectrum DCT")
+    if args.source_residual_alphas and (any(alpha < 0.0 or alpha > 1.0
+                                             for alpha in args.source_residual_alphas)
+                                        or args.source_residual_cutoff < 1
+                                        or args.source_residual_cutoff >= base.SP_DIM):
+        raise ValueError("source residual settings are outside the supported range")
     args.output.mkdir(parents=True, exist_ok=True)
     torch.set_num_threads(4)
     checkpoint = torch.load(args.checkpoint, map_location="cpu", weights_only=False)
@@ -101,19 +108,23 @@ def main() -> None:
 
     outputs = []
     label = args.candidate_label or f"round{args.experiment_round}_non_f0_gain{str(args.gain).replace('.', '_')}"
-    if args.source_detail_cutoffs:
+    if args.source_residual_alphas:
+        variants = tuple((f"round{args.experiment_round}_source_residual{str(alpha).replace('.', '_')}",
+                          args.gain, 0.0, 20, alpha) for alpha in args.source_residual_alphas)
+    elif args.source_detail_cutoffs:
         alpha = args.source_detail_alphas[0]
         variants = tuple((f"round{args.experiment_round}_source_cutoff{cutoff}",
-                          args.gain, alpha, cutoff) for cutoff in args.source_detail_cutoffs)
+                          args.gain, alpha, cutoff, 0.0) for cutoff in args.source_detail_cutoffs)
     elif args.source_detail_alphas:
         variants = tuple((f"round{args.experiment_round}_source_detail{str(alpha).replace('.', '_')}",
-                          args.gain, alpha, 20) for alpha in args.source_detail_alphas)
+                          args.gain, alpha, 20, 0.0) for alpha in args.source_detail_alphas)
     elif args.gains:
         variants = tuple((f"round{args.experiment_round}_fixed_male_gain{str(gain).replace('.', '_')}",
-                          gain, 0.0, 20) for gain in gains)
+                          gain, 0.0, 20, 0.0) for gain in gains)
     else:
-        variants = (("round37_baseline", 1.0, 0.0, 20), (label, args.gain, 0.0, 20)) if source_is_track9 else ((label, args.gain, 0.0, 20),)
-    for name, gain, source_detail_alpha, source_detail_cutoff in variants:
+        variants = (("round37_baseline", 1.0, 0.0, 20, 0.0),
+                    (label, args.gain, 0.0, 20, 0.0)) if source_is_track9 else ((label, args.gain, 0.0, 20, 0.0),)
+    for name, gain, source_detail_alpha, source_detail_cutoff, source_residual_alpha in variants:
         filtered = continuous.copy()
         if gain != 1.0:
             for group in NON_F0:
@@ -127,6 +138,12 @@ def main() -> None:
                 (1.0 - source_detail_alpha) * features5[:, region]
                 + source_detail_alpha * source_world["output"][:, region])
             features5 = np.clip(features5, clip_lo, clip_hi)
+        if source_residual_alpha:
+            region = slice(args.source_residual_cutoff, base.SP_DIM)
+            source_block = source_world["output"][:, region]
+            source_residual = source_block - np.mean(source_block, axis=0, keepdims=True)
+            features5[:, region] += source_residual_alpha * source_residual
+            features5 = np.clip(features5, clip_lo, clip_hi)
         features5[:, VUV_INDEX] = (interpolate(probability[:, None], len(features5))[:, 0] - 0.5) * 8.0
         waveform, synthesis = base.synthesize(features5, stats)
         path = args.output / f"{name}.wav"
@@ -135,7 +152,10 @@ def main() -> None:
                         "path": str(path.relative_to(ROOT)).replace("\\", "/"),
                         "sha256": base.sha256(path), "gain": gain,
                         "source_detail_alpha": source_detail_alpha,
-                        "source_detail_cutoff": source_detail_cutoff, "synthesis": synthesis})
+                        "source_detail_cutoff": source_detail_cutoff,
+                        "source_residual_alpha": source_residual_alpha,
+                        "source_residual_cutoff": args.source_residual_cutoff,
+                        "synthesis": synthesis})
 
     baseline_bit_identical = None
     if source_is_track9:
@@ -153,6 +173,8 @@ def main() -> None:
                "gain": args.gain if not args.gains else None, "gains": list(gains),
                "source_detail_alphas": args.source_detail_alphas,
                "source_detail_cutoffs": args.source_detail_cutoffs,
+               "source_residual_alphas": args.source_residual_alphas,
+               "source_residual_cutoff": args.source_residual_cutoff,
                "checkpoint_sha256": base.sha256(args.checkpoint),
                "baseline_bit_identical": baseline_bit_identical, "outputs": outputs,
                "source_relative": args.source_relative,
