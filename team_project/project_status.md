@@ -103,3 +103,5 @@
 2026-10-26 Remote-PS-C / PS-20261025-20：已接收 main PR #12 的配对语料，独立下载校验 `PASS 200 800`；代理和 Git 凭据可用。仅资产接收通过，训练及五门评测待运行。见 `report/ps_20261025_20_corpus_receipt_20261026.md`。
 
 2026-10-26 Remote-PS-C / PS-20261025-20：HuBERT→目标 FARGAN v1 首轮电脑端筛选 **REJECTED**。身份 0.778815/P10 0.751712/UTMOS 2.418010 达标，源泄漏 0.252929、CER 0.235294 未达标；未启动试听/板测。辅助 192/8 训练选择检查点后仅评价固定男性 4，男性 5/Track 9 保持锁定。证据：`report/ps_20261025_20_hubert_fargan_v1_20261026.md`；完整数值、代码/资产 SHA 与历史见同名 JSON。模型交付接收测试另轮记录。
+
+2026-10-26 Remote-PS-C / PS-20261025-20：修复 portable CLI 路径后，完整模型归档 198734997 bytes/466 文件在新干净检出本地 smoke PASS，输出 SHA 与评价 WAV 相同。质量仍 REJECTED；线上交付 BLOCKED：仓库 API 显示公开，与私有 Release 约束冲突，尚未上传模型。证据：`report/ps_20261025_20_model_archive_local_smoke_20261026.md` 及 model_delivery JSON；下一步仅在交付位置明确后做线上下载复现。

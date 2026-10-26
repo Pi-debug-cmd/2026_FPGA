@@ -634,3 +634,5 @@ ps-opt 把非周期最小相位优化移植进流式路径（改造 synthesisrea
 2026-10-26 Remote-PS-C / PS-20261025-20：同步已合并 PR #12，独立下载配对语料并校验 `PASS 200 800`；纠正受限命令造成的代理/凭据阻塞判断。仅资产接收通过，下一步独立 HuBERT→FARGAN 训练，尚无质量分数。证据：`report/ps_20261025_20_corpus_receipt_20261026.md`。
 
 2026-10-26 Remote-PS-C / PS-20261025-20：独立冻结 HuBERT layer9→PCA96→双向 GRU→FARGAN v1 完成辅助语料训练及固定男性 4 客观筛选。五门保持原口径；身份 0.778814512、P10 0.751711670、泄漏 0.252929151、UTMOS 2.418009599、CER 0.235294118，因泄漏/CER 判 REJECTED。训练 266.703 秒、最佳 step400、18.2 秒输入本机推理 2.187 秒；未拟合男性 1～3，男性 5/Track9 未解锁。新增 host 构建/实验代码、依赖锁及完整 md/json 证据；仅给 evaluator 增加可选资产路径，未改算法或门槛。下一独立轮为失败候选 Release/干净接收复现。未播放/录音或进行任何板卡、Vivado、RTL、PL、Cortex-A9/实时验收。
+
+2026-10-26 Remote-PS-C / PS-20261025-20：portable 相对路径首测发现清单写入异常，已提交 94d2aa2 修复入口路径 resolve；修复版在新干净检出/独立 runtime/空模型目录完成本地归档 smoke。466 文件校验，输出 SHA 与原评价 WAV 完全一致，退出 0、2.563 秒推理。完成约 199MB 推理包与逐件清单，质量仍 REJECTED；仓库实际公开，线上私有 Release 交付受约束冲突阻塞，未创建 Release/上传模型/改仓库可见性。报告 `ps_20261025_20_model_archive_local_smoke_20261026.md` 及 model_delivery JSON；等待用户明确交付位置后继续线上取回。无试听/板测。

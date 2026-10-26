@@ -1654,3 +1654,13 @@
 - 测试：新建 D: receive-check 独立检出及 Python 环境，逐件验证本地包 466 项，使用 `infer --assets bundle --output bundle --native bundle/native/fargan_probe_host.exe`。模型推理已生成音频，但输出清单写入时因相对 `--output` 与绝对 ROOT 的 `relative_to` 不兼容而异常退出；此命令首测失败，不冒称交付通过。
 - 修改：`build/remote_ps_c_hubert_fargan.py` 将 CLI 资产/输出/程序路径在入口统一 resolve；不改模型、统计、音频或评价计算。代码编译和绝对默认路径已有结果仍有效；随后在新干净检出重新测试该相对路径命令。
 - 报告：`report/ps_20261025_20_portable_first_smoke_20261026.md`；下一责任方 Remote-PS-C 修复后重打包并复测，线上交付位置等待用户决定。未播放/录音/触碰硬件。
+
+### [PS-20261025-20] 修复版完整归档与干净目录本地复现
+- 日期：2026-10-26；角色：Remote-PS-C / Codex；基准/模型源码：`94d2aa2237d9053d76616f22bc166ac1b7f92437`。
+- 状态：本地包复现 PASS；质量 REJECTED；线上交付 BLOCKED_PRIVATE_RELEASE。不是 WAIT_LOCAL_TEST，不安排 Hardware-A/B 试听或板测。
+- 资产：`PS-20261025-20_hubert_fargan_v1_windows_cpu.zip`，198734997 bytes，SHA-256 `9532fe32d5ab707a51662b224f82a95abba901d9fc4fcc4276cedd0cf2ca4e6a`；466 个内部文件逐项校验，包含完整推理权重/统计/host 程序/源码审计/依赖/说明；不含 WAV/训练集/缓存。预定标签 `model-PS-20261025-20-hubert-fargan-v1` 尚未创建。
+- 测试：新干净检出+空模型目录解包，独立 venv（复制锁定依赖库，未冒称重新 pip 安装），以 `infer --assets bundle --output bundle --native bundle/native/fargan_probe_host.exe` 运行；审计禁止读取原生成目录，无违规访问。退出 0，输出 291200 samples/16kHz/mono PCM16，SHA-256 `ee548f1aef80fc9a032e3557b08090091d1bb91f05a512b20b1b654ed56af109` 与原评价 WAV 完全相同。
+- 量化：封装进程 7.7018374 秒，推理报告 2.563 秒/RTF 0.140824176；Python 峰值工作集 1111027712 bytes、峰值 pagefile 2381021184 bytes（不含 native 子进程，非板端预算）。原质量五门保持 0.778814512/0.751711670/0.252929151/2.418009599/0.235294118，泄漏/CER 失败。
+- 报告/路径：`report/ps_20261025_20_model_archive_local_smoke_20261026.md`、`report/model_delivery_PS-20261025-20_hubert_fargan_v1_20261026.json`、原始 smoke TXT、状态/日志。完整复现命令与全部文件 SHA 在报告/清单中。
+- 阻塞：仓库实际公开（API `private=false`），与 ARTIFACTS.md:18/交付说明:39 的私有 Release 要求冲突。未上传附件或更改仓库可见性/规则；已请求用户指定允许的私有交付位置或明确允许当前公开仓库发布。当前仅本地归档复现，未声称 GitHub 下载或跨电脑交付通过。
+- 下一责任方：Remote-PS-C 在用户明确交付位置后发布此精确包并从空目录下载推理，提交独立接收记录。质量失败仍阻止任何试听/硬件阶段。无播放/录音/真人/硬件/实时验收。
