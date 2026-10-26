@@ -674,3 +674,13 @@ ps-opt 把非周期最小相位优化移植进流式路径（改造 synthesisrea
 - 唯一配置变量：相对v1 pca_dim96→192，delta0.25不变；保留训练方差0.862445935（v1为0.749045423），参数1155284；维度改变初始化随机数消耗，非同初始化。训练/验证192/8，最佳step400、停止1200、loss0.1972120106、271.313s。mean/y统计/分位、投影前96和旧模型/缓存保持一致。
 - 一次Male4五门：身份0.763920106/P100.747006375/泄漏0.261376895/UTMOS2.508168141/CER0.558823529；通过项{'identity': True, 'identity_p10': True, 'leakage': False, 'utmos': True, 'cer': False}。输出SHAd1fb89990a7c5cdc2a57174d1f1e0f5b5c3715239fd19c5e07594469c39cf703，mapper836a4595e6fc2bc8992107645b58a6ffd97ecdb724ef91186093009058b397aa。各阶段exit0，语法/有限JSON/格式/哈希/原评估器口径检查PASS；首次启动自动审核超时、未启动进程，重试一次成功。
 - 限制/下一责任方：辅助集选检查点，Male4开发筛选非独立验收；Male1–3只作源画像，Male5/Track9锁定。Python保护非OS全量审计，无录音/播放/真人/硬件/ARM/Vivado/RTL/PL/实时验收，不改规则/分工。Remote-PS-C另轮发布完整模型与干净下载；未全过不进入WAIT_LOCAL_TEST，不据结果追加本轮维度扫描。
+
+
+### [PS-20261025-20] v3 完整 Release 与干净下载结果
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；基准/源码 ce4f2c7e9e7b3bc09b8c37532dbfb3f8d258c1bb；状态：交付 VERIFIED_GITHUB_DOWNLOAD_AND_INFERENCE，质量 REJECTED；PR #11。
+- 授权/资产：沿用用户“授权在当前公开仓库发布完整模型包”；https://github.com/Pi-debug-cmd/2026_FPGA/releases/tag/model-PS-20261025-20-hubert-fargan-v3；附件 PS-20261025-20_hubert_fargan_v3_windows_cpu.zip，199369174 bytes，SHA 02d6a414f68d220916718dbaf6402ad8a73dd1d6d84a698151816353a19b76ae。标签指向精确源码，server digest/下载大小/SHA及466个内部文件全匹配；无WAV/语料/缓存，v1未改。
+- 路径/复现：report/ps_20261025_20_github_model_receipt_v3_20261027.md/JSON/TXT（完整下载/校验/依赖/推理命令）；model_delivery_PS-20261025-20_hubert_fargan_v3_20261027.json（逐文件SHA）；独立新目录执行 build/remote_ps_c_hubert_fargan_v3.py infer --assets bundle --output bundle --native bundle/native/fargan_probe_host.exe。状态/工作日志同步追加。
+- 量化：干净GitHub下载推理exit0，2.563s/RTF0.140824176，封装49.830876s；16kHz mono PCM16/291200 samples，输出SHA d1fb89990a7c5cdc2a57174d1f1e0f5b5c3715239fd19c5e07594469c39cf703 与本轮五门原WAV完全相同，未重新评分。Python峰值工作集1113186304 bytes/pagefile2382503936 bytes，不含native子进程。
+- 验证边界：发布/下载/校验/推理日志完整保留；独立venv复制锁定库，未测试新pip安装；同机隔离复验，非第二台实体电脑。
+- 限制/下一责任方：身份0.763920106/P10 0.747006375/泄漏0.261376895/UTMOS2.508168141/CER0.558823529，泄漏/CER仍失败，非WAIT_LOCAL_TEST。Remote-PS-C保存证据，Hardware-A/B不启动试听/板测；Male5/Track9锁定，无录音/播放/真人/ARM/Vivado/RTL/PL/实时验收，未改分配/规则/可见性。
+- 公开证据处理：自动审批阻止发布本机容量/绝对路径后，新增交付收据只保留通用项目路径；原始日志/容量检查留本地，模型/指标/哈希未变。
