@@ -126,3 +126,12 @@
 - 量化：干净GitHub下载推理exit0，2.750s/RTF0.151098901，封装53.756680s；16kHz mono PCM16/291200 samples，输出SHA 9e7f37895e8188b96909edad73b140fbcf5e7a14ebd3c1202605a27b339745e7 与本轮五门原WAV完全相同，未重新评分。Python峰值工作集1110630400 bytes/pagefile2384629760 bytes，不含native子进程。
 - 失败保留：首次上传后/下载前缺少接收父目录报WinError3；创建父目录后核对同一附件，未覆盖发布。日志保留失败及最终成功；独立venv复制锁定库，未测试新pip安装；同机隔离复验，非第二台实体电脑。
 - 限制/下一责任方：身份0.778145609/P10 0.755978229/泄漏0.255133692/UTMOS2.574109713/CER0.235294118，泄漏/CER仍失败，非WAIT_LOCAL_TEST。Remote-PS-C保存证据，Hardware-A/B不启动试听/板测；Male5/Track9锁定，无录音/播放/真人/ARM/Vivado/RTL/PL/实时验收，未改分配/规则/可见性。
+
+
+### [PS-20261025-20] 冻结教师→声码器→映射器诊断结果
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：DIAGNOSTIC_COMPLETE，v1/v2 质量仍 REJECTED，非 WAIT_LOCAL_TEST；基准 04819add786e0c07f9772afadaf7a2ba67f565d7；main 9c42263ea3aa12898ad451f3c00915e816f039c4（提交前再次 fetch，保持祖先）；PR #11，未改分工/规则。
+- 路径/复现：build/diagnose_remote_ps_c_fargan_chain.py；report/ps_20261025_20_chain_diagnostic_20261027.md/JSON/TXT。项目根目录执行 build/generated/remote_ps_c_env/Scripts/python.exe -m py_compile build/diagnose_remote_ps_c_fargan_chain.py，再以 -u 运行同脚本；完整 PowerShell 命令、资产前提及 SHA 见报告。固定现有辅助 validation 8 对/2 人/4616 帧、5 条件共40波形；冻结模型/统计/缓存，无训练或新权重。
+- 量化：source/teacher PCM/teacher features oracle/v1/v2 的 CER（相对源自动转写）为0/150、15/150、16/150、20/150、20/150；相对清单文本为21/152、22/152、25/152、28/152、31/152。目标身份均值0.186086690/0.868033508/0.799975958/0.780120042/0.778752680；描述性源相似度均值0.842271856/0.234730201/0.242190654/0.225207688/0.229753263。
+- 验证：exit0、90.219秒；8对/40条件/4616帧、有限值、CER及均值重算、127个不同文件大小/SHA及WAV格式/时长核对PASS。权重/统计未变；保留原ASR警告。运行后D余量378846371840 bytes/C92113235968 bytes；生成物留D项目忽略目录，无下载。
+- 限制：辅助集已用于选检查点；清单未经本轮人工复核，源ASR与清单已有13.82%差异。源画像逐句留一且不同于Fixed-Male验收，不能套用泄漏门；未算UTMOS，指标差值不能证明因果或固定男性失败根因。v2无内容改善。原五门数值/拒绝结论不变，不继续delta扫描；未读Fixed-Male音频/Track9，Python保护非OS全量审计；无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时验收。
+- 下一责任方：Remote-PS-C提交本轮证据及更新PR #11，维护者审核；既有v1/v2模型Release保持不变，Hardware-A/B不由本轮启动试听或板测。本轮停止，不新增训练。
