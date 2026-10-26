@@ -155,6 +155,16 @@
 - 报告链接：`report/fixed_male_validation_round51_20261026.md`、`report/fixed_male_validation_round51_20261026.json`。
 - 下一责任方：Hardware-A / Codex 提交 Round51；另行认领 Round52 固定男性 validation gain 选择。
 
+### [PS-20261021-10] 固定男性专用 gain 选择 Round 52 认领
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`65e0549`
+- 唯一变量：固定男性 validation 录音4上比较同一非 F0 后滤波的 gain `1.0/1.2/1.4/1.6/1.8`；checkpoint、参数组、目标锚点、合成器和评估器不变。
+- 选择门：先按五门最小达成比例，再按平均达成比例排序；只有五门全过才允许 Round53 打开锁定录音5。网格完成后不再插值或外推。
+- 限制：只使用录音4选固定男性专用配置；不使用录音5、Track 9、播放、录音或板卡。
+- 下一责任方：Hardware-A / Codex 完成固定网格与严格评测并单独提交。
+
 ### [PS-20261025-20] Remote-PS-C 配对语料交付修复认领
 - 日期：2026-10-26
 - 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）
