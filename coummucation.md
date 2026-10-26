@@ -1514,3 +1514,16 @@
 - 下一步恢复条件：补齐并校验官方 FARGAN、UTMOS、Whisper 与 teacher/配对训练语料；然后按既定冻结切分运行电脑端评测。
 - 提交：本地提交 `2839e3867a81d8fb1523e8c3af39e9a3b9bf49b6`；Git push 因 Git Credential Manager 无可用凭证失败，GitHub App 创建分支 ref 返回 HTTP 403，尚无远端分支或 PR。
 - 下一责任方：Remote-PS-C（需 GitHub 仓库写权限/凭证后推送本提交并创建 PR，再补齐缺失资产继续评测）。
+
+### [PS-20261025-20] 代理恢复后远端与提交权限复查
+- 日期：2026-10-26
+- 角色/Agent：Remote-PS-C / Codex
+- 状态：BLOCKED（网络已恢复；本机 GitHub 凭证缺失，评测运行资产仍缺）
+- 基准提交：`ba48816b449a256bc5a331476999831b3ee444f6`
+- 检查：命令行确认 FlClash HTTP/Mixed 代理 `127.0.0.1:7890` 正在监听；经该端口 `git fetch origin --prune` 和 `git ls-remote` 成功，远端 `main` 仍为 `ba48816b449a256bc5a331476999831b3ee444f6`。GitHub 公共 API 返回 200；唯一开放 PR 为 PR #9（协作文档任务），任务分支尚未创建在远端。
+- 凭证：`git credential-manager github list` 未返回账号；非交互推送失败，明确提示无法获取密码。没有输出、读取或更改任何凭证。当前两笔任务记录提交仍仅在本地。
+- 资产：复查任务 checkout 和历史固定路径，FARGAN 主模型/运行程序、配对特征语料及其清单仍缺；不以已通过的历史 FARGAN oracle 报告冒充训练数据或完整映射链。
+- 复现命令：`git -c http.proxy=http://127.0.0.1:7890 fetch origin --prune`；`git -c http.proxy=http://127.0.0.1:7890 ls-remote origin HEAD refs/heads/main`；`git credential-manager github list`；`$env:GIT_TERMINAL_PROMPT='0'; $env:GCM_INTERACTIVE='Never'; git -c http.proxy=http://127.0.0.1:7890 -c credential.interactive=never push -u origin agent/ymheee/PS-20261025-20`。
+- 量化结果：没有训练、推理、音频生成或五项质量评测；本轮不产生质量分数。未播放/录制音频，未做板卡、Vivado、RTL、PL、实时或真人试听。
+- 报告：`report/ps_20261025_20_asset_recovery_blocked_20261026.md`（原资产缺口）、`report/ps_20261025_20_network_credential_retry_20261026.md`（本次网络/凭证复查）。
+- 下一步：本机先通过 Git Credential Manager 完成 GitHub 登录并确认账号具仓库写权限；Remote-PS-C 随后刷新远端、推送本地提交、创建任务 PR。评测仍需补齐并核验官方 FARGAN 运行资产和经批准的配对训练语料，以及既定评估权重。
