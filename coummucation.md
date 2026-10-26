@@ -1,5 +1,17 @@
 # Agent 协作窗口
 
+### [PS-20261025-20] Remote-PS-C 配对语料交付修复认领
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）
+- 状态：CLAIMED
+- 基准提交：`ba48816b449a256bc5a331476999831b3ee444f6`
+- 问题：PR #11 已恢复并校验 FARGAN、UTMOS 与 Whisper；真正阻塞仅剩 HuBERT→FARGAN 同内容配对语料。Remote-PS-C 的 clone 不包含这些被 Git 忽略的大型资产。
+- 本机证据：受控资产区存在 `fargan_corpus_expanded`（240 train/8 validation）和 `full_train_corpus_16k`（192 train/8 validation），两份 manifest 均为 `complete=true`；这些目录未被 Git 跟踪。
+- 本轮目标：从本机受控资产生成仅含 Remote-PS-C 所需 200 对的便携归档、相对路径 manifest、逐文件 SHA-256 和校验脚本，上传私有 Release，并在 PR #11 提供下载恢复命令。
+- 数据边界：不上传额外真人录音；只交付项目已有 CosyVoice3 teacher 配对资产。Track 9 不进入训练或选参。
+- 限制：不替 Remote-PS-C 训练、推理或给出质量结论；不接触板卡、Vivado、RTL、PL、播放或录音。
+- 下一责任方：Hardware-A / Codex 完成可重复下载的资产交付；Remote-PS-C 在自己的非系统盘干净目录校验后解除 BLOCKED。
+
 ### [DOCS-20261025-01] 三写作者按候选方案分流认领
 - 日期：2026-10-25
 - 角色/Agent：Maintainer / Codex
