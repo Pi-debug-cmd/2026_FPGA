@@ -1527,3 +1527,14 @@
 - 量化结果：没有训练、推理、音频生成或五项质量评测；本轮不产生质量分数。未播放/录制音频，未做板卡、Vivado、RTL、PL、实时或真人试听。
 - 报告：`report/ps_20261025_20_asset_recovery_blocked_20261026.md`（原资产缺口）、`report/ps_20261025_20_network_credential_retry_20261026.md`（本次网络/凭证复查）。
 - 下一步：本机先通过 Git Credential Manager 完成 GitHub 登录并确认账号具仓库写权限；Remote-PS-C 随后刷新远端、推送本地提交、创建任务 PR。评测仍需补齐并核验官方 FARGAN 运行资产和经批准的配对训练语料，以及既定评估权重。
+
+### [PS-20261025-20] 官方 FARGAN 资产恢复
+- 日期：2026-10-26
+- 角色/Agent：Remote-PS-C / Codex
+- 状态：BLOCKED（FARGAN 权重已核验；配对训练语料与完整评估权重仍缺）
+- 基准提交：ba48816b449a256bc5a331476999831b3ee444f6；分支 agent/ymheee/PS-20261025-20；草稿 PR #11。
+- 修改路径：report/ps_20261025_20_fargan_asset_recovery_20261026.md、coummucation.md。
+- 复现命令：见上述报告中的官方 Opus 模型包下载及 SHA-256 校验步骤。
+- 量化结果：官方模型包 134674421 字节，SHA-256 a5177ec6fb7d15058e99e57029746100121f68e4890b1467d4094aa336b6013e；包内 FARGAN 权重 13775086 字节，SHA-256 2eb56f36f71f246174d769658b5712fa81214650bd425cf050c740c8d6b4464c，与项目清单一致。PR #11 verify-round-record 检查通过。
+- 限制：没有配对 teacher 特征语料/清单和完整 UTMOS、Whisper 权重；未训练、推理或运行五项音质指标，没有质量分数。没有播放、录音、板卡、Vivado、RTL、PL、实时或真人试听结果。
+- 下一责任方：Remote-PS-C 继续按固定来源和 SHA 恢复剩余资产；资产齐备后才运行本任务电脑端候选。Hardware-A/B 不据此启动板测。
