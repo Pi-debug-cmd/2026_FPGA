@@ -99,3 +99,5 @@
 | 身份上限（技术结论） | 参数域可达 **0.53～0.56**，不再是 0.19～0.22 | 第三轮 + 复核 |
 | PL 合成卸载 | 时分复用版开发中；首版全并行 LUT 超限 132%/141%；最新综合 363 LUT 可疑，待核对是否被优化 | `build/generated/pl_synth_offload/`、`report/pl_synth_offload_sim.json` |
 | 历史待办（已过期） | 当时提出 A1 与 A3 听感取舍及 PL 资源/时序检查；A3 后来已被用户否决，当前任务依 `plan.md` | 见 worklog |
+
+2026-10-26 Remote-PS-C / PS-20261025-20：已接收 main PR #12 的配对语料，独立下载校验 `PASS 200 800`；代理和 Git 凭据可用。仅资产接收通过，训练及五门评测待运行。见 `report/ps_20261025_20_corpus_receipt_20261026.md`。

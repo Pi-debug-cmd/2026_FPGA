@@ -1625,3 +1625,14 @@
 - 量化结果：无新增训练、推理、音频或五门指标；本地分支仍比远端任务分支多 1 个提交。
 - 限制：固定 CosyVoice 源码/权重与历史配对语料仍缺，未使用替代数据或模型；无板卡、Vivado、RTL、PL、Cortex-A9、实时或真人试听结论。
 - 下一责任方：恢复可工作的代理或直接网络及 GitHub 凭证后，推送现有提交并继续固定 teacher 资产恢复。
+
+### [PS-20261025-20] Remote-PS-C 接收 PR #12 配对语料并纠正网络结论
+- 日期：2026-10-26
+- 角色/Agent：Remote-PS-C / Codex
+- 状态：ACCEPTED_ASSET_ONLY / CLAIMED（训练链恢复；尚无候选质量结果）
+- 基准提交：main `9c42263`，本任务分支已合并同步；保留此前发布历史，继续 PR #11。
+- 检查：系统级确认 FlClashCore 监听 `127.0.0.1:7890`，经代理 GitHub HTTP 200，现有 Git 凭据账号 `ymheee` 可用。此前受限命令不可见的结果不能证明代理退出或凭据缺失；前两条网络阻塞结论由本条纠正。开放 PR #9/#11/#13 已核对，未覆盖其他候选。
+- 量化结果：PR #12 Release 附件 125109914 bytes、SHA-256 `956dead3c76b1e214cc6baf5a1dca0b7e083eebb2771e417b722df6e2181366c`；本机独立下载/解包校验 `PASS 200 800`。辅助语料 192 train/8 validation；Fixed-Male 1–3/4/5、女声 Track 5–8/9 切分不变。
+- 改动路径与复现：`report/ps_20261025_20_corpus_receipt_20261026.md`、`coummucation.md`、`team_project/project_status.md`、`report/ai_worklog.md`。
+- 限制：仅解除语料和网络阻塞；未训练/推理/五门评分，teacher 未获真人质量验收；未播放、录音或进行板卡/Vivado/RTL/PL/Cortex-A9/实时测试。
+- 下一责任方：Remote-PS-C 恢复电脑端 FARGAN 合成与 HuBERT 内容特征，按辅助 train split 训练独立候选，仅先筛选男声验证录音 4；录音 5 与 Track 9 保持锁定。
