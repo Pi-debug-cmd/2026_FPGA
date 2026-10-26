@@ -1538,3 +1538,13 @@
 - 量化结果：官方模型包 134674421 字节，SHA-256 a5177ec6fb7d15058e99e57029746100121f68e4890b1467d4094aa336b6013e；包内 FARGAN 权重 13775086 字节，SHA-256 2eb56f36f71f246174d769658b5712fa81214650bd425cf050c740c8d6b4464c，与项目清单一致。PR #11 verify-round-record 检查通过。
 - 限制：没有配对 teacher 特征语料/清单和完整 UTMOS、Whisper 权重；未训练、推理或运行五项音质指标，没有质量分数。没有播放、录音、板卡、Vivado、RTL、PL、实时或真人试听结果。
 - 下一责任方：Remote-PS-C 继续按固定来源和 SHA 恢复剩余资产；资产齐备后才运行本任务电脑端候选。Hardware-A/B 不据此启动板测。
+### [PS-20261025-20] UTMOS 固定权重恢复
+- 日期：2026-10-26
+- 角色/Agent：Remote-PS-C / Codex
+- 状态：BLOCKED（FARGAN 与 UTMOS 权重已核验；Whisper 权重及配对训练语料/清单仍缺）
+- 基准提交：ba48816b449a256bc5a331476999831b3ee444f6；分支 agent/ymheee/PS-20261025-20；PR #11。
+- 修改路径：report/ps_20261025_20_fargan_asset_recovery_20261026.md、coummucation.md。
+- 复现：UTMOS 下载 URL 与 SHA 命令记录于报告；固定 SHA 为 38aa51ab79e2a4e09a1449758a4b37e9cbb2e8235a49662a732d33a9ba1e9bff。
+- 量化结果：UTMOS 权重 411179119 字节，SHA 与项目清单完全一致；Whisper-small revision 973afd24965f72e36ca33b3055d56a652f456b4d 仍只有未完成缓存片段。没有训练、推理或五项评分。
+- 限制：配对 HuBERT→FARGAN 训练特征及清单缺失，Whisper 评估器未完整恢复；电脑端质量结论无。未播放/录音、板卡、Vivado、RTL、PL、实时或真人试听。
+- 下一责任方：Remote-PS-C 恢复批准的配对训练资产与 Whisper 固定修订权重，之后运行电脑端五门评测。

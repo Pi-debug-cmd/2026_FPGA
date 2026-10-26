@@ -26,3 +26,13 @@ From the task checkout, download https://media.xiph.org/opus/models/opus_data-a5
 ## Remaining gate
 
 HuBERT Base and WeSpeaker were verified in the prior report. The frozen source/target WAVs are present, but the historical paired teacher-feature training corpus and manifest are absent. The pinned UTMOS and Whisper-small weights are incomplete. The existing target FARGAN oracle is only a vocoder reconstruction ceiling; it cannot replace the missing HuBERT-to-target mapping. No training, inference, five-gate score, or quality conclusion is claimed. No board, Vivado, RTL, PL, realtime, playback, recording, or human-listening work was done. Restore the remaining approved assets with provenance and hashes before resuming the assigned computer-side evaluation.
+
+## Additional evaluator asset recovered
+
+The pinned UTMOS22 Strong weight was downloaded from the exact URL in `交接/核心材料/neural_reference/cross_evaluators/manifest.json` into the ignored D: task asset directory.
+
+| Asset | Bytes | SHA-256 |
+| --- | ---: | --- |
+| `utmos22_strong_step7459_v1.pt` | 411179119 | `38aa51ab79e2a4e09a1449758a4b37e9cbb2e8235a49662a732d33a9ba1e9bff` |
+
+The digest and byte count match the project manifest. Whisper-small remains incomplete. Its frozen revision is `973afd24965f72e36ca33b3055d56a652f456b4d`; existing local Hugging Face entries are `.incomplete` and are not accepted as an evaluator. The approved paired HuBERT/target-FARGAN training feature corpus and manifest remain absent. No training, inference, or five-gate evaluation has run.
