@@ -282,6 +282,9 @@ def main() -> None:
     parser.add_argument("--output", type=Path, default=GENERATED / "remote_ps_c_hubert_fargan_v1")
     parser.add_argument("--native", type=Path, default=GENERATED / "remote_ps_c_native/fargan_probe_host.exe")
     args = parser.parse_args()
+    args.assets = args.assets.resolve()
+    args.output = args.output.resolve()
+    args.native = args.native.resolve()
     args.output.mkdir(parents=True, exist_ok=True)
     {"cache": cache, "train": train, "infer": infer}[args.stage](args)
 

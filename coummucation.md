@@ -1647,3 +1647,10 @@
 - 量化结果：身份均值 0.778814512（≥0.45）、P10 0.751711670（≥0.35）、严格源泄漏 0.252929151（要求≤0.10，FAIL）、UTMOS 2.418009599（≥2.30）、CER 0.235294118=16/68（要求≤0.15，FAIL）。18.2 秒音频本机全链含加载耗时 2.187 秒，RTF 0.120165；不代表板端实时。
 - 限制：全句 HuBERT+双向 GRU 非因果；当前 Opus 源码不是历史归档的逐位同版，已固定归档/逐源 SHA 并保留 smoke 差异。该轮只发布方案/客观证据，Release 与干净目录接收复现作为随后独立测试轮提交。无播放、录音、真人试听、板卡、Vivado、RTL、PL、Cortex-A9 或实时时延验收。
 - 下一责任方：Remote-PS-C 将该失败候选打包到私有 Release 并做干净下载推理以便追溯；Hardware-A/B 不据此启动试听或板测。
+
+### [PS-20261025-20] 可移植交付命令首测及相对路径修复
+- 日期：2026-10-26；角色：Remote-PS-C / Codex；基准：`74b16db6afe4a76def817e9f643a156b7b8389c0`。
+- 状态：BLOCKED_DELIVERY；候选质量仍 REJECTED。仓库 API 返回 `private=false`，与 ARTIFACTS.md 第 18 行及交付说明第 39 行要求私有 Release 冲突；尚未创建 Release/上传附件/改仓库可见性，已请求用户指定私有位置或明确允许公开。
+- 测试：新建 D: receive-check 独立检出及 Python 环境，逐件验证本地包 466 项，使用 `infer --assets bundle --output bundle --native bundle/native/fargan_probe_host.exe`。模型推理已生成音频，但输出清单写入时因相对 `--output` 与绝对 ROOT 的 `relative_to` 不兼容而异常退出；此命令首测失败，不冒称交付通过。
+- 修改：`build/remote_ps_c_hubert_fargan.py` 将 CLI 资产/输出/程序路径在入口统一 resolve；不改模型、统计、音频或评价计算。代码编译和绝对默认路径已有结果仍有效；随后在新干净检出重新测试该相对路径命令。
+- 报告：`report/ps_20261025_20_portable_first_smoke_20261026.md`；下一责任方 Remote-PS-C 修复后重打包并复测，线上交付位置等待用户决定。未播放/录音/触碰硬件。
