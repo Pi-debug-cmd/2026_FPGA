@@ -1,0 +1,30 @@
+{
+  "task": "PS-20261021-10",
+  "round": 51,
+  "date": "2026-10-26",
+  "status": "REJECTED_CONTENT",
+  "source": "人物音频资料/男声/标准录音 4.wav",
+  "gain": 1.6,
+  "checkpoint_sha256": "efcda700ddc0e769ebcf4eb5afae8ff14528c21dd800d737a78c577e973bd2a2",
+  "candidate_sha256": "4334432bc6ce90b4ed20c86b77d2a6cef8fd1da61185562d92dc709a4f0e23f7",
+  "objective": {
+    "identity": 0.6946100085116035,
+    "identity_p10": 0.6766308101672565,
+    "leakage": 0.10456902154664358,
+    "utmos": 2.2746036052703857,
+    "cer": 0.25
+  },
+  "gates": {
+    "identity": true,
+    "identity_p10": true,
+    "leakage": false,
+    "utmos": false,
+    "cer": false
+  },
+  "track9_used": false,
+  "fixed_male_used": true,
+  "locked_recording5_used": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

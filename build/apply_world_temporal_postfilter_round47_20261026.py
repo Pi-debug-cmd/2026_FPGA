@@ -37,6 +37,8 @@ def main() -> None:
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--gain", type=float, default=1.4)
     parser.add_argument("--experiment-round", type=int, default=47)
+    parser.add_argument("--source-relative", default="人物音频资料/女声/Track 9.wav")
+    parser.add_argument("--candidate-label")
     args = parser.parse_args()
     if args.gain <= 1.0:
         raise ValueError("postfilter gain must be greater than 1.0")
@@ -50,16 +52,18 @@ def main() -> None:
 
     hubert_dir = args.asset_root / "交接/核心材料/neural_reference/RVC/assets/hubert_base"
     hubert = base.HubertModel.from_pretrained(hubert_dir, local_files_only=True).float().eval()
-    signal9 = base.read_16k(args.asset_root / "人物音频资料/女声/Track 9.wav")
-    content9 = base.extract_hubert(hubert, signal9)
-    world9 = base.analyze_world(signal9)
-    x9 = (((content9 - checkpoint["pca_mean"]) @ checkpoint["pca_projection"]
-           - checkpoint["x_mean"]) / checkpoint["x_std"]).astype(np.float32)
-    prosody9 = prosody_audit.resample_rows(prosody_audit.source_prosody(signal9), len(content9))
-    x9 = np.concatenate((x9, ((prosody9 - checkpoint["prosody_mean"])
+    source_is_track9 = args.source_relative == "人物音频资料/女声/Track 9.wav"
+    source_signal = base.read_16k(args.asset_root / args.source_relative)
+    source_content = base.extract_hubert(hubert, source_signal)
+    source_world = base.analyze_world(source_signal)
+    source_x = (((source_content - checkpoint["pca_mean"]) @ checkpoint["pca_projection"]
+                 - checkpoint["x_mean"]) / checkpoint["x_std"]).astype(np.float32)
+    source_prosody = prosody_audit.resample_rows(
+        prosody_audit.source_prosody(source_signal), len(source_content))
+    source_x = np.concatenate((source_x, ((source_prosody - checkpoint["prosody_mean"])
                               / checkpoint["prosody_std"]).astype(np.float32)), axis=1)
     with torch.inference_mode():
-        raw = model(torch.from_numpy(x9[None]))[0].numpy()
+        raw = model(torch.from_numpy(source_x[None]))[0].numpy()
     continuous = raw * checkpoint["y_std"] + checkpoint["y_mean"]
     probability = 1.0 / (1.0 + np.exp(-np.clip(raw[:, VUV_INDEX], -20.0, 20.0)))
 
@@ -84,27 +88,31 @@ def main() -> None:
              "log_sp_hi": float(np.percentile(log_sp, 99.95))}
 
     outputs = []
-    label = f"round{args.experiment_round}_non_f0_gain{str(args.gain).replace('.', '_')}"
-    for name, gain in (("round37_baseline", 1.0), (label, args.gain)):
+    label = args.candidate_label or f"round{args.experiment_round}_non_f0_gain{str(args.gain).replace('.', '_')}"
+    variants = (("round37_baseline", 1.0), (label, args.gain)) if source_is_track9 else ((label, args.gain),)
+    for name, gain in variants:
         filtered = continuous.copy()
         if gain != 1.0:
             for group in NON_F0:
                 center = np.mean(filtered[:, group], axis=0, keepdims=True)
                 filtered[:, group] = center + gain * (filtered[:, group] - center)
-        features5 = interpolate(filtered, len(world9["output"]))
+        features5 = interpolate(filtered, len(source_world["output"]))
         features5 = np.clip(features5, clip_lo, clip_hi)
         features5[:, VUV_INDEX] = (interpolate(probability[:, None], len(features5))[:, 0] - 0.5) * 8.0
         waveform, synthesis = base.synthesize(features5, stats)
-        path = args.output / f"track9_{name}.wav"
+        path = args.output / f"{name}.wav"
         base.sf.write(path, waveform, base.SAMPLE_RATE, subtype="PCM_16")
         outputs.append({"candidate": name,
                         "path": str(path.relative_to(ROOT)).replace("\\", "/"),
                         "sha256": base.sha256(path), "gain": gain, "synthesis": synthesis})
 
-    frozen = args.generated_root / "hubert_world_round37_20261025/track9_paired_causal_gru_variance_matching.wav"
-    if outputs[0]["sha256"] != base.sha256(frozen):
-        raise ValueError("Round37 baseline is not bit-identical")
-    manifest = {"inputs": [{"role": "source", "path": "人物音频资料/女声/Track 9.wav"}],
+    baseline_bit_identical = None
+    if source_is_track9:
+        frozen = args.generated_root / "hubert_world_round37_20261025/track9_paired_causal_gru_variance_matching.wav"
+        baseline_bit_identical = outputs[0]["sha256"] == base.sha256(frozen)
+        if not baseline_bit_identical:
+            raise ValueError("Round37 baseline is not bit-identical")
+    manifest = {"inputs": [{"role": "source", "path": args.source_relative}],
                 "outputs": [{"candidate": row["candidate"], "path": row["path"]}
                             for row in outputs]}
     (args.output / "strict_manifest.json").write_text(
@@ -112,9 +120,11 @@ def main() -> None:
     summary = {"task": "PS-20261021-10", "round": args.experiment_round,
                "kind": "frozen_non_f0_gain_track9_regression", "gain": args.gain,
                "checkpoint_sha256": base.sha256(args.checkpoint),
-               "baseline_bit_identical": True, "outputs": outputs,
-               "track9_used_after_freeze": True, "track9_used_for_selection": False,
-               "fixed_male_used": False, "played": False,
+               "baseline_bit_identical": baseline_bit_identical, "outputs": outputs,
+               "source_relative": args.source_relative,
+               "track9_used_after_freeze": source_is_track9,
+               "track9_used_for_selection": False,
+               "fixed_male_used": not source_is_track9, "played": False,
                "board_touched": False, "board_powered": False}
     (args.output / "summary.json").write_text(
         json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

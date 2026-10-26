@@ -143,6 +143,18 @@
 - 限制：录音4是 validation，不得据其结果重新调 gain；不播放、不录音、不接触板卡。
 - 下一责任方：Hardware-A / Codex 完成固定男性 validation 文件转换并单独提交。
 
+### [PS-20261021-10] 固定男性 validation 转换 Round 51 结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线测试）
+- 状态：REJECTED_CONTENT
+- 基准提交：`5600cda`
+- 修改路径：`build/apply_world_temporal_postfilter_round47_20261026.py`、`report/fixed_male_validation_round51_20261026.{md,json}`、`coummucation.md`。
+- 量化结果：录音4身份/P10/泄漏/UTMOS/CER=`0.6946/0.6766/0.1046/2.2746/0.2500`；身份两门通过，泄漏和UTMOS轻微未过，CER明显未过。
+- 判定：不得进入锁定录音5或试听；Round52 仅在录音4上选择固定男性专用 gain，按五门最小比例而非单项最高值决定。
+- 限制：未使用 Track 9 或锁定录音5；未播放、录音或接触板卡。
+- 报告链接：`report/fixed_male_validation_round51_20261026.md`、`report/fixed_male_validation_round51_20261026.json`。
+- 下一责任方：Hardware-A / Codex 提交 Round51；另行认领 Round52 固定男性 validation gain 选择。
+
 ### [PS-20261025-20] Remote-PS-C 配对语料交付修复认领
 - 日期：2026-10-26
 - 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）
