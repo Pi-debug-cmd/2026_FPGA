@@ -111,6 +111,16 @@
 - 报告链接：`report/world_temporal_gain_extension_round49_20261026.md`、`report/world_temporal_gain_extension_round49_20261026.json`。
 - 下一责任方：Hardware-A / Codex 提交 Round49；另行认领 Round50 冻结留出回归。
 
+### [PS-20261021-10] gain1.6 冻结 Track 9 回归 Round 50 认领
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线测试）
+- 状态：CLAIMED
+- 基准提交：`d728aba`
+- 唯一变量：使用 Round49 已冻结 gain `1.6` 替换 Round47 的 `1.4`；Round37 checkpoint、参数组、Track 9、合成与严格评估全部不变。
+- 验收：目标自重建身份≥0.45、P10≥0.35、UTMOS≥2.30、CER≤0.15；全部通过才允许 Round51 转换固定男性 validation 录音4。
+- 限制：不再根据 Track 9 调参；目标自重建不应用男性泄漏门。不播放、不录音、不接触板卡。
+- 下一责任方：Hardware-A / Codex 完成一次冻结回归并单独提交。
+
 ### [PS-20261025-20] Remote-PS-C 配对语料交付修复认领
 - 日期：2026-10-26
 - 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）
