@@ -1636,3 +1636,14 @@
 - 改动路径与复现：`report/ps_20261025_20_corpus_receipt_20261026.md`、`coummucation.md`、`team_project/project_status.md`、`report/ai_worklog.md`。
 - 限制：仅解除语料和网络阻塞；未训练/推理/五门评分，teacher 未获真人质量验收；未播放、录音或进行板卡/Vivado/RTL/PL/Cortex-A9/实时测试。
 - 下一责任方：Remote-PS-C 恢复电脑端 FARGAN 合成与 HuBERT 内容特征，按辅助 train split 训练独立候选，仅先筛选男声验证录音 4；录音 5 与 Track 9 保持锁定。
+
+### [PS-20261025-20] HuBERT→目标 FARGAN v1 首轮电脑端筛选
+- 日期：2026-10-26；角色/Agent：Remote-PS-C / Codex。
+- 状态：REJECTED（源泄漏、CER 未过；不进入 WAIT_LOCAL_TEST）。
+- 基准提交：`86afcf8d105c74538664d6ea405a790316ee563e`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；继续 PR #11，开放 PR #9/#11/#13 已检查，无任务分配改动。
+- 修改路径：`build/build_remote_ps_c_fargan.py`、`build/remote_ps_c_hubert_fargan.py`、共享 strict evaluator 的可选资产路径参数、`report/ps_20261025_20_hubert_fargan_v1_20261026.{md,json}`、依赖锁、状态及工作日志。
+- 数据/训练：已验证历史辅助 192 train/8 validation，仅辅助 train 拟合 PCA/统计/权重，辅助 validation 选择第 400 步；双向 GRU 1136852 参数，第 1200 步早停，训练 266.703 秒。未对固定男性 1～3 做源专用训练；只筛选录音 4。男声 5/目标 Track 9 保持锁定；语料尾帧按物理时长截断 319 帧，不做时长扭曲。
+- 复现命令：报告包含 host GCC 构建、`remote_ps_c_hubert_fargan.py cache/train/infer` 以及既定 strict evaluator 的完整 PowerShell 命令；五门计算与门槛未改。
+- 量化结果：身份均值 0.778814512（≥0.45）、P10 0.751711670（≥0.35）、严格源泄漏 0.252929151（要求≤0.10，FAIL）、UTMOS 2.418009599（≥2.30）、CER 0.235294118=16/68（要求≤0.15，FAIL）。18.2 秒音频本机全链含加载耗时 2.187 秒，RTF 0.120165；不代表板端实时。
+- 限制：全句 HuBERT+双向 GRU 非因果；当前 Opus 源码不是历史归档的逐位同版，已固定归档/逐源 SHA 并保留 smoke 差异。该轮只发布方案/客观证据，Release 与干净目录接收复现作为随后独立测试轮提交。无播放、录音、真人试听、板卡、Vivado、RTL、PL、Cortex-A9 或实时时延验收。
+- 下一责任方：Remote-PS-C 将该失败候选打包到私有 Release 并做干净下载推理以便追溯；Hardware-A/B 不据此启动试听或板测。

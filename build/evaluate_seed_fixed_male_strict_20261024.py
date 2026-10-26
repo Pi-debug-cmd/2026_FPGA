@@ -18,6 +18,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--asset-root", type=Path, required=True)
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--portable-assets", type=Path,
+                        help="Remote-PS-C asset layout; changes only asset paths, not metrics or gates")
     return parser.parse_args()
 
 
@@ -62,7 +64,8 @@ def main() -> None:
     external_generated = asset_root / "build" / "generated"
     sys.path.insert(0, str(ROOT / "build" / "generated" / "seed_eval_deps"))
     eval_deps = external_generated / "eval_deps_20261016"
-    speechmos_root = next((external_generated / "eval_sources_20261016").glob("SpeechMOS-*"))
+    speechmos_root = next(((args.portable_assets / "speechmos_source") if args.portable_assets else
+                          (external_generated / "eval_sources_20261016")).glob("SpeechMOS-*"))
     for extra in (
         eval_deps,
         external_generated / "world_deps",
@@ -73,7 +76,8 @@ def main() -> None:
     ):
         sys.path.insert(0, str(extra))
 
-    hf_cache = asset_root / "交接" / "核心材料" / "neural_reference" / "cache" / "hf" / "hub"
+    hf_cache = (args.portable_assets / "hf_home/hub" if args.portable_assets else
+                asset_root / "交接" / "核心材料" / "neural_reference" / "cache" / "hf" / "hub")
     whisper_snapshot = next((hf_cache / "models--openai--whisper-small" / "snapshots").glob("*"))
     os.environ["HF_HUB_OFFLINE"] = "1"
     os.environ["TRANSFORMERS_OFFLINE"] = "1"
@@ -106,17 +110,21 @@ def main() -> None:
                 yield start, clip
 
     cross = asset_root / "交接" / "核心材料" / "neural_reference" / "cross_evaluators"
+    speaker_weights = (args.portable_assets / "wespeaker/cnceleb_resnet34_LM.onnx"
+                       if args.portable_assets else cross / "cnceleb_resnet34_LM.onnx")
+    naturalness_weights = (args.portable_assets / "utmos22_strong_step7459_v1.pt"
+                           if args.portable_assets else cross / "utmos22_strong_step7459_v1.pt")
     options = ort.SessionOptions()
     options.intra_op_num_threads = 4
     options.inter_op_num_threads = 1
     session = ort.InferenceSession(
-        str(cross / "cnceleb_resnet34_LM.onnx"),
+        str(speaker_weights),
         sess_options=options,
         providers=["CPUExecutionProvider"],
     )
     naturalness_model = UTMOS22Strong()
     naturalness_model.load_state_dict(
-        torch.load(cross / "utmos22_strong_step7459_v1.pt", map_location="cpu", weights_only=True)
+        torch.load(naturalness_weights, map_location="cpu", weights_only=True)
     )
     naturalness_model.eval()
 
@@ -261,7 +269,8 @@ def main() -> None:
         reverse=True,
     )
     report = {
-        "kind": "strict_fixed_male_seed_vc_evaluation",
+        "kind": ("strict_fixed_male_evaluation" if args.portable_assets else
+                 "strict_fixed_male_seed_vc_evaluation"),
         "protocol": {
             "source_profile": [f"人物音频资料/男声/标准录音 {number}.wav" for number in range(1, 4)],
             "evaluated_source": source_item["path"],
