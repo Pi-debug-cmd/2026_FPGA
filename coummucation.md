@@ -209,6 +209,18 @@
 - 限制：只用录音4，不使用录音5或 Track 9；不播放、不录音、不接触板卡。
 - 下一责任方：Hardware-A / Codex 完成固定网格、提交本轮和十轮总结。
 
+### [PS-20261021-10] 源中阶谱细节注入 Round 54 与十轮结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED_BATCH_STOP
+- 基准提交：`7ca75db`
+- 修改路径：`build/apply_world_temporal_postfilter_round47_20261026.py`、`report/fixed_male_spectral_cutoff_round54_20261026.{md,json}`、`report/fallback_rounds_45_54_summary_20261026.json`、`coummucation.md`。
+- 量化结果：Round54 cutoff16 最佳为身份/P10/泄漏/UTMOS/CER=`0.6441/0.6276/0.0974/2.2640/0.2941`，身份/P10/泄漏通过，UTMOS/CER失败；cutoff继续下移无过门趋势。
+- 十轮结论：Round45～54已全部完成。Round50 使目标Track9重建首次四门全过，但固定男性 validation 的最佳CER仍 `0.2941`；未达到“能用”，不打开锁定录音5、不请求试听、不启动Cortex-A9/PL/板卡。
+- 限制：本批只做电脑端离线诊断/测试；未播放、录音或接触板卡，录音5保持锁定。
+- 报告链接：`report/fixed_male_spectral_cutoff_round54_20261026.md`、`report/fixed_male_spectral_cutoff_round54_20261026.json`、`report/fallback_rounds_45_54_summary_20261026.json`。
+- 下一责任方：Maintainer/用户审核本批；若继续，应新认领内容保持机制，不再扫描 gain、F0权重或谱注入比例。
+
 ### [PS-20261025-20] Remote-PS-C 配对语料交付修复认领
 - 日期：2026-10-26
 - 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）

@@ -1,0 +1,29 @@
+{
+  "task": "PS-20261021-10",
+  "date": "2026-10-26",
+  "rounds": [45, 46, 47, 48, 49, 50, 51, 52, 53, 54],
+  "requested_round_count_completed": 10,
+  "usable_gate_reached": false,
+  "major_success": {
+    "round": 50,
+    "scope": "target Track 9 reconstruction only",
+    "identity": 0.6847452670946492,
+    "identity_p10": 0.6643384218122061,
+    "utmos": 2.3813987374305725,
+    "cer": 0.10869565217391304
+  },
+  "best_fixed_male_validation_tradeoff": {
+    "round": 54,
+    "candidate": "gain1.8, source detail alpha0.4, cutoff16",
+    "identity": 0.6441,
+    "identity_p10": 0.6276,
+    "leakage": 0.0974,
+    "utmos": 2.2640,
+    "cer": 0.2941,
+    "failed_gates": ["utmos", "cer"]
+  },
+  "locked_recording5_used": false,
+  "listening_requested": false,
+  "board_touched": false,
+  "next_bottleneck": "explicit content preservation rather than more timbre gain or spectrum injection sweeps"
+}
