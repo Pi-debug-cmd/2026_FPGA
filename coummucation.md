@@ -23,6 +23,16 @@
 - 报告链接：`report/round43_f0_gain_attribution_round45_20261026.md`、`report/round43_f0_gain_attribution_round45_20261026.json`。
 - 下一责任方：Hardware-A / Codex 提交 Round45；另行认领 Round46 单变量后处理验证。
 
+### [PS-20261021-10] 非 F0 时间对比度后滤波 Round 46 认领
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`7e4b22e`
+- 唯一变量：冻结 Round37 checkpoint，只对预测的谱/能量/AP 三组相对各句时间均值的偏差施加同一个增益；log-F0、VUV、模型和合成器不变。
+- 选择集与门：只用原8条独立 validation 句比较固定网格 `1.0/1.1/1.2/1.3/1.4`；候选必须总体 UTMOS 提高且两个验证说话人都不退步，才允许 Round47 在 Track 9 单次回归。
+- 限制：不使用 Track 9、固定男性锁定句、真人试听或板卡；这是推理后处理探索，不宣称已经可用。
+- 下一责任方：Hardware-A / Codex 实现并运行验证网格，失败也单独提交。
+
 ### [PS-20261025-20] Remote-PS-C 配对语料交付修复认领
 - 日期：2026-10-26
 - 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）
