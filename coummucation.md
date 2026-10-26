@@ -1,5 +1,39 @@
 # Agent 协作窗口
 
+### [PS-20261025-20] Remote-PS-C 配对语料交付修复认领
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）
+- 状态：CLAIMED
+- 基准提交：`ba48816b449a256bc5a331476999831b3ee444f6`
+- 问题：PR #11 已恢复并校验 FARGAN、UTMOS 与 Whisper；真正阻塞仅剩 HuBERT→FARGAN 同内容配对语料。Remote-PS-C 的 clone 不包含这些被 Git 忽略的大型资产。
+- 本机证据：受控资产区存在 `fargan_corpus_expanded`（240 train/8 validation）和 `full_train_corpus_16k`（192 train/8 validation），两份 manifest 均为 `complete=true`；这些目录未被 Git 跟踪。
+- 本轮目标：从本机受控资产生成仅含 Remote-PS-C 所需 200 对的便携归档、相对路径 manifest、逐文件 SHA-256 和校验脚本，上传私有 Release，并在 PR #11 提供下载恢复命令。
+- 数据边界：不上传额外真人录音；只交付项目已有 CosyVoice3 teacher 配对资产。Track 9 不进入训练或选参。
+- 限制：不替 Remote-PS-C 训练、推理或给出质量结论；不接触板卡、Vivado、RTL、PL、播放或录音。
+- 下一责任方：Hardware-A / Codex 完成可重复下载的资产交付；Remote-PS-C 在自己的非系统盘干净目录校验后解除 BLOCKED。
+
+### [PS-20261025-20] Remote-PS-C 配对语料便携包
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）
+- 状态：PROPOSED
+- 基准提交：`ba48816b449a256bc5a331476999831b3ee444f6`
+- 改动路径：`tools/package_remote_ps_c_fargan_corpus.py`、`report/ps_20261025_20_paired_corpus_delivery_20261026.{md,json}`
+- 结果：生成 200 对（192 train / 8 validation）便携语料，含 800 个数据文件；ZIP 为 `125109914` bytes，SHA-256 `956dead3c76b1e214cc6baf5a1dca0b7e083eebb2771e417b722df6e2181366c`。
+- 复现命令：见 `report/ps_20261025_20_paired_corpus_delivery_20261026.md`；新目录本机解包校验输出 `PASS 200 800`。
+- 限制：本轮仅修复跨电脑资产缺口；未运行训练/推理/客观评测，未宣称试听、Cortex-A9、PL、板卡或实时通过。
+- 下一责任方：Hardware-A 发布私有 Release 并从 Release 空目录下载复验；通过后 Remote-PS-C 从 PR #11 继续训练与离线客观评测。
+
+### [PS-20261025-20] 私有 Release 下载复验
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（资产交付验证）
+- 状态：ACCEPTED（仅指资产交付完整性）
+- 基准提交：`2888c7cb6abff1547aff451d082e8db686a6bc08`
+- Release：`asset-PS-20261025-20-paired-corpus-v1`，附件 `PS-20261025-20_paired_hubert_fargan_corpus_v1.zip`
+- 量化结果：GitHub 与全新下载文件均为 `125109914` bytes、SHA-256 `956dead3c76b1e214cc6baf5a1dca0b7e083eebb2771e417b722df6e2181366c`；解包后校验 `PASS 200 800`。
+- 复现命令与证据：`report/ps_20261025_20_paired_corpus_delivery_20261026.{md,json}`。
+- 限制：ACCEPTED 只表示 Release 可下载且逐文件完整，不表示训练、音质、试听、板卡、PL 或实时通过。
+- 下一责任方：Remote-PS-C 下载校验后解除“缺配对语料”阻塞，在 PR #11 继续其独立训练和客观评测；达到客观门后标记 `WAIT_LOCAL_TEST`。
+
 ### [DOCS-20261025-01] 三写作者按候选方案分流认领
 - 日期：2026-10-25
 - 角色/Agent：Maintainer / Codex
