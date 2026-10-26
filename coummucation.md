@@ -23,6 +23,17 @@
 - 限制：本轮仅修复跨电脑资产缺口；未运行训练/推理/客观评测，未宣称试听、Cortex-A9、PL、板卡或实时通过。
 - 下一责任方：Hardware-A 发布私有 Release 并从 Release 空目录下载复验；通过后 Remote-PS-C 从 PR #11 继续训练与离线客观评测。
 
+### [PS-20261025-20] 私有 Release 下载复验
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（资产交付验证）
+- 状态：ACCEPTED（仅指资产交付完整性）
+- 基准提交：`2888c7cb6abff1547aff451d082e8db686a6bc08`
+- Release：`asset-PS-20261025-20-paired-corpus-v1`，附件 `PS-20261025-20_paired_hubert_fargan_corpus_v1.zip`
+- 量化结果：GitHub 与全新下载文件均为 `125109914` bytes、SHA-256 `956dead3c76b1e214cc6baf5a1dca0b7e083eebb2771e417b722df6e2181366c`；解包后校验 `PASS 200 800`。
+- 复现命令与证据：`report/ps_20261025_20_paired_corpus_delivery_20261026.{md,json}`。
+- 限制：ACCEPTED 只表示 Release 可下载且逐文件完整，不表示训练、音质、试听、板卡、PL 或实时通过。
+- 下一责任方：Remote-PS-C 下载校验后解除“缺配对语料”阻塞，在 PR #11 继续其独立训练和客观评测；达到客观门后标记 `WAIT_LOCAL_TEST`。
+
 ### [DOCS-20261025-01] 三写作者按候选方案分流认领
 - 日期：2026-10-25
 - 角色/Agent：Maintainer / Codex

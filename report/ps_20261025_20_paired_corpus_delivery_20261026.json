@@ -8,7 +8,8 @@
     "asset": "PS-20261025-20_paired_hubert_fargan_corpus_v1.zip",
     "bytes": 125109914,
     "sha256": "956dead3c76b1e214cc6baf5a1dca0b7e083eebb2771e417b722df6e2181366c",
-    "target_commit": null
+    "target_commit": "2888c7cb6abff1547aff451d082e8db686a6bc08",
+    "url": "https://github.com/Pi-debug-cmd/2026_FPGA/releases/tag/asset-PS-20261025-20-paired-corpus-v1"
   },
   "corpus": {
     "rows": 200,
@@ -24,6 +25,12 @@
   "local_clean_extract_verification": {
     "result": "PASS 200 800",
     "directory": "build/generated/receive_check_20261026_1540"
+  },
+  "release_download_verification": {
+    "result": "PASS 200 800",
+    "directory": "build/generated/release_receive_check_20261026_1550",
+    "bytes": 125109914,
+    "sha256": "956dead3c76b1e214cc6baf5a1dca0b7e083eebb2771e417b722df6e2181366c"
   },
   "limits": [
     "No training or objective evaluation is claimed by this delivery round.",

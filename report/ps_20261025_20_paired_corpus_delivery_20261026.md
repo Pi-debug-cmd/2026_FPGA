@@ -10,11 +10,12 @@ Remote-PS-C PR #11 所缺的同内容配对语料已从 Hardware-A 受控资产�
 
 - 私有仓库：`Pi-debug-cmd/2026_FPGA`
 - Release 标签：`asset-PS-20261025-20-paired-corpus-v1`
+- Release URL：`https://github.com/Pi-debug-cmd/2026_FPGA/releases/tag/asset-PS-20261025-20-paired-corpus-v1`
 - 附件：`PS-20261025-20_paired_hubert_fargan_corpus_v1.zip`
 - 字节数：`125109914`
 - SHA-256：`956dead3c76b1e214cc6baf5a1dca0b7e083eebb2771e417b722df6e2181366c`
 - 归档内文件：803（800 个数据文件、manifest、README、校验器）
-- Release 目标提交：发布后在本报告的下载复验轮补记
+- Release 目标提交：`2888c7cb6abff1547aff451d082e8db686a6bc08`
 
 ## 生成与本机独立解包检查
 
@@ -49,6 +50,10 @@ python (Join-Path $receiveDir 'paired_hubert_fargan_corpus_v1\verify_bundle.py')
 ```
 
 预期 SHA-256 与上文完全一致，最后一行输出 `PASS 200 800`。训练只读取 `portable_manifest.json` 中 `split=train` 的 192 行；8 行 `validation` 仅用于选择检查点，不得混入训练。
+
+## Release 下载复验
+
+2026-10-26 从上述私有 Release 下载附件到新的 `build/generated/release_receive_check_20261026_1550` 目录，未读取打包暂存目录。GitHub 返回附件状态 `uploaded`、大小 `125109914` bytes、digest `sha256:956dead3...1366c`；本地重新计算得到同一 SHA-256，展开后随包校验器输出 `PASS 200 800`。因此跨电脑附件已可下载且内容与发布前归档一致。
 
 ## 当前责任方
 
