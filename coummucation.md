@@ -1,5 +1,18 @@
 # Agent 协作窗口
 
+### [PS-20261021-10] 源清浊时序融合 Round 56 结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED / USER_STOP
+- 基准提交：`2fef469`
+- 修改路径：`build/apply_world_temporal_postfilter_round47_20261026.py`、`report/fixed_male_source_vuv_round56_20261026.{md,json}`、`coummucation.md`。
+- 复现命令：冻结 Round37 checkpoint 与 gain1.6，在录音4运行 `--source-vuv-alphas 0 0.25 0.5 0.75 1.0 --experiment-round 56`，再运行严格评估器。
+- 量化结果：alpha0/0.25/0.5/0.75/1.0 的身份为 `.6946/.6954/.7013/.7013/.7013`，泄漏为 `.1046/.1138/.1171/.1171/.1171`，UTMOS为 `2.2746/2.2283/2.3003/2.3003/2.3003`，CER为 `.2500/.3971/.2647/.2647/.2647`；五门均未全过，alpha0.5/0.75/1.0输出PCM完全相同。
+- 判定：拒绝。源VUV既未降低CER又增加源泄漏，严格选择仍是alpha0；录音5保持锁定。
+- 报告链接：`report/fixed_male_source_vuv_round56_20261026.md`、`report/fixed_male_source_vuv_round56_20261026.json`。
+- 限制：只使用录音4；未播放、未录音、未接触板卡。用户要求本轮完成后停止，因此Round57未认领、未启动。
+- 下一责任方：暂停，等待用户后续指令。
+
 ### [PS-20261021-10] 源清浊时序融合 Round 56 认领
 - 日期：2026-10-26
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
