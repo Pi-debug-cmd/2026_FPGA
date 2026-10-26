@@ -1739,3 +1739,18 @@
 - 验证：exit0、90.219秒；8对/40条件/4616帧、有限值、CER及均值重算、127个不同文件大小/SHA及WAV格式/时长核对PASS。权重/统计未变；保留原ASR警告。运行后D余量378846371840 bytes/C92113235968 bytes；生成物留D项目忽略目录，无下载。
 - 限制：辅助集已用于选检查点；清单未经本轮人工复核，源ASR与清单已有13.82%差异。源画像逐句留一且不同于Fixed-Male验收，不能套用泄漏门；未算UTMOS，指标差值不能证明因果或固定男性失败根因。v2无内容改善。原五门数值/拒绝结论不变，不继续delta扫描；未读Fixed-Male音频/Track9，Python保护非OS全量审计；无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时验收。
 - 下一责任方：Remote-PS-C提交本轮证据及更新PR #11，维护者审核；既有v1/v2模型Release保持不变，Hardware-A/B不由本轮启动试听或板测。本轮停止，不新增训练。
+
+### [PS-20261025-20] v3 PCA192 单变量认领
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：CLAIMED；基准60364cb333dc0f3474797f05222a8948bbcb9e26；已fetch main9c42263ea3aa12898ad451f3c00915e816f039c4，开放PR #9/#11/#13无同任务冲突，保留已发布历史。
+- 假设/控制：v1 PCA96保留训练方差0.749045423，未知被丢弃分量是否有助内容；只将v1 pca_dim96→192，delta_weight恢复/保持v1的0.25，其余配置、数据、损失、seed、2000步上限/每100步验证/patience8、native和原五门不变。维度变化必然改变首层形状/参数量及随机数消耗，不宣称同初始化；不作维度扫描。
+- 路径/复现：拟新增build/remote_ps_c_hubert_fargan_v3.py；train --cache-root build/generated/remote_ps_c_hubert_fargan_v1，再infer和原strict evaluator；输出build/generated/remote_ps_c_hubert_fargan_v3/，正式report/ps_20261025_20_hubert_fargan_v3_20261027.*。复用现有SHA已固定语料/缓存，不新增真人音频或教师数据。
+- 量化/停止：辅助192train/8validation选检查点后只做一次Male4原五门；无结果前不承诺改善。Male1–3仅原评价源画像、不拟合；Male5/Track9锁定。先保存训练/评价轮次，再独立提交版本化交付轮次。预计完整包约200MB、独立接收环境数GB；D余量378838573056 bytes/C92046622720 bytes，全部大型资产/缓存在D项目总目录。
+- 限制/下一责任方：Remote-PS-C完成本轮和PR #11；失败同样提交，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时声明，未全过不进入WAIT_LOCAL_TEST。沿用用户已授权当前公开仓库发布完整模型包，不改规则/分配/可见性。
+
+
+### [PS-20261025-20] v3 PCA192 单变量结果
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准60364cb333dc0f3474797f05222a8948bbcb9e26；main9c42263ea3aa12898ad451f3c00915e816f039c4，开放PR #9/#11/#13无冲突。
+- 路径/复现：build/remote_ps_c_hubert_fargan_v3.py、build/run_remote_ps_c_hubert_fargan_v3.py；report/ps_20261025_20_hubert_fargan_v3_20261027.md/JSON/TXT。驱动固定train复用v1缓存、infer、原strict evaluator一次五门；完整命令与资产SHA见报告。
+- 唯一配置变量：相对v1 pca_dim96→192，delta0.25不变；保留训练方差0.862445935（v1为0.749045423），参数1155284；维度改变初始化随机数消耗，非同初始化。训练/验证192/8，最佳step400、停止1200、loss0.1972120106、271.313s。mean/y统计/分位、投影前96和旧模型/缓存保持一致。
+- 一次Male4五门：身份0.763920106/P100.747006375/泄漏0.261376895/UTMOS2.508168141/CER0.558823529；通过项{'identity': True, 'identity_p10': True, 'leakage': False, 'utmos': True, 'cer': False}。输出SHAd1fb89990a7c5cdc2a57174d1f1e0f5b5c3715239fd19c5e07594469c39cf703，mapper836a4595e6fc2bc8992107645b58a6ffd97ecdb724ef91186093009058b397aa。各阶段exit0，语法/有限JSON/格式/哈希/原评估器口径检查PASS；首次启动自动审核超时、未启动进程，重试一次成功。
+- 限制/下一责任方：辅助集选检查点，Male4开发筛选非独立验收；Male1–3只作源画像，Male5/Track9锁定。Python保护非OS全量审计，无录音/播放/真人/硬件/ARM/Vivado/RTL/PL/实时验收，不改规则/分工。Remote-PS-C另轮发布完整模型与干净下载；未全过不进入WAIT_LOCAL_TEST，不据结果追加本轮维度扫描。
