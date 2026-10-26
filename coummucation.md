@@ -99,6 +99,18 @@
 - 限制：只用8条 validation 选参，不使用 Track 9 或固定男性输入，不播放、不录音、不接触板卡。
 - 下一责任方：Hardware-A / Codex 跑完整固定网格并单独提交。
 
+### [PS-20261021-10] 非 F0 增益扩展验证 Round 49 结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：GO_GAIN_1_6
+- 基准提交：`7970f5e`
+- 修改路径：`build/sweep_world_temporal_postfilter_round46_20261026.py`、`report/world_temporal_gain_extension_round49_20261026.{md,json}`、`coummucation.md`。
+- 量化结果：gain1.6 的8句 UTMOS 为 `2.4833`，`SSB0080/SSB0434=2.6352/2.3314`；1.7和1.8总体回落，1.6是内部最优。
+- 判定：冻结 gain `1.6`，停止外推；Round50 在 Track 9 做一次严格回归。
+- 限制：未使用 Track 9 或固定男性输入；未播放、录音或接触板卡。
+- 报告链接：`report/world_temporal_gain_extension_round49_20261026.md`、`report/world_temporal_gain_extension_round49_20261026.json`。
+- 下一责任方：Hardware-A / Codex 提交 Round49；另行认领 Round50 冻结留出回归。
+
 ### [PS-20261025-20] Remote-PS-C 配对语料交付修复认领
 - 日期：2026-10-26
 - 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）

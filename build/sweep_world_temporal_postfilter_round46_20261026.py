@@ -18,7 +18,7 @@ import numpy as np  # noqa: E402
 import torch  # noqa: E402
 
 
-GAINS = (1.0, 1.1, 1.2, 1.3, 1.4)
+DEFAULT_GAINS = (1.0, 1.1, 1.2, 1.3, 1.4)
 VUV_INDEX = prior.VUV_INDEX
 NON_F0 = (slice(0, base.SP_DIM),
           slice(base.SP_DIM + 2, base.SP_DIM + 3),
@@ -38,7 +38,12 @@ def main() -> None:
     parser.add_argument("--generated-root", required=True, type=Path)
     parser.add_argument("--checkpoint", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--gains", nargs="+", type=float, default=DEFAULT_GAINS)
+    parser.add_argument("--experiment-round", type=int, default=46)
     args = parser.parse_args()
+    gains = tuple(args.gains)
+    if 1.0 not in gains or any(gain < 1.0 for gain in gains) or len(set(gains)) != len(gains):
+        raise ValueError("gains must be unique, at least 1.0, and include the 1.0 baseline")
     args.output.mkdir(parents=True, exist_ok=True)
     torch.set_num_threads(4)
 
@@ -76,7 +81,7 @@ def main() -> None:
     declaration = json.loads((corpus / "manifest.json").read_text(encoding="utf-8"))
     declared = {row["stem"]: row for split in ("train", "validation")
                 for row in declaration[split]}
-    candidates = {gain: [] for gain in GAINS}
+    candidates = {gain: [] for gain in gains}
     for record in [row for row in manifest["records"] if row["split"] == "validation"]:
         data = np.load(cache / record["cache"])
         content = data["content"].astype(np.float32)
@@ -98,7 +103,7 @@ def main() -> None:
         prediction[:, VUV_INDEX] = probability
         frames5 = int(round(record["teacher_samples"] /
                             (base.SAMPLE_RATE * base.FRAME_PERIOD_MS / 1000))) + 1
-        for gain in GAINS:
+        for gain in gains:
             filtered = prediction.copy()
             for group in NON_F0:
                 center = np.mean(filtered[:, group], axis=0, keepdims=True)
@@ -133,9 +138,9 @@ def main() -> None:
                 and row["utmos_mean"] > results[0]["utmos_mean"]
                 and all(delta >= 0.0 for delta in row["speaker_delta_from_baseline"].values())]
     selected = max(eligible, key=lambda row: row["utmos_mean"])["gain"] if eligible else None
-    summary = {"task": "PS-20261021-10", "round": 46,
+    summary = {"task": "PS-20261021-10", "round": args.experiment_round,
                "kind": "non_f0_temporal_contrast_validation_sweep",
-               "checkpoint_sha256": base.sha256(args.checkpoint), "gains": list(GAINS),
+               "checkpoint_sha256": base.sha256(args.checkpoint), "gains": list(gains),
                "validation_rows": len(baseline), "results": results,
                "selection_gate": "mean improves and neither validation speaker regresses",
                "selected_gain": selected, "track9_used": False, "fixed_male_used": False,
