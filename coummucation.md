@@ -1558,3 +1558,13 @@
 - 量化结果：Whisper revision `973afd24965f72e36ca33b3055d56a652f456b4d`，11/11 需要文件齐全，权重 966995080 字节；离线加载成功，词表 51865，参数 241734912。只验证加载，不转写/不报 CER。固定 FARGAN 训练 corpus、expanded corpus 与原始训练 corpus 路径均不存在。
 - 限制：缺少批准的 HuBERT→目标 FARGAN 配对训练特征及 manifest；没有训练、推理或五项评分，也无候选质量结论。未播放/录音、板卡、Vivado、RTL、PL、实时或真人试听。
 - 下一责任方：Remote-PS-C 待恢复有来源和 SHA 的配对训练语料后，继续电脑端方案训练与客观评测。
+### [PS-20261025-20] FARGAN 配对数据契约复核
+- 日期：2026-10-26
+- 角色/Agent：Remote-PS-C / Codex
+- 状态：BLOCKED（旧配对语料缺失，当前冻结 WAV 不构成同内容训练对）
+- 基准提交：ba48816b449a256bc5a331476999831b3ee444f6；分支 agent/ymheee/PS-20261025-20；PR #11。
+- 修改路径：report/ps_20261025_20_fargan_asset_recovery_20261026.md、coummucation.md。
+- 复现依据：阅读交接/核心材料/neural_reference/prepare_fargan_features_20261006.py、train_fargan_mapper_20261006.py；检查交接/核心材料/board_budget_20261005/fargan_corpus/manifest.json 及 recorded legacy root，均不存在。
+- 量化结果：旧训练契约要求同一内容的 source_features/teacher_features 成对数据和独立 Track 5–8 target_training anchors；当前 checkout 只有 Fixed-Male 与目标 WAV，无 teacher WAV 或逐句对齐清单。没有以文件顺序、时长或非平行录音构造伪标签。
+- 限制：任务仍未训练或推理，无五项评分和候选质量结论；未播放/录音或做板卡、Vivado、RTL、PL、实时、真人试听。
+- 下一责任方：Remote-PS-C 获取项目批准、可校验来源的 target-style teacher 生成链及同内容配对训练样本后继续；不自行引入不匹配数据或新模型。
