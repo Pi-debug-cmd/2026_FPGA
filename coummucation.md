@@ -199,6 +199,16 @@
 - 报告链接：`report/fixed_male_source_detail_round53_20261026.md`、`report/fixed_male_source_detail_round53_20261026.json`。
 - 下一责任方：Hardware-A / Codex 提交 Round53；另行认领本批最后 Round54 中阶谱验证。
 
+### [PS-20261021-10] 源中阶谱细节注入 Round 54 认领
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`8f1cb04`
+- 唯一变量：冻结 gain1.8 和 source-detail alpha0.4，只比较谱 DCT 注入起点 `20/16/12/8`，终点均为60；其余参数及评估器不变。
+- 选择/停止门：仍按五门最小比例；若五门全过，候选仅获得打开锁定录音5的资格；否则不打开录音5。本轮是本批 Round45～54 的第10轮，结果提交后停止继续试参。
+- 限制：只用录音4，不使用录音5或 Track 9；不播放、不录音、不接触板卡。
+- 下一责任方：Hardware-A / Codex 完成固定网格、提交本轮和十轮总结。
+
 ### [PS-20261025-20] Remote-PS-C 配对语料交付修复认领
 - 日期：2026-10-26
 - 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）
