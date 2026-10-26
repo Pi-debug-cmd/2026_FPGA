@@ -55,6 +55,18 @@
 - 限制：Track 9 仅作冻结后一次回归，不参与训练或重新选参；不播放、不录音、不接触板卡。
 - 下一责任方：Hardware-A / Codex 合成并严格评测，单独提交结果。
 
+### [PS-20261021-10] gain1.4 冻结 Track 9 回归 Round 47 结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线测试）
+- 状态：REJECTED_BEST_SO_FAR
+- 基准提交：`ed10a65`
+- 修改路径：`build/apply_world_temporal_postfilter_round47_20261026.py`、`report/world_temporal_postfilter_track9_round47_20261026.{md,json}`、`coummucation.md`。
+- 量化结果：Round37 基线逐位一致；gain1.4 的身份/P10/UTMOS/CER 为 `0.7138/0.6973/2.2853/0.0978`，UTMOS 相对基线 `+0.4237` 但距门槛仍差 `0.0147`。
+- 判定：身份、P10、CER 通过，UTMOS 未过；不进入固定男性转换。目标自重建不应用男性泄漏门。
+- 限制：Track 9 只在冻结后使用一次；未使用固定男性输入、未播放、录音或接触板卡。候选合成前峰值 `2.0804`，下一轮回到 validation 研究限制策略。
+- 报告链接：`report/world_temporal_postfilter_track9_round47_20261026.md`、`report/world_temporal_postfilter_track9_round47_20261026.json`。
+- 下一责任方：Hardware-A / Codex 提交 Round47；另行认领 Round48 峰值策略验证。
+
 ### [PS-20261025-20] Remote-PS-C 配对语料交付修复认领
 - 日期：2026-10-26
 - 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）

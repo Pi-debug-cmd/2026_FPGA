@@ -1,0 +1,121 @@
+"""Apply the frozen Round-46 gain to Round-37 Track-9 reconstruction."""
+from __future__ import annotations
+
+import argparse
+import json
+from pathlib import Path
+import sys
+
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "build"))
+import audit_source_prosody_round32_20261025 as prosody_audit  # noqa: E402
+import train_hubert_world_teacher_round20_20261025 as base  # noqa: E402
+import train_paired_hubert_world_gru_round26_20261025 as paired  # noqa: E402
+import numpy as np  # noqa: E402
+import torch  # noqa: E402
+
+
+GAIN = 1.4
+VUV_INDEX = paired.VUV_INDEX
+NON_F0 = (slice(0, base.SP_DIM),
+          slice(base.SP_DIM + 2, base.SP_DIM + 3),
+          slice(base.SP_DIM + 3, base.OUTPUT_DIM))
+
+
+def interpolate(values: np.ndarray, frames: int) -> np.ndarray:
+    source = np.linspace(0.0, 1.0, len(values), dtype=np.float64)
+    target = np.linspace(0.0, 1.0, frames, dtype=np.float64)
+    return np.stack([np.interp(target, source, values[:, column])
+                     for column in range(values.shape[1])], axis=1).astype(np.float32)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--asset-root", required=True, type=Path)
+    parser.add_argument("--generated-root", required=True, type=Path)
+    parser.add_argument("--checkpoint", required=True, type=Path)
+    parser.add_argument("--output", required=True, type=Path)
+    args = parser.parse_args()
+    args.output.mkdir(parents=True, exist_ok=True)
+    torch.set_num_threads(4)
+    checkpoint = torch.load(args.checkpoint, map_location="cpu", weights_only=False)
+    if checkpoint["format"] != "paired_hubert_world_causal_gru_round37_variance_matching_v1":
+        raise ValueError("Round47 requires the frozen Round37 checkpoint")
+    model = paired.ProsodyCausalWorldGRU().eval()
+    model.load_state_dict(checkpoint["model"])
+
+    hubert_dir = args.asset_root / "交接/核心材料/neural_reference/RVC/assets/hubert_base"
+    hubert = base.HubertModel.from_pretrained(hubert_dir, local_files_only=True).float().eval()
+    signal9 = base.read_16k(args.asset_root / "人物音频资料/女声/Track 9.wav")
+    content9 = base.extract_hubert(hubert, signal9)
+    world9 = base.analyze_world(signal9)
+    x9 = (((content9 - checkpoint["pca_mean"]) @ checkpoint["pca_projection"]
+           - checkpoint["x_mean"]) / checkpoint["x_std"]).astype(np.float32)
+    prosody9 = prosody_audit.resample_rows(prosody_audit.source_prosody(signal9), len(content9))
+    x9 = np.concatenate((x9, ((prosody9 - checkpoint["prosody_mean"])
+                              / checkpoint["prosody_std"]).astype(np.float32)), axis=1)
+    with torch.inference_mode():
+        raw = model(torch.from_numpy(x9[None]))[0].numpy()
+    continuous = raw * checkpoint["y_std"] + checkpoint["y_mean"]
+    probability = 1.0 / (1.0 + np.exp(-np.clip(raw[:, VUV_INDEX], -20.0, 20.0)))
+
+    anchor_targets = []
+    anchor_worlds = []
+    for number in (5, 6, 7, 8):
+        signal = base.read_16k(args.asset_root / f"人物音频资料/女声/Track {number}.wav")
+        content = base.extract_hubert(hubert, signal)
+        world = base.analyze_world(signal)
+        anchor_worlds.append(world)
+        anchor_targets.append(interpolate(world["output"], len(content)))
+    del hubert
+    anchor_y = np.concatenate(anchor_targets)
+    clip_lo = np.percentile(anchor_y, 0.1, axis=0)
+    clip_hi = np.percentile(anchor_y, 99.9, axis=0)
+    voiced = anchor_y[:, VUV_INDEX] > 0.5
+    log_sp = np.log(np.maximum(np.concatenate(
+        [row["spectrum"] for row in anchor_worlds]), 1e-8))
+    stats = {"log_f0_lo": float(np.percentile(anchor_y[voiced, base.SP_DIM], 0.5)),
+             "log_f0_hi": float(np.percentile(anchor_y[voiced, base.SP_DIM], 99.5)),
+             "log_sp_lo": float(np.percentile(log_sp, 0.05)),
+             "log_sp_hi": float(np.percentile(log_sp, 99.95))}
+
+    outputs = []
+    for name, gain in (("round37_baseline", 1.0), ("round47_non_f0_gain1_4", GAIN)):
+        filtered = continuous.copy()
+        if gain != 1.0:
+            for group in NON_F0:
+                center = np.mean(filtered[:, group], axis=0, keepdims=True)
+                filtered[:, group] = center + gain * (filtered[:, group] - center)
+        features5 = interpolate(filtered, len(world9["output"]))
+        features5 = np.clip(features5, clip_lo, clip_hi)
+        features5[:, VUV_INDEX] = (interpolate(probability[:, None], len(features5))[:, 0] - 0.5) * 8.0
+        waveform, synthesis = base.synthesize(features5, stats)
+        path = args.output / f"track9_{name}.wav"
+        base.sf.write(path, waveform, base.SAMPLE_RATE, subtype="PCM_16")
+        outputs.append({"candidate": name,
+                        "path": str(path.relative_to(ROOT)).replace("\\", "/"),
+                        "sha256": base.sha256(path), "gain": gain, "synthesis": synthesis})
+
+    frozen = args.generated_root / "hubert_world_round37_20261025/track9_paired_causal_gru_variance_matching.wav"
+    if outputs[0]["sha256"] != base.sha256(frozen):
+        raise ValueError("Round37 baseline is not bit-identical")
+    manifest = {"inputs": [{"role": "source", "path": "人物音频资料/女声/Track 9.wav"}],
+                "outputs": [{"candidate": row["candidate"], "path": row["path"]}
+                            for row in outputs]}
+    (args.output / "strict_manifest.json").write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    summary = {"task": "PS-20261021-10", "round": 47,
+               "kind": "frozen_non_f0_gain_track9_regression", "gain": GAIN,
+               "checkpoint_sha256": base.sha256(args.checkpoint),
+               "baseline_bit_identical": True, "outputs": outputs,
+               "track9_used_after_freeze": True, "track9_used_for_selection": False,
+               "fixed_male_used": False, "played": False,
+               "board_touched": False, "board_powered": False}
+    (args.output / "summary.json").write_text(
+        json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(summary, ensure_ascii=False, indent=2))
+
+
+if __name__ == "__main__":
+    main()
