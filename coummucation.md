@@ -89,6 +89,16 @@
 - 报告链接：`report/world_peak_limiter_audit_round48_20261026.md`、`report/world_peak_limiter_audit_round48_20261026.json`。
 - 下一责任方：Hardware-A / Codex 提交 Round48；另行认领 Round49 扩展增益验证。
 
+### [PS-20261021-10] 非 F0 增益扩展验证 Round 49 认领
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`2040f3b`
+- 唯一变量：保持 Round46 全部流程，只把预声明验证增益扩展为 `1.5/1.6/1.7/1.8`，并保留 `1.0/1.4` 对照；不改变参数组、checkpoint、评估器或选择规则。
+- 选择门：总体 UTMOS 最大且 `SSB0080/SSB0434` 都不低于1.0基线；若最优仍位于1.8边界，本阶段停止继续外推，避免无限追涨。
+- 限制：只用8条 validation 选参，不使用 Track 9 或固定男性输入，不播放、不录音、不接触板卡。
+- 下一责任方：Hardware-A / Codex 跑完整固定网格并单独提交。
+
 ### [PS-20261025-20] Remote-PS-C 配对语料交付修复认领
 - 日期：2026-10-26
 - 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）
