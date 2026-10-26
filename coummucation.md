@@ -67,6 +67,16 @@
 - 报告链接：`report/world_temporal_postfilter_track9_round47_20261026.md`、`report/world_temporal_postfilter_track9_round47_20261026.json`。
 - 下一责任方：Hardware-A / Codex 提交 Round47；另行认领 Round48 峰值策略验证。
 
+### [PS-20261021-10] 峰值限制可归因性 Round 48 认领
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：CLAIMED
+- 基准提交：`52ccc7e`
+- 范围：审计 `synthesize()` 的峰值限制和严格 UTMOS 输入归一化，判断 Round47 的 `peak_before_limit=2.0804` 是否会造成波形失真或可通过换限制器提升指标。
+- 判定：只有现有限制器改变相对波形或与评估归一化不等价时，才允许尝试限制策略；若只是全局线性缩放，则 NO-GO，下一轮回 validation 扩展冻结增益网格。
+- 限制：只读代码与既有证据，不训练、不合成、不使用 Track 9 新结果、固定男性输入、播放或板卡。
+- 下一责任方：Hardware-A / Codex 完成数学与代码路径核对并单独提交。
+
 ### [PS-20261025-20] Remote-PS-C 配对语料交付修复认领
 - 日期：2026-10-26
 - 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）
