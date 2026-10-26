@@ -33,6 +33,18 @@
 - 限制：不使用 Track 9、固定男性锁定句、真人试听或板卡；这是推理后处理探索，不宣称已经可用。
 - 下一责任方：Hardware-A / Codex 实现并运行验证网格，失败也单独提交。
 
+### [PS-20261021-10] 非 F0 时间对比度后滤波 Round 46 结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：GO_GAIN_1_4
+- 基准提交：`a57b54d`
+- 修改路径：`build/sweep_world_temporal_postfilter_round46_20261026.py`、`report/world_temporal_postfilter_round46_20261026.{md,json}`、`coummucation.md`。
+- 量化结果：8句 UTMOS 从 gain1.0 的 `2.0055` 单调升至 gain1.4 的 `2.4082`；`SSB0080/SSB0434` 分别提升 `+0.4166/+0.3889`，通过两个说话人均不退步门。
+- 判定：冻结 gain `1.4`，不扩展验证网格；Round47 仅在 Track 9 做一次严格身份/P10/UTMOS/CER回归。
+- 限制：未使用 Track 9 或固定男性输入；未播放、录音或接触板卡，尚未宣称保底可用。
+- 报告链接：`report/world_temporal_postfilter_round46_20261026.md`、`report/world_temporal_postfilter_round46_20261026.json`。
+- 下一责任方：Hardware-A / Codex 提交 Round46；另行认领 Round47 冻结留出回归。
+
 ### [PS-20261025-20] Remote-PS-C 配对语料交付修复认领
 - 日期：2026-10-26
 - 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）

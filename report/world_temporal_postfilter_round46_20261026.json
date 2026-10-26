@@ -1,0 +1,29 @@
+{
+  "task": "PS-20261021-10",
+  "round": 46,
+  "date": "2026-10-26",
+  "status": "GO_GAIN_1_4",
+  "single_variable": "shared temporal contrast gain on spectrum, energy and aperiodicity",
+  "checkpoint_sha256": "efcda700ddc0e769ebcf4eb5afae8ff14528c21dd800d737a78c577e973bd2a2",
+  "validation_rows": 8,
+  "results": [
+    {"gain": 1.0, "utmos_mean": 2.005453662844155, "SSB0080": 2.120511472225189, "SSB0434": 1.8903958534631204},
+    {"gain": 1.1, "utmos_mean": 2.149106730743656, "SSB0080": 2.2802340388298035, "SSB0434": 2.0179794226575085},
+    {"gain": 1.2, "utmos_mean": 2.249874936196748, "SSB0080": 2.393744945526123, "SSB0434": 2.1060049268673726},
+    {"gain": 1.3, "utmos_mean": 2.3330608955987797, "SSB0080": 2.4714004397392273, "SSB0434": 2.1947213514583317},
+    {"gain": 1.4, "utmos_mean": 2.4082264355787144, "SSB0080": 2.5371488332748413, "SSB0434": 2.279304037882587}
+  ],
+  "selected_gain": 1.4,
+  "selected_delta_from_baseline": {
+    "utmos_mean": 0.4027727727345594,
+    "SSB0080": 0.4166373610496521,
+    "SSB0434": 0.3889081844194666
+  },
+  "selection_gate": "overall mean improves and neither validation speaker regresses",
+  "training_started": false,
+  "track9_used": false,
+  "fixed_male_used": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}
