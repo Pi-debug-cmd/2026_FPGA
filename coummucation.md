@@ -165,6 +165,18 @@
 - 限制：只使用录音4选固定男性专用配置；不使用录音5、Track 9、播放、录音或板卡。
 - 下一责任方：Hardware-A / Codex 完成固定网格与严格评测并单独提交。
 
+### [PS-20261021-10] 固定男性专用 gain 选择 Round 52 结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED_GAIN_ONLY
+- 基准提交：`d19fa04`
+- 修改路径：`build/apply_world_temporal_postfilter_round47_20261026.py`、`report/fixed_male_gain_sweep_round52_20261026.{md,json}`、`coummucation.md`。
+- 量化结果：gain1.4 的 UTMOS `2.3109` 通过但泄漏/CER=`0.1306/0.25` 失败；gain1.8 是唯一泄漏通过点 `0.0960`，但 UTMOS/CER=`2.2371/0.3382` 失败。无候选五门全过。
+- 判定：停止 gain-only 路线；Round53 冻结 gain1.8，只扫描源高阶谱 DCT `20:60` 的细节注入比例 `0～0.4`，针对CER且保留低阶目标音色。
+- 限制：只用录音4，未使用录音5或 Track 9；未播放、录音或接触板卡。
+- 报告链接：`report/fixed_male_gain_sweep_round52_20261026.md`、`report/fixed_male_gain_sweep_round52_20261026.json`。
+- 下一责任方：Hardware-A / Codex 提交 Round52；另行认领 Round53 高阶谱细节验证。
+
 ### [PS-20261025-20] Remote-PS-C 配对语料交付修复认领
 - 日期：2026-10-26
 - 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）

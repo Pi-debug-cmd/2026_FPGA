@@ -36,12 +36,14 @@ def main() -> None:
     parser.add_argument("--checkpoint", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--gain", type=float, default=1.4)
+    parser.add_argument("--gains", nargs="+", type=float)
     parser.add_argument("--experiment-round", type=int, default=47)
     parser.add_argument("--source-relative", default="人物音频资料/女声/Track 9.wav")
     parser.add_argument("--candidate-label")
     args = parser.parse_args()
-    if args.gain <= 1.0:
-        raise ValueError("postfilter gain must be greater than 1.0")
+    gains = tuple(args.gains) if args.gains else (args.gain,)
+    if any(gain < 1.0 for gain in gains) or len(set(gains)) != len(gains):
+        raise ValueError("postfilter gains must be unique and at least 1.0")
     args.output.mkdir(parents=True, exist_ok=True)
     torch.set_num_threads(4)
     checkpoint = torch.load(args.checkpoint, map_location="cpu", weights_only=False)
@@ -89,7 +91,11 @@ def main() -> None:
 
     outputs = []
     label = args.candidate_label or f"round{args.experiment_round}_non_f0_gain{str(args.gain).replace('.', '_')}"
-    variants = (("round37_baseline", 1.0), (label, args.gain)) if source_is_track9 else ((label, args.gain),)
+    if args.gains:
+        variants = tuple((f"round{args.experiment_round}_fixed_male_gain{str(gain).replace('.', '_')}", gain)
+                         for gain in gains)
+    else:
+        variants = (("round37_baseline", 1.0), (label, args.gain)) if source_is_track9 else ((label, args.gain),)
     for name, gain in variants:
         filtered = continuous.copy()
         if gain != 1.0:
@@ -118,7 +124,8 @@ def main() -> None:
     (args.output / "strict_manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     summary = {"task": "PS-20261021-10", "round": args.experiment_round,
-               "kind": "frozen_non_f0_gain_track9_regression", "gain": args.gain,
+               "kind": "frozen_non_f0_gain_track9_regression",
+               "gain": args.gain if not args.gains else None, "gains": list(gains),
                "checkpoint_sha256": base.sha256(args.checkpoint),
                "baseline_bit_identical": baseline_bit_identical, "outputs": outputs,
                "source_relative": args.source_relative,

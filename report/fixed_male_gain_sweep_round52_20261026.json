@@ -1,0 +1,24 @@
+{
+  "task": "PS-20261021-10",
+  "round": 52,
+  "date": "2026-10-26",
+  "status": "REJECTED_GAIN_ONLY",
+  "source": "人物音频资料/男声/标准录音 4.wav",
+  "gains": [1.0, 1.2, 1.4, 1.6, 1.8],
+  "rows": [
+    {"gain": 1.0, "identity": 0.7207, "identity_p10": 0.7040, "leakage": 0.1661, "utmos": 1.8120, "cer": 0.3235},
+    {"gain": 1.2, "identity": 0.7411, "identity_p10": 0.7224, "leakage": 0.1510, "utmos": 2.1461, "cer": 0.3235},
+    {"gain": 1.4, "identity": 0.7274, "identity_p10": 0.7129, "leakage": 0.1306, "utmos": 2.3109, "cer": 0.2500},
+    {"gain": 1.6, "identity": 0.6946, "identity_p10": 0.6766, "leakage": 0.1046, "utmos": 2.2746, "cer": 0.2500},
+    {"gain": 1.8, "identity": 0.6566, "identity_p10": 0.6299, "leakage": 0.0960, "utmos": 2.2371, "cer": 0.3382}
+  ],
+  "all_gates_passed": false,
+  "selection_by_existing_score": 1.4,
+  "only_leakage_pass_gain": 1.8,
+  "decision": "Stop gain-only tuning. Freeze gain 1.8 for a source high-order spectral-detail sweep because it is the only point with leakage margin.",
+  "track9_used": false,
+  "locked_recording5_used": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}
