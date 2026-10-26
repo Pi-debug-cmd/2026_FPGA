@@ -1568,3 +1568,15 @@
 - 量化结果：旧训练契约要求同一内容的 source_features/teacher_features 成对数据和独立 Track 5–8 target_training anchors；当前 checkout 只有 Fixed-Male 与目标 WAV，无 teacher WAV 或逐句对齐清单。没有以文件顺序、时长或非平行录音构造伪标签。
 - 限制：任务仍未训练或推理，无五项评分和候选质量结论；未播放/录音或做板卡、Vivado、RTL、PL、实时、真人试听。
 - 下一责任方：Remote-PS-C 获取项目批准、可校验来源的 target-style teacher 生成链及同内容配对训练样本后继续；不自行引入不匹配数据或新模型。
+
+### [PS-20261025-20] Teacher 来源与固定运行资产恢复重试
+- 日期：2026-10-26
+- 角色/Agent：Remote-PS-C / Codex
+- 状态：BLOCKED（数据路径已定位；固定 CosyVoice 源码/权重无法下载，未生成 teacher）
+- 基准提交：`856973c6a5dfd9f1ebc8de727330dbcb7628ad22`；分支 `agent/ymheee/PS-20261025-20`；PR #11。
+- 修改路径：`report/ps_20261025_20_teacher_source_recovery_20261026.md`、`coummucation.md`。
+- 复现命令：见报告；任务资产目录内检查无 CosyVoice 文件，`127.0.0.1:7890` 当前无监听，直连 pinned source `git ls-remote` 返回 `Recv failure: Connection was reset`。
+- 量化结果：归档中的目标 prompt 为 Track 6 前 8 秒，记录 SHA-256 `4651ab56a9b285c0d645bd6f0b94f7987e6ed8bd5171e54c37048b436e177c8f`、1,536,080 字节。由规范 Track 6 直接裁前 8 秒并保存为 PCM16 得到 1,536,044 字节、SHA-256 `9755f0cfac29bd42c0628ec6707f0df7dcd09c15149a95db3d1d4729261f7361`，未匹配归档文件，故不冒称其为原件。男声 1～5 与目标 Track 5～9 均在仓库且受控批准。
+- 固定版本：CosyVoice source `074ca6dc9e80a2f424f1f74b48bdd7d3fea531cc`、模型 `29e01c4e8d000f4bcd70751be16fa94bf3d85a18`；本机未找到对应源码/权重。现有 PyTorch 环境为 CPU 版。
+- 限制：未生成 teacher WAV/配对训练样本、未训练、未推理、未运行五项指标，无模型质量结论。未播放/录音、板卡、Vivado、RTL、PL、Cortex-A9 或实时测试。
+- 下一责任方：Remote-PS-C 在本机网络恢复后获取且校验固定 CosyVoice 源码/权重，再按原固定切分生成 teacher pairs；Track 9 保持锁定，不替换模型或数据。
