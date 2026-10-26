@@ -11,6 +11,18 @@
 - 限制：不使用固定男性锁定句或 Track 9 选参，不播放、不录音、不接触板卡；板卡可保持关机。
 - 下一责任方：Hardware-A / Codex 完成 Round45 报告并单独提交；随后按结论认领 Round46。
 
+### [PS-20261021-10] Round43 跨句 F0 收益归因 Round 45 结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：NO_GO_F0_NORMALIZATION
+- 基准提交：`aa6dcad`
+- 修改路径：`report/round43_f0_gain_attribution_round45_20261026.{md,json}`、`coummucation.md`。
+- 量化结果：Round43 相对 Round37 的 UTMOS 在 `SSB0434/SSB0080` 上分别为 `-0.04219/+0.03868`；UTMOS 增量与 F0 标准差/动态比更接近教师的相关系数为 `-0.4296/-0.6819`，不存在跨说话人同向解释。
+- 判定：禁止继续扫描 F0 权重或加入说话人/句子自适应 F0 归一化；回退 Round37，Round46 研究验证集选择的可部署非 F0 参数协同后处理。
+- 限制：未训练、推理、合成或重新使用 Track 9；未使用固定男性输入、未播放，板卡保持关机。
+- 报告链接：`report/round43_f0_gain_attribution_round45_20261026.md`、`report/round43_f0_gain_attribution_round45_20261026.json`。
+- 下一责任方：Hardware-A / Codex 提交 Round45；另行认领 Round46 单变量后处理验证。
+
 ### [PS-20261025-20] Remote-PS-C 配对语料交付修复认领
 - 日期：2026-10-26
 - 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）
