@@ -1580,3 +1580,14 @@
 - 固定版本：CosyVoice source `074ca6dc9e80a2f424f1f74b48bdd7d3fea531cc`、模型 `29e01c4e8d000f4bcd70751be16fa94bf3d85a18`；本机未找到对应源码/权重。现有 PyTorch 环境为 CPU 版。
 - 限制：未生成 teacher WAV/配对训练样本、未训练、未推理、未运行五项指标，无模型质量结论。未播放/录音、板卡、Vivado、RTL、PL、Cortex-A9 或实时测试。
 - 下一责任方：Remote-PS-C 在本机网络恢复后获取且校验固定 CosyVoice 源码/权重，再按原固定切分生成 teacher pairs；Track 9 保持锁定，不替换模型或数据。
+
+### [PS-20261025-20] 网络与提交重试
+- 日期：2026-10-26
+- 角色/Agent：Remote-PS-C / Codex
+- 状态：BLOCKED（7890 无监听；FlClash 启动后立即退出；提交未推送）
+- 基准提交：`ee3316a057094ad7ebe7859884043cdc7c8dc026`；分支 `agent/ymheee/PS-20261025-20`；PR #11。
+- 修改路径：`report/ps_20261025_20_network_retry_20261026.md`、`coummucation.md`。
+- 复现命令：见报告；配置仍声明 `127.0.0.1:7890`，启动 `D:\FlClash\FlClash.exe` 返回 0 但无进程/监听；无代理直连 push 报 `getaddrinfo() thread failed to start`。
+- 量化结果：无新增训练、推理、音频或五门指标；本地分支仍比远端任务分支多 1 个提交。
+- 限制：固定 CosyVoice 源码/权重与历史配对语料仍缺，未使用替代数据或模型；无板卡、Vivado、RTL、PL、Cortex-A9、实时或真人试听结论。
+- 下一责任方：恢复可工作的代理或直接网络及 GitHub 凭证后，推送现有提交并继续固定 teacher 资产恢复。
