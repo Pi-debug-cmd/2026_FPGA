@@ -1,0 +1,44 @@
+
+=== initial setup failure ===
+Initial v2 delivery attempt, 2026-10-26. Captured tool output:
+Traceback (most recent call last):
+  File "D:\fpga\.git-repair\build\generated\remote_ps_c_publish_v2.py", line 48, in <module>
+    download.mkdir(exist_ok=False)
+  File "D:\UserData\home\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'D:\\fpga\\receive-check\\PS-20261025-20-hubert-fargan-v2\\github-download'
+
+Release upload and server digest verification had completed. No model download or inference had started.
+Correction: create the versioned receive parent before creating the strict empty github-download child.
+The retry reuses and verifies the existing immutable Release asset; it does not overwrite it.
+
+=== GitHub download and verification ===
+OPEN_PRS [{"number": 13, "title": "PS-20261021-10: continue fallback optimization rounds 45-54", "head": "agent/Pi-debug-cmd/PS-20261021-10", "sha": "6998adb9683e2c13d37f4acb80b116f91cc7dfe7"}, {"number": 11, "title": "PS-20261025-20: archive rejected FARGAN v1, delivery and feature diagnosis", "head": "agent/ymheee/PS-20261025-20", "sha": "0a8ae4e261cc098cc8c489a12865d9c28452fe64"}, {"number": 9, "title": "DOCS-20261024-02: 登记 GPT+Codex 远端 PS 合作者", "head": "agent/Pi-debug-cmd/DOCS-20261024-02", "sha": "dcdaf87ef618921b6ac8eb787f52ea4410d60a05"}]
+Cloning into 'D:\fpga\receive-check\PS-20261025-20-hubert-fargan-v2\download-code'...
+done.
+HEAD is now at 0a8ae4e PS-20261025-20: reject delta-weight v2 on unchanged quality gates
+DELIVERY_DOWNLOAD_VERIFIED {"source_commit": "0a8ae4e261cc098cc8c489a12865d9c28452fe64", "tag": "model-PS-20261025-20-hubert-fargan-v2", "attachment": "PS-20261025-20_hubert_fargan_v2_windows_cpu.zip", "bytes": 198735391, "sha256": "a669cb614dc4f71090b898da48e7fc127fbf016892dc3d655be1a535042a4441", "files": 466, "uncompressed_bytes": 239453461, "release_url": "https://github.com/Pi-debug-cmd/2026_FPGA/releases/tag/model-PS-20261025-20-hubert-fargan-v2", "asset_url": "https://github.com/Pi-debug-cmd/2026_FPGA/releases/download/model-PS-20261025-20-hubert-fargan-v2/PS-20261025-20_hubert_fargan_v2_windows_cpu.zip", "asset_api_url": "https://api.github.com/repos/Pi-debug-cmd/2026_FPGA/releases/assets/678641359", "asset_id": 678641359, "server_digest": "sha256:a669cb614dc4f71090b898da48e7fc127fbf016892dc3d655be1a535042a4441", "tag_target_verified": true, "private_repository": false, "public_authorization": "2026-10-26 user: \u6388\u6743\u5728\u5f53\u524d\u516c\u5f00\u4ed3\u5e93\u53d1\u5e03\u5b8c\u6574\u6a21\u578b\u5305", "draft": false, "prerelease": true, "download_sha256_verified": true, "download_bytes_verified": true, "all_internal_files_verified": 466, "clean_checkout": "D:\\fpga\\receive-check\\PS-20261025-20-hubert-fargan-v2\\download-code", "dependency_runtime": "D:\\fpga\\receive-check\\PS-20261025-20-hubert-fargan-v2\\runtime", "dependency_setup": "fresh venv with locked site-packages copied; no pip/network reinstall claimed", "checkout_method": "fresh git shared clone, detached exact already-pushed commit; model downloaded from GitHub API"}
+
+=== independent environment and smoke setup ===
+{"source_commit": "0a8ae4e261cc098cc8c489a12865d9c28452fe64", "tag": "model-PS-20261025-20-hubert-fargan-v2", "attachment": "PS-20261025-20_hubert_fargan_v2_windows_cpu.zip", "bytes": 198735391, "sha256": "a669cb614dc4f71090b898da48e7fc127fbf016892dc3d655be1a535042a4441", "files": 466, "uncompressed_bytes": 239453461, "release_url": "https://github.com/Pi-debug-cmd/2026_FPGA/releases/tag/model-PS-20261025-20-hubert-fargan-v2", "asset_url": "https://github.com/Pi-debug-cmd/2026_FPGA/releases/download/model-PS-20261025-20-hubert-fargan-v2/PS-20261025-20_hubert_fargan_v2_windows_cpu.zip", "asset_api_url": "https://api.github.com/repos/Pi-debug-cmd/2026_FPGA/releases/assets/678641359", "asset_id": 678641359, "server_digest": "sha256:a669cb614dc4f71090b898da48e7fc127fbf016892dc3d655be1a535042a4441", "tag_target_verified": true, "private_repository": false, "public_authorization": "2026-10-26 user: 授权在当前公开仓库发布完整模型包", "draft": false, "prerelease": true, "download_sha256_verified": true, "download_bytes_verified": true, "all_internal_files_verified": 466, "clean_checkout": "D:\\fpga\\receive-check\\PS-20261025-20-hubert-fargan-v2\\download-code", "dependency_runtime": "D:\\fpga\\receive-check\\PS-20261025-20-hubert-fargan-v2\\runtime", "dependency_setup": "fresh independent venv; copied locked installed libraries; fresh pip install not tested", "checkout_method": "fresh git shared clone, detached exact already-pushed commit; model downloaded from GitHub API", "task": "PS-20261025-20", "date": "2026-10-26", "role": "Remote-PS-C", "quality_status": "REJECTED", "delivery_status": "VERIFIED_GITHUB_DOWNLOAD_AND_INFERENCE", "release_published": true, "github_download_tested": true, "github_download_smoke": "PASS", "runtime": {"exit_code": 0, "wall_seconds": 53.75668010000663, "original_generated_access_attempts": [], "modules": {"numpy": "D:\\fpga\\receive-check\\PS-20261025-20-hubert-fargan-v2\\runtime\\Lib\\site-packages\\numpy\\__init__.py", "scipy": "D:\\fpga\\receive-check\\PS-20261025-20-hubert-fargan-v2\\runtime\\Lib\\site-packages\\scipy\\__init__.py", "soundfile": "D:\\fpga\\receive-check\\PS-20261025-20-hubert-fargan-v2\\runtime\\Lib\\site-packages\\soundfile.py", "torch": "D:\\fpga\\receive-check\\PS-20261025-20-hubert-fargan-v2\\runtime\\Lib\\site-packages\\torch\\__init__.py", "transformers": "D:\\fpga\\receive-check\\PS-20261025-20-hubert-fargan-v2\\runtime\\Lib\\site-packages\\transformers\\__init__.py"}, "peak_working_set_bytes": 1110630400, "peak_pagefile_bytes": 2384629760, "memory_scope": "Python inference process only; native child not included", "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]", "prefix": "D:\\fpga\\receive-check\\PS-20261025-20-hubert-fargan-v2\\runtime", "board_touched": false, "played": false}, "inference": {"samples": 291200, "peak": 0.488525390625, "rms": 0.070537006879904, "sha256": "9e7f37895e8188b96909edad73b140fbcf5e7a14ebd3c1202605a27b339745e7", "clipping_fraction": 0.0, "task": "PS-20261025-20", "source_sha256": "f4a026e5c97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c", "source_samples": 291200, "frames": 1820, "inference_seconds": 2.75, "rtf_host_full_chain": 0.15109890109890112, "mapper_sha256": "610f592539fd51420409ca413e04232f3cd20da57f885957d050c6157569791c", "native_sha256": "0e5eb4d457741820564d4397e0b69f8dd58b25c896259bb66d8e84fb88a3dc14", "male5_used": false, "target_track9_used": false, "played": false, "board_touched": false}, "audio_format": {"sample_rate": 16000, "channels": 1, "sample_width_bytes": 2, "samples": 291200}, "output_hash_matches_original": true, "metrics_rerun": false, "metrics_reuse_reason": "Downloaded-package output WAV SHA equals the original v2 strict evaluation WAV", "visibility_changed": false, "allocation_or_rules_changed": false, "local_test_handoff_allowed": false, "command": "../runtime/Scripts/python.exe build/remote_ps_c_hubert_fargan_v2.py infer --assets bundle --output bundle --native bundle/native/fargan_probe_host.exe"}
+
+=== clean inference raw output ===
+{
+  "samples": 291200,
+  "peak": 0.488525390625,
+  "rms": 0.070537006879904,
+  "sha256": "9e7f37895e8188b96909edad73b140fbcf5e7a14ebd3c1202605a27b339745e7",
+  "clipping_fraction": 0.0,
+  "task": "PS-20261025-20",
+  "source_sha256": "f4a026e5c97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c",
+  "source_samples": 291200,
+  "frames": 1820,
+  "inference_seconds": 2.75,
+  "rtf_host_full_chain": 0.15109890109890112,
+  "mapper_sha256": "610f592539fd51420409ca413e04232f3cd20da57f885957d050c6157569791c",
+  "native_sha256": "0e5eb4d457741820564d4397e0b69f8dd58b25c896259bb66d8e84fb88a3dc14",
+  "male5_used": false,
+  "target_track9_used": false,
+  "played": false,
+  "board_touched": false
+}

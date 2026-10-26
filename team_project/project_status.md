@@ -117,3 +117,12 @@
 - 唯一训练变量：delta loss 0.25→1.0；其余配置逐项相同，200 缓存 SHA 已核验，重算统计数组与 v1 完全相同；v1 权重/统计/缓存不变。辅助 validation 最优step400、停止step1200、损失0.2605001032、272.828秒；跨权重总损失不可直接比较。
 - 一次 Male4 原五门：身份 0.778145609 / P10 0.755978229 / 泄漏 0.255133692 / UTMOS 2.574109713 / CER 0.235294118；通过项 {'identity': True, 'identity_p10': True, 'leakage': False, 'utmos': True, 'cer': False}。输出SHA 9e7f37895e8188b96909edad73b140fbcf5e7a14ebd3c1202605a27b339745e7；mapper 610f592539fd51420409ca413e04232f3cd20da57f885957d050c6157569791c。
 - 限制/下一责任方：仅电脑端；辅助192train/8validation，未拟合Fixed-Male1–3；Male5/Track9锁定；无参数扫描/门槛更改/录音/播放/试听/板卡/ARM/Vivado/RTL/PL/实时验收。Remote-PS-C 完成版本化模型归档与干净下载；未全过不进入 WAIT_LOCAL_TEST，不给Hardware-A/B启动板测。
+
+
+### [PS-20261025-20] v2 完整 Release 与干净下载结果
+- 日期：2026-10-26；角色：Remote-PS-C / Codex；基准/源码 0a8ae4e261cc098cc8c489a12865d9c28452fe64；状态：交付 VERIFIED_GITHUB_DOWNLOAD_AND_INFERENCE，质量 REJECTED；PR #11。
+- 授权/资产：沿用用户“授权在当前公开仓库发布完整模型包”；https://github.com/Pi-debug-cmd/2026_FPGA/releases/tag/model-PS-20261025-20-hubert-fargan-v2；附件 PS-20261025-20_hubert_fargan_v2_windows_cpu.zip，198735391 bytes，SHA a669cb614dc4f71090b898da48e7fc127fbf016892dc3d655be1a535042a4441。标签指向精确源码，server digest/下载大小/SHA及466个内部文件全匹配；无WAV/语料/缓存，v1未改。
+- 路径/复现：report/ps_20261025_20_github_model_receipt_v2_20261026.md/JSON/TXT（完整下载/校验/依赖/推理命令）；model_delivery_PS-20261025-20_hubert_fargan_v2_20261026.json（逐文件SHA）；独立新目录执行 build/remote_ps_c_hubert_fargan_v2.py infer --assets bundle --output bundle --native bundle/native/fargan_probe_host.exe。状态/工作日志同步追加。
+- 量化：干净GitHub下载推理exit0，2.750s/RTF0.151098901，封装53.756680s；16kHz mono PCM16/291200 samples，输出SHA 9e7f37895e8188b96909edad73b140fbcf5e7a14ebd3c1202605a27b339745e7 与本轮五门原WAV完全相同，未重新评分。Python峰值工作集1110630400 bytes/pagefile2384629760 bytes，不含native子进程。
+- 失败保留：首次上传后/下载前缺少接收父目录报WinError3；创建父目录后核对同一附件，未覆盖发布。日志保留失败及最终成功；独立venv复制锁定库，未测试新pip安装；同机隔离复验，非第二台实体电脑。
+- 限制/下一责任方：身份0.778145609/P10 0.755978229/泄漏0.255133692/UTMOS2.574109713/CER0.235294118，泄漏/CER仍失败，非WAIT_LOCAL_TEST。Remote-PS-C保存证据，Hardware-A/B不启动试听/板测；Male5/Track9锁定，无录音/播放/真人/ARM/Vivado/RTL/PL/实时验收，未改分配/规则/可见性。
