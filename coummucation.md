@@ -177,6 +177,16 @@
 - 报告链接：`report/fixed_male_gain_sweep_round52_20261026.md`、`report/fixed_male_gain_sweep_round52_20261026.json`。
 - 下一责任方：Hardware-A / Codex 提交 Round52；另行认领 Round53 高阶谱细节验证。
 
+### [PS-20261021-10] 源高阶谱细节注入 Round 53 认领
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`0432a9d`
+- 唯一变量：冻结 gain1.8，只把录音4源 WORLD 谱 DCT 高阶 `20:60` 按 `0/0.1/0.2/0.3/0.4` 比例注入预测；目标低阶谱 `0:20`、log-F0、VUV、能量、AP、checkpoint和评估器不变。
+- 选择门：五门最小达成比例优先；只有身份/P10/泄漏/UTMOS/CER全过才允许最后 Round54 打开锁定录音5，否则 Round54 记录10轮停止结论而不污染锁定集。
+- 限制：只用录音4选参，不使用录音5或 Track 9；不播放、不录音、不接触板卡。
+- 下一责任方：Hardware-A / Codex 完成固定细节网格并单独提交。
+
 ### [PS-20261025-20] Remote-PS-C 配对语料交付修复认领
 - 日期：2026-10-26
 - 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）
