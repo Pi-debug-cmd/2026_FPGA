@@ -1,0 +1,32 @@
+{
+  "task": "PS-20261025-20",
+  "status": "PROPOSED",
+  "purpose": "Remote-PS-C HuBERT-to-FARGAN paired training corpus",
+  "release": {
+    "repository": "Pi-debug-cmd/2026_FPGA",
+    "tag": "asset-PS-20261025-20-paired-corpus-v1",
+    "asset": "PS-20261025-20_paired_hubert_fargan_corpus_v1.zip",
+    "bytes": 125109914,
+    "sha256": "956dead3c76b1e214cc6baf5a1dca0b7e083eebb2771e417b722df6e2181366c",
+    "target_commit": null
+  },
+  "corpus": {
+    "rows": 200,
+    "train": 192,
+    "validation": 8,
+    "data_files": 800,
+    "sample_rate": 16000,
+    "pcm_format": "mono float32 little-endian",
+    "feature_format": "frame-major float32, 20 columns",
+    "target_track9_used": false,
+    "teacher_human_quality_accepted": false
+  },
+  "local_clean_extract_verification": {
+    "result": "PASS 200 800",
+    "directory": "build/generated/receive_check_20261026_1540"
+  },
+  "limits": [
+    "No training or objective evaluation is claimed by this delivery round.",
+    "No listening, Cortex-A9, PL, board, or realtime gate is claimed."
+  ]
+}

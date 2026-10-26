@@ -12,6 +12,17 @@
 - 限制：不替 Remote-PS-C 训练、推理或给出质量结论；不接触板卡、Vivado、RTL、PL、播放或录音。
 - 下一责任方：Hardware-A / Codex 完成可重复下载的资产交付；Remote-PS-C 在自己的非系统盘干净目录校验后解除 BLOCKED。
 
+### [PS-20261025-20] Remote-PS-C 配对语料便携包
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）
+- 状态：PROPOSED
+- 基准提交：`ba48816b449a256bc5a331476999831b3ee444f6`
+- 改动路径：`tools/package_remote_ps_c_fargan_corpus.py`、`report/ps_20261025_20_paired_corpus_delivery_20261026.{md,json}`
+- 结果：生成 200 对（192 train / 8 validation）便携语料，含 800 个数据文件；ZIP 为 `125109914` bytes，SHA-256 `956dead3c76b1e214cc6baf5a1dca0b7e083eebb2771e417b722df6e2181366c`。
+- 复现命令：见 `report/ps_20261025_20_paired_corpus_delivery_20261026.md`；新目录本机解包校验输出 `PASS 200 800`。
+- 限制：本轮仅修复跨电脑资产缺口；未运行训练/推理/客观评测，未宣称试听、Cortex-A9、PL、板卡或实时通过。
+- 下一责任方：Hardware-A 发布私有 Release 并从 Release 空目录下载复验；通过后 Remote-PS-C 从 PR #11 继续训练与离线客观评测。
+
 ### [DOCS-20261025-01] 三写作者按候选方案分流认领
 - 日期：2026-10-25
 - 角色/Agent：Maintainer / Codex
