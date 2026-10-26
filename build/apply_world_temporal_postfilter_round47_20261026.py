@@ -16,7 +16,6 @@ import numpy as np  # noqa: E402
 import torch  # noqa: E402
 
 
-GAIN = 1.4
 VUV_INDEX = paired.VUV_INDEX
 NON_F0 = (slice(0, base.SP_DIM),
           slice(base.SP_DIM + 2, base.SP_DIM + 3),
@@ -36,7 +35,11 @@ def main() -> None:
     parser.add_argument("--generated-root", required=True, type=Path)
     parser.add_argument("--checkpoint", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--gain", type=float, default=1.4)
+    parser.add_argument("--experiment-round", type=int, default=47)
     args = parser.parse_args()
+    if args.gain <= 1.0:
+        raise ValueError("postfilter gain must be greater than 1.0")
     args.output.mkdir(parents=True, exist_ok=True)
     torch.set_num_threads(4)
     checkpoint = torch.load(args.checkpoint, map_location="cpu", weights_only=False)
@@ -81,7 +84,8 @@ def main() -> None:
              "log_sp_hi": float(np.percentile(log_sp, 99.95))}
 
     outputs = []
-    for name, gain in (("round37_baseline", 1.0), ("round47_non_f0_gain1_4", GAIN)):
+    label = f"round{args.experiment_round}_non_f0_gain{str(args.gain).replace('.', '_')}"
+    for name, gain in (("round37_baseline", 1.0), (label, args.gain)):
         filtered = continuous.copy()
         if gain != 1.0:
             for group in NON_F0:
@@ -105,8 +109,8 @@ def main() -> None:
                             for row in outputs]}
     (args.output / "strict_manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    summary = {"task": "PS-20261021-10", "round": 47,
-               "kind": "frozen_non_f0_gain_track9_regression", "gain": GAIN,
+    summary = {"task": "PS-20261021-10", "round": args.experiment_round,
+               "kind": "frozen_non_f0_gain_track9_regression", "gain": args.gain,
                "checkpoint_sha256": base.sha256(args.checkpoint),
                "baseline_bit_identical": True, "outputs": outputs,
                "track9_used_after_freeze": True, "track9_used_for_selection": False,

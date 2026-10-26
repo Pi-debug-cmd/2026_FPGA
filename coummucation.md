@@ -121,6 +121,18 @@
 - 限制：不再根据 Track 9 调参；目标自重建不应用男性泄漏门。不播放、不录音、不接触板卡。
 - 下一责任方：Hardware-A / Codex 完成一次冻结回归并单独提交。
 
+### [PS-20261021-10] gain1.6 冻结 Track 9 回归 Round 50 结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线测试）
+- 状态：PASS_TARGET_RECONSTRUCTION
+- 基准提交：`6b32195`
+- 修改路径：`build/apply_world_temporal_postfilter_round47_20261026.py`、`report/world_temporal_gain_track9_round50_20261026.{md,json}`、`coummucation.md`。
+- 量化结果：身份/P10/男性质心余弦/UTMOS/CER=`0.6847/0.6643/0.0863/2.3814/0.1087`；目标重建适用四门全部通过，基线逐位一致。
+- 判定：目标参数预测与WORLD合成链首次达到电脑端门；Round51 冻结同一候选转换固定男性 validation 录音4，届时男性泄漏门正式适用。
+- 限制：本轮不是固定男性转换，不能宣称保底方案已通过；未播放、录音或接触板卡。
+- 报告链接：`report/world_temporal_gain_track9_round50_20261026.md`、`report/world_temporal_gain_track9_round50_20261026.json`。
+- 下一责任方：Hardware-A / Codex 提交 Round50；另行认领 Round51 固定男性 validation 转换。
+
 ### [PS-20261025-20] Remote-PS-C 配对语料交付修复认领
 - 日期：2026-10-26
 - 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）
