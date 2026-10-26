@@ -45,6 +45,16 @@
 - 报告链接：`report/world_temporal_postfilter_round46_20261026.md`、`report/world_temporal_postfilter_round46_20261026.json`。
 - 下一责任方：Hardware-A / Codex 提交 Round46；另行认领 Round47 冻结留出回归。
 
+### [PS-20261021-10] gain1.4 冻结 Track 9 回归 Round 47 认领
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线测试）
+- 状态：CLAIMED
+- 基准提交：`cea7c0c`
+- 唯一变量：把 Round46 已冻结的非 F0 时间对比度 gain `1.4` 应用于 Round37 的 Track 9 重建；不得调整增益或其他参数。
+- 验收：用既定严格评估器报告身份、P10、UTMOS、CER；目标自重建不应用男性泄漏门。四项全部过门才允许进入固定男性转换，否则保留证据并继续 Round48。
+- 限制：Track 9 仅作冻结后一次回归，不参与训练或重新选参；不播放、不录音、不接触板卡。
+- 下一责任方：Hardware-A / Codex 合成并严格评测，单独提交结果。
+
 ### [PS-20261025-20] Remote-PS-C 配对语料交付修复认领
 - 日期：2026-10-26
 - 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）
