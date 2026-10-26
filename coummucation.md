@@ -1676,3 +1676,19 @@
 - 改动/复现：`report/ps_20261025_20_github_model_receipt_20261026.md`（完整下载/校验/环境/推理命令）、同名 JSON、原始 smoke TXT、model_delivery JSON（保留历史本地测试）、状态/工作日志、`coummucation.md`。
 - 限制：同一电脑隔离接收测试，不是第二台实体电脑实测；非因果离线候选，电脑速度/内存不代表板端。男性 5/Track9 保持锁定。无播放/录音/试听/板卡/Cortex-A9/Vivado/RTL/PL/实时验收。
 - 下一责任方：Remote-PS-C 保存失败 v1 与完整交付证据；Hardware-A/B 不据此启动试听或板测，后续仍须独立通过全部客观门。
+
+### [PS-20261025-20] v1 配对标签及动态误差诊断认领
+- 日期：2026-10-26；角色：Remote-PS-C / Codex；状态：CLAIMED；基准 `fdade89b7cbf2aa6e8d1546e957535aca8ec7ae8`，main `9c42263ea3aa12898ad451f3c00915e816f039c4`。已 fetch 并核对 PR #9/#11/#13，无同路线新增冲突；保留已发布分支历史，不 rebase。
+- 范围：只诊断本任务 v1；逐项校验既有配对资产，以同一 host 分析器重新提取 source/teacher 特征，检查标签一致性及能量时移；在既有辅助 validation 8 对上比较冻结 mapper 与 train-mean 基线的逐维误差/方差/一阶差分。固定 ±300ms 能量相关仅作诊断，不据此自动对齐或选参。
+- 路径/复现：拟新增 `build/diagnose_remote_ps_c_fargan_v1.py`，命令 `build/generated/remote_ps_c_env/Scripts/python.exe build/diagnose_remote_ps_c_fargan_v1.py`；小型证据进入 `report/ps_20261025_20_feature_diagnostic_20261026.{json,md}`，生成物留 `build/generated/remote_ps_c_diagnostic_v1/`。
+- 量化结果：待运行；不训练新权重，不重复 Fixed-Male4 选参，不读取 Male5/Track9；五项门槛保持原样，v1 质量仍 REJECTED。
+- 限制/下一责任方：Remote-PS-C 按证据提出单变量下一轮；不播放、录音、试听或运行板卡/Cortex-A9/Vivado/RTL/PL，不进入 WAIT_LOCAL_TEST。
+
+### [PS-20261025-20] v1 配对标签及动态误差诊断结果
+- 日期：2026-10-26；角色：Remote-PS-C / Codex；基准 `fdade89b7cbf2aa6e8d1546e957535aca8ec7ae8`；状态：诊断 PASS，候选质量仍 REJECTED。
+- 改动/复现：`build/diagnose_remote_ps_c_fargan_v1.py`；执行 `build/generated/remote_ps_c_env/Scripts/python.exe build/diagnose_remote_ps_c_fargan_v1.py`；报告 `report/ps_20261025_20_feature_diagnostic_20261026.{md,json,txt}`，状态/日志同步追加。报告含已交付包+配对 corpus 重建缓存步骤。
+- 数据结果：800 个资产大小/SHA 匹配、200 个缓存 target 与 teacher 截断前缀逐元素相同。400 次重提取的逐句 MAE 均值 source 0.0007785375 / teacher 0.0005537752；倒谱 0–17 MAE 1.39e-7/1.92e-7，但全局最大差 1.702459217/1.282008648，逐句最大差全部落在音高/周期相关维度，不能宣称历史逐位一致。
+- 对齐结果：200 对零时移能量相关均值 0.862052121，最佳时移绝对值中位数 0ms/P90 10ms/最大 20ms；只作固定 ±300ms 诊断，没有移动训练标签，不能证明逐音素对齐。
+- 模型结果：冻结辅助 validation 8 对/4616 帧，归一化 MAE 0.452730745 vs 训练均值基线 0.806939065；20 维 MSE 均优于常数基线。维度 14–18 的差分 RMS 比 teacher 为 0.266/0.270/0.329/0.228/0.263，提示动态偏弱，但未证明这是 CER/泄漏根因，也不能排除 teacher 分析抖动。最终退出 0、26.734 秒；此前 WinError623 与诊断类型错误已保留原始失败记录并修正执行/输入类型。
+- 限制：没有新权重、训练或新五门评分；原身份/P10/泄漏/UTMOS/CER 仍 0.778814512/0.751711670/0.252929151/2.418009599/0.235294118，泄漏/CER 失败。未读取 Fixed-Male/目标 WAV，Male5/Track9 锁定；无试听/硬件/实时验收，非 WAIT_LOCAL_TEST。
+- 下一责任方：Remote-PS-C；下一候选可只改 delta loss 权重 0.25→1.0，沿用其余训练规则，在辅助 validation 选 checkpoint 后仅做一次 Male4 原口径筛选；该候选本轮尚未训练。Hardware-A/B 不据此进入板测。

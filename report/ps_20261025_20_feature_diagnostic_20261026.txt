@@ -1,0 +1,152 @@
+RUN: build/generated/remote_ps_c_diagnostic_v1_run.log
+Traceback (most recent call last):
+  File "D:\fpga\.git-repair\build\diagnose_remote_ps_c_fargan_v1.py", line 164, in <module>
+    main()
+  File "D:\fpga\.git-repair\build\diagnose_remote_ps_c_fargan_v1.py", line 80, in main
+    subprocess.run([str(NATIVE), "--features", str(prefix.with_suffix(".pcm")),
+  File "D:\UserData\home\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\subprocess.py", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\UserData\home\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "D:\UserData\home\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\subprocess.py", line 1538, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [WinError 623] {无效的系统 DLL 重定位}
+
+系统 DLL %hs 在内存中重定位。应用程序将不能正常运行。
+
+由于 DLL %hs 占用了为 Windows 系统 DLL 保存的地址范围而产生了错误。应当与提供该 DLL 的供应商联系以得到新的 DLL。
+
+RUN: build/generated/remote_ps_c_diagnostic_v1_native_run.log
+{"checked_pairs": 1, "elapsed_seconds": 0.25}
+{"checked_pairs": 25, "elapsed_seconds": 4.764999999999418}
+{"checked_pairs": 50, "elapsed_seconds": 9.014999999999418}
+{"checked_pairs": 75, "elapsed_seconds": 13.125}
+{"checked_pairs": 100, "elapsed_seconds": 18.264999999999418}
+{"checked_pairs": 125, "elapsed_seconds": 22.656000000002678}
+{"checked_pairs": 150, "elapsed_seconds": 27.343000000008033}
+{"checked_pairs": 175, "elapsed_seconds": 32.828000000008615}
+Traceback (most recent call last):
+  File "D:\fpga\.git-repair\build\diagnose_remote_ps_c_fargan_v1.py", line 164, in <module>
+    main()
+  File "D:\fpga\.git-repair\build\diagnose_remote_ps_c_fargan_v1.py", line 103, in main
+    normalized = model(torch.from_numpy(x)[None])[0].numpy()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\fpga\.git-repair\build\generated\remote_ps_c_env\Lib\site-packages\torch\nn\modules\module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\fpga\.git-repair\build\generated\remote_ps_c_env\Lib\site-packages\torch\nn\modules\module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\fpga\.git-repair\build\remote_ps_c_hubert_fargan.py", line 140, in forward
+    return self.output(self.gru(self.input(x))[0])
+                                ^^^^^^^^^^^^^
+  File "D:\fpga\.git-repair\build\generated\remote_ps_c_env\Lib\site-packages\torch\nn\modules\module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\fpga\.git-repair\build\generated\remote_ps_c_env\Lib\site-packages\torch\nn\modules\module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\fpga\.git-repair\build\generated\remote_ps_c_env\Lib\site-packages\torch\nn\modules\container.py", line 240, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "D:\fpga\.git-repair\build\generated\remote_ps_c_env\Lib\site-packages\torch\nn\modules\module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\fpga\.git-repair\build\generated\remote_ps_c_env\Lib\site-packages\torch\nn\modules\module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\fpga\.git-repair\build\generated\remote_ps_c_env\Lib\site-packages\torch\nn\modules\linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: mat1 and mat2 must have the same dtype, but got Double and Float
+
+RUN: build/generated/remote_ps_c_diagnostic_v1_verified_run.log
+{"checked_pairs": 1, "elapsed_seconds": 0.125}
+{"checked_pairs": 25, "elapsed_seconds": 3.2659999999887077}
+{"checked_pairs": 50, "elapsed_seconds": 6.327999999994063}
+{"checked_pairs": 75, "elapsed_seconds": 9.5}
+{"checked_pairs": 100, "elapsed_seconds": 12.171999999991385}
+{"checked_pairs": 125, "elapsed_seconds": 15.405999999988126}
+{"checked_pairs": 150, "elapsed_seconds": 19.0}
+{"checked_pairs": 175, "elapsed_seconds": 22.671999999991385}
+{"checked_pairs": 200, "elapsed_seconds": 26.687999999994645}
+{
+  "pairs": 200,
+  "asset_hash_checks": 800,
+  "validation_frames": 4616,
+  "reextraction": {
+    "source": {
+      "mae": {
+        "count": 200,
+        "mean": 0.0007785374871309614,
+        "median": 0.0007433713180944324,
+        "p90": 0.0012392043601721526,
+        "max": 0.002008823212236166
+      },
+      "max_abs_error": {
+        "count": 200,
+        "mean": 0.864673318862915,
+        "median": 0.8904320299625397,
+        "p90": 1.3824170112609864,
+        "max": 1.7024592161178589
+      },
+      "fraction_abs_error_over_0_01": {
+        "count": 200,
+        "mean": 0.0068487994827111124,
+        "median": 0.006761672741926621,
+        "p90": 0.009488529799271488,
+        "max": 0.013343108504398828
+      }
+    },
+    "teacher": {
+      "mae": {
+        "count": 200,
+        "mean": 0.0005537751783413114,
+        "median": 0.0005293751892168075,
+        "p90": 0.0008315000275615602,
+        "max": 0.0013109403662383556
+      },
+      "max_abs_error": {
+        "count": 200,
+        "mean": 0.5345200107246637,
+        "median": 0.5190501809120178,
+        "p90": 0.8546750128269195,
+        "max": 1.2820086479187012
+      },
+      "fraction_abs_error_over_0_01": {
+        "count": 200,
+        "mean": 0.005845417838836292,
+        "median": 0.005776181649675626,
+        "p90": 0.007706942355889724,
+        "max": 0.01025236593059937
+      }
+    }
+  },
+  "energy_lag": {
+    "method": "natural log of 10 ms PCM mean-square energy, floor 1e-8; fixed source support excluding 30 edge frames; teacher offsets -30..30 frames; positive=teacher later; no data shifted",
+    "zero_lag": {
+      "count": 200,
+      "mean": 0.86205212069721,
+      "median": 0.884509342315046,
+      "p90": 0.9251669491417909,
+      "max": 0.9536652542068611
+    },
+    "absolute_best_lag_ms": {
+      "count": 200,
+      "mean": 4.55,
+      "median": 0.0,
+      "p90": 10.0,
+      "max": 20.0
+    },
+    "gain": {
+      "count": 200,
+      "mean": 0.0045507078762809985,
+      "median": 0.0,
+      "p90": 0.012818089319467384,
+      "max": 0.056802167128919834
+    }
+  },
+  "elapsed_seconds": 26.73399999999674
+}

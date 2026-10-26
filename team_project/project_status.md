@@ -107,3 +107,5 @@
 2026-10-26 Remote-PS-C / PS-20261025-20：修复 portable CLI 路径后，完整模型归档 198734997 bytes/466 文件在新干净检出本地 smoke PASS，输出 SHA 与评价 WAV 相同。质量仍 REJECTED；线上交付 BLOCKED：仓库 API 显示公开，与私有 Release 约束冲突，尚未上传模型。证据：`report/ps_20261025_20_model_archive_local_smoke_20261026.md` 及 model_delivery JSON；下一步仅在交付位置明确后做线上下载复现。
 
 2026-10-26 Remote-PS-C / PS-20261025-20：用户明确授权当前公开仓库发布完整模型包后，已发布 `model-PS-20261025-20-hubert-fargan-v1`（源码 94d2aa2、198734997 bytes、SHA 9532fe32d5ab707a51662b224f82a95abba901d9fc4fcc4276cedd0cf2ca4e6a），GitHub 空目录重新下载/466 文件校验/干净检出推理 PASS，输出 SHA 与原评价完全相同。交付 VERIFIED，质量仍 REJECTED（泄漏/CER），不进入 WAIT_LOCAL_TEST。完整接收证据和复现命令：`report/ps_20261025_20_github_model_receipt_20261026.md`；保留此前阻塞历史，未改规则/可见性/分工，无试听或硬件验收。
+
+2026-10-26 Remote-PS-C / PS-20261025-20：冻结 v1 完成 200 对配对特征诊断，800 项 SHA 和缓存 target 全匹配；重新提取的倒谱 MAE 约 1e-7，音高/周期相关存在局部差异，不宣称历史逐位一致。能量最佳时移最大 20ms，不能代替音素对齐验证。辅助 validation 8 对/4616 帧归一化 MAE 0.452731 vs 常数基线 0.806939，部分高阶倒谱及音高差分动态偏弱。证据：`report/ps_20261025_20_feature_diagnostic_20261026.md`/JSON/TXT。没有新训练或五门评分，质量仍 REJECTED，无试听/板测；下一单变量候选待 Remote-PS-C 执行。
