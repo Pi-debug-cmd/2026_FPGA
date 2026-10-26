@@ -133,6 +133,16 @@
 - 报告链接：`report/world_temporal_gain_track9_round50_20261026.md`、`report/world_temporal_gain_track9_round50_20261026.json`。
 - 下一责任方：Hardware-A / Codex 提交 Round50；另行认领 Round51 固定男性 validation 转换。
 
+### [PS-20261021-10] 固定男性 validation 转换 Round 51 认领
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线测试）
+- 状态：CLAIMED
+- 基准提交：`394ffbb`
+- 唯一变量：输入从目标 Track 9 改为冻结的 `人物音频资料/男声/标准录音 4.wav`；Round37 checkpoint、gain1.6、目标锚点、合成器和严格评估器全部不变。
+- 验收：正式应用身份≥0.45、P10≥0.35、男性泄漏≤0.10、UTMOS≥2.30、CER≤0.15五门；全部通过才允许 Round52 使用锁定录音5。
+- 限制：录音4是 validation，不得据其结果重新调 gain；不播放、不录音、不接触板卡。
+- 下一责任方：Hardware-A / Codex 完成固定男性 validation 文件转换并单独提交。
+
 ### [PS-20261025-20] Remote-PS-C 配对语料交付修复认领
 - 日期：2026-10-26
 - 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）
