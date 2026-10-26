@@ -77,6 +77,18 @@
 - 限制：只读代码与既有证据，不训练、不合成、不使用 Track 9 新结果、固定男性输入、播放或板卡。
 - 下一责任方：Hardware-A / Codex 完成数学与代码路径核对并单独提交。
 
+### [PS-20261021-10] 峰值限制可归因性 Round 48 结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：NO_GO_LIMITER_TUNING
+- 基准提交：`a443ee7`
+- 修改路径：`report/world_peak_limiter_audit_round48_20261026.{md,json}`、`coummucation.md`。
+- 量化/代码结果：合成器只做全局 `0.98/peak` 线性缩放；UTMOS 前处理再归一到 RMS `0.04`，正比例增益严格抵消，预期 UTMOS 改变量为 `0`。
+- 判定：不调峰值限制器；Round49 回到原8条 validation，预声明扩展 gain `1.5～1.8`，仍执行两个说话人均不退步门。
+- 限制：只读代码与既有证据；没有训练、合成新音频或重新使用 Track 9，未用固定男性输入、播放或板卡。
+- 报告链接：`report/world_peak_limiter_audit_round48_20261026.md`、`report/world_peak_limiter_audit_round48_20261026.json`。
+- 下一责任方：Hardware-A / Codex 提交 Round48；另行认领 Round49 扩展增益验证。
+
 ### [PS-20261025-20] Remote-PS-C 配对语料交付修复认领
 - 日期：2026-10-26
 - 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）

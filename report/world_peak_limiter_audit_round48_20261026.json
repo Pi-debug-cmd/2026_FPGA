@@ -1,0 +1,20 @@
+{
+  "task": "PS-20261021-10",
+  "round": 48,
+  "date": "2026-10-26",
+  "status": "NO_GO_LIMITER_TUNING",
+  "observed_peak_before_limit": 2.080354530701595,
+  "synthesis_limiter": "if peak > 0.98: signal *= 0.98 / peak",
+  "utmos_preprocess": "normalized = clip * 0.04 / rms(clip)",
+  "derivation": "For positive scalar k, (k*x)*0.04/rms(k*x) equals x*0.04/rms(x).",
+  "relative_waveform_changed": false,
+  "expected_utmos_change_from_global_gain_only": 0.0,
+  "decision": "Do not tune the peak limiter. Continue on validation with a separately declared extension of the temporal-contrast gain range.",
+  "training_started": false,
+  "new_audio_generated": false,
+  "track9_reused": false,
+  "fixed_male_used": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}
