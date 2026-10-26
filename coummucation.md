@@ -187,6 +187,18 @@
 - 限制：只用录音4选参，不使用录音5或 Track 9；不播放、不录音、不接触板卡。
 - 下一责任方：Hardware-A / Codex 完成固定细节网格并单独提交。
 
+### [PS-20261021-10] 源高阶谱细节注入 Round 53 结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED_HIGH_ORDER_DETAIL
+- 基准提交：`5b88ca4`
+- 修改路径：`build/apply_world_temporal_postfilter_round47_20261026.py`、`report/fixed_male_source_detail_round53_20261026.{md,json}`、`coummucation.md`。
+- 量化结果：alpha0.2 的身份/P10/泄漏/UTMOS/CER=`0.6506/0.6252/0.0920/2.2579/0.3235`；alpha0.4 UTMOS最高 `2.2849`、泄漏 `0.0881`，但CER `0.3382`。
+- 判定：高阶20:60细节不解决内容门；Round54 冻结 gain1.8/alpha0.4，仅把谱注入起点比较 `20/16/12/8`，然后结束本批10轮。
+- 限制：只用录音4，未使用录音5或 Track 9；未播放、录音或接触板卡。
+- 报告链接：`report/fixed_male_source_detail_round53_20261026.md`、`report/fixed_male_source_detail_round53_20261026.json`。
+- 下一责任方：Hardware-A / Codex 提交 Round53；另行认领本批最后 Round54 中阶谱验证。
+
 ### [PS-20261025-20] Remote-PS-C 配对语料交付修复认领
 - 日期：2026-10-26
 - 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）
