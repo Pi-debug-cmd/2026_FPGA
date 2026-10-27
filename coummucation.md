@@ -1799,3 +1799,11 @@
 - 量化：WNS+0.283ns/WHS+0.040ns，0失败端点/黑盒/DRC Error，bus skew全MET；swap SHA9a7a45027c087a43ce2a3809945317cd892725a2ac1f891ba3db92f61cfaeee9。
 - 限制：外部3输入/6输出延时仍未完全约束，DRC警告/建议保留；位流校验传输中，当前原厂PL/服务停止；尚无compact板端性能结论，无新录放。
 - 下一责任方：Hardware-A / Codex 完成192次probe与全路径文件、定速滞后比较，再选择候选模式。
+
+### [PL-20261027-01] Round 10 compact板测：数值通过、整链性能仍拒绝
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（数值/局部开销下降），REJECTED（整链性能）。
+- 实现：`bfbc3d0`，签核`17df24f`；证据：`report/world_fft_compact_board_round10_20261027.{md,json}`及load JSON。
+- 复现：同runner两输入各7路径；192次probe含compact，最坏relativeL2 5.617e-8；CPU输出逐字节一致、FFT最大误差1、组合3/2，零exp fallback/零削顶。
+- 量化：2048接口累计0.784→0.637s（约-18.9%），但male1 cache+exp2.583090s/compact+exp2.626509s，male4 2.566616/2.604988s；仍不能默认FFT。
+- 内核状态：热切换出现xlnx_formatter_pcm_remove Bad of_node_put引用告警，后续注册与全部测试成功；完整日志保留，不宣称反复热切安全。后续切换前正常重启恢复驱动状态。
+- 限制：候选驻留、服务停止，无新录放或高实时验收；下一责任方Hardware-A / Codex继续静默定速滞后和DMA开销优化，必要时用JTAG/正常重启回原厂。
