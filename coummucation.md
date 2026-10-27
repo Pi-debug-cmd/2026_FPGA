@@ -2269,3 +2269,15 @@
 - 复现：prepare/train/candidate/evaluate --experiment-round 93 --asset-root <asset-root>，evaluate --cer-normalizer opencc；准备后核对hidden384、dropout0.20、model.train与语法。
 - 限制：CPU离线，ASR参考非人工真值；无播放、录音、板测、Cortex-A9/PL或实时结论。
 - 下一责任方：Hardware-A / Codex 完成训练评测并单轮提交。完成后35/50，最多Round108。
+
+
+### [PS-20261021-10] 历轮收益复盘与Round93中止
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED / ROUND93_ABORTED。
+- 基准提交：a0a2b4e；用户要求从近百轮提取经验，停止无收益的小步调参。
+- 事实：Round93在特征准备阶段中止，进程34436已退出，未产出checkpoint/候选/指标；不计作完成音质评测，不扩充50轮预算。Round59～92已完成34轮。
+- 修改路径与报告：report/training_progress_retrospective_20261027.md、coummucation.md。
+- 复现：逐项读取报告内所列Round23/26/28/33/37/46/47/49/52及69/88～92；本次为既有证据复盘，无新训练。
+- 量化结论：扩展配对监督CER0.3804→0.1522（多变量混杂）；多尺度监督0.1522→0.1087；方差匹配UTMOS1.7038→1.8616；gain1.4验证UTMOS2.0055→2.4082。近期增crop/PCA/锚点/宽度均退步，不能继续局部扫描。
+- 更正：Seed9/18历史上客观过五门，但用户试听否决；当前无最终验收通过方案，不等于从未客观过门。目标自重建与真正男转女证据必须区分。
+- 限制：历史部分轮次无独立报告，未声称所有轮次统一复算；CER参考为ASR，不能替代人工真值或听感。无新音频、锁定集、现场或RTL/PL操作。
+- 下一责任方：Hardware-A / Codex 先审计非锁定公共教师内容上限、错误时段和源专用监督覆盖，获得机制证据后才提出下一训练轮；不自动启动dropout或进一步调权。
