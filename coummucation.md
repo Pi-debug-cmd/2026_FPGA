@@ -2407,3 +2407,22 @@
 - 复现：Python3.12 build/restore_cosyvoice3_assets_20261027.py --workspace D:/2026_FPGA_teacher_workspace；源码/依赖版本见report/cosyvoice3_teacher_restore_20261027.md。
 - 限制：venv重用本机torch，尚非可跨电脑交付包；未训练/合成/播放/板测，未读锁定音频；不增加训练轮预算。
 - 下一责任方：Hardware-A / Codex 完成依赖校验并用训练录音离线检验教师内容，再确定源专用监督训练。
+
+### [PS-20261021-10] 固定男声训练素材教师烟测认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准提交：7e7602d；范围：依赖/权重校验后，仅对允许训练录音1～3做native VC教师生成；目标使用已有target_t6_8s.wav，SHA4651ab56…177c8f。
+- 修改路径：build/generate_fixed_male_teacher_20261027.py；输出D:/2026_FPGA_teacher_workspace/runs/fixed_male_teacher_20261027，正式结果后续report。
+- 复现：教师venv Python build/generate_fixed_male_teacher_20261027.py --asset-root <main> --workspace D:/2026_FPGA_teacher_workspace --recordings 1 2 3。
+- 判据：精确资产SHA、strict权重加载、有限非空输出、正确源/目标哈希与时长，随后独立ASR内容检查；通过烟测不等于配对质量或五门通过。
+- 限制：无ASR转TTS、无波形时间拉伸、不用录音4/5或Track9、不播放/板测、不训练学生；无源专用监督有效性结论。
+- 下一责任方：Hardware-A / Codex 完成生成与内容诊断后确定是否可进入源专用训练。
+
+### [PS-20261021-10] 教师烟测结果与用户暂停交接
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED / USER_PAUSED。
+- 基准提交：7e7602d；用户明确“今天先到这里吧”，持久目标已暂停，不再启动训练/评测。
+- 修改路径：build/generate_fixed_male_teacher_20261027.py、build/audit_fixed_male_teacher_content_20261027.py、report/fixed_male_teacher_{generation,content}_20261027.json、coummucation.md。
+- 已验证：14个模型文件下载校验完成，strict完整权重加载通过；配置导入/GPU运算通过；录音1～3教师生成退出0，时长18.04/16.76/19.52秒，峰值CUDA约1.99GB，生成耗时6.71/4.61/4.56秒。tokenizer ONNX回退CPU，flow/声码器GPU。
+- 内容评测：暂停时查询session94922已自然完成退出0，三段相对源ASR为11/73、17/70、18/67编辑，合计46/210=0.219048。不是人工金标准；教师内容尚不满足直接无条件作为优质监督的证据，不启动学生训练。
+- 复现：教师venv Python build/generate_fixed_male_teacher_20261027.py --asset-root <main> --workspace D:/2026_FPGA_teacher_workspace --recordings 1 2 3；Python3.12 build/audit_fixed_male_teacher_content_20261027.py --asset-root <main> --generation <teacher-workspace>/runs/fixed_male_teacher_20261027/generation.json --output <teacher-workspace>/runs/fixed_male_teacher_20261027/content_audit.json。
+- 限制：无试听、板测或五门结论；不读录音4/5或Track9，无新学生训练轮；原Round108上限不变。所有大文件保存在D盘任务目录；用户RTL/PL保留。
+- 下一责任方：用户恢复后Hardware-A核查教师逐句识别差异与局部对齐，判断是否适用监督；不直接恢复参数扫描。当前无本任务活跃训练/下载/评测进程。
