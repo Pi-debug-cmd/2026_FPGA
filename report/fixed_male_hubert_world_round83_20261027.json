@@ -1,0 +1,24 @@
+{
+  "task": "PS-20261021-10",
+  "round": 83,
+  "date": "2026-10-27",
+  "status": "REJECTED",
+  "baseline_commit": "671ddd3",
+  "source": {"path": "人物音频资料/男声/标准录音 4.wav", "sha256": "f4a0265ec97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c"},
+  "training": {"checkpoint_source_round": 82, "checkpoint_sha256": "2d69a00d00c21674de7578c03185d325294386504fe7100e242253a04ca0fc9b", "gain": 1.6, "unique_change": "source VUV alpha 0.10; no retraining", "target_track9_used": false},
+  "candidate": {"path": "build/generated/hubert_world_round83_20261027/candidates/round83_source_vuv0_1.wav", "sha256": "746879f49f330f33e81facfe133f3eeb7c581281f2682a457167b29b5bf9c404", "source_vuv_alpha": 0.1},
+  "metrics": {"identity_mean": 0.6990, "identity_p10": 0.6764, "source_leakage": 0.0993, "utmos": 2.3515, "cer": 0.3235},
+  "gates": {
+    "identity_mean": {"threshold": 0.45, "passed": true},
+    "identity_p10": {"threshold": 0.35, "passed": true},
+    "source_leakage": {"threshold": 0.1, "passed": true},
+    "utmos": {"threshold": 2.3, "passed": true},
+    "cer": {"threshold": 0.15, "passed": false}
+  },
+  "evaluation": {"cer_normalizer": "identity OpenCC compatibility shim", "target_track9_used": false, "recording5_used": false, "played": false, "board_touched": false},
+  "limitations": ["CER remains limited by the identity OpenCC compatibility shim and source Whisper transcript.", "No local listening, Cortex-A9, RTL, PL, or real-time result is claimed."],
+  "reproduction": {
+    "candidate": "python build/apply_world_temporal_postfilter_round47_20261026.py --asset-root . --generated-root build/generated --checkpoint build/generated/hubert_world_round82_20261027/paired_causal_gru.pt --output build/generated/hubert_world_round83_20261027/candidates --gain 1.6 --experiment-round 83 --source-vuv-alphas 0.1 --source-relative '人物音频资料/男声/标准录音 4.wav'",
+    "strict_evaluation": "Python 3.12 build/evaluate_seed_fixed_male_strict_20261024.py --asset-root . --manifest build/generated/hubert_world_round83_20261027/candidates/strict_manifest.json --output build/generated/hubert_world_round83_20261027/strict_evaluation.json; identity OpenCC shim injected."
+  }
+}

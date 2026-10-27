@@ -1967,6 +1967,30 @@
 - 报告链接：`report/fixed_male_hubert_world_round82_20261027.md`、`report/fixed_male_hubert_world_round82_20261027.json`。
 - 下一责任方：Hardware-A / Codex 转向内容保持后处理的单变量测试，优先围绕Round82模型评估可逆的VUV/内容平滑设置。
 
+### [PS-20261021-10] HuBERT/WORLD Round 83 源VUV后处理
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`671ddd3`
+- 唯一变量：冻结Round82 checkpoint与gain1.6，仅将预测VUV与录音4源WORLD VUV按源权重0.10混合；不重训、不注入源谱/音高/能量/AP。
+- 成功标准：固定录音4严格五门全部通过；否则记录泄漏、CER和自然度变化并拒绝。
+- 数据边界：只用男性标准录音4评估；Track9和录音5继续锁定，不用于选择或训练。
+- 复现入口：`build/apply_world_temporal_postfilter_round47_20261026.py --source-vuv-alphas 0.1` 与严格评测器；结果报告记录候选SHA。
+- 限制：不播放、不录音、不接触板卡，不声明试听、Cortex-A9、RTL/PL或实时通过。
+- 下一责任方：Hardware-A / Codex 完成本轮候选生成、严格评估并提交单轮结果。
+
+### [PS-20261021-10] HuBERT/WORLD Round 83 源VUV后处理
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`671ddd3`
+- 唯一变量：冻结Round82 checkpoint与gain1.6，仅将预测VUV与录音4源WORLD VUV按源权重0.10混合；不重训、不注入源谱/音高/能量/AP。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.6990/0.6764/0.0993/2.3515/0.3235`；身份、P10、泄漏、UTMOS通过，CER失败。候选SHA-256 `746879f49f330f33e81facfe133f3eeb7c581281f2682a457167b29b5bf9c404`。
+- 修改路径：`report/fixed_male_hubert_world_round83_20261027.{md,json}`、`coummucation.md`。
+- 限制：identity OpenCC shim；录音5、Track9未用于训练或筛选；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round83_20261027.md`、`report/fixed_male_hubert_world_round83_20261027.json`。
+- 下一责任方：Hardware-A / Codex 继续针对内容保持，优先测试不注入源VUV的输出内容后处理。
+
 ### [PS-20261021-10] HuBERT/WORLD Round 81 VUV 损失权重
 - 日期：2026-10-27
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
