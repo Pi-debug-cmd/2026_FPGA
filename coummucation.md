@@ -1555,3 +1555,12 @@
 - 量化：100MHz WNS+1.391ns/WHS+0.036ns，零失败端点/黑盒/DRC Error；8026LUT/13283FF/6BRAM/9DSP，bus skew最小裕量+8.996ns。
 - 限制：外部音频/I2C延时约束未完全签核；仍有DRC Warning/Advisory。位流已校验传输，尚未加载或进行PL板测。
 - 报告：`report/world_exp_implementation_20261027.md`、同名JSON；下一责任方：Hardware-A / Codex 执行静默硬件数值与文件回归。
+
+### [PL-20261027-01] 临时加载后的声卡就绪检查竞态
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：REJECTED（切换脚本就绪检查，非RTL数值）。
+- 基准提交：`20344a5`；改动：`board/world_exp_switch.py`、`report/world_exp_load_race_20261027.json`。
+- 复现：报告所记校验SHA的`world_exp_switch.py --load`；恢复位流已核验。解绑旧PL消费者后候选已成功加载、FPGA operating。
+- 失败：bind返回后立即断言`/dev/snd/controlC0`，与声卡异步注册/udev生成竞态；随后只读检查card0及所有PCM节点齐全、FPGA仍operating。未打开音频或DMA，未请求现场试听。
+- 修复：增加最多15秒的节点就绪等待；新增`--keep-stopped`允许静默恢复原厂位流，避免恢复服务自动提示音未经当轮确认。
+- 限制：当前仍是候选位流、音频服务停止，尚未有DMA/PL语音结果；不能把就绪检查失败写成硬件加速通过。
+- 下一责任方：Hardware-A / Codex 使用当前已就绪声卡完成静默DMA与文件测试；失败即静默恢复。

@@ -10,6 +10,7 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+import time
 
 FACTORY_SHA = '16cb36f7161935896615ad12b000597088a6a9745856611162f1c44a51f82a61'
 AUDIO = [('platform', 'xlnx_snd_card', 'xlnx_snd_card.0.auto'),
@@ -83,6 +84,8 @@ def main():
     mode.add_argument('--load', type=Path)
     mode.add_argument('--restore', action='store_true')
     p.add_argument('--sha256')
+    p.add_argument('--keep-stopped', action='store_true',
+                   help='Restore FPGA/drivers without the audible v23 startup cue')
     args = p.parse_args()
     base = args.base
     if args.prepare:
@@ -151,6 +154,9 @@ def main():
                 break
         if pending:
             raise RuntimeError('Driver restore pending: %r' % pending)
+        deadline = time.monotonic() + 15
+        while not Path('/dev/snd/controlC0').exists() and time.monotonic() < deadline:
+            time.sleep(0.1)
         assert Path('/dev/snd/controlC0').exists()
         run('alsactl', '-f', str(base/'mixer_before.state'), 'restore', '0')
         stage('drivers_bound')
@@ -158,8 +164,11 @@ def main():
         stage('FAILED_run_restore_immediately')
         raise
     if args.restore:
-        run('/etc/init.d/world-voice', 'start')
-        stage('factory_and_v23_restored')
+        if args.keep_stopped:
+            stage('factory_restored_audio_service_stopped')
+        else:
+            run('/etc/init.d/world-voice', 'start')
+            stage('factory_and_v23_restored')
     else:
         stage('candidate_ready_audio_service_stopped')
 
