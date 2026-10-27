@@ -1865,3 +1865,16 @@
 - 报告链接：`report/fixed_male_hubert_world_round74_20261027.md`、`report/fixed_male_hubert_world_round74_20261027.json`。
 - 下一责任方：Hardware-A / Codex 改变训练数据的目标锚点比例。
 
+### [PS-20261021-10] HuBERT/WORLD Round 75 目标锚点比例
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`ccc53f98a0519b14b5089f4b63b3ad3ee39a6bf7`
+- 唯一变量：目标自重建锚点采样概率由 0.25 降至 0.15；动态权重 1.25、固定种子和其他结构不变。验证 early stopping 在 step1200 选 checkpoint，训练历史到 step1600 停止。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.6839/0.6559/0.1117/2.3876/0.5000`；泄漏与 CER 未过门。Checkpoint SHA-256 `da359e8caa8a03f27211cd1fc02a2a509e2fad50e44565365c98649c24af6104`；候选 PCM16 SHA-256 `23b61c5ebbab4b4a16170baca47d44f812f4e301ca8fa618d7ef878531f51623`。
+- 修改路径：`report/fixed_male_hubert_world_round75_20261027.{md,json}`、`coummucation.md`。
+- 复现命令：见 `report/fixed_male_hubert_world_round75_20261027.json`；本轮锚点概率为训练运行时改写为 0.15。
+- 限制：identity OpenCC shim；录音5、Track 9 未用于选参；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL 或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round75_20261027.md`、`report/fixed_male_hubert_world_round75_20261027.json`。
+- 下一责任方：Hardware-A / Codex 继续电脑端固定男性方案探索。
+
