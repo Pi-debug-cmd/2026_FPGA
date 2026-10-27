@@ -1,0 +1,27 @@
+[
+  {
+    "output": "stopped process in pidfile '/var/run/world-voice.pid' (pid 914)\nworld-voice stopped\nbr#",
+    "command": "/etc/init.d/world-voice stop",
+    "exit": 0
+  },
+  {
+    "output": "br# br#",
+    "command": "cd /tmp/codex_deepseek_ds01",
+    "exit": 0
+  },
+  {
+    "output": "br# xlnx_formatter_pcm 43c40000.audio_formatter: stream 0 : format = 1 mode = 3 ch_limit = 2\nPlaying raw data 'tone.raw' : Signed 24 bit Little Endian, Rate 32wm8960 0-001a: slave mode, but proceeding with no clock configuration\n000 Hz, Stereo\nbr#",
+    "command": "aplay -D default -t raw -f S24_LE -r 32000 -c 2 tone.raw",
+    "exit": 0
+  },
+  {
+    "output": "br# xlnx_formatter_pcm 43c40000.audio_formatter: stream 0 : format = 1 mode = 3 ch_limit = 2\nPlaying raw data 'playback_quiet.raw' : Signed 24 bit Little Endiwm8960 0-001a: slave mode, but proceeding with no clock configuration\nan, Rate 32000 Hz, Stereo\nbr#",
+    "command": "aplay -D default -t raw -f S24_LE -r 32000 -c 2 playback_quiet.raw",
+    "exit": 0
+  },
+  {
+    "output": "br# world-voice started\nbr#",
+    "command": "restore world-voice",
+    "exit": 0
+  }
+]
