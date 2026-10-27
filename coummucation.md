@@ -2388,3 +2388,22 @@
 - 限制：清单身份审计不是全盘音频去重；无固定男声配对监督不等于唯一失败原因。未读录音4/5或Track9音频、未训练/播放/板测；不是新方案轮。
 - 报告：report/fixed_male_supervision_inventory_20261027.md及JSON。
 - 下一责任方：Hardware-A / Codex 在D盘单一任务目录恢复官方精确revision教师依赖，先用训练录音检验内容，再决定源专用监督训练；保持Round108上限，不恢复参数扫描。
+
+### [PS-20261021-10] 源专用教师环境恢复认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准提交：5a53f54；范围：只恢复公共官方教师源码/资产，不启动新训练轮。
+- 路径：D:/2026_FPGA_teacher_workspace/{source,models,cache,tmp,venv,runs}；正式脚本build/restore_cosyvoice3_assets_20261027.py，结果后续进入report。
+- 版本：CosyVoice官方源码074ca6dc9e80a2f424f1f74b48bdd7d3fea531cc；Fun-CosyVoice3模型29e01c4e8d000f4bcd70751be16fa94bf3d85a18。
+- 复现：Python3.12 build/restore_cosyvoice3_assets_20261027.py --workspace D:/2026_FPGA_teacher_workspace；git定点fetch源码与submodule。
+- 资源：D盘开始空闲约98.1GB；模型主要文件约4.43GB，依赖/环境另需空间。现有yolo GPU torch2.8.0+cu128可用，不修改该全局环境。
+- 限制：未宣称依赖或推理通过；只下载公开资产，不上传语音；不读取锁定素材、不播放、不操作板卡。Round108上限不变。
+- 下一责任方：Hardware-A / Codex 逐件校验资产、独立依赖环境、训练素材离线烟测并发布结果。
+
+### [PS-20261021-10] 教师环境恢复启动证据
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED / ENVIRONMENT_IN_PROGRESS，非完成训练轮。
+- 基准提交：5a53f54；修改路径：build/restore_cosyvoice3_assets_20261027.py、report/cosyvoice3_teacher_restore_20261027.md、coummucation.md；大文件仅D:/2026_FPGA_teacher_workspace。
+- 已完成：官方源码074ca6d与Matcha子模块dd9105b定点检出退出0；torch2.8.0+cu128 CUDA可用；独立venv torchaudio2.8.0+cu128安装成功；模型配置与campplus官方SHA校验通过。
+- 在运行：模型下载session38601；依赖安装session5662。未完成全资产校验、import/推理测试；不得只凭本记录假定进程仍活跃，恢复时须查询实际handle。
+- 复现：Python3.12 build/restore_cosyvoice3_assets_20261027.py --workspace D:/2026_FPGA_teacher_workspace；源码/依赖版本见report/cosyvoice3_teacher_restore_20261027.md。
+- 限制：venv重用本机torch，尚非可跨电脑交付包；未训练/合成/播放/板测，未读锁定音频；不增加训练轮预算。
+- 下一责任方：Hardware-A / Codex 完成依赖校验并用训练录音离线检验教师内容，再确定源专用监督训练。
