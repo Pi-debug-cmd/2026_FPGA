@@ -1955,6 +1955,18 @@
 - 限制：identity OpenCC shim的简繁归一化有限；不播放、不录音、不接触板卡，不声明试听、Cortex-A9、RTL/PL或实时通过。
 - 下一责任方：Hardware-A / Codex 完成本轮训练、严格评估并提交单轮结果。
 
+### [PS-20261021-10] HuBERT/WORLD Round 82 VUV 损失权重
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`47b132e`
+- 唯一变量：VUV BCE系数由Round81的0.40降至0.30；其余训练结构、source prosody、variance matching、动态权重1.25、锚点0.25、gain1.6、种子不变。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.7003/0.6726/0.1006/2.3312/0.2941`；泄漏、CER未过门。检查点SHA-256 `2d69a00d00c21674de7578c03185d325294386504fe7100e242253a04ca0fc9b`；候选SHA-256 `681a830407284cddb03aa1ad9c9ce6f357ac96489cc20b445375cfaaa37b7d39`。
+- 修改路径：`report/fixed_male_hubert_world_round82_20261027.{md,json}`、`coummucation.md`。
+- 限制：identity OpenCC shim；CPU启动器返回码为1但产物已独立核验；录音5、Track9未用于训练或筛选；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round82_20261027.md`、`report/fixed_male_hubert_world_round82_20261027.json`。
+- 下一责任方：Hardware-A / Codex 转向内容保持后处理的单变量测试，优先围绕Round82模型评估可逆的VUV/内容平滑设置。
+
 ### [PS-20261021-10] HuBERT/WORLD Round 81 VUV 损失权重
 - 日期：2026-10-27
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
