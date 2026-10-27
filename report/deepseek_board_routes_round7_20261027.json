@@ -1,0 +1,77 @@
+[
+  {
+    "command": "/etc/init.d/world-voice stop",
+    "output": "stopped process in pidfile '/var/run/world-voice.pid' (pid 1315)\nworld-voice stopped\nbr#",
+    "exit": 0
+  },
+  {
+    "command": "cd /tmp/codex_deepseek_ds01",
+    "output": "br# br#",
+    "exit": 0
+  },
+  {
+    "command": "alsactl -f round7_mixer.state store 0",
+    "output": "br# br#",
+    "exit": 0
+  },
+  {
+    "command": "amixer sset 'Left Output Mixer PCM' on",
+    "output": "wm8960 0-001a: slave mode, but proceeding with no clock configuration\nSimple mixer control 'Left Output Mixer PCM',0\n  Capabilities: pswitch pswitch-joined\n  Playback channels: Mono\n  Mono: Playback [on]\nbr#",
+    "exit": 0
+  },
+  {
+    "command": "amixer sset 'Right Output Mixer PCM' on",
+    "output": "br# Simple mixer control 'Right Output Mixer PCM',0\n  Capabilities: pswitch pswitch-joined\n  Playback channels: Mono\n  Mono: Playback [on]\nbr#",
+    "exit": 0
+  },
+  {
+    "command": "amixer sset 'Headphone Playback ZC' on",
+    "output": "Simple mixer control 'Headphone Playback ZC',0\n  Capabilities: pswitch\n  Playback channels: Front Left - Front Right\n  Mono:\n  Front Left: Playback [on]\n  Front Right: Playback [on]\nbr#",
+    "exit": 0
+  },
+  {
+    "command": "amixer sset Headphone 127,127",
+    "output": "br# Simple mixer control 'Headphone',0\n  Capabilities: pvolume\n  Playback channels: Front Left - Front Right\n  Limits: Playback 0 - 127\n  Mono:\n  Front Left: Playback 127 [100%] [6.00dB]\n  Front Right: Playback 127 [100%] [6.00dB]\nbr#",
+    "exit": 0
+  },
+  {
+    "command": "amixer sset Playback 255,255",
+    "output": "Simple mixer control 'Playback',0\n  Capabilities: volume\n  Playback channels: Front Left - Front Right\n  Capture channels: Front Left - Front Right\n  Limits: 0 - 255\n  Front Left: 255 [100%] [0.00dB]\n  Front Right: 255 [100%] [0.00dB]\nbr#",
+    "exit": 0
+  },
+  {
+    "command": "aplay -D default source16.wav",
+    "output": "br# xlnx_formatter_pcm 43c40000.audio_formatter: stream 0 : format = 1 mode = 3 ch_limit = 2\nPlaying WAVE 'source16.wav' : Signed 16 bit Little Endian, Rate 3wm8960 0-001a: slave mode, but proceeding with no clock configuration\n2000 Hz, Stereo\nbr#",
+    "exit": 0
+  },
+  {
+    "command": "sleep 2",
+    "output": "br# br#",
+    "exit": 0
+  },
+  {
+    "command": "aplay -D default -t raw -f S24_LE -r 32000 -c 2 playback_quiet.raw",
+    "output": "br# xlnx_formatter_pcm 43c40000.audio_formatter: stream 0 : format = 1 mode = 3 ch_limit = 2\nPlaying raw data 'playback_quiet.raw' : Signed 24 bit Little Endiwm8960 0-001a: slave mode, but proceeding with no clock configuration\nan, Rate 32000 Hz, Stereo\nbr#",
+    "exit": 0
+  },
+  {
+    "command": "sleep 1",
+    "output": "br# br#",
+    "exit": 0
+  },
+  {
+    "command": "aplay -D default -t raw -f S24_LE -r 32000 -c 2 playback_quiet.raw",
+    "output": "xlnx_formatter_pcm 43c40000.audio_formatter: stream 0 : format = 1 mode = 3 ch_limit = 2\nPlaying raw data 'playback_quiet.raw' : Signed 24 bit Little Endiwm8960 0-001a: slave mode, but proceeding with no clock configuration\nan, Rate 32000 Hz, Stereo\nbr#",
+    "exit": 0
+  },
+  {
+    "command": "alsactl -f /tmp/codex_deepseek_ds01/round7_mixer.state restore 0",
+    "output": "alsa-lib ../../../alsa-lib-1.2.5.1/src/ucm/main.c:1405:(snd_use_case_mgr_open) error: failed to import hw:0 use case configuration -2\nbr#",
+    "exit": 0
+  },
+  {
+    "command": "/etc/init.d/world-voice start",
+    "output": "world-voice started\nbr#",
+    "exit": 0
+  }
+]
