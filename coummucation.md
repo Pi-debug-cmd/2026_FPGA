@@ -2216,3 +2216,16 @@
 - 验证：准备后核对PCA96、CROP128、ANCHOR_PROBABILITY0.50与runtime语法，结果从产物直接提取。
 - 限制：ASR源参考非人工真值；无播放、录音、板测、PS/PL/实时结论。
 - 下一责任方：Hardware-A / Codex 完成本轮训练、评测、独立检查并逐轮提交。完成后33/50，最多Round108。
+
+
+### [PS-20261021-10] HuBERT/WORLD Round 91 提高目标锚点结果
+- 日期：2026-10-27；角色：Hardware-A / Codex（离线算法）；状态：REJECTED。
+- 基准提交：1fe6b2d25c4adf452a609b98233eb1dc8bdc1106；算法基线Round88。
+- 唯一变量：目标自重建锚点概率0.25→0.50；其余恢复Round88，PCA96、CROP128、hidden192。相同步数下公共配对抽样相应减少。
+- 量化结果：身份/P10/泄漏/UTMOS/CER=0.6936297194/0.6723958308/0.1130648930/2.2011870543/0.3088235294；后三门失败，未优于Round88。完成step1800，最佳step1000，验证loss0.8054647967。
+- 证据：checkpoint SHA-256 fbc00a21c1360c3b57d900a521d8303d29b8fa0595caeac49ebf7f6335ecee2f；候选SHA-256 a7f803ac6791dd4f30e9e801737486cee37321505c68c5c3f0f281965703199f；有限权重、输入/PCA维度、缓存SHA、候选SHA核验通过。
+- 补充诊断：仅录音1～3提取源韵律，三列log-F0/VUV/log-energy的每段均值偏移均小于训练1σ；未发现严重均值分布越界，未改候选或选择校准。逐录音SHA和统计在JSON，复现build/audit_fixed_male_prosody_round91_20261027.py --asset-root <asset-root>。
+- 修改路径与报告：build/audit_fixed_male_prosody_round91_20261027.py、report/fixed_male_hubert_world_round91_20261027.{md,json}、coummucation.md、team_project/project_status.md、report/ai_worklog.md。
+- 复现：build/reproduce_hubert_world_round88_20261027.py prepare/train/candidate/evaluate --experiment-round 91 --asset-root <asset-root>，evaluate真实OpenCC0.1.7，具体解释器与命令见JSON。
+- 限制：ASR源参考非人工真值；训练/生成启动器产物完成后退出1，客观评测退出0；诊断启动器亦在写出有效JSON后退出1。公共配对192/8、目标Track5～8锚点；男性1～3未参与本轮模型训练，只用于评测源质心和上述只读诊断；仅录音4验证，录音5/Track9锁定。无现场或PS/PL/实时结论。
+- 下一责任方：Hardware-A / Codex；恢复Round88并测试GRU容量，保持五门。Round59～91共33轮，剩17轮，最多Round108。

@@ -109,3 +109,8 @@
 ## 2026-10-27 Hardware-A PS-20261021-10 Round90
 
 PCA96→192拒绝：泄漏0.1263、UTMOS2.1855、CER0.4559，最佳step600，早停1400。真实OpenCC0.1.7已恢复；Round88/89保存文本重算CER不变。详见[Round90报告](../report/fixed_male_hubert_world_round90_20261027.md)。未进入现场验证。
+
+
+## 2026-10-27 Hardware-A PS-20261021-10 Round91
+
+锚点概率0.25→0.50拒绝：泄漏0.1131、UTMOS2.2012、CER0.3088，最佳1000/早停1800。男声1～3韵律均值偏移不到训练1σ，未选源校准。详见[Round91报告](../report/fixed_male_hubert_world_round91_20261027.md)。无现场验证。

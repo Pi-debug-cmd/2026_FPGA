@@ -1,0 +1,803 @@
+{
+  "task": "PS-20261021-10",
+  "round": 91,
+  "date": "2026-10-27",
+  "status": "REJECTED",
+  "baseline_commit": "1fe6b2d25c4adf452a609b98233eb1dc8bdc1106",
+  "source": {
+    "path": "人物音频资料/男声/标准录音 4.wav",
+    "sha256": "f4a026e5c97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c"
+  },
+  "training": {
+    "unique_change": "Target self-reconstruction anchor probability 0.25 -> 0.50 relative to Round88",
+    "steps_completed": 1800,
+    "best": {
+      "step": 1000,
+      "validation_total": 0.8054647967219353
+    },
+    "history": [
+      {
+        "step": 1,
+        "train": {
+          "total": 1.8154540061950684,
+          "reconstruction": 0.4928492605686188,
+          "vuv_bce": 0.18100343644618988,
+          "multiscale_delta": 0.5912560820579529,
+          "delta_lag1": 0.47686341404914856,
+          "delta_lag2": 0.5888174176216125,
+          "delta_lag4": 0.7080872654914856,
+          "variance_match": 10.99492359161377
+        },
+        "validation": {
+          "total": 1.502933606505394,
+          "reconstruction": 0.40646932646632195,
+          "vuv_bce": 0.2360660620033741,
+          "multiscale_delta": 0.45634136721491814,
+          "delta_lag1": 0.3472915291786194,
+          "delta_lag2": 0.4529437944293022,
+          "delta_lag4": 0.5687887594103813,
+          "variance_match": 9.324629664421082
+        },
+        "learning_rate": 0.000599999629889911
+      },
+      {
+        "step": 100,
+        "train": {
+          "total": 0.9681984186172485,
+          "reconstruction": 0.3495129644870758,
+          "vuv_bce": 0.05726231262087822,
+          "multiscale_delta": 0.4690189063549042,
+          "delta_lag1": 0.3901992738246918,
+          "delta_lag2": 0.47729256749153137,
+          "delta_lag4": 0.539564847946167,
+          "variance_match": 0.7164193391799927
+        },
+        "validation": {
+          "total": 0.8789830431342125,
+          "reconstruction": 0.3171992115676403,
+          "vuv_bce": 0.0776325452607125,
+          "multiscale_delta": 0.4175855964422226,
+          "delta_lag1": 0.3395017273724079,
+          "delta_lag2": 0.4219519570469856,
+          "delta_lag4": 0.49130310490727425,
+          "variance_match": 0.6701942756772041
+        },
+        "learning_rate": 0.0005963065021785408
+      },
+      {
+        "step": 200,
+        "train": {
+          "total": 1.008711338043213,
+          "reconstruction": 0.35819709300994873,
+          "vuv_bce": 0.04375097528100014,
+          "multiscale_delta": 0.5025327801704407,
+          "delta_lag1": 0.4328659474849701,
+          "delta_lag2": 0.5092117190361023,
+          "delta_lag4": 0.5655207633972168,
+          "variance_match": 0.6432392001152039
+        },
+        "validation": {
+          "total": 0.8479407355189323,
+          "reconstruction": 0.30239570513367653,
+          "vuv_bce": 0.0749987990129739,
+          "multiscale_delta": 0.4077911004424095,
+          "delta_lag1": 0.3360883817076683,
+          "delta_lag2": 0.4111015647649765,
+          "delta_lag4": 0.47618334740400314,
+          "variance_match": 0.598922535777092
+        },
+        "learning_rate": 0.0005853169548885456
+      },
+      {
+        "step": 300,
+        "train": {
+          "total": 0.9485892653465271,
+          "reconstruction": 0.3367586135864258,
+          "vuv_bce": 0.05092593654990196,
+          "multiscale_delta": 0.47068801522254944,
+          "delta_lag1": 0.40460506081581116,
+          "delta_lag2": 0.47382301092147827,
+          "delta_lag4": 0.5336359739303589,
+          "variance_match": 0.5836185812950134
+        },
+        "validation": {
+          "total": 0.8337545841932297,
+          "reconstruction": 0.29382336512207985,
+          "vuv_bce": 0.08089578780345619,
+          "multiscale_delta": 0.4040992371737957,
+          "delta_lag1": 0.3351331166923046,
+          "delta_lag2": 0.407499298453331,
+          "delta_lag4": 0.4696653038263321,
+          "variance_match": 0.5339712761342525
+        },
+        "learning_rate": 0.0005673019572565106
+      },
+      {
+        "step": 400,
+        "train": {
+          "total": 0.9903959035873413,
+          "reconstruction": 0.35066068172454834,
+          "vuv_bce": 0.04373318701982498,
+          "multiscale_delta": 0.4987668991088867,
+          "delta_lag1": 0.4365643262863159,
+          "delta_lag2": 0.5061700344085693,
+          "delta_lag4": 0.5535663962364197,
+          "variance_match": 0.5181674957275391
+        },
+        "validation": {
+          "total": 0.8215497806668282,
+          "reconstruction": 0.28908253461122513,
+          "vuv_bce": 0.07607054989784956,
+          "multiscale_delta": 0.40008411929011345,
+          "delta_lag1": 0.3334567919373512,
+          "delta_lag2": 0.4034256413578987,
+          "delta_lag4": 0.4633699283003807,
+          "variance_match": 0.5148316361010075
+        },
+        "learning_rate": 0.0005427050983124842
+      },
+      {
+        "step": 500,
+        "train": {
+          "total": 0.9910001754760742,
+          "reconstruction": 0.35532259941101074,
+          "vuv_bce": 0.02268090844154358,
+          "multiscale_delta": 0.5006523132324219,
+          "delta_lag1": 0.44248029589653015,
+          "delta_lag2": 0.5047104358673096,
+          "delta_lag4": 0.5547661185264587,
+          "variance_match": 0.539128839969635
+        },
+        "validation": {
+          "total": 0.8163541331887245,
+          "reconstruction": 0.2859913557767868,
+          "vuv_bce": 0.07794465683400631,
+          "multiscale_delta": 0.39898039400577545,
+          "delta_lag1": 0.33286748826503754,
+          "delta_lag2": 0.40239912271499634,
+          "delta_lag4": 0.4616745449602604,
+          "variance_match": 0.48611315712332726
+        },
+        "learning_rate": 0.0005121320343559645
+      },
+      {
+        "step": 600,
+        "train": {
+          "total": 0.8922349214553833,
+          "reconstruction": 0.3157879114151001,
+          "vuv_bce": 0.04931609332561493,
+          "multiscale_delta": 0.4464290142059326,
+          "delta_lag1": 0.381556898355484,
+          "delta_lag2": 0.45090627670288086,
+          "delta_lag4": 0.5068238973617554,
+          "variance_match": 0.4694298207759857
+        },
+        "validation": {
+          "total": 0.8111347407102585,
+          "reconstruction": 0.28356123715639114,
+          "vuv_bce": 0.07563243829645216,
+          "multiscale_delta": 0.39776942133903503,
+          "delta_lag1": 0.3324701376259327,
+          "delta_lag2": 0.40129730477929115,
+          "delta_lag4": 0.45954082161188126,
+          "variance_match": 0.47557615861296654
+        },
+        "learning_rate": 0.00047633557568774236
+      },
+      {
+        "step": 700,
+        "train": {
+          "total": 0.8745036721229553,
+          "reconstruction": 0.3058367669582367,
+          "vuv_bce": 0.032194383442401886,
+          "multiscale_delta": 0.4457576274871826,
+          "delta_lag1": 0.3951224684715271,
+          "delta_lag2": 0.4502541124820709,
+          "delta_lag4": 0.49189621210098267,
+          "variance_match": 0.4497942328453064
+        },
+        "validation": {
+          "total": 0.810761883854866,
+          "reconstruction": 0.28370797261595726,
+          "vuv_bce": 0.07880418631248176,
+          "multiscale_delta": 0.3970731273293495,
+          "delta_lag1": 0.3316662795841694,
+          "delta_lag2": 0.4003465287387371,
+          "delta_lag4": 0.45920656621456146,
+          "variance_match": 0.45969364419579506
+        },
+        "learning_rate": 0.00043619714992186435
+      },
+      {
+        "step": 800,
+        "train": {
+          "total": 0.8359963297843933,
+          "reconstruction": 0.29361703991889954,
+          "vuv_bce": 0.02419307269155979,
+          "multiscale_delta": 0.4275330603122711,
+          "delta_lag1": 0.3815198838710785,
+          "delta_lag2": 0.42915695905685425,
+          "delta_lag4": 0.47192245721817017,
+          "variance_match": 0.41743969917297363
+        },
+        "validation": {
+          "total": 0.8090112134814262,
+          "reconstruction": 0.28283436223864555,
+          "vuv_bce": 0.07757462305016816,
+          "multiscale_delta": 0.39701930433511734,
+          "delta_lag1": 0.3316444233059883,
+          "delta_lag2": 0.4002937264740467,
+          "delta_lag4": 0.4591197669506073,
+          "variance_match": 0.4520508721470833
+        },
+        "learning_rate": 0.00039270509831248443
+      },
+      {
+        "step": 900,
+        "train": {
+          "total": 0.8358352780342102,
+          "reconstruction": 0.29071128368377686,
+          "vuv_bce": 0.008618631400167942,
+          "multiscale_delta": 0.43405696749687195,
+          "delta_lag1": 0.39246585965156555,
+          "delta_lag2": 0.438444048166275,
+          "delta_lag4": 0.47126099467277527,
+          "variance_match": 0.4247819483280182
+        },
+        "validation": {
+          "total": 0.808938629925251,
+          "reconstruction": 0.28269729018211365,
+          "vuv_bce": 0.07794592343270779,
+          "multiscale_delta": 0.39698901399970055,
+          "delta_lag1": 0.3317375108599663,
+          "delta_lag2": 0.4003496952354908,
+          "delta_lag4": 0.45887984707951546,
+          "variance_match": 0.45146873220801353
+        },
+        "learning_rate": 0.0003469303395120695
+      },
+      {
+        "step": 1000,
+        "train": {
+          "total": 0.7732430696487427,
+          "reconstruction": 0.2711731791496277,
+          "vuv_bce": 0.02948794886469841,
+          "multiscale_delta": 0.39267584681510925,
+          "delta_lag1": 0.3486071825027466,
+          "delta_lag2": 0.3942663073539734,
+          "delta_lag4": 0.4351540505886078,
+          "variance_match": 0.41076168417930603
+        },
+        "validation": {
+          "total": 0.8054647967219353,
+          "reconstruction": 0.2814149782061577,
+          "vuv_bce": 0.07608974259346724,
+          "multiscale_delta": 0.39590638503432274,
+          "delta_lag1": 0.3313706964254379,
+          "delta_lag2": 0.399276677519083,
+          "delta_lag4": 0.45707176998257637,
+          "variance_match": 0.446614284068346
+        },
+        "learning_rate": 0.0003000000000000001
+      },
+      {
+        "step": 1100,
+        "train": {
+          "total": 0.8228974938392639,
+          "reconstruction": 0.2875858247280121,
+          "vuv_bce": 0.021290788426995277,
+          "multiscale_delta": 0.42156755924224854,
+          "delta_lag1": 0.3764738440513611,
+          "delta_lag2": 0.4241097867488861,
+          "delta_lag4": 0.4641191065311432,
+          "variance_match": 0.43957582116127014
+        },
+        "validation": {
+          "total": 0.8097746223211288,
+          "reconstruction": 0.2830832675099373,
+          "vuv_bce": 0.08034675475209951,
+          "multiscale_delta": 0.3973329924046993,
+          "delta_lag1": 0.33191366493701935,
+          "delta_lag2": 0.40066976472735405,
+          "delta_lag4": 0.4594155512750149,
+          "variance_match": 0.4354081153869629
+        },
+        "learning_rate": 0.00025306966048793087
+      },
+      {
+        "step": 1200,
+        "train": {
+          "total": 0.8612179160118103,
+          "reconstruction": 0.29926571249961853,
+          "vuv_bce": 0.03182384371757507,
+          "multiscale_delta": 0.4421394169330597,
+          "delta_lag1": 0.39737966656684875,
+          "delta_lag2": 0.4454725384712219,
+          "delta_lag4": 0.4835660457611084,
+          "variance_match": 0.40493062138557434
+        },
+        "validation": {
+          "total": 0.8086447864770889,
+          "reconstruction": 0.2828887440264225,
+          "vuv_bce": 0.0779475427698344,
+          "multiscale_delta": 0.39756904169917107,
+          "delta_lag1": 0.3322581872344017,
+          "delta_lag2": 0.40097353607416153,
+          "delta_lag4": 0.4594753608107567,
+          "variance_match": 0.4278305768966675
+        },
+        "learning_rate": 0.0002072949016875159
+      },
+      {
+        "step": 1300,
+        "train": {
+          "total": 0.8596736192703247,
+          "reconstruction": 0.29764506220817566,
+          "vuv_bce": 0.023835156112909317,
+          "multiscale_delta": 0.4449496269226074,
+          "delta_lag1": 0.4014900326728821,
+          "delta_lag2": 0.4514234960079193,
+          "delta_lag4": 0.48193541169166565,
+          "variance_match": 0.39493322372436523
+        },
+        "validation": {
+          "total": 0.8130081295967102,
+          "reconstruction": 0.28421610966324806,
+          "vuv_bce": 0.08414443070068955,
+          "multiscale_delta": 0.3983585312962532,
+          "delta_lag1": 0.33268146216869354,
+          "delta_lag2": 0.40167559310793877,
+          "delta_lag4": 0.4607185386121273,
+          "variance_match": 0.42622391134500504
+        },
+        "learning_rate": 0.00016380285007813595
+      },
+      {
+        "step": 1400,
+        "train": {
+          "total": 0.7295094132423401,
+          "reconstruction": 0.2488592267036438,
+          "vuv_bce": 0.028782038018107414,
+          "multiscale_delta": 0.3765493929386139,
+          "delta_lag1": 0.34455910325050354,
+          "delta_lag2": 0.380580335855484,
+          "delta_lag4": 0.4045087695121765,
+          "variance_match": 0.37434330582618713
+        },
+        "validation": {
+          "total": 0.8095424473285675,
+          "reconstruction": 0.28318342939019203,
+          "vuv_bce": 0.07898611016571522,
+          "multiscale_delta": 0.3977579027414322,
+          "delta_lag1": 0.33250023424625397,
+          "delta_lag2": 0.40115372836589813,
+          "delta_lag4": 0.45961975678801537,
+          "variance_match": 0.4280877709388733
+        },
+        "learning_rate": 0.0001236644243122581
+      },
+      {
+        "step": 1500,
+        "train": {
+          "total": 0.847884476184845,
+          "reconstruction": 0.2930716872215271,
+          "vuv_bce": 0.014778509736061096,
+          "multiscale_delta": 0.4428337514400482,
+          "delta_lag1": 0.4043281078338623,
+          "delta_lag2": 0.4482613503932953,
+          "delta_lag4": 0.4759117066860199,
+          "variance_match": 0.36479589343070984
+        },
+        "validation": {
+          "total": 0.8123345300555229,
+          "reconstruction": 0.28394756466150284,
+          "vuv_bce": 0.08485463354736567,
+          "multiscale_delta": 0.3980993889272213,
+          "delta_lag1": 0.3323708698153496,
+          "delta_lag2": 0.4014054574072361,
+          "delta_lag4": 0.4605218358337879,
+          "variance_match": 0.4193711541593075
+        },
+        "learning_rate": 8.786796564403575e-05
+      },
+      {
+        "step": 1600,
+        "train": {
+          "total": 0.7863588333129883,
+          "reconstruction": 0.2732921540737152,
+          "vuv_bce": 0.030747247859835625,
+          "multiscale_delta": 0.40273213386535645,
+          "delta_lag1": 0.3550522029399872,
+          "delta_lag2": 0.40570783615112305,
+          "delta_lag4": 0.44743627309799194,
+          "variance_match": 0.3805316388607025
+        },
+        "validation": {
+          "total": 0.8127005323767662,
+          "reconstruction": 0.28424782678484917,
+          "vuv_bce": 0.0848141903989017,
+          "multiscale_delta": 0.3981928788125515,
+          "delta_lag1": 0.33240723982453346,
+          "delta_lag2": 0.40149110555648804,
+          "delta_lag4": 0.4606803096830845,
+          "variance_match": 0.41872526332736015
+        },
+        "learning_rate": 5.729490168751573e-05
+      },
+      {
+        "step": 1700,
+        "train": {
+          "total": 0.889286994934082,
+          "reconstruction": 0.30554524064064026,
+          "vuv_bce": 0.03386831283569336,
+          "multiscale_delta": 0.4602397382259369,
+          "delta_lag1": 0.41345149278640747,
+          "delta_lag2": 0.46176642179489136,
+          "delta_lag4": 0.5055012702941895,
+          "variance_match": 0.3920024633407593
+        },
+        "validation": {
+          "total": 0.8103420734405518,
+          "reconstruction": 0.2836073562502861,
+          "vuv_bce": 0.07998206745833158,
+          "multiscale_delta": 0.3982583098113537,
+          "delta_lag1": 0.3326248377561569,
+          "delta_lag2": 0.4016982764005661,
+          "delta_lag4": 0.46045181527733803,
+          "variance_match": 0.4166198782622814
+        },
+        "learning_rate": 3.269804274348962e-05
+      },
+      {
+        "step": 1800,
+        "train": {
+          "total": 0.7708703875541687,
+          "reconstruction": 0.2654307186603546,
+          "vuv_bce": 0.028779026120901108,
+          "multiscale_delta": 0.39735808968544006,
+          "delta_lag1": 0.35804763436317444,
+          "delta_lag2": 0.4007303714752197,
+          "delta_lag4": 0.433296263217926,
+          "variance_match": 0.37074539065361023
+        },
+        "validation": {
+          "total": 0.8121762797236443,
+          "reconstruction": 0.2841193526983261,
+          "vuv_bce": 0.08313100738450885,
+          "multiscale_delta": 0.3984375223517418,
+          "delta_lag1": 0.3326689191162586,
+          "delta_lag2": 0.4018385596573353,
+          "delta_lag4": 0.46080509200692177,
+          "variance_match": 0.4167204573750496
+        },
+        "learning_rate": 1.4683045111453921e-05
+      }
+    ],
+    "seed": 20261025,
+    "source_prosody": true,
+    "variance_matching": true,
+    "vuv_bce_weight": 0.35,
+    "multiscale_dynamic_weight": 1.2,
+    "target_anchor_probability": 0.5,
+    "checkpoint_sha256": "fbc00a21c1360c3b57d900a521d8303d29b8fa0595caeac49ebf7f6335ecee2f",
+    "runtime_script_sha256": "9b3fa26837bab1901c3942b4db17b595ce633f386fa86efa0fae0fee679c7909",
+    "paired_cache_manifest_sha256": "4d34669259834bd30219f34af4730712c9aa7c4cf8fa8bc3c5ccde9ee3cc5bc5",
+    "paired_cache_split": {
+      "train": {
+        "pairs": 192,
+        "speakers": [
+          "SSB0005",
+          "SSB0012",
+          "SSB0018",
+          "SSB0033",
+          "SSB0043",
+          "SSB0057",
+          "SSB0073",
+          "SSB0145",
+          "SSB0149",
+          "SSB0193",
+          "SSB0197",
+          "SSB0241",
+          "SSB0273",
+          "SSB0375",
+          "SSB0394",
+          "SSB0407",
+          "SSB0603",
+          "SSB0609",
+          "SSB0623",
+          "SSB0629"
+        ],
+        "seconds": 888.1089375000003
+      },
+      "validation": {
+        "pairs": 8,
+        "speakers": [
+          "SSB0080",
+          "SSB0434"
+        ],
+        "seconds": 46.1948125
+      }
+    },
+    "fixed_male_training_used": false,
+    "target_anchors": [
+      5,
+      6,
+      7,
+      8
+    ],
+    "launcher_return_code": 1,
+    "checkpoint_independently_verified": true,
+    "crop_frames": 128,
+    "baseline_crop_frames": 128,
+    "eligible_training_rows": 184,
+    "baseline_eligible_training_rows": 184,
+    "eligibility_confound": false,
+    "pca_dimensions": 96,
+    "baseline_pca_dimensions": 96,
+    "input_dimensions": 99,
+    "baseline_input_dimensions": 99,
+    "hidden_dimensions": 192,
+    "gru_layers": 2,
+    "parameters": 478347,
+    "baseline_target_anchor_probability": 0.25,
+    "runtime_sources_sha256": {
+      "apply_world_temporal_postfilter_round47_20261026.py": "486ad7f53466751106cdd9572bf364b1cc39501affbbdf9ea3a142380ffe9e47",
+      "audit_source_prosody_round32_20261025.py": "651094a739713d8e4096f16c1c8b4ac3a31597ce2c6eee5b23fee64a018dcd25",
+      "evaluate_seed_fixed_male_strict_20261024.py": "6f03418d2f11d7b04f114ea5d43bb7f8bd559ac7c7e1759ee6be58ef5b16375f",
+      "train_hubert_world_causal_gru_round23_20261025.py": "378d8ae11b818b00cd3a95420516497d0b5e6c67b43db6c36405f1c7818f208c",
+      "train_hubert_world_teacher_round20_20261025.py": "1c6c111fdfca6f7d9343c3ca61d2d244c276ff2ca661034d35899e55174e3941",
+      "train_paired_hubert_world_gru_round26_20261025.py": "9b3fa26837bab1901c3942b4db17b595ce633f386fa86efa0fae0fee679c7909"
+    }
+  },
+  "candidate": {
+    "candidate": "round91_non_f0_gain1_6",
+    "path": "build/generated/hubert_world_round91_20261027/candidates/round91_non_f0_gain1_6.wav",
+    "sha256": "a7f803ac6791dd4f30e9e801737486cee37321505c68c5c3f0f281965703199f",
+    "gain": 1.6,
+    "source_detail_alpha": 0.0,
+    "source_detail_cutoff": 20,
+    "source_residual_alpha": 0.0,
+    "source_residual_cutoff": 8,
+    "source_vuv_alpha": 0.0,
+    "synthesis": {
+      "voiced_fraction": 0.6926668497665477,
+      "f0_voiced_median_hz": 190.6536102294922,
+      "peak_before_limit": 2.5890909643783013
+    }
+  },
+  "metrics": {
+    "identity": 0.6936297193997024,
+    "identity_p10": 0.6723958307836021,
+    "leakage": 0.11306489295782476,
+    "leakage_window_mean": 0.10916675291762683,
+    "leakage_aggregate": 0.11306489295782476,
+    "utmos": 2.2011870543162027,
+    "cer": 0.3088235294117647
+  },
+  "passed": {
+    "identity": true,
+    "identity_p10": true,
+    "leakage": false,
+    "utmos": false,
+    "cer": false
+  },
+  "all_gates_pass": false,
+  "evaluation": {
+    "cer_normalizer": "opencc-python-reimplemented 0.1.7 t2s; actual conversion enabled",
+    "source_asr": "男孩把最后一块糖给了骷髏的妹妹妹破体围剿点角亲了她一下糖纸在阳光下向彩虹多年后她仍留着那张糖纸记得那天的甜妹妹出嫁那天她把糖纸放进她手心",
+    "candidate_asr": "男孩把这位一块糖给了姑娘的妹妹妹妹破体为笑 点叫亲她一下糖质在羊尾下向彩虹 过年后她仍然留着老张糖质 记得当天的钱妹妹出家当天她把糖质放进她手心",
+    "cer_detail": {
+      "reference_chars": 68,
+      "hypothesis_chars": 69,
+      "distance": 21,
+      "cer": 0.3088235294117647
+    },
+    "identity_by_chunk": [
+      0.6763981340981724,
+      0.7330957691459752,
+      0.6713952549549596
+    ],
+    "leakage_by_chunk": [
+      0.11324463862328378,
+      0.10829297070984323,
+      0.10596264941975349
+    ],
+    "utmos_by_chunk": [
+      2.139824390411377,
+      2.041656732559204,
+      2.4220800399780273
+    ],
+    "target_track9_used": false,
+    "recording5_used": false,
+    "played": false,
+    "board_touched": false,
+    "cer_without_script_normalization": {
+      "reference_chars": 68,
+      "hypothesis_chars": 69,
+      "distance": 21,
+      "cer": 0.3088235294117647
+    },
+    "historical_transcript_normalization_audit": {
+      "package": "opencc-python-reimplemented",
+      "version": "0.1.7",
+      "operation": "t2s",
+      "smoke_test": {
+        "input": "骷髏",
+        "output": "骷髅"
+      },
+      "method": "Rescore saved ASR text only; no model inference, no audio access, no historical report overwrite",
+      "rows": [
+        {
+          "round": 88,
+          "identity_shim_cer": {
+            "reference_chars": 68,
+            "hypothesis_chars": 69,
+            "distance": 18,
+            "cer": 0.2647058823529412
+          },
+          "opencc_cer": {
+            "reference_chars": 68,
+            "hypothesis_chars": 69,
+            "distance": 18,
+            "cer": 0.2647058823529412
+          },
+          "report_sha256": "179517dd34abfd53998dff5c6470b31259abbc902466664bd4886a9fdea1d4d2"
+        },
+        {
+          "round": 89,
+          "identity_shim_cer": {
+            "reference_chars": 68,
+            "hypothesis_chars": 70,
+            "distance": 25,
+            "cer": 0.36764705882352944
+          },
+          "opencc_cer": {
+            "reference_chars": 68,
+            "hypothesis_chars": 70,
+            "distance": 25,
+            "cer": 0.36764705882352944
+          },
+          "report_sha256": "e34b624eab1829c3c969bb124b83ecc890559db4bfc077b5a5bd2bd96003856d"
+        }
+      ]
+    },
+    "dependency_install_command": "Python3.12 -m pip install --target <asset-root>/build/generated/eval_opencc_deps_20261027 --no-cache-dir opencc-python-reimplemented==0.1.7"
+  },
+  "corrections": [
+    "Round25 cache declares fixed_male_audio_used=false: 192 public paired training rows and 8 validation rows. Target Tracks5-8 are self-reconstruction anchors. Male recordings1-3 are evaluator source centroid inputs only.",
+    "Round90 removes the identity OpenCC shim by default and uses actual OpenCC0.1.7 t2s conversion. Saved Round88/89 ASR text rescoring yields unchanged CER, retained in evaluation audit; historical reports are not rewritten."
+  ],
+  "limitations": [
+    "Source Whisper transcript is not a manually verified transcript.",
+    "Training and candidate launchers returned1 after producing completion markers; checkpoint history, finite weights, dimensions and artifact hashes were independently checked.",
+    "Only recording4 development validation was evaluated; recording5 and target Track9 remain locked. No listening, board, PS, PL or realtime claim.",
+    "With the same step/batch budget, anchor probability0.50 reduces expected public-pair samples relative to0.25. The eight public validation rows still select the checkpoint; target anchors do not select it."
+  ],
+  "reproduction": {
+    "prepare": "python build/reproduce_hubert_world_round88_20261027.py prepare --asset-root <asset-root> --experiment-round 91",
+    "train": "D:/Anaconda/envs/yolo/python.exe build/reproduce_hubert_world_round88_20261027.py train --asset-root <asset-root> --experiment-round 91",
+    "candidate": "D:/Anaconda/envs/yolo/python.exe build/reproduce_hubert_world_round88_20261027.py candidate --asset-root <asset-root> --experiment-round 91",
+    "evaluate": "C:/Users/World/AppData/Local/Python/pythoncore-3.12-64/python.exe build/reproduce_hubert_world_round88_20261027.py evaluate --asset-root <asset-root> --experiment-round 91 --cer-normalizer opencc"
+  },
+  "candidate_launcher_return_code": 1,
+  "evaluation_return_code": 0,
+  "algorithm_baseline": "Round88",
+  "fixed_male_prosody_distribution_audit": {
+    "kind": "fixed_male_prosody_distribution_audit",
+    "columns": [
+      "log_f0",
+      "vuv",
+      "log_energy"
+    ],
+    "checkpoint_sha256": "fbc00a21c1360c3b57d900a521d8303d29b8fa0595caeac49ebf7f6335ecee2f",
+    "public_training_prosody_mean": [
+      5.108911037445068,
+      0.8321460485458374,
+      -13.790042877197266
+    ],
+    "public_training_prosody_std": [
+      0.3791729211807251,
+      0.3714372217655182,
+      2.8417768478393555
+    ],
+    "fixed_male_pooled_mean": [
+      4.899152755737305,
+      0.7141805291175842,
+      -12.459942817687988
+    ],
+    "fixed_male_pooled_std": [
+      0.25188326835632324,
+      0.45178738236427307,
+      2.515265703201294
+    ],
+    "rows": [
+      {
+        "recording": 1,
+        "sha256": "bffd53e9873a829ff8855bd191d4610b64436fb7054401d2598eecf9b862b11e",
+        "seconds": 18.04,
+        "rms": 0.1406577214981856,
+        "prosody_mean": [
+          4.793630599975586,
+          0.7112773656845093,
+          -12.095751762390137
+        ],
+        "prosody_std": [
+          0.2402735948562622,
+          0.4531756639480591,
+          2.481719493865967
+        ],
+        "z_mean": [
+          -0.8314739465713501,
+          -0.3254067897796631,
+          0.5962039232254028
+        ],
+        "z_abs_over3_fraction": [
+          0.004156275976724855,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "recording": 2,
+        "sha256": "7ebcc5ece683ad580df039cea09957d4133582803cd62a0e1a92619c03f1f51f",
+        "seconds": 16.76,
+        "rms": 0.1262206305738427,
+        "prosody_mean": [
+          4.903146266937256,
+          0.7623023986816406,
+          -12.561668395996094
+        ],
+        "prosody_std": [
+          0.2264373004436493,
+          0.42566943168640137,
+          2.2106473445892334
+        ],
+        "z_mean": [
+          -0.5426729321479797,
+          -0.18803495168685913,
+          0.4322566092014313
+        ],
+        "z_abs_over3_fraction": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "recording": 3,
+        "sha256": "2d13fa98c976c967d3ad0d36b0eaf26c3e10029449f135c9556ab4968d9a1293",
+        "seconds": 19.52,
+        "rms": 0.11187999979474025,
+        "prosody_mean": [
+          4.993155479431152,
+          0.6755442023277283,
+          -12.709138870239258
+        ],
+        "prosody_std": [
+          0.24502287805080414,
+          0.4681810140609741,
+          2.742990016937256
+        ],
+        "z_mean": [
+          -0.30527594685554504,
+          -0.42161405086517334,
+          0.3803648352622986
+        ],
+        "z_abs_over3_fraction": [
+          0.00025608194622279127,
+          0.0,
+          0.0
+        ]
+      }
+    ],
+    "recording4_used": false,
+    "recording5_used": false,
+    "target_track9_used": false,
+    "modified_training_or_candidate": false,
+    "played": false,
+    "board_touched": false,
+    "command": "D:/Anaconda/envs/yolo/python.exe build/audit_fixed_male_prosody_round91_20261027.py --asset-root <asset-root>",
+    "launcher_return_code": 1,
+    "interpretation": "All recording-level mean shifts are less than one public-training standard deviation; no severe mean-distribution mismatch demonstrated. No source-specific calibration selected."
+  }
+}
