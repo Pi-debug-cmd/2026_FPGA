@@ -1,0 +1,7 @@
+{
+    "path":  "build/vc_stream_arm",
+    "bytes":  804424,
+    "sha256":  "557cc08a67fadc6e452733c15eb4adb8ac4247775a58a5db458c2b44c880679e",
+    "opts":  "-O2 -static -s",
+    "note":  "48-order (T4) build as shipped with host/model/student_v5.blob. Not the same file as the board's /tmp/vc/vc_live (sha 83257578...); that one was built earlier from the same source, so keep the two apart when quoting SHAs."
+}

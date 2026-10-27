@@ -1,0 +1,16 @@
+﻿{
+    "LocalFile":  "D:\\competition_pkg_20261026\\metrics\\scripts\\measure_latency.sh",
+    "RemotePath":  "/tmp/vc/measure_latency_fix.sh",
+    "Bytes":  4490,
+    "Sha256Host":  "222a03108a66f6bec940209c07ec35cb52975243cac1837e4fa27fd6452e2c51",
+    "Sha256Remote":  "222a03108a66f6bec940209c07ec35cb52975243cac1837e4fa27fd6452e2c51",
+    "ShaMatch":  true,
+    "SizeRemote":  "4490",
+    "ElapsedSec":  0.76,
+    "PayloadBytes":  6067,
+    "RateKBps":  7.76,
+    "BinRateKBps":  5.74,
+    "Chunks":  1,
+    "Retries":  0,
+    "B64Path":  "/tmp/measure_latency_fix.sh.20261026_192705.b64"
+}
