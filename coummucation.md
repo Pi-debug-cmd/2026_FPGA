@@ -1791,3 +1791,11 @@
 - 复现：原定速128样本/8ms文件管道，新增显式binary/fft-mode/label及程序/输入SHA；默认v23/pl行为保持。可在同位流、同输入比较cache_cpu/cache_exp/cache_fft2048，结果不互相覆盖。
 - 限制：语法检查通过，入口已校验上传，尚未运行；45帧RTL已过但新版布局布线仍进行中。管线滞后不包括ALSA/codec/模拟/声学，不可作为物理端到端验收。
 - 下一责任方：Hardware-A / Codex 新版文件数值/性能门后执行并记录至少625个原始块计时，再决定现场候选。
+
+### [PL-20261027-01] Round 10 紧凑实FFT完整布局布线
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（内部routed门）。
+- 源实现：`bfbc3d0`；证据：`report/world_fft_compact_implementation_round10_20261027.json`及4份compact routed TXT。
+- 复现：同完整FFT构建、Vivado MCP open_run impl_1，核参数/100MHz不变；17255LUT/29197FF/24.5BRAM/69DSP。
+- 量化：WNS+0.283ns/WHS+0.040ns，0失败端点/黑盒/DRC Error，bus skew全MET；swap SHA9a7a45027c087a43ce2a3809945317cd892725a2ac1f891ba3db92f61cfaeee9。
+- 限制：外部3输入/6输出延时仍未完全约束，DRC警告/建议保留；位流校验传输中，当前原厂PL/服务停止；尚无compact板端性能结论，无新录放。
+- 下一责任方：Hardware-A / Codex 完成192次probe与全路径文件、定速滞后比较，再选择候选模式。
