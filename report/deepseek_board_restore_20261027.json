@@ -1,0 +1,27 @@
+[
+  {
+    "output": "2ff1ff678f5023962e79953e016a10eeb2ddfa2160399f924af80c201d8d8a33  /tmp/codex_deepseek_ds01/native_output.raw\nbr#",
+    "command": "sha256sum /tmp/codex_deepseek_ds01/native_output.raw",
+    "exit": 0
+  },
+  {
+    "output": "br# world-voice running pid=914\nbr#",
+    "command": "/etc/init.d/world-voice status",
+    "exit": 0
+  },
+  {
+    "output": "state: RUNNING\nowner_pid   : 945\ntrigger_time: 1557.224886359\ntstamp      : 0.000000000\ndelay       : 3040\navail       : 32\navail_max   : 2560\n-----\nhw_ptr      : 1240608\nappl_ptr    : 1243648\nbr#",
+    "command": "cat /proc/asound/card0/pcm0p/sub0/status",
+    "exit": 0
+  },
+  {
+    "output": "br# state: RUNNING\nowner_pid   : 943\ntrigger_time: 1557.222747725\ntstamp      : 0.000000000\ndelay       : 424\navail       : 424\navail_max   : 512\n-----\nhw_ptr      : 1244584\nappl_ptr    : 1244160\nbr#",
+    "command": "cat /proc/asound/card0/pcm1c/sub0/status",
+    "exit": 0
+  },
+  {
+    "output": "operating\nbr#",
+    "command": "cat /sys/class/fpga_manager/fpga0/state",
+    "exit": 0
+  }
+]

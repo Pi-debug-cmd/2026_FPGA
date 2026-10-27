@@ -1518,3 +1518,112 @@
 - 止损：若两个 CFG 都未降低泄漏或造成 CER 失败，本路线立即停止，不追加更高 CFG；既有 1.70 已有内容塌缩证据。
 - 限制：电脑端离线开发，不播放、不改板上 v23；Remote-PS-C 不负责验证本方案。
 - 下一责任方：Hardware-A / Codex 完成 CFG 筛选并按结果提交。
+
+### [LOCAL-PS-20261027-01] 用户指定 Deepseek 交付独立板测
+- 日期：2026-10-27
+- 角色：Hardware-A / Codex
+- 状态：CLAIMED
+- 基准提交：`7d44033`（Deepseek board pipeline handoff）；用户本轮明确要求测试 Deepseek，不改动其他三路候选。
+- 改动路径：`coummucation.md`、`report/deepseek_board_preflight_20261027.*`（本轮新增证据）；在独立 worktree 执行，原工作区未提交 RTL 与报告不动。
+- 复现命令：`git fetch origin main`；`git pull --rebase origin main`；`gh pr list --state open`；读取 `Deepseek/README.md`、`Deepseek/STATUS_AND_ISSUES.md`；板卡只读预检及资产 SHA 校验。
+- 量化结果：开放 PR #9/#11/#13，未发现修改 Deepseek 的开放 PR；模型声明 4,941,804 B/1,152,064 参数，待独立 SHA 核对；实际 USB 串口 COM4，COM8 为蓝牙，不能照搬交接端口。
+- 限制：交付已有 UTMOS 低于 2.30、CER/泄漏口径不足及模拟噪声记录，不代表本项目五门通过；本次用户指定测试作为独立工程诊断，不宣称正式验收。不更换 PL、设备树、启动分区，不启动现场录放，先确认当前板状态及可执行文件。
+- 报告链接：`Deepseek/STATUS_AND_ISSUES.md`、`Deepseek/report/o64_onboard_20261026.md`；独立预检报告本轮结束回填。
+- 下一责任方：Hardware-A 完成只读预检和无声文件测试；现场测试前按 AGENTS.md 询问操作者本轮准备状态。
+
+### [LOCAL-PS-20261027-01] Deepseek S24_LE 格式修复方案轮
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED。
+- 基准提交：`7d44033`；改动路径：Deepseek 两份 vc_stream 源码及 stream_mode.inc、build/verify_deepseek_s24.py、board/deepseek_file_test.py、report/deepseek_s24_*、coummucation.md。
+- 复现命令、资产 SHA、工具链和限制：见 `report/deepseek_s24_fix_20261027.md`。
+- 量化结果：主机 PCM16/S24_LE 输出最大误差修复前 0.651123，修复后批处理和流式均 0.0000152588；GCC13.4 ARM 静态构建成功（582928 B）。尚无修复版板端结果或真人听感。
+- 现场状态：操作者本轮确认准备；原 v23 已通过服务 stop 停止，录放均 closed；独立目录传输中，无设备树、启动分区或 PL 修改。
+- 下一责任方：Hardware-A 完成本轮方案提交后，在同任务编号另记板端测试轮。
+
+### [LOCAL-PS-20261027-01] Deepseek 板端测试轮 1
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED（文件工程验证通过；模拟听感待确认）。
+- 基准提交：`40e4292`；改动路径：`board/deepseek_audio_diagnostic.py`、`report/deepseek_board_*20261027.*`、`coummucation.md`。
+- 复现命令、同输入清单和完整 SHA：`report/deepseek_board_test_round1_20261027.md`。
+- 量化结果：4 秒浮点输出在两个 ARM ELF 与主机间 SHA 完全相同；修复版文件 RTF 0.7236；8 秒采录后分块转换 27 块/RTF0.6964/0削顶/exit0；采录电平偏低（左 peak0.008343）。播放均exit0，无听感通过结论。native_s24 输出与主机 SHA 不同，差异未量化。
+- 限制：无 PL 加载，无实时端到端或完整五门验收；新语音未下载/提交；逐块遥测为累计值，不能直接当单块p95。
+- 现场：本轮已有明确准备确认；mixer 恢复、v23服务恢复、录放RUNNING；用户要求“重新来一遍”，尚未评价音质。
+- 下一责任方：Hardware-A 提交本轮后，仅重放现有测试音与验证语音并另记测试轮。
+
+### [LOCAL-PS-20261027-01] Deepseek 重放测试轮 2
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：REJECTED（模拟语音未确认出声）。
+- 基准提交：`9840614`（本地同步main后为`f42cc63`）；路径：`report/deepseek_board_replay_round2_20261027.json`、`coummucation.md`。
+- 复现命令：stop world-voice；aplay S24_LE/32k/2ch 播放本轮目录 tone.raw 与 playback_quiet.raw；恢复 world-voice。
+- 条件：用户要求“重新来一遍”，本轮仅重放同一已有验证片段，无新采录；所有命令 exit0。
+- 量化结果：测试音0.7秒、验证语音4秒，文件电平复核：tone RMS0.017508、验证语音RMS0.037670/peak0.212582，均非空；用户原话“只听到了测试音”。不把aplay成功写成语音可听。
+- 限制：无音色或模拟语音通过结论；FPGA/系统未改；服务已恢复。
+- 下一责任方：Hardware-A，用户另已明确“准备好了，开始”，下一轮留2秒间隔后连播三遍同一验证语音，仍保持当前硬件音量。
+
+### [LOCAL-PS-20261027-01] Deepseek 重放测试轮 3
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：REJECTED（连续三遍语音仍不可听）。
+- 基准提交：`2d66ef2`；路径：`report/deepseek_board_replay_round3_20261027.json`、`coummucation.md`。
+- 条件：用户本轮明确“准备好了，开始”；world-voice stop，300ms提示音，间隔2秒，三遍各4秒同一playback_quiet.raw，最后恢复world-voice。
+- 复现命令：见JSON；所有命令exit0。用户原话“仍然只有提示音”，并明确提示音来自板卡外接音箱。
+- 量化结果：3/3播放命令成功，但0次语音出声确认；不能将命令成功写成模拟播放通过。
+- 限制：无新采录、无模型音色或实时结论，无PL/启动修改。服务已恢复。
+- 下一责任方：Hardware-A；用户已确认下一轮原始男声/WAV播放对照准备，分离语音数据与ALSA格式路径。
+
+### [LOCAL-PS-20261027-01] PCM16 WAV 对照测试轮 4
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED（等待听感，未判通过）。
+- 基准提交：`f698afe`；路径：`report/deepseek_board_wav_round4_20261027.json`、`coummucation.md`。
+- 条件：用户确认提示音来自板卡外接音箱并准备好；将同一原始男声/转换输出低24位显式转PCM16 WAV（32k双声道），交给ALSA plug转换。
+- 复现命令：见JSON；两段各4秒WAV播放均exit0；用户要求“再来一遍”，未给可听或质量结论。
+- 量化结果：2次WAV播放完成、0次现场可听确认；原v23已恢复。无新录音。
+- 限制：原始男声与转换语音尚不能据播放返回码判出声；无PL/系统修改，无音色或实时验收。
+- 下一责任方：Hardware-A按用户本轮重播指令重复WAV对照组，记录第5轮。
+
+### [LOCAL-PS-20261027-01] WAV 重放测试轮 5 与低音量定位
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：REJECTED（原始与转换语音均未听到）。
+- 基准提交：`b94a503`；路径：`report/deepseek_board_wav_round5_20261027.json`、`coummucation.md`。
+- 条件：用户本轮明确“再来一遍”；同一原始/转换PCM16 WAV对照组重复2遍，全部命令exit0；用户原话“仍然只有提示音”。原v23已恢复。
+- 复现命令：见JSON；无新采录，无PL/系统改动，无五门验收。
+- 后续只读定位：当前Headphone105(-16dB)、Playback230(-12.5dB)；服务启动脚本在提示音前设Headphone127/Playback255，停止时恢复保存的mixer，实时脚本另改音量。因此提示音可能来自恢复服务的最大音量提示，而非低电平测试音。前几轮未把播放音量显式设成同一基准，不能据此归咎算法或时钟。
+- 下一责任方：Hardware-A；用户已确认下一轮音量对照准备，显式设置Headphone127/Playback255、播放已有原声/转换音，完成后恢复。
+
+### [LOCAL-PS-20261027-01] 显式音量对照测试轮 6
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：REJECTED（音量对照未恢复语音）。
+- 基准提交：`1dc6813`；路径：`report/deepseek_board_volume_round6_20261027.json`、`coummucation.md`。
+- 条件：用户明确准备；服务stop后设置Headphone127/Playback255，一遍原声WAV与两遍降幅转换RAW均exit0；用户原话“仍然只有恢复服务时的提示音”。mixer恢复、服务恢复。
+- 复现命令：见JSON。无新采录、无PL/系统改动。
+- 后续只读根因：`/tmp/world_voice_autostart_mixer.state`与本轮`round6_mixer.state`中的左右Output Mixer PCM Playback Switch均false；停止服务恢复该状态，前几轮仅调音量未打开PCM输出路由。服务start显式打开路由后提示音可听。因此前6轮模拟播放失败不能用于评价Deepseek音质；停止服务后的路由前置检查缺失属于本次测试流程遗漏。
+- 下一责任方：Hardware-A显式打开左右PCM路由、保存/恢复mixer，另行准备确认后重做已有验证语音对照。
+
+### [LOCAL-PS-20261027-01] 播放路由前置修复方案轮
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED。
+- 基准提交：`bf8d03f`；路径：`board/deepseek_audio_diagnostic.py`、`coummucation.md`。
+- 原因：停止world-voice会恢复原mixer，PCM左右输出开关false；修复脚本在store后显式设置左右PCM on、Headphone ZC on和已确认播放音量，finally仍restore，避免静音流程重现。
+- 复现命令：`python -m py_compile board/deepseek_audio_diagnostic.py`；现场先stop服务再运行脚本（需本轮准备确认）。
+- 量化结果：只读保存状态已确认2个PCM开关false；脚本语法检查通过；新路由现场播放尚待验证。
+- 限制：不改模型、不改系统持久配置、不切PL；不能把此修改本身写成模拟播放通过。
+- 下一责任方：Hardware-A取得下一轮准备确认后播放已有原始/转换语音，记录第7轮。
+
+### [LOCAL-PS-20261027-01] 显式PCM路由播放测试轮7
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（仅文件模拟出声工程验证）。
+- 基准提交：`b599173`；路径：`report/deepseek_board_routes_round7_20261027.{json,md}`、`coummucation.md`。
+- 条件：操作者明确“准备好了，开始”；服务stop后左右PCM on/ZC on/Headphone127/Playback255，原声1次与转换语音2次播放均exit0。
+- 量化结果：3次播放成功，用户原话“原声和转换语音都听到了”；修复了停服务后PCM路由关闭导致的静音。原始命令、结果与复现顺序见报告。
+- 限制：仅已有文件出声；无完整五门音色、现场实时、PL、延迟或稳定性验收。新语音未下载/提交。
+- 恢复：mixer恢复exit0，world-voice启动exit0；无PL/设备树/启动改动。
+- 下一责任方：Hardware-A，继续须按本轮准备确认、同一PCM格式与显式路由安排短现场实时工程诊断；正式五门仍保持未验收。
+
+### [LOCAL-PS-20261027-01] 20秒PS实时工程诊断准备方案轮
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED。
+- 基准提交：`793663c`；路径：`board/deepseek_live_diagnostic.py`、`coummucation.md`。
+- 方案：既有格式修复ARM程序，20秒arecord→300ms分块转换→aplay，输出增益39322/输入262144沿用原v23量级；显式设置输入/输出路由，保存恢复mixer，仅结束自己启动的进程，不保存或上传真人音频。
+- 复现命令：`python -m py_compile board/deepseek_live_diagnostic.py`；停world-voice后板端`python3 deepseek_live_diagnostic.py`（根目录仍为本轮独立/tmp目录）。
+- 量化结果：准备20秒、300ms块、200ms播放器启动缓冲、16,384帧播放缓冲；这些是配置而非实测端到端延迟。语法检查通过，实时结果待下一测试轮。
+- 限制：纯ARM工程诊断，PL未加载，正式五门/延迟/稳定性未验收。操作者已明确“准备好了，开始20秒实时测试”。
+- 下一责任方：Hardware-A完成提交后运行这一轮，恢复原v23并记录用户现场反馈。
+
+### [LOCAL-PS-20261027-01] 20秒现场实时测试轮8
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：REJECTED（实时稳定性/无失真未通过）。
+- 基准提交：`85f3e73`；路径：`report/deepseek_board_live_round8_20261027.{json,md}`、`coummucation.md`、`team_project/project_status.md`、`report/ai_worklog.md`。
+- 条件：操作者明确准备；纯ARM修复版O64/live/300ms块、输入4倍/输出约0.6、显式PCM路由；详细命令与模型SHA沿用本任务报告。
+- 量化结果：20秒67块，RTF0.7206；3进程exit0；采集0 overrun，播放5 underrun，6082削顶样本；用户原话“能听到转换，但有断续或失真”。
+- 报告与复现：`report/deepseek_board_live_round8_20261027.md`、同名JSON、`board/deepseek_live_diagnostic.py`。
+- 限制：无PL、端到端延迟或音色五门验收。未保存/上传本轮真人音频；所有系统/启动项保持原样。
+- 恢复：mixer恢复exit0、world-voice start exit0。前述文件播放已独立确认可听，但不等于现场实时稳定。
+- 下一责任方：Hardware-A修复削顶和欠载后，再取得新一轮准备确认复测；当前保留v23作为恢复基线。

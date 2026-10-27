@@ -1,0 +1,227 @@
+{
+  "seconds": 20,
+  "pl_enabled": false,
+  "block_ms": 300,
+  "run": "/tmp/codex_deepseek_ds01/live_2724936708793",
+  "setup": [
+    {
+      "command": [
+        "alsactl",
+        "-f",
+        "/tmp/codex_deepseek_ds01/live_2724936708793/mixer.state",
+        "store",
+        "0"
+      ],
+      "exit": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "amixer",
+        "sset",
+        "Left Input Mixer Boost",
+        "on"
+      ],
+      "exit": 0,
+      "output": "Simple mixer control 'Left Input Mixer Boost',0\n  Capabilities: pswitch pswitch-joined\n  Playback channels: Mono\n  Mono: Playback [on]\n"
+    },
+    {
+      "command": [
+        "amixer",
+        "sset",
+        "Right Boost Mixer RINPUT1",
+        "on"
+      ],
+      "exit": 0,
+      "output": "Simple mixer control 'Right Boost Mixer RINPUT1',0\n  Capabilities: pswitch pswitch-joined\n  Playback channels: Mono\n  Mono: Playback [on]\n"
+    },
+    {
+      "command": [
+        "amixer",
+        "sset",
+        "Right Input Mixer Boost",
+        "on"
+      ],
+      "exit": 0,
+      "output": "Simple mixer control 'Right Input Mixer Boost',0\n  Capabilities: pswitch pswitch-joined\n  Playback channels: Mono\n  Mono: Playback [on]\n"
+    },
+    {
+      "command": [
+        "amixer",
+        "sset",
+        "Left Boost Mixer LINPUT1",
+        "on"
+      ],
+      "exit": 0,
+      "output": "Simple mixer control 'Left Boost Mixer LINPUT1',0\n  Capabilities: pswitch pswitch-joined\n  Playback channels: Mono\n  Mono: Playback [on]\n"
+    },
+    {
+      "command": [
+        "amixer",
+        "sset",
+        "Left Input Boost Mixer LINPUT1",
+        "0"
+      ],
+      "exit": 0,
+      "output": "Simple mixer control 'Left Input Boost Mixer LINPUT1',0\n  Capabilities: volume volume-joined\n  Playback channels: Mono\n  Capture channels: Mono\n  Limits: 0 - 3\n  Mono: 0 [0%] [0.00dB]\n"
+    },
+    {
+      "command": [
+        "amixer",
+        "sset",
+        "Capture",
+        "31,31",
+        "cap"
+      ],
+      "exit": 0,
+      "output": "Simple mixer control 'Capture',0\n  Capabilities: cvolume cswitch\n  Capture channels: Front Left - Front Right\n  Limits: Capture 0 - 63\n  Front Left: Capture 31 [49%] [6.00dB] [on]\n  Front Right: Capture 31 [49%] [6.00dB] [on]\n"
+    },
+    {
+      "command": [
+        "amixer",
+        "sset",
+        "Left Output Mixer PCM",
+        "on"
+      ],
+      "exit": 0,
+      "output": "Simple mixer control 'Left Output Mixer PCM',0\n  Capabilities: pswitch pswitch-joined\n  Playback channels: Mono\n  Mono: Playback [on]\n"
+    },
+    {
+      "command": [
+        "amixer",
+        "sset",
+        "Right Output Mixer PCM",
+        "on"
+      ],
+      "exit": 0,
+      "output": "Simple mixer control 'Right Output Mixer PCM',0\n  Capabilities: pswitch pswitch-joined\n  Playback channels: Mono\n  Mono: Playback [on]\n"
+    },
+    {
+      "command": [
+        "amixer",
+        "sset",
+        "Headphone Playback ZC",
+        "on"
+      ],
+      "exit": 0,
+      "output": "Simple mixer control 'Headphone Playback ZC',0\n  Capabilities: pswitch\n  Playback channels: Front Left - Front Right\n  Mono:\n  Front Left: Playback [on]\n  Front Right: Playback [on]\n"
+    },
+    {
+      "command": [
+        "amixer",
+        "sset",
+        "Headphone",
+        "127,127"
+      ],
+      "exit": 0,
+      "output": "Simple mixer control 'Headphone',0\n  Capabilities: pvolume\n  Playback channels: Front Left - Front Right\n  Limits: Playback 0 - 127\n  Mono:\n  Front Left: Playback 127 [100%] [6.00dB]\n  Front Right: Playback 127 [100%] [6.00dB]\n"
+    },
+    {
+      "command": [
+        "amixer",
+        "sset",
+        "Playback",
+        "255,255"
+      ],
+      "exit": 0,
+      "output": "Simple mixer control 'Playback',0\n  Capabilities: volume\n  Playback channels: Front Left - Front Right\n  Capture channels: Front Left - Front Right\n  Limits: 0 - 255\n  Front Left: 255 [100%] [0.00dB]\n  Front Right: 255 [100%] [0.00dB]\n"
+    },
+    {
+      "command": [
+        "amixer",
+        "cset",
+        "name=ADC Data Output Select",
+        "1"
+      ],
+      "exit": 0,
+      "output": "numid=41,iface=MIXER,name='ADC Data Output Select'\n  ; type=ENUMERATED,access=rw------,values=1,items=4\n  ; Item #0 'Left Data = Left ADC;  Right Data = Right ADC'\n  ; Item #1 'Left Data = Left ADC;  Right Data = Left ADC'\n  ; Item #2 'Left Data = Right ADC; Right Data = Right ADC'\n  ; Item #3 'Left Data = Right ADC; Right Data = Left ADC'\n  : values=1\n"
+    },
+    {
+      "command": [
+        "aplay",
+        "-D",
+        "default",
+        "-t",
+        "raw",
+        "-f",
+        "S24_LE",
+        "-r",
+        "32000",
+        "-c",
+        "2",
+        "/tmp/codex_deepseek_ds01/cue.raw"
+      ],
+      "exit": 0,
+      "output": "Playing raw data '/tmp/codex_deepseek_ds01/cue.raw' : Signed 24 bit Little Endian, Rate 32000 Hz, Stereo\n"
+    },
+    {
+      "command": [
+        "alsactl",
+        "-f",
+        "/tmp/codex_deepseek_ds01/live_2724936708793/mixer.state",
+        "restore",
+        "0"
+      ],
+      "exit": 0,
+      "output": "alsa-lib ../../../alsa-lib-1.2.5.1/src/ucm/main.c:1405:(snd_use_case_mgr_open) error: failed to import hw:0 use case configuration -2\n"
+    }
+  ],
+  "commands": [
+    [
+      "arecord",
+      "-D",
+      "hw:0,1",
+      "-t",
+      "raw",
+      "-f",
+      "S24_LE",
+      "-r",
+      "32000",
+      "-c",
+      "2",
+      "--period-size=512",
+      "--buffer-size=4096",
+      "-d",
+      "20"
+    ],
+    [
+      "/tmp/codex_deepseek_ds01/vc_s24fix_arm",
+      "20",
+      "native_s24",
+      "200",
+      "39322",
+      "262144",
+      "--model",
+      "/tmp/codex_deepseek_ds01/model.blob",
+      "--preset",
+      "live",
+      "--stream",
+      "300"
+    ],
+    [
+      "aplay",
+      "-D",
+      "default",
+      "-t",
+      "raw",
+      "-f",
+      "S24_LE",
+      "-r",
+      "32000",
+      "-c",
+      "2",
+      "--period-size=1024",
+      "--buffer-size=16384",
+      "--start-delay=200000"
+    ]
+  ],
+  "wall_s": 20.686783496000317,
+  "exit_codes": [
+    0,
+    0,
+    0
+  ],
+  "capture_log": "Recording raw data 'stdin' : Signed 24 bit Little Endian, Rate 32000 Hz, Stereo\n",
+  "convert_log": "{\"block\":1,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":214.6,\"block_rtf\":0.715,\"cum_rtf\":0.715,\"done_s\":0.300}\n{\"block\":2,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":426.6,\"block_rtf\":1.422,\"cum_rtf\":0.711,\"done_s\":0.600}\n{\"block\":3,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":637.9,\"block_rtf\":2.126,\"cum_rtf\":0.709,\"done_s\":0.900}\n{\"block\":4,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":849.5,\"block_rtf\":2.832,\"cum_rtf\":0.708,\"done_s\":1.200}\n{\"block\":5,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":1060.7,\"block_rtf\":3.536,\"cum_rtf\":0.707,\"done_s\":1.500}\n{\"block\":6,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":1273.7,\"block_rtf\":4.246,\"cum_rtf\":0.708,\"done_s\":1.800}\n{\"block\":7,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":1487.1,\"block_rtf\":4.957,\"cum_rtf\":0.708,\"done_s\":2.100}\n{\"block\":8,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":1700.0,\"block_rtf\":5.667,\"cum_rtf\":0.708,\"done_s\":2.400}\n{\"block\":9,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":1913.3,\"block_rtf\":6.378,\"cum_rtf\":0.709,\"done_s\":2.700}\n{\"block\":10,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":2126.5,\"block_rtf\":7.088,\"cum_rtf\":0.709,\"done_s\":3.000}\n{\"block\":11,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":2339.6,\"block_rtf\":7.799,\"cum_rtf\":0.709,\"done_s\":3.300}\n{\"block\":12,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":2553.8,\"block_rtf\":8.513,\"cum_rtf\":0.709,\"done_s\":3.600}\n{\"block\":13,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":2767.1,\"block_rtf\":9.224,\"cum_rtf\":0.710,\"done_s\":3.900}\n{\"block\":14,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":2979.9,\"block_rtf\":9.933,\"cum_rtf\":0.709,\"done_s\":4.200}\n{\"block\":15,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":3193.6,\"block_rtf\":10.645,\"cum_rtf\":0.710,\"done_s\":4.500}\n{\"block\":16,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":3409.6,\"block_rtf\":11.365,\"cum_rtf\":0.710,\"done_s\":4.800}\n{\"block\":17,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":3623.7,\"block_rtf\":12.079,\"cum_rtf\":0.711,\"done_s\":5.100}\n{\"block\":18,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":3836.8,\"block_rtf\":12.789,\"cum_rtf\":0.711,\"done_s\":5.400}\n{\"block\":19,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":4049.9,\"block_rtf\":13.500,\"cum_rtf\":0.711,\"done_s\":5.700}\n{\"block\":20,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":4263.3,\"block_rtf\":14.211,\"cum_rtf\":0.711,\"done_s\":6.000}\n{\"block\":21,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":4476.3,\"block_rtf\":14.921,\"cum_rtf\":0.711,\"done_s\":6.300}\n{\"block\":22,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":4689.7,\"block_rtf\":15.632,\"cum_rtf\":0.711,\"done_s\":6.600}\n{\"block\":23,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":4903.0,\"block_rtf\":16.343,\"cum_rtf\":0.711,\"done_s\":6.900}\n{\"block\":24,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":5116.1,\"block_rtf\":17.054,\"cum_rtf\":0.711,\"done_s\":7.200}\n{\"block\":25,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":5329.0,\"block_rtf\":17.763,\"cum_rtf\":0.711,\"done_s\":7.500}\n{\"block\":26,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":5541.9,\"block_rtf\":18.473,\"cum_rtf\":0.710,\"done_s\":7.800}\n{\"block\":27,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":5754.3,\"block_rtf\":19.181,\"cum_rtf\":0.710,\"done_s\":8.100}\n{\"block\":28,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":5967.1,\"block_rtf\":19.890,\"cum_rtf\":0.710,\"done_s\":8.400}\n{\"block\":29,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":6180.1,\"block_rtf\":20.600,\"cum_rtf\":0.710,\"done_s\":8.700}\n{\"block\":30,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":6393.5,\"block_rtf\":21.312,\"cum_rtf\":0.710,\"done_s\":9.000}\n{\"block\":31,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":6603.7,\"block_rtf\":22.012,\"cum_rtf\":0.710,\"done_s\":9.300}\n{\"block\":32,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":6813.9,\"block_rtf\":22.713,\"cum_rtf\":0.710,\"done_s\":9.600}\n{\"block\":33,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":7024.5,\"block_rtf\":23.415,\"cum_rtf\":0.710,\"done_s\":9.900}\n{\"block\":34,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":7234.8,\"block_rtf\":24.116,\"cum_rtf\":0.709,\"done_s\":10.200}\n{\"block\":35,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":7445.8,\"block_rtf\":24.819,\"cum_rtf\":0.709,\"done_s\":10.500}\n{\"block\":36,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":7657.0,\"block_rtf\":25.523,\"cum_rtf\":0.709,\"done_s\":10.800}\n{\"block\":37,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":7869.0,\"block_rtf\":26.230,\"cum_rtf\":0.709,\"done_s\":11.100}\n{\"block\":38,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":8122.9,\"block_rtf\":27.076,\"cum_rtf\":0.713,\"done_s\":11.400}\n{\"block\":39,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":8372.6,\"block_rtf\":27.909,\"cum_rtf\":0.716,\"done_s\":11.700}\n{\"block\":40,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":8600.7,\"block_rtf\":28.669,\"cum_rtf\":0.717,\"done_s\":12.000}\n{\"block\":41,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":8810.5,\"block_rtf\":29.368,\"cum_rtf\":0.716,\"done_s\":12.300}\n{\"block\":42,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":9021.3,\"block_rtf\":30.071,\"cum_rtf\":0.716,\"done_s\":12.600}\n{\"block\":43,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":9232.5,\"block_rtf\":30.775,\"cum_rtf\":0.716,\"done_s\":12.900}\n{\"block\":44,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":9443.8,\"block_rtf\":31.479,\"cum_rtf\":0.715,\"done_s\":13.200}\n{\"block\":45,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":9655.0,\"block_rtf\":32.183,\"cum_rtf\":0.715,\"done_s\":13.500}\n{\"block\":46,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":9898.7,\"block_rtf\":32.996,\"cum_rtf\":0.717,\"done_s\":13.800}\n{\"block\":47,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":10109.1,\"block_rtf\":33.697,\"cum_rtf\":0.717,\"done_s\":14.100}\n{\"block\":48,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":10320.5,\"block_rtf\":34.402,\"cum_rtf\":0.717,\"done_s\":14.400}\n{\"block\":49,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":10531.2,\"block_rtf\":35.104,\"cum_rtf\":0.716,\"done_s\":14.700}\n{\"block\":50,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":10742.3,\"block_rtf\":35.808,\"cum_rtf\":0.716,\"done_s\":15.000}\n{\"block\":51,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":10953.0,\"block_rtf\":36.510,\"cum_rtf\":0.716,\"done_s\":15.300}\n{\"block\":52,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":11164.4,\"block_rtf\":37.215,\"cum_rtf\":0.716,\"done_s\":15.600}\n{\"block\":53,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":11404.8,\"block_rtf\":38.016,\"cum_rtf\":0.717,\"done_s\":15.900}\n{\"block\":54,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":11641.5,\"block_rtf\":38.805,\"cum_rtf\":0.719,\"done_s\":16.200}\n{\"block\":55,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":11888.8,\"block_rtf\":39.629,\"cum_rtf\":0.721,\"done_s\":16.500}\n{\"block\":56,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":12118.3,\"block_rtf\":40.394,\"cum_rtf\":0.721,\"done_s\":16.800}\n{\"block\":57,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":12329.1,\"block_rtf\":41.097,\"cum_rtf\":0.721,\"done_s\":17.100}\n{\"block\":58,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":12542.7,\"block_rtf\":41.809,\"cum_rtf\":0.721,\"done_s\":17.400}\n{\"block\":59,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":12756.3,\"block_rtf\":42.521,\"cum_rtf\":0.721,\"done_s\":17.700}\n{\"block\":60,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":12969.5,\"block_rtf\":43.232,\"cum_rtf\":0.721,\"done_s\":18.000}\n{\"block\":61,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":13182.6,\"block_rtf\":43.942,\"cum_rtf\":0.720,\"done_s\":18.300}\n{\"block\":62,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":13398.3,\"block_rtf\":44.661,\"cum_rtf\":0.720,\"done_s\":18.600}\n{\"block\":63,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":13611.6,\"block_rtf\":45.372,\"cum_rtf\":0.720,\"done_s\":18.900}\n{\"block\":64,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":13824.8,\"block_rtf\":46.083,\"cum_rtf\":0.720,\"done_s\":19.200}\n{\"block\":65,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":14038.3,\"block_rtf\":46.794,\"cum_rtf\":0.720,\"done_s\":19.500}\n{\"block\":66,\"frames_in\":9600,\"audio_ms\":300.0,\"proc_ms\":14251.5,\"block_rtf\":47.505,\"cum_rtf\":0.720,\"done_s\":19.800}\n{\"block\":67,\"frames_in\":6400,\"audio_ms\":200.0,\"proc_ms\":14412.1,\"block_rtf\":72.061,\"cum_rtf\":0.721,\"done_s\":20.000}\n{\"ok\":true,\"mode\":\"stream\",\"blocks\":67,\"seconds\":20.0000,\"block_ms\":300,\"fade_ms\":20,\"threads\":2,\"proc_ms\":14412.12,\"wall_ms\":20078.29,\"rtf\":0.7206,\"clipped_samples\":6082}\n",
+  "playback_log": "Playing raw data 'stdin' : Signed 24 bit Little Endian, Rate 32000 Hz, Stereo\nunderrun!!! (at least 45.348 ms long)\nunderrun!!! (at least 1.303 ms long)\nunderrun!!! (at least 0.329 ms long)\nunderrun!!! (at least 24.120 ms long)\nunderrun!!! (at least 11.651 ms long)\n"
+}

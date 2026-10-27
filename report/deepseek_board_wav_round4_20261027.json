@@ -1,0 +1,57 @@
+[
+  {
+    "output": "source16.wav 512000\nconverted16.wav 512000\nbr#",
+    "exit": 0,
+    "command": "generate PCM16 WAV from original and converted low-24-bit PCM"
+  },
+  {
+    "output": "br# stopped process in pidfile '/var/run/world-voice.pid' (pid 1069)\nworld-voice stopped\nbr#",
+    "exit": 0,
+    "command": "/etc/init.d/world-voice stop"
+  },
+  {
+    "output": "br# br#",
+    "exit": 0,
+    "command": "cd /tmp/codex_deepseek_ds01"
+  },
+  {
+    "output": "br# xlnx_formatter_pcm 43c40000.audio_formatter: stream 0 : format = 1 mode = 3 ch_limit = 2\nPlaying raw data 'cue.raw' : Signed 24 bit Little Endian, Rate 320wm8960 0-001a: slave mode, but proceeding with no clock configuration\n00 Hz, Stereo\nbr#",
+    "exit": 0,
+    "command": "aplay -D default -t raw -f S24_LE -r 32000 -c 2 cue.raw"
+  },
+  {
+    "output": "br# br#",
+    "exit": 0,
+    "command": "sleep 1"
+  },
+  {
+    "output": "br# xlnx_formatter_pcm 43c40000.audio_formatter: stream 0 : format = 1 mode = 3 ch_limit = 2\nPlaying WAVE 'source16.wav' : Signed 16 bit Little Endian, Rate 3wm8960 0-001a: slave mode, but proceeding with no clock configuration\n2000 Hz, Stereo\nbr#",
+    "exit": 0,
+    "command": "aplay -D default source16.wav"
+  },
+  {
+    "output": "br# br#",
+    "exit": 0,
+    "command": "sleep 2"
+  },
+  {
+    "output": "br# xlnx_formatter_pcm 43c40000.audio_formatter: stream 0 : format = 1 mode = 3 ch_limit = 2\nPlaying raw data 'cue.raw' : Signed 24 bit Little Endian, Rate 32wm8960 0-001a: slave mode, but proceeding with no clock configuration\n000 Hz, Stereo\nbr#",
+    "exit": 0,
+    "command": "aplay -D default -t raw -f S24_LE -r 32000 -c 2 cue.raw"
+  },
+  {
+    "output": "br# br#",
+    "exit": 0,
+    "command": "sleep 1"
+  },
+  {
+    "output": "br# xlnx_formatter_pcm 43c40000.audio_formatter: stream 0 : format = 1 mode = 3 ch_limit = 2\nPlaying WAVE 'converted16.wav' : Signed 16 bit Little Endian, Ratwm8960 0-001a: slave mode, but proceeding with no clock configuration\ne 32000 Hz, Stereo\nbr#",
+    "exit": 0,
+    "command": "aplay -D default converted16.wav"
+  },
+  {
+    "output": "world-voice started\nbr#",
+    "exit": 0,
+    "command": "restore world-voice"
+  }
+]

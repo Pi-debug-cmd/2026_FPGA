@@ -1,0 +1,42 @@
+[
+  {
+    "exit": 0,
+    "output": "stopped process in pidfile '/var/run/world-voice.pid' (pid 992)\nworld-voice stopped\nbr#",
+    "command": "/etc/init.d/world-voice stop"
+  },
+  {
+    "exit": 0,
+    "output": "br# br#",
+    "command": "cd /tmp/codex_deepseek_ds01"
+  },
+  {
+    "exit": 0,
+    "output": "br# xlnx_formatter_pcm 43c40000.audio_formatter: stream 0 : format = 1 mode = 3 ch_limit = 2\nPlaying raw data 'cue.raw' : Signed 24 bit Little Endian, Rate 320wm8960 0-001a: slave mode, but proceeding with no clock configuration\n00 Hz, Stereo\nbr#",
+    "command": "aplay -D default -t raw -f S24_LE -r 32000 -c 2 cue.raw"
+  },
+  {
+    "exit": 0,
+    "output": "br# br#",
+    "command": "sleep 2"
+  },
+  {
+    "exit": 0,
+    "output": "br# xlnx_formatter_pcm 43c40000.audio_formatter: stream 0 : format = 1 mode = 3 ch_limit = 2\nPlaying raw data 'playback_quiet.raw' : Signed 24 bit Little Endiwm8960 0-001a: slave mode, but proceeding with no clock configuration\nan, Rate 32000 Hz, Stereo\nbr#",
+    "command": "aplay -D default -t raw -f S24_LE -r 32000 -c 2 playback_quiet.raw"
+  },
+  {
+    "exit": 0,
+    "output": "xlnx_formatter_pcm 43c40000.audio_formatter: stream 0 : format = 1 mode = 3 ch_limit = 2\nPlaying raw data 'playback_quiet.raw' : Signed 24 bit Little Endiwm8960 0-001a: slave mode, but proceeding with no clock configuration\nan, Rate 32000 Hz, Stereo\nbr#",
+    "command": "aplay -D default -t raw -f S24_LE -r 32000 -c 2 playback_quiet.raw"
+  },
+  {
+    "exit": 0,
+    "output": "br# xlnx_formatter_pcm 43c40000.audio_formatter: stream 0 : format = 1 mode = 3 ch_limit = 2\nPlaying raw data 'playback_quiet.raw' : Signed 24 bit Little Endiawm8960 0-001a: slave mode, but proceeding with no clock configuration\nn, Rate 32000 Hz, Stereo\nbr#",
+    "command": "aplay -D default -t raw -f S24_LE -r 32000 -c 2 playback_quiet.raw"
+  },
+  {
+    "exit": 0,
+    "output": "br# world-voice started\nbr#",
+    "command": "restore world-voice"
+  }
+]

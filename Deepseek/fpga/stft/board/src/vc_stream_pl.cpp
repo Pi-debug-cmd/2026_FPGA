@@ -8,7 +8,7 @@
 // stdin/stdout are raw PCM, stderr carries a single JSON telemetry object, which
 // is the contract of /opt/world_voice/world_budget_v23 (see
 // board_20261025.md).  Audio is S24_LE / 32000 Hz / 2 ch on this board; the
-// 24 valid bits sit left-justified in a 32-bit little-endian container
+// 24 valid bits occupy the low bits of a 32-bit little-endian container
 // (verified on the board by bringup_tool's wav24 mode).
 //
 // Algorithm (must match scripts/ ref_port.py line for line):
@@ -1528,8 +1528,8 @@ int main(int argc, char **argv) {
         const uint8_t *b = &raw[(size_t)i * kChannels * 4];
         int32_t s = (int32_t)((uint32_t)b[0] | ((uint32_t)b[1] << 8) |
                              ((uint32_t)b[2] << 16) | ((uint32_t)b[3] << 24));
-        // 24 valid bits, left justified in the 32-bit container
-        v = (double)(s >> 8) / 8388608.0;
+        // 24 valid bits, right justified in the 32-bit container
+        v = (double)(static_cast<int32_t>((static_cast<uint32_t>(s) & 0xffffffu) ^ 0x800000u) - 0x800000) / 8388608.0;
       } else {
         const uint8_t *b = &raw[(size_t)i * kChannels * 2];
         int16_t s = (int16_t)((uint16_t)b[0] | ((uint16_t)b[1] << 8));
@@ -1662,7 +1662,7 @@ int main(int argc, char **argv) {
       if (native_s24) {
         int32_t q = (int32_t)llround(v * 8388608.0);
         q = std::min(8388607, std::max(-8388608, q));
-        uint32_t u = (uint32_t)q << 8;              // 24 valid bits, left justified
+        uint32_t u = (uint32_t)q;              // 24 valid bits, right justified
         uint8_t *b = &outbuf[(size_t)i * kChannels * 4];
         for (int c = 0; c < kChannels; c++) {
           b[c * 4 + 0] = (uint8_t)(u & 0xFF);
