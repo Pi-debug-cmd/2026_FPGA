@@ -1835,3 +1835,16 @@
 - 实现979fb89；报告report/world_fft_adapter_round11_20261027.{md,json}；同位流旧新两输入三模式各三遍，共36次，全部逐字节一致/零exp fallback。
 - 量化：combined墙钟中位2.645587→2.621563s及2.658425→2.608862s；新exp_only为2.602989/2.605818s，FFT仍无可靠净收益；DMA约0.436s/3279次。
 - 限制：无ALSA/新录放；候选驻留、服务停止，未过高实时门；下一责任方Hardware-A / Codex分解内核复制和DMA耗时，再优化实际瓶颈。
+
+### [PL-20261027-01] Round 12 FFT内核阶段计时认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准8ee3902；范围src/kernel/world_fft_dma.c与小型证据，不改RTL/位流/算法；新增默认关闭的只读诊断计数。
+- 依据：Round11打包节省不足，约0.436s/3279次仍在ioctl；必须区分内核复制和设备等待，再选择200MHz或接口融合方向。
+- 复现：匹配5.15.0-xilinx module构建；同位流停用旧module、载入profile=1候选，probe/文件数值与关闭计时对照；量化待报告。
+- 限制：静默诊断，无ALSA/新现场；服务停止、compact位流驻留。下一责任方Hardware-A / Codex。
+
+### [PL-20261027-01] Round12 计时方案提交
+- 日期：2026-10-27；Hardware-A / Codex；PROPOSED；基准8ee3902。
+- 改动src/kernel/world_fft_dma.c；复现与边界见report/world_fft_kernel_profile_round12_proposal_20261027.md；module构建通过，SHA a882bc0bf3cadf7a6a89ceba3b640bd99b329db6be8eb75fe2e0a29dc1df447f。
+- 量化：尚无阶段板测；默认profile=0无额外时钟，profile=1按copy_in/device/copy_out累计，stats只读。内核已有bufferable映射，不盲改WRITE_COMBINE。
+- 限制：只静默诊断，候选驻留、服务停止，无ALSA/新录放；下一责任方Hardware-A / Codex完成开关对照，随后按用户方向转向阶段融合卸载。

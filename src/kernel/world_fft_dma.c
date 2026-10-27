@@ -8,6 +8,7 @@
 #include <linux/fs.h>
 #include <linux/mutex.h>
 #include <linux/uaccess.h>
+#include <linux/ktime.h>
 #include "world_fft_ioctl.h"
 
 #define DMA_BASE 0x40410000
@@ -18,6 +19,22 @@ static void *tx, *rx;
 static dma_addr_t tx_dma, rx_dma;
 static DEFINE_MUTEX(lock);
 static bool failed;
+static bool profile;
+module_param(profile, bool, 0400);
+static u64 calls, copy_in_ns, device_ns, copy_out_ns;
+
+static int stats_get(char *buffer, const struct kernel_param *kp)
+{
+    int size;
+    mutex_lock(&lock);
+    size = scnprintf(buffer, PAGE_SIZE,
+                     "{\"calls\":%llu,\"copy_in_ns\":%llu,\"device_ns\":%llu,\"copy_out_ns\":%llu}\n",
+                     calls, copy_in_ns, device_ns, copy_out_ns);
+    mutex_unlock(&lock);
+    return size;
+}
+static const struct kernel_param_ops stats_ops = { .get = stats_get };
+module_param_cb(stats, &stats_ops, NULL, 0444);
 
 static long process(struct file *file, unsigned int op, unsigned long arg)
 {
@@ -25,6 +42,7 @@ static long process(struct file *file, unsigned int op, unsigned long arg)
     int rc;
     struct world_fft_request request;
     size_t bytes, input_bytes;
+    u64 begin = 0, copied = 0, completed = 0;
     if (op != WORLD_FFT_PROCESS) return -ENOTTY;
     if (copy_from_user(&request, (void __user *)arg, sizeof(request))) return -EFAULT;
     if ((request.n != 1024 && request.n != 2048) || request.forward > 3 || request.forward == 2) return -EINVAL;
@@ -32,11 +50,13 @@ static long process(struct file *file, unsigned int op, unsigned long arg)
     bytes = (request.forward & 2 ? request.n / 2 + 1 : request.n) * sizeof(u64);
     if (mutex_lock_interruptible(&lock)) return -ERESTARTSYS;
     if (failed) { rc = -EIO; goto out; }
+    if (profile) begin = ktime_get_ns();
     ((u64 *)tx)[0] = (request.n == 1024 ? 10 : 11) | (request.forward << 8);
     if (copy_from_user((u64 *)tx + 1, u64_to_user_ptr(request.input), input_bytes)) {
         rc = -EFAULT; goto out;
     }
     dma_wmb();
+    if (profile) copied = ktime_get_ns();
     // Start receive before transmit. Clear old IOC/error flags (W1C).
     writel(0x7000, regs + 0x34);
     writel(0x7000, regs + 0x04);
@@ -55,7 +75,14 @@ static long process(struct file *file, unsigned int op, unsigned long arg)
     if (rc || (status & 0x5070) != 0x1000) goto fault;
     if (readl(regs + 0x58) != bytes) goto fault;
     dma_rmb();
+    if (profile) completed = ktime_get_ns();
     rc = copy_to_user(u64_to_user_ptr(request.output), rx, bytes) ? -EFAULT : 0;
+    if (profile && !rc) {
+        copy_out_ns += ktime_get_ns() - completed;
+        copy_in_ns += copied - begin;
+        device_ns += completed - copied;
+        ++calls;
+    }
     goto out;
 fault:
     pr_err("world_fft: DMA fault tx=%08x rx=%08x\n",
