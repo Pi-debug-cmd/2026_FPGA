@@ -1,0 +1,567 @@
+{
+  "task": "PS-20261021-10",
+  "round": 92,
+  "date": "2026-10-27",
+  "status": "REJECTED",
+  "baseline_commit": "adbba4bf2cd2b1f89df18b88d84924046db298c6",
+  "source": {
+    "path": "人物音频资料/男声/标准录音 4.wav",
+    "sha256": "f4a026e5c97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c"
+  },
+  "training": {
+    "unique_change": "GRU hidden192 -> 384 relative to Round88, with input/output linear layers resized accordingly",
+    "steps_completed": 1300,
+    "best": {
+      "step": 500,
+      "validation_total": 0.7960573881864548
+    },
+    "history": [
+      {
+        "step": 1,
+        "train": {
+          "total": 1.773859977722168,
+          "reconstruction": 0.45860281586647034,
+          "vuv_bce": 0.16470324993133545,
+          "multiscale_delta": 0.566600501537323,
+          "delta_lag1": 0.4522567689418793,
+          "delta_lag2": 0.5650390982627869,
+          "delta_lag4": 0.6825055480003357,
+          "variance_match": 11.553805351257324
+        },
+        "validation": {
+          "total": 1.4571711719036102,
+          "reconstruction": 0.40596510097384453,
+          "vuv_bce": 0.23277547396719456,
+          "multiscale_delta": 0.4564797393977642,
+          "delta_lag1": 0.3473333939909935,
+          "delta_lag2": 0.4530647397041321,
+          "delta_lag4": 0.5690410807728767,
+          "variance_match": 8.439179062843323
+        },
+        "learning_rate": 0.000599999629889911
+      },
+      {
+        "step": 100,
+        "train": {
+          "total": 0.9272806644439697,
+          "reconstruction": 0.32902809977531433,
+          "vuv_bce": 0.05541619658470154,
+          "multiscale_delta": 0.4551427364349365,
+          "delta_lag1": 0.3847239017486572,
+          "delta_lag2": 0.4635064899921417,
+          "delta_lag4": 0.5171979069709778,
+          "variance_match": 0.6537113785743713
+        },
+        "validation": {
+          "total": 0.8376341536641121,
+          "reconstruction": 0.29666517302393913,
+          "vuv_bce": 0.06917169620282948,
+          "multiscale_delta": 0.4048398695886135,
+          "delta_lag1": 0.33461152762174606,
+          "delta_lag2": 0.4088457450270653,
+          "delta_lag4": 0.4710623398423195,
+          "variance_match": 0.6190204471349716
+        },
+        "learning_rate": 0.0005963065021785408
+      },
+      {
+        "step": 200,
+        "train": {
+          "total": 0.9278143048286438,
+          "reconstruction": 0.3248155415058136,
+          "vuv_bce": 0.052798863500356674,
+          "multiscale_delta": 0.463869571685791,
+          "delta_lag1": 0.399848997592926,
+          "delta_lag2": 0.4702255129814148,
+          "delta_lag4": 0.521534264087677,
+          "variance_match": 0.5575136542320251
+        },
+        "validation": {
+          "total": 0.8117722272872925,
+          "reconstruction": 0.2848712354898453,
+          "vuv_bce": 0.06815279158763587,
+          "multiscale_delta": 0.39705443382263184,
+          "delta_lag1": 0.33166922628879547,
+          "delta_lag2": 0.40039967745542526,
+          "delta_lag4": 0.459094375371933,
+          "variance_match": 0.5316433012485504
+        },
+        "learning_rate": 0.0005853169548885456
+      },
+      {
+        "step": 300,
+        "train": {
+          "total": 0.843781054019928,
+          "reconstruction": 0.2942314147949219,
+          "vuv_bce": 0.0756278932094574,
+          "multiscale_delta": 0.4153923988342285,
+          "delta_lag1": 0.3553563356399536,
+          "delta_lag2": 0.41815048456192017,
+          "delta_lag4": 0.47267040610313416,
+          "variance_match": 0.4921796917915344
+        },
+        "validation": {
+          "total": 0.8056948930025101,
+          "reconstruction": 0.28211208060383797,
+          "vuv_bce": 0.0757405268959701,
+          "multiscale_delta": 0.3942216522991657,
+          "delta_lag1": 0.33039941266179085,
+          "delta_lag2": 0.3974573351442814,
+          "delta_lag4": 0.45480822399258614,
+          "variance_match": 0.48015226051211357
+        },
+        "learning_rate": 0.0005673019572565106
+      },
+      {
+        "step": 400,
+        "train": {
+          "total": 0.9466157555580139,
+          "reconstruction": 0.3324214816093445,
+          "vuv_bce": 0.03548648580908775,
+          "multiscale_delta": 0.4808267056941986,
+          "delta_lag1": 0.426401823759079,
+          "delta_lag2": 0.48784831166267395,
+          "delta_lag4": 0.5282298922538757,
+          "variance_match": 0.4956372380256653
+        },
+        "validation": {
+          "total": 0.8014649376273155,
+          "reconstruction": 0.28032103925943375,
+          "vuv_bce": 0.07541552046313882,
+          "multiscale_delta": 0.3932156376540661,
+          "delta_lag1": 0.330255176872015,
+          "delta_lag2": 0.39646369963884354,
+          "delta_lag4": 0.4529280439019203,
+          "variance_match": 0.4577934667468071
+        },
+        "learning_rate": 0.0005427050983124842
+      },
+      {
+        "step": 500,
+        "train": {
+          "total": 0.8441807627677917,
+          "reconstruction": 0.2947239875793457,
+          "vuv_bce": 0.024238109588623047,
+          "multiscale_delta": 0.4341156780719757,
+          "delta_lag1": 0.3799821138381958,
+          "delta_lag2": 0.43752822279930115,
+          "delta_lag4": 0.4848366677761078,
+          "variance_match": 0.4006916582584381
+        },
+        "validation": {
+          "total": 0.7960573881864548,
+          "reconstruction": 0.277954775840044,
+          "vuv_bce": 0.07756548444740474,
+          "multiscale_delta": 0.3923123925924301,
+          "delta_lag1": 0.3299452103674412,
+          "delta_lag2": 0.39568957686424255,
+          "delta_lag4": 0.4513023942708969,
+          "variance_match": 0.4035958871245384
+        },
+        "learning_rate": 0.0005121320343559645
+      },
+      {
+        "step": 600,
+        "train": {
+          "total": 0.7914005517959595,
+          "reconstruction": 0.27574703097343445,
+          "vuv_bce": 0.03230580687522888,
+          "multiscale_delta": 0.40486201643943787,
+          "delta_lag1": 0.35132211446762085,
+          "delta_lag2": 0.4096768796443939,
+          "delta_lag4": 0.4535871148109436,
+          "variance_match": 0.3702402412891388
+        },
+        "validation": {
+          "total": 0.7993799224495888,
+          "reconstruction": 0.2787098418921232,
+          "vuv_bce": 0.0857431492768228,
+          "multiscale_delta": 0.3928595930337906,
+          "delta_lag1": 0.3303333595395088,
+          "delta_lag2": 0.39630333706736565,
+          "delta_lag4": 0.4519420638680458,
+          "variance_match": 0.38456904143095016
+        },
+        "learning_rate": 0.00047633557568774236
+      },
+      {
+        "step": 700,
+        "train": {
+          "total": 0.7582799196243286,
+          "reconstruction": 0.25891557335853577,
+          "vuv_bce": 0.019718535244464874,
+          "multiscale_delta": 0.39655375480651855,
+          "delta_lag1": 0.35779067873954773,
+          "delta_lag2": 0.4002598822116852,
+          "delta_lag4": 0.43161073327064514,
+          "variance_match": 0.33196642994880676
+        },
+        "validation": {
+          "total": 0.8055691793560982,
+          "reconstruction": 0.2799077592790127,
+          "vuv_bce": 0.09930317150428891,
+          "multiscale_delta": 0.3935971073806286,
+          "delta_lag1": 0.33108263462781906,
+          "delta_lag2": 0.3972098156809807,
+          "delta_lag4": 0.4524988681077957,
+          "variance_match": 0.37177538871765137
+        },
+        "learning_rate": 0.00043619714992186435
+      },
+      {
+        "step": 800,
+        "train": {
+          "total": 0.7785177230834961,
+          "reconstruction": 0.265636146068573,
+          "vuv_bce": 0.022420888766646385,
+          "multiscale_delta": 0.4074018895626068,
+          "delta_lag1": 0.37108635902404785,
+          "delta_lag2": 0.40934038162231445,
+          "delta_lag4": 0.44177883863449097,
+          "variance_match": 0.32304009795188904
+        },
+        "validation": {
+          "total": 0.8105016350746155,
+          "reconstruction": 0.28160275146365166,
+          "vuv_bce": 0.10192664945498109,
+          "multiscale_delta": 0.3964715674519539,
+          "delta_lag1": 0.3327002413570881,
+          "delta_lag2": 0.4000426158308983,
+          "delta_lag4": 0.4566718563437462,
+          "variance_match": 0.3491731397807598
+        },
+        "learning_rate": 0.00039270509831248443
+      },
+      {
+        "step": 900,
+        "train": {
+          "total": 0.7608736157417297,
+          "reconstruction": 0.25833821296691895,
+          "vuv_bce": 0.008939008228480816,
+          "multiscale_delta": 0.4020785987377167,
+          "delta_lag1": 0.37428778409957886,
+          "delta_lag2": 0.4064027667045593,
+          "delta_lag4": 0.42554518580436707,
+          "variance_match": 0.33824828267097473
+        },
+        "validation": {
+          "total": 0.8096162527799606,
+          "reconstruction": 0.28236791491508484,
+          "vuv_bce": 0.09427509224042296,
+          "multiscale_delta": 0.3975347839295864,
+          "delta_lag1": 0.33377765119075775,
+          "delta_lag2": 0.4010753035545349,
+          "delta_lag4": 0.45775140821933746,
+          "variance_match": 0.34420590102672577
+        },
+        "learning_rate": 0.0003469303395120695
+      },
+      {
+        "step": 1000,
+        "train": {
+          "total": 0.7921569347381592,
+          "reconstruction": 0.27271708846092224,
+          "vuv_bce": 0.009442278183996677,
+          "multiscale_delta": 0.41552332043647766,
+          "delta_lag1": 0.3842134475708008,
+          "delta_lag2": 0.4195018708705902,
+          "delta_lag4": 0.442854642868042,
+          "variance_match": 0.35014212131500244
+        },
+        "validation": {
+          "total": 0.8155625090003014,
+          "reconstruction": 0.2845352031290531,
+          "vuv_bce": 0.09997586533427238,
+          "multiscale_delta": 0.3993087224662304,
+          "delta_lag1": 0.3343486897647381,
+          "delta_lag2": 0.4030296877026558,
+          "delta_lag4": 0.4605477787554264,
+          "variance_match": 0.3373052701354027
+        },
+        "learning_rate": 0.0003000000000000001
+      },
+      {
+        "step": 1100,
+        "train": {
+          "total": 0.7451573610305786,
+          "reconstruction": 0.2517876625061035,
+          "vuv_bce": 0.015512814745306969,
+          "multiscale_delta": 0.3936344087123871,
+          "delta_lag1": 0.36399132013320923,
+          "delta_lag2": 0.3962278366088867,
+          "delta_lag4": 0.4206840991973877,
+          "variance_match": 0.3115784227848053
+        },
+        "validation": {
+          "total": 0.8218597993254662,
+          "reconstruction": 0.2869364097714424,
+          "vuv_bce": 0.10348626552149653,
+          "multiscale_delta": 0.40184709802269936,
+          "delta_lag1": 0.33572662249207497,
+          "delta_lag2": 0.40564025938510895,
+          "delta_lag4": 0.46417440474033356,
+          "variance_match": 0.3297329731285572
+        },
+        "learning_rate": 0.00025306966048793087
+      },
+      {
+        "step": 1200,
+        "train": {
+          "total": 0.7373640537261963,
+          "reconstruction": 0.25163474678993225,
+          "vuv_bce": 0.017415132373571396,
+          "multiscale_delta": 0.3860832452774048,
+          "delta_lag1": 0.3560464680194855,
+          "delta_lag2": 0.38945895433425903,
+          "delta_lag4": 0.4127442538738251,
+          "variance_match": 0.3266821503639221
+        },
+        "validation": {
+          "total": 0.8327165842056274,
+          "reconstruction": 0.28987090289592743,
+          "vuv_bce": 0.12102471943944693,
+          "multiscale_delta": 0.40406952798366547,
+          "delta_lag1": 0.3371824659407139,
+          "delta_lag2": 0.40785104036331177,
+          "delta_lag4": 0.46717507764697075,
+          "variance_match": 0.31207180209457874
+        },
+        "learning_rate": 0.0002072949016875159
+      },
+      {
+        "step": 1300,
+        "train": {
+          "total": 0.7040292024612427,
+          "reconstruction": 0.2386198341846466,
+          "vuv_bce": 0.008784610778093338,
+          "multiscale_delta": 0.3742441236972809,
+          "delta_lag1": 0.3514515161514282,
+          "delta_lag2": 0.3786630928516388,
+          "delta_lag4": 0.3926178812980652,
+          "variance_match": 0.2648349702358246
+        },
+        "validation": {
+          "total": 0.835333488881588,
+          "reconstruction": 0.290772270411253,
+          "vuv_bce": 0.12372370949015021,
+          "multiscale_delta": 0.40482090786099434,
+          "delta_lag1": 0.3376772440969944,
+          "delta_lag2": 0.4086921773850918,
+          "delta_lag4": 0.4680933244526386,
+          "variance_match": 0.30945579893887043
+        },
+        "learning_rate": 0.00016380285007813595
+      }
+    ],
+    "seed": 20261025,
+    "source_prosody": true,
+    "variance_matching": true,
+    "vuv_bce_weight": 0.35,
+    "multiscale_dynamic_weight": 1.2,
+    "target_anchor_probability": 0.25,
+    "checkpoint_sha256": "457765a9bbc117dfc8316f3c105ab543f67e988241a5e7c46a48040da2381f1b",
+    "runtime_script_sha256": "52ec7449a2cbce1e76efd6a5dd94fa454020ae6df8d2350d2975ac42f4126f1c",
+    "paired_cache_manifest_sha256": "4d34669259834bd30219f34af4730712c9aa7c4cf8fa8bc3c5ccde9ee3cc5bc5",
+    "paired_cache_split": {
+      "train": {
+        "pairs": 192,
+        "speakers": [
+          "SSB0005",
+          "SSB0012",
+          "SSB0018",
+          "SSB0033",
+          "SSB0043",
+          "SSB0057",
+          "SSB0073",
+          "SSB0145",
+          "SSB0149",
+          "SSB0193",
+          "SSB0197",
+          "SSB0241",
+          "SSB0273",
+          "SSB0375",
+          "SSB0394",
+          "SSB0407",
+          "SSB0603",
+          "SSB0609",
+          "SSB0623",
+          "SSB0629"
+        ],
+        "seconds": 888.1089375000003
+      },
+      "validation": {
+        "pairs": 8,
+        "speakers": [
+          "SSB0080",
+          "SSB0434"
+        ],
+        "seconds": 46.1948125
+      }
+    },
+    "fixed_male_training_used": false,
+    "target_anchors": [
+      5,
+      6,
+      7,
+      8
+    ],
+    "launcher_return_code": 1,
+    "checkpoint_independently_verified": true,
+    "crop_frames": 128,
+    "baseline_crop_frames": 128,
+    "eligible_training_rows": 184,
+    "baseline_eligible_training_rows": 184,
+    "eligibility_confound": false,
+    "pca_dimensions": 96,
+    "baseline_pca_dimensions": 96,
+    "input_dimensions": 99,
+    "baseline_input_dimensions": 99,
+    "hidden_dimensions": 384,
+    "gru_layers": 2,
+    "parameters": 1841355,
+    "baseline_target_anchor_probability": 0.25,
+    "runtime_sources_sha256": {
+      "apply_world_temporal_postfilter_round47_20261026.py": "486ad7f53466751106cdd9572bf364b1cc39501affbbdf9ea3a142380ffe9e47",
+      "audit_source_prosody_round32_20261025.py": "b15637345b4918d4431044a3e03d7f5f6eab9d144245bea0f9900da7ca295954",
+      "evaluate_seed_fixed_male_strict_20261024.py": "6f03418d2f11d7b04f114ea5d43bb7f8bd559ac7c7e1759ee6be58ef5b16375f",
+      "train_hubert_world_causal_gru_round23_20261025.py": "1329f70c7a11a7071428509e595d515a68effcf94362a3df23ba8b5b465c8269",
+      "train_hubert_world_teacher_round20_20261025.py": "1c6c111fdfca6f7d9343c3ca61d2d244c276ff2ca661034d35899e55174e3941",
+      "train_paired_hubert_world_gru_round26_20261025.py": "52ec7449a2cbce1e76efd6a5dd94fa454020ae6df8d2350d2975ac42f4126f1c"
+    },
+    "baseline_hidden_dimensions": 192
+  },
+  "candidate": {
+    "candidate": "round92_non_f0_gain1_6",
+    "path": "build/generated/hubert_world_round92_20261027/candidates/round92_non_f0_gain1_6.wav",
+    "sha256": "a10739d25b3a668fb13cb06975b1804d0996e5218170e3727a0912efdb24ecba",
+    "gain": 1.6,
+    "source_detail_alpha": 0.0,
+    "source_detail_cutoff": 20,
+    "source_residual_alpha": 0.0,
+    "source_residual_cutoff": 8,
+    "source_vuv_alpha": 0.0,
+    "synthesis": {
+      "voiced_fraction": 0.6987091458390552,
+      "f0_voiced_median_hz": 188.9653778076172,
+      "peak_before_limit": 2.7134062343322767
+    }
+  },
+  "metrics": {
+    "identity": 0.6774789682712177,
+    "identity_p10": 0.6523689562920275,
+    "leakage": 0.1209129381721911,
+    "leakage_window_mean": 0.11695412276693538,
+    "leakage_aggregate": 0.1209129381721911,
+    "utmos": 2.2483020623524985,
+    "cer": 0.38235294117647056
+  },
+  "passed": {
+    "identity": true,
+    "identity_p10": true,
+    "leakage": false,
+    "utmos": false,
+    "cer": false
+  },
+  "all_gates_pass": false,
+  "evaluation": {
+    "cer_normalizer": "opencc-python-reimplemented 0.1.7 t2s; actual conversion enabled",
+    "source_asr": "男孩把最后一块糖给了骷髏的妹妹妹破体围剿点角亲了她一下糖纸在阳光下向彩虹多年后她仍留着那张糖纸记得那天的甜妹妹出嫁那天她把糖纸放进她手心",
+    "candidate_asr": "男孩把六一块糖给了铺东和妹妹妹破气为笑 点叫欺负她以下糖脂在羊肉下向彩虹 多年后她仍有留着了张糖脂 记得当今的体验妹妹出家当今她把糖脂放进她手心",
+    "cer_detail": {
+      "reference_chars": 68,
+      "hypothesis_chars": 69,
+      "distance": 26,
+      "cer": 0.38235294117647056
+    },
+    "identity_by_chunk": [
+      0.6593371585398327,
+      0.7224728405437439,
+      0.6506269057300762
+    ],
+    "leakage_by_chunk": [
+      0.10613781643837528,
+      0.1274906987652831,
+      0.11723385309714776
+    ],
+    "utmos_by_chunk": [
+      2.235278606414795,
+      2.164586067199707,
+      2.345041513442993
+    ],
+    "target_track9_used": false,
+    "recording5_used": false,
+    "played": false,
+    "board_touched": false,
+    "cer_without_script_normalization": {
+      "reference_chars": 68,
+      "hypothesis_chars": 69,
+      "distance": 26,
+      "cer": 0.38235294117647056
+    },
+    "historical_transcript_normalization_audit": {
+      "package": "opencc-python-reimplemented",
+      "version": "0.1.7",
+      "operation": "t2s",
+      "smoke_test": {
+        "input": "骷髏",
+        "output": "骷髅"
+      },
+      "method": "Rescore saved ASR text only; no model inference, no audio access, no historical report overwrite",
+      "rows": [
+        {
+          "round": 88,
+          "identity_shim_cer": {
+            "reference_chars": 68,
+            "hypothesis_chars": 69,
+            "distance": 18,
+            "cer": 0.2647058823529412
+          },
+          "opencc_cer": {
+            "reference_chars": 68,
+            "hypothesis_chars": 69,
+            "distance": 18,
+            "cer": 0.2647058823529412
+          },
+          "report_sha256": "179517dd34abfd53998dff5c6470b31259abbc902466664bd4886a9fdea1d4d2"
+        },
+        {
+          "round": 89,
+          "identity_shim_cer": {
+            "reference_chars": 68,
+            "hypothesis_chars": 70,
+            "distance": 25,
+            "cer": 0.36764705882352944
+          },
+          "opencc_cer": {
+            "reference_chars": 68,
+            "hypothesis_chars": 70,
+            "distance": 25,
+            "cer": 0.36764705882352944
+          },
+          "report_sha256": "e34b624eab1829c3c969bb124b83ecc890559db4bfc077b5a5bd2bd96003856d"
+        }
+      ]
+    },
+    "dependency_install_command": "Python3.12 -m pip install --target <asset-root>/build/generated/eval_opencc_deps_20261027 --no-cache-dir opencc-python-reimplemented==0.1.7"
+  },
+  "corrections": [
+    "Round25 cache declares fixed_male_audio_used=false: 192 public paired training rows and 8 validation rows. Target Tracks5-8 are self-reconstruction anchors. Male recordings1-3 are evaluator source centroid inputs only.",
+    "Round90 removes the identity OpenCC shim by default and uses actual OpenCC0.1.7 t2s conversion. Saved Round88/89 ASR text rescoring yields unchanged CER, retained in evaluation audit; historical reports are not rewritten."
+  ],
+  "limitations": [
+    "Source Whisper transcript is not a manually verified transcript.",
+    "Training and candidate launchers returned1 after completion markers; finite weights/history/dimensions and artifact hashes were independently checked.",
+    "Only recording4 development validation was evaluated. Recording5 and Track9 remain locked. No playback, listening, board, Cortex-A9, PL or realtime result is claimed.",
+    "The larger GRU has not been shown feasible on Cortex-A9 or PL. This is only an offline quality experiment."
+  ],
+  "reproduction": {
+    "prepare": "python build/reproduce_hubert_world_round88_20261027.py prepare --asset-root <asset-root> --experiment-round 92",
+    "train": "D:/Anaconda/envs/yolo/python.exe build/reproduce_hubert_world_round88_20261027.py train --asset-root <asset-root> --experiment-round 92",
+    "candidate": "D:/Anaconda/envs/yolo/python.exe build/reproduce_hubert_world_round88_20261027.py candidate --asset-root <asset-root> --experiment-round 92",
+    "evaluate": "C:/Users/World/AppData/Local/Python/pythoncore-3.12-64/python.exe build/reproduce_hubert_world_round88_20261027.py evaluate --asset-root <asset-root> --experiment-round 92 --cer-normalizer opencc"
+  },
+  "candidate_launcher_return_code": 1,
+  "evaluation_return_code": 0,
+  "algorithm_baseline": "Round88",
+  "runtime_import_note": "All staged modules resolve sibling modules within this round runtime/build, preventing asset-root/build scripts from shadowing the patched model. The original asset workspace currently has no same-named trainer modules."
+}

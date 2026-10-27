@@ -2243,3 +2243,15 @@
 - 复现：prepare/train/candidate/evaluate --experiment-round 92 --asset-root <asset-root>，评测--cer-normalizer opencc；训练前核对PCA96、hidden384、anchor0.25、CROP128与语法。
 - 限制：ASR参考非人工真值；当前仅电脑端质量试验，不因容量增加而宣称Cortex-A9/PL预算或现场通过。无播放、录音、板测。
 - 下一责任方：Hardware-A / Codex 完成本轮训练、客观评测、独立核验及提交；完成后34/50，最多Round108。
+
+
+### [PS-20261021-10] HuBERT/WORLD Round 92 GRU容量结果
+- 日期：2026-10-27；角色：Hardware-A / Codex（离线算法）；状态：REJECTED。
+- 基准提交：adbba4bf2cd2b1f89df18b88d84924046db298c6；算法基线Round88。
+- 唯一变量：GRU hidden192→384，相关输入/输出层同步扩大，参数1841355；PCA96、CROP128、anchor0.25及其他配置保持Round88。
+- 量化结果：身份/P10/泄漏/UTMOS/CER=0.6774789683/0.6523689563/0.1209129382/2.2483020624/0.3823529412；后三门失败。完成step1300，最佳step500，验证loss0.7960573882。step500后验证损失回升，训练重建误差下降，存在过拟合迹象；不能把更低训练误差当作音质通过。
+- 证据：checkpoint SHA-256 457765a9bbc117dfc8316f3c105ab543f67e988241a5e7c46a48040da2381f1b；候选SHA-256 a10739d25b3a668fb13cb06975b1804d0996e5218170e3727a0912efdb24ecba；有限权重、PCA(768,96)、输入(384,99)、GRU权重(1152,384)、训练历史、缓存与WAV SHA核验通过。
+- 修改路径与报告：report/fixed_male_hubert_world_round92_20261027.{md,json}、coummucation.md、team_project/project_status.md、report/ai_worklog.md。
+- 复现：build/reproduce_hubert_world_round88_20261027.py prepare/train/candidate/evaluate --experiment-round 92 --asset-root <asset-root>；evaluate真实OpenCC0.1.7，完整命令见JSON。
+- 限制：训练/生成启动器产物完成后退出1，评测退出0；ASR参考非人工真值。公共配对192训练/8验证，Track5～8锚点，固定男性1～3仅评测源质心；仅录音4验证，录音5/Track9锁定。无播放、录音、板测、Cortex-A9/PL预算或实时结论。
+- 下一责任方：Hardware-A / Codex；针对宽模型过拟合测试层间dropout。Round59～92共34轮，剩16轮，最多Round108。
