@@ -1893,6 +1893,36 @@
 ### [PS-20261025-20] v13 正式报告归档
 - 报告：`report/ps_20261025_20_hubert_fargan_v13_20261027.md/JSON/TXT`；训练已完成，推理被既有 native 的 Windows `WinError 623` 阻断，质量门结果暂不可用。
 
+### [PS-20261025-20] v13 正式评价结果
+- 普通 Windows 进程重试后 train/infer/evaluate 均 exit 0。Fixed-Male4：identity 0.770661081 / P10 0.743493013 / leakage 0.258552919 / UTMOS 2.622462908 / CER 0.250000000；identity、P10、UTMOS通过，leakage与CER失败，状态 REJECTED。
+- 未读取 Male5/Track9；无播放、录音、试听或硬件验证；不发布 v13 模型包。下一轮测试更强的逐帧对抗约束。
+
+### [PS-20261025-20] v14 逐帧对抗权重 0.05 结果
+- 日期：2026-10-27；状态：REJECTED；基准 `b03375e`；报告：`report/ps_20261025_20_hubert_fargan_v14_20261027.*`。
+- Fixed-Male4：identity 0.764674432 / P10 0.753555575 / leakage 0.253679061 / UTMOS 2.446664254 / CER 0.279411765；train/infer/evaluate exit 0，leakage 与 CER 未过。
+- Male5/Track9锁定；无播放、录音、试听或硬件验证。下一轮只改变对抗分类器输入位置。
+
+### [PS-20261025-20] v15 输出特征逐帧对抗约束认领
+- 日期：2026-10-27；状态：CLAIMED；基准 `b03375e`；唯一变量为 speaker head 输入从 GRU hidden 改为预测的 20D FARGAN 特征，逐帧 CE、权重0.05保持；其余配置、数据和评价口径不变。
+- 代码：`build/remote_ps_c_hubert_fargan_v15.py`、`build/run_remote_ps_c_hubert_fargan_v15.py`；Male5/Track9锁定，仅电脑端。
+
+### [PS-20261025-20] v15 输出 FARGAN 特征逐帧对抗结果
+- 日期：2026-10-27；状态：REJECTED；报告：`report/ps_20261025_20_hubert_fargan_v15_20261027.*`。
+- 训练首跑维度错误，修正为20→20后重跑成功。Fixed-Male4：identity 0.781900390 / P10 0.763990226 / leakage 0.255544036 / UTMOS 2.521055460 / CER 0.308823529；leakage/CER未过。
+- Male5/Track9锁定；下一轮只提高输出特征对抗权重。
+
+### [PS-20261025-20] v16 输出特征逐帧对抗权重 0.20 认领
+- 日期：2026-10-27；状态：CLAIMED；基准 v15 结果；唯一变量为 output-feature framewise `speaker_adv_weight` 0.05→0.20；其余配置和五门口径不变。
+- 代码：`build/remote_ps_c_hubert_fargan_v16.py`、`build/run_remote_ps_c_hubert_fargan_v16.py`；Male5/Track9锁定，仅电脑端。
+
+### [PS-20261025-20] v16 输出特征逐帧对抗权重 0.20 结果
+- Fixed-Male4：identity 0.768678584 / P10 0.746414766 / leakage 0.232333038 / UTMOS 2.440901200 / CER 0.411764706；三阶段 exit0，leakage 与 CER 未过，REJECTED。
+- v16 是目前 leakage 最低轮次；下一轮将同一权重降至0.10寻找内容折中。
+
+### [PS-20261025-20] v17 输出特征逐帧对抗权重 0.10 认领
+- 日期：2026-10-27；状态：CLAIMED；唯一变量为 output-feature framewise `speaker_adv_weight` 0.20→0.10；其余配置、数据和评价口径不变。
+- 代码：`build/remote_ps_c_hubert_fargan_v17.py`、`build/run_remote_ps_c_hubert_fargan_v17.py`；Male5/Track9锁定。
+
 ### [PS-20261025-20] v11 内容帧 +10ms 对齐结果
 - 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准465b70a；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
 - 路径/复现：build/remote_ps_c_hubert_fargan_v11.py、build/run_remote_ps_c_hubert_fargan_v11.py；report/ps_20261025_20_hubert_fargan_v11_20261027.md/JSON/TXT。唯一变量内容帧+1（10ms），独立cache后全阶段exit0。

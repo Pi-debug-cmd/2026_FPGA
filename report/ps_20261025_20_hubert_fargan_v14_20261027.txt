@@ -1,0 +1,9 @@
+PS-20261025-20 v14 strict evaluation
+status=REJECTED
+controlled_change=framewise speaker_adv_weight 0.02 -> 0.05
+train_exit=0 infer_exit=0 evaluate_exit=0 audio_guard_denied=[]
+identity=0.764674432 identity_p10=0.753555575 leakage=0.253679061 utmos=2.446664254 cer=0.279411765 pass=False
+wav_sha256=946cf6b76d527ee34f715101f285b70a4a970794ef508d8d1450e407c8c973ae
+mapper_sha256=0eec8e71f107b173d431eeb66e77b868be69017966f11acc6ab3f33759bab5f7
+male5_used=false target_track9_used=false played=false board_touched=false
+REPORT build/generated/remote_ps_c_hubert_fargan_v14/evaluation.json

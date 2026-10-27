@@ -272,6 +272,30 @@
 ### [PS-20261025-20] v13 正式报告归档
 - 已追加 v13 的正式 BLOCKED-RUNTIME 报告与恢复点；不将本轮当作质量通过或失败样本。
 
+### [PS-20261025-20] v13 正式评价结果
+- v13 已在普通 Windows 进程环境完成固定评价：identity 0.770661081、P10 0.743493013、leakage 0.258552919、UTMOS 2.622462908、CER 0.250000000；未通过 leakage/CER，REJECTED。
+- v13 报告已更正为正式结果；Male5/Track9锁定，未进入 `WAIT_LOCAL_TEST`。
+
+### [PS-20261025-20] v14 逐帧对抗权重 0.05 结果
+- v14 固定评价完成：identity 0.764674432、P10 0.753555575、leakage 0.253679061、UTMOS 2.446664254、CER 0.279411765；REJECTED，未进入 `WAIT_LOCAL_TEST`。
+- 仅电脑端，Male5/Track9锁定，不发布未达标模型包。
+
+### [PS-20261025-20] v15 输出特征逐帧对抗约束认领
+- v15 只将逐帧 speaker adversarial head 的输入改为预测 FARGAN 20D 输出，权重0.05不变；其余训练、数据、五门和电脑端边界不变。
+
+### [PS-20261025-20] v15 输出 FARGAN 特征逐帧对抗结果
+- v15 修正 speaker head 维度后 train/infer/evaluate 全部 exit0；identity 0.781900390、P10 0.763990226、leakage 0.255544036、UTMOS 2.521055460、CER 0.308823529；REJECTED。
+- 不进入 `WAIT_LOCAL_TEST`，不发布 v15 模型包。
+
+### [PS-20261025-20] v16 输出特征逐帧对抗权重 0.20 认领
+- v16 只将 output-feature framewise speaker adversarial weight 从0.05改为0.20；其余数据、主干、seed、优化器、评价口径和电脑端边界不变。
+
+### [PS-20261025-20] v16 输出特征逐帧对抗权重 0.20 结果
+- v16 评价：identity 0.768678584、P10 0.746414766、leakage 0.232333038、UTMOS 2.440901200、CER 0.411764706；REJECTED，不进入 `WAIT_LOCAL_TEST`。
+
+### [PS-20261025-20] v17 输出特征逐帧对抗权重 0.10 认领
+- v17 只将 output-feature framewise adversarial weight 从0.20降至0.10；其余主干、数据、seed、优化器和五门口径保持不变。
+
 ### [PS-20261025-20] v11 内容帧 +10ms 对齐结果
 - 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准465b70a；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
 - 路径/复现：build/remote_ps_c_hubert_fargan_v11.py、build/run_remote_ps_c_hubert_fargan_v11.py；report/ps_20261025_20_hubert_fargan_v11_20261027.md/JSON/TXT。唯一变量内容帧+1（10ms），独立cache后全阶段exit0。

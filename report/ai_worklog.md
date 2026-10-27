@@ -803,6 +803,31 @@ ps-opt 把非周期最小相位优化移植进流式路径（改造 synthesisrea
 ### [PS-20261025-20] v13 正式报告归档
 - `report/ps_20261025_20_hubert_fargan_v13_20261027.*` 已保存；共享记录与报告同提交，等待 native 运行时恢复。
 
+### [PS-20261025-20] v13 正式评价结果
+- 受限进程首试触发 WinError 623，普通 Windows 进程重试成功；strict evaluator exit 0。结果 identity 0.770661081、P10 0.743493013、leakage 0.258552919、UTMOS 2.622462908、CER 0.250000000，REJECTED。
+- 结论：逐帧对抗约束提升 UTMOS并改善CER，但没有降低泄漏到门槛；下一轮保持单变量，增强逐帧对抗权重。
+
+### [PS-20261025-20] v14 逐帧对抗权重 0.05 结果
+- v14 将逐帧 `speaker_adv_weight` 从0.02改为0.05，三阶段 exit0。Fixed-Male4：identity 0.764674432、P10 0.753555575、leakage 0.253679061、UTMOS 2.446664254、CER 0.279411765；leakage/CER仍失败。
+- 下一轮改为对预测 FARGAN 20D 输出施加逐帧源说话人对抗分类，保持其他变量不变。
+
+### [PS-20261025-20] v15 输出特征逐帧对抗约束认领
+- 基于 v14，v15 唯一变量为 speaker classifier 输入改为预测的 FARGAN 20D 特征；逐帧 CE、权重0.05、PCA96、HuBERT layer9、GRU192、数据、seed、优化器和五门口径保持不变。
+
+### [PS-20261025-20] v15 输出 FARGAN 特征逐帧对抗结果
+- v15 将 speaker head 输入改为预测20D FARGAN输出；首次维度错误后最小修正并重跑。结果 identity 0.781900390、P10 0.763990226、leakage 0.255544036、UTMOS 2.521055460、CER 0.308823529，leakage/CER失败。
+- 下一轮只把该输出特征对抗权重从0.05提高到0.20。
+
+### [PS-20261025-20] v16 输出特征逐帧对抗权重 0.20 认领
+- v16 唯一变量为 output-feature framewise adversarial weight 0.20；保持 HuBERT layer9、PCA96、GRU192、delta0.25、数据、seed、优化器和五门不变。
+
+### [PS-20261025-20] v16 输出特征逐帧对抗权重 0.20 结果
+- v16 将输出特征对抗权重提高到0.20，leakage降至0.232333038（当前最佳），但 CER升至0.411764706；identity/P10/UTMOS通过，leakage/CER失败。
+- 下一轮只将该权重降至0.10，继续寻找折中。
+
+### [PS-20261025-20] v17 输出特征逐帧对抗权重 0.10 认领
+- v17 唯一变量为 output-feature framewise adversarial weight 0.10；保持 HuBERT layer9、PCA96、GRU192、delta0.25、数据、seed、优化器和评价器不变。
+
 ### [PS-20261025-20] v11 内容帧 +10ms 对齐结果
 - 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准465b70a；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
 - 路径/复现：build/remote_ps_c_hubert_fargan_v11.py、build/run_remote_ps_c_hubert_fargan_v11.py；report/ps_20261025_20_hubert_fargan_v11_20261027.md/JSON/TXT。唯一变量内容帧+1（10ms），独立cache后全阶段exit0。
