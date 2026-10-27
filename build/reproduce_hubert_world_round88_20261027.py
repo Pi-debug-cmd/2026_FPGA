@@ -1,4 +1,4 @@
-"""Reproduce Round88 and the Round89 crop experiment with external assets."""
+"""Reproduce Round88-90 crop/PCA experiments with external assets."""
 from __future__ import annotations
 
 import argparse
@@ -12,7 +12,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("stage", choices=("prepare", "train", "candidate", "evaluate"))
     parser.add_argument("--asset-root", required=True, type=Path)
-    parser.add_argument("--experiment-round", type=int, choices=(88, 89), default=88)
+    parser.add_argument("--experiment-round", type=int, choices=(88, 89, 90), default=88)
     args = parser.parse_args()
     root = args.asset_root.resolve()
     generated = root / "build/generated"
@@ -36,6 +36,11 @@ def main() -> None:
                     and name == "train_paired_hubert_world_gru_round26_20261025.py"):
                 assert text.count("CROP = 128") == 1
                 text = text.replace("CROP = 128", "CROP = 192")
+            if (args.experiment_round == 90 and name in (
+                    "train_hubert_world_teacher_round20_20261025.py",
+                    "train_hubert_world_causal_gru_round23_20261025.py")):
+                assert text.count("PCA_DIM = 96") == 1
+                text = text.replace("PCA_DIM = 96", "PCA_DIM = 192")
             if name.startswith("apply_world_temporal"):
                 text = text.replace('sys.path.insert(0, str(ROOT / "build"))',
                                     'sys.path.insert(0, str(Path(__file__).resolve().parent))')

@@ -2165,3 +2165,18 @@
 - 复现：build/reproduce_hubert_world_round88_20261027.py prepare/train/candidate/evaluate --experiment-round 89 --asset-root <asset-root>；具体解释器和命令见JSON。
 - 限制：identity OpenCC shim不执行简繁转换，CER源参考是ASR而非人工真值；训练及生成启动器产物完成后退出1，评测退出0。公共配对192训练/8验证，男性1～3仅评测质心；仅评测录音4，录音5/Track9保持锁定。无播放、录音、板测或PS/PL/实时结论。
 - 下一责任方：Hardware-A / Codex。恢复Round88的128帧基线，诊断PCA压缩瓶颈；Round59～89共31轮，剩19轮，五门全过即停止。
+
+
+### [PS-20261021-10] HuBERT/WORLD Round 90 PCA内容瓶颈认领
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：783e78d3ff5667119c10a24c19eb59ce79277e9d；算法对照Round88。
+- 唯一变量：HuBERT PCA_DIM96→192，源韵律拼接后输入99→195。保持GRU hidden192/2层、CROP128、BATCH8、STEPS2000、早停、VUV0.35、动态1.20、方差损失、锚点0.25、seed和gain1.6不变。输入线性层随维度变大，属同一变量的必要结构变化。
+- 依据：Round89增加上下文反而退步；过去多轮微调损失或源谱注入没有解决CER。检验96维压缩是否限制内容保留，不能预先宣称效果改善。
+- 数据：同一Round25缓存192公共配对训练/8验证；PCA和归一化仅拟合训练集，128帧可用184/192；目标Track5～8锚点。男性1～3仅评测源质心，录音4验证，录音5和Track9锁定。
+- 成功标准：身份>=0.45、P10>=0.35、泄漏<=0.10、UTMOS>=2.30、CER<=0.15全部通过；兼容评测identity OpenCC shim不得宣称完整归一化协议通过。
+- 修改路径：build/reproduce_hubert_world_round88_20261027.py、coummucation.md；结果报告report/fixed_male_hubert_world_round90_20261027.{md,json}。
+- 复现：入口prepare/train/candidate/evaluate --experiment-round 90 --asset-root <asset-root>。准备后检查base/prior均PCA192、trainer仍CROP128；训练前py_compile。
+- 限制：保持CPU既有解释器；无播放、录音、板测、PS/PL或实时结论。
+- 下一责任方：Hardware-A / Codex 完成本轮训练和客观评测并单轮提交。此轮完成后为32/50，最多至Round108。
