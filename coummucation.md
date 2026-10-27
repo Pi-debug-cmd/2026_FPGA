@@ -1901,3 +1901,10 @@
 - src/hls/world_minphase.cpp明确LOOP_FLATTEN off；build/cosim_world_minphase_hls.tcl用原WORLD common/fft/matlabfunctions做24例C/RTL对照，HLS重综合后cosim。
 - 目标同级蝶形并行但级间完整排空，消除Round14 flatten与inter false组合的风险；结果待生成，不预设通过。
 - 限制无新板测或录放；candidate驻留/服务停止。下一责任方Hardware-A / Codex读取cosim/周期资源并独立提交。
+
+### [PL-20261027-01] Round15 C-sim通过，RTL因Windows长路径失败；基线已恢复
+- 日期2026-10-27；Hardware-A / Codex；ACCEPTED（C-sim/恢复），BLOCKED（本轮cosim工具路径）；实现e98e787。
+- 报告report/world_minphase_cosim_round15_20261027.md及工具TXT/restore JSON；24例relativeL2最大8.5944e-7，HLS30229拍/10007LUT/38DSP，RTL未执行。
+- 失败：浮点IP生成完整路径超过Windows260字符，非RTL数值失败；入口include引号已修正，下一轮用D盘短生成目录。
+- 恢复：stop/rmmod/sync/正常reboot，原厂bit与v23 SHA匹配，FPGA operating、PCM双RUNNING、内核Not tainted、自有模块卸载。启动分区未改，无新录放。
+- 下一责任方Hardware-A / Codex短路径重跑HLS/RTL并继续融合迁移。
