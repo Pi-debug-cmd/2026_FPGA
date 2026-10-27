@@ -1904,3 +1904,16 @@
 - 报告链接：`report/fixed_male_hubert_world_round77_20261027.md`、`report/fixed_male_hubert_world_round77_20261027.json`。
 - 下一责任方：Hardware-A / Codex 保留 source prosody 与 variance matching，测试独立的 VUV BCE 权重变化。
 
+### [PS-20261021-10] HuBERT/WORLD Round 78 VUV 损失权重
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`e6d0c57fa4a08fb73d48d6f58d85a8b477d0d726`
+- 唯一变量：VUV BCE 系数由0.35升至0.70；保留 source prosody 和 variance matching，动态权重1.25、锚点0.25、gain1.6不变；step1600 early stop。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.6967/0.6721/0.1134/2.3254/0.2794`；源泄漏与 CER 未过门。Checkpoint SHA-256 `f3ebc219a32883027d26b2f1f6818545159e67351adc74d306006b0867fc891c`；候选 PCM16 SHA-256 `b2082fca1f4d73f2324085a7a54bb57903b8f3c66ae988089102a6399866ba31`。
+- 修改路径：`report/fixed_male_hubert_world_round78_20261027.{md,json}`、`coummucation.md`。
+- 复现命令：见 `report/fixed_male_hubert_world_round78_20261027.json`。
+- 限制：identity OpenCC shim；录音5、Track 9 未用于选参；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL 或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round78_20261027.md`、`report/fixed_male_hubert_world_round78_20261027.json`。
+- 下一责任方：Hardware-A / Codex 测试降低 VUV BCE 权重。
+
