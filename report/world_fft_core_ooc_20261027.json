@@ -1,0 +1,25 @@
+{
+  "task": "PL-20261027-01",
+  "date": "2026-10-27",
+  "method": "Vivado MCP xfft9.1 revision16 out-of-context synthesis; no board load",
+  "part": "xc7z020clg400-2",
+  "clock_mhz": 100,
+  "lut": 7744,
+  "ff": 12935,
+  "bram36_equivalent": 15.5,
+  "dsp": 60,
+  "synth_wns_ns": 5.043,
+  "synth_whs_ns": 0.158,
+  "routed": false,
+  "errors": 0,
+  "critical_warnings": 0,
+  "warnings": 4,
+  "project_recipe": "build/create_world_fft_probe.tcl",
+  "model_evidence": "report/world_fft_ip_model_round6_20261027.json",
+  "limits": [
+    "OOC synthesis timing excludes placement/routing",
+    "Full audio+exp+FFT design not yet signed off",
+    "External audio IO delays not fully constrained",
+    "No FFT hardware or listening pass"
+  ]
+}

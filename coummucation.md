@@ -1682,3 +1682,19 @@
 - 量化：全FFT替换SNR男声1 88.876dB、男声4 87.845dB，最大PCM16误差均1；单D4C分别118.306/113.844dB。其余尺寸仍CPU，调用数完整保存。
 - 限制：模型数值通过不代表资源、RTL板测或高实时；独立OOC综合进行中，未加载FFT位流、未新录放，板上原v23运行。
 - 下一责任方：Hardware-A / Codex 完成FFT流接口、独立DMA和OOC/整机时序，静默板测后才请求现场试听。
+
+### [PL-20261027-01] Round 7 FFT PS/PL集成认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准：`ecb911e`；范围：FFT AXI流配置头、独立HP2 DMA、临时root-only驱动、PS double/float适配；保留exp及音频路径。
+- 依据：Round6官方位准确模型两段完整语音SNR≥87.845dB/最大PCM16误差1；独立FFT综合已完成，待读取资源与时序。
+- 复现与量化：将随本轮方案报告提交；先仿真流握手、综合实现与时序，再静默板测；不提前宣称FFT板端或高实时通过。
+- 限制：当前原v23/原厂PL继续运行，不修改启动分区；任何新现场录放仍需当轮确认。
+- 下一责任方：Hardware-A / Codex 完成可复现候选及客观门，再安排现场。
+
+### [PL-20261027-01] 浮点FFT独立综合资源结果
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（仅OOC综合预算）。
+- 基准构建：`ecb911e`所含probe方案，模型实现`53645ef`；改动：`report/world_fft_core_ooc_20261027.json`及资源/时序TXT。
+- 复现：Vivado MCP独立probe、open_run world_fft_probe_synth_1、report_utilization/report_timing_summary。
+- 量化：7744LUT/12935FF/15.5BRAM/60DSP；100MHz综合WNS+5.043ns、WHS+0.158ns，0 Error/0 Critical Warning/4 Warning。
+- 限制：非布局布线签核，不是整机时序或FFT板测；Round7独立HP2 DMA集成正在构建和RTL仿真，板上原v23未切换。
+- 下一责任方：Hardware-A / Codex 完成Round7流接口数值/背压仿真与整机布局布线。
