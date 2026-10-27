@@ -785,8 +785,21 @@ ps-opt 把非周期最小相位优化移植进流式路径（改造 synthesisrea
 - 停止条件：cache/train/infer/evaluate后只做一次Fixed-Male4五门；不扫描其它时移，不发布未达标模型包。
 - 限制/下一责任方：电脑端非因果实验，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时声明；Remote-PS-C提交结果。
 
+### [PS-20261025-20] v12 对抗权重 0.02 结果
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准 `2d09f52`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；PR #11。
+- 代码/报告：`build/remote_ps_c_hubert_fargan_v12.py`、`build/run_remote_ps_c_hubert_fargan_v12.py`、`report/ps_20261025_20_hubert_fargan_v12_20261027.*`；train/infer/evaluate exit 0，audio guard `denied: []`。
+- 唯一变量：`speaker_adv_weight=0.02`，其余 v5 配置和评测口径不变。Fixed-Male4：identity 0.770142852、P10 0.737552752、leakage 0.256829248、UTMOS 2.436301072、CER 0.323529412；仍未通过泄漏与 CER 门槛。
+- Male5/Track9锁定；无播放、录音、试听、板卡/ARM/Vivado/RTL/PL；未进入 `WAIT_LOCAL_TEST`，不发布 v12 模型包。下一轮改训练目标或表示约束，保持单变量。
+
 ### [PS-20261025-20] v11 内容帧 +10ms 对齐结果
 - 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准465b70a；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
 - 路径/复现：build/remote_ps_c_hubert_fargan_v11.py、build/run_remote_ps_c_hubert_fargan_v11.py；report/ps_20261025_20_hubert_fargan_v11_20261027.md/JSON/TXT。唯一变量内容帧+1（10ms），独立cache后全阶段exit0。
 - 一次Male4五门：身份0.692620680/P100.649548035/泄漏0.264168332/UTMOS1.904939890/CER0.500000000；相对v1恶化，仍REJECTED。
 - 限制/下一责任方：Male5/Track9锁定，无现场或硬件测试；Remote-PS-C保留失败证据，继续改训练目标/内容表示。
+
+### [PS-20261025-20] v12 对抗权重 0.02 单变量认领
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：CLAIMED；基准提交 `2d09f52`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；PR #11。
+- 假设/范围：v4权重0.05降低泄漏但CER=0.4706，v5权重0.01恢复部分CER但泄漏=0.2661。v12只将speaker_adv_weight改为0.02，其余v4/v5配置、数据、seed、网络、优化器、早停和五门不变。
+- 路径/复现：拟新增 `build/remote_ps_c_hubert_fargan_v12.py`、`build/run_remote_ps_c_hubert_fargan_v12.py`；输出 `build/generated/remote_ps_c_hubert_fargan_v12/`；报告 `report/ps_20261025_20_hubert_fargan_v12_20261027.*`。复用v1缓存，Male5/Track9锁定。
+- 停止条件：训练、推理和一次原五门评价；未全过不进入WAIT_LOCAL_TEST、不发布模型包。
+- 限制/下一责任方：电脑端非因果实验，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时声明；Remote-PS-C提交结果。
