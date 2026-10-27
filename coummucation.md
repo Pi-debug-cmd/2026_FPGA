@@ -1813,3 +1813,16 @@
 - 路径/复现：build/remote_ps_c_hubert_fargan_v6.py、build/run_remote_ps_c_hubert_fargan_v6.py；report/ps_20261025_20_hubert_fargan_v6_20261027.md/JSON/TXT。只复用v1冻结mapper/statistics/native，输出逐帧向target y_mean收缩50%，infer/evaluate exit0。
 - 一次Male4五门：身份0.579423544/P100.550014264/泄漏0.251125215/UTMOS1.350889683/CER0.338235294；泄漏未改善且身份/UTMOS下降，仍REJECTED。
 - 限制/下一责任方：Male5/Track9锁定，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时验收；Remote-PS-C保留失败证据，下一轮改特征级方法。
+
+### [PS-20261025-20] v7 能量/周期性列目标均值替换认领
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：CLAIMED；基准提交 `268f311`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；PR #11。
+- 假设/范围：历史 FARGAN 控制确认 20D 第0列能量、第19列周期性是源泄漏敏感项。v7 只将冻结v1输出的这两列替换为训练目标 `y_mean`，保持其余18列、mapper、统计、native、数据和五门不变；不重训。
+- 路径/复现：拟新增 `build/remote_ps_c_hubert_fargan_v7.py`、`build/run_remote_ps_c_hubert_fargan_v7.py`；输出 `build/generated/remote_ps_c_hubert_fargan_v7/`；报告 `report/ps_20261025_20_hubert_fargan_v7_20261027.*`。只读取 Fixed-Male4，Male5/Track9锁定。
+- 停止条件：只做一次原五门；未同时过门不进入 WAIT_LOCAL_TEST，不发布模型包。
+- 限制/下一责任方：电脑端离线后处理，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时声明；Remote-PS-C提交结果并维护PR #11。
+
+### [PS-20261025-20] v7 能量/周期性列目标均值替换结果
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准268f311；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
+- 路径/复现：build/remote_ps_c_hubert_fargan_v7.py、build/run_remote_ps_c_hubert_fargan_v7.py；report/ps_20261025_20_hubert_fargan_v7_20261027.md/JSON/TXT。v1冻结mapper/statistics/native，仅替换输出列0/19为target y_mean；首次索引失败后最小修复，成功infer/evaluate exit0。
+- 一次Male4五门：身份0.566145985/P100.549324480/泄漏0.283425730/UTMOS1.436652144/CER0.352941176；针对性列替换未改善，仍REJECTED。
+- 限制/下一责任方：Male5/Track9锁定，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时验收；Remote-PS-C保留失败与修复证据，后续改训练目标或内容表示。

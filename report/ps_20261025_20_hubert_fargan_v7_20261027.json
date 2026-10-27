@@ -1,0 +1,177 @@
+{
+  "task": "PS-20261025-20",
+  "date": "2026-10-27",
+  "role": "Remote-PS-C",
+  "status": "REJECTED",
+  "baseline_commit": "268f311",
+  "main_commit": "9c42263ea3aa12898ad451f3c00915e816f039c4",
+  "controlled_change": {
+    "replaced_columns": [
+      0,
+      19
+    ],
+    "replacement": "target training y_mean",
+    "training": false
+  },
+  "frozen_mapper_sha256": "ea545fda2b64b7242e710b4a799dfdd45034a958ff987ffd529a189abae26f68",
+  "native_sha256": "0e5eb4d457741820564d4397e0b69f8dd58b25c896259bb66d8e84fb88a3dc14",
+  "source_sha256": {
+    "build/remote_ps_c_hubert_fargan_v7.py": "4a75b84b667cc0d4800a21c3054ce9f00975183338b14e6e662e5f0b63d0d635",
+    "build/run_remote_ps_c_hubert_fargan_v7.py": "d02e4e5887040937da86e5792b1080f5de0c18d0d05171d02b9005fce34ca915",
+    "build/evaluate_seed_fixed_male_strict_20261024.py": "7f2138ca331004da93d6aaf4be79b4c91aa5837c3f977af01f974bf87a189083"
+  },
+  "inference": {
+    "samples": 291200,
+    "peak": 0.27130126953125,
+    "rms": 0.027546567311517566,
+    "sha256": "603c5cb031181724e2715e6521e0670422c58e9e2da760761e7c82d4b71a10de",
+    "clipping_fraction": 0.0,
+    "task": "PS-20261025-20",
+    "candidate": "Remote-PS-C_HuBERT_BiGRU_FARGAN_v7_target_energy_periodicity_mean",
+    "source_sha256": "f4a026e5c97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c",
+    "source_samples": 291200,
+    "frames": 1820,
+    "inference_seconds": 2.8280000000086147,
+    "rtf_host_full_chain": 0.15538461538508871,
+    "mapper_sha256": "ea545fda2b64b7242e710b4a799dfdd45034a958ff987ffd529a189abae26f68",
+    "native_sha256": "0e5eb4d457741820564d4397e0b69f8dd58b25c896259bb66d8e84fb88a3dc14",
+    "replaced_columns": [
+      0,
+      19
+    ],
+    "male5_used": false,
+    "target_track9_used": false,
+    "played": false,
+    "board_touched": false
+  },
+  "evaluation": {
+    "kind": "strict_fixed_male_evaluation",
+    "protocol": {
+      "source_profile": [
+        "人物音频资料/男声/标准录音 1.wav",
+        "人物音频资料/男声/标准录音 2.wav",
+        "人物音频资料/男声/标准录音 3.wav"
+      ],
+      "evaluated_source": "人物音频资料/男声/标准录音 4.wav",
+      "target_profile": [
+        "人物音频资料/女声/Track 5.wav",
+        "人物音频资料/女声/Track 6.wav",
+        "人物音频资料/女声/Track 7.wav",
+        "人物音频资料/女声/Track 8.wav"
+      ],
+      "target_track9_used": false,
+      "speaker_and_utmos_windows": "non-overlapping 6 s; tail >=1.5 s; RMS >=0.001",
+      "leakage": "maximum of arithmetic mean of per-window cosines and whole-file length-weighted aggregate-vector cosine",
+      "cer": "offline Whisper-small candidate transcript versus source transcript; punctuation removed and OpenCC 0.1.7 t2s-normalized"
+    },
+    "gates": {
+      "identity": 0.45,
+      "identity_p10": 0.35,
+      "leakage": 0.1,
+      "utmos": 2.3,
+      "cer": 0.15
+    },
+    "selected": "Remote-PS-C_HuBERT_BiGRU_FARGAN_v7_target_energy_periodicity_mean",
+    "rows": [
+      {
+        "candidate": "Remote-PS-C_HuBERT_BiGRU_FARGAN_v7_target_energy_periodicity_mean",
+        "path": "build/generated/remote_ps_c_hubert_fargan_v7/fixed_male4.wav",
+        "metrics": {
+          "identity": 0.5661459854615366,
+          "identity_p10": 0.5493244803213024,
+          "leakage": 0.28342573049381997,
+          "leakage_window_mean": 0.26823675054351853,
+          "leakage_aggregate": 0.28342573049381997,
+          "utmos": 1.436652143796285,
+          "cer": 0.35294117647058826
+        },
+        "passed": {
+          "identity": true,
+          "identity_p10": true,
+          "leakage": false,
+          "utmos": false,
+          "cer": false
+        },
+        "all_gates_pass": false,
+        "selection_score": {
+          "minimum_gate_ratio": 0.35282611718338847,
+          "mean_gate_ratio": 0.8460116378339171
+        },
+        "identity_by_chunk": [
+          0.5674379555531827,
+          0.5447961115133324,
+          0.5862038893180948
+        ],
+        "leakage_by_chunk": [
+          0.2738533768723288,
+          0.28346855075768423,
+          0.2473883240005427
+        ],
+        "utmos_by_chunk": [
+          1.437028408050537,
+          1.4785521030426025,
+          1.3943759202957153
+        ],
+        "source_asr": "男孩把最后一块糖给了骷髏的妹妹妹破体围剿点角亲了她一下糖纸在阳光下向彩虹多年后她仍留着那张糖纸记得那天的甜妹妹出嫁那天她把糖纸放进她手心",
+        "candidate_asr": "男孩把这一颗糖给了普通的妹妹妹妹夫妻为孝,尖叫欣赏她一下,糖纸在阳光下向彩虹,不念后,她仍留着能让糖纸记在那间的体验,妹妹出家那间,她把糖纸放进她手心。",
+        "cer_detail": {
+          "reference_chars": 68,
+          "hypothesis_chars": 69,
+          "distance": 24,
+          "cer": 0.35294117647058826
+        },
+        "cer_without_script_normalization": {
+          "reference_chars": 68,
+          "hypothesis_chars": 69,
+          "distance": 24,
+          "cer": 0.35294117647058826
+        }
+      }
+    ],
+    "played": false,
+    "board_touched": false
+  },
+  "execution": [
+    {
+      "stage": "infer",
+      "exit_code": 0,
+      "wall_seconds": 8.65700000000652,
+      "log": "build/generated/remote_ps_c_v7_infer.log"
+    },
+    {
+      "stage": "evaluate",
+      "exit_code": 0,
+      "wall_seconds": 17.796000000002095,
+      "log": "build/generated/remote_ps_c_v7_evaluate.log"
+    }
+  ],
+  "v1_comparison_metrics": {
+    "identity": 0.7788145118676262,
+    "identity_p10": 0.751711669998765,
+    "leakage": 0.2529291513166748,
+    "leakage_window_mean": 0.24303335684436625,
+    "leakage_aggregate": 0.2529291513166748,
+    "utmos": 2.418009599049886,
+    "cer": 0.23529411764705882
+  },
+  "metric_change_v7_minus_v1": {
+    "identity": -0.21266852640608958,
+    "identity_p10": -0.2023871896774626,
+    "leakage": 0.030496579177145156,
+    "leakage_window_mean": 0.025203393699152282,
+    "leakage_aggregate": 0.030496579177145156,
+    "utmos": -0.9813574552536013,
+    "cer": 0.11764705882352944
+  },
+  "initial_failure": {
+    "exit_code": 1,
+    "exception": "IndexError: too many indices for array; corrected before successful rerun",
+    "log": "build/generated/remote_ps_c_v7_initial_failure.log"
+  },
+  "male5_used": false,
+  "target_track9_used": false,
+  "played": false,
+  "board_touched": false,
+  "delivery_status": "not_packaged_quality_rejected",
+  "guard_scope": "Python file opens, not OS-wide/native-child tracing"
+}
