@@ -48,6 +48,7 @@ result = {'kind':'world_fft_ip_quality','generics':dict(zip(names,values)),
           'xci_sha256':hashlib.sha256(a.xci.read_bytes()).hexdigest(),'unit':[],'speech':[]}
 rng = np.random.default_rng(20261027)
 input_words, output_words = [], []
+compact_input, compact_output = [], []
 def Words(re, im):
     pairs = np.column_stack((re,im)).astype('<f4')
     return pairs.view('<u8').reshape(-1).tolist()
@@ -72,10 +73,19 @@ try:
                 relative = float(np.linalg.norm(err)/max(np.linalg.norm(ref),1e-30))
                 result['unit'].append(dict(size=n,case=label,direction=direction,relative_l2=relative))
                 assert relative < 1e-5, result['unit'][-1]
+                if direction==1:
+                    # Independently generate a real-input version of every case.
+                    zero_im=np.zeros(n)
+                    compact_in=Inputs(int(np.log2(n)),ptr(re),n,ptr(zero_im),n,scaling,6,1)
+                    assert simulate(state,compact_in,ct.byref(out)) == 0
+                    compact_input += [int(np.log2(n)) | 0x300] + re.astype('<f4').view('<u8').tolist()
+                    compact_output += Words(out_re[:n//2+1],out_im[:n//2+1])
 finally:
     destroy(state)
 (a.out/'input.mem').write_text(''.join(f'{v:016x}\n' for v in input_words))
 (a.out/'output.mem').write_text(''.join(f'{v:016x}\n' for v in output_words))
+(a.out/'compact_input.mem').write_text(''.join(f'{v:016x}\n' for v in compact_input))
+(a.out/'compact_output.mem').write_text(''.join(f'{v:016x}\n' for v in compact_output))
 for file in ([] if a.vectors_only else a.input):
     pcm = file.read_bytes()
     assert len(pcm)%32000 == 0

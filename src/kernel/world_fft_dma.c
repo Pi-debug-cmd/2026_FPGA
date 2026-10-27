@@ -24,15 +24,16 @@ static long process(struct file *file, unsigned int op, unsigned long arg)
     u32 status;
     int rc;
     struct world_fft_request request;
-    size_t bytes;
+    size_t bytes, input_bytes;
     if (op != WORLD_FFT_PROCESS) return -ENOTTY;
     if (copy_from_user(&request, (void __user *)arg, sizeof(request))) return -EFAULT;
-    if ((request.n != 1024 && request.n != 2048) || request.forward > 1) return -EINVAL;
-    bytes = request.n * sizeof(u64);
+    if ((request.n != 1024 && request.n != 2048) || request.forward > 3 || request.forward == 2) return -EINVAL;
+    input_bytes = request.n * (request.forward & 2 ? sizeof(u32) : sizeof(u64));
+    bytes = (request.forward & 2 ? request.n / 2 + 1 : request.n) * sizeof(u64);
     if (mutex_lock_interruptible(&lock)) return -ERESTARTSYS;
     if (failed) { rc = -EIO; goto out; }
     ((u64 *)tx)[0] = (request.n == 1024 ? 10 : 11) | (request.forward << 8);
-    if (copy_from_user((u64 *)tx + 1, u64_to_user_ptr(request.input), bytes)) {
+    if (copy_from_user((u64 *)tx + 1, u64_to_user_ptr(request.input), input_bytes)) {
         rc = -EFAULT; goto out;
     }
     dma_wmb();
@@ -44,7 +45,7 @@ static long process(struct file *file, unsigned int op, unsigned long arg)
     writel(bytes, regs + 0x58);
     writel(1, regs + 0x00);
     writel(tx_dma, regs + 0x18);
-    writel(bytes + sizeof(u64), regs + 0x28);
+    writel(input_bytes + sizeof(u64), regs + 0x28);
     // 20 ms bounds a stalled FFT/DMA transaction. Failure requires PL reload.
     rc = readl_poll_timeout(regs + 0x34, status,
                             (status & 0x5070), 0, 20000);

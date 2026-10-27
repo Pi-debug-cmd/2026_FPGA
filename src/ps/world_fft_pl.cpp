@@ -57,10 +57,11 @@ void __wrap_fft_execute(fft_plan p) {
     if(!real_in && !real_out) pair[1]=-pair[1];
     if(real_out && (i==0 || i==p.n/2)) pair[1]=0;
     if(!std::isfinite(pair[0]) || !std::isfinite(pair[1])) std::abort();
-    std::memcpy(&backend.input[i],pair,sizeof(pair));
+    if(real_in) std::memcpy(reinterpret_cast<unsigned char*>(backend.input)+i*sizeof(float),pair,sizeof(float));
+    else std::memcpy(&backend.input[i],pair,sizeof(pair));
   }
   world_fft_request request={uint64_t(uintptr_t(backend.input)),uint64_t(uintptr_t(backend.output)),
-                             unsigned(p.n),unsigned(p.sign==FFT_FORWARD)};
+                             unsigned(p.n),unsigned(p.sign==FFT_FORWARD) | (real_in?2u:0u)};
   t=Now();backend.prepare_s+=t-begin;
   if(ioctl(backend.fd,WORLD_FFT_PROCESS,&request)) {std::perror("WORLD_FFT_PROCESS");std::abort();}
   begin=Now();backend.dma_s+=begin-t;

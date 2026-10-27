@@ -7,7 +7,7 @@ struct world_fft_request {
     __u64 input;
     __u64 output;
     __u32 n;
-    __u32 forward;
+    __u32 forward; // bit0 forward; bit1 compact real input (forward only)
 };
 #define WORLD_FFT_PROCESS _IOWR('W', 0x32, struct world_fft_request)
 #endif

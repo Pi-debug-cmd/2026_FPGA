@@ -1761,3 +1761,18 @@
 - 性能：1024 ioctl p50 86.538µs、2048 163.770µs；male1计划复用CPU墙钟2.591575s，fft2048 2.775234、fft_all3.274853s；male4同样退步。2048打包+DMA+解包约0.785s/3279次；全FFT互斥等待约0.73s。
 - 结论：数值门通过不能抵消性能退步，不默认启用FFT。下一步先改2048实FFT传输/接口，评估时钟优化；先前6.2%exp收益和PS计划复用是独立已证据成果。
 - 状态：候选临时驻留、服务停止，恢复镜像/JTAG可用，无新录放或高实时验收。下一责任方：Hardware-A / Codex 继续实现减少实际接口开销的候选并回归。
+
+### [PL-20261027-01] Round 10 实输入FFT紧凑传输认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准：`098f57b`；范围：只减少r2c的DMA冗余零虚部与共轭半谱；不改FFT核精度/时钟/音色/批次。复杂FFT和c2r仍保留完整协议。
+- 依据：Round9数值已通过，但完整N复数TX/RX和PS转换导致性能退步；2048主要用于分析r2c，没有必要从ARM发送全零虚部或回收后半共轭谱。
+- 计划：头bit9为real输入、N个float打包为N/2个64bit数据，PL扩展零虚部；只返回N/2+1复数并内部排空其余，防止丢TLAST或下一帧污染。每轮测试仍独立提交。
+- 限制：当前候选临时驻留、服务停止，无新录放，未宣布该优化有效；下一责任方Hardware-A / Codex做RTL全格式/背压回归后再板测。
+
+### [PL-20261027-01] Round 10 实输入紧凑协议方案提交
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED。
+- 基准：`098f57b`；改动：FFT流包装/ioctl/驱动/PS/probe、向量与TB；报告`report/world_fft_compact_round10_proposal_20261027.md`、build JSON及Round9恢复JSON。
+- 复现：完整FFT构建仍tclargs fft；质量脚本生成30旧格式+15compact帧；ARM和module已编译。
+- 主要变量：r2c仅传N实float、收N/2+1复数；头bit9，内部正确排空后半谱，complex/c2r格式保持。核精度/100MHz/音色/批次不变，尚未有本轮RTL或性能结果。
+- 恢复：Round9后按修复脚本成功静默恢复原厂位流，先卸载两个DMA module，只重绑audio/I2C，未出现前轮显示重绑卡死。当前原厂operating、服务临时停止，无录放。
+- 下一责任方：Hardware-A / Codex 完成45帧RTL逐位/背压、整机时序及192次probe和全路径文件，实际加速才保留默认。

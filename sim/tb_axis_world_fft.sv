@@ -8,7 +8,7 @@ module tb_axis_world_fft;
   reg out_ready=0;
   reg [63:0] inputs[0:50000], expected[0:50000];
   integer read_count=0, cycles=0, frame_count=0;
-  integer pos=0, n, i, f, frame_start, sent, wanted;
+  integer pos=0, n, i, f, frame_start, sent, wanted, real_mode;
   reg [31:0] random_state=32'h20261027;
   string input_file, output_file;
   axis_world_fft dut(.aclk(clk),.aresetn(resetn),
@@ -44,21 +44,27 @@ module tb_axis_world_fft;
     i=$value$plusargs("OUT=%s",output_file);
     $readmemh(input_file,inputs);$readmemh(output_file,expected);
     repeat(12) @(negedge clk);resetn=1;
-    for(f=0;f<30;f=f+1) begin
-      n=1<<inputs[pos][4:0];frame_start=cycles;wanted=read_count+n;
+    for(f=0;f<45;f=f+1) begin
+      if(f==30) begin
+        $readmemh("compact_input.mem",inputs);$readmemh("compact_output.mem",expected);
+        pos=0;read_count=0;
+      end
+      n=1<<inputs[pos][4:0];real_mode=inputs[pos][9];
+      sent=real_mode?n/2:n;
+      frame_start=cycles;wanted=read_count+(real_mode?n/2+1:n);
       send_word(inputs[pos],0);pos=pos+1;
-      for(i=0;i<n;i=i+1) begin
+      for(i=0;i<sent;i=i+1) begin
         if (f>=15 && random_state[5:4]==0) begin
           @(negedge clk);valid=0;
         end
-        send_word(inputs[pos],i==n-1);pos=pos+1;
+        send_word(inputs[pos],i==sent-1);pos=pos+1;
       end
       @(negedge clk);valid=0;last=0;
       wait(frame_count==f+1);
       if(read_count!=wanted) $fatal(1,"FFT frame length");
-      $display("FFT_FRAME frame=%0d n=%0d cycles=%0d",f,n,cycles-frame_start);
+      $display("FFT_FRAME frame=%0d n=%0d real=%0d cycles=%0d",f,n,real_mode,cycles-frame_start);
       repeat(3) @(negedge clk);
     end
-    $display("FFT_STREAM_PASS frames=%0d words=%0d",frame_count,read_count);$finish;
+    $display("FFT_STREAM_PASS frames=%0d compact_words=%0d",frame_count,read_count);$finish;
   end
 endmodule

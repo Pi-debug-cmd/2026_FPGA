@@ -17,11 +17,13 @@ int main() {
   if(fd<0) {std::perror("open world_fft");return 1;}
   uint64_t input[2048], output[2048];
   fft_complex x[2048], reference[2048];
+  double real_input[2048];
   std::vector<double> timings[2];
   double worst_relative=0;
   uint32_t random=20261027;
-  for(int run=0;run<32;++run) for(int slot=0;slot<2;++slot) for(int inverse=0;inverse<2;++inverse) {
+  for(int run=0;run<32;++run) for(int slot=0;slot<2;++slot) for(int kind=0;kind<3;++kind) {
     const int n=slot?2048:1024;
+    const bool compact=kind==2, inverse=kind==1;
     for(int i=0;i<n;++i) {
       float pair[2];
       for(int j=0;j<2;++j) {
@@ -29,18 +31,24 @@ int main() {
         pair[j]=run%4==0?0.f:run%4==1?(i==0?0.5f:0.f):float(int32_t(random))/2147483648.f;
         x[i][j]=pair[j];
       }
-      // Match WORLD c2c convention while the PL engine implements standard DFT.
-      pair[1]=-pair[1];
-      std::memcpy(&input[i],pair,sizeof(pair));
+      if(compact) {
+        real_input[i]=pair[0];
+        std::memcpy(reinterpret_cast<unsigned char*>(input)+i*sizeof(float),pair,sizeof(float));
+      } else {
+        // Match WORLD c2c convention while the PL engine implements standard DFT.
+        pair[1]=-pair[1];
+        std::memcpy(&input[i],pair,sizeof(pair));
+      }
     }
-    fft_plan p=fft_plan_dft_1d(n,x,reference,inverse?FFT_BACKWARD:FFT_FORWARD,FFT_ESTIMATE);
+    fft_plan p=compact ? fft_plan_dft_r2c_1d(n,real_input,reference,FFT_ESTIMATE) :
+                        fft_plan_dft_1d(n,x,reference,inverse?FFT_BACKWARD:FFT_FORWARD,FFT_ESTIMATE);
     fft_execute(p);fft_destroy_plan(p);
-    world_fft_request request={uint64_t(uintptr_t(input)),uint64_t(uintptr_t(output)),unsigned(n),unsigned(!inverse)};
+    world_fft_request request={uint64_t(uintptr_t(input)),uint64_t(uintptr_t(output)),unsigned(n),unsigned(!inverse) | (compact?2u:0u)};
     double t=Now();
     if(ioctl(fd,WORLD_FFT_PROCESS,&request)) {std::perror("WORLD_FFT_PROCESS");return 2;}
     timings[slot].push_back((Now()-t)*1e6);
     double energy=0,error=0;
-    for(int i=0;i<n;++i) {
+    for(int i=0;i<(compact?n/2+1:n);++i) {
       float pair[2];std::memcpy(pair,&output[i],sizeof(pair));
       for(int j=0;j<2;++j) {
         if(!std::isfinite(pair[j])) return 3;
