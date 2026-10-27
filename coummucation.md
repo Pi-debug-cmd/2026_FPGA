@@ -1917,3 +1917,16 @@
 - 报告链接：`report/fixed_male_hubert_world_round78_20261027.md`、`report/fixed_male_hubert_world_round78_20261027.json`。
 - 下一责任方：Hardware-A / Codex 测试降低 VUV BCE 权重。
 
+### [PS-20261021-10] HuBERT/WORLD Round 79 VUV 损失权重
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`b2a26fa971cca004adbcf5aad3d650f9bcbfe94a`
+- 唯一变量：VUV BCE 系数由0.35降至0.15；其余训练结构、source prosody、variance matching、动态权重1.25、锚点概率0.25与gain1.6不变。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.7080/0.6891/0.1088/2.3807/0.4412`；泄漏与 CER 未过门。Checkpoint SHA-256 `257cb1d3fa86ab61adffe06ab9258105c38384442d73addfb19f180c244fa131`；候选 PCM16 SHA-256 `4ae7617ee724798347f7528048b9d7dabac7307b2a67f6edd3c0e9712c94fcbf`。
+- 修改路径：`report/fixed_male_hubert_world_round79_20261027.{md,json}`、`coummucation.md`。
+- 复现命令：见 `report/fixed_male_hubert_world_round79_20261027.json`。
+- 限制：identity OpenCC shim；录音5、Track 9 未用于选参；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL 或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round79_20261027.md`、`report/fixed_male_hubert_world_round79_20261027.json`。
+- 下一责任方：Hardware-A / Codex 继续围绕保留源韵律条件的模型改进低泄漏与CER。
+
