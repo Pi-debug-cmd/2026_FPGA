@@ -1870,3 +1870,9 @@
 - 复现：报告内MinphaseModel和vitis-run命令；初步host/HLS结果已产生，将独立结果提交。默认CPU不变，无新录放。
 - 修正方案：随机激励必须原WORLD算法/种子/消费顺序，不能LFSR替代；STFT不能直接当CheapTrick，D4C内部FFT尺寸按原公式。
 - 下一责任方Hardware-A / Codex提交完整结果，资源/周期不达标则先优化HLS，禁止提前板测通过。
+
+### [PL-20261027-01] Round13 融合核数值通过、首版周期拒绝
+- 日期2026-10-27；Hardware-A / Codex；ACCEPTED（host数值），REJECTED（首版周期）；实现2c2e2d0。
+- 报告report/world_minphase_fused_round13_20261027.md、host JSON和两份HLS原始TXT；24例最大relativeL2 9.2324e-7，完整两输入PCM16最大误差1/SNR96.237及96.601dB。
+- HLS RTL已生成，估算18150LUT/11213FF/3 BRAM36K/81DSP，但动态FFT循环顶层周期未知，不能直接板测或宣称加速。
+- 限制：无RTL cosim/routed/板测/新听感；candidate驻留、服务停止。下一责任方Hardware-A / Codex固定循环/ROM及指数流水，逐轮提交结果。
