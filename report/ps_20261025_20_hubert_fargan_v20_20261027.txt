@@ -1,0 +1,10 @@
+PS-20261025-20 v20 REJECTED
+speaker_adv_weight 0.60
+identity 0.749702423
+identity_p10 0.731277010
+leakage 0.244555400
+utmos 2.395514966
+cer 0.323529412
+identity PASS, P10 PASS, leakage FAIL, UTMOS PASS, CER FAIL
+train/infer/evaluate exit 0; Male5/Track9 locked; computer-only; no playback or hardware.
+

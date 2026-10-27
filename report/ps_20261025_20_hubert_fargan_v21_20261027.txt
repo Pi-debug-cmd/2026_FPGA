@@ -1,0 +1,10 @@
+PS-20261025-20 v21 REJECTED
+逐句 HuBERT layer9 时间均值中心化
+identity 0.758199834
+identity_p10 0.733886861
+leakage 0.236058011
+utmos 2.522906144
+cer 0.352941176
+identity PASS, P10 PASS, leakage FAIL, UTMOS PASS, CER FAIL
+cache/train/infer/evaluate exit 0; Male5/Track9 locked; computer-only; no playback or hardware.
+

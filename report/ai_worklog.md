@@ -828,6 +828,21 @@ ps-opt 把非周期最小相位优化移植进流式路径（改造 synthesisrea
 ### [PS-20261025-20] v17 输出特征逐帧对抗权重 0.10 认领
 - v17 唯一变量为 output-feature framewise adversarial weight 0.10；保持 HuBERT layer9、PCA96、GRU192、delta0.25、数据、seed、优化器和评价器不变。
 
+### [PS-20261025-20] v17 输出特征逐帧对抗权重 0.10 结果
+- v17 将权重降至0.10后 leakage回升至0.244802179，CER改善至0.294117647；identity/P10/UTMOS通过，leakage/CER失败。
+
+### [PS-20261025-20] v18 输出特征逐帧对抗权重 0.50 认领
+- v18 作为强对抗边界实验，唯一变量为 output-feature framewise adversarial weight 0.50；保持 HuBERT layer9、PCA96、GRU192、delta0.25、数据、seed、优化器和五门不变。
+
+### [PS-20261025-20] v18 输出特征逐帧对抗权重 0.50 结果
+- v18 将权重提高到0.50，CER降至0.161764706（接近门槛），leakage降至0.238312337但仍失败；下一轮测试权重1.0。
+
+### [PS-20261025-20] v19 输出特征逐帧对抗权重 1.0 认领
+- v19 唯一变量为 output-feature framewise adversarial weight 1.0；保持 HuBERT layer9、PCA96、GRU192、delta0.25、数据、seed、优化器和五门不变。
+
+### [PS-20261025-20] v19 输出特征逐帧对抗权重 1.0 结果
+- v19 强对抗使 leakage 回升至0.276337229、UTMOS降至1.349921107、CER恶化至0.705882353；确认权重1.0不可用。下一轮测试0.60。
+
 ### [PS-20261025-20] v11 内容帧 +10ms 对齐结果
 - 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准465b70a；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
 - 路径/复现：build/remote_ps_c_hubert_fargan_v11.py、build/run_remote_ps_c_hubert_fargan_v11.py；report/ps_20261025_20_hubert_fargan_v11_20261027.md/JSON/TXT。唯一变量内容帧+1（10ms），独立cache后全阶段exit0。
@@ -840,3 +855,33 @@ ps-opt 把非周期最小相位优化移植进流式路径（改造 synthesisrea
 - 路径/复现：拟新增 `build/remote_ps_c_hubert_fargan_v12.py`、`build/run_remote_ps_c_hubert_fargan_v12.py`；输出 `build/generated/remote_ps_c_hubert_fargan_v12/`；报告 `report/ps_20261025_20_hubert_fargan_v12_20261027.*`。复用v1缓存，Male5/Track9锁定。
 - 停止条件：训练、推理和一次原五门评价；未全过不进入WAIT_LOCAL_TEST、不发布模型包。
 - 限制/下一责任方：电脑端非因果实验，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时声明；Remote-PS-C提交结果。
+### 2026-10-27 Remote-PS-C v20
+- 认领单变量实验：output-feature framewise speaker adversarial weight 0.60。
+- 继承 v19 代码结构，仅修改版本标识、输出目录、候选名和该权重；待完成 train/infer/evaluate 后记录五门结果。
+
+### 2026-10-27 Remote-PS-C v20 结果
+- output-feature framewise `speaker_adv_weight=0.60`；train/infer/evaluate exit 0，audio guard 无拒绝。
+- Fixed-Male4 五门：identity 0.749702423、P10 0.731277010、leakage 0.244555400、UTMOS 2.395514966、CER 0.323529412；REJECTED。
+- v20 未进入 `WAIT_LOCAL_TEST`，未发布模型包；Male5/Track9 锁定，无播放、录音、试听或硬件验证。
+
+### 2026-10-27 Remote-PS-C v21
+- 认领逐句 HuBERT layer9 时间均值中心化单变量，重新生成独立缓存后运行原 strict 五门评价。
+
+### 2026-10-27 Remote-PS-C v22
+- 认领输入编码逐帧 speaker adversarial head（权重0.02）叠加既有输出特征 head（权重0.05）的单变量结构改进；使用 v15 缓存，等待电脑端评价。
+
+### 2026-10-27 Remote-PS-C v23
+- 认领目标 FARGAN 20D 差分损失权重 1.00 单变量实验，保持输出特征逐帧对抗权重 0.05；等待电脑端评价。
+
+### 2026-10-27 Remote-PS-C v24
+- 组合实验：复用 v18 对抗权重 0.50，加入 v23 的差分损失权重 1.00；等待电脑端评价。
+
+### 2026-10-27 Remote-PS-C v25
+- 冻结 v24 mapper/statistics/native，仅对 20D FARGAN 输出做 15% target mean shrink 后进行 infer/evaluate。
+### 2026-10-27 Remote-PS-C v21-v25 结果
+- v21：逐句 HuBERT 均值中心化，leakage 0.236058011、CER 0.352941176，REJECTED。
+- v22：输入编码对抗 0.02 + 输出对抗 0.05，leakage 0.249183390、CER 0.323529412，REJECTED。
+- v23：delta_weight 1.00 + 输出对抗 0.05，UTMOS 2.581680616、CER 0.235294118、leakage 0.255565381，REJECTED。
+- v24：delta_weight 1.00 + 输出对抗 0.50，leakage 0.237554912、CER 0.294117647，REJECTED。
+- v25：v24 输出均值收缩 0.15，leakage 0.159276669 但 identity 0.143637836、UTMOS 1.299219171、CER 1.0，REJECTED。
+- v1-v25 均未同时通过五门；当前 HuBERT→FARGAN 电脑端路线在现有数据/模型下停止继续扫描，仍不进入 WAIT_LOCAL_TEST。

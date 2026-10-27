@@ -296,6 +296,21 @@
 ### [PS-20261025-20] v17 输出特征逐帧对抗权重 0.10 认领
 - v17 只将 output-feature framewise adversarial weight 从0.20降至0.10；其余主干、数据、seed、优化器和五门口径保持不变。
 
+### [PS-20261025-20] v17 输出特征逐帧对抗权重 0.10 结果
+- v17 评价：identity 0.768637571、P10 0.752736278、leakage 0.244802179、UTMOS 2.428348462、CER 0.294117647；REJECTED，不进入 `WAIT_LOCAL_TEST`。
+
+### [PS-20261025-20] v18 输出特征逐帧对抗权重 0.50 认领
+- v18 只将 output-feature framewise adversarial weight 从0.20提高到0.50，作为路线边界实验；其他设置不变。
+
+### [PS-20261025-20] v18 输出特征逐帧对抗权重 0.50 结果
+- v18 评价：identity 0.763452809、P10 0.747618627、leakage 0.238312337、UTMOS 2.421749751、CER 0.161764706；REJECTED，不进入 `WAIT_LOCAL_TEST`。
+
+### [PS-20261025-20] v19 输出特征逐帧对抗权重 1.0 认领
+- v19 只将 output-feature framewise adversarial weight 从0.50提高到1.0，其他设置保持不变。
+
+### [PS-20261025-20] v19 输出特征逐帧对抗权重 1.0 结果
+- v19 评价：identity 0.543086837、P10 0.522550375、leakage 0.276337229、UTMOS 1.349921107、CER 0.705882353；REJECTED，不进入 `WAIT_LOCAL_TEST`。
+
 ### [PS-20261025-20] v11 内容帧 +10ms 对齐结果
 - 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准465b70a；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
 - 路径/复现：build/remote_ps_c_hubert_fargan_v11.py、build/run_remote_ps_c_hubert_fargan_v11.py；report/ps_20261025_20_hubert_fargan_v11_20261027.md/JSON/TXT。唯一变量内容帧+1（10ms），独立cache后全阶段exit0。
@@ -308,3 +323,35 @@
 - 路径/复现：拟新增 `build/remote_ps_c_hubert_fargan_v12.py`、`build/run_remote_ps_c_hubert_fargan_v12.py`；输出 `build/generated/remote_ps_c_hubert_fargan_v12/`；报告 `report/ps_20261025_20_hubert_fargan_v12_20261027.*`。复用v1缓存，Male5/Track9锁定。
 - 停止条件：训练、推理和一次原五门评价；未全过不进入WAIT_LOCAL_TEST、不发布模型包。
 - 限制/下一责任方：电脑端非因果实验，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时声明；Remote-PS-C提交结果。
+### Remote-PS-C v20 进行中（2026-10-27）
+- 方案：HuBERT→BiGRU→FARGAN 输出特征逐帧说话人对抗，权重 0.60。
+- 目的：在 v18 CER 接近门槛与 v19 强约束崩溃之间寻找内容与泄漏折中。
+- 范围：仅电脑端；Male5/Track9 不读；未达五门前不进入 WAIT_LOCAL_TEST。
+
+### Remote-PS-C v20 结果（2026-10-27）
+- 三阶段 exit 0；identity 0.749702423 / P10 0.731277010 / leakage 0.244555400 / UTMOS 2.395514966 / CER 0.323529412。
+- 通过 identity、P10、UTMOS；leakage/CER 失败，REJECTED；继续电脑端单变量改进。
+
+### Remote-PS-C v21 进行中（2026-10-27）
+- 方案：逐句 HuBERT layer9 时间均值中心化后训练 mapper，保持输出特征逐帧对抗权重 0.05。
+- 仅电脑端 cache/train/infer/evaluate；未达五门前不进入 WAIT_LOCAL_TEST。
+
+### Remote-PS-C v22 进行中（2026-10-27）
+- 方案：GRU 输入编码与 FARGAN 输出特征同时做逐帧源说话人对抗，输入权重 0.02、输出权重 0.05。
+- 固定电脑端评价边界，Male5/Track9 不读。
+
+### Remote-PS-C v23 进行中（2026-10-27）
+- 方案：输出特征逐帧对抗 0.05，目标特征差分损失权重 1.00。
+- 仅电脑端运行，未达五门不进入 WAIT_LOCAL_TEST。
+
+### Remote-PS-C v24 进行中（2026-10-27）
+- 方案：output-feature framewise adversarial weight 0.50，差分损失权重 1.00。
+- 仅电脑端，未达五门不进入 WAIT_LOCAL_TEST。
+
+### Remote-PS-C v25 进行中（2026-10-27）
+- 方案：冻结 v24 输出，target-feature mean shrink 0.15 后严格评价。
+- 仅电脑端，无播放、试听或硬件验证。
+### Remote-PS-C v21-v25 完成（2026-10-27）
+- v21-v24 均保持身份/P10/UTMOS通过，但 leakage 为 0.2361–0.2556、CER 为 0.2353–0.3529。
+- v25 将 leakage 降至 0.1593，但 identity 0.1436、UTMOS 1.2992、CER 1.0；全门失败。
+- v1-v25 没有全门通过版本；不进入 WAIT_LOCAL_TEST，不发布未达标模型包。

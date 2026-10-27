@@ -1923,6 +1923,26 @@
 - 日期：2026-10-27；状态：CLAIMED；唯一变量为 output-feature framewise `speaker_adv_weight` 0.20→0.10；其余配置、数据和评价口径不变。
 - 代码：`build/remote_ps_c_hubert_fargan_v17.py`、`build/run_remote_ps_c_hubert_fargan_v17.py`；Male5/Track9锁定。
 
+### [PS-20261025-20] v17 输出特征逐帧对抗权重 0.10 结果
+- Fixed-Male4：identity 0.768637571 / P10 0.752736278 / leakage 0.244802179 / UTMOS 2.428348462 / CER 0.294117647；三阶段 exit0，leakage/CER未过，REJECTED。
+- 当前泄漏仍高于门槛；继续下一单变量边界实验。
+
+### [PS-20261025-20] v18 输出特征逐帧对抗权重 0.50 认领
+- 日期：2026-10-27；状态：CLAIMED；唯一变量为 output-feature framewise `speaker_adv_weight` 0.20→0.50；其余配置、数据、seed、主干和五门口径不变。
+- 目标：确认强对抗边界，Male5/Track9锁定，仅电脑端。
+
+### [PS-20261025-20] v18 输出特征逐帧对抗权重 0.50 结果
+- Fixed-Male4：identity 0.763452809 / P10 0.747618627 / leakage 0.238312337 / UTMOS 2.421749751 / CER 0.161764706；三阶段 exit0，CER接近但未过，leakage未过，REJECTED。
+- 下一轮测试权重1.0，确认内容门能否跨过0.15。
+
+### [PS-20261025-20] v19 输出特征逐帧对抗权重 1.0 认领
+- 日期：2026-10-27；状态：CLAIMED；唯一变量为 output-feature framewise `speaker_adv_weight` 0.50→1.00；其余配置、数据、seed、主干和五门口径不变。
+- Male5/Track9锁定，仅电脑端运行。
+
+### [PS-20261025-20] v19 输出特征逐帧对抗权重 1.0 结果
+- Fixed-Male4：identity 0.543086837 / P10 0.522550375 / leakage 0.276337229 / UTMOS 1.349921107 / CER 0.705882353；强约束导致自然度和内容崩溃，REJECTED。
+- 下一轮回到有效区间测试权重0.60。
+
 ### [PS-20261025-20] v11 内容帧 +10ms 对齐结果
 - 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准465b70a；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
 - 路径/复现：build/remote_ps_c_hubert_fargan_v11.py、build/run_remote_ps_c_hubert_fargan_v11.py；report/ps_20261025_20_hubert_fargan_v11_20261027.md/JSON/TXT。唯一变量内容帧+1（10ms），独立cache后全阶段exit0。
@@ -1935,3 +1955,45 @@
 - 路径/复现：拟新增 `build/remote_ps_c_hubert_fargan_v12.py`、`build/run_remote_ps_c_hubert_fargan_v12.py`；输出 `build/generated/remote_ps_c_hubert_fargan_v12/`；报告 `report/ps_20261025_20_hubert_fargan_v12_20261027.*`。复用v1缓存，Male5/Track9锁定。
 - 停止条件：训练、推理和一次原五门评价；未全过不进入WAIT_LOCAL_TEST、不发布模型包。
 - 限制/下一责任方：电脑端非因果实验，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时声明；Remote-PS-C提交结果。
+### [PS-20261025-20] v20 输出 FARGAN 特征逐帧对抗权重 0.60 认领
+- 日期：2026-10-27；角色：Remote-PS-C；状态：CLAIMED。
+- 唯一变量：output-feature framewise `speaker_adv_weight` 从 v19 的 1.00 改为 0.60；HuBERT layer9、PCA96、BiGRU192、delta0.25、数据、seed、优化器、早停和 strict evaluator 保持不变。
+- 仅电脑端 train/infer/evaluate；Fixed-Male4 为开发评价，Male5 与 Track9 锁定；无播放、录音、试听、板卡、ARM、Vivado、RTL、PL 或实时验证。
+
+### [PS-20261025-20] v20 输出 FARGAN 特征逐帧对抗权重 0.60 结果
+- train/infer/evaluate 均 exit 0，audio guard `denied: []`；Male5/Track9 未读取。
+- Fixed-Male4：identity 0.749702423、identity P10 0.731277010、leakage 0.244555400、UTMOS 2.395514966、CER 0.323529412。
+- identity、P10、UTMOS 通过；leakage 与 CER 未通过，状态 REJECTED；不进入 `WAIT_LOCAL_TEST`，不发布 v20 模型包。
+- 结论：0.60 比 v19 恢复自然度但未突破泄漏/CER 折中，下一轮改测逐句 HuBERT 时间均值中心化。
+
+### [PS-20261025-20] v21 逐句 HuBERT 均值中心化认领
+- 日期：2026-10-27；状态：CLAIMED。
+- 唯一变量：cache 阶段对每个 utterance 的 768D HuBERT layer9 逐维减去该句时间均值，再进行 PCA/训练；其余网络、对抗权重 0.05、数据和 strict evaluator 不变。
+- 重新生成独立 v21 cache；仅电脑端运行，Male5/Track9 锁定，不进入硬件或试听。
+
+### [PS-20261025-20] v22 输入内容与输出特征双对抗认领
+- 日期：2026-10-27；状态：CLAIMED。
+- 唯一新增变量：在 v15 输出特征逐帧 speaker head（权重0.05）之外，对 GRU 输入编码逐帧增加梯度反转 speaker head（权重0.02）；其余数据、缓存、主干、优化器与评价器不变。
+- 仅电脑端运行；Male5/Track9 锁定，未达五门不进入 WAIT_LOCAL_TEST。
+
+### [PS-20261025-20] v23 目标特征差分损失权重 1.00 认领
+- 日期：2026-10-27；状态：CLAIMED。
+- 唯一变量：`delta_weight` 从基线 0.25 提高到 1.00；保留输出特征逐帧对抗权重 0.05，其他数据、主干、seed、优化器和评价协议不变。
+- 目的：增强 FARGAN 20D 的时间轨迹保真以改善 CER；仅电脑端，Male5/Track9 锁定。
+
+### [PS-20261025-20] v24 差分损失 1.00 + 对抗权重 0.50 认领
+- 日期：2026-10-27；状态：CLAIMED。
+- 组合验证：继承 v18 的 output-feature framewise 对抗权重 0.50，并将 `delta_weight` 从 0.25 改为 1.00；其余设置不变。
+- 目的：同时保留 v18 的低 CER 趋势与 v23 的动态保真；仅电脑端，Male5/Track9 锁定。
+
+### [PS-20261025-20] v25 v24 输出低幅目标均值收缩认领
+- 日期：2026-10-27；状态：CLAIMED。
+- 唯一变量：冻结 v24 mapper/statistics/native，对 20D 输出向训练目标均值收缩 15%；不重训，只做 infer/evaluate。
+- 目的：低幅验证目标风格收缩是否能降低 leakage；仅电脑端，Male5/Track9 锁定。
+### [PS-20261025-20] v21-v25 结果归档
+- v21：identity 0.758199834 / P10 0.733886861 / leakage 0.236058011 / UTMOS 2.522906144 / CER 0.352941176，REJECTED。
+- v22：identity 0.775719060 / P10 0.762017343 / leakage 0.249183390 / UTMOS 2.473554850 / CER 0.323529412，REJECTED。
+- v23：identity 0.781689788 / P10 0.767834480 / leakage 0.255565381 / UTMOS 2.581680616 / CER 0.235294118，REJECTED。
+- v24：identity 0.758471459 / P10 0.736845084 / leakage 0.237554912 / UTMOS 2.469073216 / CER 0.294117647，REJECTED。
+- v25：identity 0.143637836 / P10 0.113644411 / leakage 0.159276669 / UTMOS 1.299219171 / CER 1.000000000，REJECTED。
+- v25 是当前最低 leakage，但均值收缩摧毁其余门；v1-v25 未出现五门全过版本，当前路线停止无效扫描，不进入 WAIT_LOCAL_TEST。
