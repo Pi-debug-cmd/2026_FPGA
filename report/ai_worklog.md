@@ -777,3 +777,16 @@ ps-opt 把非周期最小相位优化移植进流式路径（改造 synthesisrea
 - 路径/复现：build/remote_ps_c_hubert_fargan_v10.py、build/run_remote_ps_c_hubert_fargan_v10.py；report/ps_20261025_20_hubert_fargan_v10_20261027.md/JSON/TXT。冻结v1输出做3帧平滑，infer/evaluate exit0。
 - 一次Male4五门：身份0.741703006/P100.705845421/泄漏0.269384651/UTMOS2.244268338/CER0.323529412；仍REJECTED。
 - 限制/下一责任方：停止后处理平滑路线，Male5/Track9锁定，无现场或硬件测试；Remote-PS-C继续改训练目标。
+
+### [PS-20261025-20] v11 内容帧 +10ms 对齐单变量认领
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：CLAIMED；基准提交 `465b70a`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；PR #11。
+- 假设/范围：冻结链诊断显示辅助对齐最佳时移中位0ms、P90 10ms；v11只将HuBERT内容插值到FARGAN帧的时间坐标固定向后偏移+1帧（10ms），其余layer9/PCA96/delta0.25/网络/数据/seed/训练和五门不变，重新生成缓存。
+- 路径/复现：拟新增 `build/remote_ps_c_hubert_fargan_v11.py`、`build/run_remote_ps_c_hubert_fargan_v11.py`；输出 `build/generated/remote_ps_c_hubert_fargan_v11/`；报告 `report/ps_20261025_20_hubert_fargan_v11_20261027.*`。Male5/Track9锁定。
+- 停止条件：cache/train/infer/evaluate后只做一次Fixed-Male4五门；不扫描其它时移，不发布未达标模型包。
+- 限制/下一责任方：电脑端非因果实验，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时声明；Remote-PS-C提交结果。
+
+### [PS-20261025-20] v11 内容帧 +10ms 对齐结果
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准465b70a；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
+- 路径/复现：build/remote_ps_c_hubert_fargan_v11.py、build/run_remote_ps_c_hubert_fargan_v11.py；report/ps_20261025_20_hubert_fargan_v11_20261027.md/JSON/TXT。唯一变量内容帧+1（10ms），独立cache后全阶段exit0。
+- 一次Male4五门：身份0.692620680/P100.649548035/泄漏0.264168332/UTMOS1.904939890/CER0.500000000；相对v1恶化，仍REJECTED。
+- 限制/下一责任方：Male5/Track9锁定，无现场或硬件测试；Remote-PS-C保留失败证据，继续改训练目标/内容表示。
