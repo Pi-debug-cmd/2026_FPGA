@@ -1737,3 +1737,11 @@
 - 原因：WORLD/Ooura c2c包装相对标准DFT隐含共轭输入虚部；PL和模型当前采用标准复数输入。此前语音链c2c输入为实数，模型检查未暴露此差异；30个模型RTL一致结论有效，但不能代替WORLD接口约定测试。
 - 修正方向：PS适配/host模型明确共轭c2c输入，probe与原WORLD约定对齐，再完整回归；无需改RTL。r2c/c2r不套用此变更。
 - 状态：FPGA候选operating，两临时module已加载、音频服务停止，无新录放或FFT板端验收。下一责任方：Hardware-A / Codex 修正并提交下一方案轮次，随后静默回归。
+
+### [PL-20261027-01] Round 9 复数约定修正方案
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED / PROPOSED。
+- 基准：`214be3e`；改动：`src/ps/world_fft_pl.cpp`、`world_fft_ip_model.cpp`、`world_fft_dma_probe.cpp`。
+- 修正：仅c2c输入虚部取反以匹配WORLD/Ooura；r2c/c2r、RTL/位流/驱动不变。probe的CPU参考保留原WORLD，PL发送共轭数据，覆盖正反向随机复数及复数脉冲。
+- 复现：相同ARM/host构建与完整质量脚本；修正ARM SHA2754d7d04aa874c346e362592f68dbfd88b1d6ad608ccb5d3653755d21e51904，probe SHAaddeeaf3ea941c6a697b5adb88bb26678624e14758b73f227184cb95a96fa059。
+- 限制：模型语音相对旧模型仅微小变化，原Round8“c2c输入为实数”应理解为该使用路径实部占主导，不能推断所有虚部严格为零。独立复数用例是必要补充；本轮板端复测尚未执行。候选驻留，服务停止，无录放。
+- 下一责任方：Hardware-A / Codex 完成同位流probe及两段语音全路径回归，按真实性能选默认模式。

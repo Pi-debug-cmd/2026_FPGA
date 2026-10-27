@@ -29,6 +29,8 @@ int main() {
         pair[j]=run%4==0?0.f:run%4==1?(i==0?0.5f:0.f):float(int32_t(random))/2147483648.f;
         x[i][j]=pair[j];
       }
+      // Match WORLD c2c convention while the PL engine implements standard DFT.
+      pair[1]=-pair[1];
       std::memcpy(&input[i],pair,sizeof(pair));
     }
     fft_plan p=fft_plan_dft_1d(n,x,reference,inverse?FFT_BACKWARD:FFT_FORWARD,FFT_ESTIMATE);

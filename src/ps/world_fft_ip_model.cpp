@@ -58,6 +58,7 @@ void __wrap_fft_execute(fft_plan p) {
     else if (real_out && i>p.n/2) {
       m.re[i]=float(p.c_in[p.n-i][0]); m.im[i]=float(-p.c_in[p.n-i][1]);
     } else { m.re[i]=float(p.c_in[i][0]); m.im[i]=float(p.c_in[i][1]); }
+    if (!real_in && !real_out) m.im[i]=-m.im[i];
   }
   // WORLD real transforms ignore the imaginary parts of DC and Nyquist.
   if (real_out) m.im[0]=m.im[p.n/2]=0;

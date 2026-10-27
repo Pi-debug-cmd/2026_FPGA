@@ -53,6 +53,8 @@ void __wrap_fft_execute(fft_plan p) {
     if(real_in) {pair[0]=p.in[i];pair[1]=0;}
     else if(real_out && i>p.n/2) {pair[0]=p.c_in[p.n-i][0];pair[1]=-p.c_in[p.n-i][1];}
     else {pair[0]=p.c_in[i][0];pair[1]=p.c_in[i][1];}
+    // WORLD's Ooura c2c wrapper transforms the conjugated complex input.
+    if(!real_in && !real_out) pair[1]=-pair[1];
     if(real_out && (i==0 || i==p.n/2)) pair[1]=0;
     if(!std::isfinite(pair[0]) || !std::isfinite(pair[1])) std::abort();
     std::memcpy(&backend.input[i],pair,sizeof(pair));
