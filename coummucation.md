@@ -2369,3 +2369,22 @@
 - 复现：入口generate/evaluate --group-ablation --asset-root <asset-root> --output <generated>/group_gain_ablation_20261027；解释器/脚本SHA见JSON。生成退出1但8行24WAV完成，哈希与有限分数独立检查；评测退出0。
 - 限制：8句自动ASR/UTMOS无显著性或听感结论，非固定男声五门；不读录音4/5或Track9，不训练、不播放、不接触板卡。
 - 下一责任方：Hardware-A / Codex 盘点允许的固定男声训练监督与内容表示，不再围绕统一增益/裁剪反复选点。50轮总预算不扩充，原Round93已中止不重启。
+
+### [PS-20261021-10] 固定男声监督与教师依赖盘点认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准提交：7b9bd19；范围：校验录音1～3与192/8公共配对清单，核对历史教师生成依赖及训练时序审计适用范围。
+- 修改路径：build/audit_fixed_male_supervision_20261027.py、report/fixed_male_supervision_inventory_20261027.{json,md}、coummucation.md。
+- 复现：Python3.12 build/audit_fixed_male_supervision_20261027.py --asset-root <main> --output report/fixed_male_supervision_inventory_20261027.json。
+- 量化结果：待校验；主工作区存在他人未提交RTL/报告及交流记录，全部保留；本工作在现有独立任务检出内进行。
+- 限制：不训练，不读录音4/5或Track9音频，不播放、不操作板卡；文件名/身份清单不等于音素覆盖或因果证明。
+- 下一责任方：Hardware-A / Codex 完成盘点，确定教师依赖恢复条件后再开展机制性训练，不扩充Round108上限。
+
+### [PS-20261021-10] 固定男声监督与教师依赖盘点结果
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED / DIAGNOSIS_ONLY。
+- 基准提交：7b9bd19；修改路径：build/audit_fixed_male_supervision_20261027.py、report/fixed_male_supervision_inventory_20261027.{md,json}、coummucation.md。
+- 量化结果：录音1～3哈希/字节通过；192训练/8验证的400个公共float32源/教师文件哈希/样本数通过；Fixed-Male标记训练行0。历史时序报告48条与当前192/8清单文件名交集均0，不能沿用其音素对齐结论。
+- 依赖：历史预期位置缺少CosyVoice源码和全部关键教师资产；官方API可访问且revision仍为29e01c4e8d000f4bcd70751be16fa94bf3d85a18；主要权重约4.43GB，D盘空闲约98.1GB，GPU8GB。没有宣称推理可运行。
+- 复现：Python3.12 build/audit_fixed_male_supervision_20261027.py --asset-root <main> --output report/fixed_male_supervision_inventory_20261027.json；退出0，报告附SHA与限制。
+- 限制：清单身份审计不是全盘音频去重；无固定男声配对监督不等于唯一失败原因。未读录音4/5或Track9音频、未训练/播放/板测；不是新方案轮。
+- 报告：report/fixed_male_supervision_inventory_20261027.md及JSON。
+- 下一责任方：Hardware-A / Codex 在D盘单一任务目录恢复官方精确revision教师依赖，先用训练录音检验内容，再决定源专用监督训练；保持Round108上限，不恢复参数扫描。

@@ -1,0 +1,119 @@
+{
+  "kind": "fixed_male_supervision_inventory",
+  "task": "PS-20261021-10",
+  "script_sha256": "b70d0442d34cdca40686f74b454befca827e0d4240264b8054c972b90061a17c",
+  "male_train_files": [
+    {
+      "role": "train1",
+      "path": "人物音频资料/男声/标准录音 1.wav",
+      "sha256": "bffd53e9873a829ff8855bd191d4610b64436fb7054401d2598eecf9b862b11e",
+      "bytes": 3463724
+    },
+    {
+      "role": "train2",
+      "path": "人物音频资料/男声/标准录音 2.wav",
+      "sha256": "7ebcc5ece683ad580df039cea09957d4133582803cd62a0e1a92619c03f1f51f",
+      "bytes": 3217964
+    },
+    {
+      "role": "train3",
+      "path": "人物音频资料/男声/标准录音 3.wav",
+      "sha256": "2d13fa98c976c967d3ad0d36b0eaf26c3e10029449f135c9556ab4968d9a1293",
+      "bytes": 3747884
+    }
+  ],
+  "corpus_manifest_sha256": "2404ce8282ec2759d4edabd32d7d3e8068d7b69c835194616fe121ec3015fabb",
+  "splits": {
+    "train": {
+      "pairs": 192,
+      "seconds": 888.1089375,
+      "speaker_counts": {
+        "SSB0005": 8,
+        "SSB0012": 8,
+        "SSB0018": 8,
+        "SSB0033": 8,
+        "SSB0043": 8,
+        "SSB0057": 8,
+        "SSB0073": 8,
+        "SSB0145": 12,
+        "SSB0149": 12,
+        "SSB0193": 12,
+        "SSB0197": 12,
+        "SSB0241": 8,
+        "SSB0273": 8,
+        "SSB0375": 8,
+        "SSB0394": 8,
+        "SSB0407": 8,
+        "SSB0603": 12,
+        "SSB0609": 12,
+        "SSB0623": 12,
+        "SSB0629": 12
+      },
+      "all_stems_public_ssb": true,
+      "fixed_male_labelled_rows": 0
+    },
+    "validation": {
+      "pairs": 8,
+      "seconds": 46.1948125,
+      "speaker_counts": {
+        "SSB0080": 4,
+        "SSB0434": 4
+      },
+      "all_stems_public_ssb": true,
+      "fixed_male_labelled_rows": 0
+    }
+  },
+  "verified_public_audio_files": 400,
+  "teacher_dependencies_at_historical_expected_locations": [
+    {
+      "relative_path": "CosyVoice_reference",
+      "exists": false
+    },
+    {
+      "relative_path": "cosyvoice3_assets/repository_metadata.json",
+      "exists": false
+    },
+    {
+      "relative_path": "cosyvoice3_assets/manifest.json",
+      "exists": false
+    },
+    {
+      "relative_path": "cosyvoice3_assets/FunAudioLLM__Fun-CosyVoice3-0.5B-2512/cosyvoice3.yaml",
+      "exists": false
+    },
+    {
+      "relative_path": "cosyvoice3_assets/FunAudioLLM__Fun-CosyVoice3-0.5B-2512/campplus.onnx",
+      "exists": false
+    },
+    {
+      "relative_path": "cosyvoice3_assets/FunAudioLLM__Fun-CosyVoice3-0.5B-2512/speech_tokenizer_v3.onnx",
+      "exists": false
+    },
+    {
+      "relative_path": "cosyvoice3_assets/FunAudioLLM__Fun-CosyVoice3-0.5B-2512/llm.pt",
+      "exists": false
+    },
+    {
+      "relative_path": "cosyvoice3_assets/FunAudioLLM__Fun-CosyVoice3-0.5B-2512/flow.pt",
+      "exists": false
+    },
+    {
+      "relative_path": "cosyvoice3_assets/FunAudioLLM__Fun-CosyVoice3-0.5B-2512/hift.pt",
+      "exists": false
+    }
+  ],
+  "historical_timing_report_sha256": "efc3cdaa21e5d7e294ae07b4d602dcd6c8e3e5604869e60bf3d78b0f9081f56e",
+  "historical_timing_rows": 48,
+  "historical_timing_filename_overlap": {
+    "train": 0,
+    "validation": 0
+  },
+  "timing_limitation": "Filename overlap is not waveform/hash or phoneme-alignment equivalence. Historical report uses WAV hashes; current corpus uses resampled float32.",
+  "membership_limitation": "Verified manifest labels/stems, not an exhaustive decoded-audio duplicate search. No fixed-male paired target was identified.",
+  "recording4_used": false,
+  "recording5_used": false,
+  "target_track9_used": false,
+  "training_run": false,
+  "playback": false,
+  "board_touched": false
+}
