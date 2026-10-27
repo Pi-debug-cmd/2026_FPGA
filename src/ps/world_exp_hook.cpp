@@ -76,9 +76,12 @@ bool WorldExpOffload(double (*sp)[2], int n) {
     // 24-bit input and 6-bit shift contract. Entire frame uses CPU if exceeded.
     if (a < -20.0 || peak > 600 || peak < -600) {++backend.fallback; return false;}
     double b=sp[i][1]*inv;
-    // WORLD phase usually lies inside this interval. General remainder is rare.
-    if (b > 3.14159265358979323846 || b < -3.14159265358979323846)
-      b=std::remainder(b,6.2831853071795864769);
+    // Bounded quotient avoids a libm remainder call for every wrapped bin.
+    if (b > 3.14159265358979323846 || b < -3.14159265358979323846) {
+      if (b > 1000000 || b < -1000000) {++backend.fallback; return false;}
+      int turns=int(b*0.15915494309189533577+(b>=0 ? 0.5 : -0.5));
+      b-=turns*6.2831853071795864769;
+    }
     // Truncation plus one correction implements floor(x+.5) exactly.
     double af=a*262144.0+0.5, bf=b*262144.0+0.5;
     int aq=int(af), bq=int(bf);

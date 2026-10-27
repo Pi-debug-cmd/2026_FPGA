@@ -57,7 +57,8 @@ def codec_snapshot(run, label):
     (run / ('codec_' + label + '.json')).write_text(json.dumps(snapshot, indent=2) + '\n')
 
 
-def run_trial(base, seconds, prefill, gain=49152, input_gain=262144, fifo=False, fifo_io=False, require_voiced=False):
+def run_trial(base, seconds, prefill, gain=49152, input_gain=262144, fifo=False, fifo_io=False, require_voiced=False,
+              period=512, capture_buffer=4096, playback_buffer=3072, start_delay=32000):
     binary = preflight(base)
     run = base / ('live_' + str(time.monotonic_ns()))
     run.mkdir()  # Unique run directory also owns logs and mixer snapshot.
@@ -65,7 +66,9 @@ def run_trial(base, seconds, prefill, gain=49152, input_gain=262144, fifo=False,
     mixer_saved = False
     record = {'kind': 'world_live_trial', 'directory': str(run), 'seconds': seconds,
               'prefill_ms': prefill, 'output_gain_q16': gain, 'input_gain_q16': input_gain,
-              'requested_fifo': fifo, 'requested_fifo_io': fifo_io, 'require_voiced': require_voiced, 'exit_code': 1}
+              'requested_fifo': fifo, 'requested_fifo_io': fifo_io, 'require_voiced': require_voiced, 'exit_code': 1,
+              'world_exp_requested': os.environ.get('WORLD_EXP', 'cpu'), 'alsa_period': period,
+              'capture_buffer': capture_buffer, 'playback_buffer': playback_buffer, 'start_delay_us': start_delay}
     error = None
     try:
         with (run / 'mixer_store.log').open('wb') as log:
@@ -94,7 +97,7 @@ def run_trial(base, seconds, prefill, gain=49152, input_gain=262144, fifo=False,
         for name in ['capture', 'process', 'playback']:
             logs.append((run / (name + '.log')).open('wb'))
         capture = subprocess.Popen(['arecord', '-v', '-D', 'hw:0,1', '-t', 'raw', '-f', 'S24_LE',
-            '-r', '32000', '-c', '2', '--period-size=512', '--buffer-size=4096', '-d', str(seconds), '-'],
+            '-r', '32000', '-c', '2', '--period-size='+str(period), '--buffer-size='+str(capture_buffer), '-d', str(seconds), '-'],
             stdout=subprocess.PIPE, stderr=logs[0])
         processes.append(capture)
         runtime_args = [str(binary), str(seconds), 'native_s24', str(prefill), str(gain), str(input_gain)]
@@ -107,7 +110,7 @@ def run_trial(base, seconds, prefill, gain=49152, input_gain=262144, fifo=False,
         processes.append(process)
         capture.stdout.close()
         playback = subprocess.Popen(['aplay', '-v', '-D', 'default', '-t', 'raw', '-f', 'S24_LE',
-            '-r', '32000', '-c', '2', '--period-size=512', '--buffer-size=3072', '--start-delay=32000', '-'],
+            '-r', '32000', '-c', '2', '--period-size='+str(period), '--buffer-size='+str(playback_buffer), '--start-delay='+str(start_delay), '-'],
             stdin=process.stdout, stdout=logs[2], stderr=logs[2])
         processes.append(playback)
         process.stdout.close()
@@ -146,7 +149,13 @@ def run_trial(base, seconds, prefill, gain=49152, input_gain=262144, fifo=False,
         if record['capture_overruns'] or record['playback_underruns'] or record['alsa_errors']:
             raise RuntimeError('ALSA stream error/xrun')
         runtime_lines = (run / 'process.log').read_text().splitlines()
-        runtime = json.loads(next(line for line in reversed(runtime_lines) if line.startswith('{')))
+        telemetry = [json.loads(line) for line in runtime_lines if line.startswith('{')]
+        runtime = next(item for item in telemetry if item.get('kind') == 'world_raw_stream_runtime')
+        if os.environ.get('WORLD_EXP') == 'pl':
+            stats = next(item for item in telemetry if item.get('kind') == 'world_exp_backend')
+            record['world_exp_backend'] = stats
+            if stats['mode'] != 2 or stats['calls'] <= 0 or stats['fallback']:
+                raise RuntimeError('PL did not process all minimum-phase calls')
         if runtime['exit_code'] != 0:
             raise RuntimeError('Runtime check failed')
         if runtime.get('raw_capture_clipped_samples', 0):
@@ -193,7 +202,11 @@ def run_trial(base, seconds, prefill, gain=49152, input_gain=262144, fifo=False,
         path = run / 'process.log'
         if path.exists():
             try:
-                record['runtime'] = json.loads(next(line for line in reversed(path.read_text().splitlines()) if line.startswith('{')))
+                telemetry = [json.loads(line) for line in path.read_text().splitlines() if line.startswith('{')]
+                record['runtime'] = next(item for item in telemetry if item.get('kind') == 'world_raw_stream_runtime')
+                for item in telemetry:
+                    if item.get('kind') == 'world_exp_backend':
+                        record['world_exp_backend'] = item
             except (StopIteration, ValueError):
                 record['runtime_log_incomplete'] = True
         record['child_exits'] = [child.returncode for child in processes]
@@ -224,6 +237,11 @@ def main():
     action.add_argument('--check', action='store_true')
     action.add_argument('--run', action='store_true')
     parser.add_argument('--seconds', type=int, default=20)
+    parser.add_argument('--base', type=Path, default=BASE)
+    parser.add_argument('--alsa-period', type=int, default=512)
+    parser.add_argument('--capture-buffer', type=int, default=4096)
+    parser.add_argument('--playback-buffer', type=int, default=3072)
+    parser.add_argument('--start-delay-us', type=int, default=32000)
     parser.add_argument('--prefill-ms', type=int, default=200)
     parser.add_argument('--output-gain-q16', type=int, default=49152)
     parser.add_argument('--input-gain-q16', type=int, default=262144)
@@ -232,6 +250,11 @@ def main():
     scheduling.add_argument('--fifo-io', action='store_true')
     parser.add_argument('--require-voiced', action='store_true', help='Reject speech trials without detected voiced input')
     args = parser.parse_args()
+    if (args.alsa_period < 128 or args.alsa_period > 1024 or
+        any(n < 2*args.alsa_period or n > 8192 or n % args.alsa_period
+            for n in (args.capture_buffer, args.playback_buffer)) or
+        not 0 <= args.start_delay_us <= 100000):
+        parser.error('Invalid ALSA buffer/period/start delay')
     if not 2 <= args.seconds <= 600 or not 0 <= args.prefill_ms <= 500:
         parser.error('seconds must be 2..600; prefill must be 0..500 ms')
     if not 1 <= args.output_gain_q16 <= 65536:
@@ -239,13 +262,14 @@ def main():
     if not 1 <= args.input_gain_q16 <= 262144:
         parser.error('input gain must be 1..262144')
     if args.check:
-        preflight(BASE)
+        preflight(args.base)
         return 0
     def terminate(signum, frame):
         raise KeyboardInterrupt('Supervisor interrupted by signal %d' % signum)
     signal.signal(signal.SIGTERM, terminate)
-    return run_trial(BASE, args.seconds, args.prefill_ms, args.output_gain_q16, args.input_gain_q16,
-                     args.fifo, args.fifo_io, args.require_voiced)
+    return run_trial(args.base, args.seconds, args.prefill_ms, args.output_gain_q16, args.input_gain_q16,
+                     args.fifo, args.fifo_io, args.require_voiced, args.alsa_period,
+                     args.capture_buffer, args.playback_buffer, args.start_delay_us)
 
 
 if __name__ == '__main__':
