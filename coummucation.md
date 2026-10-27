@@ -1890,6 +1890,9 @@
 - 推理启动 FARGAN native 时 exit 1，Windows `WinError 623`（系统 DLL 重定位）；重试及历史 v1/v2/v3 同 SHA native 均复现，连同一 MinGW gcc 也无法启动。故本轮没有合法音频或五门结果，不得把它标为通过或失败质量结果。
 - 当前状态保持 BLOCKED-RUNTIME；保留日志 `build/generated/remote_ps_c_v13_infer.log` 与执行摘要，待本机 native 运行时恢复后继续同一轮评价。
 
+### [PS-20261025-20] v13 正式报告归档
+- 报告：`report/ps_20261025_20_hubert_fargan_v13_20261027.md/JSON/TXT`；训练已完成，推理被既有 native 的 Windows `WinError 623` 阻断，质量门结果暂不可用。
+
 ### [PS-20261025-20] v11 内容帧 +10ms 对齐结果
 - 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准465b70a；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
 - 路径/复现：build/remote_ps_c_hubert_fargan_v11.py、build/run_remote_ps_c_hubert_fargan_v11.py；report/ps_20261025_20_hubert_fargan_v11_20261027.md/JSON/TXT。唯一变量内容帧+1（10ms），独立cache后全阶段exit0。

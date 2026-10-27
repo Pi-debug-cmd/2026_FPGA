@@ -1,0 +1,11 @@
+PS-20261025-20 v13
+status=BLOCKED-RUNTIME
+controlled_change=speaker_adversarial_head pooled -> framewise; weight=0.02
+train_exit=0 best_step=400 stop_step=1200 wall_seconds=277.281
+train_audio_guard_denied=[]
+infer_exit=1 error=Windows WinError 623 system DLL relocation while starting existing FARGAN host
+historical_native_same_sha_reproduced=true gcc_same_runtime_error=true
+strict_evaluation=not_run
+quality_metrics=unavailable
+male5_used=false target_track9_used=false played=false board_touched=false
+resume_from=build/generated/remote_ps_c_hubert_fargan_v13/mapper.pt,statistics.npz,fixed_male4.features.f32

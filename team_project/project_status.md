@@ -269,6 +269,9 @@
 - v13 训练 exit 0，生成 mapper/statistics/features；推理阶段启动既有 FARGAN native 时报 Windows `WinError 623`，重试和历史同 SHA native 均失败，未产生可评价 WAV。
 - 本轮不产生五门质量结论；保留 `build/generated/remote_ps_c_v13_train.log`、`remote_ps_c_v13_infer.log`、`remote_ps_c_v13_execution.json`，等待电脑端 native 运行时恢复后重试。
 
+### [PS-20261025-20] v13 正式报告归档
+- 已追加 v13 的正式 BLOCKED-RUNTIME 报告与恢复点；不将本轮当作质量通过或失败样本。
+
 ### [PS-20261025-20] v11 内容帧 +10ms 对齐结果
 - 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准465b70a；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
 - 路径/复现：build/remote_ps_c_hubert_fargan_v11.py、build/run_remote_ps_c_hubert_fargan_v11.py；report/ps_20261025_20_hubert_fargan_v11_20261027.md/JSON/TXT。唯一变量内容帧+1（10ms），独立cache后全阶段exit0。

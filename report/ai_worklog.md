@@ -800,6 +800,9 @@ ps-opt 把非周期最小相位优化移植进流式路径（改造 synthesisrea
 - v13 训练阶段完成（exit 0，best step 400，stop step 1200），但推理启动 FARGAN native 失败：Windows `WinError 623` 系统 DLL 重定位；历史 v1/v2/v3 同 SHA native 与 MinGW gcc 也无法启动，确认是本机运行时问题。
 - 未生成 WAV、未运行 strict evaluator，不记录 identity/leakage/UTMOS/CER 质量结果；日志和部分训练产物保留，native 环境恢复后继续评价。
 
+### [PS-20261025-20] v13 正式报告归档
+- `report/ps_20261025_20_hubert_fargan_v13_20261027.*` 已保存；共享记录与报告同提交，等待 native 运行时恢复。
+
 ### [PS-20261025-20] v11 内容帧 +10ms 对齐结果
 - 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准465b70a；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
 - 路径/复现：build/remote_ps_c_hubert_fargan_v11.py、build/run_remote_ps_c_hubert_fargan_v11.py；report/ps_20261025_20_hubert_fargan_v11_20261027.md/JSON/TXT。唯一变量内容帧+1（10ms），独立cache后全阶段exit0。
