@@ -2255,3 +2255,17 @@
 - 复现：build/reproduce_hubert_world_round88_20261027.py prepare/train/candidate/evaluate --experiment-round 92 --asset-root <asset-root>；evaluate真实OpenCC0.1.7，完整命令见JSON。
 - 限制：训练/生成启动器产物完成后退出1，评测退出0；ASR参考非人工真值。公共配对192训练/8验证，Track5～8锚点，固定男性1～3仅评测源质心；仅录音4验证，录音5/Track9锁定。无播放、录音、板测、Cortex-A9/PL预算或实时结论。
 - 下一责任方：Hardware-A / Codex；针对宽模型过拟合测试层间dropout。Round59～92共34轮，剩16轮，最多Round108。
+
+
+### [PS-20261021-10] HuBERT/WORLD Round 93 宽GRU正则化认领
+- 日期：2026-10-27；角色：Hardware-A / Codex（离线算法）；状态：CLAIMED。
+- 基准提交：95a62a4ee769ddfe629b24b75742533bd34bea0f；算法基线Round92。
+- 唯一算法变量：hidden384两层GRU增加层间dropout0.20；PCA96、输入99、CROP128、BATCH8、STEPS2000、seed、早停、anchor0.25、VUV0.35、动态1.20、方差项、gain1.6保持Round92。
+- 必要模式修复：validate会设置eval，原训练循环没有恢复train；历史GRU dropout0且无BatchNorm，因此此前前向不因模式变化。新dropout必须在每次训练前model.train()，验证和生成保持eval；该变化作为dropout生效必需部分，不声称仅声明dropout参数即可。
+- 依据：Round92 step500后训练误差下降、验证损失回升，且录音4CER0.3824；检查正则化是否缓解过拟合，不预判收益。
+- 数据：同公共配对192训练/8验证，128帧184可用，Track5～8自重建锚点；男性1～3仅评测质心，录音4验证，录音5/Track9锁定。
+- 成功标准：身份>=0.45、P10>=0.35、泄漏<=0.10、UTMOS>=2.30、CER<=0.15全过即停止；真实OpenCC0.1.7。
+- 修改路径：build/reproduce_hubert_world_round88_20261027.py、coummucation.md；报告report/fixed_male_hubert_world_round93_20261027.{md,json}。
+- 复现：prepare/train/candidate/evaluate --experiment-round 93 --asset-root <asset-root>，evaluate --cer-normalizer opencc；准备后核对hidden384、dropout0.20、model.train与语法。
+- 限制：CPU离线，ASR参考非人工真值；无播放、录音、板测、Cortex-A9/PL或实时结论。
+- 下一责任方：Hardware-A / Codex 完成训练评测并单轮提交。完成后35/50，最多Round108。

@@ -1,4 +1,4 @@
-"""Reproduce Round88-92 crop/PCA/anchor/GRU experiments with external assets."""
+"""Reproduce Round88-93 crop/PCA/anchor/GRU experiments with external assets."""
 from __future__ import annotations
 
 import argparse
@@ -12,7 +12,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("stage", choices=("prepare", "train", "candidate", "evaluate"))
     parser.add_argument("--asset-root", required=True, type=Path)
-    parser.add_argument("--experiment-round", type=int, choices=(88, 89, 90, 91, 92), default=88)
+    parser.add_argument("--experiment-round", type=int, choices=(88, 89, 90, 91, 92, 93), default=88)
     parser.add_argument("--cer-normalizer", choices=("identity", "opencc"),
                         help="Default: historical identity for 88/89, OpenCC 0.1.7 for 90+")
     args = parser.parse_args()
@@ -49,10 +49,19 @@ def main() -> None:
                     and name == "train_paired_hubert_world_gru_round26_20261025.py"):
                 assert text.count("ANCHOR_PROBABILITY = 0.25") == 1
                 text = text.replace("ANCHOR_PROBABILITY = 0.25", "ANCHOR_PROBABILITY = 0.50")
-            if (args.experiment_round == 92
+            if (args.experiment_round in (92, 93)
                     and name == "train_hubert_world_causal_gru_round23_20261025.py"):
                 assert text.count("HIDDEN = 192") == 1
                 text = text.replace("HIDDEN = 192", "HIDDEN = 384")
+                if args.experiment_round == 93:
+                    old = 'nn.GRU(HIDDEN, HIDDEN, num_layers=LAYERS, batch_first=True)'
+                    assert text.count(old) == 1
+                    text = text.replace(old, old[:-1] + ', dropout=0.20)')
+            if (args.experiment_round == 93
+                    and name == "train_paired_hubert_world_gru_round26_20261025.py"):
+                old = '        prediction = model(x)'
+                assert text.count(old) == 1
+                text = text.replace(old, '        model.train()\n' + old)
             (runtime / name).write_text(text, encoding="utf-8", newline="\n")
         return
 
