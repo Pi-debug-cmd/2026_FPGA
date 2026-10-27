@@ -153,3 +153,17 @@
 - 验证边界：发布/下载/校验/推理日志完整保留；独立venv复制锁定库，未测试新pip安装；同机隔离复验，非第二台实体电脑。
 - 限制/下一责任方：身份0.763920106/P10 0.747006375/泄漏0.261376895/UTMOS2.508168141/CER0.558823529，泄漏/CER仍失败，非WAIT_LOCAL_TEST。Remote-PS-C保存证据，Hardware-A/B不启动试听/板测；Male5/Track9锁定，无录音/播放/真人/ARM/Vivado/RTL/PL/实时验收，未改分配/规则/可见性。
 - 公开证据处理：自动审批阻止发布本机容量/绝对路径后，新增交付收据只保留通用项目路径；原始日志/容量检查留本地，模型/指标/哈希未变。
+
+### [PS-20261025-20] v4 源说话人对抗映射认领
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：CLAIMED；基准提交 `6d940c927f4ba7ffefb97761dafa68c2f4295750`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；PR #11，未发现同任务冲突。
+- 假设/范围：v1/v2/v3 的源泄漏分别约 0.253/0.255/0.261，且 PCA 与 delta 单变量均未改善。v4 保留 PCA96、delta0.25、数据切分、HuBERT layer9、双向 GRU192、优化器、早停与原五门；只新增训练期源说话人对抗分类器和梯度反转约束（20 个辅助训练说话人，权重0.05），推理仅使用映射器输出。
+- 路径/复现：拟新增 `build/remote_ps_c_hubert_fargan_v4.py`、`build/run_remote_ps_c_hubert_fargan_v4.py`；输出 `build/generated/remote_ps_c_hubert_fargan_v4/`；正式报告 `report/ps_20261025_20_hubert_fargan_v4_20261027.*`。复用经 SHA 核验的 v1 200 对缓存，不读取 Male5/Track9。
+- 停止条件：辅助 validation 选 checkpoint 后只做一次 Fixed-Male4 原五门；未全过不进入 WAIT_LOCAL_TEST、不启动试听或硬件，不继续本轮参数扫描。若该约束有效，再决定是否只调整一个对抗权重。
+- 限制/下一责任方：电脑端非因果上限；无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时声明；Remote-PS-C 负责提交失败或通过证据，维护者审核 PR #11。
+
+### [PS-20261025-20] v4 源说话人对抗映射结果
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准6d940c927f4ba7ffefb97761dafa68c2f4295750；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
+- 路径/复现：build/remote_ps_c_hubert_fargan_v4.py、build/run_remote_ps_c_hubert_fargan_v4.py；report/ps_20261025_20_hubert_fargan_v4_20261027.md/JSON/TXT。训练复用v1缓存，三阶段exit0，原strict evaluator只筛选一次Male4；完整SHA/日志见报告。
+- 唯一新增变量：训练期20类源说话人分类器+梯度反转，speaker_adv_weight0.05；PCA96、delta0.25、数据切分、seed、双向GRU192、优化器、早停和五门口径不变。统计逐元素等于v1，v4参数1144552，最佳step800、停止step1600、训练359.391s。
+- 一次Male4五门：身份0.773824141/P100.745913965/泄漏0.239771249/UTMOS2.426944574/CER0.470588235；通过项{'identity': True, 'identity_p10': True, 'leakage': False, 'utmos': True, 'cer': False}。相对v1泄漏下降但CER恶化，仍REJECTED，不进入WAIT_LOCAL_TEST。
+- 限制/下一责任方：对抗项只训练电脑端映射，非因果、无板卡/试听/实时声明；Male5/Track9锁定。Remote-PS-C提交本轮失败证据，下一轮只考虑对抗权重单变量调整。

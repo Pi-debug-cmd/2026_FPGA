@@ -1,0 +1,52 @@
+
+=== train ===
+{"step": 1, "train_loss": 3.446777582168579, "validation_loss": 0.4520340971648693, "elapsed_seconds": 6.375}
+{"step": 100, "train_loss": 3.1972601413726807, "validation_loss": 0.2284764163196087, "elapsed_seconds": 29.14100000000326}
+{"step": 200, "train_loss": 3.4338786602020264, "validation_loss": 0.21100198104977608, "elapsed_seconds": 50.937999999994645}
+{"step": 300, "train_loss": 3.3208932876586914, "validation_loss": 0.20596635155379772, "elapsed_seconds": 73.34400000001187}
+{"step": 400, "train_loss": 3.2991862297058105, "validation_loss": 0.20166591927409172, "elapsed_seconds": 94.98499999998603}
+{"step": 500, "train_loss": 3.3710081577301025, "validation_loss": 0.20263336226344109, "elapsed_seconds": 117.39100000000326}
+{"step": 600, "train_loss": 3.1880316734313965, "validation_loss": 0.19822008349001408, "elapsed_seconds": 139.14100000000326}
+{"step": 700, "train_loss": 3.1084909439086914, "validation_loss": 0.2005913257598877, "elapsed_seconds": 161.51600000000326}
+{"step": 800, "train_loss": 3.162912368774414, "validation_loss": 0.19802140444517136, "elapsed_seconds": 183.5}
+{"step": 900, "train_loss": 3.2647032737731934, "validation_loss": 0.1991384383291006, "elapsed_seconds": 205.78200000000652}
+{"step": 1000, "train_loss": 3.028459072113037, "validation_loss": 0.2011707555502653, "elapsed_seconds": 227.0789999999979}
+{"step": 1100, "train_loss": 3.127462148666382, "validation_loss": 0.20128494873642921, "elapsed_seconds": 250.53200000000652}
+{"step": 1200, "train_loss": 3.1504697799682617, "validation_loss": 0.19943934120237827, "elapsed_seconds": 272.06299999999464}
+{"step": 1300, "train_loss": 3.094202995300293, "validation_loss": 0.20086678117513657, "elapsed_seconds": 293.89100000000326}
+{"step": 1400, "train_loss": 3.1626124382019043, "validation_loss": 0.2016392331570387, "elapsed_seconds": 315.7190000000119}
+{"step": 1500, "train_loss": 3.176661252975464, "validation_loss": 0.20132804289460182, "elapsed_seconds": 337.5320000000065}
+{"step": 1600, "train_loss": 3.1189496517181396, "validation_loss": 0.20179366320371628, "elapsed_seconds": 359.35999999998603}
+PYTHON_AUDIO_GUARD {"stage": "train", "denied": []}
+
+=== infer ===
+{
+  "samples": 291200,
+  "peak": 0.6827392578125,
+  "rms": 0.06959008047905495,
+  "sha256": "c176711f3259c97c91742008f9b0288bb899bec7a8ee5ef9c6b0d4eaf2c4c9a4",
+  "clipping_fraction": 0.0,
+  "task": "PS-20261025-20",
+  "source_sha256": "f4a026e5c97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c",
+  "source_samples": 291200,
+  "frames": 1820,
+  "inference_seconds": 2.547000000020489,
+  "rtf_host_full_chain": 0.13994505494618073,
+  "mapper_sha256": "6e5609266e2c84b615ac65f7f17b9c85012fab675afc4970ad74e13f76e37a56",
+  "native_sha256": "0e5eb4d457741820564d4397e0b69f8dd58b25c896259bb66d8e84fb88a3dc14",
+  "male5_used": false,
+  "target_track9_used": false,
+  "played": false,
+  "board_touched": false
+}
+PYTHON_AUDIO_GUARD {"stage": "infer", "denied": []}
+
+=== evaluate ===
+D:\fpga\.git-repair\build\generated\remote_ps_c_env\Lib\site-packages\torch\nn\utils\weight_norm.py:143: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+You have passed task=transcribe, but also have set `forced_decoder_ids` to [[1, None], [2, 50359]] which creates a conflict. `forced_decoder_ids` will be ignored in favor of task=transcribe.
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Remote-PS-C_HuBERT_BiGRU_FARGAN_v4_speaker_adv identity=0.7738 identity_p10=0.7459 leakage=0.2398 leakage_window_mean=0.2300 leakage_aggregate=0.2398 utmos=2.4269 cer=0.4706 pass=False
+SELECTED Remote-PS-C_HuBERT_BiGRU_FARGAN_v4_speaker_adv
+REPORT D:\fpga\.git-repair\build\generated\remote_ps_c_hubert_fargan_v4\evaluation.json
+PYTHON_AUDIO_GUARD {"stage": "evaluate", "denied": []}
