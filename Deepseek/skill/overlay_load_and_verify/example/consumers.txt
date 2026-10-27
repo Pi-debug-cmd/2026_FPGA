@@ -1,0 +1,20 @@
+# PL consumers that must be unbound before loading the audio-pitch overlay.
+# Upper-level consumers first, leaves last. One device name per line.
+xlnx_snd_card.0.auto
+gpio-keys
+xlnx-drm.0
+amba_pl:drm_pl_disp_hdmi
+amba_pl:vcap_dvp
+43c70000.v_frmbuf_rd
+43ca0000.v_frmbuf_rd
+43cb0000.v_frmbuf_wr
+43c00000.v_tc
+43c80000.v_tc
+43c40000.audio_formatter
+43c50000.i2s_receiver
+43c60000.i2s_transmitter
+43c20000.axi_dynclk
+43c90000.axi_dynclk
+41600000.i2c
+42c00000.serial
+41210000.gpio
