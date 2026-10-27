@@ -1,0 +1,91 @@
+{
+  "fpga": "operating",
+  "uptime": "76.12 103.92",
+  "boot_id": "972be991-6d88-4349-83dc-792e0c4052be",
+  "v23_sha256": "f12da25e93a520b7f5255ce952a3cb9b5d1bbca474133b1bc529d8c8e18349b7",
+  "processes": [
+    {
+      "pid": 631,
+      "args": [
+        "python3",
+        "/opt/world_voice/live_world_trial.py",
+        "--run",
+        "--seconds",
+        "600",
+        "--prefill-ms",
+        "200",
+        "--output-gain-q16",
+        "39322",
+        "--input-gain-q16",
+        "262144"
+      ]
+    },
+    {
+      "pid": 645,
+      "args": [
+        "arecord",
+        "-v",
+        "-D",
+        "hw:0,1",
+        "-t",
+        "raw",
+        "-f",
+        "S24_LE",
+        "-r",
+        "32000",
+        "-c",
+        "2",
+        "--period-size=512",
+        "--buffer-size=4096",
+        "-d",
+        "600",
+        "-"
+      ]
+    },
+    {
+      "pid": 646,
+      "args": [
+        "/tmp/codex_world_20261013/world_budget_v23",
+        "600",
+        "native_s24",
+        "200",
+        "39322",
+        "262144"
+      ]
+    },
+    {
+      "pid": 647,
+      "args": [
+        "aplay",
+        "-v",
+        "-D",
+        "default",
+        "-t",
+        "raw",
+        "-f",
+        "S24_LE",
+        "-r",
+        "32000",
+        "-c",
+        "2",
+        "--period-size=512",
+        "--buffer-size=3072",
+        "--start-delay=32000",
+        "-"
+      ]
+    }
+  ],
+  "pcm": {
+    "pcm0p": "state: RUNNING\nowner_pid   : 647\ntrigger_time: 21.256574879\ntstamp      : 0.000000000\ndelay       : 2656\navail       : 416\navail_max   : 512\n-----\nhw_ptr      : 1758624\nappl_ptr    : 1761280\n",
+    "pcm1c": "state: RUNNING\nowner_pid   : 645\ntrigger_time: 21.245886214\ntstamp      : 0.000000000\ndelay       : 256\navail       : 256\navail_max   : 512\n-----\nhw_ptr      : 1758976\nappl_ptr    : 1758720\n"
+  },
+  "pl_test_module_loaded": false,
+  "task": "PL-20261027-01",
+  "date": "2026-10-27",
+  "source_commit": "2335923",
+  "operator_action": "User confirmed board reset",
+  "result": "ACCEPTED baseline recovery only",
+  "new_audio_test_started": false,
+  "subjective_feedback": "not provided",
+  "live_trial_stability_passed": false
+}

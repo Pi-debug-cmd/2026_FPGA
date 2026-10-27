@@ -1616,3 +1616,12 @@
 - 恢复：原厂载荷成功加载，但非音频显示/摄像外设重绑阶段串口失去响应，尚未启动v23。Ctrl-C/换行/BREAK无响应，MCP hw_server无JTAG target；已请操作者复位或重上电，启动分区未改。电脑保留完整证据。
 - 修复与限制：恢复脚本延后非音频外设至正常开机，并逐bind写journal；语法检查通过，尚未板测。不宣称原v23已恢复、听感通过或高实时验收。
 - 报告：`report/world_exp_live20_round1_20261027.md`与恢复JSON；下一责任方：操作者复位；Hardware-A / Codex 随后核验原v23与PCM状态，补现场听感，再安排后续调度/分析优化。
+
+### [PL-20261027-01] 操作者复位后原v23恢复核验
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（仅基线恢复）。
+- 基准提交：`2335923`；修改：`report/world_exp_reboot_recovery_20261027.{md,json}`与三份共享记录追加。
+- 操作者确认：“已重启板卡”；本轮仅只读检查，没有发起新的录放。
+- 复现：读取fpga_manager、v23 SHA、/proc进程cmdline和PCM status；机器证据见报告JSON。
+- 量化：FPGA operating，v23 SHA与基线一致；单组arecord645/runtime646/aplay647，PCM0p/PCM1c均RUNNING，PL测试模块未加载；prefill和ALSA恢复原配置。
+- 结论：解除前轮“等待现场复位”的恢复阻塞，原v23现已运行。20秒低缓冲2次欠载的REJECTED不变；无新听感或高实时验收。
+- 下一责任方：Hardware-A / Codex 后续分析关键路径/批次调度优化；任何新现场录放须当轮确认。
