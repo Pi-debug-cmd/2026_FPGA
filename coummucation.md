@@ -1538,3 +1538,12 @@
 - 量化：随机背压RTL 49248 bins零LSB/零TLAST错误；受控标准录音1/4前5秒软件模型回归 SNR 79.06/78.57dB、最大PCM16误差3/2；ARM/host和匹配内核驱动已编译。
 - 限制：整机P&R尚在运行，未加载新位流，未录放、未宣称板端提速或实测端到端延迟；原v23保留运行。
 - 下一责任方：Hardware-A / Codex 完成整机实现、板端数值与耗时测试，再经当轮准备确认安排现场回归。
+
+### [PL-20261027-01] Cortex-A9 静默 CPU 等价回归
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（仅本项文件回归）。
+- 基准提交：`45b167d`，实现 `50974e2`；改动：`board/world_exp_file_trial.py`、`report/world_exp_cpu_board_20261027.{md,json}`、`coummucation.md`。
+- 复现：报告内 `python3 world_exp_file_trial.py --base /tmp/codex_world_exp_20261027 --cpu-only`；输入与首轮标准录音1完全相同。
+- 量化：新CPU与原v23的80000样本逐字节一致；模型相对CPU SNR79.0566dB、最大PCM16误差3、1227次零fallback；三路均零削顶。
+- 恢复准备：原厂bit已核验，/tmp恢复载荷SHA `af275946c15ae958e9bed16c12f6cab45b63ebecc18645cec24176315db7fc60`；未切PL、不改启动分区。v23为稳定串口传输暂时停止，此轮无录放。
+- 限制：模型ARM耗时非PL速度；分析RTF约0.55仍是瓶颈。无现场听感/PL/实测延迟通过结论。
+- 下一责任方：Hardware-A / Codex 完成P&R/MCP复核并执行硬件向量和文件回归。
