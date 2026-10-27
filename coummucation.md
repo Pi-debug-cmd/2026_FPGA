@@ -1649,3 +1649,11 @@
 - 量化：FFT执行累计1.454058s，建表0.268492s；D4C2048执行0.324211s，合成1024执行0.654678s，均为线程累计，非墙钟加速比。
 - 限制：原厂PL，服务临时停止以便静默文件和串口传输；无录放。未使用电脑端耗时推断ARM，未宣称新的PL或低延迟通过。
 - 下一责任方：Hardware-A / Codex 先复用FFT计划，再验证适合double/log谱的PL FFT精度与DMA收益；保持v23声学路径。
+
+### [PL-20261027-01] Round 5 FFT计划复用方案
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED / PROPOSED。
+- 基准：`bf748af`；修改：`src/ps/world_fft_plan_cache.cpp`、构建入口、板端runner、`report/world_fft_cache_round5_proposal_20261027.md`与host JSON。
+- 复现：构建`-CacheFftPlans`，板端按manifest运行`world_fft_cache_trial.py`。每线程32槽/4MiB，独立工作区；只移除重复建表，不改FFT算术。
+- 量化：修复MinGW线程析构生命周期问题后，两段男声20次host文件正常退出、开关逐字节一致；ARM已编译，待静默板测。报告记录开发失败及修复，不把host计时当ARM收益。
+- 限制：原厂PL，服务临时停止；无新录放或位流切换，没有高实时结论。
+- 下一责任方：Hardware-A / Codex 完成ARM交错回归并发布本轮结果，再评估PL FFT。

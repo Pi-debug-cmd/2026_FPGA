@@ -2,9 +2,11 @@ param(
   [Parameter(Mandatory=$true)][string]$WorldRoot,
   [ValidateSet('arm','host')][string]$Target='arm',
   [string]$Compiler='',
-  [switch]$ProfileOperators
+  [switch]$ProfileOperators,
+  [switch]$CacheFftPlans
 )
 $ErrorActionPreference='Stop'
+if ($ProfileOperators -and $CacheFftPlans) {throw 'Profile and cache wrappers must be built separately'}
 $root=Split-Path -Parent $PSScriptRoot
 $out=Join-Path $root 'build/generated/world_exp_ps'
 New-Item -ItemType Directory -Force $out | Out-Null
@@ -28,6 +30,13 @@ if($ProfileOperators) {
   $bin+='_profile'
   $sources+=@("$root/src/ps/world_operator_profile.cpp")
   foreach($symbol in @('fft_execute','fft_plan_dft_1d','fft_plan_dft_r2c_1d','fft_plan_dft_c2r_1d','Dio','StoneMask','CheapTrick','D4C')) {
+    $flags+=('-Wl,--wrap='+$symbol)
+  }
+}
+if($CacheFftPlans) {
+  $bin+='_cache'
+  $sources+=@("$root/src/ps/world_fft_plan_cache.cpp")
+  foreach($symbol in @('fft_plan_dft_1d','fft_plan_dft_r2c_1d','fft_plan_dft_c2r_1d','fft_destroy_plan')) {
     $flags+=('-Wl,--wrap='+$symbol)
   }
 }
