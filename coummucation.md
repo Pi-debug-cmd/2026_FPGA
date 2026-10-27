@@ -1815,3 +1815,17 @@
 - 量化：baseline p95 117.058676ms；cache+exp 113.992885ms；compact2048+exp 114.187369ms；FFT无显著额外收益。
 - 限制：仅软件输入交付到输出到达，排除ALSA/codec/模拟/声学，不能作为物理端到端验收；无新用户听感。候选驻留、服务暂时停止。
 - 下一责任方：Hardware-A / Codex继续接口开销优化，客观门后才请求新现场轮次。
+
+### [PL-20261027-01] Round 11 PS浮点适配开销认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准：`1b8e909`；范围：只优化PS float打包/解包有限值检查与实输入循环，不改位流/驱动/精度/批次。
+- 依据：compact接口仍有约0.20s prepare/unpack；ARM反汇编显示每bin std::isfinite触发VFP abs/compare/vmrs同步；改按IEEE754指数位聚合检查，仍拒绝Inf/NaN，不放弃校验。
+- 复现与量化待本轮报告；先CPU逐字节和同位流PL数值/三次耗时。候选驻留、服务停止，无新录放；下一责任方Hardware-A / Codex。
+
+### [PL-20261027-01] Round 11 浮点适配优化方案
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED。
+- 基准：`6193bc8`；范围：src/ps/world_fft_pl.cpp、board/world_fft_adapter_trial.py；报告 world_fft_adapter_round11_proposal_20261027.md。
+- 复现：ARM CacheFftPlans/FftPl构建已成功；binary SHA 2b9d98466955262f68462e78256fb5f8e192bc9fecb265d666f3910e80807d65。
+- 变量：逐bin VFP isfinite改IEEE754指数掩码聚合，仍拒绝Inf/NaN；r2c单独打包循环；不改DMA、核/位流、音色或批次。
+- 限制：无本轮板端性能结果；当前compact候选驻留、服务停止，无新录放。
+- 下一责任方：Hardware-A / Codex同位流/旧程序交错三次、两输入三模式逐字节回归，结果独立提交。

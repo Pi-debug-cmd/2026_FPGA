@@ -48,18 +48,25 @@ void __wrap_fft_execute(fft_plan p) {
   std::lock_guard<std::mutex> lock(backend.mutex);
   double begin=Now(); backend.wait_s+=begin-t;
   const bool real_in=p.c_in==NULL, real_out=p.c_out==NULL;
-  for(int i=0;i<p.n;++i) {
+  unsigned invalid=0;
+  if(real_in) for(int i=0;i<p.n;++i) {
+    float sample=p.in[i];uint32_t bits;
+    std::memcpy(&bits,&sample,sizeof(bits));
+    invalid|=(bits&0x7f800000u)==0x7f800000u;
+    std::memcpy(reinterpret_cast<unsigned char*>(backend.input)+i*sizeof(float),&sample,sizeof(sample));
+  }
+  else for(int i=0;i<p.n;++i) {
     float pair[2];
-    if(real_in) {pair[0]=p.in[i];pair[1]=0;}
-    else if(real_out && i>p.n/2) {pair[0]=p.c_in[p.n-i][0];pair[1]=-p.c_in[p.n-i][1];}
+    if(real_out && i>p.n/2) {pair[0]=p.c_in[p.n-i][0];pair[1]=-p.c_in[p.n-i][1];}
     else {pair[0]=p.c_in[i][0];pair[1]=p.c_in[i][1];}
     // WORLD's Ooura c2c wrapper transforms the conjugated complex input.
     if(!real_in && !real_out) pair[1]=-pair[1];
     if(real_out && (i==0 || i==p.n/2)) pair[1]=0;
-    if(!std::isfinite(pair[0]) || !std::isfinite(pair[1])) std::abort();
-    if(real_in) std::memcpy(reinterpret_cast<unsigned char*>(backend.input)+i*sizeof(float),pair,sizeof(float));
-    else std::memcpy(&backend.input[i],pair,sizeof(pair));
+    uint32_t bits[2];std::memcpy(bits,pair,sizeof(bits));
+    invalid|=((bits[0]&0x7f800000u)==0x7f800000u) | ((bits[1]&0x7f800000u)==0x7f800000u);
+    std::memcpy(&backend.input[i],pair,sizeof(pair));
   }
+  if(invalid) std::abort();
   world_fft_request request={uint64_t(uintptr_t(backend.input)),uint64_t(uintptr_t(backend.output)),
                              unsigned(p.n),unsigned(p.sign==FFT_FORWARD) | (real_in?2u:0u)};
   t=Now();backend.prepare_s+=t-begin;
@@ -67,10 +74,12 @@ void __wrap_fft_execute(fft_plan p) {
   begin=Now();backend.dma_s+=begin-t;
   for(int i=0;i<(real_in?p.n/2+1:p.n);++i) {
     float pair[2];std::memcpy(pair,&backend.output[i],sizeof(pair));
-    if(!std::isfinite(pair[0]) || !std::isfinite(pair[1])) std::abort();
+    uint32_t bits[2];std::memcpy(bits,&backend.output[i],sizeof(bits));
+    invalid|=((bits[0]&0x7f800000u)==0x7f800000u) | ((bits[1]&0x7f800000u)==0x7f800000u);
     if(real_out) p.out[i]=pair[0];
     else {p.c_out[i][0]=pair[0];p.c_out[i][1]=pair[1];}
   }
+  if(invalid) std::abort();
   if(real_in) p.c_out[0][1]=p.c_out[p.n/2][1]=0;
   backend.unpack_s+=Now()-begin;++backend.calls;
 }
