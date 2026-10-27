@@ -1991,6 +1991,18 @@
 - 报告链接：`report/fixed_male_hubert_world_round86_20261027.md`、`report/fixed_male_hubert_world_round86_20261027.json`。
 - 下一责任方：Hardware-A / Codex 测试更小谱残差alpha=0.02。
 
+### [PS-20261021-10] HuBERT/WORLD Round 87 源谱动态残差后处理
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`b5003d4`
+- 唯一变量：冻结Round85 checkpoint与gain1.6，仅将录音4源WORLD谱DCT零均值动态残差alpha由0改为0.02；无源VUV/F0/能量/AP，无重训。
+- 成功标准：固定录音4严格五门全部通过；否则记录泄漏、CER和自然度变化并拒绝。
+- 数据边界：只用男性标准录音4评估；Track9和录音5继续锁定，不用于选择或训练。
+- 复现入口：`build/apply_world_temporal_postfilter_round47_20261026.py --source-residual-alphas 0.02` 与严格评测器。
+- 限制：不播放、不录音、不接触板卡，不声明试听、Cortex-A9、RTL/PL或实时通过。
+- 下一责任方：Hardware-A / Codex 完成本轮候选生成、严格评估并提交单轮结果。
+
 ### [PS-20261021-10] HuBERT/WORLD Round 82 VUV 损失权重
 - 日期：2026-10-27
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
