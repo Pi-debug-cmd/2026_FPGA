@@ -1891,3 +1891,16 @@
 - 报告链接：`report/fixed_male_hubert_world_round76_20261027.md`、`report/fixed_male_hubert_world_round76_20261027.json`。
 - 下一责任方：Hardware-A / Codex 保留 source prosody、测试移除 variance matching。
 
+### [PS-20261021-10] HuBERT/WORLD Round 77 移除方差匹配
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`629a65dc45cd22ae07225fa26634885f4e853078`
+- 唯一变量：保留 source prosody，移除 variance matching；动态损失权重1.25、锚点概率0.25、固定种子与gain1.6不变；step1600 early stop。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.6987/0.6740/0.1451/2.2132/0.3971`；泄漏、UTMOS、CER失败。Checkpoint SHA-256 `e71e7999dda6f0d2c86dd626bb1eb91b12322467b39741b46f3d5a98a60d2433`；候选 PCM16 SHA-256 `108895adf5b6e2b7ad56565671083fe649b1d4d8601dc2ea46dfd509e07e90ac`。
+- 修改路径：`report/fixed_male_hubert_world_round77_20261027.{md,json}`、`coummucation.md`。
+- 复现命令：见 `report/fixed_male_hubert_world_round77_20261027.json`。
+- 限制：identity OpenCC shim；录音5、Track 9 未用于选参；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL 或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round77_20261027.md`、`report/fixed_male_hubert_world_round77_20261027.json`。
+- 下一责任方：Hardware-A / Codex 保留 source prosody 与 variance matching，测试独立的 VUV BCE 权重变化。
+
