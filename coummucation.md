@@ -1665,3 +1665,12 @@
 - 量化：male1墙钟中位2.901327→2.592240s（-10.65%），male4 2.883022→2.605723s（-9.62%）；分析RTF分别0.572398→0.507131、0.566304→0.508260；总保留工作区约283KiB。male4最大分析批次中位34.499→36.244ms，不能宣称延迟峰值改善。
 - 限制与状态：只静默文件，原厂PL；已恢复原v23服务并记录SHA/PCM状态。无新现场听感或高实时结论，FFT还未上PL。
 - 下一责任方：Hardware-A / Codex 用Vivado MCP FFT IP位准确模型验证1024/2048浮点精度和吞吐预算，再确定PL接入。
+
+### [PL-20261027-01] Round 6 PL浮点FFT候选认领与方案
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED / PROPOSED。
+- 基准：`9b609d4`；改动：`build/create_world_fft_probe.tcl`、`src/ps/world_fft_ip_model.cpp`、构建入口、`report/world_fft_ip_round6_proposal_20261027.md`。
+- 复现：独立xfft9.1浮点/25bit twiddle/2048可变长度/100MHz，Vivado MCP已生成官方位准确C模型；host显式FftModelSdk构建成功，尚无本轮语音结果或板测。
+- 范围：先验证D4C/分析/合成FFT数值，再看OOC资源和DMA收益；不沿用慢且精度不足的18bit旧核，不改变板卡PL。
+- 板卡状态补充：Round5服务start后的首个立即PCM读取closed；异步启动完成后只读复核arecord954/aplay956两PCM均RUNNING，v23 pid918。无新现场测试。
+- 限制：官方C模型和OOC都不能替代真实PL数值/实时性；当前未加载FFT候选，未声明高实时验收。
+- 下一责任方：Hardware-A / Codex 执行位准确模型回归，数值合格再集成PS/PL。

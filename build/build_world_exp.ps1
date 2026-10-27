@@ -3,10 +3,12 @@ param(
   [ValidateSet('arm','host')][string]$Target='arm',
   [string]$Compiler='',
   [switch]$ProfileOperators,
-  [switch]$CacheFftPlans
+  [switch]$CacheFftPlans,
+  [string]$FftModelSdk=''
 )
 $ErrorActionPreference='Stop'
 if ($ProfileOperators -and $CacheFftPlans) {throw 'Profile and cache wrappers must be built separately'}
+if ($FftModelSdk -and ($Target -ne 'host' -or $ProfileOperators)) {throw 'FFT IP model requires host and no profiling'}
 $root=Split-Path -Parent $PSScriptRoot
 $out=Join-Path $root 'build/generated/world_exp_ps'
 New-Item -ItemType Directory -Force $out | Out-Null
@@ -37,6 +39,14 @@ if($CacheFftPlans) {
   $bin+='_cache'
   $sources+=@("$root/src/ps/world_fft_plan_cache.cpp")
   foreach($symbol in @('fft_plan_dft_1d','fft_plan_dft_r2c_1d','fft_plan_dft_c2r_1d','fft_destroy_plan')) {
+    $flags+=('-Wl,--wrap='+$symbol)
+  }
+}
+if($FftModelSdk) {
+  $bin+='_fftmodel'
+  $sources+=@("$root/src/ps/world_fft_ip_model.cpp", "$FftModelSdk/libIp_xfft_v9_1_bitacc_cmodel.dll")
+  $includes+=@('-I',$FftModelSdk)
+  foreach($symbol in @('fft_execute','Dio','StoneMask','CheapTrick','D4C')) {
     $flags+=('-Wl,--wrap='+$symbol)
   }
 }
