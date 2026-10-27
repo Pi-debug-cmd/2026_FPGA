@@ -1,0 +1,72 @@
+
+=== cache ===
+{"cached": 1, "total": 200, "elapsed_seconds": 0.6}
+{"cached": 10, "total": 200, "elapsed_seconds": 2.9}
+{"cached": 20, "total": 200, "elapsed_seconds": 6.5}
+{"cached": 30, "total": 200, "elapsed_seconds": 9.8}
+{"cached": 40, "total": 200, "elapsed_seconds": 12.8}
+{"cached": 50, "total": 200, "elapsed_seconds": 16.0}
+{"cached": 60, "total": 200, "elapsed_seconds": 19.1}
+{"cached": 70, "total": 200, "elapsed_seconds": 22.6}
+{"cached": 80, "total": 200, "elapsed_seconds": 25.3}
+{"cached": 90, "total": 200, "elapsed_seconds": 29.0}
+{"cached": 100, "total": 200, "elapsed_seconds": 31.7}
+{"cached": 110, "total": 200, "elapsed_seconds": 34.9}
+{"cached": 120, "total": 200, "elapsed_seconds": 39.1}
+{"cached": 130, "total": 200, "elapsed_seconds": 41.7}
+{"cached": 140, "total": 200, "elapsed_seconds": 44.9}
+{"cached": 150, "total": 200, "elapsed_seconds": 48.6}
+{"cached": 160, "total": 200, "elapsed_seconds": 51.8}
+{"cached": 170, "total": 200, "elapsed_seconds": 54.2}
+{"cached": 180, "total": 200, "elapsed_seconds": 56.9}
+{"cached": 190, "total": 200, "elapsed_seconds": 59.9}
+{"cached": 200, "total": 200, "elapsed_seconds": 63.4}
+PYTHON_AUDIO_GUARD {"stage": "cache", "denied": []}
+
+=== train ===
+{"step": 1, "train_loss": 0.4551362693309784, "validation_loss": 0.4536781646311283, "elapsed_seconds": 3.8280000000086147}
+{"step": 100, "train_loss": 0.20465512573719025, "validation_loss": 0.22253257036209106, "elapsed_seconds": 25.687000000005355}
+{"step": 200, "train_loss": 0.19021694362163544, "validation_loss": 0.2073648739606142, "elapsed_seconds": 46.969000000011874}
+{"step": 300, "train_loss": 0.1767054796218872, "validation_loss": 0.19846374168992043, "elapsed_seconds": 68.56200000000536}
+{"step": 400, "train_loss": 0.15774250030517578, "validation_loss": 0.1969808116555214, "elapsed_seconds": 90.15600000001723}
+{"step": 500, "train_loss": 0.14674030244350433, "validation_loss": 0.1970423012971878, "elapsed_seconds": 111.875}
+{"step": 600, "train_loss": 0.1345292031764984, "validation_loss": 0.19747068732976913, "elapsed_seconds": 132.9220000000205}
+{"step": 700, "train_loss": 0.13119769096374512, "validation_loss": 0.2016192376613617, "elapsed_seconds": 154.76500000001397}
+{"step": 800, "train_loss": 0.12064147740602493, "validation_loss": 0.1985677294433117, "elapsed_seconds": 176.21900000001187}
+{"step": 900, "train_loss": 0.12198468297719955, "validation_loss": 0.20091419108211994, "elapsed_seconds": 197.60900000002584}
+{"step": 1000, "train_loss": 0.12439806014299393, "validation_loss": 0.2047988548874855, "elapsed_seconds": 219.31200000000536}
+{"step": 1100, "train_loss": 0.12277736514806747, "validation_loss": 0.20387245900928974, "elapsed_seconds": 240.89000000001397}
+{"step": 1200, "train_loss": 0.10856007039546967, "validation_loss": 0.20449009537696838, "elapsed_seconds": 262.0470000000205}
+PYTHON_AUDIO_GUARD {"stage": "train", "denied": []}
+
+=== infer ===
+{
+  "samples": 291200,
+  "peak": 0.561859130859375,
+  "rms": 0.07088187632412468,
+  "sha256": "80f45a01ac039acd4bd84b51afad8e8634d0b3caa74cbf3a4447eb9617ecc037",
+  "clipping_fraction": 0.0,
+  "task": "PS-20261025-20",
+  "source_sha256": "f4a026e5c97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c",
+  "source_samples": 291200,
+  "frames": 1820,
+  "inference_seconds": 2.202999999979511,
+  "rtf_host_full_chain": 0.12104395604283028,
+  "mapper_sha256": "b273a04d9b53980088bc7afa26ce509f3b43709a5d364f831d9b14d8aabdc163",
+  "native_sha256": "0e5eb4d457741820564d4397e0b69f8dd58b25c896259bb66d8e84fb88a3dc14",
+  "male5_used": false,
+  "target_track9_used": false,
+  "played": false,
+  "board_touched": false
+}
+PYTHON_AUDIO_GUARD {"stage": "infer", "denied": []}
+
+=== evaluate ===
+D:\fpga\.git-repair\build\generated\remote_ps_c_env\Lib\site-packages\torch\nn\utils\weight_norm.py:143: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+You have passed task=transcribe, but also have set `forced_decoder_ids` to [[1, None], [2, 50359]] which creates a conflict. `forced_decoder_ids` will be ignored in favor of task=transcribe.
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Remote-PS-C_HuBERT_BiGRU_FARGAN_v8_layer12 identity=0.7787 identity_p10=0.7478 leakage=0.2403 leakage_window_mean=0.2302 leakage_aggregate=0.2403 utmos=2.5555 cer=0.4265 pass=False
+SELECTED Remote-PS-C_HuBERT_BiGRU_FARGAN_v8_layer12
+REPORT D:\fpga\.git-repair\build\generated\remote_ps_c_hubert_fargan_v8\evaluation.json
+PYTHON_AUDIO_GUARD {"stage": "evaluate", "denied": []}
