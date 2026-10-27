@@ -1,0 +1,52 @@
+{
+  "kind": "file_conversion_only",
+  "pl_enabled": false,
+  "runs": {
+    "vc_o64_pl": {
+      "command": [
+        "/tmp/codex_deepseek_ds01/vc_o64_pl",
+        "4",
+        "native_s24",
+        "200",
+        "--model",
+        "/tmp/codex_deepseek_ds01/model.blob",
+        "--in-f32-16k",
+        "--out-f32-16k",
+        "--preset",
+        "live"
+      ],
+      "exit": 0,
+      "wall_s": 3.2902035810000143,
+      "bytes": 256000,
+      "telemetry": "{\"ok\":true,\"seconds\":4.0000,\"samples_in\":64000,\"samples_out\":64000,\"frames_world\":401,\"frames_stft\":401,\"voiced_frames\":270,\"median_f0_hz\":139.578,\"pitch_ratio\":1.4000,\"pitch_impl\":\"soundtouch_wsola\",\"prefill_ms\":200,\"format\":\"native_s24\",\"model_bytes\":4941804,\"peak_out\":0.652047,\"rms_out\":0.077316,\"clipped_samples\":0,\"median_gain_db\":-1.334,\"gain_clipped_frac\":0.08543,\"silent_frames\":20,\"world_ms\":706.94,\"mlp_ms\":1724.28,\"feat_ms\":125.68,\"mlp_only_ms\":0.00,\"world_b_ms\":0.00,\"dio_ms\":205.93,\"stonemask_ms\":201.43,\"cheaptrick_ms\":913.58,\"d4c_ms\":156.08,\"ap_stride\":10,\"ct_stride\":2,\"sm_stride\":2,\"ct_mode\":\"off\",\"pitch_axis_ratio\":1.4000,\"den_stride\":0,\"threads\":2,\"threaded\":true,\"analysis_ms\":2624.26,\"pitch_ms\":193.04,\"stft_env_ms\":464.01,\"output_ms\":3.40,\"total_ms\":3241.31,\"pl_stft\":0,\"pl_dma_ms\":0.00,\"analysis_rtf\":0.6561,\"render_rtf_including_output_wait\":0.1169,\"rtf\":0.8103}\n"
+    },
+    "vc_s24fix_arm": {
+      "command": [
+        "/tmp/codex_deepseek_ds01/vc_s24fix_arm",
+        "4",
+        "native_s24",
+        "200",
+        "--model",
+        "/tmp/codex_deepseek_ds01/model.blob",
+        "--in-f32-16k",
+        "--out-f32-16k",
+        "--preset",
+        "live"
+      ],
+      "exit": 0,
+      "wall_s": 2.9390203430000383,
+      "bytes": 256000,
+      "telemetry": "{\"ok\":true,\"seconds\":4.0000,\"samples_in\":64000,\"samples_out\":64000,\"frames_world\":401,\"frames_stft\":401,\"voiced_frames\":270,\"median_f0_hz\":139.578,\"pitch_ratio\":1.4000,\"pitch_impl\":\"soundtouch_wsola\",\"prefill_ms\":200,\"format\":\"native_s24\",\"model_bytes\":4941804,\"peak_out\":0.652047,\"rms_out\":0.077316,\"clipped_samples\":0,\"median_gain_db\":-1.334,\"gain_clipped_frac\":0.08543,\"silent_frames\":20,\"world_ms\":613.82,\"mlp_ms\":1563.42,\"feat_ms\":125.28,\"mlp_only_ms\":0.00,\"world_b_ms\":0.00,\"dio_ms\":196.87,\"stonemask_ms\":177.15,\"cheaptrick_ms\":746.78,\"d4c_ms\":145.39,\"ap_stride\":10,\"ct_stride\":2,\"sm_stride\":2,\"ct_mode\":\"off\",\"pitch_axis_ratio\":1.4000,\"den_stride\":0,\"threads\":2,\"threaded\":true,\"analysis_ms\":2370.08,\"pitch_ms\":192.83,\"stft_env_ms\":382.72,\"output_ms\":3.50,\"total_ms\":2894.43,\"analysis_rtf\":0.5925,\"render_rtf_including_output_wait\":0.0966,\"rtf\":0.7236}\n"
+    }
+  },
+  "hashes": {
+    "model.blob": "01aecb78d4a5a9b1a960f4a15cbc4bc524e005a39e59a54b107a5ebc2f32bbc5",
+    "vc_o64_pl": "13d48df76a6366a54dce22bd4652ac50ca5f0363f44480b1a2c8e37125fee3e2",
+    "vc_s24fix_arm": "96b6937f6c103465d34ad3800d80c72253558ef35a05388f8241359aae4e6d4c",
+    "input.f32": "e7fa772cdb701972bea4c6e8f2f946ea7b333756def1bc02a0edaa6b8b45e409"
+  },
+  "output_peaks": {
+    "vc_o64_pl": 0.6520470976829529,
+    "vc_s24fix_arm": 0.6520470976829529
+  }
+}
