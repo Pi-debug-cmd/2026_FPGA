@@ -751,3 +751,16 @@ ps-opt 把非周期最小相位优化移植进流式路径（改造 synthesisrea
 - 路径/复现：build/remote_ps_c_hubert_fargan_v8.py、build/run_remote_ps_c_hubert_fargan_v8.py；report/ps_20261025_20_hubert_fargan_v8_20261027.md/JSON/TXT。唯一变量HuBERT layer9→12，独立cache后train/infer/evaluate exit0。
 - 一次Male4五门：身份0.778674664/P100.747804710/泄漏0.240292771/UTMOS2.555467367/CER0.426470588；UTMOS改善但CER失败，仍REJECTED。
 - 限制/下一责任方：Male5/Track9锁定，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时验收；Remote-PS-C保留失败证据，下一轮测试layer6内容折中。
+
+### [PS-20261025-20] v9 HuBERT layer6 单变量认领
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：CLAIMED；基准提交 `be4875d`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；PR #11。
+- 假设/范围：v8 layer12提升UTMOS但CER恶化。v9只将HuBERT hidden layer12改为layer6，保持PCA96、delta0.25、网络、seed、数据切分、优化器、早停和五门不变；重新生成独立layer6缓存。
+- 路径/复现：拟新增 `build/remote_ps_c_hubert_fargan_v9.py`、`build/run_remote_ps_c_hubert_fargan_v9.py`；输出 `build/generated/remote_ps_c_hubert_fargan_v9/`；报告 `report/ps_20261025_20_hubert_fargan_v9_20261027.*`。Male5/Track9锁定。
+- 停止条件：cache/train/infer/evaluate后只做一次Fixed-Male4五门；未全过不进入WAIT_LOCAL_TEST、不发布模型包、不扫描其它层。
+- 限制/下一责任方：电脑端非因果实验，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时声明；Remote-PS-C提交结果并维护PR #11。
+
+### [PS-20261025-20] v9 HuBERT layer6 结果
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准be4875d；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
+- 路径/复现：build/remote_ps_c_hubert_fargan_v9.py、build/run_remote_ps_c_hubert_fargan_v9.py；report/ps_20261025_20_hubert_fargan_v9_20261027.md/JSON/TXT。唯一变量HuBERT layer12→6，独立cache后train/infer/evaluate exit0。
+- 一次Male4五门：身份0.553576857/P100.512674765/泄漏0.233601927/UTMOS1.299599926/CER0.794117647；泄漏下降但其余门恶化，仍REJECTED。
+- 限制/下一责任方：Male5/Track9锁定，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时验收；Remote-PS-C停止层扫描，改研究训练目标/内容保真。
