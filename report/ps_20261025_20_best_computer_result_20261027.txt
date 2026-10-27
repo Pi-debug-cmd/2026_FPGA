@@ -1,0 +1,7 @@
+PS-20261025-20 best computer result summary, 2026-10-27
+Best overall by strict evaluator minimum_gate_ratio: v21, 0.423624683
+identity 0.758199834; P10 0.733886861; leakage 0.236058011; UTMOS 2.522906144; CER 0.352941176
+Best CER proximity: v18, CER 0.161764706; leakage 0.238312337; still rejected
+Lowest leakage: v25, 0.159276669; identity/UTMOS/CER collapse; unusable
+No v1-v25 version passes all five gates. No WAIT_LOCAL_TEST or model package.
+Computer-only; Male5/Track9 locked; no playback, recording, listening, or hardware.

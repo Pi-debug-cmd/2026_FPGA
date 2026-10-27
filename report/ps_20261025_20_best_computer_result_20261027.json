@@ -1,0 +1,58 @@
+{
+  "task": "PS-20261025-20",
+  "date": "2026-10-27",
+  "role": "Remote-PS-C",
+  "evaluation": "strict Fixed-Male4; evaluator minimum_gate_ratio ranking",
+  "all_gates_pass": false,
+  "best_overall": {
+    "version": "v21",
+    "candidate": "Remote-PS-C_HuBERT_BiGRU_FARGAN_v21_utterance_mean_centered",
+    "minimum_gate_ratio": 0.42362468286545596,
+    "mean_gate_ratio": 1.1454497042094198,
+    "metrics": {
+      "identity": 0.7581998342076778,
+      "identity_p10": 0.7338868609581286,
+      "leakage": 0.23605801088734057,
+      "utmos": 2.5229061444600425,
+      "cer": 0.35294117647058826
+    },
+    "passed": {
+      "identity": true,
+      "identity_p10": true,
+      "leakage": false,
+      "utmos": true,
+      "cer": false
+    }
+  },
+  "best_cer_proximity": {
+    "version": "v18",
+    "metrics": {
+      "identity": 0.7634528085789413,
+      "identity_p10": 0.7476186267085524,
+      "leakage": 0.23831233734050278,
+      "utmos": 2.421749750773112,
+      "cer": 0.16176470588235295
+    },
+    "cer_pass": false,
+    "leakage_pass": false
+  },
+  "lowest_leakage": {
+    "version": "v25",
+    "metrics": {
+      "identity": 0.14363783639523897,
+      "identity_p10": 0.11364441094298453,
+      "leakage": 0.15927666900748075,
+      "utmos": 1.2992191712061565,
+      "cer": 1.0
+    },
+    "usable": false
+  },
+  "protocol": {
+    "male5_used": false,
+    "target_track9_used": false,
+    "played": false,
+    "recorded": false,
+    "board_touched": false
+  },
+  "decision": "No version v1-v25 passes all gates; do not enter WAIT_LOCAL_TEST or publish a model package."
+}

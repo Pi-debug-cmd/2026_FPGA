@@ -356,3 +356,4 @@
 - v25 将 leakage 降至 0.1593，但 identity 0.1436、UTMOS 1.2992、CER 1.0；全门失败。
 - v1-v25 没有全门通过版本；不进入 WAIT_LOCAL_TEST，不发布未达标模型包。
 - 归档提交 `da1a545` 已推送到既有 Remote-PS-C 分支。
+- 最佳结果汇总：v21 按门槛最小比值最接近全门；v18 CER 最接近单项门槛；均未达标。报告 `report/ps_20261025_20_best_computer_result_20261027.*`。

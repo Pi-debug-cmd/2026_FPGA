@@ -1998,3 +1998,7 @@
 - v25：identity 0.143637836 / P10 0.113644411 / leakage 0.159276669 / UTMOS 1.299219171 / CER 1.000000000，REJECTED。
 - v25 是当前最低 leakage，但均值收缩摧毁其余门；v1-v25 未出现五门全过版本，当前路线停止无效扫描，不进入 WAIT_LOCAL_TEST。
 - 代码、报告和运行证据已提交为 `da1a545`，推送到 `agent/ymheee/PS-20261025-20` 成功；未改 GitHub 分配规则。
+
+### [PS-20261025-20] 最佳结果汇总已提交
+- 按 strict evaluator 的 `minimum_gate_ratio`，v21 是整体最接近五门的版本（0.423624683）；v18 的 CER 最接近门槛（0.161764706）。
+- 两者均未通过 leakage 与 CER；详见 `report/ps_20261025_20_best_computer_result_20261027.md/json/txt`。不发布模型包、不进入 `WAIT_LOCAL_TEST`。
