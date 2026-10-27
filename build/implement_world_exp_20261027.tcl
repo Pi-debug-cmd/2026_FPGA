@@ -17,4 +17,11 @@ open_run impl_1
 foreach kind {utilization timing_summary drc} {
   report_$kind -file [file join $out ${kind}.txt]
 }
+report_bus_skew -file [file join $out bus_skew.txt]
+foreach delay {max min} {
+  if {[get_property SLACK [get_timing_paths -max_paths 1 -delay_type $delay]] < 0} {
+    error "Routed timing failed ($delay)"
+  }
+}
+if {[llength [get_drc_violations -filter {SEVERITY == Error}]]} {error "DRC errors"}
 puts WORLD_EXP_BITSTREAM_BUILT

@@ -1547,3 +1547,11 @@
 - 恢复准备：原厂bit已核验，/tmp恢复载荷SHA `af275946c15ae958e9bed16c12f6cab45b63ebecc18645cec24176315db7fc60`；未切PL、不改启动分区。v23为稳定串口传输暂时停止，此轮无录放。
 - 限制：模型ARM耗时非PL速度；分析RTF约0.55仍是瓶颈。无现场听感/PL/实测延迟通过结论。
 - 下一责任方：Hardware-A / Codex 完成P&R/MCP复核并执行硬件向量和文件回归。
+
+### [PL-20261027-01] 整机布局布线与 Vivado MCP 复核
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（仅实现门）。
+- 基准提交：`69544be`；改动：`build/implement_world_exp_20261027.tcl`、`build/package_world_exp.py`、`report/world_exp_implementation_20261027.*`及四项`world_exp_routed_*_20261027.txt`。
+- 复现：报告内独立Vivado构建及MCP打开完整routed DCP；未覆盖旧工程。
+- 量化：100MHz WNS+1.391ns/WHS+0.036ns，零失败端点/黑盒/DRC Error；8026LUT/13283FF/6BRAM/9DSP，bus skew最小裕量+8.996ns。
+- 限制：外部音频/I2C延时约束未完全签核；仍有DRC Warning/Advisory。位流已校验传输，尚未加载或进行PL板测。
+- 报告：`report/world_exp_implementation_20261027.md`、同名JSON；下一责任方：Hardware-A / Codex 执行静默硬件数值与文件回归。
