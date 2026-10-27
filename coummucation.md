@@ -1979,6 +1979,18 @@
 - 限制：不播放、不录音、不接触板卡，不声明试听、Cortex-A9、RTL/PL或实时通过。
 - 下一责任方：Hardware-A / Codex 完成本轮候选生成、严格评估并提交单轮结果。
 
+### [PS-20261021-10] HuBERT/WORLD Round 84 源VUV后处理
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`b86397d`
+- 唯一变量：冻结Round82 checkpoint与gain1.6，仅将预测VUV与录音4源WORLD VUV按源权重0.05混合；不重训、不注入源谱/音高/能量/AP。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.7012/0.6747/0.1005/2.3238/0.2500`；泄漏、CER未过门。候选SHA-256 `1d7320b567dd30f41dcdc7b1a96049146c8dca8c3efdbd9c05334185fd62e4c1`。
+- 修改路径：`report/fixed_male_hubert_world_round84_20261027.{md,json}`、`coummucation.md`。
+- 限制：identity OpenCC shim；录音5、Track9未用于训练或筛选；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round84_20261027.md`、`report/fixed_male_hubert_world_round84_20261027.json`。
+- 下一责任方：Hardware-A / Codex 回到不注入源VUV的内容保持后处理或训练变量。
+
 ### [PS-20261021-10] HuBERT/WORLD Round 83 源VUV后处理
 - 日期：2026-10-27
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
