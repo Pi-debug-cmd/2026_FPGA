@@ -130,8 +130,9 @@ def main():
     for node in ('pcm0p', 'pcm1c'):
         status = Path('/proc/asound/card0/'+node+'/sub0/status')
         assert (args.restore and not status.exists()) or status.read_text().strip() == 'closed'
-    if Path('/sys/module/world_exp_dma').exists():
-        run('rmmod', 'world_exp_dma')
+    for module in ('world_fft_dma', 'world_exp_dma'):
+        if Path('/sys/module', module).exists():
+            run('rmmod', module)
     stage('audio_stopped')
     for row in saved['original']:
         binding(*row, 'unbind')

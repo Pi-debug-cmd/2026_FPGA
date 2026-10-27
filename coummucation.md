@@ -1698,3 +1698,11 @@
 - 量化：7744LUT/12935FF/15.5BRAM/60DSP；100MHz综合WNS+5.043ns、WHS+0.158ns，0 Error/0 Critical Warning/4 Warning。
 - 限制：非布局布线签核，不是整机时序或FFT板测；Round7独立HP2 DMA集成正在构建和RTL仿真，板上原v23未切换。
 - 下一责任方：Hardware-A / Codex 完成Round7流接口数值/背压仿真与整机布局布线。
+
+### [PL-20261027-01] Round 7 FFT PS/PL集成方案提交
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED。
+- 基准：`9092e1f`；改动：FFT流包装、独立HP2 DMA Tcl、临时驱动/ioctl、PS适配/probe、构建和静默板测runner；详见`report/world_fft_integration_round7_proposal_20261027.md`及build JSON。
+- 复现：报告内Vivado tclargs fft、ARM CacheFftPlans/FftPl和WSL module构建；ARM/module/probe已编译、BD已validate，RTL仿真与整机综合进行中。
+- 合约：每事务64bit配置头+N复数float，输出N复数；1024/2048、forward/inverse未归一化，c2r显式补Hermitian；DMA0x40410000，独立于已有exp。
+- 限制：没有加载FFT候选，板上原v23运行；只有模型和OOC资源门通过，整机时序/RTL全部向量/板测尚未完成；不宣称高实时。
+- 下一责任方：Hardware-A / Codex 先完成30帧位准确/背压仿真、布局布线，再做静默文件和DMA性能门；现场录放须当轮确认。

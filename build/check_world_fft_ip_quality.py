@@ -14,6 +14,7 @@ p.add_argument('--exe', type=Path, required=True)
 p.add_argument('--xci', type=Path, required=True)
 p.add_argument('--input', type=Path, action='append', required=True)
 p.add_argument('--out', type=Path, required=True)
+p.add_argument('--vectors-only', action='store_true', help='Generate RTL vectors without repeating speech tests')
 a = p.parse_args()
 a.out.mkdir(parents=True, exist_ok=True)
 names = ['C_NFFT_MAX','C_ARCH','C_HAS_NFFT','C_USE_FLT_PT','C_INPUT_WIDTH',
@@ -46,6 +47,10 @@ result = {'kind':'world_fft_ip_quality','generics':dict(zip(names,values)),
           'exe_sha256':hashlib.sha256(a.exe.read_bytes()).hexdigest(),
           'xci_sha256':hashlib.sha256(a.xci.read_bytes()).hexdigest(),'unit':[],'speech':[]}
 rng = np.random.default_rng(20261027)
+input_words, output_words = [], []
+def Words(re, im):
+    pairs = np.column_stack((re,im)).astype('<f4')
+    return pairs.view('<u8').reshape(-1).tolist()
 ptr = lambda x: x.ctypes.data_as(ct.POINTER(ct.c_double))
 try:
     for n in [1024,2048,1024]:
@@ -60,6 +65,8 @@ try:
                 inp = Inputs(int(np.log2(n)),ptr(re),n,ptr(im),n,scaling,6,direction)
                 out = Outputs(ptr(out_re),n,ptr(out_im),n,0,0)
                 assert simulate(state,inp,ct.byref(out)) == 0
+                input_words += [int(np.log2(n)) | (direction<<8)] + Words(re,im)
+                output_words += Words(out_re,out_im)
                 ref = np.fft.fft(re+1j*im) if direction else np.fft.ifft(re+1j*im)*n
                 err = out_re+1j*out_im-ref
                 relative = float(np.linalg.norm(err)/max(np.linalg.norm(ref),1e-30))
@@ -67,7 +74,9 @@ try:
                 assert relative < 1e-5, result['unit'][-1]
 finally:
     destroy(state)
-for file in a.input:
+(a.out/'input.mem').write_text(''.join(f'{v:016x}\n' for v in input_words))
+(a.out/'output.mem').write_text(''.join(f'{v:016x}\n' for v in output_words))
+for file in ([] if a.vectors_only else a.input):
     pcm = file.read_bytes()
     assert len(pcm)%32000 == 0
     seconds = len(pcm)//32000

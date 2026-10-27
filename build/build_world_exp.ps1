@@ -4,11 +4,13 @@ param(
   [string]$Compiler='',
   [switch]$ProfileOperators,
   [switch]$CacheFftPlans,
-  [string]$FftModelSdk=''
+  [string]$FftModelSdk='',
+  [switch]$FftPl
 )
 $ErrorActionPreference='Stop'
 if ($ProfileOperators -and $CacheFftPlans) {throw 'Profile and cache wrappers must be built separately'}
 if ($FftModelSdk -and ($Target -ne 'host' -or $ProfileOperators)) {throw 'FFT IP model requires host and no profiling'}
+if ($FftPl -and ($Target -ne 'arm' -or $ProfileOperators -or $FftModelSdk)) {throw 'PL FFT requires ARM without model/profiling'}
 $root=Split-Path -Parent $PSScriptRoot
 $out=Join-Path $root 'build/generated/world_exp_ps'
 New-Item -ItemType Directory -Force $out | Out-Null
@@ -50,11 +52,20 @@ if($FftModelSdk) {
     $flags+=('-Wl,--wrap='+$symbol)
   }
 }
+if($FftPl) {
+  $bin+='_fftpl'
+  $sources+=@("$root/src/ps/world_fft_pl.cpp")
+  $flags+='-Wl,--wrap=fft_execute'
+}
 if($Target -eq 'host') {$bin+='.exe'}
 & $Compiler @flags @includes "$root/src/ps/world_live_stream.cpp" "$root/src/ps/world_exp_hook.cpp" "$out/common.cpp" "$root/src/ps/world_v23/synthesis.cpp" "$root/src/ps/world_v23/synthesisrealtime.cpp" @sources "$WorldRoot/tools/audioio.cpp" -lm -o $bin
 if($LASTEXITCODE) {throw 'WORLD exp build failed'}
 if($Target -eq 'arm') {
   & $Compiler -O3 -std=c++11 -Wall -Wextra -Werror -static "$root/src/ps/world_exp_dma_probe.cpp" -o "$out/world_exp_dma_probe"
   if($LASTEXITCODE) {throw 'DMA probe build failed'}
+  if($FftPl) {
+    & $Compiler -O3 -std=c++11 -Wall -Wextra -Werror -Wno-missing-field-initializers -static -mcpu=cortex-a9 -mfpu=neon -mfloat-abi=hard -I "$WorldRoot/src" "$root/src/ps/world_fft_dma_probe.cpp" "$WorldRoot/src/fft.cpp" -lm -o "$out/world_fft_dma_probe"
+    if($LASTEXITCODE) {throw 'FFT DMA probe build failed'}
+  }
 }
 Get-FileHash $bin
