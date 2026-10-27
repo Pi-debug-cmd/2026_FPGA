@@ -1991,6 +1991,18 @@
 - 报告链接：`report/fixed_male_hubert_world_round83_20261027.md`、`report/fixed_male_hubert_world_round83_20261027.json`。
 - 下一责任方：Hardware-A / Codex 继续针对内容保持，优先测试不注入源VUV的输出内容后处理。
 
+### [PS-20261021-10] HuBERT/WORLD Round 84 源VUV后处理
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`9c3384b`
+- 唯一变量：冻结Round82 checkpoint与gain1.6，仅将预测VUV与录音4源WORLD VUV按源权重0.05混合；不重训、不注入源谱/音高/能量/AP。
+- 成功标准：固定录音4严格五门全部通过；否则记录泄漏、CER和自然度变化并拒绝。
+- 数据边界：只用男性标准录音4评估；Track9和录音5继续锁定，不用于选择或训练。
+- 复现入口：`build/apply_world_temporal_postfilter_round47_20261026.py --source-vuv-alphas 0.05` 与严格评测器；结果报告记录候选SHA。
+- 限制：不播放、不录音、不接触板卡，不声明试听、Cortex-A9、RTL/PL或实时通过。
+- 下一责任方：Hardware-A / Codex 完成本轮候选生成、严格评估并提交单轮结果。
+
 ### [PS-20261021-10] HuBERT/WORLD Round 81 VUV 损失权重
 - 日期：2026-10-27
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
