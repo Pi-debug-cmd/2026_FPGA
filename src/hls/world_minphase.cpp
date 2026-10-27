@@ -20,6 +20,7 @@ void Forward(float re[N], float im[N]) {
     }
   }
   for (int stage = 1; stage <= 10; ++stage) {
+#pragma HLS LOOP_FLATTEN off
     const int length = 1 << stage, half = length >> 1;
     for (int butterfly = 0; butterfly < N/2; ++butterfly) {
 #pragma HLS PIPELINE II=2

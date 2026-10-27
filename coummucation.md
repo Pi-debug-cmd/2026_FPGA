@@ -1895,3 +1895,9 @@
 - 量化HLS：9972LUT/7734FF/4BRAM36K/38DSP，29813拍@100MHz（估算298.13µs），非routed/实际DDR。
 - 风险：工具flatten级循环，inter false约束必须禁止跨级重叠后RTL cosim；exp目标II=1未完全满足，不宣称RTL通过。
 - 下一责任方Hardware-A / Codex明确LOOP_FLATTEN off并完成cosim，之后才考虑整机融合；无新录放。
+
+### [PL-20261027-01] Round15 FFT级间依赖与RTL验证认领
+- 日期2026-10-27；Hardware-A / Codex；CLAIMED / PROPOSED；基准e6d1306。
+- src/hls/world_minphase.cpp明确LOOP_FLATTEN off；build/cosim_world_minphase_hls.tcl用原WORLD common/fft/matlabfunctions做24例C/RTL对照，HLS重综合后cosim。
+- 目标同级蝶形并行但级间完整排空，消除Round14 flatten与inter false组合的风险；结果待生成，不预设通过。
+- 限制无新板测或录放；candidate驻留/服务停止。下一责任方Hardware-A / Codex读取cosim/周期资源并独立提交。
