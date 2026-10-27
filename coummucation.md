@@ -1991,6 +1991,18 @@
 - 报告链接：`report/fixed_male_hubert_world_round87_20261027.md`、`report/fixed_male_hubert_world_round87_20261027.json`。
 - 下一责任方：Hardware-A / Codex 停止源谱残差注入，恢复训练变量探索。
 
+### [PS-20261021-10] HuBERT/WORLD Round 88 多尺度动态损失权重
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`75940f6`
+- 唯一变量：冻结Round85配置，VUV BCE系数0.35不变，仅把多尺度动态损失权重从1.25降至1.20；source prosody、variance matching、锚点概率0.25、gain1.6、种子和早停策略保持不变。
+- 成功标准：固定录音4严格身份均值≥0.45、P10≥0.35、源泄漏≤0.10、UTMOS≥2.30、CER≤0.15五门全部通过；通过即停止训练。
+- 数据边界：只用男性标准录音4评估；训练仍限男性录音1～3及目标Track5～8；录音5和Track9锁定。
+- 复现入口：`build/train_paired_hubert_world_gru_round26_20261025.py --multiscale-weight 1.20`、candidate生成器和严格评测器。
+- 限制：不播放、不录音、不接触板卡，不声明试听、Cortex-A9、RTL/PL或实时通过。
+- 下一责任方：Hardware-A / Codex 完成本轮训练、严格评估并提交单轮结果。
+
 ### [PS-20261021-10] HuBERT/WORLD Round 86 源谱动态残差后处理
 - 日期：2026-10-27
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
