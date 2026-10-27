@@ -1,4 +1,4 @@
-"""Reproduce Round88-91 crop/PCA/anchor experiments with external assets."""
+"""Reproduce Round88-92 crop/PCA/anchor/GRU experiments with external assets."""
 from __future__ import annotations
 
 import argparse
@@ -12,7 +12,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("stage", choices=("prepare", "train", "candidate", "evaluate"))
     parser.add_argument("--asset-root", required=True, type=Path)
-    parser.add_argument("--experiment-round", type=int, choices=(88, 89, 90, 91), default=88)
+    parser.add_argument("--experiment-round", type=int, choices=(88, 89, 90, 91, 92), default=88)
     parser.add_argument("--cer-normalizer", choices=("identity", "opencc"),
                         help="Default: historical identity for 88/89, OpenCC 0.1.7 for 90+")
     args = parser.parse_args()
@@ -34,6 +34,8 @@ def main() -> None:
             text = (source / name).read_text(encoding="utf-8")
             text = text.replace("ROOT = Path(__file__).resolve().parents[1]",
                                 f"ROOT = Path({str(root)!r})")
+            text = text.replace('sys.path.insert(0, str(ROOT / "build"))',
+                                'sys.path.insert(0, str(Path(__file__).resolve().parent))')
             if (args.experiment_round == 89
                     and name == "train_paired_hubert_world_gru_round26_20261025.py"):
                 assert text.count("CROP = 128") == 1
@@ -47,9 +49,10 @@ def main() -> None:
                     and name == "train_paired_hubert_world_gru_round26_20261025.py"):
                 assert text.count("ANCHOR_PROBABILITY = 0.25") == 1
                 text = text.replace("ANCHOR_PROBABILITY = 0.25", "ANCHOR_PROBABILITY = 0.50")
-            if name.startswith("apply_world_temporal"):
-                text = text.replace('sys.path.insert(0, str(ROOT / "build"))',
-                                    'sys.path.insert(0, str(Path(__file__).resolve().parent))')
+            if (args.experiment_round == 92
+                    and name == "train_hubert_world_causal_gru_round23_20261025.py"):
+                assert text.count("HIDDEN = 192") == 1
+                text = text.replace("HIDDEN = 192", "HIDDEN = 384")
             (runtime / name).write_text(text, encoding="utf-8", newline="\n")
         return
 

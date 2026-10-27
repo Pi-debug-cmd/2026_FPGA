@@ -2229,3 +2229,17 @@
 - 复现：build/reproduce_hubert_world_round88_20261027.py prepare/train/candidate/evaluate --experiment-round 91 --asset-root <asset-root>，evaluate真实OpenCC0.1.7，具体解释器与命令见JSON。
 - 限制：ASR源参考非人工真值；训练/生成启动器产物完成后退出1，客观评测退出0；诊断启动器亦在写出有效JSON后退出1。公共配对192/8、目标Track5～8锚点；男性1～3未参与本轮模型训练，只用于评测源质心和上述只读诊断；仅录音4验证，录音5/Track9锁定。无现场或PS/PL/实时结论。
 - 下一责任方：Hardware-A / Codex；恢复Round88并测试GRU容量，保持五门。Round59～91共33轮，剩17轮，最多Round108。
+
+
+### [PS-20261021-10] HuBERT/WORLD Round 92 GRU容量认领
+- 日期：2026-10-27；角色：Hardware-A / Codex（离线算法）；状态：CLAIMED。
+- 基准提交：f92387488fefe90b966ecefde67cd6f3df4e9dcb；算法基线恢复Round88。
+- 唯一训练变量：两层因果GRU hidden192→384，输入PCA96+源韵律3维仍99；相关输入/输出线性层随hidden同步扩大。CROP128、BATCH8、STEPS2000、seed、早停、锚点0.25、VUV0.35、动态1.20、方差损失、gain1.6不变。
+- 依据：长片段、更大PCA、更多锚点均未改善录音4CER；源1～3韵律均值未严重越界。测试网络容量能否缓解声学重建不足；更大模型是否过拟合或可部署均未下结论。
+- 复现修正：prepare阶段所有任务模块只从当轮runtime/build导入，防止未来asset-root/build出现同名脚本时遮蔽当轮补丁；当前asset-root无这三个训练同名脚本，未发现此前结果受遮蔽。
+- 数据：同一公共配对192训练/8验证，训练PCA/归一化，128帧可用184/192；目标Track5～8锚点。男性1～3只作评测源质心；录音4验证，录音5/Track9锁定。
+- 成功标准：身份>=0.45、P10>=0.35、泄漏<=0.10、UTMOS>=2.30、CER<=0.15全部通过即停止；保持真实OpenCC0.1.7。
+- 修改路径：build/reproduce_hubert_world_round88_20261027.py、coummucation.md；报告report/fixed_male_hubert_world_round92_20261027.{md,json}。
+- 复现：prepare/train/candidate/evaluate --experiment-round 92 --asset-root <asset-root>，评测--cer-normalizer opencc；训练前核对PCA96、hidden384、anchor0.25、CROP128与语法。
+- 限制：ASR参考非人工真值；当前仅电脑端质量试验，不因容量增加而宣称Cortex-A9/PL预算或现场通过。无播放、录音、板测。
+- 下一责任方：Hardware-A / Codex 完成本轮训练、客观评测、独立核验及提交；完成后34/50，最多Round108。
