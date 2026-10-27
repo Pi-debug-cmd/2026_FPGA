@@ -1933,12 +1933,13 @@
 ### [PS-20261021-10] HuBERT/WORLD Round 80 VUV 损失权重
 - 日期：2026-10-27
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
-- 状态：CLAIMED
-- 基准提交：`c53698981fb69f645c0085baad65744b51267c75`
-- 唯一变量：以 Round69 的 VUV BCE 系数0.35为基准，仅改为0.50；source prosody、variance matching、动态权重1.25、锚点概率0.25、gain1.6、随机种子和早停策略保持不变。
-- 成功标准：固定录音4严格身份均值≥0.45、P10≥0.35、源泄漏≤0.10、UTMOS≥2.30、CER≤0.15五门全部通过；通过后立即停止算法训练并转入本地验证门。
-- 数据边界：只用男性标准录音4评估；训练仍限男性录音1～3及目标Track5～8；锁定录音5和Track9不得用于训练、选参、早停或筛选。
-- 复现入口：`build/train_paired_hubert_world_gru_round26_20261025.py`、`build/apply_world_temporal_postfilter_round47_20261026.py`、`build/evaluate_seed_fixed_male_strict_20261024.py`；结果报告记录缓存与资产SHA及严格评测命令。
-- 限制：identity OpenCC shim的简繁归一化有限；不播放、不录音、不接触板卡，不声明试听、Cortex-A9、RTL/PL或实时通过。
-- 下一责任方：Hardware-A / Codex 完成本轮训练、严格评估并提交单轮结果。
+- 状态：REJECTED
+- 基准提交：`05f07ba`
+- 唯一变量：以 Round79 的 VUV BCE 系数0.15为基准，仅提高至0.50；source prosody、variance matching、动态权重1.25、锚点概率0.25、gain1.6、随机种子和早停策略保持不变。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.7022/0.6817/0.1142/2.3071/0.2353`；泄漏高于门槛0.0142，CER高于门槛0.0853。检查点训练2000 step，最佳验证step1200；checkpoint SHA-256 `de268f4a915970f8dbe0298696301cd0b88dded3160eefbaffa27bde68d8a9ca`；候选 PCM16 SHA-256 `ee897bca071686a624f5631a0322238b0d1988cc9f7452900bdbb85d1d0b4c91`。
+- 修改路径：`report/fixed_male_hubert_world_round80_20261027.{md,json}`、`coummucation.md`。
+- 复现命令：见 `report/fixed_male_hubert_world_round80_20261027.json`；运行时训练脚本唯一系数改动及SHA亦记录在报告中。
+- 限制：identity OpenCC shim不执行简繁转换；CPU训练启动器虽写出并通过独立检查的checkpoint，但最后返回码为1；录音5和Track9未用于训练或筛选；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round80_20261027.md`、`report/fixed_male_hubert_world_round80_20261027.json`。
+- 下一责任方：Hardware-A / Codex 继续测试 VUV BCE 系数0.40，以在0.15、0.50、0.70之间收窄低CER与低泄漏的折中区间。
 

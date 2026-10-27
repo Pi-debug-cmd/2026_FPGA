@@ -1,0 +1,69 @@
+{
+  "task": "PS-20261021-10",
+  "round": 80,
+  "date": "2026-10-27",
+  "status": "REJECTED",
+  "baseline_commit": "05f07ba",
+  "source": {
+    "path": "人物音频资料/男声/标准录音 4.wav",
+    "sha256": "f4a0265ec97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c"
+  },
+  "training": {
+    "unique_change": "VUV BCE coefficient increased from 0.15 in Round 79 to 0.50",
+    "multiscale_dynamic_weight": 1.25,
+    "target_anchor_probability": 0.25,
+    "source_prosody": true,
+    "variance_matching": true,
+    "gain": 1.6,
+    "steps_completed": 2000,
+    "best_validation_step": 1200,
+    "best_validation_total": 0.8274294212460518,
+    "seed": 20261025,
+    "paired_cache_manifest_sha256": "4d34669259834bd30219f34af4730712c9aa7c4cf8fa8bc3c5ccde9ee3cc5bc5",
+    "source_corpus_manifest_sha256": "2404ce8282ec2759d4edabd32d7d3e8068d7b69c835194616fe121ec3015fabb",
+    "runtime_training_script_sha256": "d8542005616937399aeaca3a3b5ea70affc77205523f1b41ae843eb8b983a4b4",
+    "checkpoint_sha256": "de268f4a915970f8dbe0298696301cd0b88dded3160eefbaffa27bde68d8a9ca",
+    "device": "CPU; CUDA unavailable",
+    "launcher_exit_code": 1,
+    "checkpoint_verified_after_exit": true,
+    "target_track9_used": false
+  },
+  "candidate": {
+    "gain": 1.6,
+    "path": "build/generated/hubert_world_round80_20261027/candidates/round80_non_f0_gain1_6.wav",
+    "sha256": "ee897bca071686a624f5631a0322238b0d1988cc9f7452900bdbb85d1d0b4c91"
+  },
+  "metrics": {
+    "identity_mean": 0.7022084357875098,
+    "identity_p10": 0.6817099319099713,
+    "source_leakage": 0.11416037872529314,
+    "utmos": 2.3070620695749917,
+    "cer": 0.23529411764705882
+  },
+  "gates": {
+    "identity_mean": {"threshold": 0.45, "passed": true},
+    "identity_p10": {"threshold": 0.35, "passed": true},
+    "source_leakage": {"threshold": 0.1, "passed": false},
+    "utmos": {"threshold": 2.3, "passed": true},
+    "cer": {"threshold": 0.15, "passed": false}
+  },
+  "evaluation": {
+    "source_path": "人物音频资料/男声/标准录音 4.wav",
+    "source_sha256": "f4a0265ec97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c",
+    "cer_normalizer": "identity OpenCC compatibility shim",
+    "target_track9_used": false,
+    "recording5_used": false,
+    "played": false,
+    "board_touched": false
+  },
+  "limitations": [
+    "Identity OpenCC shim does not normalize simplified/traditional Chinese scripts.",
+    "Training launcher returned exit code 1 after emitting its completion record; the saved checkpoint was verified independently.",
+    "No local listening, Cortex-A9, RTL, PL, or real-time result is claimed."
+  ],
+  "reproduction": {
+    "train": "Runtime copy of build/train_paired_hubert_world_gru_round26_20261025.py with only the VUV BCE multiplier changed from 0.15 to 0.50; --asset-root C:/Users/World/Desktop/2026_FPGA --output build/generated/hubert_world_round80_20261027 --multiscale-dynamics --multiscale-weight 1.25 --source-prosody --variance-matching --skip-locked-target-regression; D:/Anaconda/envs/yolo/python.exe with a bootstrap adding cached dependencies and defining torchvision::nms schema.",
+    "candidate": "python build/apply_world_temporal_postfilter_round47_20261026.py --asset-root . --generated-root build/generated --checkpoint build/generated/hubert_world_round80_20261027/paired_causal_gru.pt --output build/generated/hubert_world_round80_20261027/candidates --gain 1.6 --experiment-round 80 --source-relative '人物音频资料/男声/标准录音 4.wav'",
+    "strict_evaluation": "Python 3.12 build/evaluate_seed_fixed_male_strict_20261024.py --asset-root . --manifest build/generated/hubert_world_round80_20261027/candidates/strict_manifest.json --output build/generated/hubert_world_round80_20261027/strict_evaluation.json; injected an identity opencc.OpenCC shim because the pinned OpenCC package is unavailable."
+  }
+}
