@@ -1721,3 +1721,11 @@
 - 本次JTAG已可连接（Digilent210357A7D00EA），通过XSDB系统复位并从未改动启动分区正常boot；串口115200、原v23 SHA匹配、PCM0p/PCM1c RUNNING恢复。
 - 处置：撤销未提交的BaudRate参数，上传工具仍固定115200，不重试该加速传输路径。不把具体UART驱动/内核原因写成已定位；事故期间未加载FFT候选，无新现场测试。
 - 下一责任方：Hardware-A / Codex 保持115200完成候选传输；继续等待已启动的整机布局布线。
+
+### [PL-20261027-01] Round 7 FFT整机布局布线结果
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（整机实现门）。
+- 基准实现：`b551646`；改动：打包脚本`--fft`、`report/world_fft_implementation_round7_20261027.{md,json}`和4份routed TXT。
+- 复现：报告内完整Vivado tclargs fft；Vivado MCP打开impl_1复核完整设计。
+- 量化：100MHz WNS+0.302ns/WHS+0.036ns，0失败端点/黑盒/DRC Error，17200LUT/29183FF/24.5BRAM/69DSP；bus skew全MET，位流swap SHA bdb4c0877e9818976dd7d9281a8ccc162018681cdf880bf117d2f55d3af72988。
+- 限制：3输入/6输出缺外部IO延时，保留DRC Warning/Advisory。程序已校验传输，位流传输中；服务临时停止，没有FFT板测/听感/高实时结论。
+- 下一责任方：Hardware-A / Codex 完成临时加载、128次DMA对照与两段文件全路径回归；任何新的现场录放仍先确认。
