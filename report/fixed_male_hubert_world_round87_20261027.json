@@ -1,0 +1,24 @@
+{
+  "task": "PS-20261021-10",
+  "round": 87,
+  "date": "2026-10-27",
+  "status": "REJECTED",
+  "baseline_commit": "43d2b70",
+  "source": {"path": "人物音频资料/男声/标准录音 4.wav", "sha256": "f4a0265ec97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c"},
+  "training": {"checkpoint_source_round": 85, "checkpoint_sha256": "f3fa1f9b5619ed79fc204ebc8e6e731363a4cec99d165ed60e4238f7e01c45e2", "gain": 1.6, "unique_change": "source spectral DCT zero-mean temporal residual alpha 0.02, cutoff 8; no retraining", "target_track9_used": false},
+  "candidate": {"path": "build/generated/hubert_world_round87_20261027/candidates/round87_source_residual0_02.wav", "sha256": "984939d4f10b6be67e6c147ef912ed8b9d03a986b6f7e714a506cb59961b6531", "source_residual_alpha": 0.02},
+  "metrics": {"identity_mean": 0.7011, "identity_p10": 0.6794, "source_leakage": 0.1011, "utmos": 2.2824, "cer": 0.2647},
+  "gates": {
+    "identity_mean": {"threshold": 0.45, "passed": true},
+    "identity_p10": {"threshold": 0.35, "passed": true},
+    "source_leakage": {"threshold": 0.1, "passed": false},
+    "utmos": {"threshold": 2.3, "passed": false},
+    "cer": {"threshold": 0.15, "passed": false}
+  },
+  "evaluation": {"cer_normalizer": "identity OpenCC compatibility shim", "target_track9_used": false, "recording5_used": false, "played": false, "board_touched": false},
+  "limitations": ["CER remains limited by the identity OpenCC compatibility shim and source Whisper transcript.", "No local listening, Cortex-A9, RTL, PL, or real-time result is claimed."],
+  "reproduction": {
+    "candidate": "python build/apply_world_temporal_postfilter_round47_20261026.py --asset-root . --generated-root build/generated --checkpoint build/generated/hubert_world_round85_20261027/paired_causal_gru.pt --output build/generated/hubert_world_round87_20261027/candidates --gain 1.6 --experiment-round 87 --source-residual-alphas 0.02 --source-relative '人物音频资料/男声/标准录音 4.wav'",
+    "strict_evaluation": "Python 3.12 build/evaluate_seed_fixed_male_strict_20261024.py --asset-root . --manifest build/generated/hubert_world_round87_20261027/candidates/strict_manifest.json --output build/generated/hubert_world_round87_20261027/strict_evaluation.json; identity OpenCC shim injected."
+  }
+}
