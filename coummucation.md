@@ -1807,3 +1807,11 @@
 - 量化：2048接口累计0.784→0.637s（约-18.9%），但male1 cache+exp2.583090s/compact+exp2.626509s，male4 2.566616/2.604988s；仍不能默认FFT。
 - 内核状态：热切换出现xlnx_formatter_pcm_remove Bad of_node_put引用告警，后续注册与全部测试成功；完整日志保留，不宣称反复热切安全。后续切换前正常重启恢复驱动状态。
 - 限制：候选驻留、服务停止，无新录放或高实时验收；下一责任方Hardware-A / Codex继续静默定速滞后和DMA开销优化，必要时用JTAG/正常重启回原厂。
+
+### [PL-20261027-01] Round 10 静默定速管线滞后结果
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：REJECTED（100ms实时目标）。
+- 基准：`1b8e909`，入口`4513f66`；证据：`report/world_fft_paced_round10_20261027.md`及3份paced原始JSON。
+- 复现：world_exp_latency_probe.py，5秒male1，128样本/8ms定速，625块；模式与输入/程序SHA在JSON中，未使用ALSA/录放。
+- 量化：baseline p95 117.058676ms；cache+exp 113.992885ms；compact2048+exp 114.187369ms；FFT无显著额外收益。
+- 限制：仅软件输入交付到输出到达，排除ALSA/codec/模拟/声学，不能作为物理端到端验收；无新用户听感。候选驻留、服务暂时停止。
+- 下一责任方：Hardware-A / Codex继续接口开销优化，客观门后才请求新现场轮次。
