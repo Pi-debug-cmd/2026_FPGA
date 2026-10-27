@@ -1,0 +1,22 @@
+[
+  {
+    "command": "/etc/init.d/world-voice status",
+    "output": "world-voice running pid=1566\nbr#",
+    "exit": 0
+  },
+  {
+    "command": "cat /proc/asound/card0/pcm0p/sub0/status",
+    "output": "br# state: RUNNING\nowner_pid   : 1599\ntrigger_time: 2749.677761311\ntstamp      : 0.000000000\ndelay       : 2800\navail       : 272\navail_max   : 2560\n-----\nhw_ptr      : 3359528\nappl_ptr    : 3362328\nbr#",
+    "exit": 0
+  },
+  {
+    "command": "cat /proc/asound/card0/pcm1c/sub0/status",
+    "output": "br# state: RUNNING\nowner_pid   : 1597\ntrigger_time: 2749.675655155\ntstamp      : 0.000000000\ndelay       : 384\navail       : 384\navail_max   : 512\n-----\nhw_ptr      : 3363712\nappl_ptr    : 3363328\nbr#",
+    "exit": 0
+  },
+  {
+    "command": "cat /sys/class/fpga_manager/fpga0/state",
+    "output": "operating\nbr#",
+    "exit": 0
+  }
+]

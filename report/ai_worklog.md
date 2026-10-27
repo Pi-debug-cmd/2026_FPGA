@@ -630,3 +630,7 @@ ps-opt 把非周期最小相位优化移植进流式路径（改造 synthesisrea
 ## 2026-10-21 [Maintainer] 三写作者能力边界修正
 
 用户明确项目共有三个写作者：当前已经提交的两位写作者均有 Zynq-7020 板卡和 Vivado 环境，可共同承担板端、Vivado、RTL、PL 和集成；尚未加入的第三位写作者没有板卡和 Vivado，只能在自己的电脑运行 PS/软件音色方案，再交由前两位验证。协作角色据此改为 `Hardware-A`、`Hardware-B`、`Remote-PS-C`；两名硬件方改同一工程前必须先认领任务。
+
+## 2026-10-27 LOCAL-PS-20261027-01 Deepseek 独立板测
+
+同步最新main到独立worktree保留原RTL未提交改动。修复Deepseek原生S24_LE移位错误与诊断停止v23后未打开PCM路由的问题，主机格式一致性通过、GCC13.4静态ARM构建和4秒浮点逐字节回归通过；文件输出已由用户确认可听。20秒麦克风实时诊断RTF0.7206但5次欠载/6082削顶，用户明确断续或失真，记录REJECTED。现场每轮分别确认、逐轮提交PR #15，未加载PL或改系统启动，最终恢复v23。正式证据 `report/deepseek_board_live_round8_20261027.{md,json}`；新语音未提交。

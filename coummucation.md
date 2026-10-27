@@ -1617,3 +1617,13 @@
 - 量化结果：准备20秒、300ms块、200ms播放器启动缓冲、16,384帧播放缓冲；这些是配置而非实测端到端延迟。语法检查通过，实时结果待下一测试轮。
 - 限制：纯ARM工程诊断，PL未加载，正式五门/延迟/稳定性未验收。操作者已明确“准备好了，开始20秒实时测试”。
 - 下一责任方：Hardware-A完成提交后运行这一轮，恢复原v23并记录用户现场反馈。
+
+### [LOCAL-PS-20261027-01] 20秒现场实时测试轮8
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：REJECTED（实时稳定性/无失真未通过）。
+- 基准提交：`85f3e73`；路径：`report/deepseek_board_live_round8_20261027.{json,md}`、`coummucation.md`、`team_project/project_status.md`、`report/ai_worklog.md`。
+- 条件：操作者明确准备；纯ARM修复版O64/live/300ms块、输入4倍/输出约0.6、显式PCM路由；详细命令与模型SHA沿用本任务报告。
+- 量化结果：20秒67块，RTF0.7206；3进程exit0；采集0 overrun，播放5 underrun，6082削顶样本；用户原话“能听到转换，但有断续或失真”。
+- 报告与复现：`report/deepseek_board_live_round8_20261027.md`、同名JSON、`board/deepseek_live_diagnostic.py`。
+- 限制：无PL、端到端延迟或音色五门验收。未保存/上传本轮真人音频；所有系统/启动项保持原样。
+- 恢复：mixer恢复exit0、world-voice start exit0。前述文件播放已独立确认可听，但不等于现场实时稳定。
+- 下一责任方：Hardware-A修复削顶和欠载后，再取得新一轮准备确认复测；当前保留v23作为恢复基线。

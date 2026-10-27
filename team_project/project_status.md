@@ -99,3 +99,7 @@
 | 身份上限（技术结论） | 参数域可达 **0.53～0.56**，不再是 0.19～0.22 | 第三轮 + 复核 |
 | PL 合成卸载 | 时分复用版开发中；首版全并行 LUT 超限 132%/141%；最新综合 363 LUT 可疑，待核对是否被优化 | `build/generated/pl_synth_offload/`、`report/pl_synth_offload_sim.json` |
 | 历史待办（已过期） | 当时提出 A1 与 A3 听感取舍及 PL 资源/时序检查；A3 后来已被用户否决，当前任务依 `plan.md` | 见 worklog |
+
+## 2026-10-27 Deepseek 用户指定独立板测
+
+`LOCAL-PS-20261027-01`：已接收 Deepseek 并修复 S24_LE 样本位移与停v23后的PCM输出路由关闭问题；同一4秒浮点输入的交付ARM、修复ARM与主机输出SHA完全一致。文件播放用户确认原声/转换均可听；20秒现场纯ARM实时测试失败：5次播放欠载、6082削顶、RTF0.7206，用户反馈“能听到转换，但有断续或失真”。已恢复v23，无PL/启动修改；正式五门、PL、延迟和长稳未验收。详见 `report/deepseek_board_live_round8_20261027.md`、`report/deepseek_board_routes_round7_20261027.md`，PR #15。
