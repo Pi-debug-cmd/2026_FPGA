@@ -24,7 +24,7 @@ struct StreamState {
   double proc_ms = 0.0;
 };
 
-// decode one block of S24_LE stereo (4-byte container, 24 bits left justified)
+// decode one block of S24_LE stereo (4-byte container, 24 bits right justified)
 static void decode_block(const std::vector<uint8_t> &raw, int n_frames, bool native_s24,
                          double in_gain, std::vector<double> &x32) {
   x32.assign((size_t)n_frames, 0.0);
@@ -34,7 +34,7 @@ static void decode_block(const std::vector<uint8_t> &raw, int n_frames, bool nat
       const uint8_t *b = &raw[(size_t)i * kChannels * 4];
       int32_t s = (int32_t)((uint32_t)b[0] | ((uint32_t)b[1] << 8) |
                            ((uint32_t)b[2] << 16) | ((uint32_t)b[3] << 24));
-      v = (double)(s >> 8) / 8388608.0;
+      v = (double)(static_cast<int32_t>((static_cast<uint32_t>(s) & 0xffffffu) ^ 0x800000u) - 0x800000) / 8388608.0;
     } else {
       const uint8_t *b = &raw[(size_t)i * kChannels * 2];
       int16_t s = (int16_t)((uint16_t)b[0] | ((uint16_t)b[1] << 8));
@@ -55,7 +55,7 @@ static void encode_block(const std::vector<double> &y32, double out_gain, bool n
     if (native_s24) {
       int32_t q = (int32_t)llround(v * 8388608.0);
       q = std::min(8388607, std::max(-8388608, q));
-      uint32_t u = (uint32_t)q << 8;
+      uint32_t u = (uint32_t)q;
       uint8_t *b = &out[i * kChannels * 4];
       for (int c = 0; c < kChannels; c++) {
         b[c * 4 + 0] = (uint8_t)(u & 0xFF);

@@ -1518,3 +1518,23 @@
 - 止损：若两个 CFG 都未降低泄漏或造成 CER 失败，本路线立即停止，不追加更高 CFG；既有 1.70 已有内容塌缩证据。
 - 限制：电脑端离线开发，不播放、不改板上 v23；Remote-PS-C 不负责验证本方案。
 - 下一责任方：Hardware-A / Codex 完成 CFG 筛选并按结果提交。
+
+### [LOCAL-PS-20261027-01] 用户指定 Deepseek 交付独立板测
+- 日期：2026-10-27
+- 角色：Hardware-A / Codex
+- 状态：CLAIMED
+- 基准提交：`7d44033`（Deepseek board pipeline handoff）；用户本轮明确要求测试 Deepseek，不改动其他三路候选。
+- 改动路径：`coummucation.md`、`report/deepseek_board_preflight_20261027.*`（本轮新增证据）；在独立 worktree 执行，原工作区未提交 RTL 与报告不动。
+- 复现命令：`git fetch origin main`；`git pull --rebase origin main`；`gh pr list --state open`；读取 `Deepseek/README.md`、`Deepseek/STATUS_AND_ISSUES.md`；板卡只读预检及资产 SHA 校验。
+- 量化结果：开放 PR #9/#11/#13，未发现修改 Deepseek 的开放 PR；模型声明 4,941,804 B/1,152,064 参数，待独立 SHA 核对；实际 USB 串口 COM4，COM8 为蓝牙，不能照搬交接端口。
+- 限制：交付已有 UTMOS 低于 2.30、CER/泄漏口径不足及模拟噪声记录，不代表本项目五门通过；本次用户指定测试作为独立工程诊断，不宣称正式验收。不更换 PL、设备树、启动分区，不启动现场录放，先确认当前板状态及可执行文件。
+- 报告链接：`Deepseek/STATUS_AND_ISSUES.md`、`Deepseek/report/o64_onboard_20261026.md`；独立预检报告本轮结束回填。
+- 下一责任方：Hardware-A 完成只读预检和无声文件测试；现场测试前按 AGENTS.md 询问操作者本轮准备状态。
+
+### [LOCAL-PS-20261027-01] Deepseek S24_LE 格式修复方案轮
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED。
+- 基准提交：`7d44033`；改动路径：Deepseek 两份 vc_stream 源码及 stream_mode.inc、build/verify_deepseek_s24.py、board/deepseek_file_test.py、report/deepseek_s24_*、coummucation.md。
+- 复现命令、资产 SHA、工具链和限制：见 `report/deepseek_s24_fix_20261027.md`。
+- 量化结果：主机 PCM16/S24_LE 输出最大误差修复前 0.651123，修复后批处理和流式均 0.0000152588；GCC13.4 ARM 静态构建成功（582928 B）。尚无修复版板端结果或真人听感。
+- 现场状态：操作者本轮确认准备；原 v23 已通过服务 stop 停止，录放均 closed；独立目录传输中，无设备树、启动分区或 PL 修改。
+- 下一责任方：Hardware-A 完成本轮方案提交后，在同任务编号另记板端测试轮。

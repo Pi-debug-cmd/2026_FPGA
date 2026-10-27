@@ -1,0 +1,16 @@
+[
+  {
+    "mode": "batch",
+    "max_abs_error": 1.52587890625e-05,
+    "limit": 3.0517578125e-05,
+    "samples_stereo": 128000,
+    "passed": true
+  },
+  {
+    "mode": "stream",
+    "max_abs_error": 1.52587890625e-05,
+    "limit": 3.0517578125e-05,
+    "samples_stereo": 128000,
+    "passed": true
+  }
+]
