@@ -640,3 +640,9 @@ ps-opt 把非周期最小相位优化移植进流式路径（改造 synthesisrea
 ### 2026-10-27 [PL-20261027-01] 基线恢复完成
 
 用户确认板卡重启后，串口只读核验原v23 SHA、单实例运行链与两个PCM均RUNNING、FPGA operating、PL临时模块未加载；未发起新录放。恢复证据见`report/world_exp_reboot_recovery_20261027.{md,json}`，解除待复位状态，不改写20秒低缓冲失败结论。
+
+### 2026-10-27 [PL-20261027-01] Round4–11数值与性能更新
+
+ARM算子剖析→FFT计划复用（18次板测逐字节一致、墙钟约-9.6–10.7%）→官方浮点FFT模型→AXIS/HP2 DMA→compact实输入协议已逐轮提交PR16。45帧RTL/背压全位准确，compact布局布线100MHz内部时序通过，板端192次probe最坏relativeL2 5.617e-8，两段完整语音FFT最大PCM16误差1、exp组合3/2，零exp fallback。但FFT逐次DMA抵消收益；Round11优化浮点打包后36次旧新交错全部逐字节一致，仍未比cache+exp获得可靠净收益。静默定速p95约114ms，非物理端到端验收。
+
+临时921600串口尝试失败已撤销；用现已连接的JTAG/XSDB系统复位成功恢复115200及原v23。修复后的恢复脚本已成功回原厂一次；再次热切时audio驱动有Bad of_node_put引用告警，后续正常测试成功但不能宣称反复切换安全。当前compact位流驻留、服务停止，后续正常启动恢复清理引用。所有失败与恢复证据保留，未改启动分区，无新现场听感。详见各world_fft_*round4–11报告和coummucation。

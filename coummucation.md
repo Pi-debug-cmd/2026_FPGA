@@ -1829,3 +1829,9 @@
 - 变量：逐bin VFP isfinite改IEEE754指数掩码聚合，仍拒绝Inf/NaN；r2c单独打包循环；不改DMA、核/位流、音色或批次。
 - 限制：无本轮板端性能结果；当前compact候选驻留、服务停止，无新录放。
 - 下一责任方：Hardware-A / Codex同位流/旧程序交错三次、两输入三模式逐字节回归，结果独立提交。
+
+### [PL-20261027-01] Round 11 适配对照：数值保持、FFT默认仍拒绝
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（数值保持），REJECTED（默认FFT性能）。
+- 实现979fb89；报告report/world_fft_adapter_round11_20261027.{md,json}；同位流旧新两输入三模式各三遍，共36次，全部逐字节一致/零exp fallback。
+- 量化：combined墙钟中位2.645587→2.621563s及2.658425→2.608862s；新exp_only为2.602989/2.605818s，FFT仍无可靠净收益；DMA约0.436s/3279次。
+- 限制：无ALSA/新录放；候选驻留、服务停止，未过高实时门；下一责任方Hardware-A / Codex分解内核复制和DMA耗时，再优化实际瓶颈。

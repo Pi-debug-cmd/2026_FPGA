@@ -107,3 +107,9 @@
 ### 2026-10-27 [PL-20261027-01] 恢复状态更新
 
 操作者已复位。只读核验FPGA operating、原v23 SHA匹配、单组采录放进程运行、PCM录放均RUNNING，临时PL模块未加载；先前恢复阻塞已解除。20秒低缓冲欠载失败结论不变。证据：`report/world_exp_reboot_recovery_20261027.{md,json}`。
+
+### 2026-10-27 [PL-20261027-01] FFT部署与性能现状（Round11）
+
+FFT计划复用已在ARM两输入18次验证逐字节相同，文件墙钟约降低9.6–10.7%。Xilinx浮点FFT+exp整机已完成45帧RTL位准确/背压、100MHz布局布线和板端数值回归；compact版17255LUT/29197FF/24.5BRAM/69DSP、WNS+0.283ns/WHS+0.040ns，外部IO约束仍不完整。FFT硬件数值通过但传输开销抵消计算收益，仍不默认启用；目前首选是PS计划复用+PL exp。
+
+Round11同位流旧新适配36次文件回归均与Round10逐字节一致，combined中位2.621563/2.608862秒，仍不快于exp_only 2.602989/2.605818。静默定速PS管线p95约114ms，排除ALSA/codec/模拟/声学；高实时目标未通过。没有新现场听感。当前compact候选临时驻留、服务停止，下一步内核阶段计时；恢复前避免反复audio热重绑，使用正常启动清理驱动引用。报告world_fft_adapter_round11_20261027、world_fft_paced_round10_20261027；PR16。
