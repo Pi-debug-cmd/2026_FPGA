@@ -1674,3 +1674,11 @@
 - 板卡状态补充：Round5服务start后的首个立即PCM读取closed；异步启动完成后只读复核arecord954/aplay956两PCM均RUNNING，v23 pid918。无新现场测试。
 - 限制：官方C模型和OOC都不能替代真实PL数值/实时性；当前未加载FFT候选，未声明高实时验收。
 - 下一责任方：Hardware-A / Codex 执行位准确模型回归，数值合格再集成PS/PL。
+
+### [PL-20261027-01] Round 6 浮点FFT位准确模型结果
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（模型数值门）。
+- 基准：`53645ef`；改动：`build/check_world_fft_ip_quality.py`、`report/world_fft_ip_model_round6_20261027.{md,json}`。
+- 复现：报告内SDK构建和质量脚本；30独立FFT方向/尺度/切换用例，相对L2最大6.60848722e-08；两受控输入完整WORLD各cpu/d4c/analysis/render/all。
+- 量化：全FFT替换SNR男声1 88.876dB、男声4 87.845dB，最大PCM16误差均1；单D4C分别118.306/113.844dB。其余尺寸仍CPU，调用数完整保存。
+- 限制：模型数值通过不代表资源、RTL板测或高实时；独立OOC综合进行中，未加载FFT位流、未新录放，板上原v23运行。
+- 下一责任方：Hardware-A / Codex 完成FFT流接口、独立DMA和OOC/整机时序，静默板测后才请求现场试听。
