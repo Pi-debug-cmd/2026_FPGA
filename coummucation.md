@@ -2202,3 +2202,17 @@
 - 复现：入口prepare/train/candidate/evaluate --experiment-round 90 --asset-root <asset-root>；evaluate实际使用OpenCC0.1.7 t2s，raw CER与normalized CER同为0.4558823529。报告含依赖安装、历史文本重算核对与完整命令。
 - 限制：源ASR非人工真值；训练和生成完成产物后退出1，独立检查通过，评测退出0。公共配对192训练/8验证，目标Track5～8锚点；固定男性1～3只作评测源质心，录音4验证，录音5/Track9锁定。无播放、录音、板测或PS/PL/实时结论。
 - 下一责任方：Hardware-A / Codex；恢复Round88并测试提高锚点概率，避免继续扩PCA。Round59～90共32轮，剩18轮。
+
+
+### [PS-20261021-10] HuBERT/WORLD Round 91 提高目标锚点认领
+- 日期：2026-10-27；角色：Hardware-A / Codex（电脑端离线算法）；状态：CLAIMED。
+- 基准提交：3f6504562efcf2c403e33406597cad3cd6e1bb62；算法配置恢复Round88，撤销Round89长crop和Round90 PCA增加。
+- 唯一训练变量：目标自重建锚点采样概率0.25→0.50；PCA96、GRU hidden192/2层、CROP128、BATCH8、STEPS2000、seed、早停、VUV0.35、动态1.20、方差损失、source prosody、gain1.6不变。更多锚点意味着相同step预算下公共配对采样减少，将如实报告。
+- 依据：Round75将锚点概率降至0.15时CER恶化到0.50；Round89/90增加上下文或保留维度均退步。测试更强目标自重建约束是否改善内容，尚无收益结论。
+- 数据：同一192公共配对训练/8验证，PCA和归一化仅训练集；128帧可用184/192，目标Track5～8锚点。固定男声1～3仅评测源质心，录音4验证，录音5/Track9锁定。
+- 成功标准：身份>=0.45、P10>=0.35、泄漏<=0.10、UTMOS>=2.30、CER<=0.15全部通过即停止训练；真实OpenCC0.1.7 t2s，与Round88保存文本重算CER相同。
+- 修改路径：build/reproduce_hubert_world_round88_20261027.py、coummucation.md；正式报告report/fixed_male_hubert_world_round91_20261027.{md,json}。
+- 复现：入口prepare/train/candidate/evaluate --experiment-round 91 --asset-root <asset-root>，评测--cer-normalizer opencc；具体解释器沿用Round90。
+- 验证：准备后核对PCA96、CROP128、ANCHOR_PROBABILITY0.50与runtime语法，结果从产物直接提取。
+- 限制：ASR源参考非人工真值；无播放、录音、板测、PS/PL/实时结论。
+- 下一责任方：Hardware-A / Codex 完成本轮训练、评测、独立检查并逐轮提交。完成后33/50，最多Round108。
