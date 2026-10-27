@@ -1582,3 +1582,11 @@
 - 复现命令：见JSON；无新采录，无PL/系统改动，无五门验收。
 - 后续只读定位：当前Headphone105(-16dB)、Playback230(-12.5dB)；服务启动脚本在提示音前设Headphone127/Playback255，停止时恢复保存的mixer，实时脚本另改音量。因此提示音可能来自恢复服务的最大音量提示，而非低电平测试音。前几轮未把播放音量显式设成同一基准，不能据此归咎算法或时钟。
 - 下一责任方：Hardware-A；用户已确认下一轮音量对照准备，显式设置Headphone127/Playback255、播放已有原声/转换音，完成后恢复。
+
+### [LOCAL-PS-20261027-01] 显式音量对照测试轮 6
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：REJECTED（音量对照未恢复语音）。
+- 基准提交：`1dc6813`；路径：`report/deepseek_board_volume_round6_20261027.json`、`coummucation.md`。
+- 条件：用户明确准备；服务stop后设置Headphone127/Playback255，一遍原声WAV与两遍降幅转换RAW均exit0；用户原话“仍然只有恢复服务时的提示音”。mixer恢复、服务恢复。
+- 复现命令：见JSON。无新采录、无PL/系统改动。
+- 后续只读根因：`/tmp/world_voice_autostart_mixer.state`与本轮`round6_mixer.state`中的左右Output Mixer PCM Playback Switch均false；停止服务恢复该状态，前几轮仅调音量未打开PCM输出路由。服务start显式打开路由后提示音可听。因此前6轮模拟播放失败不能用于评价Deepseek音质；停止服务后的路由前置检查缺失属于本次测试流程遗漏。
+- 下一责任方：Hardware-A显式打开左右PCM路由、保存/恢复mixer，另行准备确认后重做已有验证语音对照。
