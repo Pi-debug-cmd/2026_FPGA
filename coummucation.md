@@ -1839,3 +1839,16 @@
 - 报告链接：`report/fixed_male_hubert_world_round72_20261027.md`、`report/fixed_male_hubert_world_round72_20261027.json`。
 - 下一责任方：Hardware-A / Codex 用 Round69 checkpoint 验证目标减漏方向，不再连续扫描相邻训练权重。
 
+### [PS-20261021-10] HuBERT/WORLD Round 73 后滤波验证
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`a0fe2000c9486e335aff17f00ae6e6c9244e3da6`
+- 唯一变量：Round69 checkpoint 的非 F0 动态后滤波 gain 从 1.6 降至 1.5；这是已暴露录音4的单轮客观回归，不产生新 checkpoint。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.7224/0.7013/0.1133/2.3663/0.2206`；泄漏与 CER 未过门。Checkpoint SHA-256 `3a045e8571e77eedacf0b408ccfb9395b1bf212bf221956a8202288dad552cca`；候选 SHA-256 `0a24d19c018b155546131ab962032fe0f5d9d591c4ee32cebd8b08ad9a339ba2`。
+- 修改路径：`report/fixed_male_hubert_world_round73_20261027.{md,json}`、`coummucation.md`。
+- 复现命令：见 `report/fixed_male_hubert_world_round73_20261027.json`。
+- 限制：使用 identity OpenCC shim；录音5、Track 9 未用于选参；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL 或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round73_20261027.md`、`report/fixed_male_hubert_world_round73_20261027.json`。
+- 下一责任方：Hardware-A / Codex 继续 PS 方案探索。
+

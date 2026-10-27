@@ -1,0 +1,45 @@
+{
+  "task": "PS-20261021-10",
+  "round": 73,
+  "date": "2026-10-27",
+  "status": "REJECTED",
+  "baseline_commit": "a0fe2000c9486e335aff17f00ae6e6c9244e3da6",
+  "kind": "postfilter_gain_validation",
+  "source": {
+    "path": "人物音频资料/男声/标准录音 4.wav",
+    "sha256": "f4a026e5c97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c"
+  },
+  "checkpoint_sha256": "3a045e8571e77eedacf0b408ccfb9395b1bf212bf221956a8202288dad552cca",
+  "unique_change": "non-F0 postfilter gain reduced from 1.6 to 1.5",
+  "candidate_sha256": "0a24d19c018b155546131ab962032fe0f5d9d591c4ee32cebd8b08ad9a339ba2",
+  "metrics": {
+    "identity_mean": 0.722423266651854,
+    "identity_p10": 0.701321229091637,
+    "source_leakage": 0.113300373096064,
+    "utmos": 2.36629374821981,
+    "cer": 0.220588235294118
+  },
+  "gates": {
+    "identity_mean": {"threshold": 0.45, "passed": true},
+    "identity_p10": {"threshold": 0.35, "passed": true},
+    "source_leakage": {"threshold": 0.1, "passed": false},
+    "utmos": {"threshold": 2.3, "passed": true},
+    "cer": {"threshold": 0.15, "passed": false}
+  },
+  "evaluation": {
+    "cer_normalizer": "identity OpenCC shim; raw and normalized CER were equal",
+    "target_track9_used": false,
+    "recording5_used": false,
+    "played": false,
+    "board_touched": false
+  },
+  "limitations": [
+    "Strict evaluator compatibility shim limits simplified/traditional Chinese normalization.",
+    "This was a gain test of the Round 69 checkpoint, not a new training round.",
+    "No local listening, Cortex-A9, RTL, PL, or real-time result is claimed."
+  ],
+  "reproduction": {
+    "candidate": "python build/apply_world_temporal_postfilter_round47_20261026.py --asset-root . --generated-root build/generated --checkpoint build/generated/hubert_world_round69_20261027/paired_causal_gru.pt --output build/generated/hubert_world_round73_20261027/candidates --gain 1.5 --experiment-round 73 --source-relative '人物音频资料/男声/标准录音 4.wav'",
+    "strict_evaluation": "python build/evaluate_seed_fixed_male_strict_20261024.py --asset-root . --manifest build/generated/hubert_world_round73_20261027/candidates/strict_manifest.json --output build/generated/hubert_world_round73_20261027/strict_evaluation.json"
+  }
+}
