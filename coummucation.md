@@ -1784,3 +1784,10 @@
 - 覆盖：1024→2048→1024，complex正反向与real-forward，零/复数或实数脉冲/常量/随机/弱信号；compact均有输入空拍和输出背压，半谱TLAST/内部排空/下一帧握手通过。
 - 限制：仿真拍数不代表ARM到PL收益；整机综合完成，布局布线已启动；板端仍原厂PL、服务暂时停止，compact候选尚未加载，无新录放。
 - 下一责任方：Hardware-A / Codex 完成新版routed签核与静默192次probe/两段文件，按性能结果选择默认。
+
+### [PL-20261027-01] Round 10 静默管线滞后入口补充
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED（诊断入口）。
+- 基准：`cf28ab1`；改动：`board/world_exp_latency_probe.py`。
+- 复现：原定速128样本/8ms文件管道，新增显式binary/fft-mode/label及程序/输入SHA；默认v23/pl行为保持。可在同位流、同输入比较cache_cpu/cache_exp/cache_fft2048，结果不互相覆盖。
+- 限制：语法检查通过，入口已校验上传，尚未运行；45帧RTL已过但新版布局布线仍进行中。管线滞后不包括ALSA/codec/模拟/声学，不可作为物理端到端验收。
+- 下一责任方：Hardware-A / Codex 新版文件数值/性能门后执行并记录至少625个原始块计时，再决定现场候选。
