@@ -1979,6 +1979,18 @@
 - 限制：不播放、不录音、不接触板卡，不声明试听、Cortex-A9、RTL/PL或实时通过。
 - 下一责任方：Hardware-A / Codex 完成本轮候选生成、严格评估并提交单轮结果。
 
+### [PS-20261021-10] HuBERT/WORLD Round 86 源谱动态残差后处理
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`02995a5`
+- 唯一变量：冻结Round85 checkpoint与gain1.6，仅将录音4源WORLD谱DCT零均值动态残差按alpha=0.05注入；无源VUV/F0/能量/AP，无重训。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.7026/0.6828/0.1021/2.2968/0.2647`；身份、P10通过，泄漏、UTMOS、CER失败。候选SHA-256 `4da876bf25cc41250cf1d280452805d0b8fe8f863ac56c43893ef01872db61d7`。
+- 修改路径：`report/fixed_male_hubert_world_round86_20261027.{md,json}`、`coummucation.md`。
+- 限制：identity OpenCC shim；录音5、Track9未用于训练或筛选；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round86_20261027.md`、`report/fixed_male_hubert_world_round86_20261027.json`。
+- 下一责任方：Hardware-A / Codex 测试更小谱残差alpha=0.02。
+
 ### [PS-20261021-10] HuBERT/WORLD Round 82 VUV 损失权重
 - 日期：2026-10-27
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
