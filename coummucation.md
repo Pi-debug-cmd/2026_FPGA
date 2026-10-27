@@ -1518,3 +1518,23 @@
 - 止损：若两个 CFG 都未降低泄漏或造成 CER 失败，本路线立即停止，不追加更高 CFG；既有 1.70 已有内容塌缩证据。
 - 限制：电脑端离线开发，不播放、不改板上 v23；Remote-PS-C 不负责验证本方案。
 - 下一责任方：Hardware-A / Codex 完成 CFG 筛选并按结果提交。
+
+### [PL-20261027-01] WORLD v23 复数 exp 卸载认领
+- 日期：2026-10-27
+- 角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准提交：`e507cf7`；分支：`agent/Pi-debug-cmd/PL-20261027-01`。
+- 用户本轮明确停止 Deepseek，指定以已经试听认可的 WORLD v23 为基线部署 PL；本任务据此恢复 v23 加速，不宣称已通过固定目标身份、陌生多人或最终注册门。
+- 协作检查：已检查开放 PR #9/#11/#13/#15，无 WORLD v23 PL 重叠；根工作区保留 10-22 未提交文件，使用独立 worktree，禁止覆盖。
+- 范围：`src/rtl/synth_offload/`、新增 WORLD exp DMA 构建/驱动/报告；复用 10-22 已验证的 exp 核，PS 保留双精度 FFT。
+- 复现：将随首轮报告给出完整命令；当前只完成只读核验 `sha256sum /opt/world_voice/world_budget_v23`。
+- 量化：板端 v23 SHA256 为 `f12da25e93a520b7f5255ce952a3cb9b5d1bbca474133b1bc529d8c8e18349b7`，与既存基线一致；历史 exp 核 49248 bins 零 LSB、100MHz OOC WNS +4.584ns，仅作历史结果，尚非本轮整机/板测。
+- 限制：板端无 udmabuf 或现成 DMA 设备，必须先解决一致性内存；不改启动分区，现场录放须当轮确认。
+- 下一责任方：Hardware-A / Codex 完成 AXIS/DMA 整机实现、数值与板端耗时验证；依据 `report/pl_synth_offload_route_update_20261022.md`（待导入原件）。
+
+### [PL-20261027-01] WORLD exp 集成首轮方案与静默回归
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED。
+- 基准提交：`e507cf7`；改动：`src/rtl/synth_offload/`、`src/ps/world_v23/`、`src/ps/world_exp*`、`src/kernel/world_exp*`、`build/*world_exp*`、`board/world_exp_switch.py`。
+- 复现：见 `report/world_exp_round1_20261027.md`，上游及优化源SHA见同名JSON；生成物不入Git。
+- 量化：随机背压RTL 49248 bins零LSB/零TLAST错误；受控标准录音1/4前5秒软件模型回归 SNR 79.06/78.57dB、最大PCM16误差3/2；ARM/host和匹配内核驱动已编译。
+- 限制：整机P&R尚在运行，未加载新位流，未录放、未宣称板端提速或实测端到端延迟；原v23保留运行。
+- 下一责任方：Hardware-A / Codex 完成整机实现、板端数值与耗时测试，再经当轮准备确认安排现场回归。

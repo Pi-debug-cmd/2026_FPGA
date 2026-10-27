@@ -27,6 +27,11 @@ module tb_minphase_exp_unit;
     integer sent = 0, recvd = 0, errs = 0, lasterr = 0;
     integer maxdiff = 0, cur;
     integer c;
+    reg [31:0] rng = 32'h1234abcd;
+    always @(negedge clk) begin
+        rng <= {rng[30:0], rng[31]^rng[21]^rng[1]^rng[0]};
+        m_axis_tready <= (rng[3:0] < 6); // sustained randomized backpressure
+    end
 
     minphase_exp_unit dut (
         .clk(clk), .rst_n(rst_n),
@@ -84,7 +89,7 @@ module tb_minphase_exp_unit;
             if (cur < 0) cur = -cur;
             if (cur > maxdiff) maxdiff <= cur;
             if (m_axis_tlast !== (((recvd % NBIN) == (NBIN - 1))))
-                $display("TLAST mismatch at bin %0d", recvd);
+                $fatal(1, "TLAST mismatch at bin %0d", recvd);
             recvd <= recvd + 1;
         end
     end
@@ -92,6 +97,9 @@ module tb_minphase_exp_unit;
     initial begin
         $readmemh("exp_input.hex", inputs);
         $readmemh("exp_expected.hex", expected);
+        // 后综合 funcsim 带 glbl GSR（约前 100 ns 全局复位寄存器）；行为级仿真无 GSR。
+        // 统一先等 200 ns 再释放 rst_n，保证两种仿真激励对齐（与增量 1 的 TB 同一处理）。
+        #200;
         repeat (3) @(negedge clk);
         rst_n = 1;
         wait (recvd == N);
@@ -100,13 +108,13 @@ module tb_minphase_exp_unit;
             $display("PASS: %0d calls / %0d bins, exp unit 20-bit fields bit-exact (0 LSB)",
                      NCALL, N);
         else
-            $display("FAIL: recvd=%0d errs=%0d maxdiff=%0d LSB", recvd, errs, maxdiff);
+            $fatal(1,"FAIL: recvd=%0d errs=%0d maxdiff=%0d LSB", recvd, errs, maxdiff);
         $finish;
     end
 
     initial begin
         #50000000;
-        $display("FAIL: watchdog");
+        $fatal(1,"FAIL: watchdog");
         $finish;
     end
 endmodule
