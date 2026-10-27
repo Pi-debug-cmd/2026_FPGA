@@ -1914,3 +1914,9 @@
 - 修改两HLS入口支持WORLD_HLS_PROJECT；probe只接受新目录防覆盖历史。生成工程D:/wpl_20261027_r16/m，源码留仓库，避开260字符限制。
 - 复现：设置WORLD_HLS_PROJECT后vitis-run依次probe/cosim；算法/RTL约束不变。结果待本轮报告。
 - 限制：板端已恢复原厂v23运行，不再切板；无新录放；下一责任方Hardware-A / Codex验证工具修复及RTL数值。
+
+### [PL-20261027-01] 2026-10-27 当日停止与交接
+- 角色Hardware-A / Codex；状态暂停（用户“今天先到这里”）。Round16短路径综合/C-sim通过，RTL进入编译/展开但未完成，相关HLS/xelab进程已停止，未写RTL通过。
+- 证据report/world_minphase_round16_paused_20261027.md及synth/cosim TXT；交接handoff_20261027_PL.md。原厂位流/v23已恢复、双PCM RUNNING，临时驱动卸载，启动分区未改，无新录放。
+- 用户方向：尽量把WORLD分析/映射/合成迁入PL，PS保留I/O控制；首个最小相位融合核host两输入误差1/SNR约97dB，HLS估算38DSP/约1万LUT，尚待RTL/整机/板测。
+- 下一责任方Hardware-A / Codex：用户下次要求继续后，先完成24例RTL cosim，再评估整机/板端收益。不得把估算当高实时验收。

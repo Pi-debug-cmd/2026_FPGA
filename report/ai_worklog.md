@@ -646,3 +646,9 @@ ps-opt 把非周期最小相位优化移植进流式路径（改造 synthesisrea
 ARM算子剖析→FFT计划复用（18次板测逐字节一致、墙钟约-9.6–10.7%）→官方浮点FFT模型→AXIS/HP2 DMA→compact实输入协议已逐轮提交PR16。45帧RTL/背压全位准确，compact布局布线100MHz内部时序通过，板端192次probe最坏relativeL2 5.617e-8，两段完整语音FFT最大PCM16误差1、exp组合3/2，零exp fallback。但FFT逐次DMA抵消收益；Round11优化浮点打包后36次旧新交错全部逐字节一致，仍未比cache+exp获得可靠净收益。静默定速p95约114ms，非物理端到端验收。
 
 临时921600串口尝试失败已撤销；用现已连接的JTAG/XSDB系统复位成功恢复115200及原v23。修复后的恢复脚本已成功回原厂一次；再次热切时audio驱动有Bad of_node_put引用告警，后续正常测试成功但不能宣称反复切换安全。当前compact位流驻留、服务停止，后续正常启动恢复清理引用。所有失败与恢复证据保留，未改启动分区，无新现场听感。详见各world_fft_*round4–11报告和coummucation。
+
+### [PL-20261027-01] 2026-10-27 当日停止与交接
+- 角色Hardware-A / Codex；状态暂停（用户“今天先到这里”）。Round16短路径综合/C-sim通过，RTL进入编译/展开但未完成，相关HLS/xelab进程已停止，未写RTL通过。
+- 证据report/world_minphase_round16_paused_20261027.md及synth/cosim TXT；交接handoff_20261027_PL.md。原厂位流/v23已恢复、双PCM RUNNING，临时驱动卸载，启动分区未改，无新录放。
+- 用户方向：尽量把WORLD分析/映射/合成迁入PL，PS保留I/O控制；首个最小相位融合核host两输入误差1/SNR约97dB，HLS估算38DSP/约1万LUT，尚待RTL/整机/板测。
+- 下一责任方Hardware-A / Codex：用户下次要求继续后，先完成24例RTL cosim，再评估整机/板端收益。不得把估算当高实时验收。
