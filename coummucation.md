@@ -1753,3 +1753,11 @@
 - 量化：男声1全FFT SNR88.881dB、男声4 87.845dB，最大PCM16误差1，全部门通过；模型耗时不作硬件速度结论。
 - 限制：修正ARM/probe仍在115200校验传输，尚未执行本轮板测；位流驻留、音频服务停止，无录放。
 - 下一责任方：Hardware-A / Codex 同位流重跑DMA probe及两段文件全路径，失败仍独立提交。
+
+### [PL-20261027-01] Round 9 FFT板测：数值通过、逐次DMA性能拒绝
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（数值），REJECTED（FFT卸载性能）。
+- 实现：`0e557e7`；报告：`report/world_fft_board_round9_20261027.{md,json}`；复现同runner/manifest、同routed位流。
+- 数值：128次硬件FFT最坏relativeL2 5.537e-8；两输入CPU逐字节相同，FFT-only最大PCM16误差1、组合3/2，所有exp零fallback/零削顶。
+- 性能：1024 ioctl p50 86.538µs、2048 163.770µs；male1计划复用CPU墙钟2.591575s，fft2048 2.775234、fft_all3.274853s；male4同样退步。2048打包+DMA+解包约0.785s/3279次；全FFT互斥等待约0.73s。
+- 结论：数值门通过不能抵消性能退步，不默认启用FFT。下一步先改2048实FFT传输/接口，评估时钟优化；先前6.2%exp收益和PS计划复用是独立已证据成果。
+- 状态：候选临时驻留、服务停止，恢复镜像/JTAG可用，无新录放或高实时验收。下一责任方：Hardware-A / Codex 继续实现减少实际接口开销的候选并回归。
