@@ -2137,3 +2137,17 @@
 - 限制：identity OpenCC shim不执行简繁转换，原始评测protocol文字与实际不符已披露；源ASR文字非人工真值。训练启动器写出产物后退出1；未播放、未录音、未接触板卡，无真人试听、PS/PL/实时结论。
 - 报告链接：report/fixed_male_hubert_world_round88_20261027.md、report/fixed_male_hubert_world_round88_20261027.json。
 - 下一责任方：Hardware-A / Codex；后续先针对CER与训练数据覆盖做诊断，避免继续重复无收益的微小权重扫描。Round59～88计30轮，剩余额度20轮；五门全过即停止。
+
+### [PS-20261021-10] HuBERT/WORLD Round 89 长片段训练认领
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：816b1ddc4b7a88d5ec39f7f6b55b1b7fe0fea551
+- 唯一变量：以Round88为基准，CROP从128增加到192帧（约2.56秒至3.84秒），测试更长上下文对CER的影响；VUV BCE=0.35、动态损失1.20、锚点0.25、种子、source prosody、variance matching、gain1.6和2000 step上限不变。
+- 数据与限制：沿用Round25公共配对缓存，192训练/8验证，目标Track5～8锚点。长度筛选使可抽样训练条数由184/192降为140/192，报告此混杂因素；固定男声1～3仍只用于评测源质心，只评测录音4，不读录音5和Track9。
+- 成功标准：身份均值>=0.45、P10>=0.35、泄漏<=0.10、UTMOS>=2.30、CER<=0.15；实际仍用identity OpenCC兼容评测，不能宣称完整归一化协议通过。
+- 修改路径：build/reproduce_hubert_world_round88_20261027.py（增加固定Round89配置）、coummucation.md；结果写report/fixed_male_hubert_world_round89_20261027.{md,json}。
+- 复现命令：python build/reproduce_hubert_world_round88_20261027.py prepare --experiment-round 89 --asset-root <asset-root>；随后相同入口train/candidate/evaluate；评测使用Python3.12，训练和生成使用既有yolo Python。
+- 已验证证据：Round25清单content_frames长度计数128帧合格184，192帧合格140；当前分支与main同步、PR13归本任务，无同路线新认领。
+- 现场边界：不播放、不录音、不接触板卡，不声明PS/PL或实时通过。
+- 下一责任方：Hardware-A / Codex 训练、严格评测、直接从产物提取证据并单轮提交。

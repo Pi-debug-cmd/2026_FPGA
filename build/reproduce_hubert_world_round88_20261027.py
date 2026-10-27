@@ -1,4 +1,4 @@
-"""Reproduce Round88 with external assets and the historical compatibility runtime."""
+"""Reproduce Round88 and the Round89 crop experiment with external assets."""
 from __future__ import annotations
 
 import argparse
@@ -12,10 +12,11 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("stage", choices=("prepare", "train", "candidate", "evaluate"))
     parser.add_argument("--asset-root", required=True, type=Path)
+    parser.add_argument("--experiment-round", type=int, choices=(88, 89), default=88)
     args = parser.parse_args()
     root = args.asset_root.resolve()
     generated = root / "build/generated"
-    output = generated / "hubert_world_round88_20261027"
+    output = generated / f"hubert_world_round{args.experiment_round}_20261027"
     runtime = output / "runtime/build"
     source = Path(__file__).resolve().parent
     if args.stage == "prepare":
@@ -31,6 +32,10 @@ def main() -> None:
             text = (source / name).read_text(encoding="utf-8")
             text = text.replace("ROOT = Path(__file__).resolve().parents[1]",
                                 f"ROOT = Path({str(root)!r})")
+            if (args.experiment_round == 89
+                    and name == "train_paired_hubert_world_gru_round26_20261025.py"):
+                assert text.count("CROP = 128") == 1
+                text = text.replace("CROP = 128", "CROP = 192")
             if name.startswith("apply_world_temporal"):
                 text = text.replace('sys.path.insert(0, str(ROOT / "build"))',
                                     'sys.path.insert(0, str(Path(__file__).resolve().parent))')
@@ -70,7 +75,7 @@ def main() -> None:
             options = ["--generated-root", str(generated), "--checkpoint",
                        str(output / "paired_causal_gru.pt"), "--output",
                        str(output / "candidates"), "--gain", "1.6",
-                       "--experiment-round", "88", "--source-relative",
+                       "--experiment-round", str(args.experiment_round), "--source-relative",
                        "人物音频资料/男声/标准录音 4.wav"]
     sys.path.insert(0, str(runtime))
     sys.argv = [str(script), "--asset-root", str(root), *options]
