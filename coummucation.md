@@ -1786,3 +1786,17 @@
 - 限制：只使用录音4；未使用录音5或 Track 9，未播放、未录音、未接触板卡。
 - 下一责任方：Hardware-A / Codex 在 Round56 只测试源VUV时序融合，判断清辅音边界能否降低CER且不引入音色谱。
 
+### [PS-20261021-10] HuBERT/WORLD Round 69 结果
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`6998adb9683e2c13d37f4acb80b116f91cc7dfe7`
+- 唯一变量：多尺度动态损失权重由 0.75 改为 1.65；固定种子 20261025、2000 步、source prosody、variance matching、锚点概率 0.25 和 gain 1.6。
+- 输入：仅男声标准录音 4 验证，SHA-256 `f4a026e5c97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c`；配对缓存清单 SHA-256 `4d34669259834bd30219f34af4730712c9aa7c4cf8fa8bc3c5ccde9ee3cc5bc5`。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.7054/0.6786/0.1037/2.3743/0.2206`；泄漏与 CER 未过门。Checkpoint SHA-256 `3a045e8571e77eedacf0b408ccfb9395b1bf212bf221956a8202288dad552cca`；候选 PCM16 SHA-256 `c33eb00a6bf4d49de3d465dc729b562ac1143ac633675f855deda357411765d6`。
+- 修改路径：`build/train_paired_hubert_world_gru_round26_20261025.py`、`report/fixed_male_hubert_world_round69_20261027.{md,json}`、`coummucation.md`。
+- 复现命令：见 `report/fixed_male_hubert_world_round69_20261027.json`；训练入口支持 `--multiscale-weight`，并以 `--skip-locked-target-regression` 在保存 checkpoint 后停止。
+- 限制：严格评估注入 identity OpenCC shim，源 Whisper 转写也有识别错误；录音 5 与 Track 9 未用于选参；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL 或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round69_20261027.md`、`report/fixed_male_hubert_world_round69_20261027.json`。
+- 下一责任方：Hardware-A / Codex 继续调整同一电脑端方案并逐轮评估。
+

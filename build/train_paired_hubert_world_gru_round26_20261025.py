@@ -58,7 +58,8 @@ def loss_terms(prediction: torch.Tensor, target: torch.Tensor, target_vuv: torch
                variance_matching: bool = False,
                exclude_f0_variance: bool = False,
                half_f0_variance: bool = False,
-               voiced_f0_reconstruction: bool = False) -> tuple[torch.Tensor, dict]:
+               voiced_f0_reconstruction: bool = False,
+               multiscale_weight: float = 0.75) -> tuple[torch.Tensor, dict]:
     if not multiscale:
         return prior.loss_terms(prediction, target, target_vuv, positive_weight)
     continuous_prediction = prediction[..., prior.CONTINUOUS]
@@ -81,7 +82,7 @@ def loss_terms(prediction: torch.Tensor, target: torch.Tensor, target_vuv: torch
         deltas.append(torch.stack(per_group).mean() if group_balanced else
                       torch.nn.functional.smooth_l1_loss(prediction_delta, target_delta))
     multiscale_delta = torch.stack(deltas).mean()
-    total = reconstruction + 0.35 * vuv + 0.75 * multiscale_delta
+    total = reconstruction + 0.35 * vuv + multiscale_weight * multiscale_delta
     metrics = {"total": float(total.detach()),
                "reconstruction": float(reconstruction.detach()),
                "vuv_bce": float(vuv.detach()),
@@ -124,7 +125,8 @@ def loss_terms(prediction: torch.Tensor, target: torch.Tensor, target_vuv: torch
 def validate(model: prior.CausalWorldGRU, rows: list[tuple[np.ndarray, np.ndarray]],
              positive_weight: torch.Tensor, multiscale: bool, group_balanced: bool,
              variance_matching: bool, exclude_f0_variance: bool,
-             half_f0_variance: bool, voiced_f0_reconstruction: bool) -> dict:
+             half_f0_variance: bool, voiced_f0_reconstruction: bool,
+             multiscale_weight: float = 0.75) -> dict:
     metrics = []
     model.eval()
     with torch.inference_mode():
@@ -134,7 +136,7 @@ def validate(model: prior.CausalWorldGRU, rows: list[tuple[np.ndarray, np.ndarra
                                 torch.from_numpy(target[None, :, VUV_INDEX]), positive_weight,
                                 multiscale, group_balanced, variance_matching,
                                 exclude_f0_variance, half_f0_variance,
-                                voiced_f0_reconstruction)
+                                voiced_f0_reconstruction, multiscale_weight)
             metrics.append(row)
     return {key: float(np.mean([row[key] for row in metrics])) for key in metrics[0]}
 
@@ -145,7 +147,9 @@ def main() -> None:
     parser.add_argument("--output", type=Path,
                         default=ROOT / "build/generated/hubert_world_round26_20261025")
     parser.add_argument("--multiscale-dynamics", action="store_true",
-                        help="Round 28: use fixed 0.75 x mean(lag 1/2/4) dynamic loss")
+                        help="Round 28: use mean(lag 1/2/4) dynamic loss")
+    parser.add_argument("--multiscale-weight", type=float, default=0.75,
+                        help="Weight for the multiscale dynamic loss (default: 0.75)")
     parser.add_argument("--group-balanced-dynamics", action="store_true",
                         help="Round 30: average spectrum/log-F0/energy/AP dynamic groups equally")
     parser.add_argument("--source-prosody", action="store_true",
@@ -158,7 +162,13 @@ def main() -> None:
                         help="Round 40: weight F0 variance at half of the other groups")
     parser.add_argument("--voiced-f0-reconstruction", action="store_true",
                         help="Round 43: add 0.05 voiced-frame log-F0 reconstruction loss")
+    parser.add_argument("--skip-locked-target-regression", action="store_true",
+                        help="Stop after saving the checkpoint, before reading locked Track 9")
     args = parser.parse_args()
+    if not np.isfinite(args.multiscale_weight) or args.multiscale_weight < 0:
+        raise ValueError("multiscale weight must be finite and non-negative")
+    if not args.multiscale_dynamics and args.multiscale_weight != 0.75:
+        raise ValueError("multiscale weight requires --multiscale-dynamics")
     if args.group_balanced_dynamics and not args.multiscale_dynamics:
         raise ValueError("group-balanced dynamics requires --multiscale-dynamics")
     if args.source_prosody and (not args.multiscale_dynamics or args.group_balanced_dynamics):
@@ -292,14 +302,15 @@ def main() -> None:
         loss, metrics = loss_terms(prediction, target, target[..., VUV_INDEX], positive_weight,
                                    args.multiscale_dynamics, args.group_balanced_dynamics,
                                    args.variance_matching, args.exclude_f0_variance,
-                                   args.half_f0_variance, args.voiced_f0_reconstruction)
+                                   args.half_f0_variance, args.voiced_f0_reconstruction,
+                                   args.multiscale_weight)
         optimizer.zero_grad(set_to_none=True); loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0); optimizer.step(); scheduler.step()
         if step == 1 or step % CHECK_EVERY == 0:
             valid = validate(model, validation, positive_weight, args.multiscale_dynamics,
                              args.group_balanced_dynamics, args.variance_matching,
                              args.exclude_f0_variance, args.half_f0_variance,
-                             args.voiced_f0_reconstruction)
+                             args.voiced_f0_reconstruction, args.multiscale_weight)
             record = {"step": step, "train": metrics, "validation": valid,
                       "learning_rate": optimizer.param_groups[0]["lr"]}
             history.append(record); print(json.dumps(record), flush=True)
@@ -335,6 +346,13 @@ def main() -> None:
                 "prosody_mean": prosody_mean, "prosody_std": prosody_std,
                 "best": best, "history": history,
                 "round25_manifest_sha256": base.sha256(manifest_path)}, checkpoint)
+
+    if args.skip_locked_target_regression:
+        print(json.dumps({"checkpoint": str(checkpoint),
+                          "checkpoint_sha256": base.sha256(checkpoint),
+                          "steps_completed": history[-1]["step"],
+                          "target_track9_used": False}, ensure_ascii=False), flush=True)
+        return
 
     # Frozen target-speaker Track 9 development regression.
     signal9 = base.read_16k(args.asset_root / "人物音频资料/女声/Track 9.wav")
@@ -410,7 +428,7 @@ def main() -> None:
                                                         if args.half_f0_variance else
                                                         [1.0, 1.0, 1.0, 1.0])}
                                      if args.variance_matching else None),
-               "dynamic_loss": ({"weight": 0.75, "lags": [1, 2, 4], "reduction": "mean"}
+               "dynamic_loss": ({"weight": args.multiscale_weight, "lags": [1, 2, 4], "reduction": "mean"}
                                 if args.multiscale_dynamics
                                 else {"weight": 0.20, "lags": [1], "reduction": "mean"}),
                "synthesis": synthesis, "checkpoint_sha256": base.sha256(checkpoint),
