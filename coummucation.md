@@ -1573,3 +1573,11 @@
 - 性能：DMA均值90.799µs，p95 91.248µs；但PL接口总323µs/调用，渲染RTF0.339278比CPU0.326107略差；整链未提速，不能验收加速。
 - 限制：没有录放或听感结论，候选临时驻留、v23服务停止；分析RTF约0.55仍为另一瓶颈。
 - 下一责任方：Hardware-A / Codex 优化逐bin remainder/floor/打包并加入分项计时；同输入重复静默回归，性能过后再请求现场确认。
+
+### [PL-20261027-01] PS接口优化 Round 2 方案
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED。
+- 基准提交：`724464a`；改动：`src/ps/world_exp_hook.cpp`、`report/world_exp_round2_proposal_20261027.md`及本记录。
+- 唯一主要变量：以截断+负数纠正替代逐bin floor，常用相位范围跳过remainder，新增prepare/DMA/unpack计时；PL、音频算法、量化和输入不变。
+- 复现：首轮构建与`check_world_exp_quality.py`相同命令；host男声1 SNR79.0566dB/最大误差3保持一致，ARM已编译。
+- 限制：新程序正在静默传输，还未有本轮板端耗时；候选位流驻留、音频服务停止，无录放。
+- 下一责任方：Hardware-A / Codex 同输入板端四路径回归并提交性能结果。

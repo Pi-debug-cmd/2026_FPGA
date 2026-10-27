@@ -18,6 +18,7 @@ struct Backend {
   int mode = 0, fd = -1;
   unsigned long calls = 0, fallback = 0;
   double elapsed = 0;
+  double prepare_s = 0, dma_s = 0, unpack_s = 0;
   world_exp_packet packet;
   Backend() {
     const char *m = std::getenv("WORLD_EXP");
@@ -31,7 +32,7 @@ struct Backend {
     if (fd < 0) { std::perror("open /dev/world_exp"); std::abort(); }
   }
   ~Backend() {
-    if (mode) std::fprintf(stderr,"{\"kind\":\"world_exp_backend\",\"mode\":%d,\"calls\":%lu,\"fallback\":%lu,\"seconds\":%.9f}\n",mode,calls,fallback,elapsed);
+    if (mode) std::fprintf(stderr,"{\"kind\":\"world_exp_backend\",\"mode\":%d,\"calls\":%lu,\"fallback\":%lu,\"seconds\":%.9f,\"prepare_s\":%.9f,\"dma_s\":%.9f,\"unpack_s\":%.9f}\n",mode,calls,fallback,elapsed,prepare_s,dma_s,unpack_s);
 #ifdef __linux__
     if (fd >= 0) close(fd);
 #endif
@@ -74,23 +75,33 @@ bool WorldExpOffload(double (*sp)[2], int n) {
     const double a=sp[i][0]*inv-peak;
     // 24-bit input and 6-bit shift contract. Entire frame uses CPU if exceeded.
     if (a < -20.0 || peak > 600 || peak < -600) {++backend.fallback; return false;}
-    double b=std::remainder(sp[i][1]*inv, 6.2831853071795864769);
-    int aq=int(std::floor(a*262144.0+0.5));
-    int bq=int(std::floor(b*262144.0+0.5));
+    double b=sp[i][1]*inv;
+    // WORLD phase usually lies inside this interval. General remainder is rare.
+    if (b > 3.14159265358979323846 || b < -3.14159265358979323846)
+      b=std::remainder(b,6.2831853071795864769);
+    // Truncation plus one correction implements floor(x+.5) exactly.
+    double af=a*262144.0+0.5, bf=b*262144.0+0.5;
+    int aq=int(af), bq=int(bf);
+    aq-=af<aq; bq-=bf<bq;
     backend.packet.input[i]=(uint64_t(uint32_t(bq)&0xffffff)<<24)|(uint32_t(aq)&0xffffff);
     if (backend.mode==1) backend.packet.output[i]=
       (uint64_t(Model(aq,bq,true)&0xfffff)<<20)|(Model(aq,bq,false)&0xfffff);
   }
+  const double prepared=Now();
 #ifdef __linux__
   if (backend.mode==2 && ioctl(backend.fd,WORLD_EXP_PROCESS,&backend.packet)<0) {
     std::perror("WORLD PL DMA; refusing silent CPU fallback"); std::abort();
   }
 #endif
+  const double transferred=Now();
   double scale=std::exp(peak)/131072.0;
   for (int i=0;i<513;++i) {
     uint64_t y=backend.packet.output[i];
     sp[i][0]=Signed20(y)*scale; sp[i][1]=Signed20(y>>20)*scale;
   }
-  ++backend.calls; backend.elapsed+=Now()-start;
+  const double finished=Now();
+  ++backend.calls; backend.elapsed+=finished-start;
+  backend.prepare_s+=prepared-start; backend.dma_s+=transferred-prepared;
+  backend.unpack_s+=finished-transferred;
   return true;
 }
