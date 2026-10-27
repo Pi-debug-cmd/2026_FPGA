@@ -167,3 +167,17 @@
 - 唯一新增变量：训练期20类源说话人分类器+梯度反转，speaker_adv_weight0.05；PCA96、delta0.25、数据切分、seed、双向GRU192、优化器、早停和五门口径不变。统计逐元素等于v1，v4参数1144552，最佳step800、停止step1600、训练359.391s。
 - 一次Male4五门：身份0.773824141/P100.745913965/泄漏0.239771249/UTMOS2.426944574/CER0.470588235；通过项{'identity': True, 'identity_p10': True, 'leakage': False, 'utmos': True, 'cer': False}。相对v1泄漏下降但CER恶化，仍REJECTED，不进入WAIT_LOCAL_TEST。
 - 限制/下一责任方：对抗项只训练电脑端映射，非因果、无板卡/试听/实时声明；Male5/Track9锁定。Remote-PS-C提交本轮失败证据，下一轮只考虑对抗权重单变量调整。
+
+### [PS-20261025-20] v5 对抗权重 0.01 单变量认领
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：CLAIMED；基准提交 `38f54d0`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；PR #11。
+- 假设/范围：v4 对抗权重0.05使源泄漏降至0.2398但CER升至0.4706。v5 只将 `speaker_adv_weight` 从0.05降为0.01，PCA96、delta0.25、数据、seed、网络、优化器、早停和原五门不变，检验较弱对抗是否恢复内容并保留泄漏改善。
+- 路径/复现：拟新增 `build/remote_ps_c_hubert_fargan_v5.py`、`build/run_remote_ps_c_hubert_fargan_v5.py`；输出 `build/generated/remote_ps_c_hubert_fargan_v5/`；报告 `report/ps_20261025_20_hubert_fargan_v5_20261027.*`。复用 v1 缓存，不读取 Male5/Track9。
+- 停止条件：辅助 validation 选 checkpoint后只做一次 Fixed-Male4 五门；未全过不进入 WAIT_LOCAL_TEST，不发布模型包；本轮不扫描其它权重。
+- 限制/下一责任方：电脑端非因果实验，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时声明；Remote-PS-C提交结果并维护PR #11。
+
+### [PS-20261025-20] v5 源说话人对抗映射结果
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准6d940c927f4ba7ffefb97761dafa68c2f4295750；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
+- 路径/复现：build/remote_ps_c_hubert_fargan_v5.py、build/run_remote_ps_c_hubert_fargan_v5.py；report/ps_20261025_20_hubert_fargan_v5_20261027.md/JSON/TXT。训练复用v1缓存，三阶段exit0，原strict evaluator只筛选一次Male4；完整SHA/日志见报告。
+- 唯一新增变量：训练期20类源说话人分类器+梯度反转，speaker_adv_weight0.01；PCA96、delta0.25、数据切分、seed、双向GRU192、优化器、早停和五门口径不变。统计逐元素等于v1，v5参数1144552，最佳step400、停止step1200、训练266.797s。
+- 一次Male4五门：身份0.777850780/P100.750804871/泄漏0.266084400/UTMOS2.461675485/CER0.323529412；通过项{'identity': True, 'identity_p10': True, 'leakage': False, 'utmos': True, 'cer': False}。相对v1泄漏下降但CER恶化，仍REJECTED，不进入WAIT_LOCAL_TEST。
+- 限制/下一责任方：对抗项只训练电脑端映射，非因果、无板卡/试听/实时声明；Male5/Track9锁定。Remote-PS-C提交本轮失败证据，下一轮只考虑对抗权重单变量调整。
