@@ -1,15 +1,19 @@
 // Fixed 1024-point WORLD minimum-phase stage. Experimental resource probe.
 // Retains the WORLD/Ooura conjugated-c2c convention explicitly.
 #include <cmath>
+#include "world_minphase_twiddles.h"
 
 namespace {
 const int N = 1024;
 void Forward(float re[N], float im[N]) {
+#pragma HLS INLINE off
   // One shared radix-2 butterfly; no dynamic allocation or host dependencies.
-  for (unsigned i = 1, j = 0; i < N; ++i) {
-    unsigned bit = N >> 1;
-    for (; j & bit; bit >>= 1) j ^= bit;
-    j ^= bit;
+  for (unsigned i = 0; i < N; ++i) {
+    unsigned j = 0;
+    for (int bit = 0; bit < 10; ++bit) {
+#pragma HLS UNROLL
+      j |= ((i >> bit) & 1) << (9-bit);
+    }
     if (i < j) {
       float t = re[i]; re[i] = re[j]; re[j] = t;
       t = im[i]; im[i] = im[j]; im[j] = t;
@@ -17,17 +21,22 @@ void Forward(float re[N], float im[N]) {
   }
   for (int stage = 1; stage <= 10; ++stage) {
     const int length = 1 << stage, half = length >> 1;
-    for (int k = 0; k < half; ++k) {
-      const float angle = -6.2831853071795864769f * k / length;
-      const float wr = std::cos(angle), wi = std::sin(angle);
-      for (int first = 0; first < N; first += length) {
-        const int a = first + k, b = a + half;
+    for (int butterfly = 0; butterfly < N/2; ++butterfly) {
+#pragma HLS PIPELINE II=2
+#pragma HLS DEPENDENCE variable=re inter false
+#pragma HLS DEPENDENCE variable=im inter false
+        // Every address appears exactly once in a stage; stages drain before
+        // advancing. The inter-iteration independence above is intentional.
+        const int k = butterfly & (half-1);
+        const int first = (butterfly >> (stage-1)) << stage;
+        const int index = k << (10-stage);
+        const float wr = world_twiddle_re[index], wi = world_twiddle_im[index];
+        const int a = first+k, b = a+half;
         const float tr = wr * re[b] - wi * im[b];
         const float ti = wr * im[b] + wi * re[b];
         const float ar = re[a], ai = im[a];
         re[a] = ar + tr; im[a] = ai + ti;
         re[b] = ar - tr; im[b] = ai - ti;
-      }
     }
   }
 }
@@ -51,6 +60,7 @@ extern "C" void world_minphase(const float log_spectrum[513],
   for (int i = N/2+1; i < N; ++i) re[i] = im[i] = 0;
   Forward(re, im);
   for (int i = 0; i <= N/2; ++i) {
+#pragma HLS PIPELINE II=1
     const float amplitude = std::exp(re[i] / N);
     filter_re[i] = amplitude * std::cos(im[i] / N);
     filter_im[i] = amplitude * std::sin(im[i] / N);

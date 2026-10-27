@@ -1876,3 +1876,15 @@
 - 报告report/world_minphase_fused_round13_20261027.md、host JSON和两份HLS原始TXT；24例最大relativeL2 9.2324e-7，完整两输入PCM16最大误差1/SNR96.237及96.601dB。
 - HLS RTL已生成，估算18150LUT/11213FF/3 BRAM36K/81DSP，但动态FFT循环顶层周期未知，不能直接板测或宣称加速。
 - 限制：无RTL cosim/routed/板测/新听感；candidate驻留、服务停止。下一责任方Hardware-A / Codex固定循环/ROM及指数流水，逐轮提交结果。
+
+### [PL-20261027-01] Round14 固定循环融合核优化认领
+- 日期2026-10-27；Hardware-A / Codex；CLAIMED；基准49627af。
+- 范围最小相位HLS：1024点固定bit reversal、每级512蝶形、float32旋转因子ROM、输出exp/sin/cos流水；不改输入/输出/算法约定。
+- 依据Round13数值通过但动态循环周期未知；本轮先确定周期资源，再决定是否使用官方FFT IP替代自定义蝶形。报告与数值待本轮结果。
+- 限制无新录放/板测，候选驻留、服务停止；下一责任方Hardware-A / Codex。
+
+### [PL-20261027-01] Round14 固定周期融合核方案
+- 日期2026-10-27；Hardware-A / Codex；PROPOSED；基准49627af。
+- 固定每级512蝶形、预计算ROM、固定bit反转、exp输出流水；源码及生成/质量脚本见report/world_minphase_round14_proposal_20261027.md。
+- 24例host最大relativeL2 8.5944e-7；完整语音/HLS进行中，后续独立结果提交；同级无地址重叠依赖声明必须RTL cosim验证。
+- 限制无RTL/板测/新录放；当前compact候选驻留、服务停止；下一责任方Hardware-A / Codex完成周期/资源与数值门。
