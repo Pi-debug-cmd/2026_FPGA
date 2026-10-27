@@ -2302,3 +2302,25 @@
 - 报告：report/paired_teacher_content_audit_20261027.md与JSON保留逐句文本、SHA、编辑数及脚本SHA。
 - 限制：专名、数字书写与ASR错误混合，声明文本未经独立人工校对；等长不证明音素对齐。未读录音4/5或Track9，不训练、不播放、不接触板卡；不是五门验收。
 - 下一责任方：Hardware-A / Codex 在同8句分离教师原音、WORLD压缩重建、冻结学生的内容误差，不恢复无机制依据的参数扫描。
+
+
+### [PS-20261021-10] 同句内容链诊断认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准提交：77dff33；冻结Round88模型，gain1.6，不训练、不扫描。
+- 范围：同8条公共validation，比较教师原音、SP60/AP12 5ms重建、训练缓存20ms再插值重建、学生预测+既有gain1.6。前两重建分支不用目标裁剪以隔离表示/时间压缩；学生保持生产裁剪。各分支还保留既有合成器平滑和峰值规则，不能把差异归因于单独DCT。
+- 修改路径：build/audit_content_chain_20261027.py、report/paired_content_chain_audit_20261027.{json,md}、coummucation.md。
+- 复现：yolo Python运行generate；Python3.12运行evaluate，均--asset-root <asset-root> --output <generated>/paired_content_chain_20261027；需先完成教师内容诊断。
+- 判据：若WORLD真值路径仍保留内容而预测路径恶化，优先诊断映射/对齐及监督；若20ms重建即退化，优先修复时间表示。不按结果直接扫描更多权重。
+- 限制：声明文本非人工核验，自动ASR差异非听感结论；不读录音4/5或Track9，不播放、不训练、不接触板卡。
+- 下一责任方：Hardware-A / Codex 完成逐句证据并提交。
+
+
+### [PS-20261021-10] 同句内容链诊断结果
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED / DIAGNOSIS_ONLY。
+- 基准提交：77dff33；模型冻结Round88，未训练和调参。
+- 量化结果：同8句152字，源21、教师22、WORLD5ms24、缓存20ms25、学生gain1.6为44编辑，CER依次0.138158/0.144737/0.157895/0.164474/0.289474。最大观察增量在缓存重建到学生管线，不支持20ms压缩本身为主要原因。
+- 修改路径与报告：build/audit_content_chain_20261027.py、report/paired_content_chain_audit_20261027.{md,json}、coummucation.md。
+- 复现：yolo Python入口generate，Python3.12入口evaluate，--asset-root <asset-root> --output <generated>/paired_content_chain_20261027；前置上一教师内容诊断，完整命令见JSON。
+- 核验：checkpoint SHA e21d8175cb56a5aa3f3e7ac75578705b5deb8cb40fea07a5a73ef87d38586faa；缓存/源/教师SHA通过；8行24WAV二次核对哈希，生成产物后退出1，评测退出0。
+- 限制：ASR差异不是因果可加误差分解；学生分支包含目标裁剪和gain，锚点使用5ms统计而非生产20ms插值，不声称录音4逐位复现；声明文本非人工核验。WORLD分支保留合成器平滑/VUV/峰值规则。无录音4/5、Track9、播放、训练或板端结论。
+- 下一责任方：Hardware-A / Codex 优先量化源/教师时间对齐、预测裁剪和动态误差，再选择有机制依据的监督修复；不恢复参数扫描。
