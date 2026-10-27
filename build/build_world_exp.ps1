@@ -5,9 +5,11 @@ param(
   [switch]$ProfileOperators,
   [switch]$CacheFftPlans,
   [string]$FftModelSdk='',
-  [switch]$FftPl
+  [switch]$FftPl,
+  [switch]$MinphaseModel
 )
 $ErrorActionPreference='Stop'
+if ($MinphaseModel -and ($Target -ne 'host' -or $FftModelSdk -or $FftPl -or $ProfileOperators)) {throw 'Minimum-phase model requires host without FFT/profile wrappers'}
 if ($ProfileOperators -and $CacheFftPlans) {throw 'Profile and cache wrappers must be built separately'}
 if ($FftModelSdk -and ($Target -ne 'host' -or $ProfileOperators)) {throw 'FFT IP model requires host and no profiling'}
 if ($FftPl -and ($Target -ne 'arm' -or $ProfileOperators -or $FftModelSdk)) {throw 'PL FFT requires ARM without model/profiling'}
@@ -56,6 +58,11 @@ if($FftPl) {
   $bin+='_fftpl'
   $sources+=@("$root/src/ps/world_fft_pl.cpp")
   $flags+='-Wl,--wrap=fft_execute'
+}
+if($MinphaseModel) {
+  $bin+='_minphase_model'
+  $sources+=@("$root/src/ps/world_minphase_model.cpp", "$root/src/hls/world_minphase.cpp")
+  $flags+='-Wl,--wrap=GetMinimumPhaseSpectrum'
 }
 if($Target -eq 'host') {$bin+='.exe'}
 & $Compiler @flags @includes "$root/src/ps/world_live_stream.cpp" "$root/src/ps/world_exp_hook.cpp" "$out/common.cpp" "$root/src/ps/world_v23/synthesis.cpp" "$root/src/ps/world_v23/synthesisrealtime.cpp" @sources "$WorldRoot/tools/audioio.cpp" -lm -o $bin

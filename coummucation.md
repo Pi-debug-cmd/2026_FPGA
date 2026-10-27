@@ -1862,3 +1862,11 @@
 - 提案报告：`report/world_full_pl_migration_round13_proposal_20261027.md`。分层范围：4帧前端谱→D4C批处理→合成状态→单事务融合DMA；PS保留音频I/O与控制。
 - 量化门：逐层与v23 PCM16最大误差≤3、SNR≥75dB、零fallback/零削顶；每层独立HLS/RTL/资源/时序门。当前只是架构提案，无板测/试听/高实时结论。
 - 下一责任方：Hardware-A / Codex 编写第一阶段frame frontend golden/HLS C-sim，随后Vivado MCP综合资源评估。
+
+### [PL-20261027-01] Round13 最小相位融合原型方案
+- 日期2026-10-27；Hardware-A / Codex；PROPOSED；基准622fbd8。
+- 源码src/hls/world_minphase.cpp、host wrapper、build MinphaseModel开关、HLS tcl与24例单元；报告report/world_minphase_fused_round13_proposal_20261027.md。
+- 范围：镜像log谱→两FFT→倒谱→复数指数在一个PL核；只输入谱/输出最终滤波器，减少往返；尚非完整D4C/合成。
+- 复现：报告内MinphaseModel和vitis-run命令；初步host/HLS结果已产生，将独立结果提交。默认CPU不变，无新录放。
+- 修正方案：随机激励必须原WORLD算法/种子/消费顺序，不能LFSR替代；STFT不能直接当CheapTrick，D4C内部FFT尺寸按原公式。
+- 下一责任方Hardware-A / Codex提交完整结果，资源/周期不达标则先优化HLS，禁止提前板测通过。
