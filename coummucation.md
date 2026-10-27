@@ -1729,3 +1729,11 @@
 - 量化：100MHz WNS+0.302ns/WHS+0.036ns，0失败端点/黑盒/DRC Error，17200LUT/29183FF/24.5BRAM/69DSP；bus skew全MET，位流swap SHA bdb4c0877e9818976dd7d9281a8ccc162018681cdf880bf117d2f55d3af72988。
 - 限制：3输入/6输出缺外部IO延时，保留DRC Warning/Advisory。程序已校验传输，位流传输中；服务临时停止，没有FFT板测/听感/高实时结论。
 - 下一责任方：Hardware-A / Codex 完成临时加载、128次DMA对照与两段文件全路径回归；任何新的现场录放仍先确认。
+
+### [PL-20261027-01] Round 8 硬件FFT首轮约定检查拒绝
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：REJECTED（PS c2c适配/测试约定）。
+- 实现：`b551646`，位流实现证据`a05d00c`；报告：`report/world_fft_board_round8_rejected_20261027.json`。
+- 复现：按manifest上传，临时加载已签核SHA位流，insmod两个自有module，运行world_fft_pl_trial.py；probe在复数脉冲用例失败，1024 relativeL2=1.41421356，未进入语音文件测试。
+- 原因：WORLD/Ooura c2c包装相对标准DFT隐含共轭输入虚部；PL和模型当前采用标准复数输入。此前语音链c2c输入为实数，模型检查未暴露此差异；30个模型RTL一致结论有效，但不能代替WORLD接口约定测试。
+- 修正方向：PS适配/host模型明确共轭c2c输入，probe与原WORLD约定对齐，再完整回归；无需改RTL。r2c/c2r不套用此变更。
+- 状态：FPGA候选operating，两临时module已加载、音频服务停止，无新录放或FFT板端验收。下一责任方：Hardware-A / Codex 修正并提交下一方案轮次，随后静默回归。
