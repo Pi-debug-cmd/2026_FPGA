@@ -1706,3 +1706,18 @@
 - 合约：每事务64bit配置头+N复数float，输出N复数；1024/2048、forward/inverse未归一化，c2r显式补Hermitian；DMA0x40410000，独立于已有exp。
 - 限制：没有加载FFT候选，板上原v23运行；只有模型和OOC资源门通过，整机时序/RTL全部向量/板测尚未完成；不宣称高实时。
 - 下一责任方：Hardware-A / Codex 先完成30帧位准确/背压仿真、布局布线，再做静默文件和DMA性能门；现场录放须当轮确认。
+
+### [PL-20261027-01] Round 7 FFT AXI RTL位准确仿真
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（仅RTL仿真）。
+- 基准实现：`b551646`；改动：`report/world_fft_stream_round7_20261027.{json,txt}`。
+- 复现：质量脚本生成30帧官方模型mem向量，Vivado MCP运行`run_world_fft_sim.tcl`；40960复数float词全64bit一致，含1024→2048→1024、正反向、零/脉冲/常数/随机/弱信号和输入空拍/输出背压。
+- 量化：无背压稳态1024帧4293拍（42.93µs）、2048帧8389拍（83.89µs）@100MHz；只含流核，不含PS转换/DMA。整机综合完成，布局布线已启动。
+- 限制：未加载FFT候选、尚无FFT板端收益或听感。下一责任方：Hardware-A / Codex 完成整机时序/DRC与静默板测。
+
+### [PL-20261027-01] 临时高速UART尝试拒绝并自动恢复
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：REJECTED（921600串口），ACCEPTED（原基线恢复）。
+- 基准：`b551646`；证据：`report/world_uart_baud_recovery_20261027.json`。
+- 为缩短位流传输，停v23后临时设置921600；控制台失去响应。标准/高速重连、Ctrl-C和JTAG仅恢复UART寄存器仍未恢复；Windows PnP重启被系统权限拒绝，未执行。
+- 本次JTAG已可连接（Digilent210357A7D00EA），通过XSDB系统复位并从未改动启动分区正常boot；串口115200、原v23 SHA匹配、PCM0p/PCM1c RUNNING恢复。
+- 处置：撤销未提交的BaudRate参数，上传工具仍固定115200，不重试该加速传输路径。不把具体UART驱动/内核原因写成已定位；事故期间未加载FFT候选，无新现场测试。
+- 下一责任方：Hardware-A / Codex 保持115200完成候选传输；继续等待已启动的整机布局布线。
