@@ -1879,6 +1879,17 @@
 - 唯一变量：`speaker_adv_weight` 从 0.01 改为 0.02；PCA96、delta0.25、HuBERT layer9、双向GRU192、数据、seed、优化器、早停和五门不变。一次 Fixed-Male4 结果：identity 0.770142852 / P10 0.737552752 / leakage 0.256829248 / UTMOS 2.436301072 / CER 0.323529412；泄漏和 CER 未过，仍 REJECTED。
 - Male5/Track9 未读取；输出 16kHz mono PCM16，未播放、录音、试听或触碰板卡/ARM/Vivado/RTL/PL；未进入 `WAIT_LOCAL_TEST`，未发布 v12 模型包。下一轮改用新的单变量训练目标或表示约束。
 
+### [PS-20261025-20] v13 逐帧源说话人对抗约束认领
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：CLAIMED；基准提交 `82458d7`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；PR #11。
+- 假设/范围：v12 使用片段均值 speaker head，泄漏仍约0.257。v13 唯一改变对抗分类为逐帧 logits 与逐帧平均 CE；权重0.02、PCA96、delta0.25、HuBERT layer9、双向GRU192、数据、seed、优化器、早停和五门不变。
+- 路径：`build/remote_ps_c_hubert_fargan_v13.py`、`build/run_remote_ps_c_hubert_fargan_v13.py`；输出 `build/generated/remote_ps_c_hubert_fargan_v13/`；Male5/Track9锁定，仅电脑端运行。
+- 停止条件：train/infer/evaluate 后只做一次 Fixed-Male4 五门；未全过不进入 `WAIT_LOCAL_TEST`，不发布模型包。
+
+### [PS-20261025-20] v13 运行时阻塞记录
+- 训练完成：exit 0，best step 400，停止 step 1200；生成 `mapper.pt`、`statistics.npz` 和 Fixed-Male4 特征。
+- 推理启动 FARGAN native 时 exit 1，Windows `WinError 623`（系统 DLL 重定位）；重试及历史 v1/v2/v3 同 SHA native 均复现，连同一 MinGW gcc 也无法启动。故本轮没有合法音频或五门结果，不得把它标为通过或失败质量结果。
+- 当前状态保持 BLOCKED-RUNTIME；保留日志 `build/generated/remote_ps_c_v13_infer.log` 与执行摘要，待本机 native 运行时恢复后继续同一轮评价。
+
 ### [PS-20261025-20] v11 内容帧 +10ms 对齐结果
 - 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准465b70a；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
 - 路径/复现：build/remote_ps_c_hubert_fargan_v11.py、build/run_remote_ps_c_hubert_fargan_v11.py；report/ps_20261025_20_hubert_fargan_v11_20261027.md/JSON/TXT。唯一变量内容帧+1（10ms），独立cache后全阶段exit0。

@@ -791,6 +791,15 @@ ps-opt 把非周期最小相位优化移植进流式路径（改造 synthesisrea
 - 唯一变量：`speaker_adv_weight=0.02`，其余 v5 配置和评测口径不变。Fixed-Male4：identity 0.770142852、P10 0.737552752、leakage 0.256829248、UTMOS 2.436301072、CER 0.323529412；仍未通过泄漏与 CER 门槛。
 - Male5/Track9锁定；无播放、录音、试听、板卡/ARM/Vivado/RTL/PL；未进入 `WAIT_LOCAL_TEST`，不发布 v12 模型包。下一轮改训练目标或表示约束，保持单变量。
 
+### [PS-20261025-20] v13 逐帧源说话人对抗约束认领
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：CLAIMED；基准 `82458d7`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；PR #11。
+- 唯一变量：speaker head 从 `hidden.mean(dim=1)` pooled logits 改为逐帧 logits，speaker CE 对所有有效帧求平均；权重0.02，其他训练/数据/评价设置保持不变。
+- 代码：`build/remote_ps_c_hubert_fargan_v13.py`、`build/run_remote_ps_c_hubert_fargan_v13.py`；输出 `build/generated/remote_ps_c_hubert_fargan_v13/`；只做一次 Fixed-Male4 评价，Male5/Track9锁定。
+
+### [PS-20261025-20] v13 运行时阻塞记录
+- v13 训练阶段完成（exit 0，best step 400，stop step 1200），但推理启动 FARGAN native 失败：Windows `WinError 623` 系统 DLL 重定位；历史 v1/v2/v3 同 SHA native 与 MinGW gcc 也无法启动，确认是本机运行时问题。
+- 未生成 WAV、未运行 strict evaluator，不记录 identity/leakage/UTMOS/CER 质量结果；日志和部分训练产物保留，native 环境恢复后继续评价。
+
 ### [PS-20261025-20] v11 内容帧 +10ms 对齐结果
 - 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准465b70a；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
 - 路径/复现：build/remote_ps_c_hubert_fargan_v11.py、build/run_remote_ps_c_hubert_fargan_v11.py；report/ps_20261025_20_hubert_fargan_v11_20261027.md/JSON/TXT。唯一变量内容帧+1（10ms），独立cache后全阶段exit0。

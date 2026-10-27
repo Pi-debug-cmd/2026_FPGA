@@ -260,6 +260,15 @@
 - 五门：identity 0.770142852 / P10 0.737552752 / leakage 0.256829248 / UTMOS 2.436301072 / CER 0.323529412；身份、P10、UTMOS通过，leakage 与 CER 失败，未进入 `WAIT_LOCAL_TEST`。
 - 边界：仅电脑端；Male5/Track9锁定，无播放、录音、试听、板卡、ARM、Vivado、RTL、PL 或实时验收；v12 不发布模型包，继续下一单变量方案。
 
+### [PS-20261025-20] v13 逐帧源说话人对抗约束认领
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：CLAIMED；基准提交 `82458d7`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；PR #11。
+- 仅改变 speaker adversarial head：片段均值分类改为逐帧分类并平均 CE；其余配置和五门口径不变。路径为 `build/remote_ps_c_hubert_fargan_v13.py`、`build/run_remote_ps_c_hubert_fargan_v13.py`。
+- 仍只读辅助配对缓存与 Fixed-Male4；Male5/Track9锁定；电脑端、无播放/录音/试听/板卡/ARM/Vivado/RTL/PL。
+
+### [PS-20261025-20] v13 运行时阻塞记录
+- v13 训练 exit 0，生成 mapper/statistics/features；推理阶段启动既有 FARGAN native 时报 Windows `WinError 623`，重试和历史同 SHA native 均失败，未产生可评价 WAV。
+- 本轮不产生五门质量结论；保留 `build/generated/remote_ps_c_v13_train.log`、`remote_ps_c_v13_infer.log`、`remote_ps_c_v13_execution.json`，等待电脑端 native 运行时恢复后重试。
+
 ### [PS-20261025-20] v11 内容帧 +10ms 对齐结果
 - 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准465b70a；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
 - 路径/复现：build/remote_ps_c_hubert_fargan_v11.py、build/run_remote_ps_c_hubert_fargan_v11.py；report/ps_20261025_20_hubert_fargan_v11_20261027.md/JSON/TXT。唯一变量内容帧+1（10ms），独立cache后全阶段exit0。
