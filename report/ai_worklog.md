@@ -712,3 +712,16 @@ ps-opt 把非周期最小相位优化移植进流式路径（改造 synthesisrea
 - 唯一新增变量：训练期20类源说话人分类器+梯度反转，speaker_adv_weight0.01；PCA96、delta0.25、数据切分、seed、双向GRU192、优化器、早停和五门口径不变。统计逐元素等于v1，v5参数1144552，最佳step400、停止step1200、训练266.797s。
 - 一次Male4五门：身份0.777850780/P100.750804871/泄漏0.266084400/UTMOS2.461675485/CER0.323529412；通过项{'identity': True, 'identity_p10': True, 'leakage': False, 'utmos': True, 'cer': False}。相对v1泄漏下降但CER恶化，仍REJECTED，不进入WAIT_LOCAL_TEST。
 - 限制/下一责任方：对抗项只训练电脑端映射，非因果、无板卡/试听/实时声明；Male5/Track9锁定。Remote-PS-C提交本轮失败证据，下一轮只考虑对抗权重单变量调整。
+
+### [PS-20261025-20] v6 目标特征均值收缩单变量认领
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：CLAIMED；基准提交 `ca3e709`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；PR #11。
+- 假设/范围：v1身份0.779但泄漏0.253，v4对抗虽降泄漏仍损伤CER。v6 不重训，只复用冻结v1 mapper/statistics/native，将20D输出逐帧向训练目标均值收缩50%，再合成与评价；不改变数据、模型权重、五门口径或源/目标锁定。
+- 路径/复现：拟新增 `build/remote_ps_c_hubert_fargan_v6.py`、`build/run_remote_ps_c_hubert_fargan_v6.py`；输出 `build/generated/remote_ps_c_hubert_fargan_v6/`；报告 `report/ps_20261025_20_hubert_fargan_v6_20261027.*`。只读取 Fixed-Male4，Male5/Track9锁定。
+- 停止条件：只做一次原五门；若未同时过门则记录并继续下一明确单变量假设，不发布模型包。
+- 限制/下一责任方：电脑端离线实验，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时声明；Remote-PS-C提交结果并维护PR #11。
+
+### [PS-20261025-20] v6 目标特征均值收缩结果
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准ca3e709；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
+- 路径/复现：build/remote_ps_c_hubert_fargan_v6.py、build/run_remote_ps_c_hubert_fargan_v6.py；report/ps_20261025_20_hubert_fargan_v6_20261027.md/JSON/TXT。只复用v1冻结mapper/statistics/native，输出逐帧向target y_mean收缩50%，infer/evaluate exit0。
+- 一次Male4五门：身份0.579423544/P100.550014264/泄漏0.251125215/UTMOS1.350889683/CER0.338235294；泄漏未改善且身份/UTMOS下降，仍REJECTED。
+- 限制/下一责任方：Male5/Track9锁定，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时验收；Remote-PS-C保留失败证据，下一轮改特征级方法。
