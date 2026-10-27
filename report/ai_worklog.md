@@ -764,3 +764,16 @@ ps-opt 把非周期最小相位优化移植进流式路径（改造 synthesisrea
 - 路径/复现：build/remote_ps_c_hubert_fargan_v9.py、build/run_remote_ps_c_hubert_fargan_v9.py；report/ps_20261025_20_hubert_fargan_v9_20261027.md/JSON/TXT。唯一变量HuBERT layer12→6，独立cache后train/infer/evaluate exit0。
 - 一次Male4五门：身份0.553576857/P100.512674765/泄漏0.233601927/UTMOS1.299599926/CER0.794117647；泄漏下降但其余门恶化，仍REJECTED。
 - 限制/下一责任方：Male5/Track9锁定，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时验收；Remote-PS-C停止层扫描，改研究训练目标/内容保真。
+
+### [PS-20261025-20] v10 三帧特征平滑单变量认领
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：CLAIMED；基准提交 `1e34f2b`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；PR #11。
+- 假设/范围：v1仍是CER最佳但泄漏未过；layer6/12改变内容-自然度折中均失败。v10不重训，只复用冻结v1 mapper/statistics/native，对20D输出沿时间做3帧居中滑动平均，再合成评价；其它协议不变。
+- 路径/复现：拟新增 `build/remote_ps_c_hubert_fargan_v10.py`、`build/run_remote_ps_c_hubert_fargan_v10.py`；输出 `build/generated/remote_ps_c_hubert_fargan_v10/`；报告 `report/ps_20261025_20_hubert_fargan_v10_20261027.*`。Male5/Track9锁定。
+- 停止条件：只做一次原五门；未同时过门不进入WAIT_LOCAL_TEST、不发布模型包。
+- 限制/下一责任方：电脑端离线后处理，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时声明；Remote-PS-C提交结果。
+
+### [PS-20261025-20] v10 三帧时间平滑结果
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准1e34f2b；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
+- 路径/复现：build/remote_ps_c_hubert_fargan_v10.py、build/run_remote_ps_c_hubert_fargan_v10.py；report/ps_20261025_20_hubert_fargan_v10_20261027.md/JSON/TXT。冻结v1输出做3帧平滑，infer/evaluate exit0。
+- 一次Male4五门：身份0.741703006/P100.705845421/泄漏0.269384651/UTMOS2.244268338/CER0.323529412；仍REJECTED。
+- 限制/下一责任方：停止后处理平滑路线，Male5/Track9锁定，无现场或硬件测试；Remote-PS-C继续改训练目标。

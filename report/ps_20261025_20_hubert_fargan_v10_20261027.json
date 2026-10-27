@@ -1,0 +1,164 @@
+{
+  "task": "PS-20261025-20",
+  "date": "2026-10-27",
+  "role": "Remote-PS-C",
+  "status": "REJECTED",
+  "baseline_commit": "1e34f2b",
+  "main_commit": "9c42263ea3aa12898ad451f3c00915e816f039c4",
+  "controlled_change": {
+    "temporal_window": 3,
+    "training": false
+  },
+  "frozen_mapper_sha256": "ea545fda2b64b7242e710b4a799dfdd45034a958ff987ffd529a189abae26f68",
+  "native_sha256": "0e5eb4d457741820564d4397e0b69f8dd58b25c896259bb66d8e84fb88a3dc14",
+  "source_sha256": {
+    "build/remote_ps_c_hubert_fargan_v10.py": "950fd150ca6e42550e6b6abb01524fecdb3a81caf496a79ab96c019daf10a815",
+    "build/run_remote_ps_c_hubert_fargan_v10.py": "bd93939344a3fedf450d581a99e252508df2e753843167bf14237fbc4f423421",
+    "build/evaluate_seed_fixed_male_strict_20261024.py": "7f2138ca331004da93d6aaf4be79b4c91aa5837c3f977af01f974bf87a189083"
+  },
+  "inference": {
+    "samples": 291200,
+    "peak": 0.56292724609375,
+    "rms": 0.06891222376923137,
+    "sha256": "0f4889f354c14783f8f6f5dda6f7fa1a55d190c55c73725a82e527936c6503a8",
+    "clipping_fraction": 0.0,
+    "task": "PS-20261025-20",
+    "candidate": "Remote-PS-C_HuBERT_BiGRU_FARGAN_v10_temporal_smooth3",
+    "source_sha256": "f4a026e5c97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c",
+    "source_samples": 291200,
+    "frames": 1820,
+    "inference_seconds": 2.9059999999881256,
+    "rtf_host_full_chain": 0.15967032966967723,
+    "mapper_sha256": "ea545fda2b64b7242e710b4a799dfdd45034a958ff987ffd529a189abae26f68",
+    "native_sha256": "0e5eb4d457741820564d4397e0b69f8dd58b25c896259bb66d8e84fb88a3dc14",
+    "temporal_window": 3,
+    "male5_used": false,
+    "target_track9_used": false,
+    "played": false,
+    "board_touched": false
+  },
+  "evaluation": {
+    "kind": "strict_fixed_male_evaluation",
+    "protocol": {
+      "source_profile": [
+        "人物音频资料/男声/标准录音 1.wav",
+        "人物音频资料/男声/标准录音 2.wav",
+        "人物音频资料/男声/标准录音 3.wav"
+      ],
+      "evaluated_source": "人物音频资料/男声/标准录音 4.wav",
+      "target_profile": [
+        "人物音频资料/女声/Track 5.wav",
+        "人物音频资料/女声/Track 6.wav",
+        "人物音频资料/女声/Track 7.wav",
+        "人物音频资料/女声/Track 8.wav"
+      ],
+      "target_track9_used": false,
+      "speaker_and_utmos_windows": "non-overlapping 6 s; tail >=1.5 s; RMS >=0.001",
+      "leakage": "maximum of arithmetic mean of per-window cosines and whole-file length-weighted aggregate-vector cosine",
+      "cer": "offline Whisper-small candidate transcript versus source transcript; punctuation removed and OpenCC 0.1.7 t2s-normalized"
+    },
+    "gates": {
+      "identity": 0.45,
+      "identity_p10": 0.35,
+      "leakage": 0.1,
+      "utmos": 2.3,
+      "cer": 0.15
+    },
+    "selected": "Remote-PS-C_HuBERT_BiGRU_FARGAN_v10_temporal_smooth3",
+    "rows": [
+      {
+        "candidate": "Remote-PS-C_HuBERT_BiGRU_FARGAN_v10_temporal_smooth3",
+        "path": "build/generated/remote_ps_c_hubert_fargan_v10/fixed_male4.wav",
+        "metrics": {
+          "identity": 0.7417030062812592,
+          "identity_p10": 0.7058454206140435,
+          "leakage": 0.26938465112425214,
+          "leakage_window_mean": 0.25764951463157043,
+          "leakage_aggregate": 0.26938465112425214,
+          "utmos": 2.2442683378855386,
+          "cer": 0.3235294117647059
+        },
+        "passed": {
+          "identity": true,
+          "identity_p10": true,
+          "leakage": false,
+          "utmos": false,
+          "cer": false
+        },
+        "all_gates_pass": false,
+        "selection_score": {
+          "minimum_gate_ratio": 0.37121639849434324,
+          "mean_gate_ratio": 1.0951103418582577
+        },
+        "identity_by_chunk": [
+          0.6978737696603771,
+          0.7895032247546907,
+          0.7377320244287097
+        ],
+        "leakage_by_chunk": [
+          0.23282903958848075,
+          0.3002647016377105,
+          0.2398548026685201
+        ],
+        "utmos_by_chunk": [
+          2.056990623474121,
+          2.1651124954223633,
+          2.510701894760132
+        ],
+        "source_asr": "男孩把最后一块糖给了骷髏的妹妹妹破体围剿点角亲了她一下糖纸在阳光下向彩虹多年后她仍留着那张糖纸记得那天的甜妹妹出嫁那天她把糖纸放进她手心",
+        "candidate_asr": "男孩把这一块糖给了姑娘的妹妹妹妹不去微笑,点叫亲了她一架,糖纸在眼光下象彩虹,不念后,她仍留着那张糖纸,记得烂针的铁人。妹妹出家烂针,她把糖纸放进她手心。",
+        "cer_detail": {
+          "reference_chars": 68,
+          "hypothesis_chars": 69,
+          "distance": 22,
+          "cer": 0.3235294117647059
+        },
+        "cer_without_script_normalization": {
+          "reference_chars": 68,
+          "hypothesis_chars": 69,
+          "distance": 22,
+          "cer": 0.3235294117647059
+        }
+      }
+    ],
+    "played": false,
+    "board_touched": false
+  },
+  "execution": [
+    {
+      "stage": "infer",
+      "exit_code": 0,
+      "wall_seconds": 8.64100000000326,
+      "log": "build/generated/remote_ps_c_v10_infer.log"
+    },
+    {
+      "stage": "evaluate",
+      "exit_code": 0,
+      "wall_seconds": 17.73399999999674,
+      "log": "build/generated/remote_ps_c_v10_evaluate.log"
+    }
+  ],
+  "v1_comparison_metrics": {
+    "identity": 0.7788145118676262,
+    "identity_p10": 0.751711669998765,
+    "leakage": 0.2529291513166748,
+    "leakage_window_mean": 0.24303335684436625,
+    "leakage_aggregate": 0.2529291513166748,
+    "utmos": 2.418009599049886,
+    "cer": 0.23529411764705882
+  },
+  "metric_change_v10_minus_v1": {
+    "identity": -0.037111505586367,
+    "identity_p10": -0.0458662493847215,
+    "leakage": 0.016455499807577323,
+    "leakage_window_mean": 0.014616157787204181,
+    "leakage_aggregate": 0.016455499807577323,
+    "utmos": -0.17374126116434763,
+    "cer": 0.08823529411764708
+  },
+  "male5_used": false,
+  "target_track9_used": false,
+  "played": false,
+  "board_touched": false,
+  "delivery_status": "not_packaged_quality_rejected"
+}
