@@ -1813,3 +1813,16 @@
 - 报告链接：`report/fixed_male_hubert_world_round70_20261027.md`、`report/fixed_male_hubert_world_round70_20261027.json`。
 - 下一责任方：Hardware-A / Codex 在 Round71 测试回落权重并继续逐轮评估。
 
+### [PS-20261021-10] HuBERT/WORLD Round 71 结果
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`647548bd4040a803d00a477c0a77fdfc9d4ce255`
+- 唯一变量：多尺度动态损失权重为 1.55；2000 步、固定种子、source prosody、variance matching、gain1.6 和评估器不变。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.7055/0.6785/0.1088/2.3419/0.2647`；泄漏与 CER 未过门。Checkpoint SHA-256 `4b28e786c853ed4237d5cdb17a700c0e79df736d24249cc65824ef0e80c42d88`；候选 PCM16 SHA-256 `734ded9562ea37a8c766218198f9f812e03bcac1c5e966946db4c1bea87a5133`。
+- 修改路径：`report/fixed_male_hubert_world_round71_20261027.{md,json}`、`coummucation.md`。
+- 复现命令：见 `report/fixed_male_hubert_world_round71_20261027.json`。
+- 限制：严格评估使用 identity OpenCC shim；录音5、Track 9 未用于选参；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL 或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round71_20261027.md`、`report/fixed_male_hubert_world_round71_20261027.json`。
+- 下一责任方：Hardware-A / Codex 测试 Round69-71 权重之间的低端区间。
+
