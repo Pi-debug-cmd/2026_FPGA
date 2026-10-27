@@ -1848,3 +1848,10 @@
 - 改动src/kernel/world_fft_dma.c；复现与边界见report/world_fft_kernel_profile_round12_proposal_20261027.md；module构建通过，SHA a882bc0bf3cadf7a6a89ceba3b640bd99b329db6be8eb75fe2e0a29dc1df447f。
 - 量化：尚无阶段板测；默认profile=0无额外时钟，profile=1按copy_in/device/copy_out累计，stats只读。内核已有bufferable映射，不盲改WRITE_COMBINE。
 - 限制：只静默诊断，候选驻留、服务停止，无ALSA/新录放；下一责任方Hardware-A / Codex完成开关对照，随后按用户方向转向阶段融合卸载。
+
+### [PL-20261027-01] Round12 内核阶段计时通过，转向完整计算阶段融合
+- 日期：2026-10-27；Hardware-A / Codex；ACCEPTED（诊断）；驱动198565e。
+- 报告report/world_fft_kernel_profile_round12_20261027.{md,json}；runner board/world_fft_kernel_profile_trial.py；开关三遍两输入12次逐字节相同，两组各192次probe通过。
+- 量化male1：3279调用，copy_in28.288ms/device263.459ms/copy_out132.327ms；约31%内核开销为结果复制。开启与关闭中位墙钟2.631122/2.637466秒，无显著插桩扰动。
+- 用户新指令：能放PL就放PL，能全放更好；后续以WORLD分析/映射/合成完整计算阶段为迁移目标，PS先保留音频I/O与控制，避免逐算子往返。当前核资源余量不等于整链已能容纳，需HLS/RTL资源实测。
+- 限制：结束profile=0；服务停止、compact候选驻留，无新录放/高实时结论；下一责任方Hardware-A / Codex检查HLS工具并认领融合实现。
