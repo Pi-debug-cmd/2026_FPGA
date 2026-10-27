@@ -2151,3 +2151,17 @@
 - 已验证证据：Round25清单content_frames长度计数128帧合格184，192帧合格140；当前分支与main同步、PR13归本任务，无同路线新认领。
 - 现场边界：不播放、不录音、不接触板卡，不声明PS/PL或实时通过。
 - 下一责任方：Hardware-A / Codex 训练、严格评测、直接从产物提取证据并单轮提交。
+
+
+### [PS-20261021-10] HuBERT/WORLD Round 89 长片段训练结果
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：4ec44eb；Round88结果基线816b1ddc4b7a88d5ec39f7f6b55b1b7fe0fea551。
+- 改动：CROP128→192；其余Round88超参数不变。长度筛选使训练可用条数184→140（总192），存在覆盖率混杂。
+- 量化结果：身份/P10/泄漏/UTMOS/CER=0.6777270597/0.6568020193/0.1228567630/2.0558493137/0.3676470588；后三门失败，比Round88退步。早停step1300，最佳step500，验证loss0.8019716069。
+- 证据：checkpoint SHA-256 5846de735d14ddeccb44257901abc551efdb994c136a8d3dfc7005d60ff4761a；候选SHA-256 48095635b1a4e21fc5c23659ee0fafbc5c16c788dba23c1ae9f575c479329c6b；独立加载检查有限权重、训练历史、缓存及WAV SHA通过。
+- 修改路径与报告：report/fixed_male_hubert_world_round89_20261027.{md,json}、coummucation.md、team_project/project_status.md、report/ai_worklog.md。
+- 复现：build/reproduce_hubert_world_round88_20261027.py prepare/train/candidate/evaluate --experiment-round 89 --asset-root <asset-root>；具体解释器和命令见JSON。
+- 限制：identity OpenCC shim不执行简繁转换，CER源参考是ASR而非人工真值；训练及生成启动器产物完成后退出1，评测退出0。公共配对192训练/8验证，男性1～3仅评测质心；仅评测录音4，录音5/Track9保持锁定。无播放、录音、板测或PS/PL/实时结论。
+- 下一责任方：Hardware-A / Codex。恢复Round88的128帧基线，诊断PCA压缩瓶颈；Round59～89共31轮，剩19轮，五门全过即停止。
