@@ -630,3 +630,9 @@ ps-opt 把非周期最小相位优化移植进流式路径（改造 synthesisrea
 ## 2026-10-21 [Maintainer] 三写作者能力边界修正
 
 用户明确项目共有三个写作者：当前已经提交的两位写作者均有 Zynq-7020 板卡和 Vivado 环境，可共同承担板端、Vivado、RTL、PL 和集成；尚未加入的第三位写作者没有板卡和 Vivado，只能在自己的电脑运行 PS/软件音色方案，再交由前两位验证。协作角色据此改为 `Hardware-A`、`Hardware-B`、`Remote-PS-C`；两名硬件方改同一工程前必须先认领任务。
+
+## 2026-10-27 [Hardware-A / PL-20261027-01] WORLD v23 PL与低缓冲现场
+
+按用户新指令停止Deepseek，复用已验证exp核完成64bit AXIS/DMA/一致性内存及临时位流集成；Vivado2026.1 P&R与MCP routed复核100MHz WNS+1.391/WHS+0.036，板端49248 bins零差异、PL语音=整数模型，相对CPU语音SNR79.06dB。多轮接口优化后渲染RTF0.326521→0.306332，但PS管线p95仍115ms。所有方案/失败/测试逐轮推送PR #16并更新coummucation。
+
+操作者当轮准备确认后仅跑20秒低缓冲现场：PL3177次零fallback/零削顶，但2次播放欠载、只有2帧有声，拒绝稳定性门。恢复原厂bit成功，后续非音频外围重绑阶段失去串口响应，未到v23启动；MCP未发现JTAG target，已请现场系统复位。修复脚本延后非音频重绑至正常开机、增加逐bind日志，尚未板测。当前恢复状态不可写成成功；证据在`report/world_exp_live20_round1_20261027.md`与`report/world_exp_restore_stall_20261027.json`。

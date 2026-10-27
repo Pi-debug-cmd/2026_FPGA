@@ -99,3 +99,7 @@
 | 身份上限（技术结论） | 参数域可达 **0.53～0.56**，不再是 0.19～0.22 | 第三轮 + 复核 |
 | PL 合成卸载 | 时分复用版开发中；首版全并行 LUT 超限 132%/141%；最新综合 363 LUT 可疑，待核对是否被优化 | `build/generated/pl_synth_offload/`、`report/pl_synth_offload_sim.json` |
 | 历史待办（已过期） | 当时提出 A1 与 A3 听感取舍及 PL 资源/时序检查；A3 后来已被用户否决，当前任务依 `plan.md` | 见 worklog |
+
+## 2026-10-27 [Hardware-A / PL-20261027-01] WORLD v23 PL首轮现场
+
+用户指定停止Deepseek，已恢复WORLD v23加速。复数exp核整机100MHz时序通过，板端49248 bins零差异，语音PL=整数模型，渲染RTF较CPU约降低6.2%；定速文件PS管线p95约115ms，仍未实现高实时目标。现场20秒低缓冲测试2次播放欠载且仅2帧有声，拒绝。原厂位流已重新加载，但重绑非音频外设时Linux串口停止响应，v23尚未重启，等待操作者系统复位/重上电。启动分区与原v23未改。详见`report/world_exp_live20_round1_20261027.md`、`report/world_exp_restore_stall_20261027.json`和`coummucation.md`；PR #16。

@@ -140,12 +140,19 @@ def main():
         run('fpgautil', '-b', str(image), '-f', 'Full')
         assert Path('/sys/class/fpga_manager/fpga0/state').read_text().strip() == 'operating'
         stage('fpga_loaded')
-        selected = saved['original'] if args.restore else [row for row in saved['original'] if row in [list(x) for x in AUDIO] or row[1]=='xiic-i2c']
+        # Display/camera rebind stalled Linux during the first recovery trial.
+        # Restore the audio path here; a normal boot restores other peripherals.
+        selected = [row for row in saved['original']
+                    if row in [list(x) for x in AUDIO] or row[1]=='xiic-i2c']
+        if args.restore:
+            saved['peripheral_rebind_deferred_until_boot'] = [
+                row for row in saved['original'] if row not in selected]
         pending = list(reversed(selected))
         for attempt in range(3):
             remaining = []
             for row in pending:
                 try:
+                    stage('binding_'+row[2])
                     binding(*row, 'bind')
                 except OSError:
                     remaining.append(row)

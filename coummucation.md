@@ -1606,3 +1606,13 @@
 - 滞后：定速文件PS管线p95原v23 115.867ms/PL115.484ms；不含ALSA/codec/模拟链，不能作为物理端到端通过证据，亦未达到100ms。
 - 现场：20秒低缓冲只读preflight通过，已发当轮准备确认，尚未执行；当前候选驻留、音频服务停止，恢复镜像可用。
 - 下一责任方：Hardware-A / Codex 获得现场准备确认后做短回归；随后针对分析端与参数批次的关键路径继续推进，不能把当前exp功能集成宣称整链完成。
+
+### [PL-20261027-01] 首轮20秒现场：欠载拒绝，恢复停于非音频重绑
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：REJECTED（低缓冲稳定性），BLOCKED（等待现场复位恢复）。
+- 基准提交：`8c0095c`；改动：`board/world_exp_switch.py`、`report/world_exp_live20_round1_20261027.{md,json,txt}`、`report/world_exp_restore_stall_20261027.json`及状态追加。
+- 授权：操作者明确“准备好了，开始20秒PL实时测试”；仅执行一轮，没有追加录放。
+- 复现：报告内20秒WORLD_EXP=pl命令；prefill100ms/period256/capture2048/playback1024/start-delay16000µs、增益4与0.6。
+- 量化：子进程全0，0采集overrun/2播放underrun，0原始和输出削顶；PL3177次/0fallback，502参数提交=消费；分析RTF0.266565/渲染0.294135；仅2帧有声，不算持续语音负载。
+- 恢复：原厂载荷成功加载，但非音频显示/摄像外设重绑阶段串口失去响应，尚未启动v23。Ctrl-C/换行/BREAK无响应，MCP hw_server无JTAG target；已请操作者复位或重上电，启动分区未改。电脑保留完整证据。
+- 修复与限制：恢复脚本延后非音频外设至正常开机，并逐bind写journal；语法检查通过，尚未板测。不宣称原v23已恢复、听感通过或高实时验收。
+- 报告：`report/world_exp_live20_round1_20261027.md`与恢复JSON；下一责任方：操作者复位；Hardware-A / Codex 随后核验原v23与PCM状态，补现场听感，再安排后续调度/分析优化。
