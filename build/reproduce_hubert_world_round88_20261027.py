@@ -13,6 +13,8 @@ def main() -> None:
     parser.add_argument("stage", choices=("prepare", "train", "candidate", "evaluate"))
     parser.add_argument("--asset-root", required=True, type=Path)
     parser.add_argument("--experiment-round", type=int, choices=(88, 89, 90), default=88)
+    parser.add_argument("--cer-normalizer", choices=("identity", "opencc"),
+                        help="Default: historical identity for 88/89, OpenCC 0.1.7 for 90")
     args = parser.parse_args()
     root = args.asset_root.resolve()
     generated = root / "build/generated"
@@ -48,16 +50,22 @@ def main() -> None:
         return
 
     if args.stage == "evaluate":
-        # Historical comparability only: this performs no Chinese script conversion.
-        shim = types.ModuleType("opencc")
-        class IdentityOpenCC:
-            def __init__(self, config: str) -> None:
-                pass
+        normalizer = args.cer_normalizer or ("opencc" if args.experiment_round >= 90 else "identity")
+        if normalizer == "identity":
+            # Historical comparability only: no Chinese script conversion.
+            shim = types.ModuleType("opencc")
+            class IdentityOpenCC:
+                def __init__(self, config: str) -> None:
+                    pass
 
-            def convert(self, text: str) -> str:
-                return text
-        shim.OpenCC = IdentityOpenCC
-        sys.modules["opencc"] = shim
+                def convert(self, text: str) -> str:
+                    return text
+            shim.OpenCC = IdentityOpenCC
+            sys.modules["opencc"] = shim
+        else:
+            sys.path.insert(0, str(generated / "eval_opencc_deps_20261027"))
+            from opencc import OpenCC
+            assert OpenCC("t2s").convert("骷髏") == "骷髅"
         script = runtime / "evaluate_seed_fixed_male_strict_20261024.py"
         options = ["--manifest", str(output / "candidates/strict_manifest.json"),
                    "--output", str(output / "strict_evaluation.json")]

@@ -104,3 +104,8 @@
 ## 2026-10-27 Hardware-A PS-20261021-10 Round89
 
 长片段训练已拒绝：泄漏0.1229、UTMOS2.0558、CER0.3676，身份/P10通过。最佳step500、早停1300；可用训练行184降至140存在混杂。详见[Round89报告](../report/fixed_male_hubert_world_round89_20261027.md)。未进入现场验证；录音5和Track9保持锁定。
+
+
+## 2026-10-27 Hardware-A PS-20261021-10 Round90
+
+PCA96→192拒绝：泄漏0.1263、UTMOS2.1855、CER0.4559，最佳step600，早停1400。真实OpenCC0.1.7已恢复；Round88/89保存文本重算CER不变。详见[Round90报告](../report/fixed_male_hubert_world_round90_20261027.md)。未进入现场验证。

@@ -2180,3 +2180,25 @@
 - 复现：入口prepare/train/candidate/evaluate --experiment-round 90 --asset-root <asset-root>。准备后检查base/prior均PCA192、trainer仍CROP128；训练前py_compile。
 - 限制：保持CPU既有解释器；无播放、录音、板测、PS/PL或实时结论。
 - 下一责任方：Hardware-A / Codex 完成本轮训练和客观评测并单轮提交。此轮完成后为32/50，最多至Round108。
+
+
+### [PS-20261021-10] Round90 评测依赖修正说明
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED（随Round90结果提交）。
+- 基准提交：ceae77a；修改路径：build/reproduce_hubert_world_round88_20261027.py、Round90报告。
+- 改动：补齐本地opencc-python-reimplemented==0.1.7，Round90默认使用真实t2s转换；Round88/89默认保留历史identity口径供复现，新增--cer-normalizer可显式选择。
+- 复现：Python3.12 -m pip install --target <asset-root>/build/generated/eval_opencc_deps_20261027 --no-cache-dir opencc-python-reimplemented==0.1.7；评测入口evaluate --experiment-round 90 --cer-normalizer opencc。
+- 量化证据：简繁转换smoke通过；从已提交的Round88/89保存ASR文本重算，CER分别仍为18/68=0.2647058824、25/68=0.3676470588；不改写历史报告，不重新读取音频。这是评测环境修复，不算额外训练轮次。
+- 限制：CER源参考仍是Whisper识别而非人工校对；未因此放宽门槛、读取录音5/Track9或执行现场测试。
+- 下一责任方：Hardware-A / Codex 完成Round90真实OpenCC评测并在JSON同时记录raw CER和normalized CER、依赖版本及上述核对证据。
+
+
+### [PS-20261021-10] HuBERT/WORLD Round 90 PCA内容瓶颈结果
+- 日期：2026-10-27；角色：Hardware-A / Codex（离线算法）；状态：REJECTED。
+- 基准提交：ceae77a94a77e7cc2bbb5701b9d80256ec0171f1；算法基线Round88。
+- 变量：PCA96→192，输入99→195，GRU其余配置保持Round88；参数量496779。128帧训练可用184/192，与Round88一致。
+- 量化结果：身份/P10/泄漏/UTMOS/CER=0.6439841784/0.6157650156/0.1262829402/2.1855001450/0.4558823529；后三门失败。最佳step600，完成step1400；增加PCA维度未改善录音4内容。
+- 证据：checkpoint SHA-256 2a29d614f6995fd0a4d3d4d349d2860fbe07a2017d988bfc6b853d82e43eab95；WAV SHA-256 fb8bc99c9a5319c58c96f6c0e2684fe69c36863918efc3119f899a5ef50c6c52；有限权重、PCA(768,192)、输入(192,195)、训练历史与缓存/WAV SHA核验通过。
+- 修改路径与报告：build/reproduce_hubert_world_round88_20261027.py、report/fixed_male_hubert_world_round90_20261027.{md,json}、coummucation.md、team_project/project_status.md、report/ai_worklog.md。
+- 复现：入口prepare/train/candidate/evaluate --experiment-round 90 --asset-root <asset-root>；evaluate实际使用OpenCC0.1.7 t2s，raw CER与normalized CER同为0.4558823529。报告含依赖安装、历史文本重算核对与完整命令。
+- 限制：源ASR非人工真值；训练和生成完成产物后退出1，独立检查通过，评测退出0。公共配对192训练/8验证，目标Track5～8锚点；固定男性1～3只作评测源质心，录音4验证，录音5/Track9锁定。无播放、录音、板测或PS/PL/实时结论。
+- 下一责任方：Hardware-A / Codex；恢复Round88并测试提高锚点概率，避免继续扩PCA。Round59～90共32轮，剩18轮。

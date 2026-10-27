@@ -635,3 +635,8 @@ ps-opt 把非周期最小相位优化移植进流式路径（改造 synthesisrea
 ## 2026-10-27 Hardware-A PS-20261021-10 Round89
 
 CROP128→192未改善内容：CER0.367647、泄漏0.122857、UTMOS2.055849，拒绝。早停1300/最佳500；checkpoint与WAV已独立验证。详见[报告](fixed_male_hubert_world_round89_20261027.md)。identity OpenCC兼容口径，无人工文本、听感或板端结论。
+
+
+## 2026-10-27 Hardware-A PS-20261021-10 Round90
+
+增加PCA维度未改善内容，CER0.455882、泄漏0.126283、UTMOS2.185500，拒绝。完成1400/最佳600，权重和维度核验通过；本轮评测真实OpenCC0.1.7，原始与归一CER相同。详见[报告](fixed_male_hubert_world_round90_20261027.md)。无现场或板端结论。
