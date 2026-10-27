@@ -1,0 +1,953 @@
+{
+  "task": "PS-20261021-10",
+  "kind": "public_validation_content_chain",
+  "checkpoint_sha256": "e21d8175cb56a5aa3f3e7ac75578705b5deb8cb40fea07a5a73ef87d38586faa",
+  "corpus_manifest_sha256": "2404ce8282ec2759d4edabd32d7d3e8068d7b69c835194616fe121ec3015fabb",
+  "cache_manifest_sha256": "4d34669259834bd30219f34af4730712c9aa7c4cf8fa8bc3c5ccde9ee3cc5bc5",
+  "gain": 1.6,
+  "recording4_used": false,
+  "recording5_used": false,
+  "track9_used": false,
+  "training": false,
+  "played": false,
+  "board_touched": false,
+  "rows": [
+    {
+      "stem": "SSB04340036",
+      "speaker": "SSB0434",
+      "text": "不一定按照第二次网签申报的较低价格来征税",
+      "source_sha256": "7f5ad67d120d20228f8e7969bc2059991fa042d9e9b4e479c1b69d91fbc09a7a",
+      "teacher_sha256": "f88f6a039fb83118766fcee9f25fe38f451b03a6bc61bb9a6617c9987aaeb701",
+      "variants": [
+        {
+          "kind": "student_gain1_6",
+          "file": "SSB04340036_student_gain1_6.wav",
+          "sha256": "63fc6a07bb8e1cde88b5acb9017ac2919e4e9524b02b676c93695f77ec919efb",
+          "samples": 72080,
+          "synthesis": {
+            "voiced_fraction": 0.779134295227525,
+            "f0_voiced_median_hz": 196.855130975308,
+            "peak_before_limit": 2.015872374338201
+          },
+          "asr": "不一定用按照第二次的网线审报的交低价格来周末",
+          "cer_against_declared": {
+            "reference_chars": 20,
+            "hypothesis_chars": 22,
+            "distance": 7,
+            "cer": 0.35
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 22,
+            "distance": 4,
+            "cer": 0.2
+          },
+          "utmos": 2.675607204437256
+        },
+        {
+          "kind": "no_energy_gain",
+          "file": "SSB04340036_no_energy_gain.wav",
+          "sha256": "1b22dac0bbd0575b02157ca2ae654bcd0afdc7b0a2ac7f3436bfb3f8ffc5abe8",
+          "samples": 72080,
+          "synthesis": {
+            "voiced_fraction": 0.779134295227525,
+            "f0_voiced_median_hz": 196.855130975308,
+            "peak_before_limit": 1.1950370160953971
+          },
+          "asr": "不一定按照第二次往前申报的交集价格来周末",
+          "cer_against_declared": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 6,
+            "cer": 0.3
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 6,
+            "cer": 0.3
+          },
+          "utmos": 2.589442729949951
+        },
+        {
+          "kind": "no_ap_gain",
+          "file": "SSB04340036_no_ap_gain.wav",
+          "sha256": "d5c74b9c5ca00edaf4b1ee314ad6aec2101b62da1ab227ed312be406679aae2d",
+          "samples": 72080,
+          "synthesis": {
+            "voiced_fraction": 0.779134295227525,
+            "f0_voiced_median_hz": 196.855130975308,
+            "peak_before_limit": 2.0195666148424922
+          },
+          "asr": "不一定用按照第二次的网线审报的交低价格来周末",
+          "cer_against_declared": {
+            "reference_chars": 20,
+            "hypothesis_chars": 22,
+            "distance": 7,
+            "cer": 0.35
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 22,
+            "distance": 4,
+            "cer": 0.2
+          },
+          "utmos": 2.681939125061035
+        }
+      ],
+      "source": {
+        "sha256": "7f5ad67d120d20228f8e7969bc2059991fa042d9e9b4e479c1b69d91fbc09a7a",
+        "samples": 72075,
+        "asr": "不一定按照第二次往前审報的交低價格來徵稅",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 20,
+          "distance": 4,
+          "cer": 0.2
+        }
+      },
+      "teacher": {
+        "sha256": "f88f6a039fb83118766fcee9f25fe38f451b03a6bc61bb9a6617c9987aaeb701",
+        "samples": 72075,
+        "asr": "不一定按照第二次網線審報的交低價格來招稅",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 20,
+          "distance": 4,
+          "cer": 0.2
+        }
+      }
+    },
+    {
+      "stem": "SSB04340089",
+      "speaker": "SSB0434",
+      "text": "张继科罢赛另有隐情与乒羽中心各罚五万了事",
+      "source_sha256": "60f0ec31b6ffbfe216662d6d114bbe6675a4e91b4e38451ddab4ce42097ed9a7",
+      "teacher_sha256": "3e6a66d8d7c553214fae48964ffe1e83bcc7414c2c96709c083a8d5afb158d78",
+      "variants": [
+        {
+          "kind": "student_gain1_6",
+          "file": "SSB04340089_student_gain1_6.wav",
+          "sha256": "18439ef015b9faf8e8dc499e88a71f6cb52d5443e9c57f6814c670a65de138e4",
+          "samples": 121920,
+          "synthesis": {
+            "voiced_fraction": 0.6692913385826772,
+            "f0_voiced_median_hz": 191.18951254917386,
+            "peak_before_limit": 2.5177732417486207
+          },
+          "asr": "張局克 霸散 另有點強壹 平衡與中心 各罰無萬教士",
+          "cer_against_declared": {
+            "reference_chars": 20,
+            "hypothesis_chars": 21,
+            "distance": 13,
+            "cer": 0.65
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 21,
+            "distance": 11,
+            "cer": 0.55
+          },
+          "utmos": 2.349911291768232
+        },
+        {
+          "kind": "no_energy_gain",
+          "file": "SSB04340089_no_energy_gain.wav",
+          "sha256": "ee0502ff7ea7af0dbb0f502878b5fbf863f88806bdfd5903adff3ba731a04da5",
+          "samples": 121920,
+          "synthesis": {
+            "voiced_fraction": 0.6692913385826772,
+            "f0_voiced_median_hz": 191.18951254917386,
+            "peak_before_limit": 1.499855632785097
+          },
+          "asr": "张局克 霸赛 令游简强一 匹勇语 中心 各法 无万教士",
+          "cer_against_declared": {
+            "reference_chars": 20,
+            "hypothesis_chars": 21,
+            "distance": 15,
+            "cer": 0.75
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 21,
+            "distance": 13,
+            "cer": 0.65
+          },
+          "utmos": 2.339259806580431
+        },
+        {
+          "kind": "no_ap_gain",
+          "file": "SSB04340089_no_ap_gain.wav",
+          "sha256": "6c9740b7f56fd746154640582d042a8629a17faf136a6cbfd969479735656efa",
+          "samples": 121920,
+          "synthesis": {
+            "voiced_fraction": 0.6692913385826772,
+            "f0_voiced_median_hz": 191.18951254917386,
+            "peak_before_limit": 2.5169675666674576
+          },
+          "asr": "張局克 霸散 另有點強壹 平衡與中心 各罰無萬教士",
+          "cer_against_declared": {
+            "reference_chars": 20,
+            "hypothesis_chars": 21,
+            "distance": 13,
+            "cer": 0.65
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 21,
+            "distance": 11,
+            "cer": 0.55
+          },
+          "utmos": 2.3651987868031177
+        }
+      ],
+      "source": {
+        "sha256": "60f0ec31b6ffbfe216662d6d114bbe6675a4e91b4e38451ddab4ce42097ed9a7",
+        "samples": 121859,
+        "asr": "張繼柯霸賽另有眼前與平與中心各罰5萬了事",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 20,
+          "distance": 7,
+          "cer": 0.35
+        }
+      },
+      "teacher": {
+        "sha256": "3e6a66d8d7c553214fae48964ffe1e83bcc7414c2c96709c083a8d5afb158d78",
+        "samples": 121859,
+        "asr": "張繼科 霸賽另有簡稱與 拼與中心各罰5萬料事",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 20,
+          "distance": 7,
+          "cer": 0.35
+        }
+      }
+    },
+    {
+      "stem": "SSB04340076",
+      "speaker": "SSB0434",
+      "text": "孙杨现在在苏州大学读体育教育专业的研究生",
+      "source_sha256": "75cc56bdcc3bd76f1cd43535ff49da3d7e06934b0eca2c5f7331a32287427abf",
+      "teacher_sha256": "6fa87c5ca2d54dd2f8e95bedaf30dd52cf8c4814b7bdbd1d368f86f3a01a0687",
+      "variants": [
+        {
+          "kind": "student_gain1_6",
+          "file": "SSB04340076_student_gain1_6.wav",
+          "sha256": "7af4317f2361cb540c154c4b4580b72373bc8902e8f3cccaa0e9f646c8892c01",
+          "samples": 81760,
+          "synthesis": {
+            "voiced_fraction": 0.7416829745596869,
+            "f0_voiced_median_hz": 208.04357934810386,
+            "peak_before_limit": 2.4157410891926427
+          },
+          "asr": "孙央现在在苏州大学读体育教育专业的研究生",
+          "cer_against_declared": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 1,
+            "cer": 0.05
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 1,
+            "cer": 0.05
+          },
+          "utmos": 2.1811258792877197
+        },
+        {
+          "kind": "no_energy_gain",
+          "file": "SSB04340076_no_energy_gain.wav",
+          "sha256": "cb8bc339db93b7ef6bee707990bf029e85c9602566a8ad8f622fd3414806983f",
+          "samples": 81760,
+          "synthesis": {
+            "voiced_fraction": 0.7416829745596869,
+            "f0_voiced_median_hz": 208.04357934810386,
+            "peak_before_limit": 1.5660654495445605
+          },
+          "asr": "孙央现在在苏州大学都体育教育专业的研究生",
+          "cer_against_declared": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 2,
+            "cer": 0.1
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 2,
+            "cer": 0.1
+          },
+          "utmos": 2.277707099914551
+        },
+        {
+          "kind": "no_ap_gain",
+          "file": "SSB04340076_no_ap_gain.wav",
+          "sha256": "1ad3ec1441c3e4ca21c0961484542585f26d3f464c6621c0ac63a6276836ea51",
+          "samples": 81760,
+          "synthesis": {
+            "voiced_fraction": 0.7416829745596869,
+            "f0_voiced_median_hz": 208.04357934810386,
+            "peak_before_limit": 2.410774196849294
+          },
+          "asr": "孙央现在在 苏州大学读体育教育专业的研究生",
+          "cer_against_declared": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 1,
+            "cer": 0.05
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 1,
+            "cer": 0.05
+          },
+          "utmos": 2.2210164070129395
+        }
+      ],
+      "source": {
+        "sha256": "75cc56bdcc3bd76f1cd43535ff49da3d7e06934b0eca2c5f7331a32287427abf",
+        "samples": 81735,
+        "asr": "孫陽現在在蘇州大學讀體育教育專業的研究生",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 20,
+          "distance": 1,
+          "cer": 0.05
+        }
+      },
+      "teacher": {
+        "sha256": "6fa87c5ca2d54dd2f8e95bedaf30dd52cf8c4814b7bdbd1d368f86f3a01a0687",
+        "samples": 81735,
+        "asr": "孫陽現在在 蘇州大學讀體育教育專業的研究生",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 20,
+          "distance": 1,
+          "cer": 0.05
+        }
+      }
+    },
+    {
+      "stem": "SSB04340118",
+      "speaker": "SSB0434",
+      "text": "子女们可以通过手机调节摄像头的角度",
+      "source_sha256": "b75c7f309987b5d4bd2da91f89e588896617f70633709b158aa9f0c96363d695",
+      "teacher_sha256": "11dbb9fca1ecb5c98473430168da92dbf0474375b17c9a8c6794ab56101172fe",
+      "variants": [
+        {
+          "kind": "student_gain1_6",
+          "file": "SSB04340118_student_gain1_6.wav",
+          "sha256": "19b02d85fa5e5e298fe66dfea82253fdc5cc4aa5f7a64b8d678cb32a05dfdf07",
+          "samples": 81760,
+          "synthesis": {
+            "voiced_fraction": 0.6477495107632094,
+            "f0_voiced_median_hz": 205.26997112766855,
+            "peak_before_limit": 2.562014915251005
+          },
+          "asr": "所以你們可以通過手提條件設想好的角度",
+          "cer_against_declared": {
+            "reference_chars": 17,
+            "hypothesis_chars": 18,
+            "distance": 9,
+            "cer": 0.5294117647058824
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 17,
+            "hypothesis_chars": 18,
+            "distance": 9,
+            "cer": 0.5294117647058824
+          },
+          "utmos": 1.9990264177322388
+        },
+        {
+          "kind": "no_energy_gain",
+          "file": "SSB04340118_no_energy_gain.wav",
+          "sha256": "a3a7d4e2461f0774d8c8e55e81f6f8d373bfd698914cfd7374374758df239741",
+          "samples": 81760,
+          "synthesis": {
+            "voiced_fraction": 0.6477495107632094,
+            "f0_voiced_median_hz": 205.26997112766855,
+            "peak_before_limit": 1.3103106453399427
+          },
+          "asr": "所以你们可以通过手机调节设奖后的角度",
+          "cer_against_declared": {
+            "reference_chars": 17,
+            "hypothesis_chars": 18,
+            "distance": 6,
+            "cer": 0.35294117647058826
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 17,
+            "hypothesis_chars": 18,
+            "distance": 8,
+            "cer": 0.47058823529411764
+          },
+          "utmos": 2.139199733734131
+        },
+        {
+          "kind": "no_ap_gain",
+          "file": "SSB04340118_no_ap_gain.wav",
+          "sha256": "b4b35bc151d5f9938257f1a13c2ab0c40656bd884f0a7115599747f019ec385f",
+          "samples": 81760,
+          "synthesis": {
+            "voiced_fraction": 0.6477495107632094,
+            "f0_voiced_median_hz": 205.26997112766855,
+            "peak_before_limit": 2.5662382516114683
+          },
+          "asr": "所以你们可以通过手提条件设奖好的角度",
+          "cer_against_declared": {
+            "reference_chars": 17,
+            "hypothesis_chars": 18,
+            "distance": 9,
+            "cer": 0.5294117647058824
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 17,
+            "hypothesis_chars": 18,
+            "distance": 9,
+            "cer": 0.5294117647058824
+          },
+          "utmos": 2.0155041217803955
+        }
+      ],
+      "source": {
+        "sha256": "b75c7f309987b5d4bd2da91f89e588896617f70633709b158aa9f0c96363d695",
+        "samples": 81735,
+        "asr": "子女们可以通过手机调节摄像头的角度",
+        "cer_against_declared": {
+          "reference_chars": 17,
+          "hypothesis_chars": 17,
+          "distance": 0,
+          "cer": 0.0
+        }
+      },
+      "teacher": {
+        "sha256": "11dbb9fca1ecb5c98473430168da92dbf0474375b17c9a8c6794ab56101172fe",
+        "samples": 81735,
+        "asr": "孫女們可以通過手機挑戰攝像頭的角度",
+        "cer_against_declared": {
+          "reference_chars": 17,
+          "hypothesis_chars": 17,
+          "distance": 3,
+          "cer": 0.17647058823529413
+        }
+      }
+    },
+    {
+      "stem": "SSB00800053",
+      "speaker": "SSB0080",
+      "text": "金融街控股宣布安邦保险已增持至百分之二十",
+      "source_sha256": "c551e9c1d8cf72e22652387559af5340cbcef02fa1a82d80b271f96925893776",
+      "teacher_sha256": "b6c394c4c48efc949ffcc3bbf50dab92d6676f27219b265bfa474d902b6847f1",
+      "variants": [
+        {
+          "kind": "student_gain1_6",
+          "file": "SSB00800053_student_gain1_6.wav",
+          "sha256": "35799d0bac052d2c16f023f977996f4b13271eca32c09d3f7172fc73d04b4f14",
+          "samples": 108560,
+          "synthesis": {
+            "voiced_fraction": 0.8577745025792188,
+            "f0_voiced_median_hz": 210.39678700898332,
+            "peak_before_limit": 2.1913024206037175
+          },
+          "asr": "基隆街控股宣布安邦保险已增持至20%",
+          "cer_against_declared": {
+            "reference_chars": 20,
+            "hypothesis_chars": 18,
+            "distance": 7,
+            "cer": 0.35
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 18,
+            "hypothesis_chars": 18,
+            "distance": 2,
+            "cer": 0.1111111111111111
+          },
+          "utmos": 2.365063190460205
+        },
+        {
+          "kind": "no_energy_gain",
+          "file": "SSB00800053_no_energy_gain.wav",
+          "sha256": "84363a9a149ede9fefc183047e5311c00c1377fcf7be417ba0f4e1a33a665bc6",
+          "samples": 108560,
+          "synthesis": {
+            "voiced_fraction": 0.8577745025792188,
+            "f0_voiced_median_hz": 210.39678700898332,
+            "peak_before_limit": 1.3896710773616814
+          },
+          "asr": "基隆街控股宣布韩帮保险已增持至20%",
+          "cer_against_declared": {
+            "reference_chars": 20,
+            "hypothesis_chars": 18,
+            "distance": 9,
+            "cer": 0.45
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 18,
+            "hypothesis_chars": 18,
+            "distance": 4,
+            "cer": 0.2222222222222222
+          },
+          "utmos": 2.308229446411133
+        },
+        {
+          "kind": "no_ap_gain",
+          "file": "SSB00800053_no_ap_gain.wav",
+          "sha256": "b354b16c003b9d60b3789decd92b12102862b44c8fdff62147d0d01eddb066b6",
+          "samples": 108560,
+          "synthesis": {
+            "voiced_fraction": 0.8577745025792188,
+            "f0_voiced_median_hz": 210.39678700898332,
+            "peak_before_limit": 2.1899736842553508
+          },
+          "asr": "基隆街控股宣布安邦保险已增持至20%",
+          "cer_against_declared": {
+            "reference_chars": 20,
+            "hypothesis_chars": 18,
+            "distance": 7,
+            "cer": 0.35
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 18,
+            "hypothesis_chars": 18,
+            "distance": 2,
+            "cer": 0.1111111111111111
+          },
+          "utmos": 2.3768839836120605
+        }
+      ],
+      "source": {
+        "sha256": "c551e9c1d8cf72e22652387559af5340cbcef02fa1a82d80b271f96925893776",
+        "samples": 108481,
+        "asr": "金融接控股宣布安邦保险已增持至20%",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 18,
+          "distance": 6,
+          "cer": 0.3
+        }
+      },
+      "teacher": {
+        "sha256": "b6c394c4c48efc949ffcc3bbf50dab92d6676f27219b265bfa474d902b6847f1",
+        "samples": 108481,
+        "asr": "金融街控股宣布安邦保險已增持至20%",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 18,
+          "distance": 5,
+          "cer": 0.25
+        }
+      }
+    },
+    {
+      "stem": "SSB00800102",
+      "speaker": "SSB0080",
+      "text": "他五月底又被曝和朋友到新店山中聚会玩通宵",
+      "source_sha256": "ab089a86b54ff23c04669f31ec45a75f9517256178513ae7482a307575f6065a",
+      "teacher_sha256": "255ff2955881121c8eed04a12015606e9df1b6b2116ed0f0a64f522cb7a627ab",
+      "variants": [
+        {
+          "kind": "student_gain1_6",
+          "file": "SSB00800102_student_gain1_6.wav",
+          "sha256": "dfbbf0e953b552b88f55d412dcd44d67901d093f5383b8ded754382d72096ac0",
+          "samples": 97040,
+          "synthesis": {
+            "voiced_fraction": 0.886232481450948,
+            "f0_voiced_median_hz": 201.75325881281552,
+            "peak_before_limit": 2.032989539016476
+          },
+          "asr": "他5月底又被抱和朋友到新殿山中聚会晚通宵。",
+          "cer_against_declared": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 4,
+            "cer": 0.2
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 2,
+            "cer": 0.1
+          },
+          "utmos": 2.5173208713531494
+        },
+        {
+          "kind": "no_energy_gain",
+          "file": "SSB00800102_no_energy_gain.wav",
+          "sha256": "9c5959ec9b9c29e73a4bda824377ffc9d7b02d6fef7d9daf6c9932c9e7e0d9d4",
+          "samples": 97040,
+          "synthesis": {
+            "voiced_fraction": 0.886232481450948,
+            "f0_voiced_median_hz": 201.75325881281552,
+            "peak_before_limit": 1.2535593737177442
+          },
+          "asr": "他五月底又被抱和朋友到新建山中聚会玩通宵。",
+          "cer_against_declared": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 2,
+            "cer": 0.1
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 1,
+            "cer": 0.05
+          },
+          "utmos": 2.5623810291290283
+        },
+        {
+          "kind": "no_ap_gain",
+          "file": "SSB00800102_no_ap_gain.wav",
+          "sha256": "37d18fee9c7b9db280e0c0e3271b06f8a557123963b92736ed947980bc1bd05d",
+          "samples": 97040,
+          "synthesis": {
+            "voiced_fraction": 0.886232481450948,
+            "f0_voiced_median_hz": 201.75325881281552,
+            "peak_before_limit": 2.0362565627453275
+          },
+          "asr": "他5月底又被抱和朋友到新殿山中聚会晚通宵。",
+          "cer_against_declared": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 4,
+            "cer": 0.2
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 2,
+            "cer": 0.1
+          },
+          "utmos": 2.5255022048950195
+        }
+      ],
+      "source": {
+        "sha256": "ab089a86b54ff23c04669f31ec45a75f9517256178513ae7482a307575f6065a",
+        "samples": 96962,
+        "asr": "他5月底又被報和朋友到新電山中聚會玩通宵。",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 20,
+          "distance": 3,
+          "cer": 0.15
+        }
+      },
+      "teacher": {
+        "sha256": "255ff2955881121c8eed04a12015606e9df1b6b2116ed0f0a64f522cb7a627ab",
+        "samples": 96962,
+        "asr": "他五月底又被抱和朋友到新殿山中聚会玩通宵。",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 20,
+          "distance": 2,
+          "cer": 0.1
+        }
+      }
+    },
+    {
+      "stem": "SSB00800018",
+      "speaker": "SSB0080",
+      "text": "参赛作品突出国际化创新创意的全新设计理念",
+      "source_sha256": "8bcb63a1b795b57257cc34316af23647930abcabf5390e73ed4296010b5430fc",
+      "teacher_sha256": "320154cd3ca7b45a13990be3e0af7a8530e44d0df1a1ddf6dec4b72f85e77440",
+      "variants": [
+        {
+          "kind": "student_gain1_6",
+          "file": "SSB00800018_student_gain1_6.wav",
+          "sha256": "315709e9ec1590f6549f4005cafb4586336c811cef64354e23918468e22a7d02",
+          "samples": 104800,
+          "synthesis": {
+            "voiced_fraction": 0.8175572519083969,
+            "f0_voiced_median_hz": 211.1603379989488,
+            "peak_before_limit": 2.214409282739292
+          },
+          "asr": "參賽作品突出國際化,創新創意的全新設計裡面。",
+          "cer_against_declared": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 2,
+            "cer": 0.1
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 2,
+            "cer": 0.1
+          },
+          "utmos": 2.6815361976623535
+        },
+        {
+          "kind": "no_energy_gain",
+          "file": "SSB00800018_no_energy_gain.wav",
+          "sha256": "29958a72a700a2b4458cedb2b43b490db8939856cd4dcffcaad95df0027e6d18",
+          "samples": 104800,
+          "synthesis": {
+            "voiced_fraction": 0.8175572519083969,
+            "f0_voiced_median_hz": 211.1603379989488,
+            "peak_before_limit": 1.3844702848341346
+          },
+          "asr": "參賽作品突出國際化,創新創意的全新設計理念。",
+          "cer_against_declared": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "utmos": 2.62009596824646
+        },
+        {
+          "kind": "no_ap_gain",
+          "file": "SSB00800018_no_ap_gain.wav",
+          "sha256": "e4bbdfc95deedacb74faec94fad72c1f42e490c3b321974a3c57ec3fed8cfff2",
+          "samples": 104800,
+          "synthesis": {
+            "voiced_fraction": 0.8175572519083969,
+            "f0_voiced_median_hz": 211.1603379989488,
+            "peak_before_limit": 2.221562606715912
+          },
+          "asr": "參賽作品突出國際化,創新創意的全新設計裡面。",
+          "cer_against_declared": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 2,
+            "cer": 0.1
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 2,
+            "cer": 0.1
+          },
+          "utmos": 2.710318088531494
+        }
+      ],
+      "source": {
+        "sha256": "8bcb63a1b795b57257cc34316af23647930abcabf5390e73ed4296010b5430fc",
+        "samples": 104746,
+        "asr": "參賽作品突出國際化,創新創意的全新設計理念",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 20,
+          "distance": 0,
+          "cer": 0.0
+        }
+      },
+      "teacher": {
+        "sha256": "320154cd3ca7b45a13990be3e0af7a8530e44d0df1a1ddf6dec4b72f85e77440",
+        "samples": 104746,
+        "asr": "參賽作品突出國際化,創新創意的全新設計理念",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 20,
+          "distance": 0,
+          "cer": 0.0
+        }
+      }
+    },
+    {
+      "stem": "SSB00800067",
+      "speaker": "SSB0080",
+      "text": "杰森在我们手上受了很痛苦的折磨",
+      "source_sha256": "eb9462faf4b6b455368a2563828b8d4d0213a83f7cddee5752278533abed70a8",
+      "teacher_sha256": "32f233d8a77029b6dcc3280d553cfeeb09750ec7bc420a96b97284d17aa64c70",
+      "variants": [
+        {
+          "kind": "student_gain1_6",
+          "file": "SSB00800067_student_gain1_6.wav",
+          "sha256": "40a778d2727a796205d9cfff74da51a11f64d8b57f92b9c61c0bf505efb5c605",
+          "samples": 71600,
+          "synthesis": {
+            "voiced_fraction": 0.8424581005586592,
+            "f0_voiced_median_hz": 202.2891156017654,
+            "peak_before_limit": 2.1533276856655665
+          },
+          "asr": "傑森在我們手上收了很痛苦的折磨。",
+          "cer_against_declared": {
+            "reference_chars": 15,
+            "hypothesis_chars": 15,
+            "distance": 1,
+            "cer": 0.06666666666666667
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 15,
+            "hypothesis_chars": 15,
+            "distance": 1,
+            "cer": 0.06666666666666667
+          },
+          "utmos": 2.890685558319092
+        },
+        {
+          "kind": "no_energy_gain",
+          "file": "SSB00800067_no_energy_gain.wav",
+          "sha256": "7e53044f3df7eb0005224362bfcaf42231489e1fe7e4eef13019bb97b05b243e",
+          "samples": 71600,
+          "synthesis": {
+            "voiced_fraction": 0.8424581005586592,
+            "f0_voiced_median_hz": 202.2891156017654,
+            "peak_before_limit": 1.1156804086312113
+          },
+          "asr": "傑森在我們手上受了很痛苦的折磨。",
+          "cer_against_declared": {
+            "reference_chars": 15,
+            "hypothesis_chars": 15,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 15,
+            "hypothesis_chars": 15,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "utmos": 2.755197286605835
+        },
+        {
+          "kind": "no_ap_gain",
+          "file": "SSB00800067_no_ap_gain.wav",
+          "sha256": "780b75ed331b0dbe2ba72152b576ea328461f8626b75fcef19fb791ccd26700a",
+          "samples": 71600,
+          "synthesis": {
+            "voiced_fraction": 0.8424581005586592,
+            "f0_voiced_median_hz": 202.2891156017654,
+            "peak_before_limit": 2.1509861199683185
+          },
+          "asr": "傑森在我們手上收了很痛苦的折磨。",
+          "cer_against_declared": {
+            "reference_chars": 15,
+            "hypothesis_chars": 15,
+            "distance": 1,
+            "cer": 0.06666666666666667
+          },
+          "cer_against_teacher_asr": {
+            "reference_chars": 15,
+            "hypothesis_chars": 15,
+            "distance": 1,
+            "cer": 0.06666666666666667
+          },
+          "utmos": 2.900700569152832
+        }
+      ],
+      "source": {
+        "sha256": "eb9462faf4b6b455368a2563828b8d4d0213a83f7cddee5752278533abed70a8",
+        "samples": 71524,
+        "asr": "傑森在我們手上受了很痛苦的折磨",
+        "cer_against_declared": {
+          "reference_chars": 15,
+          "hypothesis_chars": 15,
+          "distance": 0,
+          "cer": 0.0
+        }
+      },
+      "teacher": {
+        "sha256": "32f233d8a77029b6dcc3280d553cfeeb09750ec7bc420a96b97284d17aa64c70",
+        "samples": 71524,
+        "asr": "傑森在我們手上受了很痛苦的折磨",
+        "cer_against_declared": {
+          "reference_chars": 15,
+          "hypothesis_chars": 15,
+          "distance": 0,
+          "cer": 0.0
+        }
+      }
+    }
+  ],
+  "group_ablation": true,
+  "anchor_statistics": "production20ms",
+  "summary": {
+    "student_gain1_6": {
+      "reference_chars": 152,
+      "distance": 44,
+      "micro_cer": 0.2894736842105263,
+      "utmos_mean": 2.4575345763775305
+    },
+    "no_energy_gain": {
+      "reference_chars": 152,
+      "distance": 40,
+      "micro_cer": 0.2631578947368421,
+      "utmos_mean": 2.4489391375714398
+    },
+    "no_ap_gain": {
+      "reference_chars": 152,
+      "distance": 44,
+      "micro_cer": 0.2894736842105263,
+      "utmos_mean": 2.474632910856112
+    }
+  },
+  "complete": true,
+  "reference": "declared corpus text; not independently manually verified",
+  "asr": "offline Whisper-small, existing CER with OpenCC0.1.7 t2s",
+  "by_speaker": {
+    "SSB0080": {
+      "student_gain1_6": {
+        "reference_chars": 75,
+        "distance": 14,
+        "micro_cer": 0.18666666666666668,
+        "utmos_mean": 2.6136514544487
+      },
+      "no_energy_gain": {
+        "reference_chars": 75,
+        "distance": 11,
+        "micro_cer": 0.14666666666666667,
+        "utmos_mean": 2.561475932598114
+      },
+      "no_ap_gain": {
+        "reference_chars": 75,
+        "distance": 14,
+        "micro_cer": 0.18666666666666668,
+        "utmos_mean": 2.6283512115478516
+      }
+    },
+    "SSB0434": {
+      "student_gain1_6": {
+        "reference_chars": 77,
+        "distance": 30,
+        "micro_cer": 0.38961038961038963,
+        "utmos_mean": 2.3014176983063614
+      },
+      "no_energy_gain": {
+        "reference_chars": 77,
+        "distance": 29,
+        "micro_cer": 0.37662337662337664,
+        "utmos_mean": 2.336402342544766
+      },
+      "no_ap_gain": {
+        "reference_chars": 77,
+        "distance": 30,
+        "micro_cer": 0.38961038961038963,
+        "utmos_mean": 2.320914610164372
+      }
+    }
+  },
+  "execution": {
+    "generation_return_code": 1,
+    "evaluation_return_code": 0,
+    "artifacts_verified": "8rows24WAV with independently rechecked SHA and finite UTMOS",
+    "script_sha256": "9c822ec35aad5e4e703a7744d0ce1ec2355322c6e743f9d23f216dc3f14facc9",
+    "commands": [
+      "D:/Anaconda/envs/yolo/python.exe build/audit_content_chain_20261027.py generate --group-ablation --asset-root <asset-root> --output <generated>/group_gain_ablation_20261027",
+      "Python3.12 build/audit_content_chain_20261027.py evaluate --group-ablation --asset-root <asset-root> --output <generated>/group_gain_ablation_20261027"
+    ]
+  },
+  "decision": {
+    "no_energy_gain": "REJECTED_AS_REPLACEMENT: CER improves4/152 edits but one speaker UTMOS falls; no stable joint gain",
+    "no_ap_gain": "SMALL_NATURALNESS_GAIN_ONLY: both speakers improve slightly, CER identical on all8 sentences; not a content solution",
+    "production_candidate_selected": false,
+    "next": "Stop postfilter tuning; investigate source-specific paired supervision and phonetic/content representation using existing allowed training assets."
+  },
+  "limitations": [
+    "Public8-sentence mechanism test, not fixed-male five-gate evaluation.",
+    "Declared text not independently verified and ASR contains formatting/proper-name errors.",
+    "UTMOS averages per-utterance scores; each utterance score uses existing6s/nonoverlap tail>=1.5s RMS0.04 length weighting. No confidence interval or listening evidence.",
+    "No inference feasibility or realtime claim; full-utterance means still used."
+  ]
+}

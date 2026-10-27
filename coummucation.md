@@ -2346,3 +2346,26 @@
 - 判定：统一增益与裁剪在不同参数组作用不同，优先冻结模型做能量/AP增益移除对照，而不是继续统一增益或损失权重扫描。
 - 限制：全局能量相关不证明局部音素对齐；RMS量不证明轨迹正确；统计位于20ms帧，非最终5ms裁剪率；仅参数统计不能证明CER改善。无录音4/5、Track9、训练、合成、播放、板测或PS/PL结论。
 - 下一责任方：Hardware-A / Codex 在同8句冻结模型和谱gain1.6、分别移除能量或AP增益，检查内容与自然度，结果出来前不选新配置。
+
+
+### [PS-20261021-10] 分组增益机制验证认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准提交：268dc96；冻结Round88 checkpoint，8公共validation，谱gain1.6。
+- 实验：原gain1.6、仅去能量增益、仅去AP增益三个固定对照；使用生产20ms锚点统计，其他裁剪/F0/VUV/合成不变，无搜索网格或训练。
+- 修改路径：build/audit_content_chain_20261027.py --group-ablation、report/group_gain_ablation_20261027.{md,json}、coummucation.md。
+- 复现：generate用yolo Python、evaluate用Python3.12，--group-ablation --asset-root <asset-root> --output <generated>/group_gain_ablation_20261027。
+- 选择证据：报告同句CER、逐句UTMOS、两说话人一致性；只改善总分而某人退步不选新配置。结果不能替代固定男性五门。
+- 限制：不读取录音4/5或Track9，不播放、不训练、不接触板卡。计为机制验证，不额外扩充50轮训练预算。
+- 下一责任方：Hardware-A / Codex 完成对照并提交证据。
+
+
+### [PS-20261021-10] 分组增益机制验证结果
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：REJECTED_AS_CONTENT_SOLUTION。
+- 基准提交：268dc96；模型Round88冻结，8公共validation，生产20ms锚点统计，无训练/网格。
+- 量化结果：baseline CER44/152=0.289474、UTMOS2.457535；去能量gain CER40/152=0.263158、UTMOS2.448939；去AP gain CER44/152=0.289474、UTMOS2.474633。
+- 跨人证据：去能量gain令SSB0080 UTMOS2.613651→2.561476，SSB0434为2.301418→2.336402，未满足无说话人回退门；去AP在两人小幅上升0.014700/0.019497，但8/8句CER均不变。AP版8/8WAV哈希不同，确实改了信号。
+- 判定：不选新生产候选；裁剪冲突不是简单移除单组gain即可解决的主要内容瓶颈，不继续本地增益微调。
+- 修改路径与报告：build/audit_content_chain_20261027.py、report/group_gain_ablation_20261027.{md,json}、coummucation.md。
+- 复现：入口generate/evaluate --group-ablation --asset-root <asset-root> --output <generated>/group_gain_ablation_20261027；解释器/脚本SHA见JSON。生成退出1但8行24WAV完成，哈希与有限分数独立检查；评测退出0。
+- 限制：8句自动ASR/UTMOS无显著性或听感结论，非固定男声五门；不读录音4/5或Track9，不训练、不播放、不接触板卡。
+- 下一责任方：Hardware-A / Codex 盘点允许的固定男声训练监督与内容表示，不再围绕统一增益/裁剪反复选点。50轮总预算不扩充，原Round93已中止不重启。

@@ -18,6 +18,8 @@ def main():
     parser.add_argument('stage', choices=('generate', 'evaluate'))
     parser.add_argument('--asset-root', required=True, type=Path)
     parser.add_argument('--output', required=True, type=Path)
+    parser.add_argument('--group-ablation', action='store_true',
+                        help='Freeze gain1.6 and separately remove energy or AP gain')
     args = parser.parse_args()
     root = args.asset_root.resolve()
     generated = root / 'build/generated'
@@ -39,6 +41,13 @@ def main():
         snapshot = next((root / '交接/核心材料/neural_reference/cache/hf/hub/models--openai--whisper-small/snapshots').glob('*'))
         processor = WhisperProcessor.from_pretrained(snapshot, local_files_only=True)
         model = WhisperForConditionalGeneration.from_pretrained(snapshot, local_files_only=True).eval()
+        if args.group_ablation:
+            sys.path.insert(0, str(generated / 'eval_deps_20261016'))
+            sys.path.insert(0, str(next((generated / 'eval_sources_20261016').glob('SpeechMOS-*'))))
+            from speechmos.utmos22.strong.model import UTMOS22Strong
+            utmos = UTMOS22Strong()
+            utmos.load_state_dict(torch.load(root / '交接/核心材料/neural_reference/cross_evaluators/utmos22_strong_step7459_v1.pt', map_location='cpu', weights_only=True))
+            utmos.eval()
         result = json.loads((args.output / 'generation.json').read_text(encoding='utf-8'))
         previous = json.loads((generated / 'paired_teacher_audit_20261027/teacher_content_audit.json').read_text(encoding='utf-8'))
         assert previous['complete']
@@ -59,17 +68,33 @@ def main():
                 text = processor.batch_decode(ids, skip_special_tokens=True)[0].strip()
                 variant.update(asr=text, cer_against_declared=cer(row['text'], text),
                                cer_against_teacher_asr=cer(row['teacher']['asr'], text))
+                if args.group_ablation:
+                    scores, weights = [], []
+                    for start in range(0, len(signal), 96000):
+                        clip = signal[start:start+96000]
+                        rms = float(np.sqrt(np.mean(clip * clip)))
+                        if len(clip) < 24000 or rms < 1e-3:
+                            continue
+                        normalized = clip * 0.04 / rms
+                        with torch.inference_mode():
+                            scores.append(float(utmos(torch.from_numpy(normalized).unsqueeze(0).float(), 16000).item()))
+                        weights.append(len(clip))
+                    assert scores and np.isfinite(scores).all()
+                    variant['utmos'] = float(np.average(scores, weights=weights))
             print(json.dumps({'stem': row['stem'], 'edits': {
                 v['kind']: v['cer_against_declared']['distance'] for v in row['variants']}}), flush=True)
             (args.output / 'evaluation.json').write_text(json.dumps(result, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
         summary = {}
-        for kind in ('source', 'teacher', 'world5', 'world20', 'student_gain1_6'):
+        kinds = ('student_gain1_6', 'no_energy_gain', 'no_ap_gain') if args.group_ablation else ('source', 'teacher', 'world5', 'world20', 'student_gain1_6')
+        for kind in kinds:
             values = [(row[kind] if kind in ('source', 'teacher') else
                        next(v for v in row['variants'] if v['kind'] == kind))['cer_against_declared']
                       for row in result['rows']]
             chars = sum(v['reference_chars'] for v in values)
             distance = sum(v['distance'] for v in values)
             summary[kind] = {'reference_chars': chars, 'distance': distance, 'micro_cer': distance/chars}
+            if args.group_ablation:
+                summary[kind]['utmos_mean'] = float(np.mean([next(v for v in row['variants'] if v['kind']==kind)['utmos'] for row in result['rows']]))
         result.update(summary=summary, complete=True,
                       reference='declared corpus text; not independently manually verified',
                       asr='offline Whisper-small, existing CER with OpenCC0.1.7 t2s')
@@ -99,7 +124,12 @@ def main():
     cache_manifest = json.loads(cache_manifest_path.read_text(encoding='utf-8'))
     records = {r['stem']: r for r in cache_manifest['records'] if r['split'] == 'validation'}
     anchor_worlds = [base.analyze_world(base.read_16k(root/f'人物音频资料/女声/Track {n}.wav')) for n in (5,6,7,8)]
-    anchor_y = np.concatenate([w['output'] for w in anchor_worlds])
+    if args.group_ablation:
+        hubert = base.HubertModel.from_pretrained(root / '交接/核心材料/neural_reference/RVC/assets/hubert_base', local_files_only=True).float().eval()
+        anchor_y = np.concatenate([interpolate(w['output'], len(base.extract_hubert(hubert, base.read_16k(root/f'人物音频资料/女声/Track {n}.wav')))) for n,w in zip((5,6,7,8),anchor_worlds)])
+        del hubert
+    else:
+        anchor_y = np.concatenate([w['output'] for w in anchor_worlds])
     clip_lo, clip_hi = np.percentile(anchor_y, [0.1, 99.9], axis=0)
     log_sp = np.log(np.maximum(np.concatenate([w['spectrum'] for w in anchor_worlds]), 1e-8))
     voiced = anchor_y[:, paired.VUV_INDEX] > 0.5
@@ -111,6 +141,8 @@ def main():
               'cache_manifest_sha256':sha(cache_manifest_path), 'gain':1.6,
               'recording4_used':False, 'recording5_used':False, 'track9_used':False,
               'training':False, 'played':False, 'board_touched':False, 'rows':[]}
+    result['group_ablation'] = args.group_ablation
+    result['anchor_statistics'] = 'production20ms' if args.group_ablation else 'diagnostic5ms'
     for row in declaration['validation']:
         record = records[row['stem']]
         signals = {}
@@ -138,6 +170,7 @@ def main():
         with torch.inference_mode():
             raw = model(torch.from_numpy(x[None]))[0].numpy()
         continuous = raw*cp['y_std']+cp['y_mean']
+        unfiltered = continuous.copy()
         for group in NON_F0:
             center = continuous[:,group].mean(axis=0,keepdims=True)
             continuous[:,group] = center+1.6*(continuous[:,group]-center)
@@ -146,7 +179,16 @@ def main():
         prediction[:,paired.VUV_INDEX]=(interpolate(probability[:,None],len(oracle5))[:,0]-0.5)*8
         out = {'stem':row['stem'],'speaker':row['speaker'],'text':row['text'],
                'source_sha256':row['src_sha'],'teacher_sha256':row['tch_sha'],'variants':[]}
-        for kind,value,bounds in (('world5',oracle5,reconstruct_stats),('world20',oracle20,reconstruct_stats),('student_gain1_6',prediction,stats)):
+        variants = [('world5',oracle5,reconstruct_stats),('world20',oracle20,reconstruct_stats),('student_gain1_6',prediction,stats)]
+        if args.group_ablation:
+            variants = [('student_gain1_6',prediction,stats)]
+            for kind, group in (('no_energy_gain', slice(62,63)), ('no_ap_gain', slice(63,75))):
+                changed = continuous.copy()
+                changed[:,group] = unfiltered[:,group]
+                frames = np.clip(interpolate(changed,len(oracle5)),clip_lo,clip_hi)
+                frames[:,paired.VUV_INDEX] = prediction[:,paired.VUV_INDEX]
+                variants.append((kind,frames,stats))
+        for kind,value,bounds in variants:
             wave, synthesis = base.synthesize(value,bounds)
             assert np.isfinite(wave).all()
             path = args.output/f'{row["stem"]}_{kind}.wav'
