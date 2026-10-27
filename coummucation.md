@@ -1908,3 +1908,9 @@
 - 失败：浮点IP生成完整路径超过Windows260字符，非RTL数值失败；入口include引号已修正，下一轮用D盘短生成目录。
 - 恢复：stop/rmmod/sync/正常reboot，原厂bit与v23 SHA匹配，FPGA operating、PCM双RUNNING、内核Not tainted、自有模块卸载。启动分区未改，无新录放。
 - 下一责任方Hardware-A / Codex短路径重跑HLS/RTL并继续融合迁移。
+
+### [PL-20261027-01] Round16 短路径HLS工具修复认领
+- 日期2026-10-27；Hardware-A / Codex；CLAIMED / PROPOSED；基准3ddb50d。
+- 修改两HLS入口支持WORLD_HLS_PROJECT；probe只接受新目录防覆盖历史。生成工程D:/wpl_20261027_r16/m，源码留仓库，避开260字符限制。
+- 复现：设置WORLD_HLS_PROJECT后vitis-run依次probe/cosim；算法/RTL约束不变。结果待本轮报告。
+- 限制：板端已恢复原厂v23运行，不再切板；无新录放；下一责任方Hardware-A / Codex验证工具修复及RTL数值。
