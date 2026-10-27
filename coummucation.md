@@ -1608,3 +1608,12 @@
 - 限制：仅已有文件出声；无完整五门音色、现场实时、PL、延迟或稳定性验收。新语音未下载/提交。
 - 恢复：mixer恢复exit0，world-voice启动exit0；无PL/设备树/启动改动。
 - 下一责任方：Hardware-A，继续须按本轮准备确认、同一PCM格式与显式路由安排短现场实时工程诊断；正式五门仍保持未验收。
+
+### [LOCAL-PS-20261027-01] 20秒PS实时工程诊断准备方案轮
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED。
+- 基准提交：`793663c`；路径：`board/deepseek_live_diagnostic.py`、`coummucation.md`。
+- 方案：既有格式修复ARM程序，20秒arecord→300ms分块转换→aplay，输出增益39322/输入262144沿用原v23量级；显式设置输入/输出路由，保存恢复mixer，仅结束自己启动的进程，不保存或上传真人音频。
+- 复现命令：`python -m py_compile board/deepseek_live_diagnostic.py`；停world-voice后板端`python3 deepseek_live_diagnostic.py`（根目录仍为本轮独立/tmp目录）。
+- 量化结果：准备20秒、300ms块、200ms播放器启动缓冲、16,384帧播放缓冲；这些是配置而非实测端到端延迟。语法检查通过，实时结果待下一测试轮。
+- 限制：纯ARM工程诊断，PL未加载，正式五门/延迟/稳定性未验收。操作者已明确“准备好了，开始20秒实时测试”。
+- 下一责任方：Hardware-A完成提交后运行这一轮，恢复原v23并记录用户现场反馈。
