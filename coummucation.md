@@ -1855,3 +1855,10 @@
 - 量化male1：3279调用，copy_in28.288ms/device263.459ms/copy_out132.327ms；约31%内核开销为结果复制。开启与关闭中位墙钟2.631122/2.637466秒，无显著插桩扰动。
 - 用户新指令：能放PL就放PL，能全放更好；后续以WORLD分析/映射/合成完整计算阶段为迁移目标，PS先保留音频I/O与控制，避免逐算子往返。当前核资源余量不等于整链已能容纳，需HLS/RTL资源实测。
 - 限制：结束profile=0；服务停止、compact候选驻留，无新录放/高实时结论；下一责任方Hardware-A / Codex检查HLS工具并认领融合实现。
+
+### [PL-20261027-01] Round13 WORLD整链PL融合方案认领与提案
+- 日期：2026-10-27；Hardware-A / Codex；状态：CLAIMED / PROPOSED；基准9eb5509。
+- 用户明确要求能放PL就放PL，能全放更好。Round12显示逐FFT ioctl中回读约31%、设备事务约62%，故切换帧级融合，不再把单FFT加速当主路径。
+- 提案报告：`report/world_full_pl_migration_round13_proposal_20261027.md`。分层范围：4帧前端谱→D4C批处理→合成状态→单事务融合DMA；PS保留音频I/O与控制。
+- 量化门：逐层与v23 PCM16最大误差≤3、SNR≥75dB、零fallback/零削顶；每层独立HLS/RTL/资源/时序门。当前只是架构提案，无板测/试听/高实时结论。
+- 下一责任方：Hardware-A / Codex 编写第一阶段frame frontend golden/HLS C-sim，随后Vivado MCP综合资源评估。
