@@ -1888,3 +1888,10 @@
 - 固定每级512蝶形、预计算ROM、固定bit反转、exp输出流水；源码及生成/质量脚本见report/world_minphase_round14_proposal_20261027.md。
 - 24例host最大relativeL2 8.5944e-7；完整语音/HLS进行中，后续独立结果提交；同级无地址重叠依赖声明必须RTL cosim验证。
 - 限制无RTL/板测/新录放；当前compact候选驻留、服务停止；下一责任方Hardware-A / Codex完成周期/资源与数值门。
+
+### [PL-20261027-01] Round14 host通过，HLS估算改善但待RTL门
+- 日期2026-10-27；Hardware-A / Codex；ACCEPTED（host/资源估算）；实现bfb9327。
+- 报告report/world_minphase_fused_round14_20261027.md、host JSON及两份HLS TXT；24例最大relativeL2 8.5944e-7，两输入PCM16误差1/SNR97.268及96.811dB。
+- 量化HLS：9972LUT/7734FF/4BRAM36K/38DSP，29813拍@100MHz（估算298.13µs），非routed/实际DDR。
+- 风险：工具flatten级循环，inter false约束必须禁止跨级重叠后RTL cosim；exp目标II=1未完全满足，不宣称RTL通过。
+- 下一责任方Hardware-A / Codex明确LOOP_FLATTEN off并完成cosim，之后才考虑整机融合；无新录放。
