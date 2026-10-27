@@ -2123,3 +2123,17 @@
 - 限制：identity OpenCC shim的简繁归一化有限；不播放、不录音、不接触板卡，不声明试听、Cortex-A9、RTL/PL或实时通过。
 - 下一责任方：Hardware-A / Codex 完成本轮训练、严格评估并提交单轮结果。
 
+
+### [PS-20261021-10] HuBERT/WORLD Round 88 结果与训练数据用途更正
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：45cab049b3ad4d1179596adab70a68166056793b
+- 唯一变量：以Round85为基准，仅将多尺度动态损失权重1.25改为1.20；VUV BCE=0.35、source prosody、variance matching、锚点0.25、gain1.6和种子不变。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = 0.6988806643/0.6764631763/0.1049895034/2.3280673822/0.2647058824；泄漏、CER失败。2000 step完成，checkpoint内最佳step=1200，验证loss=0.7921773791；checkpoint SHA-256 e21d8175cb56a5aa3f3e7ac75578705b5deb8cb40fea07a5a73ef87d38586faa；WAV SHA-256 a49aa55a3d9677ef42cf6d03daf63f2d4a52e451af62d3f2688c1966ea3969eb。
+- 数据用途更正：Round25缓存声明fixed_male_audio_used=false，192条公共配对训练、8条独立验证；女声Track5～8作自重建锚点。此前认领记录中“男性录音1～3用于训练”的文字不准确，实际它们用于评测源身份质心；本轮只评测录音4，未读取录音5或Track9。
+- 修改路径：build/reproduce_hubert_world_round88_20261027.py、report/fixed_male_hubert_world_round88_20261027.{md,json}、coummucation.md。
+- 复现命令：见JSON内reproduction四阶段命令；prepare与py_compile通过，evaluate入口重跑得到相同指标；原始checkpoint已独立加载并核对历史、权重有限值、缓存SHA、WAV SHA。
+- 限制：identity OpenCC shim不执行简繁转换，原始评测protocol文字与实际不符已披露；源ASR文字非人工真值。训练启动器写出产物后退出1；未播放、未录音、未接触板卡，无真人试听、PS/PL/实时结论。
+- 报告链接：report/fixed_male_hubert_world_round88_20261027.md、report/fixed_male_hubert_world_round88_20261027.json。
+- 下一责任方：Hardware-A / Codex；后续先针对CER与训练数据覆盖做诊断，避免继续重复无收益的微小权重扫描。Round59～88计30轮，剩余额度20轮；五门全过即停止。
