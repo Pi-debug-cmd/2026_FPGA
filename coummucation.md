@@ -2324,3 +2324,25 @@
 - 核验：checkpoint SHA e21d8175cb56a5aa3f3e7ac75578705b5deb8cb40fea07a5a73ef87d38586faa；缓存/源/教师SHA通过；8行24WAV二次核对哈希，生成产物后退出1，评测退出0。
 - 限制：ASR差异不是因果可加误差分解；学生分支包含目标裁剪和gain，锚点使用5ms统计而非生产20ms插值，不声称录音4逐位复现；声明文本非人工核验。WORLD分支保留合成器平滑/VUV/峰值规则。无录音4/5、Track9、播放、训练或板端结论。
 - 下一责任方：Hardware-A / Codex 优先量化源/教师时间对齐、预测裁剪和动态误差，再选择有机制依据的监督修复；不恢复参数扫描。
+
+
+### [PS-20261021-10] 时序与裁剪诊断认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准提交：20ebd6a；冻结Round88，仅公共8句validation，无训练或选参。
+- 范围：源/教师能量包络±200ms相关，测全局错位代理；预测、gain1.6及裁剪后的谱/F0/能量/AP动态比和标准化误差、越界率；锚点沿生产20ms插值统计。
+- 修改路径：build/audit_alignment_clipping_20261027.py、report/alignment_clipping_audit_20261027.{json,md}、coummucation.md。
+- 复现：yolo Python build/audit_alignment_clipping_20261027.py --asset-root <asset-root> --output <generated>/alignment_clipping.json。
+- 判据：区分明显全局时移、动态不足与裁剪损失；能量相关不是音素对齐证明，不按最佳lag直接修改训练集。
+- 限制：只诊断，不合成、不读取录音4/5或Track9、不播放、不接触板卡。
+- 下一责任方：Hardware-A / Codex 完成逐句统计和报告。
+
+
+### [PS-20261021-10] 时序与裁剪诊断结果
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED / DIAGNOSIS_ONLY。
+- 基准提交：20ebd6a；冻结Round88，8公共validation，不训练或合成。
+- 量化结果：8/8能量包络最佳lag0，相关0.9103～0.9723，不支持全局平移修复。gain1.6导致能量27.97%、AP51.14%值越界；AP动态比预测0.7711→增益1.2337→裁剪0.8835，谱0.7512→1.2019→1.1507，能量0.9091→1.4546→1.3718。
+- 修改路径与报告：build/audit_alignment_clipping_20261027.py、report/alignment_clipping_audit_20261027.{md,json}、coummucation.md。
+- 复现：yolo Python build/audit_alignment_clipping_20261027.py --asset-root <asset-root> --output <generated>/alignment_clipping.json；启动器完成JSON后退出1，完整8行、有限值、checkpoint/缓存SHA独立核验。
+- 判定：统一增益与裁剪在不同参数组作用不同，优先冻结模型做能量/AP增益移除对照，而不是继续统一增益或损失权重扫描。
+- 限制：全局能量相关不证明局部音素对齐；RMS量不证明轨迹正确；统计位于20ms帧，非最终5ms裁剪率；仅参数统计不能证明CER改善。无录音4/5、Track9、训练、合成、播放、板测或PS/PL结论。
+- 下一责任方：Hardware-A / Codex 在同8句冻结模型和谱gain1.6、分别移除能量或AP增益，检查内容与自然度，结果出来前不选新配置。
