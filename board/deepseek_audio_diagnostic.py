@@ -28,6 +28,12 @@ def main():
     saved = False
     try:
         call(['alsactl', '-f', str(state), 'store', '0']); saved = True
+        # world-voice stop restores a snapshot with the PCM output routes off.
+        call(['amixer', 'sset', 'Left Output Mixer PCM', 'on'])
+        call(['amixer', 'sset', 'Right Output Mixer PCM', 'on'])
+        call(['amixer', 'sset', 'Headphone Playback ZC', 'on'])
+        call(['amixer', 'sset', 'Headphone', '127,127'])
+        call(['amixer', 'sset', 'Playback', '255,255'])
         call(['amixer', 'sget', 'Headphone'])
         call(['amixer', 'sget', 'Playback'])
         for name, seconds, frequency in [('tone', .7, 660), ('cue', .3, 880)]:

@@ -1590,3 +1590,12 @@
 - 复现命令：见JSON。无新采录、无PL/系统改动。
 - 后续只读根因：`/tmp/world_voice_autostart_mixer.state`与本轮`round6_mixer.state`中的左右Output Mixer PCM Playback Switch均false；停止服务恢复该状态，前几轮仅调音量未打开PCM输出路由。服务start显式打开路由后提示音可听。因此前6轮模拟播放失败不能用于评价Deepseek音质；停止服务后的路由前置检查缺失属于本次测试流程遗漏。
 - 下一责任方：Hardware-A显式打开左右PCM路由、保存/恢复mixer，另行准备确认后重做已有验证语音对照。
+
+### [LOCAL-PS-20261027-01] 播放路由前置修复方案轮
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED。
+- 基准提交：`bf8d03f`；路径：`board/deepseek_audio_diagnostic.py`、`coummucation.md`。
+- 原因：停止world-voice会恢复原mixer，PCM左右输出开关false；修复脚本在store后显式设置左右PCM on、Headphone ZC on和已确认播放音量，finally仍restore，避免静音流程重现。
+- 复现命令：`python -m py_compile board/deepseek_audio_diagnostic.py`；现场先stop服务再运行脚本（需本轮准备确认）。
+- 量化结果：只读保存状态已确认2个PCM开关false；脚本语法检查通过；新路由现场播放尚待验证。
+- 限制：不改模型、不改系统持久配置、不切PL；不能把此修改本身写成模拟播放通过。
+- 下一责任方：Hardware-A取得下一轮准备确认后播放已有原始/转换语音，记录第7轮。
