@@ -355,3 +355,4 @@
 - v21-v24 均保持身份/P10/UTMOS通过，但 leakage 为 0.2361–0.2556、CER 为 0.2353–0.3529。
 - v25 将 leakage 降至 0.1593，但 identity 0.1436、UTMOS 1.2992、CER 1.0；全门失败。
 - v1-v25 没有全门通过版本；不进入 WAIT_LOCAL_TEST，不发布未达标模型包。
+- 归档提交 `da1a545` 已推送到既有 Remote-PS-C 分支。

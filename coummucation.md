@@ -1997,3 +1997,4 @@
 - v24：identity 0.758471459 / P10 0.736845084 / leakage 0.237554912 / UTMOS 2.469073216 / CER 0.294117647，REJECTED。
 - v25：identity 0.143637836 / P10 0.113644411 / leakage 0.159276669 / UTMOS 1.299219171 / CER 1.000000000，REJECTED。
 - v25 是当前最低 leakage，但均值收缩摧毁其余门；v1-v25 未出现五门全过版本，当前路线停止无效扫描，不进入 WAIT_LOCAL_TEST。
+- 代码、报告和运行证据已提交为 `da1a545`，推送到 `agent/ymheee/PS-20261025-20` 成功；未改 GitHub 分配规则。

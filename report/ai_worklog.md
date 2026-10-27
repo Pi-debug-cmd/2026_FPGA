@@ -885,3 +885,4 @@ ps-opt 把非周期最小相位优化移植进流式路径（改造 synthesisrea
 - v24：delta_weight 1.00 + 输出对抗 0.50，leakage 0.237554912、CER 0.294117647，REJECTED。
 - v25：v24 输出均值收缩 0.15，leakage 0.159276669 但 identity 0.143637836、UTMOS 1.299219171、CER 1.0，REJECTED。
 - v1-v25 均未同时通过五门；当前 HuBERT→FARGAN 电脑端路线在现有数据/模型下停止继续扫描，仍不进入 WAIT_LOCAL_TEST。
+- 协作策略检查通过；提交 `da1a545` 已推送到 `agent/ymheee/PS-20261025-20`。
