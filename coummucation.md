@@ -2281,3 +2281,24 @@
 - 更正：Seed9/18历史上客观过五门，但用户试听否决；当前无最终验收通过方案，不等于从未客观过门。目标自重建与真正男转女证据必须区分。
 - 限制：历史部分轮次无独立报告，未声称所有轮次统一复算；CER参考为ASR，不能替代人工真值或听感。无新音频、锁定集、现场或RTL/PL操作。
 - 下一责任方：Hardware-A / Codex 先审计非锁定公共教师内容上限、错误时段和源专用监督覆盖，获得机制证据后才提出下一训练轮；不自动启动dropout或进一步调权。
+
+
+### [PS-20261021-10] 公共配对教师内容诊断认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准提交：1a8954c；本次为收益复盘后的根因诊断，不新增训练或参数扫描。
+- 范围：仅现有公共配对8条validation，核对源/教师SHA，以同一Whisper-small分别识别并与manifest声明文本比较，同时报告teacher对source-ASR的CER，避免源识别错误被隐藏。
+- 修改路径：build/audit_paired_teacher_content_20261027.py、report/paired_teacher_content_audit_20261027.{json,md}、coummucation.md。
+- 复现：Python3.12 build/audit_paired_teacher_content_20261027.py --asset-root <asset-root> --output <generated>/teacher_content_audit.json。
+- 判据：先查教师是否保留内容；若教师自身明显错漏，不继续以优化学生权重解决教师缺陷。若教师内容良好，下一步定位学生预测和时间对齐。
+- 限制：声明文本仍需独立人工核验；非最终五门验收，不读录音4/5或Track9，不播放、不训练、不接触板卡。
+- 下一责任方：Hardware-A / Codex 完成诊断、记录逐句证据、推送后据此决定下一项机制验证。
+
+
+### [PS-20261021-10] 公共配对教师内容诊断结果
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED / DIAGNOSIS_ONLY。
+- 基准提交：1a8954c；修改路径：build/audit_paired_teacher_content_20261027.py、report/paired_teacher_content_audit_20261027.{md,json}、coummucation.md。
+- 量化结果：8验证对源/教师SHA和样本数通过；对声明152字，源21编辑CER0.1381579，教师22编辑CER0.1447368。SSB04340118源0/17而教师3/17，其他句也有教师更好的情况；不能仅凭总分判定教师完全可靠或普遍破坏内容。
+- 复现：Python3.12 build/audit_paired_teacher_content_20261027.py --asset-root <asset-root> --output <generated>/teacher_content_audit.json；退出0，真实OpenCC0.1.7。
+- 报告：report/paired_teacher_content_audit_20261027.md与JSON保留逐句文本、SHA、编辑数及脚本SHA。
+- 限制：专名、数字书写与ASR错误混合，声明文本未经独立人工校对；等长不证明音素对齐。未读录音4/5或Track9，不训练、不播放、不接触板卡；不是五门验收。
+- 下一责任方：Hardware-A / Codex 在同8句分离教师原音、WORLD压缩重建、冻结学生的内容误差，不恢复无机制依据的参数扫描。
