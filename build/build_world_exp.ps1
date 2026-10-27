@@ -1,7 +1,8 @@
 param(
   [Parameter(Mandatory=$true)][string]$WorldRoot,
   [ValidateSet('arm','host')][string]$Target='arm',
-  [string]$Compiler=''
+  [string]$Compiler='',
+  [switch]$ProfileOperators
 )
 $ErrorActionPreference='Stop'
 $root=Split-Path -Parent $PSScriptRoot
@@ -23,6 +24,13 @@ $flags=@('-O3','-funroll-loops','-fno-math-errno','-fno-trapping-math','-std=c++
 if($Target -eq 'arm') {$flags+=@('-mcpu=cortex-a9','-mfpu=neon','-mfloat-abi=hard')}
 $includes=@('-I',"$root/src/ps/world_v23",'-I',"$root/src/ps",'-I',$out,'-I',"$WorldRoot/src",'-I',"$WorldRoot/tools")
 $bin="$out/world_exp_$Target"
+if($ProfileOperators) {
+  $bin+='_profile'
+  $sources+=@("$root/src/ps/world_operator_profile.cpp")
+  foreach($symbol in @('fft_execute','fft_plan_dft_1d','fft_plan_dft_r2c_1d','fft_plan_dft_c2r_1d','Dio','StoneMask','CheapTrick','D4C')) {
+    $flags+=('-Wl,--wrap='+$symbol)
+  }
+}
 if($Target -eq 'host') {$bin+='.exe'}
 & $Compiler @flags @includes "$root/src/ps/world_live_stream.cpp" "$root/src/ps/world_exp_hook.cpp" "$out/common.cpp" "$root/src/ps/world_v23/synthesis.cpp" "$root/src/ps/world_v23/synthesisrealtime.cpp" @sources "$WorldRoot/tools/audioio.cpp" -lm -o $bin
 if($LASTEXITCODE) {throw 'WORLD exp build failed'}

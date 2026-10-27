@@ -1625,3 +1625,19 @@
 - 量化：FPGA operating，v23 SHA与基线一致；单组arecord645/runtime646/aplay647，PCM0p/PCM1c均RUNNING，PL测试模块未加载；prefill和ALSA恢复原配置。
 - 结论：解除前轮“等待现场复位”的恢复阻塞，原v23现已运行。20秒低缓冲2次欠载的REJECTED不变；无新听感或高实时验收。
 - 下一责任方：Hardware-A / Codex 后续分析关键路径/批次调度优化；任何新现场录放须当轮确认。
+
+### [PL-20261027-01] Round 4 ARM实际算子剖析认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准提交：`ed3624a`（按仓库入口要求rebase最新main，原结果报告内旧SHA保留作历史）。
+- 当前依据：exp卸载渲染只改善约6.2%，定速PS管线p95约115ms，低缓冲现场2次欠载；不能继续用电脑端profile推断ARM热点。
+- 范围：新增可复现ARM算子计时构建/脚本，先测FFT执行、FFT建表和各分析阶段，数值保持原v23；本轮暂不改音色或批次。
+- 复现/量化：待本轮报告；原证据`report/world_exp_pl_board_round3_20261027.md`。原v23已由操作者复位恢复，现场录放不在本轮范围。
+- 下一责任方：Hardware-A / Codex 根据真实ARM占比选下一个PL模块或移除接口开销；完成静默文件数值对齐和计时后提交PR #16。
+
+### [PL-20261027-01] Round 4 ARM算子剖析方案提交
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED。
+- 基准：`ed3624a`；改动：`src/ps/world_operator_profile.cpp`、`build/build_world_exp.ps1`、`report/world_operator_profile_round4_proposal_20261027.md`及本记录。
+- 复现：`build_world_exp.ps1 -Target arm -ProfileOperators -WorldRoot <WORLD>`；ARM已编译，板端待测。
+- 方法：链接器wrap FFT plan/execute及4个分析API，线程局部计数，按阶段/长度/类型细分；默认生产路径不启用。先比对原v23输出SHA，再使用剖析结果。
+- 限制：原厂PL保持，只有文件测试；服务为稳定串口传输暂时停止，完成后恢复。计时有插桩开销，尚无下一算子加速结论。
+- 下一责任方：Hardware-A / Codex 执行相同输入对齐与ARM计时，按占比实施下一优化。
