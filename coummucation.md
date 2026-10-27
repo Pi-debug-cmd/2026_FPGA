@@ -1776,3 +1776,11 @@
 - 主要变量：r2c仅传N实float、收N/2+1复数；头bit9，内部正确排空后半谱，complex/c2r格式保持。核精度/100MHz/音色/批次不变，尚未有本轮RTL或性能结果。
 - 恢复：Round9后按修复脚本成功静默恢复原厂位流，先卸载两个DMA module，只重绑audio/I2C，未出现前轮显示重绑卡死。当前原厂operating、服务临时停止，无录放。
 - 下一责任方：Hardware-A / Codex 完成45帧RTL逐位/背压、整机时序及192次probe和全路径文件，实际加速才保留默认。
+
+### [PL-20261027-01] Round 10 紧凑实FFT RTL数值/背压结果
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（RTL门）。
+- 实现：`bfbc3d0`；证据：`report/world_fft_compact_rtl_round10_20261027.{json,txt}`。
+- 复现：30帧原格式+15帧compact mem官方模型对照，Vivado MCP source run_world_fft_sim.tcl；旧格式40960词、compact10255词全部float64打包逐位一致。
+- 覆盖：1024→2048→1024，complex正反向与real-forward，零/复数或实数脉冲/常量/随机/弱信号；compact均有输入空拍和输出背压，半谱TLAST/内部排空/下一帧握手通过。
+- 限制：仿真拍数不代表ARM到PL收益；整机综合完成，布局布线已启动；板端仍原厂PL、服务暂时停止，compact候选尚未加载，无新录放。
+- 下一责任方：Hardware-A / Codex 完成新版routed签核与静默192次probe/两段文件，按性能结果选择默认。
