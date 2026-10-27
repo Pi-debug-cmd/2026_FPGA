@@ -1878,3 +1878,16 @@
 - 报告链接：`report/fixed_male_hubert_world_round75_20261027.md`、`report/fixed_male_hubert_world_round75_20261027.json`。
 - 下一责任方：Hardware-A / Codex 继续电脑端固定男性方案探索。
 
+### [PS-20261021-10] HuBERT/WORLD Round 76 移除源韵律
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`1c1dced5ddf6d8179338f50ea28a52e4cf4311dd`
+- 唯一变量：从 Round37 衍生配置中移除 source prosody 输入；动态损失权重 1.25、锚点概率 0.25、固定种子、gain1.6 不变；验证 early stopping 在 step1400 停止。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.6860/0.6648/0.1611/2.1773/0.4118`；源泄漏、UTMOS、CER 失败。Checkpoint SHA-256 `6d3c276ad5345a0ea5302191476ba446d95615d7ba41e4174582c63b58d36cb8`；候选 PCM16 SHA-256 `b2a7afe0414eba2a0e4a2c5fb46259c70de38927d9fa97f2eabf2f2497ed964b`。
+- 修改路径：`report/fixed_male_hubert_world_round76_20261027.{md,json}`、`coummucation.md`。
+- 复现命令：见 `report/fixed_male_hubert_world_round76_20261027.json`。
+- 限制：identity OpenCC shim；录音5、Track 9 未用于选参；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL 或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round76_20261027.md`、`report/fixed_male_hubert_world_round76_20261027.json`。
+- 下一责任方：Hardware-A / Codex 保留 source prosody、测试移除 variance matching。
+
