@@ -1,0 +1,14 @@
+{
+  "task": "PS-20261025-20",
+  "date": "2026-10-27",
+  "role": "Remote-PS-C",
+  "status": "REJECTED",
+  "baseline_commit": "82458d7",
+  "controlled_change": {"speaker_adv_head": "pooled_to_framewise", "speaker_adv_weight": 0.02},
+  "unchanged_config": {"pca_dim": 96, "delta_weight": 0.25, "hubert_layer": 9, "hidden": 192, "layers": 2, "bidirectional": true, "seed": 20261026},
+  "training": {"exit_code": 0, "best_step": 400, "stop_step": 1200, "wall_seconds": 277.28100000001723, "audio_guard_denied": [], "male5_used": false, "target_track9_used": false},
+  "inference": {"exit_code": 0, "samples": 291200, "peak": 0.572967529296875, "rms": 0.07023111723361719, "clipping_fraction": 0.0, "inference_seconds": 2.3280000000086147, "rtf_host_full_chain": 0.12791208791256126, "wav_sha256": "10e7ccd8e957d8c754d48b069e2723f12ef439a36f1579fc3ffd83be06c6a8c6", "mapper_sha256": "eb94bd20c827268b35abfb2fe7c1148ca266d815e625a9c231882b58dad497ca", "played": false, "board_touched": false},
+  "evaluation": {"identity": 0.7706610810692798, "identity_p10": 0.7434930126986177, "leakage": 0.25855291892658744, "leakage_window_mean": 0.24811803099788107, "leakage_aggregate": 0.25855291892658744, "utmos": 2.6224629084269204, "cer": 0.25, "gates": {"identity": 0.45, "identity_p10": 0.35, "leakage": 0.1, "utmos": 2.3, "cer": 0.15}, "all_gates_pass": false},
+  "resume_artifacts": ["build/generated/remote_ps_c_hubert_fargan_v13/mapper.pt", "build/generated/remote_ps_c_hubert_fargan_v13/statistics.npz", "build/generated/remote_ps_c_hubert_fargan_v13/fixed_male4.features.f32"],
+  "boundary": "computer-only; no playback, recording, listening, board, ARM, Vivado, RTL, PL, or real-time validation"
+}

@@ -1,0 +1,7 @@
+PS-20261025-20 v18 strict evaluation
+status=REJECTED
+controlled_change=output-feature framewise speaker_adv_weight 0.20 -> 0.50
+train_exit=0 infer_exit=0 evaluate_exit=0 audio_guard_denied=[]
+identity=0.763452809 identity_p10=0.747618627 leakage=0.238312337 utmos=2.421749751 cer=0.161764706 pass=False
+male5_used=false target_track9_used=false played=false board_touched=false
+REPORT build/generated/remote_ps_c_hubert_fargan_v18/evaluation.json

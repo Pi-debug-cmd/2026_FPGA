@@ -1,0 +1,8 @@
+{
+  "task":"PS-20261025-20","date":"2026-10-27","role":"Remote-PS-C","status":"REJECTED","baseline_commit":"ba267f8",
+  "controlled_change":{"speaker_head_input":"output20","speaker_adv_mode":"framewise","speaker_adv_weight":{"v16":0.20,"v18":0.50}},
+  "evaluation":{"identity":0.7634528085789413,"identity_p10":0.7476186267085524,"leakage":0.23831233734050278,"leakage_window_mean":0.22711287155700952,"leakage_aggregate":0.23831233734050278,"utmos":2.421749750773112,"cer":0.16176470588235295,"gates":{"identity":0.45,"identity_p10":0.35,"leakage":0.1,"utmos":2.3,"cer":0.15},"all_gates_pass":false},
+  "execution":{"train_exit":0,"infer_exit":0,"evaluate_exit":0,"audio_guard_denied":[]},
+  "inference":{"male5_used":false,"target_track9_used":false,"played":false,"board_touched":false},
+  "boundary":"computer-only; no playback, recording, listening, board, ARM, Vivado, RTL, PL, or real-time validation"
+}

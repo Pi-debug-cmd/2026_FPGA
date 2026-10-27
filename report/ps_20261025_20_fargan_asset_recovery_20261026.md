@@ -1,0 +1,46 @@
+# PS-20261025-20 Pinned FARGAN Asset Recovery
+
+- Date: 2026-10-26
+- Role: Remote-PS-C / Codex
+- Base commit: ba48816b449a256bc5a331476999831b3ee444f6 (PR #10 merge)
+- Branch: agent/ymheee/PS-20261025-20; draft PR #11
+- Status: BLOCKED before teacher-to-target training or five-gate evaluation
+
+## Recovered official asset
+
+The Xiph Opus main source archive cached at build/generated/remote_ps_c_assets/opus_fargan_main_20261026.zip contains autogen.sh, which requests opus_data-a5177ec6fb7d15058e99e57029746100121f68e4890b1467d4094aa336b6013e.tar.gz from https://media.xiph.org/opus/models/. The archive was downloaded to the ignored D: task asset directory and its SHA-256 matches the checksum in the upstream script.
+
+| Asset | Bytes | SHA-256 |
+| --- | ---: | --- |
+| Opus model archive | 134674421 | a5177ec6fb7d15058e99e57029746100121f68e4890b1467d4094aa336b6013e |
+| dnn/models/fargan_sq1Ab_adv_50.pth | 13775086 | 2eb56f36f71f246174d769658b5712fa81214650bd425cf050c740c8d6b4464c |
+| dnn/fargan_data.c | 21978624 | 68ba6e8731007f7184be862d7d1afe4cef096a7c9bcbfa115962340f725e004c |
+| dnn/fargan_data.h | 1844 | 402e691f4975d6d156903f0fe12da3385e20ec6dd6155c3387e9dad536f654cd |
+
+The model and C assets were extracted under ignored build/generated/remote_ps_c_assets/opus_official/. Their hashes match the previously recorded 交接/核心材料/board_support/native_llvc_20261005/fargan_assets.json. No FARGAN executable was built or run. No model, audio, or archive was added to Git.
+
+## Reproduction
+
+From the task checkout, download https://media.xiph.org/opus/models/opus_data-a5177ec6fb7d15058e99e57029746100121f68e4890b1467d4094aa336b6013e.tar.gz to build/generated/remote_ps_c_assets/opus_data-a5177ec6.tar.gz. If required by the host network, use FlClash HTTP proxy 127.0.0.1:7890. Then run Get-FileHash -Algorithm SHA256 build/generated/remote_ps_c_assets/opus_data-a5177ec6.tar.gz and compare to the table. The archive members can be checked with Python tarfile and hashlib.sha256; their byte counts and digests must also match the table.
+
+## Remaining gate
+
+HuBERT Base and WeSpeaker were verified in the prior report. The frozen source/target WAVs are present, but the historical paired teacher-feature training corpus and manifest are absent. The pinned UTMOS and Whisper-small weights are incomplete. The existing target FARGAN oracle is only a vocoder reconstruction ceiling; it cannot replace the missing HuBERT-to-target mapping. No training, inference, five-gate score, or quality conclusion is claimed. No board, Vivado, RTL, PL, realtime, playback, recording, or human-listening work was done. Restore the remaining approved assets with provenance and hashes before resuming the assigned computer-side evaluation.
+
+## Additional evaluator asset recovered
+
+The pinned UTMOS22 Strong weight was downloaded from the exact URL in `交接/核心材料/neural_reference/cross_evaluators/manifest.json` into the ignored D: task asset directory.
+
+| Asset | Bytes | SHA-256 |
+| --- | ---: | --- |
+| `utmos22_strong_step7459_v1.pt` | 411179119 | `38aa51ab79e2a4e09a1449758a4b37e9cbb2e8235a49662a732d33a9ba1e9bff` |
+
+The digest and byte count match the project manifest. Whisper-small remains incomplete. Its frozen revision is `973afd24965f72e36ca33b3055d56a652f456b4d`; existing local Hugging Face entries are `.incomplete` and are not accepted as an evaluator. The approved paired HuBERT/target-FARGAN training feature corpus and manifest remain absent. No training, inference, or five-gate evaluation has run.
+
+## Whisper-small restored and load-tested
+
+Downloaded the project-pinned `openai/whisper-small` revision `973afd24965f72e36ca33b3055d56a652f456b4d` into the ignored D: Hugging Face cache. All 11 requested files are present; `model.safetensors` is 966995080 bytes. With `HF_HUB_OFFLINE=1`, local-only loading completed using the project Python environment: tokenizer vocabulary 51865, model vocabulary 51865, 241734912 parameters. This verifies local asset completeness/loading only; no source or candidate transcription and no CER score was generated.
+
+The pinned FARGAN paired feature corpus, expanded corpus, and original training corpus manifests are absent both at the repository's archived `交接/核心材料/board_budget_20261005/` paths and the recorded legacy `D:\Tools_FPGA\workspace\voice_conversion_zynq7020\` tree. The HuBERT-to-target FARGAN mapper therefore remains untrainable from the available approved assets. Status remains `BLOCKED`; no data substitution was made.
+
+The archived `prepare_fargan_features_20261006.py` and `train_fargan_mapper_20261006.py` clarify the data contract: every source feature sequence is paired with a same-content target-style teacher feature sequence; Track 5-8 FARGAN features are separate target anchors. The current frozen Fixed-Male and target recordings do not include those teacher waveforms or a same-utterance alignment manifest. Independent male and female WAV files cannot be paired by file order or duration without inventing training labels, so they were not used as substitutes. The required target-style teacher generation source/checkpoint and transcript alignment record are not present in this checkout.

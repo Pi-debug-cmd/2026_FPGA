@@ -1,0 +1,8 @@
+{
+  "task":"PS-20261025-20","date":"2026-10-27","role":"Remote-PS-C","status":"REJECTED","baseline_commit":"b03375e",
+  "controlled_change":{"speaker_head_input":"hidden384_to_output20","speaker_adv_mode":"framewise","speaker_adv_weight":0.05,"initial_dimension_failure":true,"corrected_run":true},
+  "evaluation":{"identity":0.7819003904094813,"identity_p10":0.7639902255199895,"leakage":0.25554403589745367,"leakage_window_mean":0.2457018776216028,"leakage_aggregate":0.25554403589745367,"utmos":2.5210554599761963,"cer":0.3088235294117647,"gates":{"identity":0.45,"identity_p10":0.35,"leakage":0.1,"utmos":2.3,"cer":0.15},"all_gates_pass":false},
+  "execution":{"train_exit":0,"infer_exit":0,"evaluate_exit":0,"audio_guard_denied":[]},
+  "inference":{"wav_sha256":"4fffadcdf2bbeb2020ac2bdd0483e483b032414ebe910ccc84cd4f6075019e56","mapper_sha256":"98deeedfe613f288b1af06bd08fca1c3069a96fd1e860cc0e51ce455fe46d674","male5_used":false,"target_track9_used":false,"played":false,"board_touched":false},
+  "boundary":"computer-only; no playback, recording, listening, board, ARM, Vivado, RTL, PL, or real-time validation"
+}

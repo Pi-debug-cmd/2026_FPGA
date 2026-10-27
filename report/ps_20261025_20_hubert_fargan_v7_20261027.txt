@@ -1,0 +1,60 @@
+v7 initial attempt (before minimal fix): infer exit_code=1
+Exception: IndexError: too many indices for array: array is 1-dimensional, but 2 were indexed
+Location: build/remote_ps_c_hubert_fargan_v7.py, features[:, (0, 19)] = stats["y_mean"][(0, 19)]
+The corrected rerun changed only the indexing to stats["y_mean"][[0, 19]]; no experiment variable changed.
+
+=== infer ===
+{
+  "samples": 291200,
+  "peak": 0.5401611328125,
+  "rms": 0.07089322197241096,
+  "sha256": "ee548f1aef80fc9a032e3557b08090091d1bb91f05a512b20b1b654ed56af109",
+  "clipping_fraction": 0.0,
+  "task": "PS-20261025-20",
+  "source_sha256": "f4a026e5c97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c",
+  "source_samples": 291200,
+  "frames": 1820,
+  "inference_seconds": 2.2190000000118744,
+  "rtf_host_full_chain": 0.12192307692372936,
+  "mapper_sha256": "ea545fda2b64b7242e710b4a799dfdd45034a958ff987ffd529a189abae26f68",
+  "native_sha256": "0e5eb4d457741820564d4397e0b69f8dd58b25c896259bb66d8e84fb88a3dc14",
+  "male5_used": false,
+  "target_track9_used": false,
+  "played": false,
+  "board_touched": false
+}
+{
+  "samples": 291200,
+  "peak": 0.27130126953125,
+  "rms": 0.027546567311517566,
+  "sha256": "603c5cb031181724e2715e6521e0670422c58e9e2da760761e7c82d4b71a10de",
+  "clipping_fraction": 0.0,
+  "task": "PS-20261025-20",
+  "candidate": "Remote-PS-C_HuBERT_BiGRU_FARGAN_v7_target_energy_periodicity_mean",
+  "source_sha256": "f4a026e5c97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c",
+  "source_samples": 291200,
+  "frames": 1820,
+  "inference_seconds": 2.8280000000086147,
+  "rtf_host_full_chain": 0.15538461538508871,
+  "mapper_sha256": "ea545fda2b64b7242e710b4a799dfdd45034a958ff987ffd529a189abae26f68",
+  "native_sha256": "0e5eb4d457741820564d4397e0b69f8dd58b25c896259bb66d8e84fb88a3dc14",
+  "replaced_columns": [
+    0,
+    19
+  ],
+  "male5_used": false,
+  "target_track9_used": false,
+  "played": false,
+  "board_touched": false
+}
+PYTHON_AUDIO_GUARD {"stage": "infer", "denied": []}
+
+=== evaluate ===
+D:\fpga\.git-repair\build\generated\remote_ps_c_env\Lib\site-packages\torch\nn\utils\weight_norm.py:143: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+You have passed task=transcribe, but also have set `forced_decoder_ids` to [[1, None], [2, 50359]] which creates a conflict. `forced_decoder_ids` will be ignored in favor of task=transcribe.
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Remote-PS-C_HuBERT_BiGRU_FARGAN_v7_target_energy_periodicity_mean identity=0.5661 identity_p10=0.5493 leakage=0.2834 leakage_window_mean=0.2682 leakage_aggregate=0.2834 utmos=1.4367 cer=0.3529 pass=False
+SELECTED Remote-PS-C_HuBERT_BiGRU_FARGAN_v7_target_energy_periodicity_mean
+REPORT D:\fpga\.git-repair\build\generated\remote_ps_c_hubert_fargan_v7\evaluation.json
+PYTHON_AUDIO_GUARD {"stage": "evaluate", "denied": []}

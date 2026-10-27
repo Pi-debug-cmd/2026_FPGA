@@ -1,0 +1,2 @@
+{"task":"PS-20261025-20","date":"2026-10-27","role":"Remote-PS-C","version":"v24","status":"REJECTED","candidate":"Remote-PS-C_HuBERT_BiGRU_FARGAN_v24_delta100_adv050","controlled_change":"delta_weight 1.00 + 输出特征对抗 0.50","execution":"train/infer/evaluate exit 0","evaluation":{"identity":0.758471459,"identity_p10":0.736845084,"leakage":0.237554912,"utmos":2.469073216,"cer":0.294117647,"gates":{"identity":0.45,"identity_p10":0.35,"leakage":0.1,"utmos":2.3,"cer":0.15},"all_gates_pass":false},"male5_used":false,"target_track9_used":false,"played":false,"board_touched":false}
+

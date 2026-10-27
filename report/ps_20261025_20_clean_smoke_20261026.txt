@@ -1,0 +1,19 @@
+{
+  "samples": 291200,
+  "peak": 0.5401611328125,
+  "rms": 0.07089322197241096,
+  "sha256": "ee548f1aef80fc9a032e3557b08090091d1bb91f05a512b20b1b654ed56af109",
+  "clipping_fraction": 0.0,
+  "task": "PS-20261025-20",
+  "source_sha256": "f4a026e5c97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c",
+  "source_samples": 291200,
+  "frames": 1820,
+  "inference_seconds": 2.562999999994645,
+  "rtf_host_full_chain": 0.1408241758238816,
+  "mapper_sha256": "ea545fda2b64b7242e710b4a799dfdd45034a958ff987ffd529a189abae26f68",
+  "native_sha256": "0e5eb4d457741820564d4397e0b69f8dd58b25c896259bb66d8e84fb88a3dc14",
+  "male5_used": false,
+  "target_track9_used": false,
+  "played": false,
+  "board_touched": false
+}

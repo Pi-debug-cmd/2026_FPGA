@@ -630,3 +630,260 @@ ps-opt 把非周期最小相位优化移植进流式路径（改造 synthesisrea
 ## 2026-10-21 [Maintainer] 三写作者能力边界修正
 
 用户明确项目共有三个写作者：当前已经提交的两位写作者均有 Zynq-7020 板卡和 Vivado 环境，可共同承担板端、Vivado、RTL、PL 和集成；尚未加入的第三位写作者没有板卡和 Vivado，只能在自己的电脑运行 PS/软件音色方案，再交由前两位验证。协作角色据此改为 `Hardware-A`、`Hardware-B`、`Remote-PS-C`；两名硬件方改同一工程前必须先认领任务。
+
+2026-10-26 Remote-PS-C / PS-20261025-20：同步已合并 PR #12，独立下载配对语料并校验 `PASS 200 800`；纠正受限命令造成的代理/凭据阻塞判断。仅资产接收通过，下一步独立 HuBERT→FARGAN 训练，尚无质量分数。证据：`report/ps_20261025_20_corpus_receipt_20261026.md`。
+
+2026-10-26 Remote-PS-C / PS-20261025-20：独立冻结 HuBERT layer9→PCA96→双向 GRU→FARGAN v1 完成辅助语料训练及固定男性 4 客观筛选。五门保持原口径；身份 0.778814512、P10 0.751711670、泄漏 0.252929151、UTMOS 2.418009599、CER 0.235294118，因泄漏/CER 判 REJECTED。训练 266.703 秒、最佳 step400、18.2 秒输入本机推理 2.187 秒；未拟合男性 1～3，男性 5/Track9 未解锁。新增 host 构建/实验代码、依赖锁及完整 md/json 证据；仅给 evaluator 增加可选资产路径，未改算法或门槛。下一独立轮为失败候选 Release/干净接收复现。未播放/录音或进行任何板卡、Vivado、RTL、PL、Cortex-A9/实时验收。
+
+2026-10-26 Remote-PS-C / PS-20261025-20：portable 相对路径首测发现清单写入异常，已提交 94d2aa2 修复入口路径 resolve；修复版在新干净检出/独立 runtime/空模型目录完成本地归档 smoke。466 文件校验，输出 SHA 与原评价 WAV 完全一致，退出 0、2.563 秒推理。完成约 199MB 推理包与逐件清单，质量仍 REJECTED；仓库实际公开，线上私有 Release 交付受约束冲突阻塞，未创建 Release/上传模型/改仓库可见性。报告 `ps_20261025_20_model_archive_local_smoke_20261026.md` 及 model_delivery JSON；等待用户明确交付位置后继续线上取回。无试听/板测。
+
+2026-10-26 Remote-PS-C / PS-20261025-20：用户明确授权当前公开仓库发布完整模型包后，已发布 `model-PS-20261025-20-hubert-fargan-v1`（源码 94d2aa2、198734997 bytes、SHA 9532fe32d5ab707a51662b224f82a95abba901d9fc4fcc4276cedd0cf2ca4e6a），GitHub 空目录重新下载/466 文件校验/干净检出推理 PASS，输出 SHA 与原评价完全相同。交付 VERIFIED，质量仍 REJECTED（泄漏/CER），不进入 WAIT_LOCAL_TEST。完整接收证据和复现命令：`report/ps_20261025_20_github_model_receipt_20261026.md`；保留此前阻塞历史，未改规则/可见性/分工，无试听或硬件验收。
+
+2026-10-26 Remote-PS-C / PS-20261025-20：冻结 v1 完成配对标签/能量时移/模型动态诊断，800 项资产 SHA、200 个缓存 target 全匹配；400 次重提取整体 MAE 小但音高/周期相关有局部极值，完整逐对证据未隐藏。辅助 validation 8 对/4616 帧上归一化 MAE 0.452730745 vs 训练均值 0.806939065；高阶倒谱及音高一阶差分 RMS 比 teacher 约 0.23–0.33。能量时移最大 20ms 仅能描述轮廓，不证明音素对齐或失败根因。诊断脚本、完整 JSON/MD/TXT 和复现准备步骤进入本轮提交；初始 WinError623 与输入类型错误记录保留，最终 host 运行退出 0、26.734 秒。没有新权重、训练、五门评分或验收集读取；v1 质量仍 REJECTED，无试听/板卡/Cortex-A9/Vivado/RTL/PL/实时验收。下一单变量候选可调整差分损失权重，尚未执行。
+
+
+### [PS-20261025-20] v2 delta=1.0 单变量结果
+- 日期：2026-10-26；角色：Remote-PS-C / Codex；状态：REJECTED；基准 e8bb8e016caf987ad0f2dc99521794c97b8fd192；main 9c42263ea3aa12898ad451f3c00915e816f039c4；开放 PR #9/#11/#13 无本任务冲突。
+- 路径/复现：build/remote_ps_c_hubert_fargan_v2.py train --cache-root build/generated/remote_ps_c_hubert_fargan_v1，然后 infer，再运行原 strict evaluator；report/ps_20261025_20_hubert_fargan_v2_20261026.md/JSON/TXT 保存完整命令/日志/转写/哈希。共享入口只增加版本输出名与显式缓存复用；状态/工作日志追加。
+- 唯一训练变量：delta loss 0.25→1.0；其余配置逐项相同，200 缓存 SHA 已核验，重算统计数组与 v1 完全相同；v1 权重/统计/缓存不变。辅助 validation 最优step400、停止step1200、损失0.2605001032、272.828秒；跨权重总损失不可直接比较。
+- 一次 Male4 原五门：身份 0.778145609 / P10 0.755978229 / 泄漏 0.255133692 / UTMOS 2.574109713 / CER 0.235294118；通过项 {'identity': True, 'identity_p10': True, 'leakage': False, 'utmos': True, 'cer': False}。输出SHA 9e7f37895e8188b96909edad73b140fbcf5e7a14ebd3c1202605a27b339745e7；mapper 610f592539fd51420409ca413e04232f3cd20da57f885957d050c6157569791c。
+- 限制/下一责任方：仅电脑端；辅助192train/8validation，未拟合Fixed-Male1–3；Male5/Track9锁定；无参数扫描/门槛更改/录音/播放/试听/板卡/ARM/Vivado/RTL/PL/实时验收。Remote-PS-C 完成版本化模型归档与干净下载；未全过不进入 WAIT_LOCAL_TEST，不给Hardware-A/B启动板测。
+
+
+### [PS-20261025-20] v2 完整 Release 与干净下载结果
+- 日期：2026-10-26；角色：Remote-PS-C / Codex；基准/源码 0a8ae4e261cc098cc8c489a12865d9c28452fe64；状态：交付 VERIFIED_GITHUB_DOWNLOAD_AND_INFERENCE，质量 REJECTED；PR #11。
+- 授权/资产：沿用用户“授权在当前公开仓库发布完整模型包”；https://github.com/Pi-debug-cmd/2026_FPGA/releases/tag/model-PS-20261025-20-hubert-fargan-v2；附件 PS-20261025-20_hubert_fargan_v2_windows_cpu.zip，198735391 bytes，SHA a669cb614dc4f71090b898da48e7fc127fbf016892dc3d655be1a535042a4441。标签指向精确源码，server digest/下载大小/SHA及466个内部文件全匹配；无WAV/语料/缓存，v1未改。
+- 路径/复现：report/ps_20261025_20_github_model_receipt_v2_20261026.md/JSON/TXT（完整下载/校验/依赖/推理命令）；model_delivery_PS-20261025-20_hubert_fargan_v2_20261026.json（逐文件SHA）；独立新目录执行 build/remote_ps_c_hubert_fargan_v2.py infer --assets bundle --output bundle --native bundle/native/fargan_probe_host.exe。状态/工作日志同步追加。
+- 量化：干净GitHub下载推理exit0，2.750s/RTF0.151098901，封装53.756680s；16kHz mono PCM16/291200 samples，输出SHA 9e7f37895e8188b96909edad73b140fbcf5e7a14ebd3c1202605a27b339745e7 与本轮五门原WAV完全相同，未重新评分。Python峰值工作集1110630400 bytes/pagefile2384629760 bytes，不含native子进程。
+- 失败保留：首次上传后/下载前缺少接收父目录报WinError3；创建父目录后核对同一附件，未覆盖发布。日志保留失败及最终成功；独立venv复制锁定库，未测试新pip安装；同机隔离复验，非第二台实体电脑。
+- 限制/下一责任方：身份0.778145609/P10 0.755978229/泄漏0.255133692/UTMOS2.574109713/CER0.235294118，泄漏/CER仍失败，非WAIT_LOCAL_TEST。Remote-PS-C保存证据，Hardware-A/B不启动试听/板测；Male5/Track9锁定，无录音/播放/真人/ARM/Vivado/RTL/PL/实时验收，未改分配/规则/可见性。
+
+
+### [PS-20261025-20] 冻结教师→声码器→映射器诊断结果
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：DIAGNOSTIC_COMPLETE，v1/v2 质量仍 REJECTED，非 WAIT_LOCAL_TEST；基准 04819add786e0c07f9772afadaf7a2ba67f565d7；main 9c42263ea3aa12898ad451f3c00915e816f039c4（提交前再次 fetch，保持祖先）；PR #11，未改分工/规则。
+- 路径/复现：build/diagnose_remote_ps_c_fargan_chain.py；report/ps_20261025_20_chain_diagnostic_20261027.md/JSON/TXT。项目根目录执行 build/generated/remote_ps_c_env/Scripts/python.exe -m py_compile build/diagnose_remote_ps_c_fargan_chain.py，再以 -u 运行同脚本；完整 PowerShell 命令、资产前提及 SHA 见报告。固定现有辅助 validation 8 对/2 人/4616 帧、5 条件共40波形；冻结模型/统计/缓存，无训练或新权重。
+- 量化：source/teacher PCM/teacher features oracle/v1/v2 的 CER（相对源自动转写）为0/150、15/150、16/150、20/150、20/150；相对清单文本为21/152、22/152、25/152、28/152、31/152。目标身份均值0.186086690/0.868033508/0.799975958/0.780120042/0.778752680；描述性源相似度均值0.842271856/0.234730201/0.242190654/0.225207688/0.229753263。
+- 验证：exit0、90.219秒；8对/40条件/4616帧、有限值、CER及均值重算、127个不同文件大小/SHA及WAV格式/时长核对PASS。权重/统计未变；保留原ASR警告。运行后D余量378846371840 bytes/C92113235968 bytes；生成物留D项目忽略目录，无下载。
+- 限制：辅助集已用于选检查点；清单未经本轮人工复核，源ASR与清单已有13.82%差异。源画像逐句留一且不同于Fixed-Male验收，不能套用泄漏门；未算UTMOS，指标差值不能证明因果或固定男性失败根因。v2无内容改善。原五门数值/拒绝结论不变，不继续delta扫描；未读Fixed-Male音频/Track9，Python保护非OS全量审计；无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时验收。
+- 下一责任方：Remote-PS-C提交本轮证据及更新PR #11，维护者审核；既有v1/v2模型Release保持不变，Hardware-A/B不由本轮启动试听或板测。本轮停止，不新增训练。
+
+
+### [PS-20261025-20] v3 PCA192 单变量结果
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准60364cb333dc0f3474797f05222a8948bbcb9e26；main9c42263ea3aa12898ad451f3c00915e816f039c4，开放PR #9/#11/#13无冲突。
+- 路径/复现：build/remote_ps_c_hubert_fargan_v3.py、build/run_remote_ps_c_hubert_fargan_v3.py；report/ps_20261025_20_hubert_fargan_v3_20261027.md/JSON/TXT。驱动固定train复用v1缓存、infer、原strict evaluator一次五门；完整命令与资产SHA见报告。
+- 唯一配置变量：相对v1 pca_dim96→192，delta0.25不变；保留训练方差0.862445935（v1为0.749045423），参数1155284；维度改变初始化随机数消耗，非同初始化。训练/验证192/8，最佳step400、停止1200、loss0.1972120106、271.313s。mean/y统计/分位、投影前96和旧模型/缓存保持一致。
+- 一次Male4五门：身份0.763920106/P100.747006375/泄漏0.261376895/UTMOS2.508168141/CER0.558823529；通过项{'identity': True, 'identity_p10': True, 'leakage': False, 'utmos': True, 'cer': False}。输出SHAd1fb89990a7c5cdc2a57174d1f1e0f5b5c3715239fd19c5e07594469c39cf703，mapper836a4595e6fc2bc8992107645b58a6ffd97ecdb724ef91186093009058b397aa。各阶段exit0，语法/有限JSON/格式/哈希/原评估器口径检查PASS；首次启动自动审核超时、未启动进程，重试一次成功。
+- 限制/下一责任方：辅助集选检查点，Male4开发筛选非独立验收；Male1–3只作源画像，Male5/Track9锁定。Python保护非OS全量审计，无录音/播放/真人/硬件/ARM/Vivado/RTL/PL/实时验收，不改规则/分工。Remote-PS-C另轮发布完整模型与干净下载；未全过不进入WAIT_LOCAL_TEST，不据结果追加本轮维度扫描。
+
+
+### [PS-20261025-20] v3 完整 Release 与干净下载结果
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；基准/源码 ce4f2c7e9e7b3bc09b8c37532dbfb3f8d258c1bb；状态：交付 VERIFIED_GITHUB_DOWNLOAD_AND_INFERENCE，质量 REJECTED；PR #11。
+- 授权/资产：沿用用户“授权在当前公开仓库发布完整模型包”；https://github.com/Pi-debug-cmd/2026_FPGA/releases/tag/model-PS-20261025-20-hubert-fargan-v3；附件 PS-20261025-20_hubert_fargan_v3_windows_cpu.zip，199369174 bytes，SHA 02d6a414f68d220916718dbaf6402ad8a73dd1d6d84a698151816353a19b76ae。标签指向精确源码，server digest/下载大小/SHA及466个内部文件全匹配；无WAV/语料/缓存，v1未改。
+- 路径/复现：report/ps_20261025_20_github_model_receipt_v3_20261027.md/JSON/TXT（完整下载/校验/依赖/推理命令）；model_delivery_PS-20261025-20_hubert_fargan_v3_20261027.json（逐文件SHA）；独立新目录执行 build/remote_ps_c_hubert_fargan_v3.py infer --assets bundle --output bundle --native bundle/native/fargan_probe_host.exe。状态/工作日志同步追加。
+- 量化：干净GitHub下载推理exit0，2.563s/RTF0.140824176，封装49.830876s；16kHz mono PCM16/291200 samples，输出SHA d1fb89990a7c5cdc2a57174d1f1e0f5b5c3715239fd19c5e07594469c39cf703 与本轮五门原WAV完全相同，未重新评分。Python峰值工作集1113186304 bytes/pagefile2382503936 bytes，不含native子进程。
+- 验证边界：发布/下载/校验/推理日志完整保留；独立venv复制锁定库，未测试新pip安装；同机隔离复验，非第二台实体电脑。
+- 限制/下一责任方：身份0.763920106/P10 0.747006375/泄漏0.261376895/UTMOS2.508168141/CER0.558823529，泄漏/CER仍失败，非WAIT_LOCAL_TEST。Remote-PS-C保存证据，Hardware-A/B不启动试听/板测；Male5/Track9锁定，无录音/播放/真人/ARM/Vivado/RTL/PL/实时验收，未改分配/规则/可见性。
+- 公开证据处理：自动审批阻止发布本机容量/绝对路径后，新增交付收据只保留通用项目路径；原始日志/容量检查留本地，模型/指标/哈希未变。
+
+### [PS-20261025-20] v4 源说话人对抗映射认领
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：CLAIMED；基准提交 `6d940c927f4ba7ffefb97761dafa68c2f4295750`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；PR #11，未发现同任务冲突。
+- 假设/范围：v1/v2/v3 的源泄漏分别约 0.253/0.255/0.261，且 PCA 与 delta 单变量均未改善。v4 保留 PCA96、delta0.25、数据切分、HuBERT layer9、双向 GRU192、优化器、早停与原五门；只新增训练期源说话人对抗分类器和梯度反转约束（20 个辅助训练说话人，权重0.05），推理仅使用映射器输出。
+- 路径/复现：拟新增 `build/remote_ps_c_hubert_fargan_v4.py`、`build/run_remote_ps_c_hubert_fargan_v4.py`；输出 `build/generated/remote_ps_c_hubert_fargan_v4/`；正式报告 `report/ps_20261025_20_hubert_fargan_v4_20261027.*`。复用经 SHA 核验的 v1 200 对缓存，不读取 Male5/Track9。
+- 停止条件：辅助 validation 选 checkpoint 后只做一次 Fixed-Male4 原五门；未全过不进入 WAIT_LOCAL_TEST、不启动试听或硬件，不继续本轮参数扫描。若该约束有效，再决定是否只调整一个对抗权重。
+- 限制/下一责任方：电脑端非因果上限；无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时声明；Remote-PS-C 负责提交失败或通过证据，维护者审核 PR #11。
+
+### [PS-20261025-20] v4 源说话人对抗映射结果
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准6d940c927f4ba7ffefb97761dafa68c2f4295750；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
+- 路径/复现：build/remote_ps_c_hubert_fargan_v4.py、build/run_remote_ps_c_hubert_fargan_v4.py；report/ps_20261025_20_hubert_fargan_v4_20261027.md/JSON/TXT。训练复用v1缓存，三阶段exit0，原strict evaluator只筛选一次Male4；完整SHA/日志见报告。
+- 唯一新增变量：训练期20类源说话人分类器+梯度反转，speaker_adv_weight0.05；PCA96、delta0.25、数据切分、seed、双向GRU192、优化器、早停和五门口径不变。统计逐元素等于v1，v4参数1144552，最佳step800、停止step1600、训练359.391s。
+- 一次Male4五门：身份0.773824141/P100.745913965/泄漏0.239771249/UTMOS2.426944574/CER0.470588235；通过项{'identity': True, 'identity_p10': True, 'leakage': False, 'utmos': True, 'cer': False}。相对v1泄漏下降但CER恶化，仍REJECTED，不进入WAIT_LOCAL_TEST。
+- 限制/下一责任方：对抗项只训练电脑端映射，非因果、无板卡/试听/实时声明；Male5/Track9锁定。Remote-PS-C提交本轮失败证据，下一轮只考虑对抗权重单变量调整。
+
+### [PS-20261025-20] v5 对抗权重 0.01 单变量认领
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：CLAIMED；基准提交 `38f54d0`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；PR #11。
+- 假设/范围：v4 对抗权重0.05使源泄漏降至0.2398但CER升至0.4706。v5 只将 `speaker_adv_weight` 从0.05降为0.01，PCA96、delta0.25、数据、seed、网络、优化器、早停和原五门不变，检验较弱对抗是否恢复内容并保留泄漏改善。
+- 路径/复现：拟新增 `build/remote_ps_c_hubert_fargan_v5.py`、`build/run_remote_ps_c_hubert_fargan_v5.py`；输出 `build/generated/remote_ps_c_hubert_fargan_v5/`；报告 `report/ps_20261025_20_hubert_fargan_v5_20261027.*`。复用 v1 缓存，不读取 Male5/Track9。
+- 停止条件：辅助 validation 选 checkpoint后只做一次 Fixed-Male4 五门；未全过不进入 WAIT_LOCAL_TEST，不发布模型包；本轮不扫描其它权重。
+- 限制/下一责任方：电脑端非因果实验，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时声明；Remote-PS-C提交结果并维护PR #11。
+
+### [PS-20261025-20] v5 源说话人对抗映射结果
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准6d940c927f4ba7ffefb97761dafa68c2f4295750；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
+- 路径/复现：build/remote_ps_c_hubert_fargan_v5.py、build/run_remote_ps_c_hubert_fargan_v5.py；report/ps_20261025_20_hubert_fargan_v5_20261027.md/JSON/TXT。训练复用v1缓存，三阶段exit0，原strict evaluator只筛选一次Male4；完整SHA/日志见报告。
+- 唯一新增变量：训练期20类源说话人分类器+梯度反转，speaker_adv_weight0.01；PCA96、delta0.25、数据切分、seed、双向GRU192、优化器、早停和五门口径不变。统计逐元素等于v1，v5参数1144552，最佳step400、停止step1200、训练266.797s。
+- 一次Male4五门：身份0.777850780/P100.750804871/泄漏0.266084400/UTMOS2.461675485/CER0.323529412；通过项{'identity': True, 'identity_p10': True, 'leakage': False, 'utmos': True, 'cer': False}。相对v1泄漏下降但CER恶化，仍REJECTED，不进入WAIT_LOCAL_TEST。
+- 限制/下一责任方：对抗项只训练电脑端映射，非因果、无板卡/试听/实时声明；Male5/Track9锁定。Remote-PS-C提交本轮失败证据，下一轮只考虑对抗权重单变量调整。
+
+### [PS-20261025-20] v6 目标特征均值收缩单变量认领
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：CLAIMED；基准提交 `ca3e709`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；PR #11。
+- 假设/范围：v1身份0.779但泄漏0.253，v4对抗虽降泄漏仍损伤CER。v6 不重训，只复用冻结v1 mapper/statistics/native，将20D输出逐帧向训练目标均值收缩50%，再合成与评价；不改变数据、模型权重、五门口径或源/目标锁定。
+- 路径/复现：拟新增 `build/remote_ps_c_hubert_fargan_v6.py`、`build/run_remote_ps_c_hubert_fargan_v6.py`；输出 `build/generated/remote_ps_c_hubert_fargan_v6/`；报告 `report/ps_20261025_20_hubert_fargan_v6_20261027.*`。只读取 Fixed-Male4，Male5/Track9锁定。
+- 停止条件：只做一次原五门；若未同时过门则记录并继续下一明确单变量假设，不发布模型包。
+- 限制/下一责任方：电脑端离线实验，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时声明；Remote-PS-C提交结果并维护PR #11。
+
+### [PS-20261025-20] v6 目标特征均值收缩结果
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准ca3e709；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
+- 路径/复现：build/remote_ps_c_hubert_fargan_v6.py、build/run_remote_ps_c_hubert_fargan_v6.py；report/ps_20261025_20_hubert_fargan_v6_20261027.md/JSON/TXT。只复用v1冻结mapper/statistics/native，输出逐帧向target y_mean收缩50%，infer/evaluate exit0。
+- 一次Male4五门：身份0.579423544/P100.550014264/泄漏0.251125215/UTMOS1.350889683/CER0.338235294；泄漏未改善且身份/UTMOS下降，仍REJECTED。
+- 限制/下一责任方：Male5/Track9锁定，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时验收；Remote-PS-C保留失败证据，下一轮改特征级方法。
+
+### [PS-20261025-20] v7 能量/周期性列目标均值替换认领
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：CLAIMED；基准提交 `268f311`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；PR #11。
+- 假设/范围：历史 FARGAN 控制确认 20D 第0列能量、第19列周期性是源泄漏敏感项。v7 只将冻结v1输出的这两列替换为训练目标 `y_mean`，保持其余18列、mapper、统计、native、数据和五门不变；不重训。
+- 路径/复现：拟新增 `build/remote_ps_c_hubert_fargan_v7.py`、`build/run_remote_ps_c_hubert_fargan_v7.py`；输出 `build/generated/remote_ps_c_hubert_fargan_v7/`；报告 `report/ps_20261025_20_hubert_fargan_v7_20261027.*`。只读取 Fixed-Male4，Male5/Track9锁定。
+- 停止条件：只做一次原五门；未同时过门不进入 WAIT_LOCAL_TEST，不发布模型包。
+- 限制/下一责任方：电脑端离线后处理，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时声明；Remote-PS-C提交结果并维护PR #11。
+
+### [PS-20261025-20] v7 能量/周期性列目标均值替换结果
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准268f311；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
+- 路径/复现：build/remote_ps_c_hubert_fargan_v7.py、build/run_remote_ps_c_hubert_fargan_v7.py；report/ps_20261025_20_hubert_fargan_v7_20261027.md/JSON/TXT。v1冻结mapper/statistics/native，仅替换输出列0/19为target y_mean；首次索引失败后最小修复，成功infer/evaluate exit0。
+- 一次Male4五门：身份0.566145985/P100.549324480/泄漏0.283425730/UTMOS1.436652144/CER0.352941176；针对性列替换未改善，仍REJECTED。
+- 限制/下一责任方：Male5/Track9锁定，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时验收；Remote-PS-C保留失败与修复证据，后续改训练目标或内容表示。
+
+### [PS-20261025-20] v8 HuBERT layer12 单变量认领
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：CLAIMED；基准提交 `ba06fd3`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；PR #11。
+- 假设/范围：v1/v4/v5显示输出后处理或对抗权重难以兼顾CER与泄漏。v8 只将 HuBERT hidden layer9 改为 layer12，PCA96、delta0.25、双向GRU192、数据切分、seed、优化器、早停和原五门不变；重新生成独立 layer12 缓存，不复用 layer9缓存。
+- 路径/复现：拟新增 `build/remote_ps_c_hubert_fargan_v8.py`、`build/run_remote_ps_c_hubert_fargan_v8.py`；输出 `build/generated/remote_ps_c_hubert_fargan_v8/`；报告 `report/ps_20261025_20_hubert_fargan_v8_20261027.*`。只读取辅助配对语料，Male5/Track9锁定。
+- 停止条件：cache/train/infer/evaluate完成后只做一次Fixed-Male4五门；未全过不进入WAIT_LOCAL_TEST、不发布模型包、不扫描其它HuBERT层。
+- 限制/下一责任方：电脑端非因果实验，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时声明；Remote-PS-C提交结果并维护PR #11。
+
+### [PS-20261025-20] v8 HuBERT layer12 结果
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准ba06fd3；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
+- 路径/复现：build/remote_ps_c_hubert_fargan_v8.py、build/run_remote_ps_c_hubert_fargan_v8.py；report/ps_20261025_20_hubert_fargan_v8_20261027.md/JSON/TXT。唯一变量HuBERT layer9→12，独立cache后train/infer/evaluate exit0。
+- 一次Male4五门：身份0.778674664/P100.747804710/泄漏0.240292771/UTMOS2.555467367/CER0.426470588；UTMOS改善但CER失败，仍REJECTED。
+- 限制/下一责任方：Male5/Track9锁定，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时验收；Remote-PS-C保留失败证据，下一轮测试layer6内容折中。
+
+### [PS-20261025-20] v9 HuBERT layer6 单变量认领
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：CLAIMED；基准提交 `be4875d`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；PR #11。
+- 假设/范围：v8 layer12提升UTMOS但CER恶化。v9只将HuBERT hidden layer12改为layer6，保持PCA96、delta0.25、网络、seed、数据切分、优化器、早停和五门不变；重新生成独立layer6缓存。
+- 路径/复现：拟新增 `build/remote_ps_c_hubert_fargan_v9.py`、`build/run_remote_ps_c_hubert_fargan_v9.py`；输出 `build/generated/remote_ps_c_hubert_fargan_v9/`；报告 `report/ps_20261025_20_hubert_fargan_v9_20261027.*`。Male5/Track9锁定。
+- 停止条件：cache/train/infer/evaluate后只做一次Fixed-Male4五门；未全过不进入WAIT_LOCAL_TEST、不发布模型包、不扫描其它层。
+- 限制/下一责任方：电脑端非因果实验，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时声明；Remote-PS-C提交结果并维护PR #11。
+
+### [PS-20261025-20] v9 HuBERT layer6 结果
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准be4875d；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
+- 路径/复现：build/remote_ps_c_hubert_fargan_v9.py、build/run_remote_ps_c_hubert_fargan_v9.py；report/ps_20261025_20_hubert_fargan_v9_20261027.md/JSON/TXT。唯一变量HuBERT layer12→6，独立cache后train/infer/evaluate exit0。
+- 一次Male4五门：身份0.553576857/P100.512674765/泄漏0.233601927/UTMOS1.299599926/CER0.794117647；泄漏下降但其余门恶化，仍REJECTED。
+- 限制/下一责任方：Male5/Track9锁定，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时验收；Remote-PS-C停止层扫描，改研究训练目标/内容保真。
+
+### [PS-20261025-20] v10 三帧特征平滑单变量认领
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：CLAIMED；基准提交 `1e34f2b`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；PR #11。
+- 假设/范围：v1仍是CER最佳但泄漏未过；layer6/12改变内容-自然度折中均失败。v10不重训，只复用冻结v1 mapper/statistics/native，对20D输出沿时间做3帧居中滑动平均，再合成评价；其它协议不变。
+- 路径/复现：拟新增 `build/remote_ps_c_hubert_fargan_v10.py`、`build/run_remote_ps_c_hubert_fargan_v10.py`；输出 `build/generated/remote_ps_c_hubert_fargan_v10/`；报告 `report/ps_20261025_20_hubert_fargan_v10_20261027.*`。Male5/Track9锁定。
+- 停止条件：只做一次原五门；未同时过门不进入WAIT_LOCAL_TEST、不发布模型包。
+- 限制/下一责任方：电脑端离线后处理，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时声明；Remote-PS-C提交结果。
+
+### [PS-20261025-20] v10 三帧时间平滑结果
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准1e34f2b；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
+- 路径/复现：build/remote_ps_c_hubert_fargan_v10.py、build/run_remote_ps_c_hubert_fargan_v10.py；report/ps_20261025_20_hubert_fargan_v10_20261027.md/JSON/TXT。冻结v1输出做3帧平滑，infer/evaluate exit0。
+- 一次Male4五门：身份0.741703006/P100.705845421/泄漏0.269384651/UTMOS2.244268338/CER0.323529412；仍REJECTED。
+- 限制/下一责任方：停止后处理平滑路线，Male5/Track9锁定，无现场或硬件测试；Remote-PS-C继续改训练目标。
+
+### [PS-20261025-20] v11 内容帧 +10ms 对齐单变量认领
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：CLAIMED；基准提交 `465b70a`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；PR #11。
+- 假设/范围：冻结链诊断显示辅助对齐最佳时移中位0ms、P90 10ms；v11只将HuBERT内容插值到FARGAN帧的时间坐标固定向后偏移+1帧（10ms），其余layer9/PCA96/delta0.25/网络/数据/seed/训练和五门不变，重新生成缓存。
+- 路径/复现：拟新增 `build/remote_ps_c_hubert_fargan_v11.py`、`build/run_remote_ps_c_hubert_fargan_v11.py`；输出 `build/generated/remote_ps_c_hubert_fargan_v11/`；报告 `report/ps_20261025_20_hubert_fargan_v11_20261027.*`。Male5/Track9锁定。
+- 停止条件：cache/train/infer/evaluate后只做一次Fixed-Male4五门；不扫描其它时移，不发布未达标模型包。
+- 限制/下一责任方：电脑端非因果实验，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时声明；Remote-PS-C提交结果。
+
+### [PS-20261025-20] v12 对抗权重 0.02 结果
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准 `2d09f52`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；PR #11。
+- 代码/报告：`build/remote_ps_c_hubert_fargan_v12.py`、`build/run_remote_ps_c_hubert_fargan_v12.py`、`report/ps_20261025_20_hubert_fargan_v12_20261027.*`；train/infer/evaluate exit 0，audio guard `denied: []`。
+- 唯一变量：`speaker_adv_weight=0.02`，其余 v5 配置和评测口径不变。Fixed-Male4：identity 0.770142852、P10 0.737552752、leakage 0.256829248、UTMOS 2.436301072、CER 0.323529412；仍未通过泄漏与 CER 门槛。
+- Male5/Track9锁定；无播放、录音、试听、板卡/ARM/Vivado/RTL/PL；未进入 `WAIT_LOCAL_TEST`，不发布 v12 模型包。下一轮改训练目标或表示约束，保持单变量。
+
+### [PS-20261025-20] v13 逐帧源说话人对抗约束认领
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：CLAIMED；基准 `82458d7`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；PR #11。
+- 唯一变量：speaker head 从 `hidden.mean(dim=1)` pooled logits 改为逐帧 logits，speaker CE 对所有有效帧求平均；权重0.02，其他训练/数据/评价设置保持不变。
+- 代码：`build/remote_ps_c_hubert_fargan_v13.py`、`build/run_remote_ps_c_hubert_fargan_v13.py`；输出 `build/generated/remote_ps_c_hubert_fargan_v13/`；只做一次 Fixed-Male4 评价，Male5/Track9锁定。
+
+### [PS-20261025-20] v13 运行时阻塞记录
+- v13 训练阶段完成（exit 0，best step 400，stop step 1200），但推理启动 FARGAN native 失败：Windows `WinError 623` 系统 DLL 重定位；历史 v1/v2/v3 同 SHA native 与 MinGW gcc 也无法启动，确认是本机运行时问题。
+- 未生成 WAV、未运行 strict evaluator，不记录 identity/leakage/UTMOS/CER 质量结果；日志和部分训练产物保留，native 环境恢复后继续评价。
+
+### [PS-20261025-20] v13 正式报告归档
+- `report/ps_20261025_20_hubert_fargan_v13_20261027.*` 已保存；共享记录与报告同提交，等待 native 运行时恢复。
+
+### [PS-20261025-20] v13 正式评价结果
+- 受限进程首试触发 WinError 623，普通 Windows 进程重试成功；strict evaluator exit 0。结果 identity 0.770661081、P10 0.743493013、leakage 0.258552919、UTMOS 2.622462908、CER 0.250000000，REJECTED。
+- 结论：逐帧对抗约束提升 UTMOS并改善CER，但没有降低泄漏到门槛；下一轮保持单变量，增强逐帧对抗权重。
+
+### [PS-20261025-20] v14 逐帧对抗权重 0.05 结果
+- v14 将逐帧 `speaker_adv_weight` 从0.02改为0.05，三阶段 exit0。Fixed-Male4：identity 0.764674432、P10 0.753555575、leakage 0.253679061、UTMOS 2.446664254、CER 0.279411765；leakage/CER仍失败。
+- 下一轮改为对预测 FARGAN 20D 输出施加逐帧源说话人对抗分类，保持其他变量不变。
+
+### [PS-20261025-20] v15 输出特征逐帧对抗约束认领
+- 基于 v14，v15 唯一变量为 speaker classifier 输入改为预测的 FARGAN 20D 特征；逐帧 CE、权重0.05、PCA96、HuBERT layer9、GRU192、数据、seed、优化器和五门口径保持不变。
+
+### [PS-20261025-20] v15 输出 FARGAN 特征逐帧对抗结果
+- v15 将 speaker head 输入改为预测20D FARGAN输出；首次维度错误后最小修正并重跑。结果 identity 0.781900390、P10 0.763990226、leakage 0.255544036、UTMOS 2.521055460、CER 0.308823529，leakage/CER失败。
+- 下一轮只把该输出特征对抗权重从0.05提高到0.20。
+
+### [PS-20261025-20] v16 输出特征逐帧对抗权重 0.20 认领
+- v16 唯一变量为 output-feature framewise adversarial weight 0.20；保持 HuBERT layer9、PCA96、GRU192、delta0.25、数据、seed、优化器和五门不变。
+
+### [PS-20261025-20] v16 输出特征逐帧对抗权重 0.20 结果
+- v16 将输出特征对抗权重提高到0.20，leakage降至0.232333038（当前最佳），但 CER升至0.411764706；identity/P10/UTMOS通过，leakage/CER失败。
+- 下一轮只将该权重降至0.10，继续寻找折中。
+
+### [PS-20261025-20] v17 输出特征逐帧对抗权重 0.10 认领
+- v17 唯一变量为 output-feature framewise adversarial weight 0.10；保持 HuBERT layer9、PCA96、GRU192、delta0.25、数据、seed、优化器和评价器不变。
+
+### [PS-20261025-20] v17 输出特征逐帧对抗权重 0.10 结果
+- v17 将权重降至0.10后 leakage回升至0.244802179，CER改善至0.294117647；identity/P10/UTMOS通过，leakage/CER失败。
+
+### [PS-20261025-20] v18 输出特征逐帧对抗权重 0.50 认领
+- v18 作为强对抗边界实验，唯一变量为 output-feature framewise adversarial weight 0.50；保持 HuBERT layer9、PCA96、GRU192、delta0.25、数据、seed、优化器和五门不变。
+
+### [PS-20261025-20] v18 输出特征逐帧对抗权重 0.50 结果
+- v18 将权重提高到0.50，CER降至0.161764706（接近门槛），leakage降至0.238312337但仍失败；下一轮测试权重1.0。
+
+### [PS-20261025-20] v19 输出特征逐帧对抗权重 1.0 认领
+- v19 唯一变量为 output-feature framewise adversarial weight 1.0；保持 HuBERT layer9、PCA96、GRU192、delta0.25、数据、seed、优化器和五门不变。
+
+### [PS-20261025-20] v19 输出特征逐帧对抗权重 1.0 结果
+- v19 强对抗使 leakage 回升至0.276337229、UTMOS降至1.349921107、CER恶化至0.705882353；确认权重1.0不可用。下一轮测试0.60。
+
+### [PS-20261025-20] v11 内容帧 +10ms 对齐结果
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：REJECTED；基准465b70a；main9c42263ea3aa12898ad451f3c00915e816f039c4；PR #11。
+- 路径/复现：build/remote_ps_c_hubert_fargan_v11.py、build/run_remote_ps_c_hubert_fargan_v11.py；report/ps_20261025_20_hubert_fargan_v11_20261027.md/JSON/TXT。唯一变量内容帧+1（10ms），独立cache后全阶段exit0。
+- 一次Male4五门：身份0.692620680/P100.649548035/泄漏0.264168332/UTMOS1.904939890/CER0.500000000；相对v1恶化，仍REJECTED。
+- 限制/下一责任方：Male5/Track9锁定，无现场或硬件测试；Remote-PS-C保留失败证据，继续改训练目标/内容表示。
+
+### [PS-20261025-20] v12 对抗权重 0.02 单变量认领
+- 日期：2026-10-27；角色：Remote-PS-C / Codex；状态：CLAIMED；基准提交 `2d09f52`；main `9c42263ea3aa12898ad451f3c00915e816f039c4`；PR #11。
+- 假设/范围：v4权重0.05降低泄漏但CER=0.4706，v5权重0.01恢复部分CER但泄漏=0.2661。v12只将speaker_adv_weight改为0.02，其余v4/v5配置、数据、seed、网络、优化器、早停和五门不变。
+- 路径/复现：拟新增 `build/remote_ps_c_hubert_fargan_v12.py`、`build/run_remote_ps_c_hubert_fargan_v12.py`；输出 `build/generated/remote_ps_c_hubert_fargan_v12/`；报告 `report/ps_20261025_20_hubert_fargan_v12_20261027.*`。复用v1缓存，Male5/Track9锁定。
+- 停止条件：训练、推理和一次原五门评价；未全过不进入WAIT_LOCAL_TEST、不发布模型包。
+- 限制/下一责任方：电脑端非因果实验，无录音/播放/真人/板卡/ARM/Vivado/RTL/PL/实时声明；Remote-PS-C提交结果。
+### 2026-10-27 Remote-PS-C v20
+- 认领单变量实验：output-feature framewise speaker adversarial weight 0.60。
+- 继承 v19 代码结构，仅修改版本标识、输出目录、候选名和该权重；待完成 train/infer/evaluate 后记录五门结果。
+
+### 2026-10-27 Remote-PS-C v20 结果
+- output-feature framewise `speaker_adv_weight=0.60`；train/infer/evaluate exit 0，audio guard 无拒绝。
+- Fixed-Male4 五门：identity 0.749702423、P10 0.731277010、leakage 0.244555400、UTMOS 2.395514966、CER 0.323529412；REJECTED。
+- v20 未进入 `WAIT_LOCAL_TEST`，未发布模型包；Male5/Track9 锁定，无播放、录音、试听或硬件验证。
+
+### 2026-10-27 Remote-PS-C v21
+- 认领逐句 HuBERT layer9 时间均值中心化单变量，重新生成独立缓存后运行原 strict 五门评价。
+
+### 2026-10-27 Remote-PS-C v22
+- 认领输入编码逐帧 speaker adversarial head（权重0.02）叠加既有输出特征 head（权重0.05）的单变量结构改进；使用 v15 缓存，等待电脑端评价。
+
+### 2026-10-27 Remote-PS-C v23
+- 认领目标 FARGAN 20D 差分损失权重 1.00 单变量实验，保持输出特征逐帧对抗权重 0.05；等待电脑端评价。
+
+### 2026-10-27 Remote-PS-C v24
+- 组合实验：复用 v18 对抗权重 0.50，加入 v23 的差分损失权重 1.00；等待电脑端评价。
+
+### 2026-10-27 Remote-PS-C v25
+- 冻结 v24 mapper/statistics/native，仅对 20D FARGAN 输出做 15% target mean shrink 后进行 infer/evaluate。
+### 2026-10-27 Remote-PS-C v21-v25 结果
+- v21：逐句 HuBERT 均值中心化，leakage 0.236058011、CER 0.352941176，REJECTED。
+- v22：输入编码对抗 0.02 + 输出对抗 0.05，leakage 0.249183390、CER 0.323529412，REJECTED。
+- v23：delta_weight 1.00 + 输出对抗 0.05，UTMOS 2.581680616、CER 0.235294118、leakage 0.255565381，REJECTED。
+- v24：delta_weight 1.00 + 输出对抗 0.50，leakage 0.237554912、CER 0.294117647，REJECTED。
+- v25：v24 输出均值收缩 0.15，leakage 0.159276669 但 identity 0.143637836、UTMOS 1.299219171、CER 1.0，REJECTED。
+- v1-v25 均未同时通过五门；当前 HuBERT→FARGAN 电脑端路线在现有数据/模型下停止继续扫描，仍不进入 WAIT_LOCAL_TEST。
+- 协作策略检查通过；提交 `da1a545` 已推送到 `agent/ymheee/PS-20261025-20`。
+- 新增最佳结果汇总：v21 的 minimum_gate_ratio 最高（0.423624683），v18 的 CER 最接近门槛（0.161764706）；均未过五门。提交到既有 Remote-PS-C 分支。

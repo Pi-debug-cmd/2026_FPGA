@@ -1,0 +1,2473 @@
+{
+  "source_commit": "ce4f2c7e9e7b3bc09b8c37532dbfb3f8d258c1bb",
+  "tag": "model-PS-20261025-20-hubert-fargan-v3",
+  "attachment": "PS-20261025-20_hubert_fargan_v3_windows_cpu.zip",
+  "bytes": 199369174,
+  "sha256": "02d6a414f68d220916718dbaf6402ad8a73dd1d6d84a698151816353a19b76ae",
+  "files": 466,
+  "uncompressed_bytes": 240117907,
+  "release_url": "https://github.com/Pi-debug-cmd/2026_FPGA/releases/tag/model-PS-20261025-20-hubert-fargan-v3",
+  "asset_url": "https://github.com/Pi-debug-cmd/2026_FPGA/releases/download/model-PS-20261025-20-hubert-fargan-v3/PS-20261025-20_hubert_fargan_v3_windows_cpu.zip",
+  "asset_api_url": "https://api.github.com/repos/Pi-debug-cmd/2026_FPGA/releases/assets/679530168",
+  "asset_id": 679530168,
+  "server_digest": "sha256:02d6a414f68d220916718dbaf6402ad8a73dd1d6d84a698151816353a19b76ae",
+  "tag_target_verified": true,
+  "private_repository": false,
+  "public_authorization": "2026-10-26 user: 授权在当前公开仓库发布完整模型包",
+  "draft": false,
+  "prerelease": true,
+  "download_sha256_verified": true,
+  "download_bytes_verified": true,
+  "all_internal_files_verified": 466,
+  "clean_checkout": "<workspace>\\receive-check\\PS-20261025-20-hubert-fargan-v3\\download-code",
+  "dependency_runtime": "<workspace>\\receive-check\\PS-20261025-20-hubert-fargan-v3\\runtime",
+  "dependency_setup": "fresh independent venv; copied locked installed libraries; fresh pip install not tested",
+  "checkout_method": "fresh git shared clone, detached exact already-pushed commit; model downloaded from GitHub API",
+  "task": "PS-20261025-20",
+  "date": "2026-10-27",
+  "role": "Remote-PS-C",
+  "quality_status": "REJECTED",
+  "delivery_status": "VERIFIED_GITHUB_DOWNLOAD_AND_INFERENCE",
+  "release_published": true,
+  "github_download_tested": true,
+  "github_download_smoke": "PASS",
+  "runtime": {
+    "exit_code": 0,
+    "wall_seconds": 49.83087580000574,
+    "original_generated_access_attempts": [],
+    "modules": {
+      "numpy": "<workspace>\\receive-check\\PS-20261025-20-hubert-fargan-v3\\runtime\\Lib\\site-packages\\numpy\\__init__.py",
+      "scipy": "<workspace>\\receive-check\\PS-20261025-20-hubert-fargan-v3\\runtime\\Lib\\site-packages\\scipy\\__init__.py",
+      "soundfile": "<workspace>\\receive-check\\PS-20261025-20-hubert-fargan-v3\\runtime\\Lib\\site-packages\\soundfile.py",
+      "torch": "<workspace>\\receive-check\\PS-20261025-20-hubert-fargan-v3\\runtime\\Lib\\site-packages\\torch\\__init__.py",
+      "transformers": "<workspace>\\receive-check\\PS-20261025-20-hubert-fargan-v3\\runtime\\Lib\\site-packages\\transformers\\__init__.py"
+    },
+    "peak_working_set_bytes": 1113186304,
+    "peak_pagefile_bytes": 2382503936,
+    "memory_scope": "Python inference process only; native child not included",
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "prefix": "<workspace>\\receive-check\\PS-20261025-20-hubert-fargan-v3\\runtime",
+    "board_touched": false,
+    "played": false
+  },
+  "inference": {
+    "samples": 291200,
+    "peak": 0.479034423828125,
+    "rms": 0.06764136911095815,
+    "sha256": "d1fb89990a7c5cdc2a57174d1f1e0f5b5c3715239fd19c5e07594469c39cf703",
+    "clipping_fraction": 0.0,
+    "task": "PS-20261025-20",
+    "source_sha256": "f4a026e5c97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c",
+    "source_samples": 291200,
+    "frames": 1820,
+    "inference_seconds": 2.562999999994645,
+    "rtf_host_full_chain": 0.1408241758238816,
+    "mapper_sha256": "836a4595e6fc2bc8992107645b58a6ffd97ecdb724ef91186093009058b397aa",
+    "native_sha256": "0e5eb4d457741820564d4397e0b69f8dd58b25c896259bb66d8e84fb88a3dc14",
+    "male5_used": false,
+    "target_track9_used": false,
+    "played": false,
+    "board_touched": false
+  },
+  "audio_format": {
+    "sample_rate": 16000,
+    "channels": 1,
+    "sample_width_bytes": 2,
+    "samples": 291200
+  },
+  "output_hash_matches_original": true,
+  "metrics_rerun": false,
+  "metrics_reuse_reason": "Downloaded-package output WAV SHA equals the original v3 strict evaluation WAV",
+  "visibility_changed": false,
+  "allocation_or_rules_changed": false,
+  "local_test_handoff_allowed": false,
+  "command": "../runtime/Scripts/python.exe build/remote_ps_c_hubert_fargan_v3.py infer --assets bundle --output bundle --native bundle/native/fargan_probe_host.exe",
+  "training_evaluation_evidence": "report/ps_20261025_20_hubert_fargan_v3_20261027.json",
+  "bundle_manifest": {
+    "task": "PS-20261025-20",
+    "version": "hubert-fargan-v3",
+    "status": "REJECTED",
+    "source_commit": "ce4f2c7e9e7b3bc09b8c37532dbfb3f8d258c1bb",
+    "platform": "Windows x64, Python 3.12.14, CPU",
+    "files": [
+      {
+        "path": "environment.lock.txt",
+        "bytes": 1480,
+        "sha256": "0d81c14ab82acd1927e54b7e6b6f1137de5ea4db88a08151fa5ee45c30e24df3"
+      },
+      {
+        "path": "hubert_base/hubert_base/config.json",
+        "bytes": 1492,
+        "sha256": "0346950779dfb7f9316fa74ed846e2b8a22a08eedfdc5387b73f327cb1a4a7cf"
+      },
+      {
+        "path": "hubert_base/hubert_base/preprocessor_config.json",
+        "bytes": 225,
+        "sha256": "7c1976a680fb7acc757cd36fb08eef878fa36c70b4c9d2d595df9c608bbbbf0e"
+      },
+      {
+        "path": "hubert_base/hubert_base/pytorch_model.bin",
+        "bytes": 189206711,
+        "sha256": "cc8c20f4b90a520757260197a3ff2505705a7adbd20ad9eeaa4e1a9b38442ef5"
+      },
+      {
+        "path": "hubert_provenance.json",
+        "bytes": 1621,
+        "sha256": "81308727bdd430197dd2606f279653a585c7f8f6d22118172a72c5d2adb9408d"
+      },
+      {
+        "path": "mapper.pt",
+        "bytes": 4627149,
+        "sha256": "836a4595e6fc2bc8992107645b58a6ffd97ecdb724ef91186093009058b397aa"
+      },
+      {
+        "path": "native/build_manifest.json",
+        "bytes": 6414,
+        "sha256": "36e989cd9d24d30f18ad847450b94aa3b76f3be44e6b9b283a3ada2539b53d9f"
+      },
+      {
+        "path": "native/fargan_probe_host.exe",
+        "bytes": 4934034,
+        "sha256": "0e5eb4d457741820564d4397e0b69f8dd58b25c896259bb66d8e84fb88a3dc14"
+      },
+      {
+        "path": "native/source/AUTHORS",
+        "bytes": 239,
+        "sha256": "f9fd849e652219ce98e008303370b352d37663d0ffb27b8dc514ad93c9c7438b"
+      },
+      {
+        "path": "native/source/celt/_kiss_fft_guts.h",
+        "bytes": 6212,
+        "sha256": "c61749211e75ab6088ea19cf05e777645b8762ac8917b7ec92dc24f630b0c392"
+      },
+      {
+        "path": "native/source/celt/arch.h",
+        "bytes": 12655,
+        "sha256": "22c074998d336dfcfe061a5b752824ea795fd11a00cd714fce8f0ffffe0b4b23"
+      },
+      {
+        "path": "native/source/celt/arm/arm2gnu.pl",
+        "bytes": 10762,
+        "sha256": "a8cad929072449f309f40d73252a059d4a5af0814a21019d661f24184c206a0a"
+      },
+      {
+        "path": "native/source/celt/arm/arm_celt_map.c",
+        "bytes": 6477,
+        "sha256": "f45f4740a8f767c8c6120a4db6c290015bb99e816bab5de82cb0dd0011d5ea79"
+      },
+      {
+        "path": "native/source/celt/arm/armcpu.c",
+        "bytes": 9535,
+        "sha256": "18f5b330475db86f261b1327946417948cdea16ab4e991322887f8a07612a03f"
+      },
+      {
+        "path": "native/source/celt/arm/armcpu.h",
+        "bytes": 2830,
+        "sha256": "9bfc2da335b5a37cde9dbeb16c9666c9678f0d8487466825678f6c2bbc4b520d"
+      },
+      {
+        "path": "native/source/celt/arm/armopts.s.in",
+        "bytes": 1715,
+        "sha256": "71f3374dfbd38081f35e0367dd3727740287c1cf03e12bc5a224a151fd73a02b"
+      },
+      {
+        "path": "native/source/celt/arm/celt_arm_asm.h",
+        "bytes": 5714,
+        "sha256": "6489a268834e4216989cb50d4eebd4b85c38921e593f1d0a6de201b46a94a691"
+      },
+      {
+        "path": "native/source/celt/arm/celt_mdct_tx.c",
+        "bytes": 11541,
+        "sha256": "318caf33776ab6db082fabfb1f4585e0cca1e556ddda0993a8e2d03e85f7e050"
+      },
+      {
+        "path": "native/source/celt/arm/celt_neon_aarch64.S",
+        "bytes": 10897,
+        "sha256": "d32f0b4f038aa16749b8cf2399edc188a43cb435391cd89a5221d3e13b596631"
+      },
+      {
+        "path": "native/source/celt/arm/celt_neon_intr.c",
+        "bytes": 13606,
+        "sha256": "92d1b4ba9e7ff537a41da8ca32f243796cf5071f96351695918cf8231cc4bf8f"
+      },
+      {
+        "path": "native/source/celt/arm/celt_pitch_xcorr_arm.s",
+        "bytes": 20117,
+        "sha256": "39135fbbfc4723f5b2afaa8db413b5f5c5c8a44aec7cf615010a05c54b522389"
+      },
+      {
+        "path": "native/source/celt/arm/celt_tx_neon.S",
+        "bytes": 80148,
+        "sha256": "37eab84cc1a5cc3d41e88c0ef3fadd65f35d3ad60d402270665f816a50e406c7"
+      },
+      {
+        "path": "native/source/celt/arm/fft_arm.h",
+        "bytes": 1531,
+        "sha256": "7b09d7b0b421505072a6167edeae87d7a7f705375a8ada297731eb8c2d0e856d"
+      },
+      {
+        "path": "native/source/celt/arm/fixed_arm64.h",
+        "bytes": 1484,
+        "sha256": "36b30b4ae61eb54631afa262acc85bbd4a5d50c4d7d6a49d698791e4b79b657e"
+      },
+      {
+        "path": "native/source/celt/arm/fixed_armv4.h",
+        "bytes": 2952,
+        "sha256": "2ca28bd5f429c412f2695c70c6de278cc292f527d3ac6467681e96b6cc7d222e"
+      },
+      {
+        "path": "native/source/celt/arm/fixed_armv5e.h",
+        "bytes": 4284,
+        "sha256": "378844bbe1a5844d0acdf94932fa2563dfc7b2cb2ce553db9ef2bc4b793b4115"
+      },
+      {
+        "path": "native/source/celt/arm/kiss_fft_armv4.h",
+        "bytes": 4465,
+        "sha256": "6dd2447644f7f255fc6c4e12174fcf8b06ce5eb838d59ce0f5358941617ed555"
+      },
+      {
+        "path": "native/source/celt/arm/kiss_fft_armv5e.h",
+        "bytes": 4101,
+        "sha256": "f13a165fe38f4dc7ede8926407eb8b2118889a7674ab65dea6db25183c74eac3"
+      },
+      {
+        "path": "native/source/celt/arm/mathops_arm.h",
+        "bytes": 3884,
+        "sha256": "a9a8361ee8ed4c442bb820126be1f5b5612386db4268fb8c0de93dceadb9b2db"
+      },
+      {
+        "path": "native/source/celt/arm/mdct_arm.h",
+        "bytes": 3232,
+        "sha256": "73e1ee271a8b662a821b3b04bd5d632c76e116b8358207b438e5cbb6c3232814"
+      },
+      {
+        "path": "native/source/celt/arm/meson.build",
+        "bytes": 468,
+        "sha256": "222f5918d41908756f546488e0d9707de57b1322102d4cef34e6fcc00d9e30d3"
+      },
+      {
+        "path": "native/source/celt/arm/pitch_arm.h",
+        "bytes": 9692,
+        "sha256": "5ec0f95c6eaf4b1ba3209c27b8ba2fcd7e0aa7dcbff7345be83dc044635d7b48"
+      },
+      {
+        "path": "native/source/celt/arm/pitch_neon_intr.c",
+        "bytes": 10415,
+        "sha256": "3ac262214a575b6a9b147602be983ff09c3040e7d4a4d5673e754dfe79b9f2a8"
+      },
+      {
+        "path": "native/source/celt/bands.c",
+        "bytes": 61161,
+        "sha256": "5babc134875d3ec9dc1eee681c2a1cfeff3dd86bd75d0c522912bfec0dfb5351"
+      },
+      {
+        "path": "native/source/celt/bands.h",
+        "bytes": 5577,
+        "sha256": "2167a3fcca0789942d46cdc2f870d77d66d09ec1840ee1db8a508ae16126fad8"
+      },
+      {
+        "path": "native/source/celt/celt.c",
+        "bytes": 11191,
+        "sha256": "89aa7c24e2cc473d20f62d894d2a8a58b4c57d99fcd7d648ff1d7df26dc6c2f3"
+      },
+      {
+        "path": "native/source/celt/celt.h",
+        "bytes": 8913,
+        "sha256": "84f91ea9435f507abe70c5f9133b1a823c87d085ae4240d4ef824429f5d66db7"
+      },
+      {
+        "path": "native/source/celt/celt_decoder.c",
+        "bytes": 62571,
+        "sha256": "f8e648618a0a70e3f1847f84e2595b20a9c5bc70862ce77c14b8ca4df04e99d8"
+      },
+      {
+        "path": "native/source/celt/celt_encoder.c",
+        "bytes": 107235,
+        "sha256": "763f2782b31309703f91b4b236831914f64baba397b5a8f13ce5d9c8ab4ad0c0"
+      },
+      {
+        "path": "native/source/celt/celt_lpc.c",
+        "bytes": 10753,
+        "sha256": "8c6eb20b52aa9d52a83453fd3e33372f2faf1791ea6cfcd8d9d294b005cd0801"
+      },
+      {
+        "path": "native/source/celt/celt_lpc.h",
+        "bytes": 2240,
+        "sha256": "e10b2e2e610b16a2003d00599467dfed45d300726eb28d0934857ebe2dc822cf"
+      },
+      {
+        "path": "native/source/celt/celt_tx_tables.c",
+        "bytes": 51708,
+        "sha256": "959374731931ef9bf3a72c16afd0be76e6acf61985d017a8e9ee425e2091c13d"
+      },
+      {
+        "path": "native/source/celt/celt_tx_tables.h",
+        "bytes": 6886,
+        "sha256": "10d728ff062b42a66d8c7955f5b43f30a14fbf97bd9c2b4620e618c7e95a8861"
+      },
+      {
+        "path": "native/source/celt/cpu_support.h",
+        "bytes": 2434,
+        "sha256": "02bf67720c974a87fa96aad556c4847acc3370ecd16a95170193724197bc9c0e"
+      },
+      {
+        "path": "native/source/celt/cwrs.c",
+        "bytes": 28394,
+        "sha256": "6579428627c7cbdc5de0e977bd81559f1e75cc7dd620bcb29ef7b4770ae13e44"
+      },
+      {
+        "path": "native/source/celt/cwrs.h",
+        "bytes": 1885,
+        "sha256": "7705be67d58e7fbdea384dde5f3c404ef814fbb8ecbfca61f731d11e8201bdc7"
+      },
+      {
+        "path": "native/source/celt/dump_modes/dump_modes.c",
+        "bytes": 17309,
+        "sha256": "979e9ae195e4fbe1c497aae88adf9d8a69eabc9fc37c04068b84ac6c2cfd3360"
+      },
+      {
+        "path": "native/source/celt/dump_modes/dump_modes_arch.h",
+        "bytes": 1765,
+        "sha256": "980144dabc228cd8b2b9532632fa8796a5d84c3661d5e05e56fc1ca262e568eb"
+      },
+      {
+        "path": "native/source/celt/dump_modes/Makefile",
+        "bytes": 557,
+        "sha256": "2e399b3d92ba0f12d197a7b4b7ac8e74dd17a2da6eded3e8c9d9bc55c750feb1"
+      },
+      {
+        "path": "native/source/celt/ecintrin.h",
+        "bytes": 3679,
+        "sha256": "c1100f45bdf70d2243740a7891a5def54cf483b51d024a35ac915b630639b556"
+      },
+      {
+        "path": "native/source/celt/entcode.c",
+        "bytes": 5700,
+        "sha256": "fb52778fb752126b6da6366d29d532ee98d66eb366a28e913562eb9520ba9208"
+      },
+      {
+        "path": "native/source/celt/entcode.h",
+        "bytes": 5423,
+        "sha256": "97e7742ae4251b545326aadcc898635e90f22d5dc18fa63471c118b8bd79d1e8"
+      },
+      {
+        "path": "native/source/celt/entdec.c",
+        "bytes": 8374,
+        "sha256": "f2d74695ceeb927210dcf76d653241ebdfd465a1c23128604640d218cdd93c38"
+      },
+      {
+        "path": "native/source/celt/entdec.h",
+        "bytes": 5348,
+        "sha256": "31485453c516ad9be38a03b50a3c450fd5a9b7c7fad2d9e6c05357fd07efe0a9"
+      },
+      {
+        "path": "native/source/celt/entenc.c",
+        "bytes": 9881,
+        "sha256": "56e0843479ae5db15696125ba6ac3d0a0c26fa8b677d4d6bd457686865408572"
+      },
+      {
+        "path": "native/source/celt/entenc.h",
+        "bytes": 5905,
+        "sha256": "b54d50fa515e4cf2f4b5a5a7a99269b85e24aefb533dd55d407660d1105b5a01"
+      },
+      {
+        "path": "native/source/celt/fixed_c5x.h",
+        "bytes": 2525,
+        "sha256": "22b33645dcdbc52a949fdd39de23797cb4908f0ef6b231c5032979f490827bef"
+      },
+      {
+        "path": "native/source/celt/fixed_c6x.h",
+        "bytes": 2189,
+        "sha256": "e78714ffbdf4a6e240fd8a3b79d0227193492276c0ad29c08f1b62947ef24720"
+      },
+      {
+        "path": "native/source/celt/fixed_debug.h",
+        "bytes": 23889,
+        "sha256": "de221abc89897587eed6e08272a3905c7a1eb5aa10b656051727e9f147a9f80b"
+      },
+      {
+        "path": "native/source/celt/fixed_generic.h",
+        "bytes": 10413,
+        "sha256": "d102d53bb299308b832590760913a95dcd4bef9684d6e92134852e932587995f"
+      },
+      {
+        "path": "native/source/celt/float_cast.h",
+        "bytes": 5952,
+        "sha256": "eb1b227996006fe595ae9bc7b9bf35c113fff4d5d4072b8eca705f35cf34136b"
+      },
+      {
+        "path": "native/source/celt/kiss_fft.c",
+        "bytes": 20902,
+        "sha256": "a933f4fdabdd42d47697fbd41a2bc17cd7f7ef6eae0be207fc058e9b0264be0c"
+      },
+      {
+        "path": "native/source/celt/kiss_fft.h",
+        "bytes": 5595,
+        "sha256": "5bdeabe134a669a2922cd4094147825261fe1319c87e1c2cef768a8bb702a55e"
+      },
+      {
+        "path": "native/source/celt/laplace.c",
+        "bytes": 6257,
+        "sha256": "6a33bdc5bf3a3350f51f92aafa281e4163fdffc88c9e7b0718f6eb770dc595e7"
+      },
+      {
+        "path": "native/source/celt/laplace.h",
+        "bytes": 2349,
+        "sha256": "27102a1e7f24879c6871df971b7215b119d574bc25a3af9740c343d3b285ae82"
+      },
+      {
+        "path": "native/source/celt/mathops.c",
+        "bytes": 11265,
+        "sha256": "25199450cc613fc9784add776204dc81d12478fde0d00c746fb1ac62ba85c10e"
+      },
+      {
+        "path": "native/source/celt/mathops.h",
+        "bytes": 22889,
+        "sha256": "79bf06946bf6ab97e6eb933193bcc654d0a7503132044c22714d7cdcc22ba22f"
+      },
+      {
+        "path": "native/source/celt/mdct.c",
+        "bytes": 13484,
+        "sha256": "b383aa210ab8693ea1594261e5dffbf54c1ae6b4a2efaa3a503cf3436a739192"
+      },
+      {
+        "path": "native/source/celt/mdct.h",
+        "bytes": 3733,
+        "sha256": "d0fbc7c64c3d91f01ddd0045b01e2b9afc88839c627adb1ff720bfce0a38f863"
+      },
+      {
+        "path": "native/source/celt/mdct_pfa.c",
+        "bytes": 19299,
+        "sha256": "c2d37314a881976a0f41be514db5c5f3f779cb00276a2f5302d1569fdce1d0f7"
+      },
+      {
+        "path": "native/source/celt/meson.build",
+        "bytes": 1730,
+        "sha256": "30742753ffae561c8c8ca72b127b559d79d046cd2cb6ca3ebec0e570f0cb5537"
+      },
+      {
+        "path": "native/source/celt/mfrngcod.h",
+        "bytes": 2232,
+        "sha256": "5974c2341889a1c2e9775c2a21b3a55d4cbc1ebef90fe4412789aca4f4a19504"
+      },
+      {
+        "path": "native/source/celt/mini_kfft.c",
+        "bytes": 14377,
+        "sha256": "e8d317ab8ad7295212819b4b20b24708e2dd62fb8c0592da2df1c389c247e5a3"
+      },
+      {
+        "path": "native/source/celt/mips/celt_mipsr1.h",
+        "bytes": 6050,
+        "sha256": "824e3cff4cb9774a9098b494608c3d174970babff42bfaf7ff5f08b3ccae82a1"
+      },
+      {
+        "path": "native/source/celt/mips/fixed_generic_mipsr1.h",
+        "bytes": 4854,
+        "sha256": "ebbe5110bb581614b905c5682fcc571a2ffe0faf5621e45b36eb21374e2cec88"
+      },
+      {
+        "path": "native/source/celt/mips/kiss_fft_mipsr1.h",
+        "bytes": 8820,
+        "sha256": "4e9ddafda2e6c5248dd48d8cc63ae4f9472d43928d99d16372126d46cbf3574b"
+      },
+      {
+        "path": "native/source/celt/mips/mdct_mipsr1.h",
+        "bytes": 12929,
+        "sha256": "7ffba0aeef920748a383a5cf13b481d89e6d159e651472b52c27994763ece861"
+      },
+      {
+        "path": "native/source/celt/mips/pitch_mipsr1.h",
+        "bytes": 10276,
+        "sha256": "ced0e8b13f68a8a3f28b240e146c28f652acbf42180bd732587045b7a41686fa"
+      },
+      {
+        "path": "native/source/celt/modes.c",
+        "bytes": 16964,
+        "sha256": "9e70b5254cfd7b53af114029222310182d5c05bf1d115abeea8fcf7a1d22aef9"
+      },
+      {
+        "path": "native/source/celt/modes.h",
+        "bytes": 2986,
+        "sha256": "1c0e479ae09847f0ab17d9ce7f960275935f69ef66175c3d512f7341faa12686"
+      },
+      {
+        "path": "native/source/celt/opus_custom_demo.c",
+        "bytes": 16282,
+        "sha256": "d7321f41981227cb37d0c577d597b3fb98931e7c370fd3b57a0fc618dc417fb5"
+      },
+      {
+        "path": "native/source/celt/os_support.h",
+        "bytes": 3291,
+        "sha256": "9e0b4572b0c5f366fd6f954d8f70d598d5f2b9d6cd7d123fc0f57cfff54abfd6"
+      },
+      {
+        "path": "native/source/celt/pitch.c",
+        "bytes": 15453,
+        "sha256": "0c7b6d0f19651a772a2f12380163f3637bb2e1f12842480569df244c725ab3d0"
+      },
+      {
+        "path": "native/source/celt/pitch.h",
+        "bytes": 6990,
+        "sha256": "a0c15b1b2f7859db49132ab4cdffbaf2e8bb7f9805641a4c6aec0a1f1801a716"
+      },
+      {
+        "path": "native/source/celt/quant_bands.c",
+        "bytes": 18965,
+        "sha256": "bec6e7ac19ff02b83480c6ca6a01c084566781856a1e3442b7468bf25a4b937b"
+      },
+      {
+        "path": "native/source/celt/quant_bands.h",
+        "bytes": 2998,
+        "sha256": "ea86cddfd98268902f37662cbe67d168fb8c1d5d23ad6e6a82b8f6f511048874"
+      },
+      {
+        "path": "native/source/celt/rate.c",
+        "bytes": 31378,
+        "sha256": "b18d93870b51ed47d3db3960578f8888e4eea3f9d54168cef2348d8dfcf071fa"
+      },
+      {
+        "path": "native/source/celt/rate.h",
+        "bytes": 3606,
+        "sha256": "7bc335949f2e6e7d4e28c23681c4fc6f3c99733848deb7d1a24e908431f0d8a6"
+      },
+      {
+        "path": "native/source/celt/stack_alloc.h",
+        "bytes": 6798,
+        "sha256": "791a3ed2f579d0031213dd2e59446b2160f887c2df158f00b254bb08e66a739f"
+      },
+      {
+        "path": "native/source/celt/static_modes_fixed.h",
+        "bytes": 204283,
+        "sha256": "b3a47c6a64ad35316aa3f553318ed76fe5a9bf84da96b26aa2c9e0ce58760a53"
+      },
+      {
+        "path": "native/source/celt/static_modes_float.h",
+        "bytes": 150403,
+        "sha256": "9c7fb758b2db67c601673ac1a87d90b0796d6556b05310ee8d4096ce32fb12f3"
+      },
+      {
+        "path": "native/source/celt/tests/meson.build",
+        "bytes": 498,
+        "sha256": "40a6e03cd5fb857759a6413b02f039a60124154b3b130ccc48de173232e954bf"
+      },
+      {
+        "path": "native/source/celt/tests/test_unit_cwrs32.c",
+        "bytes": 4489,
+        "sha256": "5a45c9a73823bba6cfbc36182e68f4360804e711c3a998590f7334c5b441627c"
+      },
+      {
+        "path": "native/source/celt/tests/test_unit_dft.c",
+        "bytes": 4821,
+        "sha256": "66a649669e54ff36f1e9a8c489af820b11d508277404369c46eb1e7bc9db665d"
+      },
+      {
+        "path": "native/source/celt/tests/test_unit_entropy.c",
+        "bytes": 11896,
+        "sha256": "3c3012064d79fb0826cda7989d028f037d5b6a5640eddb1156e00b711c32dda0"
+      },
+      {
+        "path": "native/source/celt/tests/test_unit_laplace.c",
+        "bytes": 2803,
+        "sha256": "666deb7d5f10013c0c677adadc50eede8b449fccf94fe364956d8467d81e44c0"
+      },
+      {
+        "path": "native/source/celt/tests/test_unit_mathops.c",
+        "bytes": 23320,
+        "sha256": "b9786c59d9871ff31110e62d6e477bfb5b57d635a8374826c97fceb4f344c04a"
+      },
+      {
+        "path": "native/source/celt/tests/test_unit_mdct.c",
+        "bytes": 6162,
+        "sha256": "99d35a36bb9956870f0a0cdbbbca028a8017ffb42d3c040f8138d18959cac150"
+      },
+      {
+        "path": "native/source/celt/tests/test_unit_mini_kfft.c",
+        "bytes": 4330,
+        "sha256": "89b321a8a110fe3efe25a9321bdbba2b87d7b1f97a335acaa8bdaef02dd45af8"
+      },
+      {
+        "path": "native/source/celt/tests/test_unit_rotation.c",
+        "bytes": 2613,
+        "sha256": "c61a9fa345e6bd87bd204cc1a931eb9ad9badff853fc045649a87d1704ead17e"
+      },
+      {
+        "path": "native/source/celt/tests/test_unit_types.c",
+        "bytes": 1752,
+        "sha256": "8b6ab5963d023a39e9064c0aaa5ddf26f4e5d1dc4c2a3614a86af08967b7320b"
+      },
+      {
+        "path": "native/source/celt/vq.c",
+        "bytes": 25216,
+        "sha256": "6909f68990d3157d3681ea8038e7ff7406448689324abe6426e6573d174245c0"
+      },
+      {
+        "path": "native/source/celt/vq.h",
+        "bytes": 3921,
+        "sha256": "b6c4c1ff9eb7aeb71cef86fe18d33446c9b9a71b4e82f002840d7f13028195f5"
+      },
+      {
+        "path": "native/source/celt/x86/celt_lpc_sse.h",
+        "bytes": 2273,
+        "sha256": "ed9c69b4f64a234a15374a8a7c0bed584c316b2f9ddc583f06efc129ecc37e9c"
+      },
+      {
+        "path": "native/source/celt/x86/celt_lpc_sse4_1.c",
+        "bytes": 3038,
+        "sha256": "14029aa815d785b457ae277cc986d310635263c7950ab2fdeca8931170d208a9"
+      },
+      {
+        "path": "native/source/celt/x86/pitch_avx.c",
+        "bytes": 4507,
+        "sha256": "93397ac70d0d4952b9b9db0f542d4e44c0ae935d5f3104d9397398e957dc2e7b"
+      },
+      {
+        "path": "native/source/celt/x86/pitch_sse.c",
+        "bytes": 5901,
+        "sha256": "95bacc0ffe6dbf11a49f4d892b5485e0748a4e6ccf2f001a42e2edbc31be0203"
+      },
+      {
+        "path": "native/source/celt/x86/pitch_sse.h",
+        "bytes": 7273,
+        "sha256": "610c078ff00a4c841def50cac60092d72adcc6fc88c735f14c87b7ed4df83de2"
+      },
+      {
+        "path": "native/source/celt/x86/pitch_sse2.c",
+        "bytes": 3240,
+        "sha256": "4403c0f5982dd4845dce4b303590ff04437499d57c0a02bc745e1e27520eccd9"
+      },
+      {
+        "path": "native/source/celt/x86/pitch_sse4_1.c",
+        "bytes": 7815,
+        "sha256": "18b391a66b6d11ae55d92588f87cc9fcf7a19d6188568c107351583c91c9f89c"
+      },
+      {
+        "path": "native/source/celt/x86/vq_sse.h",
+        "bytes": 1996,
+        "sha256": "26ec674e13a6c6c4c87e7fc04d8f3bcec47276c8022b2d0a03763db8d6541ae2"
+      },
+      {
+        "path": "native/source/celt/x86/vq_sse2.c",
+        "bytes": 7736,
+        "sha256": "76bf727c4eec667c8d8d275b9537aa4f133b57e067bd9ba778e00b3bc390baf2"
+      },
+      {
+        "path": "native/source/celt/x86/x86_arch_macros.h",
+        "bytes": 1618,
+        "sha256": "b6118942870b62ff78731edc3025e55230c3fadaf28ec2f4024d786210631505"
+      },
+      {
+        "path": "native/source/celt/x86/x86_celt_map.c",
+        "bytes": 5555,
+        "sha256": "8f67562fef7176e1a318a00745bbf65c148ac02d985c11a79b488a4c36d8b4bc"
+      },
+      {
+        "path": "native/source/celt/x86/x86cpu.c",
+        "bytes": 5261,
+        "sha256": "c3d9e639236391e09beafa385baa16a3d4c94a1337876b88159fb49a3fcba104"
+      },
+      {
+        "path": "native/source/celt/x86/x86cpu.h",
+        "bytes": 4247,
+        "sha256": "82297f62289e349b30f6d0d01e07a3dce2b162d1b8c2754c5751bcc459134f52"
+      },
+      {
+        "path": "native/source/COPYING",
+        "bytes": 1945,
+        "sha256": "01e1167d54a096d123cf6dfbbeb19587278845c6481d2d66d545669846079551"
+      },
+      {
+        "path": "native/source/dnn/adaconvtest.c",
+        "bytes": 12137,
+        "sha256": "8a154be11383cb50e4ee7f0353075368544ffd2b24f8846b39b03a6c5a8f4c01"
+      },
+      {
+        "path": "native/source/dnn/arm/arm_dnn_map.c",
+        "bytes": 2850,
+        "sha256": "a8b4a06cd9e0ee1d4fea975a7eaee607eb13e9107147037fc947089190dd8d16"
+      },
+      {
+        "path": "native/source/dnn/arm/dnn_arm.h",
+        "bytes": 4440,
+        "sha256": "9b87598ef5707e008811e7db1c94c67678552758af11aa5a5d97488cfd5a1574"
+      },
+      {
+        "path": "native/source/dnn/arm/nnet_dotprod.c",
+        "bytes": 1563,
+        "sha256": "d9c0f429cac16e1f2649f3d8c8c1ecf65718ecb61cdd87c552d2b1c048d10093"
+      },
+      {
+        "path": "native/source/dnn/arm/nnet_neon.c",
+        "bytes": 1576,
+        "sha256": "6a034b99f5b16becc78098ee317fc1b8ea579b652f36c76e5a3384e563b0c584"
+      },
+      {
+        "path": "native/source/dnn/burg.c",
+        "bytes": 9356,
+        "sha256": "89ed14fa5020434a6e1ceecc5d23892a3e88fac5e5f71c86d8be65e2eeb138e4"
+      },
+      {
+        "path": "native/source/dnn/burg.h",
+        "bytes": 2464,
+        "sha256": "866d915ee4046e126dd3e7c87d822cbcf6c691e59f32e8ebf4715bfacf3f6ba7"
+      },
+      {
+        "path": "native/source/dnn/bwe_demo.c",
+        "bytes": 2885,
+        "sha256": "991e2bbcf52a36988083006e613675c29d06993adf712b998ce9d7ce9ccff2ad"
+      },
+      {
+        "path": "native/source/dnn/common.h",
+        "bytes": 1040,
+        "sha256": "012ec8b0166d54a5cb096e0c1d47765156d8f69537f1317dd98c5e87fd94e8c8"
+      },
+      {
+        "path": "native/source/dnn/datasets.txt",
+        "bytes": 8586,
+        "sha256": "8ad56554c71d19230d2566771f02a741e757837304c17acb9328c18ae0689fbf"
+      },
+      {
+        "path": "native/source/dnn/download_model.bat",
+        "bytes": 258,
+        "sha256": "7f2874aa77c786341920422ca40977028b159264db0c0e76220bc22a6f8fac05"
+      },
+      {
+        "path": "native/source/dnn/download_model.sh",
+        "bytes": 1070,
+        "sha256": "112be3ee3f2bbf37ccf9b9f4821df9d4acc58b783a25066339db8137b2a60ce8"
+      },
+      {
+        "path": "native/source/dnn/dred_coding.c",
+        "bytes": 1740,
+        "sha256": "f0a27afb2aee0b97738ce3462f956655c2778b818ced495a27546bea140d2f57"
+      },
+      {
+        "path": "native/source/dnn/dred_coding.h",
+        "bytes": 1511,
+        "sha256": "fc3e86fcfa6bf4c7f2da662629dee6a81e4d71c8956d1c4549d6d554733c9910"
+      },
+      {
+        "path": "native/source/dnn/dred_compare.c",
+        "bytes": 18912,
+        "sha256": "9dfc8a7e1dee10677de50dfa67af05b8ccbbb87b9ca362c340ec4976e8f16448"
+      },
+      {
+        "path": "native/source/dnn/dred_config.h",
+        "bytes": 2165,
+        "sha256": "52b1e4019880966ae809613fd07f40ff8e8a8d25f45435b7737d17bf85379339"
+      },
+      {
+        "path": "native/source/dnn/dred_decoder.c",
+        "bytes": 5129,
+        "sha256": "fcb263a29d4f78deb507b0c9589c1d4882086d3a4c4cc09a8f2acc7040406131"
+      },
+      {
+        "path": "native/source/dnn/dred_decoder.h",
+        "bytes": 1968,
+        "sha256": "6051136ad89a9b4c604495e19836633e6567e79d3d27c5c719defcf241b6c1bd"
+      },
+      {
+        "path": "native/source/dnn/dred_encoder.c",
+        "bytes": 14732,
+        "sha256": "f5fb985be7995555ccdb25133b3b95a686e827dc972fccfcc10c5536b866f36c"
+      },
+      {
+        "path": "native/source/dnn/dred_encoder.h",
+        "bytes": 2655,
+        "sha256": "453b2d47226c35cf0d0ec77fd2c84934971cf657fba095a1086cf73454ed0173"
+      },
+      {
+        "path": "native/source/dnn/dred_rdovae.h",
+        "bytes": 1623,
+        "sha256": "7b1b0c292f7a06fcb3e282717adb34ed89ed9f23840aea04c5aaadf9683ca58d"
+      },
+      {
+        "path": "native/source/dnn/dred_rdovae_constants.h",
+        "bytes": 560,
+        "sha256": "5df7e762f6a55299879f7626535451cfc7c9396c30ce754fa3dd364ca26ac543"
+      },
+      {
+        "path": "native/source/dnn/dred_rdovae_dec.c",
+        "bytes": 7316,
+        "sha256": "454f79da47cb47e9c64ab1dd5ffedc9bbeb924827b43b5fc197f2827f63a4403"
+      },
+      {
+        "path": "native/source/dnn/dred_rdovae_dec.h",
+        "bytes": 2352,
+        "sha256": "0e647b4ea6ffaec294850e0d1be9266f16ccee98f1532e2f1cd9129bc9a1f793"
+      },
+      {
+        "path": "native/source/dnn/dred_rdovae_enc.c",
+        "bytes": 6255,
+        "sha256": "00ec56340179946a793f8bdf5c0a794df237ff4832517ee961a5bb18d6949381"
+      },
+      {
+        "path": "native/source/dnn/dred_rdovae_enc.h",
+        "bytes": 2128,
+        "sha256": "71b5efa375d93fac6c249ee5524bb0a69349cb3d9ec3a7af7a2de2cfe09bb840"
+      },
+      {
+        "path": "native/source/dnn/dump_data.c",
+        "bytes": 15095,
+        "sha256": "f6d9b1906b618d858548a03e2fcdd084446939fb2983c5731e16ea8b5863dbfa"
+      },
+      {
+        "path": "native/source/dnn/dump_lpcnet_tables.c",
+        "bytes": 3805,
+        "sha256": "2592d54613c62540bec12a5d9567829cfa72c58a563a66ece0013dd4639baad9"
+      },
+      {
+        "path": "native/source/dnn/fargan.c",
+        "bytes": 9764,
+        "sha256": "31345cea40748e6e380d6b8c4ff612f2a78611fae7e26404e171dcda983ca759"
+      },
+      {
+        "path": "native/source/dnn/fargan.h",
+        "bytes": 2641,
+        "sha256": "e1761b61669f70ed6ae918772b8fae3ed9fe5c65f67d2ce3d68749ac4bd9a4ad"
+      },
+      {
+        "path": "native/source/dnn/fargan_data.c",
+        "bytes": 21978624,
+        "sha256": "68ba6e8731007f7184be862d7d1afe4cef096a7c9bcbfa115962340f725e004c"
+      },
+      {
+        "path": "native/source/dnn/fargan_data.h",
+        "bytes": 1844,
+        "sha256": "402e691f4975d6d156903f0fe12da3385e20ec6dd6155c3387e9dad536f654cd"
+      },
+      {
+        "path": "native/source/dnn/fargan_demo.c",
+        "bytes": 10453,
+        "sha256": "b608790b017ce979c5a13a807f3c9797bfe4bba0d79dc01b8dae4d4001823ae2"
+      },
+      {
+        "path": "native/source/dnn/freq.c",
+        "bytes": 8780,
+        "sha256": "d50062b834535a8f2fa7e30bb1ad3162b69cc5dd869729701e9fe9e9bbab20fc"
+      },
+      {
+        "path": "native/source/dnn/freq.h",
+        "bytes": 2388,
+        "sha256": "007974d8a8854199604e0510b4cd4d463a60fa1c2c34463251d9e097e5fbc031"
+      },
+      {
+        "path": "native/source/dnn/fwgan.c",
+        "bytes": 13024,
+        "sha256": "85e5b1d320efd732f848e7655fe782955a7407ce3e59e3484f761301d4d98223"
+      },
+      {
+        "path": "native/source/dnn/fwgan.h",
+        "bytes": 2942,
+        "sha256": "1e6313e19d3cc3fa528bcedab9836f75e965982f6b39b27bda46aab9b5b1dfb6"
+      },
+      {
+        "path": "native/source/dnn/kiss99.c",
+        "bytes": 3062,
+        "sha256": "5073dddcf50a37a5e1f997472c66b373d5d9d3e1a89e73ed38783b2cb8181579"
+      },
+      {
+        "path": "native/source/dnn/kiss99.h",
+        "bytes": 1882,
+        "sha256": "56d3880aa188612d31f3f6ebed29437f7bd6691e20a385228bf754ecc7211545"
+      },
+      {
+        "path": "native/source/dnn/lossgen.c",
+        "bytes": 6148,
+        "sha256": "a59eecb5eff49e0cf198113630f1a6f8e442b0fbbb1ce5055a370077843a0b72"
+      },
+      {
+        "path": "native/source/dnn/lossgen.h",
+        "bytes": 1895,
+        "sha256": "738e377ae6f7adddc522df7f0129f96c4631634672f699e6212f69891f31d47c"
+      },
+      {
+        "path": "native/source/dnn/lossgen_demo.c",
+        "bytes": 524,
+        "sha256": "e97146d7534d94ca64c0c1c3380e52d45d61db0ac5f878e39ca7b0ba96b949eb"
+      },
+      {
+        "path": "native/source/dnn/lpcnet.c",
+        "bytes": 9884,
+        "sha256": "cac333c1e0c5116a0d2ba4617aa93d2713c0751da0e07b9cccc5054e41d9ade3"
+      },
+      {
+        "path": "native/source/dnn/lpcnet.h",
+        "bytes": 7193,
+        "sha256": "31d773c937996174bb38233390b58da8459ff6cadda5a5f4cfb085f57ab90518"
+      },
+      {
+        "path": "native/source/dnn/LPCNet.yml",
+        "bytes": 335,
+        "sha256": "265c709c1b95f56246db8102c70f60a450d746aa946ef08ebcac2ce32ce013e4"
+      },
+      {
+        "path": "native/source/dnn/lpcnet_enc.c",
+        "bytes": 8581,
+        "sha256": "6181341664a621ca0e020b1fe9a521c419bf55567d09643ced5cf56e95dd6f8b"
+      },
+      {
+        "path": "native/source/dnn/lpcnet_plc.c",
+        "bytes": 7735,
+        "sha256": "186820f6b58af2d570bc4324b45905c18138f583ee6c063d35607e62aa69c9a2"
+      },
+      {
+        "path": "native/source/dnn/lpcnet_private.h",
+        "bytes": 2563,
+        "sha256": "31bacd0b49cf76df0f379b553cdd899cdc11fbba9c1a815525e123c79c178aea"
+      },
+      {
+        "path": "native/source/dnn/lpcnet_tables.c",
+        "bytes": 19101,
+        "sha256": "9a4b5490b8c45e11712d7d2d9eff99f7a13fe49bd2d911609a4435b35ef1996a"
+      },
+      {
+        "path": "native/source/dnn/meson.build",
+        "bytes": 1650,
+        "sha256": "266845756e7c876059cc804563a507f68482a58f226deeef2f01374a32237e86"
+      },
+      {
+        "path": "native/source/dnn/nndsp.c",
+        "bytes": 15905,
+        "sha256": "d8e0808328c78403c088cd87386f934af59ab85ab708df4a18d810b5eba8cdfc"
+      },
+      {
+        "path": "native/source/dnn/nndsp.h",
+        "bytes": 4152,
+        "sha256": "0da4042f6b0ffdaf684f1ed06ace42142ae78341325a8474d014e0a51490e7f2"
+      },
+      {
+        "path": "native/source/dnn/nnet.c",
+        "bytes": 5966,
+        "sha256": "1b376a8499167e143f8a4ec8d0c622d259b4ae99d8c7495a80d6318912de81e7"
+      },
+      {
+        "path": "native/source/dnn/nnet.h",
+        "bytes": 5717,
+        "sha256": "be76402755570a7d9251f1cb9e9960792378dbb52bb5273f5478ceeb83571d10"
+      },
+      {
+        "path": "native/source/dnn/nnet_arch.h",
+        "bytes": 9293,
+        "sha256": "3b227cd54ae376c21050a1116261665c9c8d82b9ec46b1c9aed9af6a6cd444d0"
+      },
+      {
+        "path": "native/source/dnn/nnet_default.c",
+        "bytes": 1456,
+        "sha256": "1402eb611b7fcc1fe7fa18639f0395e0af47a783ef87450318411483516e9011"
+      },
+      {
+        "path": "native/source/dnn/osce.c",
+        "bytes": 70078,
+        "sha256": "bf587ba2c017421acb2d9f4472786b0da65167a675871017729d64b760d1a1f0"
+      },
+      {
+        "path": "native/source/dnn/osce.h",
+        "bytes": 4088,
+        "sha256": "e9f1784cf1372d95ca75eff9a778e9d297ed45af4be6fc82c52d0a79d15f10d0"
+      },
+      {
+        "path": "native/source/dnn/osce_config.h",
+        "bytes": 2222,
+        "sha256": "7e5cce5ad1f2b0dbbba2766bb7f92ec821abd78d374ddfc760f872e9d2bd0cf3"
+      },
+      {
+        "path": "native/source/dnn/osce_features.c",
+        "bytes": 24877,
+        "sha256": "de167f19f4f194b9d22e2ecfd6c56ac3bb6e3fd57b191149de9dc598354265ee"
+      },
+      {
+        "path": "native/source/dnn/osce_features.h",
+        "bytes": 3054,
+        "sha256": "d482f57c0771caf588a6ad0328e33cae6373f834aff95887bfdbbe516eba151d"
+      },
+      {
+        "path": "native/source/dnn/osce_structs.h",
+        "bytes": 4667,
+        "sha256": "4c460b9fd382c8fbf97f81a4067a8628932403e18fc8004654ca423a3bf02cc2"
+      },
+      {
+        "path": "native/source/dnn/parse_lpcnet_weights.c",
+        "bytes": 8014,
+        "sha256": "78ab42e0fc04a72f89bc1a1af9363c630263608cb1065751c2c4d89c5f93e89a"
+      },
+      {
+        "path": "native/source/dnn/pitchdnn.c",
+        "bytes": 2468,
+        "sha256": "128473b43db5c160d4eefbab7e74f75b9074316a89ee095743329d387301252f"
+      },
+      {
+        "path": "native/source/dnn/pitchdnn.h",
+        "bytes": 710,
+        "sha256": "deb690e8a4c80e224ca3ff7f115388969560704147db8ec90357fd67cf225d54"
+      },
+      {
+        "path": "native/source/dnn/pitchdnn_data.c",
+        "bytes": 1788613,
+        "sha256": "b086f190fbba4179bc4995169910a0178b0be608a608800d2090ddbf64b42b3e"
+      },
+      {
+        "path": "native/source/dnn/pitchdnn_data.h",
+        "bytes": 795,
+        "sha256": "55b4f52dafae0f5599c4bfa4afa9f71411da42bb16536e602f857e55de0e4164"
+      },
+      {
+        "path": "native/source/dnn/plc_data.h",
+        "bytes": 683,
+        "sha256": "b0db9231882cc347e9e65246188a633ff5484d5450f7cd5e66b37ac56306c71d"
+      },
+      {
+        "path": "native/source/dnn/README",
+        "bytes": 14,
+        "sha256": "3debe734c777df09c3c762cadd0fea1bebdb857c55243d605dc5b09211895bf3"
+      },
+      {
+        "path": "native/source/dnn/README.md",
+        "bytes": 6929,
+        "sha256": "6ae93dd98265b0a429d5e5714b1875424bb8345800347304ee2a03385f076bdf"
+      },
+      {
+        "path": "native/source/dnn/tansig_table.h",
+        "bytes": 2378,
+        "sha256": "9c865491efad7e1b05946636987fe923265a6fd4e1950d0870b45a930fed1472"
+      },
+      {
+        "path": "native/source/dnn/test_vec.c",
+        "bytes": 2728,
+        "sha256": "4e69fe002f37b60f4645d40986cc338b58923f6d87439d0f5d51c3de95003bb1"
+      },
+      {
+        "path": "native/source/dnn/torch/dnntools/dnntools/__init__.py",
+        "bytes": 55,
+        "sha256": "8d47de8991fa0103dc23d9f3d142977d12e4db41eee724ce56e4f36ad41364ca"
+      },
+      {
+        "path": "native/source/dnn/torch/dnntools/dnntools/quantization/__init__.py",
+        "bytes": 52,
+        "sha256": "82de20d10c6980e8f84996294599becfdd08c0305a1d33a664b732ddf7b129ae"
+      },
+      {
+        "path": "native/source/dnn/torch/dnntools/dnntools/quantization/softquant.py",
+        "bytes": 4024,
+        "sha256": "c9bf45f3b23ee5c26ed6f8b1fe096264175fadf5527067d75901a1bf9fdb2384"
+      },
+      {
+        "path": "native/source/dnn/torch/dnntools/dnntools/relegance/__init__.py",
+        "bytes": 201,
+        "sha256": "bbd83ef60445d2bda925ce585d37d82d321668a88bef6c09a1290ddf0c7b970f"
+      },
+      {
+        "path": "native/source/dnn/torch/dnntools/dnntools/relegance/meta_critic.py",
+        "bytes": 3576,
+        "sha256": "9ce49c1686208cc401cac8aeca6f72d201e501f5fe604d23adf61063fd85a2f2"
+      },
+      {
+        "path": "native/source/dnn/torch/dnntools/dnntools/relegance/relegance.py",
+        "bytes": 16205,
+        "sha256": "a86f090259fb432cdf77e4e0240a862709dc003948a0e487cc4c874b11265e3c"
+      },
+      {
+        "path": "native/source/dnn/torch/dnntools/dnntools/sparsification/__init__.py",
+        "bytes": 332,
+        "sha256": "cc98a3e144fdc4f4ea89731fac7d2ecae96c96da24c5d439851cb244a9ae0585"
+      },
+      {
+        "path": "native/source/dnn/torch/dnntools/dnntools/sparsification/base_sparsifier.py",
+        "bytes": 2266,
+        "sha256": "e914743effebd10a0a517a4aa4881619e5da89905042bc3164b96984cb7b850d"
+      },
+      {
+        "path": "native/source/dnn/torch/dnntools/dnntools/sparsification/common.py",
+        "bytes": 4189,
+        "sha256": "2f0a1af96e4a3cef4ca0d7169d3cd9bf2838ce61e25e439dbee79f29d77d1587"
+      },
+      {
+        "path": "native/source/dnn/torch/dnntools/dnntools/sparsification/conv1d_sparsifier.py",
+        "bytes": 4916,
+        "sha256": "dcc75f2cbbfcb8661f0ee8574492fdfb8eccd6966fce726c39c75bf9750fdb48"
+      },
+      {
+        "path": "native/source/dnn/torch/dnntools/dnntools/sparsification/conv_transpose1d_sparsifier.py",
+        "bytes": 4977,
+        "sha256": "85519ddb905719e8a083213e11990fc890adab851f6cc5eb08f2a16259b0ba7d"
+      },
+      {
+        "path": "native/source/dnn/torch/dnntools/dnntools/sparsification/gru_sparsifier.py",
+        "bytes": 7578,
+        "sha256": "b4a7a2bc960866fc590470c00b5e31e415d82b4626c57d54c63c7a44c33d3d27"
+      },
+      {
+        "path": "native/source/dnn/torch/dnntools/dnntools/sparsification/linear_sparsifier.py",
+        "bytes": 4723,
+        "sha256": "ecdc38d27135ed057b6f292476a855bb212bd104237488f556d708fde8b1d00c"
+      },
+      {
+        "path": "native/source/dnn/torch/dnntools/dnntools/sparsification/utils.py",
+        "bytes": 2698,
+        "sha256": "7256c0b30a79270da4a6199663b4386bfa73989b85c4138fb947c52d7cf655bf"
+      },
+      {
+        "path": "native/source/dnn/torch/dnntools/requirements.txt",
+        "bytes": 5,
+        "sha256": "37bf51bfba4699a940ce31349422b24a5bc55a2b179ed7aec74459a9ae8d57b7"
+      },
+      {
+        "path": "native/source/dnn/torch/dnntools/setup.py",
+        "bytes": 1954,
+        "sha256": "ec55547b90ada22e17b7ec294cbffc135b0db965a27e9aeedbdcdd2656b48ca0"
+      },
+      {
+        "path": "native/source/dnn/torch/fargan/adv_train_fargan.py",
+        "bytes": 10886,
+        "sha256": "2205fdf68e87e3394c5f7a672c67e2baaf6dd94de0c88be27a2a8729dbc9d11a"
+      },
+      {
+        "path": "native/source/dnn/torch/fargan/dataset.py",
+        "bytes": 2661,
+        "sha256": "ab25c69d5943e9d1970c161854a388f8612984091bb68660e084203bf895e835"
+      },
+      {
+        "path": "native/source/dnn/torch/fargan/dump_fargan_weights.py",
+        "bytes": 4181,
+        "sha256": "9ac0c115b1028efda492e9229ab280dc6410c965c790000b167c1145486fbd9b"
+      },
+      {
+        "path": "native/source/dnn/torch/fargan/fargan.py",
+        "bytes": 13567,
+        "sha256": "d70803ada9777de7d212c21f36e7111d300e24c43ebbf81bacedac7dab745db1"
+      },
+      {
+        "path": "native/source/dnn/torch/fargan/filters.py",
+        "bytes": 1496,
+        "sha256": "db99252c5403ce025da7b769a91f9ff6e8a4de737132b0d060189d79a0cb6c48"
+      },
+      {
+        "path": "native/source/dnn/torch/fargan/rc.py",
+        "bytes": 682,
+        "sha256": "1c620692fcb04d3e021e3c8e0ea027bacf92a9fd23882e4c3cc2c8844df1624a"
+      },
+      {
+        "path": "native/source/dnn/torch/fargan/README.md",
+        "bytes": 2232,
+        "sha256": "21102bb17b616beae752956c2007477899ab9f60fc8bee878af9dd4470337ea9"
+      },
+      {
+        "path": "native/source/dnn/torch/fargan/stft_loss.py",
+        "bytes": 7082,
+        "sha256": "2db132aa3804429a9f5c99de4ba21b3d70c860421f98088df837541ef4d9da8f"
+      },
+      {
+        "path": "native/source/dnn/torch/fargan/test_fargan.py",
+        "bytes": 4047,
+        "sha256": "a7faa18164c87ba4a16ac2d3e8227fc2b56888ad9ff635fc2636bc915093caa5"
+      },
+      {
+        "path": "native/source/dnn/torch/fargan/train_fargan.py",
+        "bytes": 6631,
+        "sha256": "eaa246b7144ba3683a047e0174894f8c2beb116a2f66e1592069f66ffe2a577e"
+      },
+      {
+        "path": "native/source/dnn/torch/fwgan/dump_model_weights.py",
+        "bytes": 3064,
+        "sha256": "420bd0fbdbc96fc5eeaadbbc6e2b1df74ddc9ea8e2b96526fd4fedc25551abd4"
+      },
+      {
+        "path": "native/source/dnn/torch/fwgan/inference.py",
+        "bytes": 4603,
+        "sha256": "38136c454b80f86e8e13c919730d3aa933428bf03686883331a709ecd9ffcab0"
+      },
+      {
+        "path": "native/source/dnn/torch/fwgan/models/__init__.py",
+        "bytes": 156,
+        "sha256": "77143da9efa68dc3b3ce7ac3711c1073b51b4f365f19d4e8573345e49282cd2f"
+      },
+      {
+        "path": "native/source/dnn/torch/fwgan/models/fwgan400.py",
+        "bytes": 10454,
+        "sha256": "1929e0c4bcac557d1082c8b193b3977b568bb826ec72220307672747ee8ea221"
+      },
+      {
+        "path": "native/source/dnn/torch/fwgan/models/fwgan500.py",
+        "bytes": 9177,
+        "sha256": "a8de12021efd38cf3c02e310b8c63cc20a42542c2b87234fa3e3ec45a772400d"
+      },
+      {
+        "path": "native/source/dnn/torch/lossgen/export_lossgen.py",
+        "bytes": 3386,
+        "sha256": "9e1ac27ff7464665a6d6bc776bcf01575d91bca2d0c83ac5d6fabbbdbc9f4b06"
+      },
+      {
+        "path": "native/source/dnn/torch/lossgen/lossgen.py",
+        "bytes": 1163,
+        "sha256": "45cc51dfb7ceb351fece7ae625d68a677f8e31b80e13ffc346f508d699999013"
+      },
+      {
+        "path": "native/source/dnn/torch/lossgen/process_data.sh",
+        "bytes": 327,
+        "sha256": "fdce5f549f905621973b24dc4f24dc48465a5237070b25354bb39f3d46f76dd2"
+      },
+      {
+        "path": "native/source/dnn/torch/lossgen/README.md",
+        "bytes": 1068,
+        "sha256": "04048baba249256d530b0fb36d8a926572ec197192f2a7ca6e9010eaff04976d"
+      },
+      {
+        "path": "native/source/dnn/torch/lossgen/test_lossgen.py",
+        "bytes": 1231,
+        "sha256": "c5f5766d111bc4505983583a7270eff0a4d8f269816516980f52cefe32dde860"
+      },
+      {
+        "path": "native/source/dnn/torch/lossgen/train_lossgen.py",
+        "bytes": 3367,
+        "sha256": "5d3f769d3745bcd1870b6748792cbdddcec1b26e19bd1dcf096bcc994777e101"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/add_dataset_config.py",
+        "bytes": 2710,
+        "sha256": "781a038c253ca9ef462b301487dd1d92bfb06ca05a7830da30e2f3eaf4ee9a80"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/data/__init__.py",
+        "bytes": 41,
+        "sha256": "8de433c6735847f253ae0a25e63331134f01db0abf09de1c6eea1f0f9da06528"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/data/lpcnet_dataset.py",
+        "bytes": 10146,
+        "sha256": "455f35229b604e2abd056477c30e2358b487a2f655fda18403b4200c4a2b02e4"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/engine/lpcnet_engine.py",
+        "bytes": 4764,
+        "sha256": "bb3f7ff4d80e63f0f21f955d0345f10dcd693fab9074e03b7fb86b476aaa9aca"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/make_default_setup.py",
+        "bytes": 2065,
+        "sha256": "ea296be837028f4798edf0cfba1edf621f49b5344a204080a6d5c154ec851145"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/make_test_config.py",
+        "bytes": 3341,
+        "sha256": "9054c76de9db320ecbe8c620ae643f52adbbc1c421162a30c023fc6975e5e21f"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/models/__init__.py",
+        "bytes": 154,
+        "sha256": "25d17a768fe6db01e4c514467eca0801259960f0a422c553b6b046f5513b260c"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/models/lpcnet.py",
+        "bytes": 13076,
+        "sha256": "07edf04168d03a01f54cfd6f5880337aff4ae715a9b068bf650fa6e2c39a27ef"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/models/multi_rate_lpcnet.py",
+        "bytes": 19844,
+        "sha256": "9a33b893edf00b6493db68ac46351d8e6bd76aa1c2eee5cece20d168b2d4f995"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/print_lpcnet_complexity.py",
+        "bytes": 2359,
+        "sha256": "f28997a03881dd89d75cf6b301008a00288dd0d8c86fbf4cee2f9830130ec32f"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/README.md",
+        "bytes": 782,
+        "sha256": "c6091176e937f6904a5cb5760b8cdd02f7674a0f4c44bec07a5a6c98c777d113"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/scripts/collect_multi_run_results.py",
+        "bytes": 5619,
+        "sha256": "2ad7ef3e0ab049518bc403a57c6b39172a6d26984ba6fba81e73ad5bca6247c3"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/scripts/loop_run.sh",
+        "bytes": 2096,
+        "sha256": "1948ebbac8779b4f7579369180e5513850751d656b7b92e51a38830ce5061a42"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/scripts/make_animation.py",
+        "bytes": 2537,
+        "sha256": "4a0e484db259b830633f220720c044a1bff29b7b278beaedb3b3e7839b6619de"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/scripts/modify_dataset_target.py",
+        "bytes": 379,
+        "sha256": "ba6ffa2aafcc881f772db4312182d5256d43a2c966d37946423dac8da3e2f4de"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/scripts/multi_run.sh",
+        "bytes": 551,
+        "sha256": "d050794d8701a689dbb84e64144437770e3510f90ff7f280a8490ecef1b2d5d7"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/scripts/run_inference_test.sh",
+        "bytes": 553,
+        "sha256": "e3dc46142e39992b68fcdc4c779b22b5ad326e950cf4a9f6662651d19d880021"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/scripts/update_checkpoints.py",
+        "bytes": 2039,
+        "sha256": "3d4c0ac02bf571a5b85a6e8a76542a802274963a3d765fe6fd2498913c531cba"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/scripts/update_output_folder.sh",
+        "bytes": 473,
+        "sha256": "c726069b507645e9b58152b860ba4911bd81679446c41944b227c4284b5c7cba"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/scripts/update_setups.py",
+        "bytes": 2079,
+        "sha256": "fbcc9b20b35bc9deae7ae8a5747de9cffe2583ddf1dde55c18c629ef61921c7a"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/test_lpcnet.py",
+        "bytes": 2884,
+        "sha256": "a7af6ad55ca4b636ee80d46dcf2effae90c02c6dc3f7ed0cebde75240b58d325"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/train_lpcnet.py",
+        "bytes": 9291,
+        "sha256": "6c40873d05478576960410a211cfcd1aacccaadd354ff758b8560d15910b2c38"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/utils/__init__.py",
+        "bytes": 86,
+        "sha256": "4eb5fb4b5c46d9c3f9e50cecb46866ec381822d9a0f99b9f8a30d018f1f23279"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/utils/data.py",
+        "bytes": 4755,
+        "sha256": "dd917b2feeadb6ffef03b4cb1c549d2f3406ebb057b22606289261c3cd759f8f"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/utils/endoscopy.py",
+        "bytes": 7824,
+        "sha256": "cb47fe002f1d0606e80e5cc4d00f1e190c243163aea3fbb10c1d540fec3d1e5d"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/utils/layers/__init__.py",
+        "bytes": 202,
+        "sha256": "05beb7f7e5407dc3d0f0b21c496fe25c782d9afe43836e49ff3d16c9ace228e8"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/utils/layers/dual_fc.py",
+        "bytes": 1895,
+        "sha256": "711b340c0133eae53d64605c206bbedf3283e31e319b5d56beafa5ed43457adc"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/utils/layers/pcm_embeddings.py",
+        "bytes": 2628,
+        "sha256": "0342728c116866b5f518018120505a26f1814f90570ea5844907ef644744e252"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/utils/layers/subconditioner.py",
+        "bytes": 17204,
+        "sha256": "072dc96669d81b9407254b3028588df805fa752e7e2a5593a336a8cc8c97d38e"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/utils/misc.py",
+        "bytes": 2113,
+        "sha256": "b619d457220eeb704fda84c6f6b06c87321ee2a4e62d71259f2f406a701350f3"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/utils/pcm.py",
+        "bytes": 1499,
+        "sha256": "bb10f323e0fe3ce61cc64501acc0f63b08105c734e842a331e07213b94cb26ae"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/utils/sample.py",
+        "bytes": 1733,
+        "sha256": "6e7a615d6504e32a9213f07e83786e13126bfb28627ebb0628797a1e83b5b585"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/utils/sparsification/__init__.py",
+        "bytes": 107,
+        "sha256": "ed4ae70623fa9df13b1d60ae5c160790fb5d3c1bf429f4b0b1b74cccf64392e3"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/utils/sparsification/common.py",
+        "bytes": 4177,
+        "sha256": "c7b7c4ea807e5fd99a972167410fb35c1062703024d9f737619902f402055c5b"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/utils/sparsification/gru_sparsifier.py",
+        "bytes": 7714,
+        "sha256": "6e78371d3c2327bf76f570ae6c5c51005ad1166e79def18ee975e0241926d2d4"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/utils/templates.py",
+        "bytes": 5787,
+        "sha256": "aa3a683a401735fb0e081e3129655a864a7098aba4859cfbe7980a10870dc8d0"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/utils/ulaw.py",
+        "bytes": 1978,
+        "sha256": "0fee652ee6856e897923dca6a6cae0571b2ebd4a688862344f69a947f0737fd0"
+      },
+      {
+        "path": "native/source/dnn/torch/lpcnet/utils/wav.py",
+        "bytes": 1790,
+        "sha256": "c3fae5c61db0c515dc28580c1e1214fdc014027231a44590fd838ea0eb5b0474"
+      },
+      {
+        "path": "native/source/dnn/torch/neural-pitch/data_augmentation.py",
+        "bytes": 8178,
+        "sha256": "c2c218503958024f3af434a83daf67c8107f80ce4d995f56b6fe8b322215c7ee"
+      },
+      {
+        "path": "native/source/dnn/torch/neural-pitch/download_demand.sh",
+        "bytes": 1260,
+        "sha256": "b87a56e27dc94392296d3be54e6f022c2e3b54b67f15846e14a93f692ec8bc24"
+      },
+      {
+        "path": "native/source/dnn/torch/neural-pitch/evaluation.py",
+        "bytes": 16825,
+        "sha256": "b249c60d0a9ac3eb58ede45ca39f7c2c1486a1a5921567f34b8d2f1909a03b7d"
+      },
+      {
+        "path": "native/source/dnn/torch/neural-pitch/experiments.py",
+        "bytes": 2082,
+        "sha256": "f155b7acc1a465a46af5a9a2a162afc9ffadd4e508be2608020f00a5920046dc"
+      },
+      {
+        "path": "native/source/dnn/torch/neural-pitch/export_neuralpitch_weights.py",
+        "bytes": 3460,
+        "sha256": "07a76a3a326fed99d938864012c910daf9c0355fa01e32037d03376b991cb8b9"
+      },
+      {
+        "path": "native/source/dnn/torch/neural-pitch/models.py",
+        "bytes": 7116,
+        "sha256": "f6634ed7e2d33998ec7331c6bac5fad36bb38c8732d28ddd7c31b3d833afa464"
+      },
+      {
+        "path": "native/source/dnn/torch/neural-pitch/neural_pitch_update.py",
+        "bytes": 7231,
+        "sha256": "289608fd9804bf42cd4d3e53d3e8f4ffe83f9bb77e0d2020d047f4aeef629728"
+      },
+      {
+        "path": "native/source/dnn/torch/neural-pitch/ptdb_process.sh",
+        "bytes": 938,
+        "sha256": "1eea1b89e15f6fe9309510dfe15c9eeeda6b95db3707db349575e91f1a325790"
+      },
+      {
+        "path": "native/source/dnn/torch/neural-pitch/README.md",
+        "bytes": 764,
+        "sha256": "af2dedf2d1d6e6d39d9eb5bc106bed4a21c9ebc7bcc038e8f0d54b0e4ce1e765"
+      },
+      {
+        "path": "native/source/dnn/torch/neural-pitch/run_crepe.py",
+        "bytes": 2670,
+        "sha256": "136277860e2f700dd70ce0b0c2752e44af50ce26a416047b3cb7ac1707b0a659"
+      },
+      {
+        "path": "native/source/dnn/torch/neural-pitch/training.py",
+        "bytes": 7308,
+        "sha256": "bffdacdd081e648b187afe0f9ac6a943b78f5bf6d0ec999a39affda62166a750"
+      },
+      {
+        "path": "native/source/dnn/torch/neural-pitch/utils.py",
+        "bytes": 2323,
+        "sha256": "91fb3d99704d89af1ff4cc4fa634e631899e9efd4bbcf0cbfa3d8f1cae50f8ef"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/adv_train_bwe_model.py",
+        "bytes": 17207,
+        "sha256": "08b3f5cbdf9013246f9d717a3754c3aa93b90d8514e4f065cb4183df2a3a6843"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/adv_train_model.py",
+        "bytes": 16069,
+        "sha256": "44ffa8bc17fac7406f74207bdb16f201bd8a84704d5c09cc2a5b9aee258263fd"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/adv_train_vocoder.py",
+        "bytes": 15335,
+        "sha256": "b6e83d7e2fe1f4833e77899a9f82a55d54fb45f85494540a5a217470dd703adb"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/bwe_preproc.py",
+        "bytes": 11690,
+        "sha256": "61c6765332af8a8e718ce5b6f37bed4b6a02c616bd865075d2cf5d89b8196a4f"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/concatenator.py",
+        "bytes": 2882,
+        "sha256": "4a837ff52d49c9a96e8170f32320220cc53c5559f9cd47aab4eb914fa01d9511"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/create_testvectors.py",
+        "bytes": 6652,
+        "sha256": "755c4646c8f21f89fe2f010d5143ca0b3e7f846790ab96c8495be002f4cb1c98"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/data/__init__.py",
+        "bytes": 156,
+        "sha256": "9d7e01396e271d9f9771bf15b6ffd94caf9cca396b9b65d7fe611db201dabfb9"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/data/lpcnet_vocoding_dataset.py",
+        "bytes": 9892,
+        "sha256": "d2514e94fe5dea86de1f47c37f10808cfa6fe04e2ff984ff0ba2be5b6cf36c82"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/data/silk_conversion_set.py",
+        "bytes": 5981,
+        "sha256": "5d90de65338844700d94eff977635c38d23c3257689e9be9cbed55c951fe16bf"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/data/silk_enhancement_set.py",
+        "bytes": 6416,
+        "sha256": "9daaf9f5b930afa2c03806e5214aa0e853448d60c1adf00e738e7e3edd973c1f"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/data/simple_bwe_dataset.py",
+        "bytes": 3559,
+        "sha256": "2675e8e2296f9244944c91a1148cda26f8a064d7cce88a14e7ea7879fccd4eb8"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/engine/bwe_engine.py",
+        "bytes": 3327,
+        "sha256": "ded9e9b20e4a6bba17dee3c869360f86529c84566489e9efb37587ea1dc53fec"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/engine/engine.py",
+        "bytes": 2989,
+        "sha256": "120bd6b0c841b1325bb27ad1e09d408dd268cfd64196f70afe5f1a1842a9c11a"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/engine/vocoder_engine.py",
+        "bytes": 2775,
+        "sha256": "b45c771674c943357fbd37520b57d45de41d98a6c41d9065baa9c680ada68a53"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/export_model_weights.py",
+        "bytes": 8830,
+        "sha256": "01577911d16e54f6e046f199ef6492016fced50ec29e0de309fdb9c70351a071"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/extract_setup.py",
+        "bytes": 420,
+        "sha256": "a915495595a05fd150164eda0b262256062336dae2944e0b387b833e36d655d7"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/losses/stft_loss.py",
+        "bytes": 9391,
+        "sha256": "62510fa6ac729d5049a6bf88bb0031cdaf798d81c92dd7b247a518ff5f7090ba"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/losses/td_lowpass.py",
+        "bytes": 930,
+        "sha256": "79046f50a6f6b461f4024f1118f4347b6ae868a6e26c25dae8f9dbfbd246e534"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/make_default_setup.py",
+        "bytes": 3734,
+        "sha256": "3ad241b28f0295db0a427f138b2d501efe6badc2c1d766606333bbb94a3cc709"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/models/__init__.py",
+        "bytes": 1899,
+        "sha256": "faa7fb0909057b6cb750db0ceb84cd6825eac6b87db37a7ee117ca12d1460afa"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/models/bbwe_net.py",
+        "bytes": 11444,
+        "sha256": "fba3bfd347e051a665b6e83651b7dba3de848f5171eed23b722e8e0d5f7874df"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/models/bwe_net.py",
+        "bytes": 10310,
+        "sha256": "c77ab9fcf3aa7a063890f4e464809de3217ba754be247304b3e5f2578da6b69b"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/models/fd_discriminator.py",
+        "bytes": 30441,
+        "sha256": "ebec431304e8c78848871230dea3818564c27f400b375ed1947217a3889e51b5"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/models/lace.py",
+        "bytes": 8236,
+        "sha256": "4e576a005e8e7ca38576cd9d75a735b63956605fac4e67a6e82a4d985ebd83fb"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/models/lavoce.py",
+        "bytes": 12350,
+        "sha256": "d459f301584fbd7517251eba1eaf9091dca5eb55037c9c7f1ffed7b02c66c08d"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/models/lavoce_400.py",
+        "bytes": 11140,
+        "sha256": "ab3fa45980bb00c25010c49bc89a91a79a4b3d88708aeeb58f1c399b26ea93d4"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/models/lpcnet_feature_net.py",
+        "bytes": 3199,
+        "sha256": "0d38324884ff1a7ef73ab0781b435a95cd5b9bbc6f4c49d176d8566af61e2b9f"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/models/nns_base.py",
+        "bytes": 2605,
+        "sha256": "6f85cecb44b721a747c23ede982f1582e2f4fe2b04a2483d32ab1b6267527bcd"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/models/no_lace.py",
+        "bytes": 10783,
+        "sha256": "40421fe9e8628e7f1761b5511f521085f9369b86a471aa67c4c943edd87c40a5"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/models/scale_embedding.py",
+        "bytes": 2480,
+        "sha256": "5b1f56b582eba4d031bcd3e4590e7d23bf3268d4222b13f5010bab2083045205"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/models/shape_up_48.py",
+        "bytes": 7259,
+        "sha256": "aa717fdfdf40548dffb8b3f840ddb1b7ca41a7ac5779237856595f579918b052"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/models/silk_feature_net.py",
+        "bytes": 3004,
+        "sha256": "cf8829fed25fc1e6d6bfedca00d719dc108f0dba04a5c565d231427d842bf050"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/models/silk_feature_net_pl.py",
+        "bytes": 4847,
+        "sha256": "9a50260714e60986e592c705d87f82dec1cea1d39e159e22ef7973b146bc9a5f"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/models/td_discriminator.py",
+        "bytes": 6258,
+        "sha256": "77359dccf87f4cf4d2125d71014e999e4bad52fb4d36ddff644a8d4d30f407ac"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/pre_to_adv.py",
+        "bytes": 846,
+        "sha256": "63b81b8a2f619cb55a4352528479d95f10e6a0c21840f18d6e16cf03fe0c2a39"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/README.md",
+        "bytes": 3090,
+        "sha256": "54c01c5032f3eab5d66470085cc35fed5ce7d8e097e2cdfb23cdd20c3f48fd37"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/requirements.txt",
+        "bytes": 134,
+        "sha256": "568ffe556775fa2275f5ff35f428131566106009b6a4af6f55fcb689ac41667e"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/resources/training_files.txt",
+        "bytes": 5581581,
+        "sha256": "7b4b8663374c9b012a700019e632e2da70fcc1b991fb513a6eda5a56f074ac37"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/resources/validation_files.txt",
+        "bytes": 1398229,
+        "sha256": "320be24880c0a651514231494c46d7b63818d36e3e566ddf2f2421fddae204a8"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/scripts/bwe_extract_filterbank.py",
+        "bytes": 732,
+        "sha256": "59dbfcaca70c4d16d41f6166eaa925d8a2df9d515f68e24c3c70bd091899a2d6"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/scripts/concatenator.py",
+        "bytes": 2985,
+        "sha256": "57c3f05f5f42e33128d035299209b623fa7c65c0a144e87da860794754057026"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/scripts/print_features.py",
+        "bytes": 496,
+        "sha256": "239290d1392d5126f4306fa35fbfdeb08e4105992cd92b05119d6f2af9a91f48"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/silk_16_to_48.py",
+        "bytes": 677,
+        "sha256": "3d7cb453fd11d318b83a8dc03b01dedf61f2fd1bff52a284b2f95d99fc66aead"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/evaluation/commonvoice_clip_selection.py",
+        "bytes": 3955,
+        "sha256": "94a60d06c1597c2b4883466a01aac7ea072a3a71fbb23a584ecc8aac590f3bfa"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/evaluation/create_input_data.sh",
+        "bytes": 663,
+        "sha256": "ea4064e88f33a0f9dfc392547893d4ba09afe7a1d2c2ab41252b212ecdbe8f38"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/evaluation/distort_models.py",
+        "bytes": 6524,
+        "sha256": "18bd4f8bb1ddc069a8bd6e8b78d2905c798dc75e99ebd8ad360156dd5187e078"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/evaluation/env.rc",
+        "bytes": 441,
+        "sha256": "272220e1973012be49b6e966e0414ae7aac3e930da5ec7e22a9f993bc4098305"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/evaluation/evaluate.py",
+        "bytes": 4218,
+        "sha256": "7379a685cca3793ecb49cb30d00bf7be2cf8b2f544b7ef3b542f72489874692b"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/evaluation/highband_eval.py",
+        "bytes": 2656,
+        "sha256": "c7164fcd0a5ce839b520449490e31d76b831449f172c24cdac39f5548aa342c1"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/evaluation/lace_loss_metric.py",
+        "bytes": 10699,
+        "sha256": "b667a437e09c6ea93d4f1338c6dec30b27fe9b6ed2f60f0d55a42319d85691f5"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/evaluation/make_boxplots.py",
+        "bytes": 4580,
+        "sha256": "f98d3dc3c06a142a95bac2b1f80535e83151461316af8b3a4e5a8e1d0f48f4a9"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/evaluation/make_boxplots_moctest.py",
+        "bytes": 4404,
+        "sha256": "67e8e05b5baec39b9f0dfe6cfb58b6236df70d972c188593e1337fe3adb26d74"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/evaluation/make_tables.py",
+        "bytes": 4893,
+        "sha256": "dd925381882fa2f9c2c8d1a7b7359c0955d50348e8ffc06da31c3f69493e0712"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/evaluation/make_tables_moctest.py",
+        "bytes": 4728,
+        "sha256": "bef8facc760bd8f82939fe543a6ee3f91cb4f1267e34c5834adbbb5f2e768dcc"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/evaluation/moc.py",
+        "bytes": 5952,
+        "sha256": "61188caa648d4172fa470f49e6703b9083bbf67fcedc3d8ee29d7b37a15f4e58"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/evaluation/moc2.py",
+        "bytes": 6366,
+        "sha256": "a287aef743b4e3b081c9912f8eccc2b336ebc0d9b3d022b4ecc20220d5d03438"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/evaluation/nbwe_dcr1.tar",
+        "bytes": 912896,
+        "sha256": "c65b935dee1db6a9c2256b574967a14c737a22b1b0993d126c734a4abb2ce5fc"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/evaluation/process_dataset.sh",
+        "bytes": 2460,
+        "sha256": "5a688ca249d72f9d2b813165db8ed0dc53407af7db08a0e0c95a3805167a92f7"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/evaluation/run_bwe_test.py",
+        "bytes": 13841,
+        "sha256": "7e7318488d84680e49d18355cf8dcc1942540eacf38c2074a9c3b37cdf15dbd2"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/evaluation/run_nomad.py",
+        "bytes": 5317,
+        "sha256": "91ce40ff5086062eee26e11518f6abf316b6e6288ffe93837057f15891925e00"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/evaluation/run_osce_test.py",
+        "bytes": 7334,
+        "sha256": "47b5c8f9d59318d674cfe85ec74f86f800f6e7ea41e086cf24d6e271d75095e9"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/evaluation/tests/dred_journal.tar",
+        "bytes": 1010688,
+        "sha256": "65b1cfc217cf55aff2d928afedf41e55da4bc097f600c2a2bf7705d86652f37c"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/evaluation/tests/lace.tar",
+        "bytes": 373760,
+        "sha256": "37c1c5ab66bfac9c4f2d6d25fb11a977edfadc3a76b6b6d1a8776c105db704a0"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/evaluation/tests/NBWE_ACR.tar",
+        "bytes": 1094656,
+        "sha256": "adb309022d140a8fb0224577ac7977506e3165b5f88967f69dad8d023cc8659a"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/evaluation/tests/nolace.tar",
+        "bytes": 477696,
+        "sha256": "11a58f83166c13c89104fe6120a55e38c78f6387eaf6ea050b1f16a8792703e0"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/presentation/endoscopy.py",
+        "bytes": 6460,
+        "sha256": "c21283d8eb87d21947a80a596dacbd5b84b200f9b156489f7c2ea1addf86b4b8"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/presentation/lace_demo.ipynb",
+        "bytes": 627764,
+        "sha256": "42bbac871ccba7fd27b0e071bf5964fab3baf6921df8fcf4410e3f0f3d7d6be7"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/presentation/linear_prediction.ipynb",
+        "bytes": 830382,
+        "sha256": "bdec8167f3df785ea946d3aef01f818b2685a056c73dbc3c15dd080732cffe31"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/presentation/playback.py",
+        "bytes": 952,
+        "sha256": "c68eb5e0f54eef95bad9c85091fcd9ec1c018ec34f50dfd62392f2640f216023"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/presentation/postfilter.ipynb",
+        "bytes": 179613,
+        "sha256": "582689afeeda414b23d104c27133de04b3b67947a2c5c8915777dc4e8c7a0151"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/presentation/spectrogram.ipynb",
+        "bytes": 441308,
+        "sha256": "54a4a234a06baeeb3ce20f779236a7af9141e3ea8523b59c6372c1e51dd15d15"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/qualification/create_bitstreams.py",
+        "bytes": 12661,
+        "sha256": "1ad3e97cfc57fa316082c011519fdf77047d9c4326157ebb8067e47e4a14f28a"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/qualification/moc.py",
+        "bytes": 12640,
+        "sha256": "b323e27f602a1f3bb65a80c3a9aa668c1a5f80f5bc2cc282e7fefe39db1a4f4e"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/stndrd/qualification/Readme.md",
+        "bytes": 709,
+        "sha256": "d095ffffce78bc79360138dd480841ccb942216310de4e8a31b00fef73d47dab"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/test_bwe_model.py",
+        "bytes": 3499,
+        "sha256": "ebcfc2db1ea6459ab3cf24a15145649d5572b2fddf728c34b0a46d25db720cff"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/test_model.py",
+        "bytes": 3173,
+        "sha256": "bd90814328cc36634a75b2c365afc6831c4e66b3b6f670903380d12da70358fc"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/test_vocoder.py",
+        "bytes": 3278,
+        "sha256": "35a971e87622a511eb00dad7c82a2374cbaae15b735d83b71366429b5b3452bb"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/train_bwe_model.py",
+        "bytes": 9836,
+        "sha256": "6f1bd66df601a62ca1b8712e4a2d33a1cbb31ee7c00186ab6afd66a632e5cf8b"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/train_model.py",
+        "bytes": 9839,
+        "sha256": "f36c320e7d763234e6610d839adbbe0f7f1ae9a350b27ec24858d597e7941897"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/train_vocoder.py",
+        "bytes": 9220,
+        "sha256": "f2d34d853dda75c6c652d39d7a86eb3472d1b3765c694ff1a2c45f469f4b46d6"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/utils/ada_conv.py",
+        "bytes": 3701,
+        "sha256": "10c15b0403d5dfd46efd316240d0b6dfcc540bbae7bb11b1f2c1a3967dc9f7dd"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/utils/bwe_features.py",
+        "bytes": 3132,
+        "sha256": "bfb6a107e15242b747f11d9f512f5f54e2050a15197e9a6b517e9aeb0d8daf7e"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/utils/complexity.py",
+        "bytes": 257,
+        "sha256": "2c2017ab0b4f3a667066196b4a6ca382bda3b33cd7eb44762f452e0ec200a3eb"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/utils/endoscopy.py",
+        "bytes": 6460,
+        "sha256": "c21283d8eb87d21947a80a596dacbd5b84b200f9b156489f7c2ea1addf86b4b8"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/utils/layers/fir.py",
+        "bytes": 699,
+        "sha256": "3c93f27ee2c03df5bd5dcbd7244ec96e8ed3e0378f8ded049d04d7c96ae598a7"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/utils/layers/limited_adaptive_comb1d.py",
+        "bytes": 9347,
+        "sha256": "f746afbcb1fe3d118a7dca6165d40ddddf4d16b0dd0d45d441980f5790d4dbae"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/utils/layers/limited_adaptive_conv1d.py",
+        "bytes": 7311,
+        "sha256": "9d3c768b63cad57a8b6baaea2df9b7056325319d17d1e5fb0b7884f80a07fd10"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/utils/layers/noise_shaper.py",
+        "bytes": 3186,
+        "sha256": "e4c82d29ee3eb448ba60fca80b6b865352b995900db5fe92fcbb68dc480fcfe6"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/utils/layers/pitch_auto_correlator.py",
+        "bytes": 3202,
+        "sha256": "49e3a211386fda97cdcb2b015d5a32126ad471b5f6ee21a3b6df4cdef84ec686"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/utils/layers/silk_upsampler.py",
+        "bytes": 5907,
+        "sha256": "41ef6d18a43f2bd639586e9453d48591b3c6878a10e9b8ce1bf661b9bab6d1cb"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/utils/layers/td_shaper.py",
+        "bytes": 4915,
+        "sha256": "77ac9907afc5ddf0bc35344ce85ff574708b69497ea08be73b2e7f3840aa3c77"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/utils/lpcnet_features.py",
+        "bytes": 3398,
+        "sha256": "a1280badddc1687d67d119119e34a9c4422e575f7e1ed5e060afd2381b6b5db5"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/utils/misc.py",
+        "bytes": 3201,
+        "sha256": "5210497c8cf9dcfedbb5b716dac515b029bfeed4bbec021da20ec50fbb28d12a"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/utils/moc.py",
+        "bytes": 4588,
+        "sha256": "4dececa7366eb586cae36938c9ea35aea03a60c1c980e1cc223784b7b776dae4"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/utils/pitch.py",
+        "bytes": 3940,
+        "sha256": "4bf7fc5423264be4cf1709a2d2094b0ad051b1957d564cdaba6935b3948e1cc7"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/utils/silk_features.py",
+        "bytes": 6064,
+        "sha256": "61e1f5eff68aa13ab0ace8542052323b59401e2a41c87b0685f9b78772f13d22"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/utils/softquant.py",
+        "bytes": 3836,
+        "sha256": "8e49a378aafe7dcb6b709d676097ecc77ff3fc012dc334fc11ced1b2d2ff6735"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/utils/spec.py",
+        "bytes": 7417,
+        "sha256": "93d4bb00786b9aba9142090083daca084451ac7c7ebe979bc4e285b5c56dcf5f"
+      },
+      {
+        "path": "native/source/dnn/torch/osce/utils/templates.py",
+        "bytes": 15321,
+        "sha256": "8fdf1d76d86bdb13c6f6c83bd28d361212805f2dba6373f4d17e02343d63e630"
+      },
+      {
+        "path": "native/source/dnn/torch/plc/export_plc.py",
+        "bytes": 3284,
+        "sha256": "078436c0368af444049dc3548d915e22e4fe42235090be5e67dd54e29d04c4b0"
+      },
+      {
+        "path": "native/source/dnn/torch/plc/plc.py",
+        "bytes": 4918,
+        "sha256": "d76e7b1a56ad0902ee2d1b7306a0d9e4f86f264894f3dc9593e612b36d104a8b"
+      },
+      {
+        "path": "native/source/dnn/torch/plc/plc_dataset.py",
+        "bytes": 2981,
+        "sha256": "c579b0093da5671b35a1b9e8a2c265408fae82150db94d7934180b02b9d3d274"
+      },
+      {
+        "path": "native/source/dnn/torch/plc/train_plc.py",
+        "bytes": 5454,
+        "sha256": "a21c43cce4559956e4c40f50fc0202deddca786a7bc3b11cd6744787266bb20a"
+      },
+      {
+        "path": "native/source/dnn/torch/rdovae/download_datasets.sh",
+        "bytes": 88,
+        "sha256": "a67f8a2fd64423a592f175aa9838318746ba4a771d42cbb44a9447297543748c"
+      },
+      {
+        "path": "native/source/dnn/torch/rdovae/export_rdovae_weights.py",
+        "bytes": 17229,
+        "sha256": "e2b61c6c2f70a52c4af67195cb0933f59dda9c037edff8a3c8b6da79d4872ed2"
+      },
+      {
+        "path": "native/source/dnn/torch/rdovae/fec_encoder.py",
+        "bytes": 8057,
+        "sha256": "4d20f326ccca4188a538013aef653a167f2830acc437d9176d4d2fd45820dd6e"
+      },
+      {
+        "path": "native/source/dnn/torch/rdovae/import_rdovae_weights.py",
+        "bytes": 6154,
+        "sha256": "814315da7da7f533affde4e5cc7f97ad8c0fb18b97ae61791fb3f376dca550c0"
+      },
+      {
+        "path": "native/source/dnn/torch/rdovae/packets/__init__.py",
+        "bytes": 60,
+        "sha256": "a8d9d2fa39e687312640f639bae093dd90f369cf63560c62b1a90feffa10ef43"
+      },
+      {
+        "path": "native/source/dnn/torch/rdovae/packets/fec_packets.c",
+        "bytes": 4584,
+        "sha256": "500e4103be748b87f56cb064dc7b69a6a4a7e166dff7d8aed7c4f1e43c38c7f8"
+      },
+      {
+        "path": "native/source/dnn/torch/rdovae/packets/fec_packets.h",
+        "bytes": 1578,
+        "sha256": "6bde0942030ba0a7ab89de148b1426dd739c3122ce5097f08954738b0c3688dc"
+      },
+      {
+        "path": "native/source/dnn/torch/rdovae/packets/fec_packets.py",
+        "bytes": 4137,
+        "sha256": "08dfe05ed6d8a3709232d2285fa943abdb80341d7212bcc83086594cba2baa50"
+      },
+      {
+        "path": "native/source/dnn/torch/rdovae/process_speech.sh",
+        "bytes": 168,
+        "sha256": "d30004b3c29d45c8ee5891cec834da376b73e4c1d15d9930284cf9f749006c94"
+      },
+      {
+        "path": "native/source/dnn/torch/rdovae/rdovae/__init__.py",
+        "bytes": 119,
+        "sha256": "f4d344f80d2f2d71ac1ef2b8a7409157c0e7de0315825ef47652adc6407184b9"
+      },
+      {
+        "path": "native/source/dnn/torch/rdovae/rdovae/dataset.py",
+        "bytes": 2930,
+        "sha256": "60370ad5e4737eb8fdac3da5fcc1eaab0f9f789b6ebcdc73371b155b2e6203cf"
+      },
+      {
+        "path": "native/source/dnn/torch/rdovae/rdovae/rdovae.py",
+        "bytes": 33029,
+        "sha256": "b543f98dfaea2d199b904c1d45e062fdd1ece9e354d1a5148b8c858b68247fec"
+      },
+      {
+        "path": "native/source/dnn/torch/rdovae/README.md",
+        "bytes": 2050,
+        "sha256": "647788fb96933ce9f6ed4e76a9104d5f9d0512684c1da4d51aef8707cd9cd36f"
+      },
+      {
+        "path": "native/source/dnn/torch/rdovae/requirements.txt",
+        "bytes": 22,
+        "sha256": "23cbbcd1fd71ce11ed15954f7fc2b93ba481c7d096ac362f26ab6578e81e922f"
+      },
+      {
+        "path": "native/source/dnn/torch/rdovae/train_rdovae.py",
+        "bytes": 13988,
+        "sha256": "56e9fdfd01e4c620236fd9e66e4e325496319401814b19b25d9f906e97fcac51"
+      },
+      {
+        "path": "native/source/dnn/torch/testsuite/examples/lpcnet_c_example.yml",
+        "bytes": 331,
+        "sha256": "8e3241d6ff1afc37beb8cfd1e4a7fa2014e4251d11cf70e2294a65aa749ce601"
+      },
+      {
+        "path": "native/source/dnn/torch/testsuite/examples/lpcnet_c_plc_example.yml",
+        "bytes": 247,
+        "sha256": "85f99997b03ff982e9293b04ec1e4258cdb471e300ae841a91a9f3f781900529"
+      },
+      {
+        "path": "native/source/dnn/torch/testsuite/examples/lpcnet_torch_example.yml",
+        "bytes": 360,
+        "sha256": "e82c1b8195c29cc868a0b455abd8ee3db6a649b258c619300f63a0310491a2d7"
+      },
+      {
+        "path": "native/source/dnn/torch/testsuite/README.md",
+        "bytes": 1460,
+        "sha256": "b9d19806c98eea47721346f50954b5b25bcd82275481a2143292d37245cd2416"
+      },
+      {
+        "path": "native/source/dnn/torch/testsuite/requirements.txt",
+        "bytes": 106,
+        "sha256": "8db2f9aa5840ef18faa10c4d7fa5e166a83ecb04a89188cb9090c80a5620dc86"
+      },
+      {
+        "path": "native/source/dnn/torch/testsuite/run_test.py",
+        "bytes": 13156,
+        "sha256": "e486d7faf084f60535a653d7cea0ed0847ca066b3f5dd912478696a479481020"
+      },
+      {
+        "path": "native/source/dnn/torch/testsuite/utils/__init__.py",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "native/source/dnn/torch/testsuite/utils/files.py",
+        "bytes": 2081,
+        "sha256": "b14b8f82cf26ebf53ae1f76bdd8203dc161dbee1d4822e9902bd9afd807a5c1d"
+      },
+      {
+        "path": "native/source/dnn/torch/testsuite/utils/pesq.py",
+        "bytes": 1716,
+        "sha256": "2d7ac60bfe3e89c6b9fddee6b9ae2385ef40bc109418d9cfbc5149536934369b"
+      },
+      {
+        "path": "native/source/dnn/torch/testsuite/utils/pitch.py",
+        "bytes": 2447,
+        "sha256": "16df8c0f8c28bea461304b775ad1ba695d7d75788bd1d65b4315210e40840714"
+      },
+      {
+        "path": "native/source/dnn/torch/weight-exchange/README.md",
+        "bytes": 1112,
+        "sha256": "af81d953f952ca4953ebf7e8e36307d3b6cef69b5faf0157aa922e63b2dfbca7"
+      },
+      {
+        "path": "native/source/dnn/torch/weight-exchange/requirements.txt",
+        "bytes": 5,
+        "sha256": "73dd0baf8e5438da8816254a073ee43b61f8b2cdef6f393e0059cdbc55cb8d9c"
+      },
+      {
+        "path": "native/source/dnn/torch/weight-exchange/setup.py",
+        "bytes": 1951,
+        "sha256": "15d7d26f9368a59f355646ff95dc9d58ddc9538f911c595896d35b40838d3a95"
+      },
+      {
+        "path": "native/source/dnn/torch/weight-exchange/wexchange/__init__.py",
+        "bytes": 1386,
+        "sha256": "6051e9fd85dc7f1e0fe2b329beda6fe647af9ae555b008446f23f18831c7f68c"
+      },
+      {
+        "path": "native/source/dnn/torch/weight-exchange/wexchange/c_export/__init__.py",
+        "bytes": 1523,
+        "sha256": "a16768faab409f5c0e3b55f71c23bce83bc6e684eeb58dd14f823b15ce25f252"
+      },
+      {
+        "path": "native/source/dnn/torch/weight-exchange/wexchange/c_export/c_writer.py",
+        "bytes": 6729,
+        "sha256": "27b1f44e9811b1c633697020d55dc4dea70bbeba56240456811a97897e1ae857"
+      },
+      {
+        "path": "native/source/dnn/torch/weight-exchange/wexchange/c_export/common.py",
+        "bytes": 12768,
+        "sha256": "91b330c18f85e10fe14e003acfc5132b367f78a02a7b4c7e62418f944c27a3ba"
+      },
+      {
+        "path": "native/source/dnn/torch/weight-exchange/wexchange/tf/__init__.py",
+        "bytes": 298,
+        "sha256": "fe6548792a19d4521b050b480edfe3ba596c9ad96a63301e1f12339077963674"
+      },
+      {
+        "path": "native/source/dnn/torch/weight-exchange/wexchange/tf/tf.py",
+        "bytes": 6753,
+        "sha256": "e82e2c89a24696292bc72386cb60ae01d50d08da4c3fa06790c296b46b4d5c0a"
+      },
+      {
+        "path": "native/source/dnn/torch/weight-exchange/wexchange/torch/__init__.py",
+        "bytes": 1879,
+        "sha256": "100baca34c71e157b128f6ea5f938df0358e359413deb132ab392cfa235c296a"
+      },
+      {
+        "path": "native/source/dnn/torch/weight-exchange/wexchange/torch/torch.py",
+        "bytes": 18465,
+        "sha256": "c59d8213210ba5612fea25e4ef26ebe6fe863c881d0593ef344f840359102cb2"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/dataloader.py",
+        "bytes": 2023,
+        "sha256": "810c54c1506adceda489c6a8916148090f0411893b3387b388e596c3d7006f5a"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/decode_rdovae.py",
+        "bytes": 4267,
+        "sha256": "21c2f4b9200bd9d8ce3bfd3228a15f2f75b490b968f3aa6649d202e11372d386"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/diffembed.py",
+        "bytes": 1914,
+        "sha256": "b49436e81077acf89ac7d52c297ed5b86878e23e008b2bea6d89f32419f0d86f"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/dump_lpcnet.py",
+        "bytes": 17020,
+        "sha256": "4d1f4e5db38f2774c3e0a80495de8d71803892b89b3ae3fb983efebc1eea88ca"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/dump_plc.py",
+        "bytes": 12292,
+        "sha256": "b1daf086f5181157669ed322918812d968c88c0fe3c27f5b6d48940b608bce2d"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/dump_rdovae.py",
+        "bytes": 8099,
+        "sha256": "b277687e7891bf4607fed72fda6c93e34c9dcae84521d9e2b8b5c9141c5f2c2a"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/encode_rdovae.py",
+        "bytes": 4965,
+        "sha256": "8035bfe14e8535ebea44db83682a31561c26288172eab868265e84e5bb142b93"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/fec_encoder.py",
+        "bytes": 10379,
+        "sha256": "162e8a026a9a048a9177d47e0ac9f76478a997af073049d31bb441d90d56588b"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/fec_packets.c",
+        "bytes": 4584,
+        "sha256": "500e4103be748b87f56cb064dc7b69a6a4a7e166dff7d8aed7c4f1e43c38c7f8"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/fec_packets.h",
+        "bytes": 1577,
+        "sha256": "5682885160ce25055f196b95c63770434f430c622a97c1f8d6b07400c37c5861"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/fec_packets.py",
+        "bytes": 4140,
+        "sha256": "c62d0d8c9a567a27eac55eda8f778d7d5a0480a724a49e2cb5546f943ecc8279"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/keraslayerdump.py",
+        "bytes": 8644,
+        "sha256": "3ca9e2ce5f96cd9ccdc2998c71b067297d4ec6b478184198e8d66416bc57e52e"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/lossfuncs.py",
+        "bytes": 4240,
+        "sha256": "e3d4d1dc2c7f506b1c354f4c5b9255fef43ddd833ab9e81b10ebd771db8597f3"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/lpcnet.py",
+        "bytes": 14991,
+        "sha256": "a42f9948072640184fda6ed7c09d363d92f50a0830b45f7e9309da2d3308cf1e"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/lpcnet_plc.py",
+        "bytes": 4933,
+        "sha256": "790f83a720ef80b77fb2ab4fbe61d71348b908568ab7650c90b631c04e86537b"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/mdense.py",
+        "bytes": 4380,
+        "sha256": "11c50a8a641521924d3542255a33afd0fd71fc83fe002754ae7c0e16bb7ef74d"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/pade.py",
+        "bytes": 2448,
+        "sha256": "9f7b20aaa7605f2f97d91848a60b2d5bb0c919107e4ef0b2cb0ad886a460bc08"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/parameters.py",
+        "bytes": 1149,
+        "sha256": "e3d47b0a24b90bf554261491a10c349a93432b8e98c28a9cb5b641e21733391d"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/plc_loader.py",
+        "bytes": 3845,
+        "sha256": "ac0f4a5cb87ee6f1cf93719f25aab4509e1a9c31adea46f556024e9e210c53b8"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/rdovae.py",
+        "bytes": 15990,
+        "sha256": "9fcc0adcd9b37d4dcc963a2c71a08c66b09f4b4bda7492625ecd7e2b49536cc8"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/rdovae_exchange.py",
+        "bytes": 4935,
+        "sha256": "3d68f3f66f4b06352305e6c118579f4cdf9e4f671bbe42a5a61184c70d64a486"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/rdovae_import.py",
+        "bytes": 4615,
+        "sha256": "0b6084fcb29bbd57e1abadb770d0b9ef3a2737afab0233f558e043567015b069"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/test_lpcnet.py",
+        "bytes": 4691,
+        "sha256": "671cbeb9723688553350eb94beeda24d4e8c590c9bb29931b5010da3382cfdbc"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/test_plc.py",
+        "bytes": 3577,
+        "sha256": "cbe667827c668c03c25c3406556a63419988a12aa55b155fd34d547ce84f9286"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/tf_funcs.py",
+        "bytes": 2787,
+        "sha256": "7e7fd68ab092eb6ec0b5a0d13dd7cc52b904662b0dd4f945454f623b4e7d192d"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/train_lpcnet.py",
+        "bytes": 9659,
+        "sha256": "954bc1c3d0a39002411fcc7f24a5127d9b336cc9fb6abce3bcbc2777f998f679"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/train_plc.py",
+        "bytes": 7883,
+        "sha256": "6b4856f57853d7cbbd75c3f006b27ed20c578cdbc80f260ca4950db22d43d7ca"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/train_rdovae.py",
+        "bytes": 6163,
+        "sha256": "eba6992281fd759b5bea140e22e44e15d0cdd1591956e17171ad23689cf18de7"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/ulaw.py",
+        "bytes": 381,
+        "sha256": "0a5e31d7f6eee3fcda526962eaec4e6ba134873cdb42cf12e12d3adf8e61dade"
+      },
+      {
+        "path": "native/source/dnn/training_tf2/uniform_noise.py",
+        "bytes": 2591,
+        "sha256": "72aee206b0b11568ca9d384f26d5008da4521da61e4dec18f2a5695a80467659"
+      },
+      {
+        "path": "native/source/dnn/vec.h",
+        "bytes": 11306,
+        "sha256": "821c89bde7bec81b4d920ef0c0b72957d5b27236f3757328e8fa076cb597f392"
+      },
+      {
+        "path": "native/source/dnn/vec_avx.h",
+        "bytes": 25068,
+        "sha256": "c7d296bbc2f8a920b08e2b895831bfe2343a4b0180367d934a8b77a1e4042cc7"
+      },
+      {
+        "path": "native/source/dnn/vec_neon.h",
+        "bytes": 13641,
+        "sha256": "0fa404539200c5149adfd212ea0eebce1b22529a917b6a051a727d797a6964bb"
+      },
+      {
+        "path": "native/source/dnn/write_lpcnet_weights.c",
+        "bytes": 3246,
+        "sha256": "fe2f87e90cd58393ebb122453ae0c9afaa8457c726089a3e758a08ebb0369872"
+      },
+      {
+        "path": "native/source/dnn/x86/dnn_x86.h",
+        "bytes": 5717,
+        "sha256": "473284fd36146b937ce163affaa3d18e7207db21056e548a5dc9f1de5596d601"
+      },
+      {
+        "path": "native/source/dnn/x86/nnet_avx2.c",
+        "bytes": 1575,
+        "sha256": "c49cec6a38ee554660b4dd6958eb12450eac7bb6e28ce07d5a814a4a9d0fbbf2"
+      },
+      {
+        "path": "native/source/dnn/x86/nnet_sse2.c",
+        "bytes": 1575,
+        "sha256": "75553544ae0aa91b36a8c1dc32c2a5138e1f49081399f77108d4c5f3fb107fb4"
+      },
+      {
+        "path": "native/source/dnn/x86/nnet_sse4_1.c",
+        "bytes": 1583,
+        "sha256": "e32fc91e403fb0c105ae9bcbbcf0339ce0b49e01110d8485520321f4a605f9ba"
+      },
+      {
+        "path": "native/source/dnn/x86/x86_dnn_map.c",
+        "bytes": 2730,
+        "sha256": "bc3a39fff54ec31ff392e5fe08b0432f90c7b47ef4bbe23301cda347a63c50ef"
+      },
+      {
+        "path": "native/source/fargan_mingw_compat.h",
+        "bytes": 273,
+        "sha256": "34945d63a455b04a1ba0ba5b28fdc502fe849d1104234c95c8f430ea02428afd"
+      },
+      {
+        "path": "native/source/fargan_probe.c",
+        "bytes": 2480,
+        "sha256": "9e9ea27dd6b0f0af271c51d5a0018169be87656b07148986ad5760065c736351"
+      },
+      {
+        "path": "native/source/include/meson.build",
+        "bytes": 226,
+        "sha256": "9c14127570dd2598ef506fb7f75e8f1963457bbc93f2f1088ea0045a6d39167a"
+      },
+      {
+        "path": "native/source/include/opus.h",
+        "bytes": 59505,
+        "sha256": "036f6a6e83a20e943505743e113e90d6278cbe8240f7d5bb90b3f86261e783e3"
+      },
+      {
+        "path": "native/source/include/opus_custom.h",
+        "bytes": 16965,
+        "sha256": "3b67a36b36eac7d712f712a4e57d602a7ff9df753d184b0743bbca8628ccff4b"
+      },
+      {
+        "path": "native/source/include/opus_defines.h",
+        "bytes": 38558,
+        "sha256": "bbd4d4e3ba99f6982b1c8d8f5541814ad77d8e8babf3cc788cf23d517b2ca9d6"
+      },
+      {
+        "path": "native/source/include/opus_multistream.h",
+        "bytes": 38267,
+        "sha256": "fd99c4594b4b57e406e9cab45a777895dd1b4c8de067088aa54ed7ae100b13f0"
+      },
+      {
+        "path": "native/source/include/opus_projection.h",
+        "bytes": 32998,
+        "sha256": "11b3427e9ca342308a93adc9a081e2479685e5b7811a3a53540609f1bbc488ad"
+      },
+      {
+        "path": "native/source/include/opus_types.h",
+        "bytes": 5157,
+        "sha256": "19cb301ea1eedbcbdbb5049363de061893bf11c20e505a657b69ce6ffa5b11fa"
+      },
+      {
+        "path": "README.md",
+        "bytes": 3350,
+        "sha256": "9f437669815ea887b706b5ba8d815269842dc6cdcf6c1ccf9a7614e5cc8b3362"
+      },
+      {
+        "path": "statistics.npz",
+        "bytes": 1186296,
+        "sha256": "6b3051638127b561d85359b03708d1b4b82a1cb6b65276d8fc6ed07410c64165"
+      },
+      {
+        "path": "training.json",
+        "bytes": 3187,
+        "sha256": "bdc9fbb623ca45af0b14d61f8b9d09b5db66b4a6ebc9081be37fe83c661e4425"
+      }
+    ],
+    "male5_used": false,
+    "target_track9_used": false,
+    "played": false,
+    "board_touched": false
+  },
+  "applicable_stage": "noncausal offline PC experiment; original five gates fail",
+  "model_parameters": 1155284,
+  "estimated_mapper_mac_per_second_at_100fps": 115046400,
+  "estimated_pca_mac_per_second_at_100fps": 14745600,
+  "compute_estimate_excludes": "HuBERT, FARGAN, nonlinear operations; not a measured board budget",
+  "future_context": "full-utterance HuBERT and bidirectional GRU; 18.2 seconds in this test",
+  "cortex_a9_and_1gb_feasibility": "not verified; no deployment initiated while quality fails",
+  "quantization_or_pl_started": false,
+  "second_physical_computer_tested": false,
+  "male5_used": false,
+  "target_track9_used": false,
+  "played": false,
+  "board_touched": false,
+  "objective_metrics": {
+    "identity": 0.7639201062671027,
+    "identity_p10": 0.7470063749706686,
+    "leakage": 0.26137689534769215,
+    "leakage_window_mean": 0.25162215734404053,
+    "leakage_aggregate": 0.26137689534769215,
+    "utmos": 2.5081681410471597,
+    "cer": 0.5588235294117647
+  },
+  "objective_gates": {
+    "identity": 0.45,
+    "identity_p10": 0.35,
+    "leakage": 0.1,
+    "utmos": 2.3,
+    "cer": 0.15
+  },
+  "objective_passed": {
+    "identity": true,
+    "identity_p10": true,
+    "leakage": false,
+    "utmos": true,
+    "cer": false
+  },
+  "source_sha256": {
+    "build/remote_ps_c_hubert_fargan.py": "ba6aa878bb18c09b623257025e26dc4381cbafa9ccdd94d096c775190e69d0c8",
+    "build/remote_ps_c_hubert_fargan_v3.py": "0d78a79fc2c09ff984b1630701b153af34dd48432603bd29610eb47141a42846",
+    "build/run_remote_ps_c_hubert_fargan_v3.py": "e92585143f6065e78cb498bb80ebbc1456d816ed61d38068ca1948002547d18b",
+    "build/evaluate_seed_fixed_male_strict_20261024.py": "7f2138ca331004da93d6aaf4be79b4c91aa5837c3f977af01f974bf87a189083",
+    "report/ps_20261025_20_environment_20261026.lock.txt": "0d81c14ab82acd1927e54b7e6b6f1137de5ea4db88a08151fa5ee45c30e24df3"
+  },
+  "public_evidence_redaction": "Workstation absolute root replaced with <workspace>; original logs retained locally. Metrics, asset bytes and hashes unchanged."
+}

@@ -1,0 +1,10 @@
+PS-20261025-20 v22 REJECTED
+GRU 输入对抗 0.02 + 输出特征对抗 0.05
+identity 0.775719060
+identity_p10 0.762017343
+leakage 0.249183390
+utmos 2.473554850
+cer 0.323529412
+identity PASS, P10 PASS, leakage FAIL, UTMOS PASS, CER FAIL
+train/infer/evaluate exit 0; Male5/Track9 locked; computer-only; no playback or hardware.
+

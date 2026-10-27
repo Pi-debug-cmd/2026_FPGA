@@ -1,0 +1,286 @@
+{
+  "task": "PS-20261025-20",
+  "date": "2026-10-27",
+  "role": "Remote-PS-C",
+  "status": "REJECTED",
+  "baseline_commit": "465b70a",
+  "main_commit": "9c42263ea3aa12898ad451f3c00915e816f039c4",
+  "controlled_change": {
+    "alignment_offset_frames": 1,
+    "alignment_offset_ms": 10
+  },
+  "cache_manifest_sha256": "8a11254a69afd861ecd4e5fbe60797afcab5e0713a99aa5067308b3c7ae8695a",
+  "corpus_manifest_sha256": "8e88db6e2777a331c874cfd3da948f9b86b0571acde17efbb384787ed9410e58",
+  "training": {
+    "task": "PS-20261025-20",
+    "config": {
+      "seed": 20261026,
+      "pca_dim": 96,
+      "hidden": 192,
+      "layers": 2,
+      "bidirectional": true,
+      "crop_frames": 192,
+      "batch": 8,
+      "steps": 2000,
+      "check_every": 100,
+      "patience_checks": 8,
+      "learning_rate": 0.001,
+      "delta_weight": 0.25
+    },
+    "history": [
+      {
+        "step": 1,
+        "train_loss": 0.4551362693309784,
+        "validation_loss": 0.4536781646311283,
+        "elapsed_seconds": 4.015999999974156
+      },
+      {
+        "step": 100,
+        "train_loss": 0.20465512573719025,
+        "validation_loss": 0.22253257036209106,
+        "elapsed_seconds": 25.75
+      },
+      {
+        "step": 200,
+        "train_loss": 0.19021694362163544,
+        "validation_loss": 0.2073648739606142,
+        "elapsed_seconds": 47.890999999974156
+      },
+      {
+        "step": 300,
+        "train_loss": 0.1767054796218872,
+        "validation_loss": 0.19846374168992043,
+        "elapsed_seconds": 71.06299999999464
+      },
+      {
+        "step": 400,
+        "train_loss": 0.15774250030517578,
+        "validation_loss": 0.1969808116555214,
+        "elapsed_seconds": 93.5
+      },
+      {
+        "step": 500,
+        "train_loss": 0.14674030244350433,
+        "validation_loss": 0.1970423012971878,
+        "elapsed_seconds": 117.03099999998813
+      },
+      {
+        "step": 600,
+        "train_loss": 0.1345292031764984,
+        "validation_loss": 0.19747068732976913,
+        "elapsed_seconds": 139.18799999999464
+      },
+      {
+        "step": 700,
+        "train_loss": 0.13119769096374512,
+        "validation_loss": 0.2016192376613617,
+        "elapsed_seconds": 161.35999999998603
+      },
+      {
+        "step": 800,
+        "train_loss": 0.12064147740602493,
+        "validation_loss": 0.1985677294433117,
+        "elapsed_seconds": 183.76599999997416
+      },
+      {
+        "step": 900,
+        "train_loss": 0.12198468297719955,
+        "validation_loss": 0.20091419108211994,
+        "elapsed_seconds": 205.51599999997416
+      },
+      {
+        "step": 1000,
+        "train_loss": 0.12439806014299393,
+        "validation_loss": 0.2047988548874855,
+        "elapsed_seconds": 228.14099999997416
+      },
+      {
+        "step": 1100,
+        "train_loss": 0.12277736514806747,
+        "validation_loss": 0.20387245900928974,
+        "elapsed_seconds": 250.53099999998813
+      },
+      {
+        "step": 1200,
+        "train_loss": 0.10856007039546967,
+        "validation_loss": 0.20449009537696838,
+        "elapsed_seconds": 272.06299999999464
+      }
+    ],
+    "best_step": 400,
+    "best_validation_loss": 0.1969808116555214,
+    "pca_explained_variance_ratio": 0.84170738151534,
+    "train_frames": 88733,
+    "train_pairs": 192,
+    "validation_pairs": 8,
+    "fit_scope": "declared auxiliary train only; no Fixed-Male or target Track WAVs",
+    "parameters": 1136852,
+    "mapper_sha256": "359bc1b10804e06e5e32dd51360cf90d6cf4cf372b9fadbfb727d006c6ba6b51",
+    "statistics_sha256": "cb2eabaf8eaf4e5c8b405d7ae7f821186695e69518d9519b16fa51f762aa277a",
+    "noncausal": true,
+    "future_context": "bidirectional GRU and full-utterance HuBERT",
+    "elapsed_seconds": 272.09399999998277,
+    "board_touched": false,
+    "played": false
+  },
+  "inference": {
+    "samples": 291200,
+    "peak": 0.35394287109375,
+    "rms": 0.04662357451982433,
+    "sha256": "7cb79a1b66707c7a85d44d893f5120112fcdaae36ba02e4fbc598a0aa9e621d6",
+    "clipping_fraction": 0.0,
+    "task": "PS-20261025-20",
+    "source_sha256": "f4a026e5c97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c",
+    "source_samples": 291200,
+    "frames": 1820,
+    "inference_seconds": 2.312999999994645,
+    "rtf_host_full_chain": 0.12708791208761785,
+    "mapper_sha256": "359bc1b10804e06e5e32dd51360cf90d6cf4cf372b9fadbfb727d006c6ba6b51",
+    "native_sha256": "0e5eb4d457741820564d4397e0b69f8dd58b25c896259bb66d8e84fb88a3dc14",
+    "male5_used": false,
+    "target_track9_used": false,
+    "played": false,
+    "board_touched": false
+  },
+  "evaluation": {
+    "kind": "strict_fixed_male_evaluation",
+    "protocol": {
+      "source_profile": [
+        "人物音频资料/男声/标准录音 1.wav",
+        "人物音频资料/男声/标准录音 2.wav",
+        "人物音频资料/男声/标准录音 3.wav"
+      ],
+      "evaluated_source": "人物音频资料/男声/标准录音 4.wav",
+      "target_profile": [
+        "人物音频资料/女声/Track 5.wav",
+        "人物音频资料/女声/Track 6.wav",
+        "人物音频资料/女声/Track 7.wav",
+        "人物音频资料/女声/Track 8.wav"
+      ],
+      "target_track9_used": false,
+      "speaker_and_utmos_windows": "non-overlapping 6 s; tail >=1.5 s; RMS >=0.001",
+      "leakage": "maximum of arithmetic mean of per-window cosines and whole-file length-weighted aggregate-vector cosine",
+      "cer": "offline Whisper-small candidate transcript versus source transcript; punctuation removed and OpenCC 0.1.7 t2s-normalized"
+    },
+    "gates": {
+      "identity": 0.45,
+      "identity_p10": 0.35,
+      "leakage": 0.1,
+      "utmos": 2.3,
+      "cer": 0.15
+    },
+    "selected": "Remote-PS-C_HuBERT_BiGRU_FARGAN_v11_align_plus10ms",
+    "rows": [
+      {
+        "candidate": "Remote-PS-C_HuBERT_BiGRU_FARGAN_v11_align_plus10ms",
+        "path": "build/generated/remote_ps_c_hubert_fargan_v11/fixed_male4.wav",
+        "metrics": {
+          "identity": 0.6926206800473627,
+          "identity_p10": 0.6495480350820896,
+          "leakage": 0.26416833231402137,
+          "leakage_window_mean": 0.2517235570288139,
+          "leakage_aggregate": 0.26416833231402137,
+          "utmos": 1.904939889907837,
+          "cer": 0.5
+        },
+        "passed": {
+          "identity": true,
+          "identity_p10": true,
+          "leakage": false,
+          "utmos": false,
+          "cer": false
+        },
+        "all_gates_pass": false,
+        "selection_score": {
+          "minimum_gate_ratio": 0.3,
+          "mean_gate_ratio": 0.980357967874817
+        },
+        "identity_by_chunk": [
+          0.6419544745313635,
+          0.7559852883257305,
+          0.6799222772849941
+        ],
+        "leakage_by_chunk": [
+          0.24301885131642464,
+          0.28237912318874403,
+          0.229772696581273
+        ],
+        "utmos_by_chunk": [
+          1.9594858884811401,
+          1.8351752758026123,
+          1.9201585054397583
+        ],
+        "source_asr": "男孩把最后一块糖给了骷髏的妹妹妹破体围剿点角亲了她一下糖纸在阳光下向彩虹多年后她仍留着那张糖纸记得那天的甜妹妹出嫁那天她把糖纸放进她手心",
+        "candidate_asr": "男孩把这一块糖给了空中的梅蕾梅梅铺起围剿,点角气了它一炸糖脂在羊毛下向彩虹多年后,它把人留着冷藏糖脂,记得弹琴的体验梅蕾出现弹琴,它把糖脂放进它手心",
+        "cer_detail": {
+          "reference_chars": 68,
+          "hypothesis_chars": 70,
+          "distance": 34,
+          "cer": 0.5
+        },
+        "cer_without_script_normalization": {
+          "reference_chars": 68,
+          "hypothesis_chars": 70,
+          "distance": 34,
+          "cer": 0.5
+        }
+      }
+    ],
+    "played": false,
+    "board_touched": false
+  },
+  "execution": [
+    {
+      "stage": "cache",
+      "exit_code": 0,
+      "wall_seconds": 62.21799999999348,
+      "log": "build/generated/remote_ps_c_v11_cache.log"
+    },
+    {
+      "stage": "train",
+      "exit_code": 0,
+      "wall_seconds": 277.7969999999914,
+      "log": "build/generated/remote_ps_c_v11_train.log"
+    },
+    {
+      "stage": "infer",
+      "exit_code": 0,
+      "wall_seconds": 7.860000000015134,
+      "log": "build/generated/remote_ps_c_v11_infer.log"
+    },
+    {
+      "stage": "evaluate",
+      "exit_code": 0,
+      "wall_seconds": 21.45299999997951,
+      "log": "build/generated/remote_ps_c_v11_evaluate.log"
+    }
+  ],
+  "source_sha256": {
+    "build/remote_ps_c_hubert_fargan_v11.py": "e6691c7c50afc834fde54f0bccb4074ae3687c50f2b3ea3cbe4e5e77c364ab37",
+    "build/run_remote_ps_c_hubert_fargan_v11.py": "de0c74f0ff492bd51d8b3d10f1af273e5afffe30704719cb32bd46a5aca60e94",
+    "build/evaluate_seed_fixed_male_strict_20261024.py": "7f2138ca331004da93d6aaf4be79b4c91aa5837c3f977af01f974bf87a189083"
+  },
+  "v1_comparison_metrics": {
+    "identity": 0.7788145118676262,
+    "identity_p10": 0.751711669998765,
+    "leakage": 0.2529291513166748,
+    "leakage_window_mean": 0.24303335684436625,
+    "leakage_aggregate": 0.2529291513166748,
+    "utmos": 2.418009599049886,
+    "cer": 0.23529411764705882
+  },
+  "metric_change_v11_minus_v1": {
+    "identity": -0.08619383182026352,
+    "identity_p10": -0.10216363491667546,
+    "leakage": 0.011239180997346554,
+    "leakage_window_mean": 0.008690200184447633,
+    "leakage_aggregate": 0.011239180997346554,
+    "utmos": -0.5130697091420493,
+    "cer": 0.2647058823529412
+  },
+  "male5_used": false,
+  "target_track9_used": false,
+  "played": false,
+  "board_touched": false,
+  "delivery_status": "not_packaged_quality_rejected"
+}

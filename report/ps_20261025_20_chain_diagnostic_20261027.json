@@ -1,0 +1,2385 @@
+{
+  "task": "PS-20261025-20",
+  "date": "2026-10-27",
+  "role": "Remote-PS-C",
+  "round": "frozen_auxiliary_validation_chain_diagnostic",
+  "status": "DIAGNOSTIC_COMPLETE",
+  "base_commit": "04819add786e0c07f9772afadaf7a2ba67f565d7",
+  "script_sha256": "3cb6da745941c5477050a7b7f0d9c81f2cc6a5bd32385ca37dd0711650b63af0",
+  "corpus_manifest_sha256": "8e88db6e2777a331c874cfd3da948f9b86b0571acde17efbb384787ed9410e58",
+  "validation_pairs": 8,
+  "speakers": [
+    "SSB0080",
+    "SSB0434"
+  ],
+  "validation_frames": 4616,
+  "conditions": [
+    "source",
+    "teacher_pcm",
+    "teacher_features_oracle",
+    "v1",
+    "v2"
+  ],
+  "summaries": {
+    "source": {
+      "target_identity_mean": {
+        "mean": 0.18608669005478487,
+        "median": 0.18505827116425883,
+        "min": 0.08345941862075616,
+        "max": 0.28780704842060195
+      },
+      "target_identity_p10": {
+        "mean": 0.18565001900050063,
+        "median": 0.18331158694712188,
+        "min": 0.08345941862075616,
+        "max": 0.28780704842060195
+      },
+      "source_similarity_strict": {
+        "mean": 0.8422718556291361,
+        "median": 0.8737291064101084,
+        "min": 0.6889893693104308,
+        "max": 0.8992944195175461
+      },
+      "cer_vs_source_asr": {
+        "reference_chars": 150,
+        "distance": 0,
+        "micro": 0.0,
+        "per_utterance": {
+          "mean": 0.0,
+          "median": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "cer_vs_manifest_text": {
+        "reference_chars": 152,
+        "distance": 21,
+        "micro": 0.13815789473684212,
+        "per_utterance": {
+          "mean": 0.13125,
+          "median": 0.1,
+          "min": 0.0,
+          "max": 0.35
+        }
+      }
+    },
+    "teacher_pcm": {
+      "target_identity_mean": {
+        "mean": 0.8680335083921369,
+        "median": 0.8807861037194711,
+        "min": 0.8208726423177174,
+        "max": 0.8985215023364437
+      },
+      "target_identity_p10": {
+        "mean": 0.8638846444637889,
+        "median": 0.8807861037194711,
+        "min": 0.7876817308909333,
+        "max": 0.8985215023364437
+      },
+      "source_similarity_strict": {
+        "mean": 0.2347302012279156,
+        "median": 0.2249722470480236,
+        "min": 0.14198986584402135,
+        "max": 0.35315333045823805
+      },
+      "cer_vs_source_asr": {
+        "reference_chars": 150,
+        "distance": 15,
+        "micro": 0.1,
+        "per_utterance": {
+          "mean": 0.09775326797385622,
+          "median": 0.10277777777777777,
+          "min": 0.0,
+          "max": 0.25
+        }
+      },
+      "cer_vs_manifest_text": {
+        "reference_chars": 152,
+        "distance": 22,
+        "micro": 0.14473684210526316,
+        "per_utterance": {
+          "mean": 0.14080882352941176,
+          "median": 0.13823529411764707,
+          "min": 0.0,
+          "max": 0.35
+        }
+      }
+    },
+    "teacher_features_oracle": {
+      "target_identity_mean": {
+        "mean": 0.7999759577331473,
+        "median": 0.8082477315849635,
+        "min": 0.7447181988504832,
+        "max": 0.8479192217514393
+      },
+      "target_identity_p10": {
+        "mean": 0.7926529655273266,
+        "median": 0.8082477315849635,
+        "min": 0.6861342612039165,
+        "max": 0.8479192217514393
+      },
+      "source_similarity_strict": {
+        "mean": 0.24219065370916162,
+        "median": 0.23924975171265583,
+        "min": 0.12146045205050478,
+        "max": 0.37784098392544296
+      },
+      "cer_vs_source_asr": {
+        "reference_chars": 150,
+        "distance": 16,
+        "micro": 0.10666666666666667,
+        "per_utterance": {
+          "mean": 0.10620915032679737,
+          "median": 0.07777777777777778,
+          "min": 0.0,
+          "max": 0.29411764705882354
+        }
+      },
+      "cer_vs_manifest_text": {
+        "reference_chars": 152,
+        "distance": 25,
+        "micro": 0.16447368421052633,
+        "per_utterance": {
+          "mean": 0.16176470588235292,
+          "median": 0.175,
+          "min": 0.0,
+          "max": 0.3
+        }
+      }
+    },
+    "v1": {
+      "target_identity_mean": {
+        "mean": 0.7801200421763033,
+        "median": 0.7778067870305145,
+        "min": 0.7550055879867938,
+        "max": 0.8094061503044854
+      },
+      "target_identity_p10": {
+        "mean": 0.7775534192661898,
+        "median": 0.7778067870305145,
+        "min": 0.7462452906447492,
+        "max": 0.8094061503044854
+      },
+      "source_similarity_strict": {
+        "mean": 0.22520768835460203,
+        "median": 0.2155217619855515,
+        "min": 0.16887833476033184,
+        "max": 0.29554544509712766
+      },
+      "cer_vs_source_asr": {
+        "reference_chars": 150,
+        "distance": 20,
+        "micro": 0.13333333333333333,
+        "per_utterance": {
+          "mean": 0.12941176470588237,
+          "median": 0.125,
+          "min": 0.0,
+          "max": 0.35
+        }
+      },
+      "cer_vs_manifest_text": {
+        "reference_chars": 152,
+        "distance": 28,
+        "micro": 0.18421052631578946,
+        "per_utterance": {
+          "mean": 0.17941176470588233,
+          "median": 0.16764705882352943,
+          "min": 0.0,
+          "max": 0.4
+        }
+      }
+    },
+    "v2": {
+      "target_identity_mean": {
+        "mean": 0.7787526797733062,
+        "median": 0.7821108600651511,
+        "min": 0.7515469358876896,
+        "max": 0.7981943641659877
+      },
+      "target_identity_p10": {
+        "mean": 0.7760646597127854,
+        "median": 0.7821108600651511,
+        "min": 0.7300427754035228,
+        "max": 0.7981943641659877
+      },
+      "source_similarity_strict": {
+        "mean": 0.22975326342170727,
+        "median": 0.22532238246675101,
+        "min": 0.14018034376452507,
+        "max": 0.3112987655294291
+      },
+      "cer_vs_source_asr": {
+        "reference_chars": 150,
+        "distance": 20,
+        "micro": 0.13333333333333333,
+        "per_utterance": {
+          "mean": 0.12941176470588237,
+          "median": 0.125,
+          "min": 0.0,
+          "max": 0.25
+        }
+      },
+      "cer_vs_manifest_text": {
+        "reference_chars": 152,
+        "distance": 31,
+        "micro": 0.20394736842105263,
+        "per_utterance": {
+          "mean": 0.19816176470588237,
+          "median": 0.16764705882352943,
+          "min": 0.0,
+          "max": 0.4
+        }
+      }
+    }
+  },
+  "records": [
+    {
+      "stem": "SSB04340036",
+      "speaker": "SSB0434",
+      "split": "validation",
+      "manifest_text": "不一定按照第二次网签申报的较低价格来征税",
+      "frames": 450,
+      "original_samples": 72075,
+      "source_profile_other_stems": [
+        "SSB04340089",
+        "SSB04340076",
+        "SSB04340118"
+      ],
+      "source_profile_sha256_f64": "1a327bda28a27e45c7e876938e4e4b7cc788fcdf88721e3987c5c7c2b12b645d",
+      "feature_errors": {
+        "v1": {
+          "normalized_mae": 0.41645973920822144,
+          "clipped_fraction": 0.0023333333333333335
+        },
+        "v2": {
+          "normalized_mae": 0.4160555601119995,
+          "clipped_fraction": 0.0024444444444444444
+        }
+      },
+      "conditions": {
+        "source": {
+          "asr": "不一定按照第二次往前审報的交低價格來徵稅",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 4,
+            "cer": 0.2
+          },
+          "target_identity_mean": 0.1237642816599742,
+          "target_identity_p10": 0.1237642816599742,
+          "source_similarity_window_mean": 0.894898162191766,
+          "source_similarity_aggregate": 0.8948981621917662,
+          "source_similarity_strict": 0.8948981621917662,
+          "source_similarity_by_chunk": [
+            0.894898162191766
+          ],
+          "target_identity_by_chunk": [
+            0.1237642816599742
+          ],
+          "samples": 72000,
+          "peak": 0.386474609375,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340036_source.wav",
+            "bytes": 144044,
+            "sha256": "ee6bec5f6cb7b4e1b3420664d1fd90a67ca71bc4c7ec5b8492b6d8771a82c5cd"
+          }
+        },
+        "teacher_pcm": {
+          "asr": "不一定按照第二次網線審報的交低價格來招稅",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 3,
+            "cer": 0.15
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 4,
+            "cer": 0.2
+          },
+          "target_identity_mean": 0.8924427379065654,
+          "target_identity_p10": 0.8924427379065654,
+          "source_similarity_window_mean": 0.14198986584402135,
+          "source_similarity_aggregate": 0.14198986584402135,
+          "source_similarity_strict": 0.14198986584402135,
+          "source_similarity_by_chunk": [
+            0.14198986584402135
+          ],
+          "target_identity_by_chunk": [
+            0.8924427379065654
+          ],
+          "samples": 72000,
+          "peak": 0.57879638671875,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340036_teacher_pcm.wav",
+            "bytes": 144044,
+            "sha256": "577ed46963259ce86805d3fc6c30cb602c975730ca96176686dce70563fba2a2"
+          }
+        },
+        "teacher_features_oracle": {
+          "asr": "不一定按照第二次往前審報的交低價格來裝睡",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 2,
+            "cer": 0.1
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 6,
+            "cer": 0.3
+          },
+          "target_identity_mean": 0.8479192217514393,
+          "target_identity_p10": 0.8479192217514393,
+          "source_similarity_window_mean": 0.12146045205050478,
+          "source_similarity_aggregate": 0.12146045205050478,
+          "source_similarity_strict": 0.12146045205050478,
+          "source_similarity_by_chunk": [
+            0.12146045205050478
+          ],
+          "target_identity_by_chunk": [
+            0.8479192217514393
+          ],
+          "samples": 72000,
+          "peak": 0.54852294921875,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340036_teacher_features_oracle.wav",
+            "bytes": 144044,
+            "sha256": "be52ec02422ac8e8f864e5e6517d6e87762b8ae7e66d384af9a8a778469b3030",
+            "samples": 72000,
+            "peak": 0.54852294921875,
+            "rms": 0.07959732292713069,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340036_teacher_features_oracle.features.f32",
+              "bytes": 36000,
+              "sha256": "7fde91f2962e3fd704636f9564cdcf57078935a13f947a4c320957cedf66e7fb"
+            }
+          }
+        },
+        "v1": {
+          "asr": "不一定按照第二次往前申报的交地价格来周水",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 4,
+            "cer": 0.2
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 6,
+            "cer": 0.3
+          },
+          "target_identity_mean": 0.8094061503044854,
+          "target_identity_p10": 0.8094061503044854,
+          "source_similarity_window_mean": 0.17218541053616054,
+          "source_similarity_aggregate": 0.17218541053616054,
+          "source_similarity_strict": 0.17218541053616054,
+          "source_similarity_by_chunk": [
+            0.17218541053616054
+          ],
+          "target_identity_by_chunk": [
+            0.8094061503044854
+          ],
+          "samples": 72000,
+          "peak": 0.484283447265625,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340036_v1.wav",
+            "bytes": 144044,
+            "sha256": "e05c9e7e9056b56f385f13b465b87dc47153d765e79b6f4a5c41dac091ab1f71",
+            "samples": 72000,
+            "peak": 0.484283447265625,
+            "rms": 0.07680950749680793,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340036_v1.features.f32",
+              "bytes": 36000,
+              "sha256": "1447a077bb062e26189663ca402260e6299b2d1b3bfa7e7d8d629f62a7bd4adc"
+            }
+          }
+        },
+        "v2": {
+          "asr": "不一定按照第二次榜前審報的交替價格來周遂",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 4,
+            "cer": 0.2
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 7,
+            "cer": 0.35
+          },
+          "target_identity_mean": 0.7860815216773942,
+          "target_identity_p10": 0.7860815216773942,
+          "source_similarity_window_mean": 0.18339305376154127,
+          "source_similarity_aggregate": 0.18339305376154136,
+          "source_similarity_strict": 0.18339305376154136,
+          "source_similarity_by_chunk": [
+            0.18339305376154127
+          ],
+          "target_identity_by_chunk": [
+            0.7860815216773942
+          ],
+          "samples": 72000,
+          "peak": 0.524322509765625,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340036_v2.wav",
+            "bytes": 144044,
+            "sha256": "700909febc2faa3d02f85ced0a35d5de2fe4788f824662a173c9e337d1a6fc87",
+            "samples": 72000,
+            "peak": 0.524322509765625,
+            "rms": 0.07670713192930691,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340036_v2.features.f32",
+              "bytes": 36000,
+              "sha256": "32fdab967ff227385520fcc187537c22cd3a224e47bc629ed3c11beefa9dce7e"
+            }
+          }
+        }
+      }
+    },
+    {
+      "stem": "SSB04340089",
+      "speaker": "SSB0434",
+      "split": "validation",
+      "manifest_text": "张继科罢赛另有隐情与乒羽中心各罚五万了事",
+      "frames": 761,
+      "original_samples": 121859,
+      "source_profile_other_stems": [
+        "SSB04340036",
+        "SSB04340076",
+        "SSB04340118"
+      ],
+      "source_profile_sha256_f64": "7f8301b977f40833f445eb6aba785bc78f70eedcc2af52e5fbc8aede7408cdae",
+      "feature_errors": {
+        "v1": {
+          "normalized_mae": 0.44781485199928284,
+          "clipped_fraction": 0.0008541392904073587
+        },
+        "v2": {
+          "normalized_mae": 0.4455932676792145,
+          "clipped_fraction": 0.0007227332457293036
+        }
+      },
+      "conditions": {
+        "source": {
+          "asr": "張繼柯霸賽另有眼前與平與中心各罰5萬了事",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 7,
+            "cer": 0.35
+          },
+          "target_identity_mean": 0.16692662769835376,
+          "target_identity_p10": 0.16343325926407987,
+          "source_similarity_window_mean": 0.7768649318057343,
+          "source_similarity_aggregate": 0.8820842278745311,
+          "source_similarity_strict": 0.8820842278745311,
+          "source_similarity_by_chunk": [
+            0.8759768712421998,
+            0.6777529923692689
+          ],
+          "target_identity_by_chunk": [
+            0.16255991715551138,
+            0.17129333824119614
+          ],
+          "samples": 121760,
+          "peak": 0.324859619140625,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340089_source.wav",
+            "bytes": 243564,
+            "sha256": "7f1098255a223f824beb684bb85980e6314d1da98f0fa7ebab905df3ad3ddd26"
+          }
+        },
+        "teacher_pcm": {
+          "asr": "張繼科 霸賽另有簡稱與 拼與中心各罰5萬料事",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 5,
+            "cer": 0.25
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 7,
+            "cer": 0.35
+          },
+          "target_identity_mean": 0.8208726423177174,
+          "target_identity_p10": 0.7876817308909333,
+          "source_similarity_window_mean": 0.1399489463194451,
+          "source_similarity_aggregate": 0.1603158091709036,
+          "source_similarity_strict": 0.1603158091709036,
+          "source_similarity_by_chunk": [
+            0.16649642448517532,
+            0.11340146815371491
+          ],
+          "target_identity_by_chunk": [
+            0.8623612816011975,
+            0.7793840030342373
+          ],
+          "samples": 121760,
+          "peak": 0.587799072265625,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340089_teacher_pcm.wav",
+            "bytes": 243564,
+            "sha256": "92707c552c7434e2b7c38ed6b1f5b3889f5a8b1b81f09925114da6deeea8c0c6"
+          }
+        },
+        "teacher_features_oracle": {
+          "asr": "張繼科 霸賽另有簡情與拼與忠心各罰5萬了事",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 5,
+            "cer": 0.25
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 6,
+            "cer": 0.3
+          },
+          "target_identity_mean": 0.7447181988504832,
+          "target_identity_p10": 0.6861342612039165,
+          "source_similarity_window_mean": 0.1547839301985358,
+          "source_similarity_aggregate": 0.16812749886720857,
+          "source_similarity_strict": 0.16812749886720857,
+          "source_similarity_by_chunk": [
+            0.16673113611345547,
+            0.14283672428361616
+          ],
+          "target_identity_by_chunk": [
+            0.8179481209086916,
+            0.6714882767922749
+          ],
+          "samples": 121760,
+          "peak": 0.620361328125,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340089_teacher_features_oracle.wav",
+            "bytes": 243564,
+            "sha256": "f07acbab94782d3a24bb63982edd12fc41a4e3b08af135dff7118ca65d3f16b6",
+            "samples": 121760,
+            "peak": 0.620361328125,
+            "rms": 0.07979242600760306,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340089_teacher_features_oracle.features.f32",
+              "bytes": 60880,
+              "sha256": "d6ad57ac18025c440d91c139464c8c65ef4fa7b9e1137204d5723575a05c45f4"
+            }
+          }
+        },
+        "v1": {
+          "asr": "張巨柯霸賽另有隱藏於拚與忠心各罰五萬了事",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 7,
+            "cer": 0.35
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 8,
+            "cer": 0.4
+          },
+          "target_identity_mean": 0.766778273925657,
+          "target_identity_p10": 0.7462452906447492,
+          "source_similarity_window_mean": 0.15665146544911918,
+          "source_similarity_aggregate": 0.17216037880675328,
+          "source_similarity_strict": 0.17216037880675328,
+          "source_similarity_by_chunk": [
+            0.1727840969105841,
+            0.14051883398765425
+          ],
+          "target_identity_by_chunk": [
+            0.7924445030267916,
+            0.7411120448245223
+          ],
+          "samples": 121760,
+          "peak": 0.6910400390625,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340089_v1.wav",
+            "bytes": 243564,
+            "sha256": "d1da715c3ad74b7607079ad6c7ec30613ff11f69bd446d3aa37e3917fe61f0df",
+            "samples": 121760,
+            "peak": 0.6910400390625,
+            "rms": 0.0696654235945544,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340089_v1.features.f32",
+              "bytes": 60880,
+              "sha256": "242c8375deb31069fd0d4fccf60872618714b0a42aa59676f09e8d487ba29c75"
+            }
+          }
+        },
+        "v2": {
+          "asr": "張巨柯霸賽另有隱藏與拚與忠心各罰5萬了事",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 5,
+            "cer": 0.25
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 8,
+            "cer": 0.4
+          },
+          "target_identity_mean": 0.7515469358876896,
+          "target_identity_p10": 0.7300427754035228,
+          "source_similarity_window_mean": 0.14098803641200947,
+          "source_similarity_aggregate": 0.14983837747900586,
+          "source_similarity_strict": 0.14983837747900586,
+          "source_similarity_by_chunk": [
+            0.1471109707470587,
+            0.13486510207696023
+          ],
+          "target_identity_by_chunk": [
+            0.7784271364928981,
+            0.7246667352824812
+          ],
+          "samples": 121760,
+          "peak": 0.467041015625,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340089_v2.wav",
+            "bytes": 243564,
+            "sha256": "699f726ae532dc4d11f12d23bad50f9522437848ae96810097cf886a4c4615ea",
+            "samples": 121760,
+            "peak": 0.467041015625,
+            "rms": 0.06937529690066056,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340089_v2.features.f32",
+              "bytes": 60880,
+              "sha256": "64ea0bdc3b0599d3936c31c1f7db36463a28ee4a7c98398f7c8a0a46f8df2441"
+            }
+          }
+        }
+      }
+    },
+    {
+      "stem": "SSB04340076",
+      "speaker": "SSB0434",
+      "split": "validation",
+      "manifest_text": "孙杨现在在苏州大学读体育教育专业的研究生",
+      "frames": 510,
+      "original_samples": 81735,
+      "source_profile_other_stems": [
+        "SSB04340036",
+        "SSB04340089",
+        "SSB04340118"
+      ],
+      "source_profile_sha256_f64": "5e5f67429226b4559f3616b62880772968cfd5c4ff47ff0c8fd9fa2f45e30987",
+      "feature_errors": {
+        "v1": {
+          "normalized_mae": 0.43205949664115906,
+          "clipped_fraction": 0.0013725490196078432
+        },
+        "v2": {
+          "normalized_mae": 0.43172961473464966,
+          "clipped_fraction": 0.0018627450980392157
+        }
+      },
+      "conditions": {
+        "source": {
+          "asr": "孫陽現在在蘇州大學讀體育教育專業的研究生",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 1,
+            "cer": 0.05
+          },
+          "target_identity_mean": 0.08345941862075616,
+          "target_identity_p10": 0.08345941862075616,
+          "source_similarity_window_mean": 0.8759750928600758,
+          "source_similarity_aggregate": 0.8759750928600758,
+          "source_similarity_strict": 0.8759750928600758,
+          "source_similarity_by_chunk": [
+            0.8759750928600758
+          ],
+          "target_identity_by_chunk": [
+            0.08345941862075616
+          ],
+          "samples": 81600,
+          "peak": 0.4522705078125,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340076_source.wav",
+            "bytes": 163244,
+            "sha256": "4369c0f75b460923cba50eb84008bc2bacce84204aa615de52b2b59da1985313"
+          }
+        },
+        "teacher_pcm": {
+          "asr": "孫陽現在在 蘇州大學讀體育教育專業的研究生",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 1,
+            "cer": 0.05
+          },
+          "target_identity_mean": 0.8863911719217182,
+          "target_identity_p10": 0.8863911719217182,
+          "source_similarity_window_mean": 0.17432183597856762,
+          "source_similarity_aggregate": 0.17432183597856762,
+          "source_similarity_strict": 0.17432183597856762,
+          "source_similarity_by_chunk": [
+            0.17432183597856762
+          ],
+          "target_identity_by_chunk": [
+            0.8863911719217182
+          ],
+          "samples": 81600,
+          "peak": 0.46746826171875,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340076_teacher_pcm.wav",
+            "bytes": 163244,
+            "sha256": "574d31631d0b8882898a1545beb903bcbf351cab0f758107bcf6a0d5bf4df183"
+          }
+        },
+        "teacher_features_oracle": {
+          "asr": "孫陽現在在 蘇州大學讀體育教育專業的研究生",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 1,
+            "cer": 0.05
+          },
+          "target_identity_mean": 0.8028666561530817,
+          "target_identity_p10": 0.8028666561530817,
+          "source_similarity_window_mean": 0.1851189494991837,
+          "source_similarity_aggregate": 0.1851189494991837,
+          "source_similarity_strict": 0.1851189494991837,
+          "source_similarity_by_chunk": [
+            0.1851189494991837
+          ],
+          "target_identity_by_chunk": [
+            0.8028666561530817
+          ],
+          "samples": 81600,
+          "peak": 0.481292724609375,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340076_teacher_features_oracle.wav",
+            "bytes": 163244,
+            "sha256": "609830896d116f0d75884210aa426c6c336386eb31463054d9a81b42d3132b8a",
+            "samples": 81600,
+            "peak": 0.481292724609375,
+            "rms": 0.07934111384666881,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340076_teacher_features_oracle.features.f32",
+              "bytes": 40800,
+              "sha256": "6e6cafa78fba594a97d79985f879f08fca3c6b4d42895a328b1ff694ac8d834a"
+            }
+          }
+        },
+        "v1": {
+          "asr": "孫央現在在蘇州大學都體育教育專業的研究生",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 2,
+            "cer": 0.1
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 2,
+            "cer": 0.1
+          },
+          "target_identity_mean": 0.795865634522789,
+          "target_identity_p10": 0.795865634522789,
+          "source_similarity_window_mean": 0.17282806700358616,
+          "source_similarity_aggregate": 0.17282806700358616,
+          "source_similarity_strict": 0.17282806700358616,
+          "source_similarity_by_chunk": [
+            0.17282806700358616
+          ],
+          "target_identity_by_chunk": [
+            0.795865634522789
+          ],
+          "samples": 81600,
+          "peak": 0.600006103515625,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340076_v1.wav",
+            "bytes": 163244,
+            "sha256": "f0851b7bde7a5656d21b1849598a6f885638b89382e9904fa85e00e9f0682558",
+            "samples": 81600,
+            "peak": 0.600006103515625,
+            "rms": 0.07950860029032507,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340076_v1.features.f32",
+              "bytes": 40800,
+              "sha256": "54772c7b910695ac2f4ef4ae2fd9a293c8ddc45c7ee4e707edf1a96f3d120e32"
+            }
+          }
+        },
+        "v2": {
+          "asr": "孫央現在在蘇州大學都體育教育專業的研究生",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 2,
+            "cer": 0.1
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 2,
+            "cer": 0.1
+          },
+          "target_identity_mean": 0.7778733595237197,
+          "target_identity_p10": 0.7778733595237197,
+          "source_similarity_window_mean": 0.1754730848731551,
+          "source_similarity_aggregate": 0.1754730848731551,
+          "source_similarity_strict": 0.1754730848731551,
+          "source_similarity_by_chunk": [
+            0.1754730848731551
+          ],
+          "target_identity_by_chunk": [
+            0.7778733595237197
+          ],
+          "samples": 81600,
+          "peak": 0.593597412109375,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340076_v2.wav",
+            "bytes": 163244,
+            "sha256": "3760cfd624b2db2b8667759e378fd095f9248f3eb4f0ea7c3e7523a2df8f0f28",
+            "samples": 81600,
+            "peak": 0.593597412109375,
+            "rms": 0.07784517915427278,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340076_v2.features.f32",
+              "bytes": 40800,
+              "sha256": "70d3c60a4ae31e6b7019a604af482abf682eaf2b4d494db57291deeca9434de4"
+            }
+          }
+        }
+      }
+    },
+    {
+      "stem": "SSB04340118",
+      "speaker": "SSB0434",
+      "split": "validation",
+      "manifest_text": "子女们可以通过手机调节摄像头的角度",
+      "frames": 510,
+      "original_samples": 81735,
+      "source_profile_other_stems": [
+        "SSB04340036",
+        "SSB04340089",
+        "SSB04340076"
+      ],
+      "source_profile_sha256_f64": "5c8204b1914fd4d636c5421703a3b6dc0b94c12e3786fd4729d176cc077e7009",
+      "feature_errors": {
+        "v1": {
+          "normalized_mae": 0.4751274287700653,
+          "clipped_fraction": 0.000980392156862745
+        },
+        "v2": {
+          "normalized_mae": 0.47281646728515625,
+          "clipped_fraction": 0.00196078431372549
+        }
+      },
+      "conditions": {
+        "source": {
+          "asr": "子女们可以通过手机调节摄像头的角度",
+          "cer_vs_source_asr": {
+            "reference_chars": 17,
+            "hypothesis_chars": 17,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 17,
+            "hypothesis_chars": 17,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "target_identity_mean": 0.14689342552309484,
+          "target_identity_p10": 0.14689342552309484,
+          "source_similarity_window_mean": 0.6889893693104308,
+          "source_similarity_aggregate": 0.6889893693104308,
+          "source_similarity_strict": 0.6889893693104308,
+          "source_similarity_by_chunk": [
+            0.6889893693104308
+          ],
+          "target_identity_by_chunk": [
+            0.14689342552309484
+          ],
+          "samples": 81600,
+          "peak": 0.165985107421875,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340118_source.wav",
+            "bytes": 163244,
+            "sha256": "81ace35c367b4b0b08c87553c49e6beea009bef11ffa6e7ea2ce08fad6f92e9c"
+          }
+        },
+        "teacher_pcm": {
+          "asr": "孫女們可以通過手機挑戰攝像頭的角度",
+          "cer_vs_source_asr": {
+            "reference_chars": 17,
+            "hypothesis_chars": 17,
+            "distance": 3,
+            "cer": 0.17647058823529413
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 17,
+            "hypothesis_chars": 17,
+            "distance": 3,
+            "cer": 0.17647058823529413
+          },
+          "target_identity_mean": 0.835266832951296,
+          "target_identity_p10": 0.835266832951296,
+          "source_similarity_window_mean": 0.15212818123536131,
+          "source_similarity_aggregate": 0.15212818123536131,
+          "source_similarity_strict": 0.15212818123536131,
+          "source_similarity_by_chunk": [
+            0.15212818123536131
+          ],
+          "target_identity_by_chunk": [
+            0.835266832951296
+          ],
+          "samples": 81600,
+          "peak": 0.502288818359375,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340118_teacher_pcm.wav",
+            "bytes": 163244,
+            "sha256": "9e9d76237b3561a6089387e2fcfe80890b712d92a4e7ad27e3096c7002bddf12"
+          }
+        },
+        "teacher_features_oracle": {
+          "asr": "左女們可以通過手機挑戰,設下頭的角度。",
+          "cer_vs_source_asr": {
+            "reference_chars": 17,
+            "hypothesis_chars": 17,
+            "distance": 5,
+            "cer": 0.29411764705882354
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 17,
+            "hypothesis_chars": 17,
+            "distance": 5,
+            "cer": 0.29411764705882354
+          },
+          "target_identity_mean": 0.7759906234581007,
+          "target_identity_p10": 0.7759906234581007,
+          "source_similarity_window_mean": 0.1353594837450112,
+          "source_similarity_aggregate": 0.13535948374501122,
+          "source_similarity_strict": 0.13535948374501122,
+          "source_similarity_by_chunk": [
+            0.1353594837450112
+          ],
+          "target_identity_by_chunk": [
+            0.7759906234581007
+          ],
+          "samples": 81600,
+          "peak": 0.503143310546875,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340118_teacher_features_oracle.wav",
+            "bytes": 163244,
+            "sha256": "15d491835a1122e821a07ac8505fad89adbeac43926a56cd4824efbf56dafb99",
+            "samples": 81600,
+            "peak": 0.503143310546875,
+            "rms": 0.07977504825689054,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340118_teacher_features_oracle.features.f32",
+              "bytes": 40800,
+              "sha256": "af2ef138cdb159c86895e393e20b91b661ec21b4549ae5c86a4114c600ad0ecc"
+            }
+          }
+        },
+        "v1": {
+          "asr": "所以你们可以通过手机调节摄像好的角度",
+          "cer_vs_source_asr": {
+            "reference_chars": 17,
+            "hypothesis_chars": 18,
+            "distance": 4,
+            "cer": 0.23529411764705882
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 17,
+            "hypothesis_chars": 18,
+            "distance": 4,
+            "cer": 0.23529411764705882
+          },
+          "target_identity_mean": 0.7780745222599109,
+          "target_identity_p10": 0.7780745222599109,
+          "source_similarity_window_mean": 0.16887833476033184,
+          "source_similarity_aggregate": 0.16887833476033184,
+          "source_similarity_strict": 0.16887833476033184,
+          "source_similarity_by_chunk": [
+            0.16887833476033184
+          ],
+          "target_identity_by_chunk": [
+            0.7780745222599109
+          ],
+          "samples": 81600,
+          "peak": 0.4794921875,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340118_v1.wav",
+            "bytes": 163244,
+            "sha256": "5a3213377a907a6adb842b85429d1b12899eba0e09ca02b8ec135a2aad851bd4",
+            "samples": 81600,
+            "peak": 0.4794921875,
+            "rms": 0.06953454490861738,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340118_v1.features.f32",
+              "bytes": 40800,
+              "sha256": "cfa9b672cc38d3d9c5c54a7bbc160ac90af14cdd1e4b897e776deb0eee50c05d"
+            }
+          }
+        },
+        "v2": {
+          "asr": "所以你们可以通过手机调节摄像好的角度",
+          "cer_vs_source_asr": {
+            "reference_chars": 17,
+            "hypothesis_chars": 18,
+            "distance": 4,
+            "cer": 0.23529411764705882
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 17,
+            "hypothesis_chars": 18,
+            "distance": 4,
+            "cer": 0.23529411764705882
+          },
+          "target_identity_mean": 0.789548773393496,
+          "target_identity_p10": 0.789548773393496,
+          "source_similarity_window_mean": 0.14018034376452507,
+          "source_similarity_aggregate": 0.14018034376452504,
+          "source_similarity_strict": 0.14018034376452507,
+          "source_similarity_by_chunk": [
+            0.14018034376452507
+          ],
+          "target_identity_by_chunk": [
+            0.789548773393496
+          ],
+          "samples": 81600,
+          "peak": 0.403900146484375,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340118_v2.wav",
+            "bytes": 163244,
+            "sha256": "bb536c4506423b9eda80011972ab08ff873d311692df37b78a1fe9b0b87a4695",
+            "samples": 81600,
+            "peak": 0.403900146484375,
+            "rms": 0.06815460249207896,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB04340118_v2.features.f32",
+              "bytes": 40800,
+              "sha256": "96e387854d6afc98634c0ef31b9d5613a94b1d0e81c781d49f7abe62f6339f9b"
+            }
+          }
+        }
+      }
+    },
+    {
+      "stem": "SSB00800053",
+      "speaker": "SSB0080",
+      "split": "validation",
+      "manifest_text": "金融街控股宣布安邦保险已增持至百分之二十",
+      "frames": 678,
+      "original_samples": 108481,
+      "source_profile_other_stems": [
+        "SSB00800102",
+        "SSB00800018",
+        "SSB00800067"
+      ],
+      "source_profile_sha256_f64": "c0dd97df9dcc80be06dd9473c65e81166f3b1b00f3755f1a75dc914e0d971510",
+      "feature_errors": {
+        "v1": {
+          "normalized_mae": 0.49116942286491394,
+          "clipped_fraction": 0.001696165191740413
+        },
+        "v2": {
+          "normalized_mae": 0.4908950924873352,
+          "clipped_fraction": 0.0018436578171091445
+        }
+      },
+      "conditions": {
+        "source": {
+          "asr": "金融接控股宣布安邦保险已增持至20%",
+          "cer_vs_source_asr": {
+            "reference_chars": 18,
+            "hypothesis_chars": 18,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 18,
+            "distance": 6,
+            "cer": 0.3
+          },
+          "target_identity_mean": 0.23398023576745638,
+          "target_identity_p10": 0.23398023576745638,
+          "source_similarity_window_mean": 0.8442372939111282,
+          "source_similarity_aggregate": 0.8442372939111282,
+          "source_similarity_strict": 0.8442372939111282,
+          "source_similarity_by_chunk": [
+            0.8442372939111282
+          ],
+          "target_identity_by_chunk": [
+            0.23398023576745638
+          ],
+          "samples": 108480,
+          "peak": 0.124420166015625,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800053_source.wav",
+            "bytes": 217004,
+            "sha256": "6761dac42b703cac09e0504fc63959fda1bfefc6d1f61069a1f0150cd3243a7a"
+          }
+        },
+        "teacher_pcm": {
+          "asr": "金融街控股宣布安邦保險已增持至20%",
+          "cer_vs_source_asr": {
+            "reference_chars": 18,
+            "hypothesis_chars": 18,
+            "distance": 1,
+            "cer": 0.05555555555555555
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 18,
+            "distance": 5,
+            "cer": 0.25
+          },
+          "target_identity_mean": 0.8457326808426573,
+          "target_identity_p10": 0.8457326808426573,
+          "source_similarity_window_mean": 0.35315333045823805,
+          "source_similarity_aggregate": 0.35315333045823805,
+          "source_similarity_strict": 0.35315333045823805,
+          "source_similarity_by_chunk": [
+            0.35315333045823805
+          ],
+          "target_identity_by_chunk": [
+            0.8457326808426573
+          ],
+          "samples": 108480,
+          "peak": 0.477264404296875,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800053_teacher_pcm.wav",
+            "bytes": 217004,
+            "sha256": "064a4b6bdb4e672cea857388df35cabafb67c911fa3be77caceb79e711ae37dc"
+          }
+        },
+        "teacher_features_oracle": {
+          "asr": "金融街控股宣布安邦保險已增持至20%。",
+          "cer_vs_source_asr": {
+            "reference_chars": 18,
+            "hypothesis_chars": 18,
+            "distance": 1,
+            "cer": 0.05555555555555555
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 18,
+            "distance": 5,
+            "cer": 0.25
+          },
+          "target_identity_mean": 0.7809338384719049,
+          "target_identity_p10": 0.7809338384719049,
+          "source_similarity_window_mean": 0.37784098392544296,
+          "source_similarity_aggregate": 0.37784098392544296,
+          "source_similarity_strict": 0.37784098392544296,
+          "source_similarity_by_chunk": [
+            0.37784098392544296
+          ],
+          "target_identity_by_chunk": [
+            0.7809338384719049
+          ],
+          "samples": 108480,
+          "peak": 0.48541259765625,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800053_teacher_features_oracle.wav",
+            "bytes": 217004,
+            "sha256": "0a9fb1ef88dae64b5e17f408de9d16962a8a4c5dc2aa1d02c7a92f387a97b64a",
+            "samples": 108480,
+            "peak": 0.48541259765625,
+            "rms": 0.07951991452110112,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800053_teacher_features_oracle.features.f32",
+              "bytes": 54240,
+              "sha256": "ccd0742da6d0c4d50d534f6ef38c25c21096fe274be43f51e5b0b2305250639a"
+            }
+          }
+        },
+        "v1": {
+          "asr": "金融接控股宣布安邦保险已增持至20%",
+          "cer_vs_source_asr": {
+            "reference_chars": 18,
+            "hypothesis_chars": 18,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 18,
+            "distance": 6,
+            "cer": 0.3
+          },
+          "target_identity_mean": 0.7550055879867938,
+          "target_identity_p10": 0.7550055879867938,
+          "source_similarity_window_mean": 0.27448090109730816,
+          "source_similarity_aggregate": 0.27448090109730816,
+          "source_similarity_strict": 0.27448090109730816,
+          "source_similarity_by_chunk": [
+            0.27448090109730816
+          ],
+          "target_identity_by_chunk": [
+            0.7550055879867938
+          ],
+          "samples": 108480,
+          "peak": 0.551666259765625,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800053_v1.wav",
+            "bytes": 217004,
+            "sha256": "3fb0449fd0fdd55f898e241755431ba6122db1591e5b467b726f19ae5fbb262e",
+            "samples": 108480,
+            "peak": 0.551666259765625,
+            "rms": 0.07517825279743295,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800053_v1.features.f32",
+              "bytes": 54240,
+              "sha256": "a495964c38633d46fc5d2c65c7866511d8663e8cd5d8432b0c42c1273bcd0f43"
+            }
+          }
+        },
+        "v2": {
+          "asr": "金融接控股宣布安邦保險已增持至20%",
+          "cer_vs_source_asr": {
+            "reference_chars": 18,
+            "hypothesis_chars": 18,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 18,
+            "distance": 6,
+            "cer": 0.3
+          },
+          "target_identity_mean": 0.7598231357472054,
+          "target_identity_p10": 0.7598231357472054,
+          "source_similarity_window_mean": 0.3043256784629368,
+          "source_similarity_aggregate": 0.3043256784629368,
+          "source_similarity_strict": 0.3043256784629368,
+          "source_similarity_by_chunk": [
+            0.3043256784629368
+          ],
+          "target_identity_by_chunk": [
+            0.7598231357472054
+          ],
+          "samples": 108480,
+          "peak": 0.599639892578125,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800053_v2.wav",
+            "bytes": 217004,
+            "sha256": "2d28379a522ec259e0c5480aaa73d84f5b774fe013d22d5bac5e95204215bc3c",
+            "samples": 108480,
+            "peak": 0.599639892578125,
+            "rms": 0.07474536646907913,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800053_v2.features.f32",
+              "bytes": 54240,
+              "sha256": "0856e66cf4e7f231658dce91f7faddc699862acd38c91f89f47f733bd1d53a9b"
+            }
+          }
+        }
+      }
+    },
+    {
+      "stem": "SSB00800102",
+      "speaker": "SSB0080",
+      "split": "validation",
+      "manifest_text": "他五月底又被曝和朋友到新店山中聚会玩通宵",
+      "frames": 606,
+      "original_samples": 96962,
+      "source_profile_other_stems": [
+        "SSB00800053",
+        "SSB00800018",
+        "SSB00800067"
+      ],
+      "source_profile_sha256_f64": "3a57bd8a571dfa2be7f1ef2e2caa23eb660d25640f7779541523532f1e76df29",
+      "feature_errors": {
+        "v1": {
+          "normalized_mae": 0.4373247027397156,
+          "clipped_fraction": 0.0009900990099009901
+        },
+        "v2": {
+          "normalized_mae": 0.43538355827331543,
+          "clipped_fraction": 0.0016501650165016502
+        }
+      },
+      "conditions": {
+        "source": {
+          "asr": "他5月底又被報和朋友到新電山中聚會玩通宵。",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 3,
+            "cer": 0.15
+          },
+          "target_identity_mean": 0.2426725681178778,
+          "target_identity_p10": 0.2426725681178778,
+          "source_similarity_window_mean": 0.8992944195175461,
+          "source_similarity_aggregate": 0.8992944195175461,
+          "source_similarity_strict": 0.8992944195175461,
+          "source_similarity_by_chunk": [
+            0.8992944195175461
+          ],
+          "target_identity_by_chunk": [
+            0.2426725681178778
+          ],
+          "samples": 96960,
+          "peak": 0.200042724609375,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800102_source.wav",
+            "bytes": 193964,
+            "sha256": "263d59c42eba6bb736cc37d55f21fcb30fb1d8077e41dbe67e87dc5587eac89c"
+          }
+        },
+        "teacher_pcm": {
+          "asr": "他五月底又被抱和朋友到新殿山中聚会玩通宵。",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 3,
+            "cer": 0.15
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 2,
+            "cer": 0.1
+          },
+          "target_identity_mean": 0.8898594633434731,
+          "target_identity_p10": 0.8898594633434731,
+          "source_similarity_window_mean": 0.34413123776836985,
+          "source_similarity_aggregate": 0.34413123776836985,
+          "source_similarity_strict": 0.34413123776836985,
+          "source_similarity_by_chunk": [
+            0.34413123776836985
+          ],
+          "target_identity_by_chunk": [
+            0.8898594633434731
+          ],
+          "samples": 96960,
+          "peak": 0.45294189453125,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800102_teacher_pcm.wav",
+            "bytes": 193964,
+            "sha256": "d9f025ce91ba39a2c01d12a5e537bad1f580e0a1f2ffb8cf4d8ebd7eb75f2bc1"
+          }
+        },
+        "teacher_features_oracle": {
+          "asr": "他五月底又被抱和朋友到新殿山中聚会玩通宵。",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 3,
+            "cer": 0.15
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 2,
+            "cer": 0.1
+          },
+          "target_identity_mean": 0.8155403244840619,
+          "target_identity_p10": 0.8155403244840619,
+          "source_similarity_window_mean": 0.3353545156507223,
+          "source_similarity_aggregate": 0.33535451565072233,
+          "source_similarity_strict": 0.33535451565072233,
+          "source_similarity_by_chunk": [
+            0.3353545156507223
+          ],
+          "target_identity_by_chunk": [
+            0.8155403244840619
+          ],
+          "samples": 96960,
+          "peak": 0.585113525390625,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800102_teacher_features_oracle.wav",
+            "bytes": 193964,
+            "sha256": "e4253ff059958fd144fd4d9cffe51b04ec70373c18b489daa202a6c3ada89d74",
+            "samples": 96960,
+            "peak": 0.585113525390625,
+            "rms": 0.07994443874676689,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800102_teacher_features_oracle.features.f32",
+              "bytes": 48480,
+              "sha256": "775246e8ba9d843c992d314809bbabe2b8af4d627b896c5885689e46c448fd11"
+            }
+          }
+        },
+        "v1": {
+          "asr": "他五月底又被抱和朋友到新殿山中聚会玩通宵。",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 3,
+            "cer": 0.15
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 2,
+            "cer": 0.1
+          },
+          "target_identity_mean": 0.7644245635920044,
+          "target_identity_p10": 0.7644245635920044,
+          "source_similarity_window_mean": 0.2873675125680318,
+          "source_similarity_aggregate": 0.2873675125680317,
+          "source_similarity_strict": 0.2873675125680318,
+          "source_similarity_by_chunk": [
+            0.2873675125680318
+          ],
+          "target_identity_by_chunk": [
+            0.7644245635920044
+          ],
+          "samples": 96960,
+          "peak": 0.469146728515625,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800102_v1.wav",
+            "bytes": 193964,
+            "sha256": "29b3bff2fad0ec6bf598336256dc4aa5c1defb75428546d6aac68c3ef550f3e5",
+            "samples": 96960,
+            "peak": 0.469146728515625,
+            "rms": 0.08104055894851861,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800102_v1.features.f32",
+              "bytes": 48480,
+              "sha256": "35ae571a83c8a0b1184ab057930c4acec911dd6ee162917c6fe32ddebaf5ac10"
+            }
+          }
+        },
+        "v2": {
+          "asr": "他五月底又被抱和朋友到新殿山中聚会玩通宵。",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 3,
+            "cer": 0.15
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 2,
+            "cer": 0.1
+          },
+          "target_identity_mean": 0.7781401984529079,
+          "target_identity_p10": 0.7781401984529079,
+          "source_similarity_window_mean": 0.30626509233110405,
+          "source_similarity_aggregate": 0.30626509233110405,
+          "source_similarity_strict": 0.30626509233110405,
+          "source_similarity_by_chunk": [
+            0.30626509233110405
+          ],
+          "target_identity_by_chunk": [
+            0.7781401984529079
+          ],
+          "samples": 96960,
+          "peak": 0.535980224609375,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800102_v2.wav",
+            "bytes": 193964,
+            "sha256": "c071e84523e6ede59964b4f49bfeaf886b0e9886313b9e319a218c0c15b249da",
+            "samples": 96960,
+            "peak": 0.535980224609375,
+            "rms": 0.08135550128892059,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800102_v2.features.f32",
+              "bytes": 48480,
+              "sha256": "5bd3df07cbd102e2f15a2a945386035d5c97ce520df0a22287ee061def86c0a5"
+            }
+          }
+        }
+      }
+    },
+    {
+      "stem": "SSB00800018",
+      "speaker": "SSB0080",
+      "split": "validation",
+      "manifest_text": "参赛作品突出国际化创新创意的全新设计理念",
+      "frames": 654,
+      "original_samples": 104746,
+      "source_profile_other_stems": [
+        "SSB00800053",
+        "SSB00800102",
+        "SSB00800067"
+      ],
+      "source_profile_sha256_f64": "72bb5c655a7ca73dae9d9070bce2b8c2f4811b1a05155b20e3ac569abdf060ad",
+      "feature_errors": {
+        "v1": {
+          "normalized_mae": 0.45599403977394104,
+          "clipped_fraction": 0.0016055045871559634
+        },
+        "v2": {
+          "normalized_mae": 0.45449909567832947,
+          "clipped_fraction": 0.001987767584097859
+        }
+      },
+      "conditions": {
+        "source": {
+          "asr": "參賽作品突出國際化,創新創意的全新設計理念",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "target_identity_mean": 0.28780704842060195,
+          "target_identity_p10": 0.28780704842060195,
+          "source_similarity_window_mean": 0.8714831199601409,
+          "source_similarity_aggregate": 0.8714831199601409,
+          "source_similarity_strict": 0.8714831199601409,
+          "source_similarity_by_chunk": [
+            0.8714831199601409
+          ],
+          "target_identity_by_chunk": [
+            0.28780704842060195
+          ],
+          "samples": 104640,
+          "peak": 0.168609619140625,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800018_source.wav",
+            "bytes": 209324,
+            "sha256": "550c20f5aca9dd723e5c98c88097ed75f4b921adbb6d07d97fa05ff1b507d0f6"
+          }
+        },
+        "teacher_pcm": {
+          "asr": "參賽作品突出國際化,創新創意的全新設計理念",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "target_identity_mean": 0.8985215023364437,
+          "target_identity_p10": 0.8985215023364437,
+          "source_similarity_window_mean": 0.27617869125038336,
+          "source_similarity_aggregate": 0.2761786912503833,
+          "source_similarity_strict": 0.27617869125038336,
+          "source_similarity_by_chunk": [
+            0.27617869125038336
+          ],
+          "target_identity_by_chunk": [
+            0.8985215023364437
+          ],
+          "samples": 104640,
+          "peak": 0.50811767578125,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800018_teacher_pcm.wav",
+            "bytes": 209324,
+            "sha256": "e04bddb2220e2adc0ee2cf7727ccd3ed82c0d719c8c40695bb26e1d08b69b155"
+          }
+        },
+        "teacher_features_oracle": {
+          "asr": "參賽作品突出國際化,創新創意的全新設計理念",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "target_identity_mean": 0.8182099916792621,
+          "target_identity_p10": 0.8182099916792621,
+          "source_similarity_window_mean": 0.32088279200909137,
+          "source_similarity_aggregate": 0.3208827920090914,
+          "source_similarity_strict": 0.3208827920090914,
+          "source_similarity_by_chunk": [
+            0.32088279200909137
+          ],
+          "target_identity_by_chunk": [
+            0.8182099916792621
+          ],
+          "samples": 104640,
+          "peak": 0.4610595703125,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800018_teacher_features_oracle.wav",
+            "bytes": 209324,
+            "sha256": "3f0dfec1096dc6ed1766ef41d398b56a3e0181d55806536e1239bccb9d723881",
+            "samples": 104640,
+            "peak": 0.4610595703125,
+            "rms": 0.07952109621437989,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800018_teacher_features_oracle.features.f32",
+              "bytes": 52320,
+              "sha256": "46d85810a973d827ea17233e2db932c7f0a4884ca5175da1eb98536adfc41d73"
+            }
+          }
+        },
+        "v1": {
+          "asr": "參賽作品突出國際化,創新創意的全新設計理念。",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "target_identity_mean": 0.7938665530176674,
+          "target_identity_p10": 0.7938665530176674,
+          "source_similarity_window_mean": 0.25821545696751685,
+          "source_similarity_aggregate": 0.25821545696751685,
+          "source_similarity_strict": 0.25821545696751685,
+          "source_similarity_by_chunk": [
+            0.25821545696751685
+          ],
+          "target_identity_by_chunk": [
+            0.7938665530176674
+          ],
+          "samples": 104640,
+          "peak": 0.59033203125,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800018_v1.wav",
+            "bytes": 209324,
+            "sha256": "11bbb96b80ca2a258e15c72ab74574fe0ff2d1f40658fde249f22dc8eb5e3251",
+            "samples": 104640,
+            "peak": 0.59033203125,
+            "rms": 0.07495734278672675,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800018_v1.features.f32",
+              "bytes": 52320,
+              "sha256": "e9c40afc6640e33df7174c8adab5bfce9022317a5f5e4bbdf3dd3b1f3ed0efa1"
+            }
+          }
+        },
+        "v2": {
+          "asr": "參賽作品突出國際化,創新創意的全新設計裡面。",
+          "cer_vs_source_asr": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 2,
+            "cer": 0.1
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 20,
+            "hypothesis_chars": 20,
+            "distance": 2,
+            "cer": 0.1
+          },
+          "target_identity_mean": 0.7981943641659877,
+          "target_identity_p10": 0.7981943641659877,
+          "source_similarity_window_mean": 0.2672517111719606,
+          "source_similarity_aggregate": 0.26725171117196067,
+          "source_similarity_strict": 0.26725171117196067,
+          "source_similarity_by_chunk": [
+            0.2672517111719606
+          ],
+          "target_identity_by_chunk": [
+            0.7981943641659877
+          ],
+          "samples": 104640,
+          "peak": 0.47772216796875,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800018_v2.wav",
+            "bytes": 209324,
+            "sha256": "71b689c670535ac952fdc27d055bfc58f574f92685e412883491db11a4b45124",
+            "samples": 104640,
+            "peak": 0.47772216796875,
+            "rms": 0.07354193741212844,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800018_v2.features.f32",
+              "bytes": 52320,
+              "sha256": "6fab3bca888dd017056d7e18e4d5e69307ba35e18e6b5b6842ddfde5cbce89c5"
+            }
+          }
+        }
+      }
+    },
+    {
+      "stem": "SSB00800067",
+      "speaker": "SSB0080",
+      "split": "validation",
+      "manifest_text": "杰森在我们手上受了很痛苦的折磨",
+      "frames": 447,
+      "original_samples": 71524,
+      "source_profile_other_stems": [
+        "SSB00800053",
+        "SSB00800102",
+        "SSB00800018"
+      ],
+      "source_profile_sha256_f64": "60eb124a7052e9706ffb36b65032241d5143a23617c645821908b60666bf1085",
+      "feature_errors": {
+        "v1": {
+          "normalized_mae": 0.4534544050693512,
+          "clipped_fraction": 0.0008948545861297539
+        },
+        "v2": {
+          "normalized_mae": 0.45399850606918335,
+          "clipped_fraction": 0.0013422818791946308
+        }
+      },
+      "conditions": {
+        "source": {
+          "asr": "傑森在我們手上受了很痛苦的折磨",
+          "cer_vs_source_asr": {
+            "reference_chars": 15,
+            "hypothesis_chars": 15,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 15,
+            "hypothesis_chars": 15,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "target_identity_mean": 0.2031899146301639,
+          "target_identity_p10": 0.2031899146301639,
+          "source_similarity_window_mean": 0.7812131594074694,
+          "source_similarity_aggregate": 0.7812131594074692,
+          "source_similarity_strict": 0.7812131594074694,
+          "source_similarity_by_chunk": [
+            0.7812131594074694
+          ],
+          "target_identity_by_chunk": [
+            0.2031899146301639
+          ],
+          "samples": 71520,
+          "peak": 0.1402587890625,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800067_source.wav",
+            "bytes": 143084,
+            "sha256": "1c298ce20d31831c4103dcaee620af6c7ee7f2ddb956a73a62a935b6928dd221"
+          }
+        },
+        "teacher_pcm": {
+          "asr": "傑森在我們手上受了很痛苦的折磨",
+          "cer_vs_source_asr": {
+            "reference_chars": 15,
+            "hypothesis_chars": 15,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 15,
+            "hypothesis_chars": 15,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "target_identity_mean": 0.8751810355172239,
+          "target_identity_p10": 0.8751810355172239,
+          "source_similarity_window_mean": 0.2756226581174796,
+          "source_similarity_aggregate": 0.2756226581174796,
+          "source_similarity_strict": 0.2756226581174796,
+          "source_similarity_by_chunk": [
+            0.2756226581174796
+          ],
+          "target_identity_by_chunk": [
+            0.8751810355172239
+          ],
+          "samples": 71520,
+          "peak": 0.414398193359375,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800067_teacher_pcm.wav",
+            "bytes": 143084,
+            "sha256": "18f0b2df3ca6832f73fd7ee2addc6c4db891949a8e2354e7d3e97c9f758a8a48"
+          }
+        },
+        "teacher_features_oracle": {
+          "asr": "傑森在我們手上受了很痛苦的折磨",
+          "cer_vs_source_asr": {
+            "reference_chars": 15,
+            "hypothesis_chars": 15,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 15,
+            "hypothesis_chars": 15,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "target_identity_mean": 0.8136288070168454,
+          "target_identity_p10": 0.8136288070168454,
+          "source_similarity_window_mean": 0.29338055392612794,
+          "source_similarity_aggregate": 0.29338055392612794,
+          "source_similarity_strict": 0.29338055392612794,
+          "source_similarity_by_chunk": [
+            0.29338055392612794
+          ],
+          "target_identity_by_chunk": [
+            0.8136288070168454
+          ],
+          "samples": 71520,
+          "peak": 0.42315673828125,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800067_teacher_features_oracle.wav",
+            "bytes": 143084,
+            "sha256": "c9e75d6c8ea6d75d373029e4bb91f815596418701dab5d8a9903ebe69c5883da",
+            "samples": 71520,
+            "peak": 0.42315673828125,
+            "rms": 0.07976588343082412,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800067_teacher_features_oracle.features.f32",
+              "bytes": 35760,
+              "sha256": "429f02f983697215b6a273696d6816c6f1c2831db016ae7a4d53e040da42cf4e"
+            }
+          }
+        },
+        "v1": {
+          "asr": "傑森在我們手上受了很痛苦的折磨。",
+          "cer_vs_source_asr": {
+            "reference_chars": 15,
+            "hypothesis_chars": 15,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 15,
+            "hypothesis_chars": 15,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "target_identity_mean": 0.7775390518011182,
+          "target_identity_p10": 0.7775390518011182,
+          "source_similarity_window_mean": 0.29554544509712766,
+          "source_similarity_aggregate": 0.29554544509712755,
+          "source_similarity_strict": 0.29554544509712766,
+          "source_similarity_by_chunk": [
+            0.29554544509712766
+          ],
+          "target_identity_by_chunk": [
+            0.7775390518011182
+          ],
+          "samples": 71520,
+          "peak": 0.506866455078125,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800067_v1.wav",
+            "bytes": 143084,
+            "sha256": "87067599e708b4483fa839b87b428566998d769f2e715d8f0f56c363e54d8b86",
+            "samples": 71520,
+            "peak": 0.506866455078125,
+            "rms": 0.08197530611465033,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800067_v1.features.f32",
+              "bytes": 35760,
+              "sha256": "f3547604e8a9bc5bc0decfc099cde5e44f6594713a4a67ed5bb19e0e6ae19c17"
+            }
+          }
+        },
+        "v2": {
+          "asr": "傑森在我們手上受了很痛苦的折磨。",
+          "cer_vs_source_asr": {
+            "reference_chars": 15,
+            "hypothesis_chars": 15,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "cer_vs_manifest_text": {
+            "reference_chars": 15,
+            "hypothesis_chars": 15,
+            "distance": 0,
+            "cer": 0.0
+          },
+          "target_identity_mean": 0.7888131493380491,
+          "target_identity_p10": 0.7888131493380491,
+          "source_similarity_window_mean": 0.3112987655294291,
+          "source_similarity_aggregate": 0.3112987655294291,
+          "source_similarity_strict": 0.3112987655294291,
+          "source_similarity_by_chunk": [
+            0.3112987655294291
+          ],
+          "target_identity_by_chunk": [
+            0.7888131493380491
+          ],
+          "samples": 71520,
+          "peak": 0.49652099609375,
+          "clipping_fraction": 0.0,
+          "output": {
+            "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800067_v2.wav",
+            "bytes": 143084,
+            "sha256": "afa63cf3bc58b3223abdb4765ed8bf21b8a49439bb0574d15851f2ceeaf4a43d",
+            "samples": 71520,
+            "peak": 0.49652099609375,
+            "rms": 0.0815324800816957,
+            "clipping_fraction": 0.0,
+            "features": {
+              "path": "build/generated/remote_ps_c_chain_diagnostic_20261027/SSB00800067_v2.features.f32",
+              "bytes": 35760,
+              "sha256": "13a53cb557400c6fc798d23cdfcad551343a5a2f990a6d963594b5e997c8c6a4"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "input_artifacts": [
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/portable_manifest.json",
+      "bytes": 239634,
+      "sha256": "8e88db6e2777a331c874cfd3da948f9b86b0571acde17efbb384787ed9410e58"
+    },
+    {
+      "path": "build/generated/remote_ps_c_hubert_fargan_v1/cache_manifest.json",
+      "bytes": 266096,
+      "sha256": "d305aab590730054f873a2cda25e0e1afb05b887bb3f9104d95047a7b72461ca"
+    },
+    {
+      "path": "build/generated/remote_ps_c_native/fargan_probe_host.exe",
+      "bytes": 4934034,
+      "sha256": "0e5eb4d457741820564d4397e0b69f8dd58b25c896259bb66d8e84fb88a3dc14"
+    },
+    {
+      "path": "build/generated/remote_ps_c_hubert_fargan_v1/mapper.pt",
+      "bytes": 4553421,
+      "sha256": "ea545fda2b64b7242e710b4a799dfdd45034a958ff987ffd529a189abae26f68"
+    },
+    {
+      "path": "build/generated/remote_ps_c_hubert_fargan_v1/statistics.npz",
+      "bytes": 595704,
+      "sha256": "fc95aab77f18e7ea2308dacb524292a48d5ba9517bbdcb431341338f759584d8"
+    },
+    {
+      "path": "build/generated/remote_ps_c_hubert_fargan_v2/mapper.pt",
+      "bytes": 4553421,
+      "sha256": "610f592539fd51420409ca413e04232f3cd20da57f885957d050c6157569791c"
+    },
+    {
+      "path": "build/generated/remote_ps_c_hubert_fargan_v2/statistics.npz",
+      "bytes": 595704,
+      "sha256": "fc95aab77f18e7ea2308dacb524292a48d5ba9517bbdcb431341338f759584d8"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/hf_home/hub/models--openai--whisper-small/snapshots/973afd24965f72e36ca33b3055d56a652f456b4d/added_tokens.json",
+      "bytes": 34604,
+      "sha256": "9715fd2243b6f06a5858b5e32950d2853f73dd5bc201aafcf76f5082a2d8acd1"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/hf_home/hub/models--openai--whisper-small/snapshots/973afd24965f72e36ca33b3055d56a652f456b4d/config.json",
+      "bytes": 1967,
+      "sha256": "e6a2b489da1b5aed65a8eb8d1e7466fa867ad5643a8bc138ba708bd56b2875c4"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/hf_home/hub/models--openai--whisper-small/snapshots/973afd24965f72e36ca33b3055d56a652f456b4d/generation_config.json",
+      "bytes": 3868,
+      "sha256": "71565b8ef50d0bf7a1193ed4bbed195b94e70c18894d81bba2f1233dcec3ab53"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/hf_home/hub/models--openai--whisper-small/snapshots/973afd24965f72e36ca33b3055d56a652f456b4d/merges.txt",
+      "bytes": 493869,
+      "sha256": "2df2990a395e35e8dfbc7511e08c12d56018d8d04691e0133e5d63b21e154dc6"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/hf_home/hub/models--openai--whisper-small/snapshots/973afd24965f72e36ca33b3055d56a652f456b4d/model.safetensors",
+      "bytes": 966995080,
+      "sha256": "1d7734884874f1a1513ed9aa760a4f8e97aaa02fd6d93a3a85d27b2ae9ca596b"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/hf_home/hub/models--openai--whisper-small/snapshots/973afd24965f72e36ca33b3055d56a652f456b4d/normalizer.json",
+      "bytes": 52666,
+      "sha256": "bf1c507dc8724ca9cf9903640dacfb69dae2f00edee4f21ceba106a7392f26dd"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/hf_home/hub/models--openai--whisper-small/snapshots/973afd24965f72e36ca33b3055d56a652f456b4d/preprocessor_config.json",
+      "bytes": 184990,
+      "sha256": "9b5cd03a36fbb8a627c64d98a5b5b126ead95a77720723944487311f0110b666"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/hf_home/hub/models--openai--whisper-small/snapshots/973afd24965f72e36ca33b3055d56a652f456b4d/special_tokens_map.json",
+      "bytes": 2194,
+      "sha256": "e67ae3a0aaa99abcd9f187138e12db1f65c16a14761c50ef10eef2c174a7a691"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/hf_home/hub/models--openai--whisper-small/snapshots/973afd24965f72e36ca33b3055d56a652f456b4d/tokenizer.json",
+      "bytes": 2480466,
+      "sha256": "27fc476bfe7f17299480be2273fc0608e4d5a99aba2ab5dec5374b4482d1a566"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/hf_home/hub/models--openai--whisper-small/snapshots/973afd24965f72e36ca33b3055d56a652f456b4d/tokenizer_config.json",
+      "bytes": 282683,
+      "sha256": "2a4c4281cf9f51ac6ccc406fdc711a087afe6530f671fa7b80953edc498275ce"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/hf_home/hub/models--openai--whisper-small/snapshots/973afd24965f72e36ca33b3055d56a652f456b4d/vocab.json",
+      "bytes": 835550,
+      "sha256": "8f680bba319e01a653d2e8a5dbc17a9157179e0576e6ce74ce0c06356c6e24f9"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/wespeaker/cnceleb_resnet34_LM.onnx",
+      "bytes": 26530309,
+      "sha256": "e7584940aeac8d5512d875e58ce6c09ba4ddad65d8128e1dac0d93aadd087ebb"
+    },
+    {
+      "path": "人物音频资料/女声/Track 5.wav",
+      "bytes": 8292736,
+      "sha256": "c3a50c67c7d29a77c482067272624c3a196ed6421dcf11099b5827ccb65e09e3"
+    },
+    {
+      "path": "人物音频资料/女声/Track 6.wav",
+      "bytes": 5936896,
+      "sha256": "92ac22ae3f5674e8e5b49c296e0b1c35f38347c72081c3e56e570091f82ffbfa"
+    },
+    {
+      "path": "人物音频资料/女声/Track 7.wav",
+      "bytes": 7526656,
+      "sha256": "942b113534ff1e5af211b57a1db7419d1f9e9ba08e1944475931e393671bf5b1"
+    },
+    {
+      "path": "人物音频资料/女声/Track 8.wav",
+      "bytes": 6812410,
+      "sha256": "4e07e8ebf0deba90db76de70aec293f544c4695b43bdfec4d6037c3fb7f888f3"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/pcm/src/SSB04340036.f32",
+      "bytes": 288300,
+      "sha256": "7f5ad67d120d20228f8e7969bc2059991fa042d9e9b4e479c1b69d91fbc09a7a"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/pcm/tch/SSB04340036.f32",
+      "bytes": 288300,
+      "sha256": "f88f6a039fb83118766fcee9f25fe38f451b03a6bc61bb9a6617c9987aaeb701"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/features/source/SSB04340036.f32",
+      "bytes": 36000,
+      "sha256": "6e6db72567d67279629991457b37f299137d6631800776f79ec162303d5dc18e"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/features/teacher/SSB04340036.f32",
+      "bytes": 36160,
+      "sha256": "8179d7e8a40d96e52a7d717a6e46863fa3e1ab26cfb36d01f4153b4c20630d31"
+    },
+    {
+      "path": "build/generated/remote_ps_c_hubert_fargan_v1/cache/SSB04340036.npz",
+      "bytes": 674859,
+      "sha256": "c66cac81731001a8c5511a5850312a85af95e7a806894598fb7959efb7060e98"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/pcm/src/SSB04340089.f32",
+      "bytes": 487436,
+      "sha256": "60f0ec31b6ffbfe216662d6d114bbe6675a4e91b4e38451ddab4ce42097ed9a7"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/pcm/tch/SSB04340089.f32",
+      "bytes": 487436,
+      "sha256": "3e6a66d8d7c553214fae48964ffe1e83bcc7414c2c96709c083a8d5afb158d78"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/features/source/SSB04340089.f32",
+      "bytes": 60880,
+      "sha256": "ad5b8bd64202b93e8cd986765146bc9497ebb3d5761432935513bb85d326f1c1"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/features/teacher/SSB04340089.f32",
+      "bytes": 61120,
+      "sha256": "e3f5137270cedbc4fa347f57ae17627a5e32d2780814c554bb7b8a64014ed21f"
+    },
+    {
+      "path": "build/generated/remote_ps_c_hubert_fargan_v1/cache/SSB04340089.npz",
+      "bytes": 1144403,
+      "sha256": "cea068650125b89dfae67e63e710f0a49d6a65c8cc8898398d23057713917821"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/pcm/src/SSB04340076.f32",
+      "bytes": 326940,
+      "sha256": "75cc56bdcc3bd76f1cd43535ff49da3d7e06934b0eca2c5f7331a32287427abf"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/pcm/tch/SSB04340076.f32",
+      "bytes": 326940,
+      "sha256": "6fa87c5ca2d54dd2f8e95bedaf30dd52cf8c4814b7bdbd1d368f86f3a01a0687"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/features/source/SSB04340076.f32",
+      "bytes": 40800,
+      "sha256": "ac11c39ac60cde2ad6224641c557dc695f69de75d022fdd56b4637cae591c4e6"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/features/teacher/SSB04340076.f32",
+      "bytes": 40960,
+      "sha256": "b1ba04ca2c8f14f4e2e88bdda2476d5dbbada6c3aea8d99d91474b3c20df9740"
+    },
+    {
+      "path": "build/generated/remote_ps_c_hubert_fargan_v1/cache/SSB04340076.npz",
+      "bytes": 767916,
+      "sha256": "4538571156e36c655ace60dd07e3b77eee14df0db34d4595dce87e48379a22c0"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/pcm/src/SSB04340118.f32",
+      "bytes": 326940,
+      "sha256": "b75c7f309987b5d4bd2da91f89e588896617f70633709b158aa9f0c96363d695"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/pcm/tch/SSB04340118.f32",
+      "bytes": 326940,
+      "sha256": "11dbb9fca1ecb5c98473430168da92dbf0474375b17c9a8c6794ab56101172fe"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/features/source/SSB04340118.f32",
+      "bytes": 40800,
+      "sha256": "5ca3031620f73fc888d97386ded88654475dae7b54a96ee1f7d3684a835b2fb5"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/features/teacher/SSB04340118.f32",
+      "bytes": 40960,
+      "sha256": "5e0a402c990b666046af7e5a8e4671446b34b2662910591a6486936f61eda762"
+    },
+    {
+      "path": "build/generated/remote_ps_c_hubert_fargan_v1/cache/SSB04340118.npz",
+      "bytes": 768032,
+      "sha256": "34098679cf45f76a8df7133c114970572c604104741b2115158ce8e4cc8272cd"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/pcm/src/SSB00800053.f32",
+      "bytes": 433924,
+      "sha256": "c551e9c1d8cf72e22652387559af5340cbcef02fa1a82d80b271f96925893776"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/pcm/tch/SSB00800053.f32",
+      "bytes": 433924,
+      "sha256": "b6c394c4c48efc949ffcc3bbf50dab92d6676f27219b265bfa474d902b6847f1"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/features/source/SSB00800053.f32",
+      "bytes": 54240,
+      "sha256": "de86f4082444b8f07cfede2ba46f654038ce38997b3f15f696846d2aab91b5d8"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/features/teacher/SSB00800053.f32",
+      "bytes": 54400,
+      "sha256": "9dcccacbb02b849c04e5af6849489663d7794d13bc0076febeadda3033cdb6c6"
+    },
+    {
+      "path": "build/generated/remote_ps_c_hubert_fargan_v1/cache/SSB00800053.npz",
+      "bytes": 1018479,
+      "sha256": "5ae20ab2b24c14f34bc40e63defbfc55f3c6b795bc82cc8c565af4b2ab8d7384"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/pcm/src/SSB00800102.f32",
+      "bytes": 387848,
+      "sha256": "ab089a86b54ff23c04669f31ec45a75f9517256178513ae7482a307575f6065a"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/pcm/tch/SSB00800102.f32",
+      "bytes": 387848,
+      "sha256": "255ff2955881121c8eed04a12015606e9df1b6b2116ed0f0a64f522cb7a627ab"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/features/source/SSB00800102.f32",
+      "bytes": 48480,
+      "sha256": "050f74ee7440552ff7fc854f23b7d2feecef09fe42d188e1e6b3ea6bf2b91a7f"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/features/teacher/SSB00800102.f32",
+      "bytes": 48640,
+      "sha256": "407f4a6e70d10fef07ad11ec06b38fb1563c441a00934f02274aee6a2f5e2605"
+    },
+    {
+      "path": "build/generated/remote_ps_c_hubert_fargan_v1/cache/SSB00800102.npz",
+      "bytes": 909778,
+      "sha256": "4c9fd77694e0ef19d0463e35f2681c8183fab24014eacaf7069fdf7ebb721295"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/pcm/src/SSB00800018.f32",
+      "bytes": 418984,
+      "sha256": "8bcb63a1b795b57257cc34316af23647930abcabf5390e73ed4296010b5430fc"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/pcm/tch/SSB00800018.f32",
+      "bytes": 418984,
+      "sha256": "320154cd3ca7b45a13990be3e0af7a8530e44d0df1a1ddf6dec4b72f85e77440"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/features/source/SSB00800018.f32",
+      "bytes": 52320,
+      "sha256": "20f1289efca499ed53da9b74d790d3f2b91d1448c1777701a3996037aa0a11d7"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/features/teacher/SSB00800018.f32",
+      "bytes": 52480,
+      "sha256": "adcc0ef374d6931cbfbf8b6aca671bb5e6788d007654817cb5d515aa6f17cef0"
+    },
+    {
+      "path": "build/generated/remote_ps_c_hubert_fargan_v1/cache/SSB00800018.npz",
+      "bytes": 985034,
+      "sha256": "0a330eb0bc7d86d6acea91d04f7e4ef0cc7a990245770a14d79482d6b12a6109"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/pcm/src/SSB00800067.f32",
+      "bytes": 286096,
+      "sha256": "eb9462faf4b6b455368a2563828b8d4d0213a83f7cddee5752278533abed70a8"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/pcm/tch/SSB00800067.f32",
+      "bytes": 286096,
+      "sha256": "32f233d8a77029b6dcc3280d553cfeeb09750ec7bc420a96b97284d17aa64c70"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/features/source/SSB00800067.f32",
+      "bytes": 35760,
+      "sha256": "2fbedca82557dd3abb0c14b1c3625d3dda21ef6610001cc190611cf7203ed060"
+    },
+    {
+      "path": "build/generated/remote_ps_c_assets/paired_corpus_v1/paired_hubert_fargan_corpus_v1/features/teacher/SSB00800067.f32",
+      "bytes": 35840,
+      "sha256": "d39a71d03a67e62292866ba905fcc4278d82701a3d0fa7b7f878ba926530864b"
+    },
+    {
+      "path": "build/generated/remote_ps_c_hubert_fargan_v1/cache/SSB00800067.npz",
+      "bytes": 671810,
+      "sha256": "6500bac81b910e6eb9e345e80318fe86aa0b84edfcba422e8d5b3196ead1ad2f"
+    }
+  ],
+  "protocol": {
+    "duration": "All five conditions truncated to cached teacher prefix frames * 160 samples; no time warp or search.",
+    "pcm": "source/teacher float32 rounded/clipped to PCM16; all evaluated signals mono16k PCM16",
+    "mapper": "frozen step400 checkpoints; original float16 cached HuBERT content, PCA/statistics and clipping",
+    "source_profile": "leave-one-utterance-out mean of normalized same-speaker source aggregates (3 other auxiliary validation utterances)",
+    "target_profile": "equal-weight normalized per-file centroid of Track5-8, existing speaker windows",
+    "speaker_windows": "6s nonoverlap; tail >=1.5s; RMS>=0.001; RMS0.04 fbank80 Hamming CMN, no VAD",
+    "source_similarity": "max(mean window cosine, normalized duration-weighted aggregate cosine); descriptive, not the Fixed-Male profile",
+    "asr": "offline Whisper-small language zh task transcribe max_new_tokens256; existing forced_decoder_ids/attention-mask settings unchanged",
+    "cer": "existing evaluator cer() punctuation/case/OpenCC t2s; separately source-ASR and declared manifest text references; micro=sum edits/sum reference chars",
+    "utmos": "not evaluated in this diagnostic; no quality-gate acceptance or selection"
+  },
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "torch": "2.7.1+cpu",
+    "onnxruntime": "1.22.1",
+    "threads": 4,
+    "runtime": "D:\\fpga\\.git-repair\\build\\generated\\remote_ps_c_env\\Scripts\\python.exe"
+  },
+  "training_performed": false,
+  "model_or_statistics_modified": false,
+  "fixed_male_audio_read": false,
+  "target_track9_read": false,
+  "python_guard_denied_accesses": [],
+  "played": false,
+  "board_touched": false,
+  "quality_status": "v1/v2 REJECTED unchanged; not WAIT_LOCAL_TEST",
+  "limitations": [
+    "Auxiliary validation selected the existing checkpoints; this is not an independent acceptance set or Fixed-Male result.",
+    "Two speakers and short utterances do not establish generalization; source-profile protocol differs from fixed-male gates.",
+    "Whisper transcript errors and source-ASR reference errors can confound CER; manifest text is declared corpus metadata, not newly human-verified audio transcription.",
+    "Teacher PCM and supplied feature oracle use historical paired assets; native build is not historical bit parity.",
+    "Only one stage is replaced in each adjacent comparison, but numeric metric differences do not prove the cause of Fixed-Male failures.",
+    "Python file-open guard does not trace operating-system-wide or native-child access.",
+    "No new weights, hyperparameter sweep, locked-set evaluation, playback, human listening, ARM, PL or real-time result."
+  ],
+  "elapsed_seconds": 90.21899999999732
+}

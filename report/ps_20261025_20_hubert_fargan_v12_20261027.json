@@ -1,0 +1,106 @@
+{
+  "kind": "strict_fixed_male_evaluation",
+  "protocol": {
+    "source_profile": [
+      "人物音频资料/男声/标准录音 1.wav",
+      "人物音频资料/男声/标准录音 2.wav",
+      "人物音频资料/男声/标准录音 3.wav"
+    ],
+    "evaluated_source": "人物音频资料/男声/标准录音 4.wav",
+    "target_profile": [
+      "人物音频资料/女声/Track 5.wav",
+      "人物音频资料/女声/Track 6.wav",
+      "人物音频资料/女声/Track 7.wav",
+      "人物音频资料/女声/Track 8.wav"
+    ],
+    "target_track9_used": false,
+    "speaker_and_utmos_windows": "non-overlapping 6 s; tail >=1.5 s; RMS >=0.001",
+    "leakage": "maximum of arithmetic mean of per-window cosines and whole-file length-weighted aggregate-vector cosine",
+    "cer": "offline Whisper-small candidate transcript versus source transcript; punctuation removed and OpenCC 0.1.7 t2s-normalized"
+  },
+  "gates": {
+    "identity": 0.45,
+    "identity_p10": 0.35,
+    "leakage": 0.1,
+    "utmos": 2.3,
+    "cer": 0.15
+  },
+  "selected": "Remote-PS-C_HuBERT_BiGRU_FARGAN_v12_speaker_adv002",
+  "rows": [
+    {
+      "candidate": "Remote-PS-C_HuBERT_BiGRU_FARGAN_v12_speaker_adv002",
+      "path": "build/generated/remote_ps_c_hubert_fargan_v12/fixed_male4.wav",
+      "metrics": {
+        "identity": 0.770142852459652,
+        "identity_p10": 0.7375527516371683,
+        "leakage": 0.25682924843859395,
+        "leakage_window_mean": 0.24600050322000053,
+        "leakage_aggregate": 0.25682924843859395,
+        "utmos": 2.436301072438558,
+        "cer": 0.3235294117647059
+      },
+      "passed": {
+        "identity": true,
+        "identity_p10": true,
+        "leakage": false,
+        "utmos": true,
+        "cer": false
+      },
+      "all_gates_pass": false,
+      "selection_score": {
+        "minimum_gate_ratio": 0.389363752796673,
+        "mean_gate_ratio": 1.1461967178807064
+      },
+      "identity_by_chunk": [
+        0.7314920895738906,
+        0.8171410679147859,
+        0.7617953998902793
+      ],
+      "leakage_by_chunk": [
+        0.21404254904913775,
+        0.27975941998818954,
+        0.24419954062267427
+      ],
+      "utmos_by_chunk": [
+        2.350990056991577,
+        2.371020555496216,
+        2.586892604827881
+      ],
+      "source_asr": "男孩把最后一块糖给了骷髏的妹妹妹破体围剿点角亲了她一下糖纸在阳光下向彩虹多年后她仍留着那张糖纸记得那天的甜妹妹出嫁那天她把糖纸放进她手心",
+      "candidate_asr": "南海把这一块糖给了库当的妹妹妹妹铺起尾架,颠角轻了她一下,糖脂在眼眸下象彩虹,多年后她仍留着那张糖脂,记得那天的铁人。妹妹出家那天,她把糖脂放进她手心。",
+      "cer_detail": {
+        "reference_chars": 68,
+        "hypothesis_chars": 69,
+        "distance": 22,
+        "cer": 0.3235294117647059
+      },
+      "cer_without_script_normalization": {
+        "reference_chars": 68,
+        "hypothesis_chars": 69,
+        "distance": 22,
+        "cer": 0.3235294117647059
+      }
+    }
+  ],
+  "played": false,
+  "board_touched": false,
+  "task": "PS-20261025-20",
+  "date": "2026-10-27",
+  "role": "Remote-PS-C",
+  "status": "REJECTED",
+  "baseline_commit": "2d09f52",
+  "main_commit": "9c42263ea3aa12898ad451f3c00915e816f039c4",
+  "controlled_change": {
+    "speaker_adv_weight": {
+      "v5": 0.01,
+      "v12": 0.02
+    }
+  },
+  "execution": {
+    "train_exit": 0,
+    "infer_exit": 0,
+    "evaluate_exit": 0,
+    "audio_guard_denied": []
+  },
+  "boundary": "computer-only; no Male5, Track9, playback, recording, listening, board, ARM, Vivado, RTL, PL, or real-time validation"
+}

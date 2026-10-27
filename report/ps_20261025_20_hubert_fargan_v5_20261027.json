@@ -1,0 +1,504 @@
+{
+  "task": "PS-20261025-20",
+  "date": "2026-10-27",
+  "role": "Remote-PS-C",
+  "status": "REJECTED",
+  "baseline_commit": "6d940c927f4ba7ffefb97761dafa68c2f4295750",
+  "main_commit": "9c42263ea3aa12898ad451f3c00915e816f039c4",
+  "controlled_change": {
+    "speaker_adversarial_loss": {
+      "v1": false,
+      "v5": true
+    },
+    "speaker_adv_weight": [
+      0.05,
+      0.01
+    ],
+    "speaker_classes": 20
+  },
+  "unchanged_config": {
+    "pca_dim": 96,
+    "delta_weight": 0.25,
+    "hidden": 192,
+    "layers": 2,
+    "bidirectional": true,
+    "crop_frames": 192,
+    "batch": 8,
+    "learning_rate": 0.001,
+    "seed": 20261026
+  },
+  "statistics_equal_to_v1": {
+    "mean": true,
+    "projection": true,
+    "x_std": true,
+    "y_mean": true,
+    "y_std": true,
+    "low": true,
+    "high": true
+  },
+  "cache_manifest_sha256": "d305aab590730054f873a2cda25e0e1afb05b887bb3f9104d95047a7b72461ca",
+  "corpus_manifest_sha256": "8e88db6e2777a331c874cfd3da948f9b86b0571acde17efbb384787ed9410e58",
+  "counts": {
+    "train": 192,
+    "validation": 8
+  },
+  "speakers": {
+    "train": [
+      "SSB0005",
+      "SSB0012",
+      "SSB0018",
+      "SSB0033",
+      "SSB0043",
+      "SSB0057",
+      "SSB0073",
+      "SSB0145",
+      "SSB0149",
+      "SSB0193",
+      "SSB0197",
+      "SSB0241",
+      "SSB0273",
+      "SSB0375",
+      "SSB0394",
+      "SSB0407",
+      "SSB0603",
+      "SSB0609",
+      "SSB0623",
+      "SSB0629"
+    ],
+    "validation": [
+      "SSB0080",
+      "SSB0434"
+    ]
+  },
+  "alignment": "HuBERT RF center (320*i+199.5)/16000 interpolated at FARGAN (160*j+79.5)/16000; edge replication; no time warp",
+  "source_sha256": {
+    "build/remote_ps_c_hubert_fargan.py": "ba6aa878bb18c09b623257025e26dc4381cbafa9ccdd94d096c775190e69d0c8",
+    "build/remote_ps_c_hubert_fargan_v5.py": "388063df579ead0e000c974172fd4b0c75482827f44ffa8db120ad83cb7dce26",
+    "build/run_remote_ps_c_hubert_fargan_v5.py": "b58ece7eeaffabde9d83630d99809243f6dda037fc921e9358daa8d4f8760d79",
+    "build/evaluate_seed_fixed_male_strict_20261024.py": "7f2138ca331004da93d6aaf4be79b4c91aa5837c3f977af01f974bf87a189083",
+    "report/ps_20261025_20_environment_20261026.lock.txt": "0d81c14ab82acd1927e54b7e6b6f1137de5ea4db88a08151fa5ee45c30e24df3"
+  },
+  "training": {
+    "task": "PS-20261025-20",
+    "config": {
+      "seed": 20261026,
+      "pca_dim": 96,
+      "hidden": 192,
+      "layers": 2,
+      "bidirectional": true,
+      "crop_frames": 192,
+      "batch": 8,
+      "steps": 2000,
+      "check_every": 100,
+      "patience_checks": 8,
+      "learning_rate": 0.001,
+      "delta_weight": 0.25,
+      "speaker_adv_weight": 0.01,
+      "speaker_classes": 20
+    },
+    "history": [
+      {
+        "step": 1,
+        "train_loss": 3.446777582168579,
+        "validation_loss": 0.4530540704727173,
+        "elapsed_seconds": 3.640999999974156
+      },
+      {
+        "step": 100,
+        "train_loss": 3.0793089866638184,
+        "validation_loss": 0.22502296045422554,
+        "elapsed_seconds": 25.640999999974156
+      },
+      {
+        "step": 200,
+        "train_loss": 3.082286834716797,
+        "validation_loss": 0.2073812112212181,
+        "elapsed_seconds": 47.35999999998603
+      },
+      {
+        "step": 300,
+        "train_loss": 3.2145190238952637,
+        "validation_loss": 0.19836894050240517,
+        "elapsed_seconds": 69.54699999999139
+      },
+      {
+        "step": 400,
+        "train_loss": 3.0630712509155273,
+        "validation_loss": 0.19420235231518745,
+        "elapsed_seconds": 91.03099999998813
+      },
+      {
+        "step": 500,
+        "train_loss": 2.997708320617676,
+        "validation_loss": 0.19516651518642902,
+        "elapsed_seconds": 112.89099999997416
+      },
+      {
+        "step": 600,
+        "train_loss": 2.7385950088500977,
+        "validation_loss": 0.19557839445769787,
+        "elapsed_seconds": 135.10999999998603
+      },
+      {
+        "step": 700,
+        "train_loss": 2.891559600830078,
+        "validation_loss": 0.1992729902267456,
+        "elapsed_seconds": 156.93799999999464
+      },
+      {
+        "step": 800,
+        "train_loss": 2.9652585983276367,
+        "validation_loss": 0.19605773128569126,
+        "elapsed_seconds": 178.84399999998277
+      },
+      {
+        "step": 900,
+        "train_loss": 3.1531941890716553,
+        "validation_loss": 0.1966672372072935,
+        "elapsed_seconds": 201.09399999998277
+      },
+      {
+        "step": 1000,
+        "train_loss": 2.8586266040802,
+        "validation_loss": 0.20066208392381668,
+        "elapsed_seconds": 223.14099999997416
+      },
+      {
+        "step": 1100,
+        "train_loss": 3.0605416297912598,
+        "validation_loss": 0.2010192796587944,
+        "elapsed_seconds": 245.14099999997416
+      },
+      {
+        "step": 1200,
+        "train_loss": 2.9906699657440186,
+        "validation_loss": 0.199802128598094,
+        "elapsed_seconds": 266.75
+      }
+    ],
+    "best_step": 400,
+    "best_validation_loss": 0.19420235231518745,
+    "pca_explained_variance_ratio": 0.7490454230036694,
+    "train_frames": 88733,
+    "train_pairs": 192,
+    "validation_pairs": 8,
+    "fit_scope": "declared auxiliary train only; no Fixed-Male or target Track WAVs",
+    "speaker_adversarial": {
+      "classes": [
+        "SSB0005",
+        "SSB0012",
+        "SSB0018",
+        "SSB0033",
+        "SSB0043",
+        "SSB0057",
+        "SSB0073",
+        "SSB0145",
+        "SSB0149",
+        "SSB0193",
+        "SSB0197",
+        "SSB0241",
+        "SSB0273",
+        "SSB0375",
+        "SSB0394",
+        "SSB0407",
+        "SSB0603",
+        "SSB0609",
+        "SSB0623",
+        "SSB0629"
+      ],
+      "weight": 0.01,
+      "training_only": true,
+      "validation_selection_excludes_classifier_loss": true
+    },
+    "parameters": 1144552,
+    "mapper_sha256": "d3a2c1d670576a36024382a2efe08eb1b4dd4a3f541abe55632eb3b688eb3beb",
+    "statistics_sha256": "fc95aab77f18e7ea2308dacb524292a48d5ba9517bbdcb431341338f759584d8",
+    "noncausal": true,
+    "future_context": "bidirectional GRU and full-utterance HuBERT",
+    "elapsed_seconds": 266.7969999999914,
+    "board_touched": false,
+    "played": false
+  },
+  "inference": {
+    "samples": 291200,
+    "peak": 0.629608154296875,
+    "rms": 0.07232560482567203,
+    "sha256": "059fccd8a4204655bf56ae3609f3c851b73235386a2c6d670048a19e827554fb",
+    "clipping_fraction": 0.0,
+    "task": "PS-20261025-20",
+    "source_sha256": "f4a026e5c97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c",
+    "source_samples": 291200,
+    "frames": 1820,
+    "inference_seconds": 2.1719999999913853,
+    "rtf_host_full_chain": 0.119340659340186,
+    "mapper_sha256": "d3a2c1d670576a36024382a2efe08eb1b4dd4a3f541abe55632eb3b688eb3beb",
+    "native_sha256": "0e5eb4d457741820564d4397e0b69f8dd58b25c896259bb66d8e84fb88a3dc14",
+    "male5_used": false,
+    "target_track9_used": false,
+    "played": false,
+    "board_touched": false
+  },
+  "evaluation": {
+    "kind": "strict_fixed_male_evaluation",
+    "protocol": {
+      "source_profile": [
+        "人物音频资料/男声/标准录音 1.wav",
+        "人物音频资料/男声/标准录音 2.wav",
+        "人物音频资料/男声/标准录音 3.wav"
+      ],
+      "evaluated_source": "人物音频资料/男声/标准录音 4.wav",
+      "target_profile": [
+        "人物音频资料/女声/Track 5.wav",
+        "人物音频资料/女声/Track 6.wav",
+        "人物音频资料/女声/Track 7.wav",
+        "人物音频资料/女声/Track 8.wav"
+      ],
+      "target_track9_used": false,
+      "speaker_and_utmos_windows": "non-overlapping 6 s; tail >=1.5 s; RMS >=0.001",
+      "leakage": "maximum of arithmetic mean of per-window cosines and whole-file length-weighted aggregate-vector cosine",
+      "cer": "offline Whisper-small candidate transcript versus source transcript; punctuation removed and OpenCC 0.1.7 t2s-normalized"
+    },
+    "gates": {
+      "identity": 0.45,
+      "identity_p10": 0.35,
+      "leakage": 0.1,
+      "utmos": 2.3,
+      "cer": 0.15
+    },
+    "selected": "Remote-PS-C_HuBERT_BiGRU_FARGAN_v5_speaker_adv001",
+    "rows": [
+      {
+        "candidate": "Remote-PS-C_HuBERT_BiGRU_FARGAN_v5_speaker_adv001",
+        "path": "build/generated/remote_ps_c_hubert_fargan_v5/fixed_male4.wav",
+        "metrics": {
+          "identity": 0.7778507799243427,
+          "identity_p10": 0.7508048707020668,
+          "leakage": 0.2660844000206373,
+          "leakage_window_mean": 0.2563450724706107,
+          "leakage_aggregate": 0.2660844000206373,
+          "utmos": 2.461675484975179,
+          "cer": 0.3235294117647059
+        },
+        "passed": {
+          "identity": true,
+          "identity_p10": true,
+          "leakage": false,
+          "utmos": true,
+          "cer": false
+        },
+        "all_gates_pass": false,
+        "selection_score": {
+          "minimum_gate_ratio": 0.37582060426031766,
+          "mean_gate_ratio": 1.1566929438343125
+        },
+        "identity_by_chunk": [
+          0.7443439617007486,
+          0.8125598713649396,
+          0.7766485067073399
+        ],
+        "leakage_by_chunk": [
+          0.238642315606786,
+          0.28669206618096243,
+          0.24370083562408365
+        ],
+        "utmos_by_chunk": [
+          2.423257350921631,
+          2.3684303760528564,
+          2.59333872795105
+        ],
+        "source_asr": "男孩把最后一块糖给了骷髏的妹妹妹破体围剿点角亲了她一下糖纸在阳光下向彩虹多年后她仍留着那张糖纸记得那天的甜妹妹出嫁那天她把糖纸放进她手心",
+        "candidate_asr": "南海把这一块糖给了库囊的妹妹妹妹铺起尾叫,点叫亲了她一下,糖纸在眼眸下象彩虹,多年后她仍留着那张糖纸,记得热情的体能。妹妹出家热情,她把糖纸放进她手心。",
+        "cer_detail": {
+          "reference_chars": 68,
+          "hypothesis_chars": 69,
+          "distance": 22,
+          "cer": 0.3235294117647059
+        },
+        "cer_without_script_normalization": {
+          "reference_chars": 68,
+          "hypothesis_chars": 69,
+          "distance": 22,
+          "cer": 0.3235294117647059
+        }
+      }
+    ],
+    "played": false,
+    "board_touched": false
+  },
+  "execution": [
+    {
+      "stage": "train",
+      "exit_code": 0,
+      "wall_seconds": 272.3440000000119,
+      "log": "build/generated/remote_ps_c_v5_train.log"
+    },
+    {
+      "stage": "infer",
+      "exit_code": 0,
+      "wall_seconds": 7.717999999993481,
+      "log": "build/generated/remote_ps_c_v5_infer.log"
+    },
+    {
+      "stage": "evaluate",
+      "exit_code": 0,
+      "wall_seconds": 17.719000000011874,
+      "log": "build/generated/remote_ps_c_v5_evaluate.log"
+    }
+  ],
+  "v1_comparison_metrics": {
+    "identity": 0.7788145118676262,
+    "identity_p10": 0.751711669998765,
+    "leakage": 0.2529291513166748,
+    "leakage_window_mean": 0.24303335684436625,
+    "leakage_aggregate": 0.2529291513166748,
+    "utmos": 2.418009599049886,
+    "cer": 0.23529411764705882
+  },
+  "metric_change_v5_minus_v1": {
+    "identity": -0.0009637319432834746,
+    "identity_p10": -0.0009067992966982352,
+    "leakage": 0.013155248703962508,
+    "leakage_window_mean": 0.013311715626244475,
+    "leakage_aggregate": 0.013155248703962508,
+    "utmos": 0.04366588592529297,
+    "cer": 0.08823529411764708
+  },
+  "native_build": {
+    "task": "PS-20261025-20",
+    "source_archive_sha256": "d3c6c54fefb4f31162710bb47880d11b93e8d23993553a6590017749893351d2",
+    "source_is_exact_historical_archive": false,
+    "model_archive_sha256": "a5177ec6fb7d15058e99e57029746100121f68e4890b1467d4094aa336b6013e",
+    "compiler": "gcc.exe (MinGW-W64 x86_64-posix-seh, built by Brecht Sanders) 9.3.0",
+    "command": [
+      "D:\\Xilinx\\Vivado\\2023.2\\tps\\mingw\\9.3.0\\win64.o\\nt\\bin\\gcc.exe",
+      "-O3",
+      "-std=gnu99",
+      "-DOPUS_BUILD",
+      "-DUSE_ALLOCA",
+      "-include",
+      "D:\\fpga\\.git-repair\\build\\generated\\remote_ps_c_native\\fargan_mingw_compat.h",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-Wl,--gc-sections",
+      "-ID:\\fpga\\.git-repair\\build\\generated\\remote_ps_c_native\\opus-main",
+      "-ID:\\fpga\\.git-repair\\build\\generated\\remote_ps_c_native\\opus-main\\include",
+      "-ID:\\fpga\\.git-repair\\build\\generated\\remote_ps_c_native\\opus-main\\celt",
+      "-ID:\\fpga\\.git-repair\\build\\generated\\remote_ps_c_native\\opus-main\\dnn",
+      "D:\\fpga\\.git-repair\\build\\generated\\remote_ps_c_native\\fargan_probe.c",
+      "D:\\fpga\\.git-repair\\build\\generated\\remote_ps_c_native\\opus-main\\dnn\\burg.c",
+      "D:\\fpga\\.git-repair\\build\\generated\\remote_ps_c_native\\opus-main\\dnn\\freq.c",
+      "D:\\fpga\\.git-repair\\build\\generated\\remote_ps_c_native\\opus-main\\dnn\\fargan.c",
+      "D:\\fpga\\.git-repair\\build\\generated\\remote_ps_c_native\\opus-main\\dnn\\fargan_data.c",
+      "D:\\fpga\\.git-repair\\build\\generated\\remote_ps_c_native\\opus-main\\dnn\\lpcnet_enc.c",
+      "D:\\fpga\\.git-repair\\build\\generated\\remote_ps_c_native\\opus-main\\dnn\\lpcnet_tables.c",
+      "D:\\fpga\\.git-repair\\build\\generated\\remote_ps_c_native\\opus-main\\dnn\\nnet.c",
+      "D:\\fpga\\.git-repair\\build\\generated\\remote_ps_c_native\\opus-main\\dnn\\nnet_default.c",
+      "D:\\fpga\\.git-repair\\build\\generated\\remote_ps_c_native\\opus-main\\dnn\\parse_lpcnet_weights.c",
+      "D:\\fpga\\.git-repair\\build\\generated\\remote_ps_c_native\\opus-main\\dnn\\pitchdnn.c",
+      "D:\\fpga\\.git-repair\\build\\generated\\remote_ps_c_native\\opus-main\\dnn\\pitchdnn_data.c",
+      "D:\\fpga\\.git-repair\\build\\generated\\remote_ps_c_native\\opus-main\\celt\\kiss_fft.c",
+      "D:\\fpga\\.git-repair\\build\\generated\\remote_ps_c_native\\opus-main\\celt\\pitch.c",
+      "D:\\fpga\\.git-repair\\build\\generated\\remote_ps_c_native\\opus-main\\celt\\celt_lpc.c",
+      "D:\\fpga\\.git-repair\\build\\generated\\remote_ps_c_native\\opus-main\\celt\\mathops.c",
+      "-lm",
+      "-o",
+      "D:\\fpga\\.git-repair\\build\\generated\\remote_ps_c_native\\fargan_probe_host.exe"
+    ],
+    "probe_sha256": "9e9ea27dd6b0f0af271c51d5a0018169be87656b07148986ad5760065c736351",
+    "compat_sha256": "34945d63a455b04a1ba0ba5b28fdc502fe849d1104234c95c8f430ea02428afd",
+    "exe_sha256": "0e5eb4d457741820564d4397e0b69f8dd58b25c896259bb66d8e84fb88a3dc14",
+    "compiled_sources": {
+      "dnn/burg.c": "89ed14fa5020434a6e1ceecc5d23892a3e88fac5e5f71c86d8be65e2eeb138e4",
+      "dnn/freq.c": "d50062b834535a8f2fa7e30bb1ad3162b69cc5dd869729701e9fe9e9bbab20fc",
+      "dnn/fargan.c": "31345cea40748e6e380d6b8c4ff612f2a78611fae7e26404e171dcda983ca759",
+      "dnn/fargan_data.c": "68ba6e8731007f7184be862d7d1afe4cef096a7c9bcbfa115962340f725e004c",
+      "dnn/lpcnet_enc.c": "6181341664a621ca0e020b1fe9a521c419bf55567d09643ced5cf56e95dd6f8b",
+      "dnn/lpcnet_tables.c": "9a4b5490b8c45e11712d7d2d9eff99f7a13fe49bd2d911609a4435b35ef1996a",
+      "dnn/nnet.c": "1b376a8499167e143f8a4ec8d0c622d259b4ae99d8c7495a80d6318912de81e7",
+      "dnn/nnet_default.c": "1402eb611b7fcc1fe7fa18639f0395e0af47a783ef87450318411483516e9011",
+      "dnn/parse_lpcnet_weights.c": "78ab42e0fc04a72f89bc1a1af9363c630263608cb1065751c2c4d89c5f93e89a",
+      "dnn/pitchdnn.c": "128473b43db5c160d4eefbab7e74f75b9074316a89ee095743329d387301252f",
+      "dnn/pitchdnn_data.c": "b086f190fbba4179bc4995169910a0178b0be608a608800d2090ddbf64b42b3e",
+      "celt/kiss_fft.c": "a933f4fdabdd42d47697fbd41a2bc17cd7f7ef6eae0be207fc058e9b0264be0c",
+      "celt/pitch.c": "0c7b6d0f19651a772a2f12380163f3637bb2e1f12842480569df244c725ab3d0",
+      "celt/celt_lpc.c": "8c6eb20b52aa9d52a83453fd3e33372f2faf1791ea6cfcd8d9d294b005cd0801",
+      "celt/mathops.c": "25199450cc613fc9784add776204dc81d12478fde0d00c746fb1ac62ba85c10e"
+    },
+    "host_only": true,
+    "board_touched": false,
+    "played": false,
+    "smoke": [
+      {
+        "stem": "SSB06030046",
+        "frames": 484,
+        "delivered_frames": 484,
+        "feature_mae": 0.000537671206984669,
+        "feature_max_difference": 0.3260602653026581,
+        "output_samples": 77440,
+        "output_peak": 0.541351318359375,
+        "output_rms": 0.07998424580665495,
+        "analysis": {
+          "frames": 484,
+          "audio_seconds": 4.84,
+          "mean_frame_ms": 0.033089,
+          "max_frame_ms": 0.2357,
+          "total_compute_ms": 16.0151,
+          "frame_audio_ms": 10,
+          "synthesis": false,
+          "target_voice_conversion": false,
+          "live_verified": false
+        },
+        "synthesis": {
+          "frames": 484,
+          "audio_seconds": 4.84,
+          "mean_frame_ms": 0.290907,
+          "max_frame_ms": 0.4753,
+          "total_compute_ms": 140.7992,
+          "frame_audio_ms": 10,
+          "synthesis": true,
+          "target_voice_conversion": false,
+          "live_verified": false
+        }
+      },
+      {
+        "stem": "SSB06030056",
+        "frames": 434,
+        "delivered_frames": 436,
+        "feature_mae": 0.00024446690804325044,
+        "feature_max_difference": 0.1691220998764038,
+        "output_samples": 69440,
+        "output_peak": 0.548187255859375,
+        "output_rms": 0.07980555877634578,
+        "analysis": {
+          "frames": 434,
+          "audio_seconds": 4.34,
+          "mean_frame_ms": 0.028426,
+          "max_frame_ms": 0.2472,
+          "total_compute_ms": 12.337,
+          "frame_audio_ms": 10,
+          "synthesis": false,
+          "target_voice_conversion": false,
+          "live_verified": false
+        },
+        "synthesis": {
+          "frames": 434,
+          "audio_seconds": 4.34,
+          "mean_frame_ms": 0.322816,
+          "max_frame_ms": 0.795,
+          "total_compute_ms": 140.102,
+          "frame_audio_ms": 10,
+          "synthesis": true,
+          "target_voice_conversion": false,
+          "live_verified": false
+        }
+      }
+    ]
+  },
+  "male5_used": false,
+  "target_track9_used": false,
+  "played": false,
+  "board_touched": false,
+  "delivery_status": "not_packaged_quality_rejected",
+  "python_audio_guard_denied_accesses": [],
+  "guard_scope": "Python file opens, not OS-wide/native-child tracing"
+}

@@ -1,0 +1,2 @@
+{"task":"PS-20261025-20","date":"2026-10-27","role":"Remote-PS-C","version":"v22","status":"REJECTED","candidate":"Remote-PS-C_HuBERT_BiGRU_FARGAN_v22_input002_output005","controlled_change":"GRU 输入对抗 0.02 + 输出特征对抗 0.05","execution":"train/infer/evaluate exit 0","evaluation":{"identity":0.77571906,"identity_p10":0.762017343,"leakage":0.24918339,"utmos":2.47355485,"cer":0.323529412,"gates":{"identity":0.45,"identity_p10":0.35,"leakage":0.1,"utmos":2.3,"cer":0.15},"all_gates_pass":false},"male5_used":false,"target_track9_used":false,"played":false,"board_touched":false}
+

@@ -1,0 +1,10 @@
+PS-20261025-20 v23 REJECTED
+delta_weight 1.00 + 输出特征对抗 0.05
+identity 0.781689788
+identity_p10 0.767834480
+leakage 0.255565381
+utmos 2.581680616
+cer 0.235294118
+identity PASS, P10 PASS, leakage FAIL, UTMOS PASS, CER FAIL
+train/infer/evaluate exit 0; Male5/Track9 locked; computer-only; no playback or hardware.
+

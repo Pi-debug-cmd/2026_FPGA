@@ -1,0 +1,10 @@
+PS-20261025-20 v25 REJECTED
+冻结 v24 输出，target mean shrink 0.15
+identity 0.143637836
+identity_p10 0.113644411
+leakage 0.159276669
+utmos 1.299219171
+cer 1.000000000
+identity FAIL, P10 FAIL, leakage FAIL, UTMOS FAIL, CER FAIL
+infer/evaluate exit 0; Male5/Track9 locked; computer-only; no playback or hardware.
+
