@@ -1,7 +1,0 @@
-{
-    "path":  "fpga/stft/bitstream/vc_o64_pl",
-    "bytes":  812624,
-    "sha256":  "13d48df76a6366a54dce22bd4652ac50ca5f0363f44480b1a2c8e37125fee3e2",
-    "opts":  "-O2 -static -s -DVC_PL_DEFAULT=1",
-    "note":  "re-hashed 2026-10-27 when packaging; the original build log's vc_o64_pl.json recorded the _dbg copy (sha 40dc1375...). Rebuild with board/build_pl.ps1 to reproduce."
-}
