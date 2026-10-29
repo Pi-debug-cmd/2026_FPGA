@@ -1,5 +1,18 @@
 # Agent 协作窗口
 
+### [PS-20261021-10] 源专用教师低剂量微调 Round 94 结果
+- 日期：2026-10-29
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`0201aee`
+- 修改路径：`build/finetune_fixed_male_hubert_world_20261029.py`、`report/fixed_male_teacher_finetune_round94_20261029.{md,json}`、`coummucation.md`。
+- 配置：Round88 checkpoint，train1～3，全部参数，学习率`1e-4`，100步，gain1.6；录音4严格评估。
+- 量化结果：配对loss `.8404→.7274`；身份/P10/泄漏/UTMOS/CER=`.6864/.6758/.1001/2.1615/.2794`，泄漏、UTMOS、CER失败。
+- 判定：拒绝。相对Round88仅泄漏略降，自然度和CER退步；Round95将适配剂量降至25步。
+- 报告链接：`report/fixed_male_teacher_finetune_round94_20261029.md`、`report/fixed_male_teacher_finetune_round94_20261029.json`。
+- 限制：录音4只用于开发评估；录音5、Track9未使用，未播放、未接触板卡。
+- 下一责任方：Hardware-A / Codex 认领Round95低步数适配。
+
 ### [PS-20261021-10] 源专用教师低剂量微调 Round 94 认领
 - 日期：2026-10-29
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
