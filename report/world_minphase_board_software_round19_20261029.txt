@@ -1,0 +1,12 @@
+PL-20261027-01 Round19 board-software build: PASS (build only)
+kernel vermagic: 5.15.0-xilinx SMP preempt mod_unload modversions ARMv7 p2v8
+device/ABI: /dev/world_minphase; 513 f32 in; 513+513 f32 out; 6156 bytes
+MMIO: ctrl 0x43c70000; args 0x43c80000 + 0x10/0x1c/0x28
+timeout: 20000 us, failure latched; no silent CPU fallback
+ARM main: 2dea4725867974f20319f5ea418aa67258aede0bcfd43e72fb1cf2d39559f438
+ARM probe: 664bc0819b5c76791761b5ac6a5a7af61e42a973ef4c55c6cca054c7131723f6
+module: fbbe531f16189fb720a487fbcfa2d78ab1d08836488c93850e7a8480fbc31f62
+swapped bin: 1bc4b3f8f5e5f1b722b0772b9aad23af3c60579dc3c81c44c8d86b408c429373
+deterministic gzip: 6a7fec9987d31c5f803b79b1bb8e115dca9fda0dfc278b8f462d60562b628d98
+board load/vector/file test: NOT RUN
+record/playback/listening/boot partition modification: NONE

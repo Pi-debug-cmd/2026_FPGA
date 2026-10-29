@@ -1966,3 +1966,18 @@
 - 风险：DRC 仍有 131 Warning/38 Advisory；现有音频约束仍缺 3 输入和 6 输出 I/O delay。首次长路径工程因 Windows 260 字符失败，同设计在 `D:/wpl_20261029_full/m` 通过；不能宣称外部接口完整 signoff。
 - 报告：`report/world_minphase_integration_round18_20261029.{md,json,txt}`；候选 bit/bin/DCP SHA 见 JSON，生成物未入 Git。本轮未加载板卡、未录放或试听。
 - 下一责任方：Hardware-A / Codex 生成 Linux 换序载荷，实现 coherent-buffer/超时轮询驱动和 WORLD 包装，再执行可恢复的静默板端向量测试。
+
+### [PL-20261027-01] Round19 最小相位板端软件闭环认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED / PROPOSED；基准提交：`4c13edd`。
+- 唯一变量：为 Round18 位流增加 Linux FPGA Manager 换序打包、`/dev/world_minphase` coherent-buffer 驱动、`GetMinimumPhaseSpectrum` ARM 包装和 24 例静默 DMA 探针；不改 HLS 算法或整机连接。
+- 驱动契约：513 float32 输入、513+513 float32 输出；控制/参数基址 `0x43C70000/0x43C80000`，物理缓冲经 HP2，20 ms 有界轮询，超时后拒绝继续静默回退。
+- 成功门：ARM 静态程序和匹配 5.15.0-xilinx module 构建通过；载荷换序/哈希可复现；主机编译与 ioctl ABI 检查通过。独立提交后才临时加载板卡做 24 例静默向量并验证恢复。
+- 限制：本轮软件构建不加载板卡、不录放或试听；板端阶段也只做文件/向量，启动分区不修改。
+- 下一责任方：Hardware-A / Codex 完成构建、证据与提交。
+
+### [PL-20261027-01] Round19 最小相位板端软件闭环结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：ACCEPTED（仅软件构建门）；基准提交：`4c13edd`。
+- 交付：确定性 FPGA Manager 换序/gzip 打包、`/dev/world_minphase` coherent DMA 模块、WORLD `GetMinimumPhaseSpectrum` 包装和 24 例静默探针；控制/参数基址 `0x43C70000/0x43C80000`，20 ms 超时后锁存失败，不静默回退。
+- 构建：ARM 静态主程序/探针通过；模块 vermagic `5.15.0-xilinx SMP preempt mod_unload modversions ARMv7 p2v8`。换序 bin SHA `1bc4b3f8...29373`，确定性 gzip SHA `6a7fec99...8d98`，连续两次一致；其余哈希见 JSON。
+- 报告：`report/world_minphase_board_software_round19_20261029.{md,json,txt}`。本轮未加载板卡，不能宣称板端数值、RTF 或音质通过；未录放、试听或修改启动分区。
+- 下一责任方：Hardware-A / Codex 独立提交后执行可恢复的 24 例静默板测及文件转换对照，最后恢复并核对原厂 bit/v23、PCM、服务和内核状态。

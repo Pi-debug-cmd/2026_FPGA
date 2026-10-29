@@ -1,0 +1,63 @@
+{
+  "task_id": "PL-20261027-01",
+  "round": 19,
+  "date": "2026-10-29",
+  "role": "Hardware-A / Codex",
+  "status": "ACCEPTED_BUILD_ONLY",
+  "base_commit": "4c13edd",
+  "board_loaded": false,
+  "kernel": {
+    "vermagic": "5.15.0-xilinx SMP preempt mod_unload modversions ARMv7 p2v8",
+    "device": "/dev/world_minphase",
+    "dma": "coherent 32-bit, three float32 planes through HP2",
+    "timeout_us": 20000,
+    "failed_latched_after_timeout": true
+  },
+  "abi": {
+    "bins": 513,
+    "packet_bytes": 6156,
+    "ap_ctrl_base": "0x43c70000",
+    "pointer_args_base": "0x43c80000",
+    "pointer_offsets": ["0x10", "0x1c", "0x28"]
+  },
+  "payload": {
+    "raw_bytes": 4045564,
+    "raw_sha256": "2e8517d9d126261fd397ec76e3209b111d9cee232d6374bdc9bb099473d79117",
+    "swapped_sha256": "1bc4b3f8f5e5f1b722b0772b9aad23af3c60579dc3c81c44c8d86b408c429373",
+    "gzip_bytes": 536768,
+    "gzip_sha256": "6a7fec9987d31c5f803b79b1bb8e115dca9fda0dfc278b8f462d60562b628d98",
+    "deterministic_second_run": true
+  },
+  "artifacts": {
+    "world_exp_arm_minphasepl": {
+      "bytes": 1988692,
+      "sha256": "2dea4725867974f20319f5ea418aa67258aede0bcfd43e72fb1cf2d39559f438",
+      "type": "ELF 32-bit LSB ARM EABI5 static"
+    },
+    "world_minphase_dma_probe": {
+      "bytes": 566456,
+      "sha256": "664bc0819b5c76791761b5ac6a5a7af61e42a973ef4c55c6cca054c7131723f6",
+      "cases": 24,
+      "relative_l2_gate": 0.00002,
+      "type": "ELF 32-bit LSB ARM EABI5 static"
+    },
+    "world_minphase_dma.ko": {
+      "bytes": 10124,
+      "sha256": "fbbe531f16189fb720a487fbcfa2d78ab1d08836488c93850e7a8480fbc31f62",
+      "type": "ELF 32-bit LSB ARM relocatable"
+    }
+  },
+  "checks": {
+    "arm_cross_build": "pass",
+    "kernel_module_build": "pass",
+    "wrapper_symbol_present": true,
+    "hls_pointer_offsets_rechecked": true,
+    "board_vector_test": "not_run"
+  },
+  "limitations": [
+    "No candidate bitstream or module was loaded on the board in this round.",
+    "No board numerical result, end-to-end RTF, recording, playback, or listening claim is made.",
+    "The boot partition was not modified."
+  ],
+  "next_responsible": "Hardware-A / Codex: run a recoverable silent 24-case board probe and file-conversion comparison, then restore and verify factory bit/v23."
+}

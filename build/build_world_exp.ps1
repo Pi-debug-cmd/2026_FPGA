@@ -6,10 +6,12 @@ param(
   [switch]$CacheFftPlans,
   [string]$FftModelSdk='',
   [switch]$FftPl,
-  [switch]$MinphaseModel
+  [switch]$MinphaseModel,
+  [switch]$MinphasePl
 )
 $ErrorActionPreference='Stop'
 if ($MinphaseModel -and ($Target -ne 'host' -or $FftModelSdk -or $FftPl -or $ProfileOperators)) {throw 'Minimum-phase model requires host without FFT/profile wrappers'}
+if ($MinphasePl -and ($Target -ne 'arm' -or $MinphaseModel -or $FftModelSdk -or $ProfileOperators)) {throw 'PL minimum-phase requires ARM without model/profile wrappers'}
 if ($ProfileOperators -and $CacheFftPlans) {throw 'Profile and cache wrappers must be built separately'}
 if ($FftModelSdk -and ($Target -ne 'host' -or $ProfileOperators)) {throw 'FFT IP model requires host and no profiling'}
 if ($FftPl -and ($Target -ne 'arm' -or $ProfileOperators -or $FftModelSdk)) {throw 'PL FFT requires ARM without model/profiling'}
@@ -64,6 +66,11 @@ if($MinphaseModel) {
   $sources+=@("$root/src/ps/world_minphase_model.cpp", "$root/src/hls/world_minphase.cpp")
   $flags+='-Wl,--wrap=GetMinimumPhaseSpectrum'
 }
+if($MinphasePl) {
+  $bin+='_minphasepl'
+  $sources+=@("$root/src/ps/world_minphase_pl.cpp")
+  $flags+='-Wl,--wrap=GetMinimumPhaseSpectrum'
+}
 if($Target -eq 'host') {$bin+='.exe'}
 & $Compiler @flags @includes "$root/src/ps/world_live_stream.cpp" "$root/src/ps/world_exp_hook.cpp" "$out/common.cpp" "$root/src/ps/world_v23/synthesis.cpp" "$root/src/ps/world_v23/synthesisrealtime.cpp" @sources "$WorldRoot/tools/audioio.cpp" -lm -o $bin
 if($LASTEXITCODE) {throw 'WORLD exp build failed'}
@@ -73,6 +80,10 @@ if($Target -eq 'arm') {
   if($FftPl) {
     & $Compiler -O3 -std=c++11 -Wall -Wextra -Werror -Wno-missing-field-initializers -static -mcpu=cortex-a9 -mfpu=neon -mfloat-abi=hard -I "$WorldRoot/src" "$root/src/ps/world_fft_dma_probe.cpp" "$WorldRoot/src/fft.cpp" -lm -o "$out/world_fft_dma_probe"
     if($LASTEXITCODE) {throw 'FFT DMA probe build failed'}
+  }
+  if($MinphasePl) {
+    & $Compiler -O3 -std=c++11 -Wall -Wextra -Werror -Wno-missing-field-initializers -static -mcpu=cortex-a9 -mfpu=neon -mfloat-abi=hard -I "$WorldRoot/src" "$root/src/ps/world_minphase_dma_probe.cpp" "$WorldRoot/src/common.cpp" "$WorldRoot/src/fft.cpp" "$WorldRoot/src/matlabfunctions.cpp" -lm -o "$out/world_minphase_dma_probe"
+    if($LASTEXITCODE) {throw 'Minimum-phase DMA probe build failed'}
   }
 }
 Get-FileHash $bin
