@@ -2552,3 +2552,11 @@
 - 证据：`report/fixed_male_teacher_finetune_round99_20261029.{md,json}`；checkpoint `7d06b7a1...12b5ce4`；候选 `ce2a06c1...f6b4536`。
 - 限制：录音5/Track9未用；未播放、未板测。下一责任方：Hardware-A / Codex执行Round100教师子集对照。
 
+### [PS-20261021-10] train1教师单句全模型适配 Round 100 结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：REJECTED。
+- 配置：Round88，仅train1，全模型25步，lr=1e-4，gain1.6。
+- 五门：0.6787/0.6592/0.1008/2.1770/0.3088；仅身份通过。
+- 判定：筛选内容最好的单句教师仍未保护内容/自然度，不进录音5。
+- 证据：`report/fixed_male_teacher_finetune_round100_20261029.{md,json}`；checkpoint `0582b714...97a165c`；候选 `9fc06823...8175e1d`。
+- 限制：录音5/Track9未用；未播放、未板测。下一责任方：Hardware-A / Codex执行Round101。
+
