@@ -2544,3 +2544,11 @@
 - 证据：`report/fixed_male_teacher_finetune_round98_20261029.{md,json}`；checkpoint `56806af3...fec42fd`；候选 `89d496f8...6b26d385`。
 - 限制：录音5/Track9未用；未播放、未接触板卡。下一责任方：Hardware-A / Codex执行Round99。
 
+### [PS-20261021-10] GRU与输出层适配 Round 99 结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：REJECTED。
+- 配置：Round88，train1～3，GRU+输出层25步，lr=1e-4，gain1.6。
+- 五门：0.6923/0.6722/0.1176/2.2391/0.3235；仅身份两门通过。
+- 判定：扩大可训练层恶化泄漏、自然度与内容，不进入录音5，不再扩层。
+- 证据：`report/fixed_male_teacher_finetune_round99_20261029.{md,json}`；checkpoint `7d06b7a1...12b5ce4`；候选 `ce2a06c1...f6b4536`。
+- 限制：录音5/Track9未用；未播放、未板测。下一责任方：Hardware-A / Codex执行Round100教师子集对照。
+
