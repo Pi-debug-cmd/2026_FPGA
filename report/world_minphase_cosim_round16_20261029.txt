@@ -1,0 +1,11 @@
+Report time       : Thu Oct 29 19:29:10 2026
+Solution          : solution
+Simulation tool   : xsim
+RTL               : Verilog
+Status            : Pass
+Latency cycles    : min 32231 / avg 32231 / max 32232
+Interval cycles   : min 32245 / avg 32245 / max 32246
+Total cycles      : 773889
+C post check      : {"cases":24,"relative_l2_max":8.53141669198e-07,"passed":true}
+Dependence warnings counted in generated xsim.log: 6720
+Generated report SHA-256: 226fefa1573e712efefa9b5bf6822aaa62a6c2e34dc825a36ffbb42cdec0fc31

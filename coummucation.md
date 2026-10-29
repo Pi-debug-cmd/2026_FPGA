@@ -1920,3 +1920,18 @@
 - 证据report/world_minphase_round16_paused_20261027.md及synth/cosim TXT；交接handoff_20261027_PL.md。原厂位流/v23已恢复、双PCM RUNNING，临时驱动卸载，启动分区未改，无新录放。
 - 用户方向：尽量把WORLD分析/映射/合成迁入PL，PS保留I/O控制；首个最小相位融合核host两输入误差1/SNR约97dB，HLS估算38DSP/约1万LUT，尚待RTL/整机/板测。
 - 下一责任方Hardware-A / Codex：用户下次要求继续后，先完成24例RTL cosim，再评估整机/板端收益。不得把估算当高实时验收。
+
+### [PL-20261027-01] Round16 短路径 RTL cosim 恢复认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`fe556e66fd5bd1a3feb0a34fbd3db2e8cb29a045`。
+- 用户要求继续 WORLD v23 PL 迁移直到可用；本轮先恢复 `D:/wpl_20261027_r16/m` 的 24 例 Verilog cosim，关闭前不把 HLS 估算或未完成日志写成 RTL 通过。
+- 协作边界：根工作区存在他人未提交改动，继续只使用独立工作树 `tmp/world_v23_pl_worktree`；板卡保持原厂 bit/v23，不进行录音、播放或试听。
+- 成功门：24/24 RTL 输出与同一 WORLD golden 对照通过，并记录工具版本、周期与误差；通过后再评估整机资源/时序和静默板端收益。
+- 下一责任方：Hardware-A / Codex 完成本轮 cosim、证据、提交和 PR 更新。
+
+### [PL-20261027-01] Round16 短路径 RTL cosim 结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：ACCEPTED（仅 RTL cosim 门）；基准提交：`fe556e66fd5bd1a3feb0a34fbd3db2e8cb29a045`。
+- 复现：设置 `WORLD_HLS_PROJECT=D:/wpl_20261027_r16/m`，运行报告中的 Vitis HLS 2026.1 命令；WORLD 0.3.5 golden 源来自根工作区忽略目录，源码与报告 SHA 见 JSON。
+- 量化：24/24 Verilog RTL 用例通过，RTL 后检查最大 relative L2 `8.53141669198e-7`；延迟 `32231..32232` 拍，事务间隔 `32245..32246` 拍。HLS 估算 `10007 LUT / 7732 FF / 8 BRAM18K / 38 DSP`，尚非 routed。
+- 风险：XSIM 对显式 `inter false` 依赖提示记录 6720 条动态地址冲突警告；24 例数值通过但警告保留，不能据此宣称整机时序或板端通过。
+- 报告：`report/world_minphase_cosim_round16_20261029.{md,json,txt}`。本轮无板卡切换、录音、播放或试听。
+- 下一责任方：Hardware-A / Codex 独立提交本轮后执行 OOC 实现与时序/资源门；通过后再设计整机 DMA 接入。
