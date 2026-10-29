@@ -2058,3 +2058,18 @@
 - 运行态：candidate active MICB/ADC/DAC/PGA/HP均On；驱动 device 累计`3.055748 s`、约`387.64 us/call`。报告：`report/world_minphase_prompt_live60_round24_20261029.{md,json,txt}`；完整结果与active codec已保存。
 - 恢复：module卸载、sync、正常reboot；原厂bit/v23 SHA匹配，FPGA operating、服务和双PCM RUNNING、自有模块无、taint0、临时目录清除。既有FAT警告仍在，本轮未写启动分区。
 - 下一责任方：Hardware-A / Codex 等待新的操作者准备确认后，使用完全相同参数重做60秒；提示后需在整个录入窗口持续讲话，失败不自动重跑。
+
+### [PL-20261027-01] Round25 60 秒有效讲话稳定性复测认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`d85bee6`；操作者明确“准备好了”。
+- 唯一变量：复用 Round24 完全相同 candidate、程序、module、提示音、200 ms/fifo_io、增益和 ALSA 参数，重新执行60秒；本轮操作者将在提示后持续讲话。
+- 成功门：有声帧>0，零录放 xrun/ALSA error/输入触顶/输出削顶，PL calls>0/fallback=0；保存结果与active codec，取得用户听感后恢复原厂bit/v23。
+- 限制：60秒不替代10/30分钟长稳和定量物理延迟；任何失败仍单独提交，不自动重跑。
+- 下一责任方：Hardware-A / Codex 部署、执行、取证并恢复。
+
+### [PL-20261027-01] Round25 60 秒有效讲话稳定性复测结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：REJECTED（提示音不可闻且客观门失败）；基准提交：`d85bee6`。
+- 用户原话：**“我刚刚没有听到提示音”**。提示进程虽报告exit0/24960帧，但操作者没有听见，正式录入起点不可判定；不得把进程成功写成提示可闻。
+- 客观：60秒采集/播放各960000样本、零xrun，PL `8803 calls / 0 fallback`；但子进程`0/6/0`、有声帧0、输出peak `2.423787`且削顶133样本，监督器exit1。本轮不能作为60秒有效讲话稳定性验收。
+- 报告：`report/world_minphase_prompt_live60_round25_20261029.{md,json,txt}`；完整结果与active codec已保存。candidate active MICB/ADC/DAC/PGA/HP均On；驱动device约`386.25 us/call`。
+- 恢复：module卸载、sync、正常reboot；原厂bit/v23 SHA匹配，FPGA operating、服务running，双PCM在随后复核均RUNNING，自有模块无、taint0、临时目录清除。
+- 下一责任方：Hardware-A / Codex 先增加codec静音预热、更长更响三段提示和`--prompt-only`验证模式；取得新的播放准备确认并由用户明确确认可闻后，才再次申请60秒录入。
