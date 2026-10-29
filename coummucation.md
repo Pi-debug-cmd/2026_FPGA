@@ -2567,3 +2567,10 @@
 - 证据：`report/fixed_male_teacher_finetune_round101_20261029.{md,json}`；checkpoint `0d6250b4...daf877d`；候选 `d4b332ae...e8c1f38`。
 - 限制：录音5/Track9未用；未播放、未板测。下一责任方：Hardware-A / Codex执行Round102。
 
+### [PS-20261021-10] train1+2教师输出层适配 Round 102 结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：REJECTED。
+- 配置：Round88，train1+2，输出层100步，lr=1e-4，gain1.6；五门0.6884/0.6728/0.1003/2.2894/0.3382。
+- 判定：泄漏/UTMOS虽近线但CER严重失败，不进录音5。
+- 证据：`report/fixed_male_teacher_finetune_round102_20261029.{md,json}`；checkpoint `d50b7f4f...caa4f38`；候选 `5147501f...9f82879`。
+- 限制：录音5/Track9未用；未播放、未板测。下一责任方：Hardware-A / Codex执行Round103。
+
