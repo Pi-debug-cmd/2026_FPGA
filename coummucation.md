@@ -1950,3 +1950,19 @@
 - 限制：OOC 边界缺少顶层 `HD.CLK_SRC/HD.PARTPIN_LOCS`，且 Vivado 提示不会执行全部连接型 DRC；94 项 Warning 主要为 DSP 流水建议及 OOC `RTSTAT-10/ZPS7-1`。不宣称整机时序或板端通过。
 - 报告：`report/world_minphase_ooc_round17_20261029.{md,json,txt}`；本轮未加载位流，未录音、播放或试听。
 - 下一责任方：Hardware-A / Codex 接入现有 Zynq 音频设计并完成整机 address/DRC/资源/时序门，通过后再进行可恢复的静默板端向量测试。
+
+### [PL-20261027-01] Round18 最小相位融合核整机接入认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED / PROPOSED；基准提交：`7065a2f`。
+- 唯一变量：把 Round17 导出的 `xilinx.com:hls:world_minphase:1.0` 接入现有完整音频工程；保留音频 HP0 和现有 WORLD exp HP1，新增核的两个 AXI master 独占 HP2，两个 AXI-Lite 从口接 GP0 控制互联。
+- 地址计划：ap_ctrl `0x43C70000`、指针参数 `0x43C80000`；输入/输出 DDR 视图均为 HP2 `0x00000000..0x3fffffff`。中断暂接 F2P bit14，首轮驱动仍采用有界轮询。
+- 成功门：BD validate 通过且地址无重叠；随后完整综合/布局布线满足 WNS/WHS 非负、0 未布线、0 DRC Error，并记录整机资源。任何失败也独立提交，不覆盖历史工程。
+- 限制：本轮只生成新的 `build/generated/world_minphase_20261029` 工程，不加载位流、不操作板卡、不录放或试听；导出 IP 由 `WORLD_MINPHASE_IP_REPO` 显式指定，避免把大生成物提交 Git。
+- 下一责任方：Hardware-A / Codex 完成整机 validate/implementation 与证据。
+
+### [PL-20261027-01] Round18 最小相位融合核整机实现结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：ACCEPTED（整机静态实现门）；基准提交：`7065a2f`。
+- 接入：ap_ctrl `0x43C70000`、指针参数 `0x43C80000`，输入/输出 AXI master 经新互联独占 HP2；音频 HP0、既有 WORLD-exp HP1 不变。F2P bit14 保留中断，首轮驱动计划有界轮询。
+- 量化：完整 routed WNS `+0.856 ns`、WHS `+0.029 ns`，setup/hold/pulse-width 失败端点 0，32,065/32,065 可路由网络完成；black box 0、DRC Error 0。整机 `13910 LUT / 20145 FF / 9.5 BRAM Tile / 47 DSP`。
+- 风险：DRC 仍有 131 Warning/38 Advisory；现有音频约束仍缺 3 输入和 6 输出 I/O delay。首次长路径工程因 Windows 260 字符失败，同设计在 `D:/wpl_20261029_full/m` 通过；不能宣称外部接口完整 signoff。
+- 报告：`report/world_minphase_integration_round18_20261029.{md,json,txt}`；候选 bit/bin/DCP SHA 见 JSON，生成物未入 Git。本轮未加载板卡、未录放或试听。
+- 下一责任方：Hardware-A / Codex 生成 Linux 换序载荷，实现 coherent-buffer/超时轮询驱动和 WORLD 包装，再执行可恢复的静默板端向量测试。
