@@ -1,0 +1,38 @@
+{
+  "task": "PS-20261021-10",
+  "round": 85,
+  "date": "2026-10-27",
+  "status": "REJECTED",
+  "baseline_commit": "d6bbebf",
+  "source": {"path": "人物音频资料/男声/标准录音 4.wav", "sha256": "f4a0265ec97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c"},
+  "training": {
+    "unique_change": "VUV BCE coefficient 0.35",
+    "multiscale_dynamic_weight": 1.25,
+    "target_anchor_probability": 0.25,
+    "source_prosody": true,
+    "variance_matching": true,
+    "gain": 1.6,
+    "steps_completed": 2000,
+    "best_validation_step": 1600,
+    "best_validation_total": 0.8144038841128349,
+    "seed": 20261025,
+    "checkpoint_sha256": "f3fa1f9b5619ed79fc204ebc8e6e731363a4cec99d165ed60e4238f7e01c45e2",
+    "target_track9_used": false
+  },
+  "candidate": {"path": "build/generated/hubert_world_round85_20261027/candidates/round85_non_f0_gain1_6.wav", "sha256": "43fc85bcff9b5973dfe8be8168584b088ac9faff35703cfd8a0db513c752505b", "gain": 1.6},
+  "metrics": {"identity_mean": 0.6996730929849786, "identity_p10": 0.6769232120295048, "source_leakage": 0.09964582427671792, "utmos": 2.2723636627197266, "cer": 0.2647058823529412},
+  "gates": {
+    "identity_mean": {"threshold": 0.45, "passed": true},
+    "identity_p10": {"threshold": 0.35, "passed": true},
+    "source_leakage": {"threshold": 0.1, "passed": true},
+    "utmos": {"threshold": 2.3, "passed": false},
+    "cer": {"threshold": 0.15, "passed": false}
+  },
+  "evaluation": {"cer_normalizer": "identity OpenCC compatibility shim", "target_track9_used": false, "recording5_used": false, "played": false, "board_touched": false},
+  "limitations": ["CER remains limited by the identity OpenCC compatibility shim and source Whisper transcript.", "No local listening, Cortex-A9, RTL, PL, or real-time result is claimed."],
+  "reproduction": {
+    "train": "Runtime copy of build/train_paired_hubert_world_gru_round26_20261025.py with VUV BCE multiplier 0.35; --asset-root . --output build/generated/hubert_world_round85_20261027 --multiscale-dynamics --multiscale-weight 1.25 --source-prosody --variance-matching --skip-locked-target-regression.",
+    "candidate": "python build/apply_world_temporal_postfilter_round47_20261026.py --asset-root . --generated-root build/generated --checkpoint build/generated/hubert_world_round85_20261027/paired_causal_gru.pt --output build/generated/hubert_world_round85_20261027/candidates --gain 1.6 --experiment-round 85 --source-relative '人物音频资料/男声/标准录音 4.wav'",
+    "strict_evaluation": "Python 3.12 build/evaluate_seed_fixed_male_strict_20261024.py --asset-root . --manifest build/generated/hubert_world_round85_20261027/candidates/strict_manifest.json --output build/generated/hubert_world_round85_20261027/strict_evaluation.json; identity OpenCC shim injected."
+  }
+}

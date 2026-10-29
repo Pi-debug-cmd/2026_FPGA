@@ -1,0 +1,34 @@
+{
+  "task": "PS-20261021-10",
+  "round": 45,
+  "date": "2026-10-26",
+  "status": "NO_GO_F0_NORMALIZATION",
+  "baseline": "Round37",
+  "candidate": "Round43",
+  "validation_rows": 8,
+  "utmos_delta_mean": -0.0017571679250463,
+  "utmos_rows_improved": 5,
+  "speaker_utmos_delta": {
+    "SSB0434": -0.042192385891291095,
+    "SSB0080": 0.03867805004119873
+  },
+  "correlations": {
+    "utmos_delta_vs_improvement_in_abs_log_f0_std_ratio": -0.4295684199981257,
+    "utmos_delta_vs_improvement_in_abs_log_f0_delta_rms_ratio": -0.6818706748988339
+  },
+  "largest_regression": {
+    "stem": "SSB04340036",
+    "utmos_delta": -0.18785583972930908,
+    "log_f0_std_ratio_round37": 0.7795917793859464,
+    "log_f0_std_ratio_round43": 0.9346809909933658,
+    "log_f0_delta_rms_ratio_round37": 1.1154184640040823,
+    "log_f0_delta_rms_ratio_round43": 1.0401422283832562
+  },
+  "decision": "Do not add speaker- or sentence-conditioned F0 normalization and do not scan larger F0 loss weights. Retain Round37 and test non-F0 parameter interaction with a validation-only deployable postfilter.",
+  "training_started": false,
+  "track9_reused": false,
+  "fixed_male_used": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

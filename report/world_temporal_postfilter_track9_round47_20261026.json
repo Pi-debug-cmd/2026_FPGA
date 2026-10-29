@@ -1,0 +1,39 @@
+{
+  "task": "PS-20261021-10",
+  "round": 47,
+  "date": "2026-10-26",
+  "status": "REJECTED_BEST_SO_FAR",
+  "gain": 1.4,
+  "checkpoint_sha256": "efcda700ddc0e769ebcf4eb5afae8ff14528c21dd800d737a78c577e973bd2a2",
+  "baseline_bit_identical": true,
+  "baseline_sha256": "cebbc5f51b7816b94526f07aaad3839188e66b30a10bb8d68c84d51946355eef",
+  "candidate_sha256": "8a27c878eec3f39a3dec31b6a06bad9ee078afdda62e9fe8af47efa0ecc08869",
+  "objective": {
+    "identity": 0.7137685181260613,
+    "identity_p10": 0.697328052553226,
+    "male_centroid_cosine_not_applicable": 0.10813494072668547,
+    "utmos": 2.2852615118026733,
+    "cer": 0.09782608695652174
+  },
+  "delta_from_round37": {
+    "identity": 0.01840401867434036,
+    "identity_p10": 0.0179008632400029,
+    "male_centroid_cosine_not_applicable": -0.02681612341794646,
+    "utmos": 0.4236652255058288,
+    "cer": -0.0108695652173913
+  },
+  "target_reconstruction_gates": {
+    "identity": true,
+    "identity_p10": true,
+    "utmos": false,
+    "cer": true
+  },
+  "utmos_shortfall": 0.014738488197326534,
+  "peak_before_limit": 2.080354530701595,
+  "track9_used_after_freeze": true,
+  "track9_used_for_selection": false,
+  "fixed_male_used": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

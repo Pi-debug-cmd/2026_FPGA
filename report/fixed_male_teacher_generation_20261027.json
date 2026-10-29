@@ -1,0 +1,63 @@
+{
+  "kind": "fixed_male_native_vc_teacher_generation",
+  "rows": [
+    {
+      "role": "train1",
+      "source_path": "人物音频资料/男声/标准录音 1.wav",
+      "source_sha256": "bffd53e9873a829ff8855bd191d4610b64436fb7054401d2598eecf9b862b11e",
+      "source_seconds": 18.04,
+      "teacher_path": "D:\\2026_FPGA_teacher_workspace\\runs\\fixed_male_teacher_20261027\\train1_teacher.wav",
+      "teacher_sha256": "17c3930b99e284b473d7ec5d0f3812043c45aa32c5b9ddc8118480776766fd1c",
+      "teacher_seconds": 18.04,
+      "inference_seconds": 6.706526100053452,
+      "gain_only": 1.4950849434018145,
+      "peak_cuda_bytes": 1974526976,
+      "teacher_human_quality_accepted": false
+    },
+    {
+      "role": "train2",
+      "source_path": "人物音频资料/男声/标准录音 2.wav",
+      "source_sha256": "7ebcc5ece683ad580df039cea09957d4133582803cd62a0e1a92619c03f1f51f",
+      "source_seconds": 16.76,
+      "teacher_path": "D:\\2026_FPGA_teacher_workspace\\runs\\fixed_male_teacher_20261027\\train2_teacher.wav",
+      "teacher_sha256": "646e175401f3bd0b55df70a45c77e633192066f18e4341d106539f46d5480c28",
+      "teacher_seconds": 16.76,
+      "inference_seconds": 4.608205400058068,
+      "gain_only": 1.4604069925159266,
+      "peak_cuda_bytes": 1961419264,
+      "teacher_human_quality_accepted": false
+    },
+    {
+      "role": "train3",
+      "source_path": "人物音频资料/男声/标准录音 3.wav",
+      "source_sha256": "2d13fa98c976c967d3ad0d36b0eaf26c3e10029449f135c9556ab4968d9a1293",
+      "source_seconds": 19.52,
+      "teacher_path": "D:\\2026_FPGA_teacher_workspace\\runs\\fixed_male_teacher_20261027\\train3_teacher.wav",
+      "teacher_sha256": "922e5157e4ad46f6a4c7bf16ff5b8732c138dc6289f930b9c519f3a1f9db6b52",
+      "teacher_seconds": 19.52,
+      "inference_seconds": 4.564707699930295,
+      "gain_only": 1.5784853114483652,
+      "peak_cuda_bytes": 1990161408,
+      "teacher_human_quality_accepted": false
+    }
+  ],
+  "complete": true,
+  "script_sha256": "26deb788c6df16855fe204c2025dc66d0e3e230ca410dda4bba3b9477d86d48f",
+  "asset_manifest_sha256": "7bb6bc102c395d162c4169eb18cd74618ec4ce57676ebb46e17dece2e84b7968",
+  "model_revision": "29e01c4e8d000f4bcd70751be16fa94bf3d85a18",
+  "load_seconds": 43.54665230005048,
+  "target_sha256": "4651ab56a9b285c0d645bd6f0b94f7987e6ed8bd5171e54c37048b436e177c8f",
+  "target_path": "C:\\Users\\World\\Desktop\\2026_FPGA\\交接\\核心材料\\目标参考\\target_t6_8s.wav",
+  "torch": "2.8.0+cu128",
+  "torchaudio": "2.8.0+cu128",
+  "transformers": "4.51.3",
+  "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU",
+  "asr_to_tts": false,
+  "waveform_time_warp": false,
+  "recording4_used": false,
+  "recording5_used": false,
+  "target_track9_used": false,
+  "student_trained": false,
+  "playback": false,
+  "board_touched": false
+}

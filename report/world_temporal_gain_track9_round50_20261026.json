@@ -1,0 +1,30 @@
+{
+  "task": "PS-20261021-10",
+  "round": 50,
+  "date": "2026-10-26",
+  "status": "PASS_TARGET_RECONSTRUCTION",
+  "gain": 1.6,
+  "checkpoint_sha256": "efcda700ddc0e769ebcf4eb5afae8ff14528c21dd800d737a78c577e973bd2a2",
+  "baseline_bit_identical": true,
+  "candidate_sha256": "12c22471a83dd090f7a445eae11a5596d82f48a4ec558cdf49b6b6f18981eb3f",
+  "objective": {
+    "identity": 0.6847452670946492,
+    "identity_p10": 0.6643384218122061,
+    "male_centroid_cosine": 0.08628983751983474,
+    "utmos": 2.3813987374305725,
+    "cer": 0.10869565217391304
+  },
+  "gates": {
+    "identity": true,
+    "identity_p10": true,
+    "male_centroid_cosine_diagnostic": true,
+    "utmos": true,
+    "cer": true
+  },
+  "track9_used_after_freeze": true,
+  "track9_used_for_selection": false,
+  "fixed_male_used": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

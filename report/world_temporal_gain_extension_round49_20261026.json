@@ -1,0 +1,29 @@
+{
+  "task": "PS-20261021-10",
+  "round": 49,
+  "date": "2026-10-26",
+  "status": "GO_GAIN_1_6",
+  "checkpoint_sha256": "efcda700ddc0e769ebcf4eb5afae8ff14528c21dd800d737a78c577e973bd2a2",
+  "validation_rows": 8,
+  "results": [
+    {"gain": 1.0, "utmos_mean": 2.005453662844155, "SSB0080": 2.120511472225189, "SSB0434": 1.8903958534631204},
+    {"gain": 1.4, "utmos_mean": 2.4082264355787144, "SSB0080": 2.5371488332748413, "SSB0434": 2.279304037882587},
+    {"gain": 1.5, "utmos_mean": 2.460864648809583, "SSB0080": 2.594312846660614, "SSB0434": 2.327416450958552},
+    {"gain": 1.6, "utmos_mean": 2.4833137620621777, "SSB0080": 2.6351975202560425, "SSB0434": 2.3314300038683133},
+    {"gain": 1.7, "utmos_mean": 2.480429913349978, "SSB0080": 2.645470380783081, "SSB0434": 2.3153894459168742},
+    {"gain": 1.8, "utmos_mean": 2.458796150571718, "SSB0080": 2.6370298862457275, "SSB0434": 2.2805624148977084}
+  ],
+  "selected_gain": 1.6,
+  "selected_delta_from_baseline": {
+    "utmos_mean": 0.47786009921802286,
+    "SSB0080": 0.5146860480308533,
+    "SSB0434": 0.4410341504051929
+  },
+  "interior_optimum": true,
+  "training_started": false,
+  "track9_used": false,
+  "fixed_male_used": false,
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

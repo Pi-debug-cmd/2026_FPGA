@@ -1,0 +1,79 @@
+{
+  "kind": "fixed_male_training_teacher_content",
+  "generation_sha256": "3ca44b0a5ee24189cfdffb679bbd329acd163da2a32bb2635d3752a274dbcdb7",
+  "script_sha256": "1801ab0164fd816c48e4a12567b0c0f1e52ce4239df4e4ba3e4b531e9c0890e0",
+  "asr": "offline Whisper-small",
+  "normalization": "existing CER punctuation rules and real OpenCC0.1.7 t2s",
+  "reference": "source ASR; not manually verified text or validation gate",
+  "rows": [
+    {
+      "role": "train1",
+      "source": {
+        "sha256": "bffd53e9873a829ff8855bd191d4610b64436fb7054401d2598eecf9b862b11e",
+        "seconds": 18.04,
+        "asr": "深夜便利店,店员给刘浪翰倒了杯热水,刘浪翰喝完默默把门口及血扫得干干净净监控里两个人都笑了,那杯热水暖了两个陌生人整个冬天,后来刘浪翰常来,每次都带一把扫着。"
+      },
+      "teacher": {
+        "sha256": "17c3930b99e284b473d7ec5d0f3812043c45aa32c5b9ddc8118480776766fd1c",
+        "seconds": 18.04,
+        "asr": "深夜便利店,店员给刘浪汉倒了杯热水,刘浪汉喝完懵我把门口及血扫的干干净净,惊空里两个人都笑了,那杯热水暖了两个牧生人整个冬天,后来刘浪汉常来,每次都在一把扫揉。"
+      },
+      "teacher_against_source_asr": {
+        "reference_chars": 73,
+        "hypothesis_chars": 73,
+        "distance": 11,
+        "cer": 0.1506849315068493
+      }
+    },
+    {
+      "role": "train2",
+      "source": {
+        "sha256": "7ebcc5ece683ad580df039cea09957d4133582803cd62a0e1a92619c03f1f51f",
+        "seconds": 16.76,
+        "asr": "他把舊貓一拆了給流浪狼貓治了個窩貓沒來隔壁讀書奶奶學校們能教我嗎我也想治一個後來整棟樓道的老人都在吃貓窩頂滿了樓道貓終於來了跳了一個窩下不走"
+      },
+      "teacher": {
+        "sha256": "646e175401f3bd0b55df70a45c77e633192066f18e4341d106539f46d5480c28",
+        "seconds": 16.76,
+        "asr": "他把这毛衣拆了给个浪漢猫,直了个窝,猫没来。隔壁独居奶奶,学校们能教我吗?我也想这一个。后来整栋楼道老人都在指,猫窝钉板楼道,猫真运来了。挑了一个,窝下不走。"
+      },
+      "teacher_against_source_asr": {
+        "reference_chars": 70,
+        "hypothesis_chars": 68,
+        "distance": 17,
+        "cer": 0.24285714285714285
+      }
+    },
+    {
+      "role": "train3",
+      "source": {
+        "sha256": "2d13fa98c976c967d3ad0d36b0eaf26c3e10029449f135c9556ab4968d9a1293",
+        "seconds": 19.52,
+        "asr": "他每天给阳台的枯枝浇水铃鸡笑他傻第三年春天枯枝开出满树雨蓝相托了整条巷子铃鸡们纷纷探头他站在树下笑到好像孩子没人知道那是他王岐最爱的花"
+      },
+      "teacher": {
+        "sha256": "922e5157e4ad46f6a4c7bf16ff5b8732c138dc6289f930b9c519f3a1f9db6b52",
+        "seconds": 19.52,
+        "asr": "她每天給陽台的枯枝澆水鄰居笑大少,一三年春天,枯枝開出,滿樹雨藍,香吐了整條巷子。鄰居們紛紛探頭,她正在出腳,笑得好像孩子,沒人知道那是她王妻最愛的話。"
+      },
+      "teacher_against_source_asr": {
+        "reference_chars": 67,
+        "hypothesis_chars": 67,
+        "distance": 18,
+        "cer": 0.26865671641791045
+      }
+    }
+  ],
+  "training": false,
+  "playback": false,
+  "board_touched": false,
+  "recording4_used": false,
+  "recording5_used": false,
+  "target_track9_used": false,
+  "summary": {
+    "source_asr_characters": 210,
+    "edits": 46,
+    "micro_cer": 0.21904761904761905
+  },
+  "complete": true
+}

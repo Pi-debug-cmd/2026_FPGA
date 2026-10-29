@@ -1,0 +1,54 @@
+{
+  "task": "PS-20261021-10",
+  "round": 75,
+  "date": "2026-10-27",
+  "status": "REJECTED",
+  "baseline_commit": "ccc53f98a0519b14b5089f4b63b3ad3ee39a6bf7",
+  "source": {
+    "path": "人物音频资料/男声/标准录音 4.wav",
+    "sha256": "f4a026e5c97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c"
+  },
+  "training": {
+    "unique_change": "target self-reconstruction anchor probability reduced from 0.25 to 0.15",
+    "dynamic_loss_weight": 1.25,
+    "steps_completed": 1600,
+    "early_stopped": true,
+    "seed": 20261025,
+    "checkpoint_sha256": "da359e8caa8a03f27211cd1fc02a2a509e2fad50e44565365c98649c24af6104"
+  },
+  "candidate": {
+    "gain": 1.6,
+    "sha256": "23b61c5ebbab4b4a16170baca47d44f812f4e301ca8fa618d7ef878531f51623"
+  },
+  "metrics": {
+    "identity_mean": 0.6839,
+    "identity_p10": 0.6559,
+    "source_leakage": 0.1117,
+    "utmos": 2.3876,
+    "cer": 0.5
+  },
+  "gates": {
+    "identity_mean": {"threshold": 0.45, "passed": true},
+    "identity_p10": {"threshold": 0.35, "passed": true},
+    "source_leakage": {"threshold": 0.1, "passed": false},
+    "utmos": {"threshold": 2.3, "passed": true},
+    "cer": {"threshold": 0.15, "passed": false}
+  },
+  "evaluation": {
+    "cer_normalizer": "identity OpenCC shim",
+    "target_track9_used": false,
+    "recording5_used": false,
+    "played": false,
+    "board_touched": false
+  },
+  "limitations": [
+    "Strict evaluator compatibility shim limits simplified/traditional Chinese normalization.",
+    "Training checkpoint was saved before the locked Track 9 read was intercepted.",
+    "No local listening, Cortex-A9, RTL, PL, or real-time result is claimed."
+  ],
+  "reproduction": {
+    "train": "D:\\Anaconda\\envs\\yolo\\python.exe build/train_paired_hubert_world_gru_round26_20261025.py --asset-root . --output build/generated/hubert_world_round75_20261027 --multiscale-dynamics --multiscale-weight 1.25 --source-prosody --variance-matching (runtime anchor probability 0.15)",
+    "candidate": "python build/apply_world_temporal_postfilter_round47_20261026.py --asset-root . --generated-root build/generated --checkpoint build/generated/hubert_world_round75_20261027/paired_causal_gru.pt --output build/generated/hubert_world_round75_20261027/candidates --gain 1.6 --experiment-round 75 --source-relative '人物音频资料/男声/标准录音 4.wav'",
+    "strict_evaluation": "python build/evaluate_seed_fixed_male_strict_20261024.py --asset-root . --manifest build/generated/hubert_world_round75_20261027/candidates/strict_manifest.json --output build/generated/hubert_world_round75_20261027/strict_evaluation.json"
+  }
+}

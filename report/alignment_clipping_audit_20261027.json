@@ -1,0 +1,1465 @@
+{
+  "task": "PS-20261021-10",
+  "kind": "alignment_clipping_diagnosis",
+  "checkpoint_sha256": "e21d8175cb56a5aa3f3e7ac75578705b5deb8cb40fea07a5a73ef87d38586faa",
+  "cache_manifest_sha256": "4d34669259834bd30219f34af4730712c9aa7c4cf8fa8bc3c5ccde9ee3cc5bc5",
+  "anchor_statistics": "same20ms HuBERT-resampled target anchors as production candidate",
+  "lag_definition": "correlation(source_energy[t], teacher_energy[t+lag]); 20ms per frame",
+  "recording4_used": false,
+  "recording5_used": false,
+  "track9_used": false,
+  "training": false,
+  "synthesis": false,
+  "played": false,
+  "board_touched": false,
+  "rows": [
+    {
+      "stem": "SSB04340036",
+      "speaker": "SSB0434",
+      "source_sha256": "7f5ad67d120d20228f8e7969bc2059991fa042d9e9b4e479c1b69d91fbc09a7a",
+      "zero_lag_correlation": 0.9103489869461167,
+      "best_energy_lag": {
+        "lag": 0,
+        "correlation": 0.9103489869461167
+      },
+      "energy_lags": [
+        {
+          "lag": -10,
+          "correlation": 0.25117747560540477
+        },
+        {
+          "lag": -9,
+          "correlation": 0.2766454009925656
+        },
+        {
+          "lag": -8,
+          "correlation": 0.3148498970730751
+        },
+        {
+          "lag": -7,
+          "correlation": 0.3578065937240035
+        },
+        {
+          "lag": -6,
+          "correlation": 0.41607784692372574
+        },
+        {
+          "lag": -5,
+          "correlation": 0.4840099687776951
+        },
+        {
+          "lag": -4,
+          "correlation": 0.5549362324139727
+        },
+        {
+          "lag": -3,
+          "correlation": 0.6257269075197739
+        },
+        {
+          "lag": -2,
+          "correlation": 0.7269313615535505
+        },
+        {
+          "lag": -1,
+          "correlation": 0.8496983045080115
+        },
+        {
+          "lag": 0,
+          "correlation": 0.9103489869461167
+        },
+        {
+          "lag": 1,
+          "correlation": 0.8245769568435041
+        },
+        {
+          "lag": 2,
+          "correlation": 0.6942174592548361
+        },
+        {
+          "lag": 3,
+          "correlation": 0.5936938047765192
+        },
+        {
+          "lag": 4,
+          "correlation": 0.5271303825711551
+        },
+        {
+          "lag": 5,
+          "correlation": 0.47134560849517065
+        },
+        {
+          "lag": 6,
+          "correlation": 0.41407497284852385
+        },
+        {
+          "lag": 7,
+          "correlation": 0.3556811427492673
+        },
+        {
+          "lag": 8,
+          "correlation": 0.3060550154363795
+        },
+        {
+          "lag": 9,
+          "correlation": 0.2705877222051861
+        },
+        {
+          "lag": 10,
+          "correlation": 0.25184341608312333
+        }
+      ],
+      "groups": {
+        "spectrum": {
+          "prediction": {
+            "normalized_smooth_l1": 0.32771942019462585,
+            "dynamic_rms_ratio": 0.7502598762512207,
+            "outside_anchor_fraction": 0.016666666666666666
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.3826698064804077,
+            "dynamic_rms_ratio": 1.200415849685669,
+            "outside_anchor_fraction": 0.02269345238095238
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.38080484265844633,
+            "dynamic_rms_ratio": 1.1631040333990692,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0019345238095238096
+        },
+        "log_f0": {
+          "prediction": {
+            "normalized_smooth_l1": 0.11818615347146988,
+            "dynamic_rms_ratio": 1.0989980697631836,
+            "outside_anchor_fraction": 0.0
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.11818615347146988,
+            "dynamic_rms_ratio": 1.0989980697631836,
+            "outside_anchor_fraction": 0.0
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.11818615111045708,
+            "dynamic_rms_ratio": 1.0989981557614477,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0
+        },
+        "energy": {
+          "prediction": {
+            "normalized_smooth_l1": 0.042770903557538986,
+            "dynamic_rms_ratio": 0.9345700740814209,
+            "outside_anchor_fraction": 0.0
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.21618209779262543,
+            "dynamic_rms_ratio": 1.4953123331069946,
+            "outside_anchor_fraction": 0.23660714285714285
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.1291562766625247,
+            "dynamic_rms_ratio": 1.420100544382938,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0
+        },
+        "ap": {
+          "prediction": {
+            "normalized_smooth_l1": 0.2144291251897812,
+            "dynamic_rms_ratio": 0.6661859154701233,
+            "outside_anchor_fraction": 0.07552083333333333
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.39789626002311707,
+            "dynamic_rms_ratio": 1.0658974647521973,
+            "outside_anchor_fraction": 0.5200892857142857
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.27324211512058255,
+            "dynamic_rms_ratio": 0.7731389021157602,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0018601190476190475
+        }
+      }
+    },
+    {
+      "stem": "SSB04340089",
+      "speaker": "SSB0434",
+      "source_sha256": "60f0ec31b6ffbfe216662d6d114bbe6675a4e91b4e38451ddab4ce42097ed9a7",
+      "zero_lag_correlation": 0.9443738997589965,
+      "best_energy_lag": {
+        "lag": 0,
+        "correlation": 0.9443738997589965
+      },
+      "energy_lags": [
+        {
+          "lag": -10,
+          "correlation": 0.16469155509666533
+        },
+        {
+          "lag": -9,
+          "correlation": 0.22901823108053923
+        },
+        {
+          "lag": -8,
+          "correlation": 0.30645577651886086
+        },
+        {
+          "lag": -7,
+          "correlation": 0.39600556633507444
+        },
+        {
+          "lag": -6,
+          "correlation": 0.49317044141301586
+        },
+        {
+          "lag": -5,
+          "correlation": 0.5941363944231142
+        },
+        {
+          "lag": -4,
+          "correlation": 0.6866148050681643
+        },
+        {
+          "lag": -3,
+          "correlation": 0.7769198157537947
+        },
+        {
+          "lag": -2,
+          "correlation": 0.8591632958287155
+        },
+        {
+          "lag": -1,
+          "correlation": 0.9213598440325059
+        },
+        {
+          "lag": 0,
+          "correlation": 0.9443738997589965
+        },
+        {
+          "lag": 1,
+          "correlation": 0.8863912883034397
+        },
+        {
+          "lag": 2,
+          "correlation": 0.7916645695107655
+        },
+        {
+          "lag": 3,
+          "correlation": 0.6888528718223202
+        },
+        {
+          "lag": 4,
+          "correlation": 0.5844167604018091
+        },
+        {
+          "lag": 5,
+          "correlation": 0.4784159635859368
+        },
+        {
+          "lag": 6,
+          "correlation": 0.377279588545285
+        },
+        {
+          "lag": 7,
+          "correlation": 0.2898725031158102
+        },
+        {
+          "lag": 8,
+          "correlation": 0.21530114512648824
+        },
+        {
+          "lag": 9,
+          "correlation": 0.15022881035718216
+        },
+        {
+          "lag": 10,
+          "correlation": 0.09317636845034297
+        }
+      ],
+      "groups": {
+        "spectrum": {
+          "prediction": {
+            "normalized_smooth_l1": 0.27687227725982666,
+            "dynamic_rms_ratio": 0.6897475123405457,
+            "outside_anchor_fraction": 0.016885964912280702
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.3335449695587158,
+            "dynamic_rms_ratio": 1.1035960912704468,
+            "outside_anchor_fraction": 0.024605263157894738
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.3306157639100285,
+            "dynamic_rms_ratio": 1.0566022952280423,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0015350877192982456
+        },
+        "log_f0": {
+          "prediction": {
+            "normalized_smooth_l1": 0.24754847586154938,
+            "dynamic_rms_ratio": 0.7635669112205505,
+            "outside_anchor_fraction": 0.0
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.24754847586154938,
+            "dynamic_rms_ratio": 0.7635669112205505,
+            "outside_anchor_fraction": 0.0
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.24754845713868467,
+            "dynamic_rms_ratio": 0.7635669321637661,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0
+        },
+        "energy": {
+          "prediction": {
+            "normalized_smooth_l1": 0.0552988164126873,
+            "dynamic_rms_ratio": 0.851275622844696,
+            "outside_anchor_fraction": 0.010526315789473684
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.24403253197669983,
+            "dynamic_rms_ratio": 1.3620409965515137,
+            "outside_anchor_fraction": 0.3605263157894737
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.14168261184659564,
+            "dynamic_rms_ratio": 1.2845732659388955,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0
+        },
+        "ap": {
+          "prediction": {
+            "normalized_smooth_l1": 0.20025628805160522,
+            "dynamic_rms_ratio": 0.7360319495201111,
+            "outside_anchor_fraction": 0.09364035087719298
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.3900219202041626,
+            "dynamic_rms_ratio": 1.1776511669158936,
+            "outside_anchor_fraction": 0.5662280701754386
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.2560622472114189,
+            "dynamic_rms_ratio": 0.9006512119166795,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.015570175438596491
+        }
+      }
+    },
+    {
+      "stem": "SSB04340076",
+      "speaker": "SSB0434",
+      "source_sha256": "75cc56bdcc3bd76f1cd43535ff49da3d7e06934b0eca2c5f7331a32287427abf",
+      "zero_lag_correlation": 0.9343011658378901,
+      "best_energy_lag": {
+        "lag": 0,
+        "correlation": 0.9343011658378901
+      },
+      "energy_lags": [
+        {
+          "lag": -10,
+          "correlation": 0.4173455245833405
+        },
+        {
+          "lag": -9,
+          "correlation": 0.43748631847385583
+        },
+        {
+          "lag": -8,
+          "correlation": 0.46583909829443737
+        },
+        {
+          "lag": -7,
+          "correlation": 0.5080901927123554
+        },
+        {
+          "lag": -6,
+          "correlation": 0.5575411169399201
+        },
+        {
+          "lag": -5,
+          "correlation": 0.5978131927002899
+        },
+        {
+          "lag": -4,
+          "correlation": 0.6435767579587878
+        },
+        {
+          "lag": -3,
+          "correlation": 0.6998734183975142
+        },
+        {
+          "lag": -2,
+          "correlation": 0.7904808373580998
+        },
+        {
+          "lag": -1,
+          "correlation": 0.8908265330143108
+        },
+        {
+          "lag": 0,
+          "correlation": 0.9343011658378901
+        },
+        {
+          "lag": 1,
+          "correlation": 0.8334061504971568
+        },
+        {
+          "lag": 2,
+          "correlation": 0.7047160378815714
+        },
+        {
+          "lag": 3,
+          "correlation": 0.6033744674731427
+        },
+        {
+          "lag": 4,
+          "correlation": 0.5323035238995196
+        },
+        {
+          "lag": 5,
+          "correlation": 0.4746117531702142
+        },
+        {
+          "lag": 6,
+          "correlation": 0.4110518089146672
+        },
+        {
+          "lag": 7,
+          "correlation": 0.3529274848025608
+        },
+        {
+          "lag": 8,
+          "correlation": 0.30775159414841846
+        },
+        {
+          "lag": 9,
+          "correlation": 0.2760060470490715
+        },
+        {
+          "lag": 10,
+          "correlation": 0.24923855854651275
+        }
+      ],
+      "groups": {
+        "spectrum": {
+          "prediction": {
+            "normalized_smooth_l1": 0.2835663855075836,
+            "dynamic_rms_ratio": 0.7577472925186157,
+            "outside_anchor_fraction": 0.016666666666666666
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.34048694372177124,
+            "dynamic_rms_ratio": 1.2123957872390747,
+            "outside_anchor_fraction": 0.024183006535947713
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.3377327195952774,
+            "dynamic_rms_ratio": 1.1696920174310301,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.00196078431372549
+        },
+        "log_f0": {
+          "prediction": {
+            "normalized_smooth_l1": 0.14197733998298645,
+            "dynamic_rms_ratio": 1.0395103693008423,
+            "outside_anchor_fraction": 0.0
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.14197733998298645,
+            "dynamic_rms_ratio": 1.0395103693008423,
+            "outside_anchor_fraction": 0.0
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.14197733114644637,
+            "dynamic_rms_ratio": 1.0395104117605147,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0
+        },
+        "energy": {
+          "prediction": {
+            "normalized_smooth_l1": 0.03801096975803375,
+            "dynamic_rms_ratio": 0.8655474185943604,
+            "outside_anchor_fraction": 0.0
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.21695107221603394,
+            "dynamic_rms_ratio": 1.3848758935928345,
+            "outside_anchor_fraction": 0.27450980392156865
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.13749227287270804,
+            "dynamic_rms_ratio": 1.3377424654162136,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0
+        },
+        "ap": {
+          "prediction": {
+            "normalized_smooth_l1": 0.08558786660432816,
+            "dynamic_rms_ratio": 0.766860842704773,
+            "outside_anchor_fraction": 0.07647058823529412
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.2117893546819687,
+            "dynamic_rms_ratio": 1.2269773483276367,
+            "outside_anchor_fraction": 0.5238562091503268
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.11600852112355306,
+            "dynamic_rms_ratio": 0.8728043261780483,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0016339869281045752
+        }
+      }
+    },
+    {
+      "stem": "SSB04340118",
+      "speaker": "SSB0434",
+      "source_sha256": "b75c7f309987b5d4bd2da91f89e588896617f70633709b158aa9f0c96363d695",
+      "zero_lag_correlation": 0.9470325970355055,
+      "best_energy_lag": {
+        "lag": 0,
+        "correlation": 0.9470325970355055
+      },
+      "energy_lags": [
+        {
+          "lag": -10,
+          "correlation": 0.46918446222924415
+        },
+        {
+          "lag": -9,
+          "correlation": 0.5056128507542756
+        },
+        {
+          "lag": -8,
+          "correlation": 0.538985975303235
+        },
+        {
+          "lag": -7,
+          "correlation": 0.5772446622894863
+        },
+        {
+          "lag": -6,
+          "correlation": 0.6211890811044432
+        },
+        {
+          "lag": -5,
+          "correlation": 0.678693943034839
+        },
+        {
+          "lag": -4,
+          "correlation": 0.735820286786871
+        },
+        {
+          "lag": -3,
+          "correlation": 0.7860375807047043
+        },
+        {
+          "lag": -2,
+          "correlation": 0.8458003631196521
+        },
+        {
+          "lag": -1,
+          "correlation": 0.9116193099535488
+        },
+        {
+          "lag": 0,
+          "correlation": 0.9470325970355055
+        },
+        {
+          "lag": 1,
+          "correlation": 0.8951999368179022
+        },
+        {
+          "lag": 2,
+          "correlation": 0.8086636124184389
+        },
+        {
+          "lag": 3,
+          "correlation": 0.7352091382724095
+        },
+        {
+          "lag": 4,
+          "correlation": 0.672725356601482
+        },
+        {
+          "lag": 5,
+          "correlation": 0.614763778976074
+        },
+        {
+          "lag": 6,
+          "correlation": 0.5659736781676589
+        },
+        {
+          "lag": 7,
+          "correlation": 0.5321104980215963
+        },
+        {
+          "lag": 8,
+          "correlation": 0.49918947393080226
+        },
+        {
+          "lag": 9,
+          "correlation": 0.4747022576461553
+        },
+        {
+          "lag": 10,
+          "correlation": 0.45628402497543114
+        }
+      ],
+      "groups": {
+        "spectrum": {
+          "prediction": {
+            "normalized_smooth_l1": 0.2540947198867798,
+            "dynamic_rms_ratio": 0.72606360912323,
+            "outside_anchor_fraction": 0.016862745098039214
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.3062974512577057,
+            "dynamic_rms_ratio": 1.1617017984390259,
+            "outside_anchor_fraction": 0.022483660130718956
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.3043016386881588,
+            "dynamic_rms_ratio": 1.1407798918219876,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0013725490196078432
+        },
+        "log_f0": {
+          "prediction": {
+            "normalized_smooth_l1": 0.47403988242149353,
+            "dynamic_rms_ratio": 0.9152052402496338,
+            "outside_anchor_fraction": 0.0
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.47403988242149353,
+            "dynamic_rms_ratio": 0.9152052402496338,
+            "outside_anchor_fraction": 0.0
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.47403990316845124,
+            "dynamic_rms_ratio": 0.9152052955182244,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0
+        },
+        "energy": {
+          "prediction": {
+            "normalized_smooth_l1": 0.045378345996141434,
+            "dynamic_rms_ratio": 0.8211116194725037,
+            "outside_anchor_fraction": 0.0
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.1674058884382248,
+            "dynamic_rms_ratio": 1.3137785196304321,
+            "outside_anchor_fraction": 0.40784313725490196
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.10918732998673913,
+            "dynamic_rms_ratio": 1.2759148373306979,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0
+        },
+        "ap": {
+          "prediction": {
+            "normalized_smooth_l1": 0.23716765642166138,
+            "dynamic_rms_ratio": 0.6513944268226624,
+            "outside_anchor_fraction": 0.07483660130718954
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.3983791768550873,
+            "dynamic_rms_ratio": 1.0422310829162598,
+            "outside_anchor_fraction": 0.519281045751634
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.27298938985287335,
+            "dynamic_rms_ratio": 0.7714718085473876,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.015359477124183006
+        }
+      }
+    },
+    {
+      "stem": "SSB00800053",
+      "speaker": "SSB0080",
+      "source_sha256": "c551e9c1d8cf72e22652387559af5340cbcef02fa1a82d80b271f96925893776",
+      "zero_lag_correlation": 0.9206885091022886,
+      "best_energy_lag": {
+        "lag": 0,
+        "correlation": 0.9206885091022886
+      },
+      "energy_lags": [
+        {
+          "lag": -10,
+          "correlation": 0.17815773212151717
+        },
+        {
+          "lag": -9,
+          "correlation": 0.19159986608237395
+        },
+        {
+          "lag": -8,
+          "correlation": 0.19627070225620633
+        },
+        {
+          "lag": -7,
+          "correlation": 0.21390191040700185
+        },
+        {
+          "lag": -6,
+          "correlation": 0.252923463178879
+        },
+        {
+          "lag": -5,
+          "correlation": 0.31104206903932174
+        },
+        {
+          "lag": -4,
+          "correlation": 0.40813392674422766
+        },
+        {
+          "lag": -3,
+          "correlation": 0.5371117764208762
+        },
+        {
+          "lag": -2,
+          "correlation": 0.6801344321434382
+        },
+        {
+          "lag": -1,
+          "correlation": 0.8286217659198079
+        },
+        {
+          "lag": 0,
+          "correlation": 0.9206885091022886
+        },
+        {
+          "lag": 1,
+          "correlation": 0.8581979999955353
+        },
+        {
+          "lag": 2,
+          "correlation": 0.7040329840445669
+        },
+        {
+          "lag": 3,
+          "correlation": 0.5601858740839772
+        },
+        {
+          "lag": 4,
+          "correlation": 0.4422130950932582
+        },
+        {
+          "lag": 5,
+          "correlation": 0.3541734562151059
+        },
+        {
+          "lag": 6,
+          "correlation": 0.2914522617337001
+        },
+        {
+          "lag": 7,
+          "correlation": 0.24315524327306595
+        },
+        {
+          "lag": 8,
+          "correlation": 0.20474274801218822
+        },
+        {
+          "lag": 9,
+          "correlation": 0.16722940381219376
+        },
+        {
+          "lag": 10,
+          "correlation": 0.12854954653178394
+        }
+      ],
+      "groups": {
+        "spectrum": {
+          "prediction": {
+            "normalized_smooth_l1": 0.33679255843162537,
+            "dynamic_rms_ratio": 0.7642378807067871,
+            "outside_anchor_fraction": 0.017061143984220907
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.4017934501171112,
+            "dynamic_rms_ratio": 1.2227805852890015,
+            "outside_anchor_fraction": 0.02642998027613412
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.3982305931617121,
+            "dynamic_rms_ratio": 1.1523937113942655,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0020710059171597634
+        },
+        "log_f0": {
+          "prediction": {
+            "normalized_smooth_l1": 0.15164066851139069,
+            "dynamic_rms_ratio": 1.0729427337646484,
+            "outside_anchor_fraction": 0.0
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.15164066851139069,
+            "dynamic_rms_ratio": 1.0729427337646484,
+            "outside_anchor_fraction": 0.0
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.1516406732936911,
+            "dynamic_rms_ratio": 1.0729426614079225,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0
+        },
+        "energy": {
+          "prediction": {
+            "normalized_smooth_l1": 0.035275012254714966,
+            "dynamic_rms_ratio": 0.9305741190910339,
+            "outside_anchor_fraction": 0.0029585798816568047
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.17402367293834686,
+            "dynamic_rms_ratio": 1.4889185428619385,
+            "outside_anchor_fraction": 0.22781065088757396
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.1113955599722132,
+            "dynamic_rms_ratio": 1.3383074039784018,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0
+        },
+        "ap": {
+          "prediction": {
+            "normalized_smooth_l1": 0.10400316119194031,
+            "dynamic_rms_ratio": 0.824978232383728,
+            "outside_anchor_fraction": 0.09344181459566075
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.22490985691547394,
+            "dynamic_rms_ratio": 1.3199650049209595,
+            "outside_anchor_fraction": 0.47534516765285995
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.13435242896684219,
+            "dynamic_rms_ratio": 0.9277659747453921,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.00616370808678501
+        }
+      }
+    },
+    {
+      "stem": "SSB00800102",
+      "speaker": "SSB0080",
+      "source_sha256": "ab089a86b54ff23c04669f31ec45a75f9517256178513ae7482a307575f6065a",
+      "zero_lag_correlation": 0.9454543631415412,
+      "best_energy_lag": {
+        "lag": 0,
+        "correlation": 0.9454543631415412
+      },
+      "energy_lags": [
+        {
+          "lag": -10,
+          "correlation": 0.1718425283131064
+        },
+        {
+          "lag": -9,
+          "correlation": 0.15400570688559354
+        },
+        {
+          "lag": -8,
+          "correlation": 0.15132498887800547
+        },
+        {
+          "lag": -7,
+          "correlation": 0.1721171350435789
+        },
+        {
+          "lag": -6,
+          "correlation": 0.2166702306396966
+        },
+        {
+          "lag": -5,
+          "correlation": 0.283555286094529
+        },
+        {
+          "lag": -4,
+          "correlation": 0.3896990604592192
+        },
+        {
+          "lag": -3,
+          "correlation": 0.5423792025886107
+        },
+        {
+          "lag": -2,
+          "correlation": 0.7132667250245263
+        },
+        {
+          "lag": -1,
+          "correlation": 0.8720565654362034
+        },
+        {
+          "lag": 0,
+          "correlation": 0.9454543631415412
+        },
+        {
+          "lag": 1,
+          "correlation": 0.8391652709780223
+        },
+        {
+          "lag": 2,
+          "correlation": 0.6748707755761286
+        },
+        {
+          "lag": 3,
+          "correlation": 0.5063983435070583
+        },
+        {
+          "lag": 4,
+          "correlation": 0.37064078157656827
+        },
+        {
+          "lag": 5,
+          "correlation": 0.2686007391813867
+        },
+        {
+          "lag": 6,
+          "correlation": 0.1989559242517344
+        },
+        {
+          "lag": 7,
+          "correlation": 0.15398707388248029
+        },
+        {
+          "lag": 8,
+          "correlation": 0.13217524397029665
+        },
+        {
+          "lag": 9,
+          "correlation": 0.14355311833351625
+        },
+        {
+          "lag": 10,
+          "correlation": 0.1703177765302692
+        }
+      ],
+      "groups": {
+        "spectrum": {
+          "prediction": {
+            "normalized_smooth_l1": 0.30326682329177856,
+            "dynamic_rms_ratio": 0.7612708806991577,
+            "outside_anchor_fraction": 0.01683222958057395
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.35898303985595703,
+            "dynamic_rms_ratio": 1.2180334329605103,
+            "outside_anchor_fraction": 0.02367549668874172
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.3564519299933123,
+            "dynamic_rms_ratio": 1.1557196086234607,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0016556291390728477
+        },
+        "log_f0": {
+          "prediction": {
+            "normalized_smooth_l1": 0.1589125394821167,
+            "dynamic_rms_ratio": 1.6098264455795288,
+            "outside_anchor_fraction": 0.0
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.1589125394821167,
+            "dynamic_rms_ratio": 1.6098264455795288,
+            "outside_anchor_fraction": 0.0
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.15891255055480347,
+            "dynamic_rms_ratio": 1.609826475279401,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0
+        },
+        "energy": {
+          "prediction": {
+            "normalized_smooth_l1": 0.03152046725153923,
+            "dynamic_rms_ratio": 0.9366625547409058,
+            "outside_anchor_fraction": 0.0
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.1380794495344162,
+            "dynamic_rms_ratio": 1.4986602067947388,
+            "outside_anchor_fraction": 0.19205298013245034
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.09380747164514733,
+            "dynamic_rms_ratio": 1.4172624968254284,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0
+        },
+        "ap": {
+          "prediction": {
+            "normalized_smooth_l1": 0.08006790280342102,
+            "dynamic_rms_ratio": 0.9151302576065063,
+            "outside_anchor_fraction": 0.09823399558498896
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.18026655912399292,
+            "dynamic_rms_ratio": 1.4642084836959839,
+            "outside_anchor_fraction": 0.43736203090507725
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.103490856450584,
+            "dynamic_rms_ratio": 0.9786412714959695,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.02041942604856512
+        }
+      }
+    },
+    {
+      "stem": "SSB00800018",
+      "speaker": "SSB0080",
+      "source_sha256": "8bcb63a1b795b57257cc34316af23647930abcabf5390e73ed4296010b5430fc",
+      "zero_lag_correlation": 0.9456633530424629,
+      "best_energy_lag": {
+        "lag": 0,
+        "correlation": 0.9456633530424629
+      },
+      "energy_lags": [
+        {
+          "lag": -10,
+          "correlation": 0.2541549067006667
+        },
+        {
+          "lag": -9,
+          "correlation": 0.2671267776134486
+        },
+        {
+          "lag": -8,
+          "correlation": 0.2971822297315986
+        },
+        {
+          "lag": -7,
+          "correlation": 0.3446983679446016
+        },
+        {
+          "lag": -6,
+          "correlation": 0.40374875911829505
+        },
+        {
+          "lag": -5,
+          "correlation": 0.46738504784469437
+        },
+        {
+          "lag": -4,
+          "correlation": 0.5323192054411235
+        },
+        {
+          "lag": -3,
+          "correlation": 0.6123457116710934
+        },
+        {
+          "lag": -2,
+          "correlation": 0.7234103986436956
+        },
+        {
+          "lag": -1,
+          "correlation": 0.8647251085897537
+        },
+        {
+          "lag": 0,
+          "correlation": 0.9456633530424629
+        },
+        {
+          "lag": 1,
+          "correlation": 0.8715350178090038
+        },
+        {
+          "lag": 2,
+          "correlation": 0.7374127415400167
+        },
+        {
+          "lag": 3,
+          "correlation": 0.6302969940469917
+        },
+        {
+          "lag": 4,
+          "correlation": 0.5546640041135227
+        },
+        {
+          "lag": 5,
+          "correlation": 0.4946580289429828
+        },
+        {
+          "lag": 6,
+          "correlation": 0.4241627123452824
+        },
+        {
+          "lag": 7,
+          "correlation": 0.3553643088606379
+        },
+        {
+          "lag": 8,
+          "correlation": 0.3021260701505003
+        },
+        {
+          "lag": 9,
+          "correlation": 0.2714824464423835
+        },
+        {
+          "lag": 10,
+          "correlation": 0.26791826046971057
+        }
+      ],
+      "groups": {
+        "spectrum": {
+          "prediction": {
+            "normalized_smooth_l1": 0.31230974197387695,
+            "dynamic_rms_ratio": 0.7790486216545105,
+            "outside_anchor_fraction": 0.016972477064220184
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.36943519115448,
+            "dynamic_rms_ratio": 1.2464778423309326,
+            "outside_anchor_fraction": 0.02522935779816514
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.366251138299556,
+            "dynamic_rms_ratio": 1.188236194014911,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0025484199796126403
+        },
+        "log_f0": {
+          "prediction": {
+            "normalized_smooth_l1": 0.19680814445018768,
+            "dynamic_rms_ratio": 1.0933623313903809,
+            "outside_anchor_fraction": 0.0
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.19680814445018768,
+            "dynamic_rms_ratio": 1.0933623313903809,
+            "outside_anchor_fraction": 0.0
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.19680815044802727,
+            "dynamic_rms_ratio": 1.093362287378497,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0
+        },
+        "energy": {
+          "prediction": {
+            "normalized_smooth_l1": 0.03283658251166344,
+            "dynamic_rms_ratio": 0.9251890182495117,
+            "outside_anchor_fraction": 0.0
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.1559455692768097,
+            "dynamic_rms_ratio": 1.4803025722503662,
+            "outside_anchor_fraction": 0.2599388379204893
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.08876546085553441,
+            "dynamic_rms_ratio": 1.4182022316586287,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0
+        },
+        "ap": {
+          "prediction": {
+            "normalized_smooth_l1": 0.1453392058610916,
+            "dynamic_rms_ratio": 0.7687489986419678,
+            "outside_anchor_fraction": 0.0835881753312946
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.3155447244644165,
+            "dynamic_rms_ratio": 1.2299983501434326,
+            "outside_anchor_fraction": 0.5361875637104995
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.2005704742271972,
+            "dynamic_rms_ratio": 0.8822637147402402,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.005351681957186544
+        }
+      }
+    },
+    {
+      "stem": "SSB00800067",
+      "speaker": "SSB0080",
+      "source_sha256": "eb9462faf4b6b455368a2563828b8d4d0213a83f7cddee5752278533abed70a8",
+      "zero_lag_correlation": 0.97232109120832,
+      "best_energy_lag": {
+        "lag": 0,
+        "correlation": 0.97232109120832
+      },
+      "energy_lags": [
+        {
+          "lag": -10,
+          "correlation": 0.37287259301077214
+        },
+        {
+          "lag": -9,
+          "correlation": 0.37246774083811224
+        },
+        {
+          "lag": -8,
+          "correlation": 0.3901897879476761
+        },
+        {
+          "lag": -7,
+          "correlation": 0.4292681485183232
+        },
+        {
+          "lag": -6,
+          "correlation": 0.47592676505805853
+        },
+        {
+          "lag": -5,
+          "correlation": 0.5391608721774834
+        },
+        {
+          "lag": -4,
+          "correlation": 0.6051091269936211
+        },
+        {
+          "lag": -3,
+          "correlation": 0.6845492829247645
+        },
+        {
+          "lag": -2,
+          "correlation": 0.7872668647646335
+        },
+        {
+          "lag": -1,
+          "correlation": 0.9060377621773749
+        },
+        {
+          "lag": 0,
+          "correlation": 0.97232109120832
+        },
+        {
+          "lag": 1,
+          "correlation": 0.9094336657513898
+        },
+        {
+          "lag": 2,
+          "correlation": 0.8052722232349242
+        },
+        {
+          "lag": 3,
+          "correlation": 0.7105483865193631
+        },
+        {
+          "lag": 4,
+          "correlation": 0.6231129619549831
+        },
+        {
+          "lag": 5,
+          "correlation": 0.5450926274060257
+        },
+        {
+          "lag": 6,
+          "correlation": 0.4805804851195693
+        },
+        {
+          "lag": 7,
+          "correlation": 0.41953304053769314
+        },
+        {
+          "lag": 8,
+          "correlation": 0.3698025815169689
+        },
+        {
+          "lag": 9,
+          "correlation": 0.3405397543313424
+        },
+        {
+          "lag": 10,
+          "correlation": 0.3363031738276994
+        }
+      ],
+      "groups": {
+        "spectrum": {
+          "prediction": {
+            "normalized_smooth_l1": 0.3532777726650238,
+            "dynamic_rms_ratio": 0.7813560962677002,
+            "outside_anchor_fraction": 0.016666666666666666
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.4074004292488098,
+            "dynamic_rms_ratio": 1.2501697540283203,
+            "outside_anchor_fraction": 0.02242152466367713
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.4052622284423968,
+            "dynamic_rms_ratio": 1.1787524380478214,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0025411061285500747
+        },
+        "log_f0": {
+          "prediction": {
+            "normalized_smooth_l1": 0.15649475157260895,
+            "dynamic_rms_ratio": 1.40182363986969,
+            "outside_anchor_fraction": 0.0
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.15649475157260895,
+            "dynamic_rms_ratio": 1.40182363986969,
+            "outside_anchor_fraction": 0.0
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.15649475926333872,
+            "dynamic_rms_ratio": 1.4018236306157001,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0
+        },
+        "energy": {
+          "prediction": {
+            "normalized_smooth_l1": 0.03317966312170029,
+            "dynamic_rms_ratio": 1.0081068277359009,
+            "outside_anchor_fraction": 0.0
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.2288263589143753,
+            "dynamic_rms_ratio": 1.6129709482192993,
+            "outside_anchor_fraction": 0.27802690582959644
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.13954263539047757,
+            "dynamic_rms_ratio": 1.4821950422964583,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.0
+        },
+        "ap": {
+          "prediction": {
+            "normalized_smooth_l1": 0.10209832340478897,
+            "dynamic_rms_ratio": 0.839202344417572,
+            "outside_anchor_fraction": 0.08445440956651719
+          },
+          "gain1_6": {
+            "normalized_smooth_l1": 0.2532556653022766,
+            "dynamic_rms_ratio": 1.3427237272262573,
+            "outside_anchor_fraction": 0.5127055306427504
+          },
+          "gain1_6_clipped": {
+            "normalized_smooth_l1": 0.14399002255506452,
+            "dynamic_rms_ratio": 0.961479254030816,
+            "outside_anchor_fraction": 0.0
+          },
+          "teacher_outside_anchor_fraction": 0.007473841554559043
+        }
+      }
+    }
+  ],
+  "complete": true,
+  "summary": {
+    "spectrum": {
+      "prediction": {
+        "normalized_smooth_l1": 0.3059874624013901,
+        "dynamic_rms_ratio": 0.751216471195221,
+        "outside_anchor_fraction": 0.01682682007991687
+      },
+      "gain1_6": {
+        "normalized_smooth_l1": 0.3625764101743698,
+        "dynamic_rms_ratio": 1.2019463926553726,
+        "outside_anchor_fraction": 0.02396521770402899
+      },
+      "gain1_6_clipped": {
+        "normalized_smooth_l1": 0.35995635684361105,
+        "dynamic_rms_ratio": 1.1506600237450735,
+        "outside_anchor_fraction": 0.0
+      },
+      "teacher_outside_anchor_fraction": 0.0019523882533188392
+    },
+    "log_f0": {
+      "prediction": {
+        "normalized_smooth_l1": 0.2057009944692254,
+        "dynamic_rms_ratio": 1.1244044676423073,
+        "outside_anchor_fraction": 0.0
+      },
+      "gain1_6": {
+        "normalized_smooth_l1": 0.2057009944692254,
+        "dynamic_rms_ratio": 1.1244044676423073,
+        "outside_anchor_fraction": 0.0
+      },
+      "gain1_6_clipped": {
+        "normalized_smooth_l1": 0.2057009970154875,
+        "dynamic_rms_ratio": 1.1244044812356842,
+        "outside_anchor_fraction": 0.0
+      },
+      "teacher_outside_anchor_fraction": 0.0
+    },
+    "energy": {
+      "prediction": {
+        "normalized_smooth_l1": 0.039283845108002424,
+        "dynamic_rms_ratio": 0.9091296568512917,
+        "outside_anchor_fraction": 0.001685611958891311
+      },
+      "gain1_6": {
+        "normalized_smooth_l1": 0.1926808301359415,
+        "dynamic_rms_ratio": 1.4546075016260147,
+        "outside_anchor_fraction": 0.27966447182414966
+      },
+      "gain1_6_clipped": {
+        "normalized_smooth_l1": 0.11887870240399251,
+        "dynamic_rms_ratio": 1.3717872859784577,
+        "outside_anchor_fraction": 0.0
+      },
+      "teacher_outside_anchor_fraction": 0.0
+    },
+    "ap": {
+      "prediction": {
+        "normalized_smooth_l1": 0.14611869119107723,
+        "dynamic_rms_ratio": 0.7710666209459305,
+        "outside_anchor_fraction": 0.08502334610393393
+      },
+      "gain1_6": {
+        "normalized_smooth_l1": 0.29650793969631195,
+        "dynamic_rms_ratio": 1.2337065786123276,
+        "outside_anchor_fraction": 0.511381862962859
+      },
+      "gain1_6_clipped": {
+        "normalized_smooth_l1": 0.18758825693851447,
+        "dynamic_rms_ratio": 0.8835270579712867,
+        "outside_anchor_fraction": 0.0
+      },
+      "teacher_outside_anchor_fraction": 0.009229052023199855
+    }
+  },
+  "execution": {
+    "return_code": 1,
+    "artifact_independently_verified": "complete8-row JSON; finite summary metrics and exact checkpoint/cache hashes; source/cache SHA verified in script",
+    "script_sha256": "9b8a796221bb8c515692c2bdd92ef5c707cb6524d5e9d18e46d10cf247611c56",
+    "command": "D:/Anaconda/envs/yolo/python.exe build/audit_alignment_clipping_20261027.py --asset-root <asset-root> --output <generated>/alignment_clipping.json"
+  },
+  "limitations": [
+    "Energy correlation measures global envelope alignment only, not local phoneme alignment.",
+    "Dynamic RMS ratio measures magnitude, not correct direction or timing.",
+    "Statistics are at20ms model frames; synthesis interpolates to5ms then clips, so these are not exact final-waveform clipping fractions.",
+    "Eight public validation sentences, no new candidate/ASR or listening test. No causal CER claim from parameter statistics alone."
+  ],
+  "conclusion": "No global source-teacher energy lag; uniform gain1.6 creates substantial energy/AP range violations. Follow with frozen-model group ablations, not gain/weight scans."
+}

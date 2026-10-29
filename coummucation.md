@@ -1,5 +1,360 @@
 # Agent 协作窗口
 
+### [PS-20261021-10] 源专用适配消融 Round 97～107 批次认领
+- 日期：2026-10-29
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`b309a3a`
+- 范围：Round97输出层25步；98输出层低学习率；99 GRU+输出层；100～103分别测试高质量教师子集；104～106测试极低全模型剂量与低学习率；107冻结本批最佳配置做最终开发判定，五门全过才打开录音5。
+- 固定项：Round88基线、Round93缓存、gain1.6、严格五门和录音4开发集；每轮单独报告、提交和推送。
+- 止损：某一参数族连续无改善即切换下一机制，不扩大到已否决的增益/VUV/容量扫描。
+- 限制：录音5和Track9锁定；不播放、不接触板卡。
+- 下一责任方：Hardware-A / Codex 按编号完成并逐轮发布Round97～107。
+
+### [PS-20261021-10] 输出层源专用适配 Round 96 结果
+- 日期：2026-10-29
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`890e283`
+- 配置：Round88、train1～3、仅输出层、`1e-4`、100步、gain1.6。
+- 量化结果：loss`.8404→.8154`；五门`.6975/.6843/.1168/2.2291/.2500`，泄漏、UTMOS、CER失败。
+- 判定：冻结内容网络只恢复部分CER，输出层100步仍过强；继续更低剂量与教师子集消融。
+- 修改/报告：`report/fixed_male_teacher_finetune_round96_20261029.{md,json}`、`coummucation.md`。
+- 限制：录音5、Track9未使用，未播放、未接触板卡。
+- 下一责任方：Hardware-A / Codex 继续Round97。
+
+### [PS-20261021-10] 输出层源专用适配 Round 96 认领
+- 日期：2026-10-29
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`99c480f`
+- 唯一变量：冻结Round88输入层和两层GRU，只训练输出线性层100步；train1～3、`1e-4`、损失、gain1.6不变。
+- 成功标准：五门全过；否则检验冻结内容网络能否避免Round94/95的CER和UTMOS退步。
+- 限制：录音4开发评估；录音5、Track9锁定，未播放、未接触板卡。
+- 下一责任方：Hardware-A / Codex 完成Round96。
+
+### [PS-20261021-10] 源专用超低剂量微调 Round 95 结果
+- 日期：2026-10-29
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`59e4bac`
+- 配置：Round88、train1～3、全参数、`1e-4`、25步、gain1.6。
+- 量化结果：loss `.8404→.7789`；五门`.6957/.6789/.1169/2.2371/.2941`，泄漏、UTMOS、CER失败。
+- 判定：全模型低步数适配仍全面退步，停止该方向；Round96冻结内容网络，只训输出层。
+- 修改/报告：`report/fixed_male_teacher_finetune_round95_20261029.{md,json}`、`coummucation.md`；复现使用已提交微调脚本。
+- 限制：录音5、Track9未使用，未播放、未接触板卡。
+- 下一责任方：Hardware-A / Codex 认领Round96输出层适配。
+
+### [PS-20261021-10] 源专用超低剂量微调 Round 95 认领
+- 日期：2026-10-29
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`50b1fa7`
+- 唯一变量：相对Round94把全模型微调从100步降到25步；Round88基线、train1～3、学习率`1e-4`、损失、gain1.6和评估器不变。
+- 成功标准：五门全过；否则要求UTMOS和CER不低于Round88且泄漏改善，才允许保留该剂量方向。
+- 限制：录音4开发评估；录音5和Track9锁定，不播放、不接触板卡。
+- 下一责任方：Hardware-A / Codex 完成Round95训练评估并提交。
+
+### [PS-20261021-10] 源专用教师低剂量微调 Round 94 结果
+- 日期：2026-10-29
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`0201aee`
+- 修改路径：`build/finetune_fixed_male_hubert_world_20261029.py`、`report/fixed_male_teacher_finetune_round94_20261029.{md,json}`、`coummucation.md`。
+- 配置：Round88 checkpoint，train1～3，全部参数，学习率`1e-4`，100步，gain1.6；录音4严格评估。
+- 量化结果：配对loss `.8404→.7274`；身份/P10/泄漏/UTMOS/CER=`.6864/.6758/.1001/2.1615/.2794`，泄漏、UTMOS、CER失败。
+- 判定：拒绝。相对Round88仅泄漏略降，自然度和CER退步；Round95将适配剂量降至25步。
+- 报告链接：`report/fixed_male_teacher_finetune_round94_20261029.md`、`report/fixed_male_teacher_finetune_round94_20261029.json`。
+- 限制：录音4只用于开发评估；录音5、Track9未使用，未播放、未接触板卡。
+- 下一责任方：Hardware-A / Codex 认领Round95低步数适配。
+
+### [PS-20261021-10] 源专用教师低剂量微调 Round 94 认领
+- 日期：2026-10-29
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`7f26744`
+- 唯一变量：从Round88 checkpoint继续训练，仅用Round93三条固定男声→目标女声配对，AdamW学习率`1e-4`、100步；模型、损失、gain1.6和严格评估器保持不变。
+- 成功标准：录音4五门全过；若未过，比较CER、泄漏和UTMOS相对Round88的方向，再决定Round95增加适配步数或止损。
+- 限制：录音1～3用于训练，录音4只用于严格开发评估；录音5和Track9锁定，不播放、不接触板卡。
+- 下一责任方：Hardware-A / Codex 完成微调、录音4严格评估和单轮提交。
+
+### [PS-20261021-10] 固定男声教师配对预检 Round 93 结果
+- 日期：2026-10-29
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：ACCEPTED_PREFLIGHT
+- 基准提交：`4a95ae9`
+- 修改路径：`build/prepare_fixed_male_teacher_pairs_20261029.py`、`report/fixed_male_teacher_pairs_round93_20261029.{md,json}`、`coummucation.md`。
+- 复现命令：使用冻结教师generation.json运行配对缓存脚本；输出位于忽略目录`build/generated/fixed_male_teacher_pairs_20261029/`。
+- 量化结果：train1/2/3均为样本数严格一致、901/837/975个20ms帧且可裁128帧；最佳能量时移`+5/0/0 ms`，相关`.8839/.8815/.9288`。教师对源ASR micro CER `.2190`，内容监督有噪声。
+- 判定：配对与时序预检通过，允许Round94低剂量源专用微调；教师内容不完美，后续必须以录音4严格五门止损。
+- 报告链接：`report/fixed_male_teacher_pairs_round93_20261029.md`、`report/fixed_male_teacher_pairs_round93_20261029.json`。
+- 限制：未使用录音4/5或Track9，未播放、未接触板卡。
+- 下一责任方：Hardware-A / Codex 认领Round94，对Round88 checkpoint执行低剂量源专用微调。
+
+### [PS-20261021-10] 固定男声教师配对预检 Round 93 认领
+- 日期：2026-10-29
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`1c77a80`
+- 范围：承接远端已完成的 Round92 和教师资产恢复证据，核验录音1～3与原生 CosyVoice3 教师输出的SHA、时长、HuBERT/WORLD帧数和局部时序对齐，并建立源专用训练缓存。
+- 成功标准：三对资产校验通过、特征有限、帧数一致且可形成至少一个完整训练crop；若教师局部对齐或内容证据不支持训练，则本批在预检处止损并如实报告。
+- 限制：只读取固定男声训练录音1～3及其教师输出；不使用录音4/5或Track9，不播放、不录音、不接触板卡。
+- 下一责任方：Hardware-A / Codex 完成Round93预检并单独提交，再按结果认领Round94。
+
+### [PS-20261021-10] 源清浊时序融合 Round 56 结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED / USER_STOP
+- 基准提交：`2fef469`
+- 修改路径：`build/apply_world_temporal_postfilter_round47_20261026.py`、`report/fixed_male_source_vuv_round56_20261026.{md,json}`、`coummucation.md`。
+- 复现命令：冻结 Round37 checkpoint 与 gain1.6，在录音4运行 `--source-vuv-alphas 0 0.25 0.5 0.75 1.0 --experiment-round 56`，再运行严格评估器。
+- 量化结果：alpha0/0.25/0.5/0.75/1.0 的身份为 `.6946/.6954/.7013/.7013/.7013`，泄漏为 `.1046/.1138/.1171/.1171/.1171`，UTMOS为 `2.2746/2.2283/2.3003/2.3003/2.3003`，CER为 `.2500/.3971/.2647/.2647/.2647`；五门均未全过，alpha0.5/0.75/1.0输出PCM完全相同。
+- 判定：拒绝。源VUV既未降低CER又增加源泄漏，严格选择仍是alpha0；录音5保持锁定。
+- 报告链接：`report/fixed_male_source_vuv_round56_20261026.md`、`report/fixed_male_source_vuv_round56_20261026.json`。
+- 限制：只使用录音4；未播放、未录音、未接触板卡。用户要求本轮完成后停止，因此Round57未认领、未启动。
+- 下一责任方：暂停，等待用户后续指令。
+
+### [PS-20261021-10] 源清浊时序融合 Round 56 认领
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`b832fe8`
+- 唯一变量：冻结 Round51 的 gain1.6 和全部目标谱/F0/AP，只把模型预测VUV概率与源WORLD VUV按 `0/0.25/0.5/0.75/1.0` 融合，测试源清浊边界能否改善辅音与CER；不注入源谱或源音高。
+- 成功标准：录音4严格身份 `>=0.45`、P10 `>=0.35`、泄漏 `<=0.10`、UTMOS `>=2.30`、CER `<=0.15` 全过；只有全过才允许下一轮打开锁定录音5。
+- 限制：不使用录音5或 Track 9，不播放、不录音、不接触板卡。
+- 下一责任方：Hardware-A / Codex 实现VUV单变量网格并独立提交结果。
+
+### [PS-20261021-10] 零均值源谱动态残差 Round 55 认领
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`26a31ad496dddfff26c4f396771bb8cec4c3aff0`
+- 唯一变量：冻结 Round51 的 gain1.6，在固定男性 validation 录音4上把源 WORLD 谱 DCT `8:60` 去除逐维时间均值后的动态残差按 `0/0.1/0.2/0.3/0.4` 注入；不注入男性平均谱、F0、能量或AP。
+- 选择门：按身份/P10/泄漏/UTMOS/CER五门最小比例排序；只有五门全过才允许 Round56 打开锁定录音5。
+- 限制：只使用录音4选参，不使用录音5或 Track 9；不播放、不录音、不接触板卡。
+- 下一责任方：Hardware-A / Codex 完成固定残差比例网格并单独提交。
+
+### [PS-20261021-10] Round43 跨句 F0 收益归因 Round 45 认领
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：CLAIMED
+- 基准提交：`9c42263ea3aa12898ad451f3c00915e816f039c4`
+- 范围：承接既有 44 轮，从 Round37/Round43 的同一 8 条独立验证证据分析逐句、逐说话人 F0 动态误差与 UTMOS 收益方向；本次新增轮次固定编号为 Round 45～54，达到客观可用门则提前停止。
+- 唯一变量：本轮只做归因，不训练、不改变 checkpoint；不得继续扫描更大 F0 权重。
+- 判定：只有能在两个验证说话人上同向解释 UTMOS 差异的归一化/误差项，才允许进入下一训练轮；否则回到 Round37 并优先研究非 F0 参数协同。
+- 限制：不使用固定男性锁定句或 Track 9 选参，不播放、不录音、不接触板卡；板卡可保持关机。
+- 下一责任方：Hardware-A / Codex 完成 Round45 报告并单独提交；随后按结论认领 Round46。
+
+### [PS-20261021-10] Round43 跨句 F0 收益归因 Round 45 结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：NO_GO_F0_NORMALIZATION
+- 基准提交：`aa6dcad`
+- 修改路径：`report/round43_f0_gain_attribution_round45_20261026.{md,json}`、`coummucation.md`。
+- 量化结果：Round43 相对 Round37 的 UTMOS 在 `SSB0434/SSB0080` 上分别为 `-0.04219/+0.03868`；UTMOS 增量与 F0 标准差/动态比更接近教师的相关系数为 `-0.4296/-0.6819`，不存在跨说话人同向解释。
+- 判定：禁止继续扫描 F0 权重或加入说话人/句子自适应 F0 归一化；回退 Round37，Round46 研究验证集选择的可部署非 F0 参数协同后处理。
+- 限制：未训练、推理、合成或重新使用 Track 9；未使用固定男性输入、未播放，板卡保持关机。
+- 报告链接：`report/round43_f0_gain_attribution_round45_20261026.md`、`report/round43_f0_gain_attribution_round45_20261026.json`。
+- 下一责任方：Hardware-A / Codex 提交 Round45；另行认领 Round46 单变量后处理验证。
+
+### [PS-20261021-10] 非 F0 时间对比度后滤波 Round 46 认领
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`7e4b22e`
+- 唯一变量：冻结 Round37 checkpoint，只对预测的谱/能量/AP 三组相对各句时间均值的偏差施加同一个增益；log-F0、VUV、模型和合成器不变。
+- 选择集与门：只用原8条独立 validation 句比较固定网格 `1.0/1.1/1.2/1.3/1.4`；候选必须总体 UTMOS 提高且两个验证说话人都不退步，才允许 Round47 在 Track 9 单次回归。
+- 限制：不使用 Track 9、固定男性锁定句、真人试听或板卡；这是推理后处理探索，不宣称已经可用。
+- 下一责任方：Hardware-A / Codex 实现并运行验证网格，失败也单独提交。
+
+### [PS-20261021-10] 非 F0 时间对比度后滤波 Round 46 结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：GO_GAIN_1_4
+- 基准提交：`a57b54d`
+- 修改路径：`build/sweep_world_temporal_postfilter_round46_20261026.py`、`report/world_temporal_postfilter_round46_20261026.{md,json}`、`coummucation.md`。
+- 量化结果：8句 UTMOS 从 gain1.0 的 `2.0055` 单调升至 gain1.4 的 `2.4082`；`SSB0080/SSB0434` 分别提升 `+0.4166/+0.3889`，通过两个说话人均不退步门。
+- 判定：冻结 gain `1.4`，不扩展验证网格；Round47 仅在 Track 9 做一次严格身份/P10/UTMOS/CER回归。
+- 限制：未使用 Track 9 或固定男性输入；未播放、录音或接触板卡，尚未宣称保底可用。
+- 报告链接：`report/world_temporal_postfilter_round46_20261026.md`、`report/world_temporal_postfilter_round46_20261026.json`。
+- 下一责任方：Hardware-A / Codex 提交 Round46；另行认领 Round47 冻结留出回归。
+
+### [PS-20261021-10] gain1.4 冻结 Track 9 回归 Round 47 认领
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线测试）
+- 状态：CLAIMED
+- 基准提交：`cea7c0c`
+- 唯一变量：把 Round46 已冻结的非 F0 时间对比度 gain `1.4` 应用于 Round37 的 Track 9 重建；不得调整增益或其他参数。
+- 验收：用既定严格评估器报告身份、P10、UTMOS、CER；目标自重建不应用男性泄漏门。四项全部过门才允许进入固定男性转换，否则保留证据并继续 Round48。
+- 限制：Track 9 仅作冻结后一次回归，不参与训练或重新选参；不播放、不录音、不接触板卡。
+- 下一责任方：Hardware-A / Codex 合成并严格评测，单独提交结果。
+
+### [PS-20261021-10] gain1.4 冻结 Track 9 回归 Round 47 结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线测试）
+- 状态：REJECTED_BEST_SO_FAR
+- 基准提交：`ed10a65`
+- 修改路径：`build/apply_world_temporal_postfilter_round47_20261026.py`、`report/world_temporal_postfilter_track9_round47_20261026.{md,json}`、`coummucation.md`。
+- 量化结果：Round37 基线逐位一致；gain1.4 的身份/P10/UTMOS/CER 为 `0.7138/0.6973/2.2853/0.0978`，UTMOS 相对基线 `+0.4237` 但距门槛仍差 `0.0147`。
+- 判定：身份、P10、CER 通过，UTMOS 未过；不进入固定男性转换。目标自重建不应用男性泄漏门。
+- 限制：Track 9 只在冻结后使用一次；未使用固定男性输入、未播放、录音或接触板卡。候选合成前峰值 `2.0804`，下一轮回到 validation 研究限制策略。
+- 报告链接：`report/world_temporal_postfilter_track9_round47_20261026.md`、`report/world_temporal_postfilter_track9_round47_20261026.json`。
+- 下一责任方：Hardware-A / Codex 提交 Round47；另行认领 Round48 峰值策略验证。
+
+### [PS-20261021-10] 峰值限制可归因性 Round 48 认领
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：CLAIMED
+- 基准提交：`52ccc7e`
+- 范围：审计 `synthesize()` 的峰值限制和严格 UTMOS 输入归一化，判断 Round47 的 `peak_before_limit=2.0804` 是否会造成波形失真或可通过换限制器提升指标。
+- 判定：只有现有限制器改变相对波形或与评估归一化不等价时，才允许尝试限制策略；若只是全局线性缩放，则 NO-GO，下一轮回 validation 扩展冻结增益网格。
+- 限制：只读代码与既有证据，不训练、不合成、不使用 Track 9 新结果、固定男性输入、播放或板卡。
+- 下一责任方：Hardware-A / Codex 完成数学与代码路径核对并单独提交。
+
+### [PS-20261021-10] 峰值限制可归因性 Round 48 结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线诊断）
+- 状态：NO_GO_LIMITER_TUNING
+- 基准提交：`a443ee7`
+- 修改路径：`report/world_peak_limiter_audit_round48_20261026.{md,json}`、`coummucation.md`。
+- 量化/代码结果：合成器只做全局 `0.98/peak` 线性缩放；UTMOS 前处理再归一到 RMS `0.04`，正比例增益严格抵消，预期 UTMOS 改变量为 `0`。
+- 判定：不调峰值限制器；Round49 回到原8条 validation，预声明扩展 gain `1.5～1.8`，仍执行两个说话人均不退步门。
+- 限制：只读代码与既有证据；没有训练、合成新音频或重新使用 Track 9，未用固定男性输入、播放或板卡。
+- 报告链接：`report/world_peak_limiter_audit_round48_20261026.md`、`report/world_peak_limiter_audit_round48_20261026.json`。
+- 下一责任方：Hardware-A / Codex 提交 Round48；另行认领 Round49 扩展增益验证。
+
+### [PS-20261021-10] 非 F0 增益扩展验证 Round 49 认领
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`2040f3b`
+- 唯一变量：保持 Round46 全部流程，只把预声明验证增益扩展为 `1.5/1.6/1.7/1.8`，并保留 `1.0/1.4` 对照；不改变参数组、checkpoint、评估器或选择规则。
+- 选择门：总体 UTMOS 最大且 `SSB0080/SSB0434` 都不低于1.0基线；若最优仍位于1.8边界，本阶段停止继续外推，避免无限追涨。
+- 限制：只用8条 validation 选参，不使用 Track 9 或固定男性输入，不播放、不录音、不接触板卡。
+- 下一责任方：Hardware-A / Codex 跑完整固定网格并单独提交。
+
+### [PS-20261021-10] 非 F0 增益扩展验证 Round 49 结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：GO_GAIN_1_6
+- 基准提交：`7970f5e`
+- 修改路径：`build/sweep_world_temporal_postfilter_round46_20261026.py`、`report/world_temporal_gain_extension_round49_20261026.{md,json}`、`coummucation.md`。
+- 量化结果：gain1.6 的8句 UTMOS 为 `2.4833`，`SSB0080/SSB0434=2.6352/2.3314`；1.7和1.8总体回落，1.6是内部最优。
+- 判定：冻结 gain `1.6`，停止外推；Round50 在 Track 9 做一次严格回归。
+- 限制：未使用 Track 9 或固定男性输入；未播放、录音或接触板卡。
+- 报告链接：`report/world_temporal_gain_extension_round49_20261026.md`、`report/world_temporal_gain_extension_round49_20261026.json`。
+- 下一责任方：Hardware-A / Codex 提交 Round49；另行认领 Round50 冻结留出回归。
+
+### [PS-20261021-10] gain1.6 冻结 Track 9 回归 Round 50 认领
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线测试）
+- 状态：CLAIMED
+- 基准提交：`d728aba`
+- 唯一变量：使用 Round49 已冻结 gain `1.6` 替换 Round47 的 `1.4`；Round37 checkpoint、参数组、Track 9、合成与严格评估全部不变。
+- 验收：目标自重建身份≥0.45、P10≥0.35、UTMOS≥2.30、CER≤0.15；全部通过才允许 Round51 转换固定男性 validation 录音4。
+- 限制：不再根据 Track 9 调参；目标自重建不应用男性泄漏门。不播放、不录音、不接触板卡。
+- 下一责任方：Hardware-A / Codex 完成一次冻结回归并单独提交。
+
+### [PS-20261021-10] gain1.6 冻结 Track 9 回归 Round 50 结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线测试）
+- 状态：PASS_TARGET_RECONSTRUCTION
+- 基准提交：`6b32195`
+- 修改路径：`build/apply_world_temporal_postfilter_round47_20261026.py`、`report/world_temporal_gain_track9_round50_20261026.{md,json}`、`coummucation.md`。
+- 量化结果：身份/P10/男性质心余弦/UTMOS/CER=`0.6847/0.6643/0.0863/2.3814/0.1087`；目标重建适用四门全部通过，基线逐位一致。
+- 判定：目标参数预测与WORLD合成链首次达到电脑端门；Round51 冻结同一候选转换固定男性 validation 录音4，届时男性泄漏门正式适用。
+- 限制：本轮不是固定男性转换，不能宣称保底方案已通过；未播放、录音或接触板卡。
+- 报告链接：`report/world_temporal_gain_track9_round50_20261026.md`、`report/world_temporal_gain_track9_round50_20261026.json`。
+- 下一责任方：Hardware-A / Codex 提交 Round50；另行认领 Round51 固定男性 validation 转换。
+
+### [PS-20261021-10] 固定男性 validation 转换 Round 51 认领
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线测试）
+- 状态：CLAIMED
+- 基准提交：`394ffbb`
+- 唯一变量：输入从目标 Track 9 改为冻结的 `人物音频资料/男声/标准录音 4.wav`；Round37 checkpoint、gain1.6、目标锚点、合成器和严格评估器全部不变。
+- 验收：正式应用身份≥0.45、P10≥0.35、男性泄漏≤0.10、UTMOS≥2.30、CER≤0.15五门；全部通过才允许 Round52 使用锁定录音5。
+- 限制：录音4是 validation，不得据其结果重新调 gain；不播放、不录音、不接触板卡。
+- 下一责任方：Hardware-A / Codex 完成固定男性 validation 文件转换并单独提交。
+
+### [PS-20261021-10] 固定男性 validation 转换 Round 51 结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线测试）
+- 状态：REJECTED_CONTENT
+- 基准提交：`5600cda`
+- 修改路径：`build/apply_world_temporal_postfilter_round47_20261026.py`、`report/fixed_male_validation_round51_20261026.{md,json}`、`coummucation.md`。
+- 量化结果：录音4身份/P10/泄漏/UTMOS/CER=`0.6946/0.6766/0.1046/2.2746/0.2500`；身份两门通过，泄漏和UTMOS轻微未过，CER明显未过。
+- 判定：不得进入锁定录音5或试听；Round52 仅在录音4上选择固定男性专用 gain，按五门最小比例而非单项最高值决定。
+- 限制：未使用 Track 9 或锁定录音5；未播放、录音或接触板卡。
+- 报告链接：`report/fixed_male_validation_round51_20261026.md`、`report/fixed_male_validation_round51_20261026.json`。
+- 下一责任方：Hardware-A / Codex 提交 Round51；另行认领 Round52 固定男性 validation gain 选择。
+
+### [PS-20261021-10] 固定男性专用 gain 选择 Round 52 认领
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`65e0549`
+- 唯一变量：固定男性 validation 录音4上比较同一非 F0 后滤波的 gain `1.0/1.2/1.4/1.6/1.8`；checkpoint、参数组、目标锚点、合成器和评估器不变。
+- 选择门：先按五门最小达成比例，再按平均达成比例排序；只有五门全过才允许 Round53 打开锁定录音5。网格完成后不再插值或外推。
+- 限制：只使用录音4选固定男性专用配置；不使用录音5、Track 9、播放、录音或板卡。
+- 下一责任方：Hardware-A / Codex 完成固定网格与严格评测并单独提交。
+
+### [PS-20261021-10] 固定男性专用 gain 选择 Round 52 结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED_GAIN_ONLY
+- 基准提交：`d19fa04`
+- 修改路径：`build/apply_world_temporal_postfilter_round47_20261026.py`、`report/fixed_male_gain_sweep_round52_20261026.{md,json}`、`coummucation.md`。
+- 量化结果：gain1.4 的 UTMOS `2.3109` 通过但泄漏/CER=`0.1306/0.25` 失败；gain1.8 是唯一泄漏通过点 `0.0960`，但 UTMOS/CER=`2.2371/0.3382` 失败。无候选五门全过。
+- 判定：停止 gain-only 路线；Round53 冻结 gain1.8，只扫描源高阶谱 DCT `20:60` 的细节注入比例 `0～0.4`，针对CER且保留低阶目标音色。
+- 限制：只用录音4，未使用录音5或 Track 9；未播放、录音或接触板卡。
+- 报告链接：`report/fixed_male_gain_sweep_round52_20261026.md`、`report/fixed_male_gain_sweep_round52_20261026.json`。
+- 下一责任方：Hardware-A / Codex 提交 Round52；另行认领 Round53 高阶谱细节验证。
+
+### [PS-20261021-10] 源高阶谱细节注入 Round 53 认领
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`0432a9d`
+- 唯一变量：冻结 gain1.8，只把录音4源 WORLD 谱 DCT 高阶 `20:60` 按 `0/0.1/0.2/0.3/0.4` 比例注入预测；目标低阶谱 `0:20`、log-F0、VUV、能量、AP、checkpoint和评估器不变。
+- 选择门：五门最小达成比例优先；只有身份/P10/泄漏/UTMOS/CER全过才允许最后 Round54 打开锁定录音5，否则 Round54 记录10轮停止结论而不污染锁定集。
+- 限制：只用录音4选参，不使用录音5或 Track 9；不播放、不录音、不接触板卡。
+- 下一责任方：Hardware-A / Codex 完成固定细节网格并单独提交。
+
+### [PS-20261021-10] 源高阶谱细节注入 Round 53 结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED_HIGH_ORDER_DETAIL
+- 基准提交：`5b88ca4`
+- 修改路径：`build/apply_world_temporal_postfilter_round47_20261026.py`、`report/fixed_male_source_detail_round53_20261026.{md,json}`、`coummucation.md`。
+- 量化结果：alpha0.2 的身份/P10/泄漏/UTMOS/CER=`0.6506/0.6252/0.0920/2.2579/0.3235`；alpha0.4 UTMOS最高 `2.2849`、泄漏 `0.0881`，但CER `0.3382`。
+- 判定：高阶20:60细节不解决内容门；Round54 冻结 gain1.8/alpha0.4，仅把谱注入起点比较 `20/16/12/8`，然后结束本批10轮。
+- 限制：只用录音4，未使用录音5或 Track 9；未播放、录音或接触板卡。
+- 报告链接：`report/fixed_male_source_detail_round53_20261026.md`、`report/fixed_male_source_detail_round53_20261026.json`。
+- 下一责任方：Hardware-A / Codex 提交 Round53；另行认领本批最后 Round54 中阶谱验证。
+
+### [PS-20261021-10] 源中阶谱细节注入 Round 54 认领
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`8f1cb04`
+- 唯一变量：冻结 gain1.8 和 source-detail alpha0.4，只比较谱 DCT 注入起点 `20/16/12/8`，终点均为60；其余参数及评估器不变。
+- 选择/停止门：仍按五门最小比例；若五门全过，候选仅获得打开锁定录音5的资格；否则不打开录音5。本轮是本批 Round45～54 的第10轮，结果提交后停止继续试参。
+- 限制：只用录音4，不使用录音5或 Track 9；不播放、不录音、不接触板卡。
+- 下一责任方：Hardware-A / Codex 完成固定网格、提交本轮和十轮总结。
+
+### [PS-20261021-10] 源中阶谱细节注入 Round 54 与十轮结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED_BATCH_STOP
+- 基准提交：`7ca75db`
+- 修改路径：`build/apply_world_temporal_postfilter_round47_20261026.py`、`report/fixed_male_spectral_cutoff_round54_20261026.{md,json}`、`report/fallback_rounds_45_54_summary_20261026.json`、`coummucation.md`。
+- 量化结果：Round54 cutoff16 最佳为身份/P10/泄漏/UTMOS/CER=`0.6441/0.6276/0.0974/2.2640/0.2941`，身份/P10/泄漏通过，UTMOS/CER失败；cutoff继续下移无过门趋势。
+- 十轮结论：Round45～54已全部完成。Round50 使目标Track9重建首次四门全过，但固定男性 validation 的最佳CER仍 `0.2941`；未达到“能用”，不打开锁定录音5、不请求试听、不启动Cortex-A9/PL/板卡。
+- 限制：本批只做电脑端离线诊断/测试；未播放、录音或接触板卡，录音5保持锁定。
+- 报告链接：`report/fixed_male_spectral_cutoff_round54_20261026.md`、`report/fixed_male_spectral_cutoff_round54_20261026.json`、`report/fallback_rounds_45_54_summary_20261026.json`。
+- 下一责任方：Maintainer/用户审核本批；若继续，应新认领内容保持机制，不再扫描 gain、F0权重或谱注入比例。
+
 ### [PS-20261025-20] Remote-PS-C 配对语料交付修复认领
 - 日期：2026-10-26
 - 角色/Agent：Hardware-A / Codex（资产交付，不运行 Remote-PS-C 方案）
@@ -1518,3 +1873,711 @@
 - 止损：若两个 CFG 都未降低泄漏或造成 CER 失败，本路线立即停止，不追加更高 CFG；既有 1.70 已有内容塌缩证据。
 - 限制：电脑端离线开发，不播放、不改板上 v23；Remote-PS-C 不负责验证本方案。
 - 下一责任方：Hardware-A / Codex 完成 CFG 筛选并按结果提交。
+
+### [PS-20261021-10] 零均值源谱动态残差 Round 55 结果
+- 日期：2026-10-26
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`47667df`
+- 修改路径：`build/apply_world_temporal_postfilter_round47_20261026.py`、`report/fixed_male_centered_residual_round55_20261026.{md,json}`、`coummucation.md`。
+- 复现命令：在 Round37 checkpoint 与 Round25 cache 上运行后滤波脚本，固定 gain1.6，参数 `--source-residual-alphas 0 0.1 0.2 0.3 0.4 --source-residual-cutoff 8 --source-relative 人物音频资料/男声/标准录音 4.wav`，再运行严格评估器。
+- 量化结果：alpha0.0/0.1/0.2/0.3/0.4 的身份为 `.6946/.6976/.7001/.7037/.7059`，泄漏为 `.1046/.1101/.1131/.1197/.1214`，UTMOS为 `2.2746/2.3042/2.3390/2.3722/2.3991`，CER为 `.2500/.2500/.3235/.3088/.2941`；五门均未全过。
+- 判定：拒绝。中心化谱残差可提高身份和自然度，但单调增加源泄漏且未修复内容；录音5保持锁定。
+- 报告链接：`report/fixed_male_centered_residual_round55_20261026.md`、`report/fixed_male_centered_residual_round55_20261026.json`。
+- 限制：只使用录音4；未使用录音5或 Track 9，未播放、未录音、未接触板卡。
+- 下一责任方：Hardware-A / Codex 在 Round56 只测试源VUV时序融合，判断清辅音边界能否降低CER且不引入音色谱。
+
+### [PS-20261021-10] HuBERT/WORLD Round 69 结果
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`6998adb9683e2c13d37f4acb80b116f91cc7dfe7`
+- 唯一变量：多尺度动态损失权重由 0.75 改为 1.65；固定种子 20261025、2000 步、source prosody、variance matching、锚点概率 0.25 和 gain 1.6。
+- 输入：仅男声标准录音 4 验证，SHA-256 `f4a026e5c97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c`；配对缓存清单 SHA-256 `4d34669259834bd30219f34af4730712c9aa7c4cf8fa8bc3c5ccde9ee3cc5bc5`。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.7054/0.6786/0.1037/2.3743/0.2206`；泄漏与 CER 未过门。Checkpoint SHA-256 `3a045e8571e77eedacf0b408ccfb9395b1bf212bf221956a8202288dad552cca`；候选 PCM16 SHA-256 `c33eb00a6bf4d49de3d465dc729b562ac1143ac633675f855deda357411765d6`。
+- 修改路径：`build/train_paired_hubert_world_gru_round26_20261025.py`、`report/fixed_male_hubert_world_round69_20261027.{md,json}`、`coummucation.md`。
+- 复现命令：见 `report/fixed_male_hubert_world_round69_20261027.json`；训练入口支持 `--multiscale-weight`，并以 `--skip-locked-target-regression` 在保存 checkpoint 后停止。
+- 限制：严格评估注入 identity OpenCC shim，源 Whisper 转写也有识别错误；录音 5 与 Track 9 未用于选参；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL 或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round69_20261027.md`、`report/fixed_male_hubert_world_round69_20261027.json`。
+- 下一责任方：Hardware-A / Codex 继续调整同一电脑端方案并逐轮评估。
+
+### [PS-20261021-10] HuBERT/WORLD Round 70 结果
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`726a0318f5ce7e6daa969afee9453c9b112fe8a3`
+- 唯一变量：多尺度动态损失权重由 Round69 的 1.65 改为 1.70；其他训练参数、录音4验证、gain1.6 和评估器不变。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.7009/0.6733/0.1046/2.3363/0.2647`；泄漏与 CER 未过门。Checkpoint SHA-256 `a297ea51273b137f0a65924d6c4cbc092f6a253da83b8373cb6fac23ca20f236`；候选 PCM16 SHA-256 `a4ffd96e0c41a3dffc6cc8560a22c8dd936fc99b296219518bb5a504bd6598ae`。
+- 修改路径：`report/fixed_male_hubert_world_round70_20261027.{md,json}`、`coummucation.md`。
+- 复现命令：见 `report/fixed_male_hubert_world_round70_20261027.json`。
+- 限制：严格评估使用 identity OpenCC shim；录音5、Track 9 未用于选参；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL 或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round70_20261027.md`、`report/fixed_male_hubert_world_round70_20261027.json`。
+- 下一责任方：Hardware-A / Codex 在 Round71 测试回落权重并继续逐轮评估。
+
+### [PS-20261021-10] HuBERT/WORLD Round 71 结果
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`647548bd4040a803d00a477c0a77fdfc9d4ce255`
+- 唯一变量：多尺度动态损失权重为 1.55；2000 步、固定种子、source prosody、variance matching、gain1.6 和评估器不变。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.7055/0.6785/0.1088/2.3419/0.2647`；泄漏与 CER 未过门。Checkpoint SHA-256 `4b28e786c853ed4237d5cdb17a700c0e79df736d24249cc65824ef0e80c42d88`；候选 PCM16 SHA-256 `734ded9562ea37a8c766218198f9f812e03bcac1c5e966946db4c1bea87a5133`。
+- 修改路径：`report/fixed_male_hubert_world_round71_20261027.{md,json}`、`coummucation.md`。
+- 复现命令：见 `report/fixed_male_hubert_world_round71_20261027.json`。
+- 限制：严格评估使用 identity OpenCC shim；录音5、Track 9 未用于选参；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL 或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round71_20261027.md`、`report/fixed_male_hubert_world_round71_20261027.json`。
+- 下一责任方：Hardware-A / Codex 测试 Round69-71 权重之间的低端区间。
+
+### [PS-20261021-10] HuBERT/WORLD Round 72 结果
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`5ed22b20a57df1168d19c4c4a864df4bcb3dbfa4`
+- 唯一变量：多尺度动态损失权重为 1.45；2000 步、固定种子、source prosody、variance matching、gain1.6 和评估器不变。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.7045/0.6792/0.1028/2.3635/0.2647`；泄漏与 CER 未过门。Checkpoint SHA-256 `8cc81ef4e25ca63c7d1df36a64bf737ffaa53cd7fef9564a05fc2156f9fadd4b`；候选 PCM16 SHA-256 `03c4e244c53dd9c46065796c006fd9d1bf6ecbb7025a13f6649ba52d7c051394`。
+- 修改路径：`report/fixed_male_hubert_world_round72_20261027.{md,json}`、`coummucation.md`。
+- 复现命令：见 `report/fixed_male_hubert_world_round72_20261027.json`。
+- 限制：严格评估使用 identity OpenCC shim；录音5、Track 9 未用于选参；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL 或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round72_20261027.md`、`report/fixed_male_hubert_world_round72_20261027.json`。
+- 下一责任方：Hardware-A / Codex 用 Round69 checkpoint 验证目标减漏方向，不再连续扫描相邻训练权重。
+
+### [PS-20261021-10] HuBERT/WORLD Round 73 后滤波验证
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`a0fe2000c9486e335aff17f00ae6e6c9244e3da6`
+- 唯一变量：Round69 checkpoint 的非 F0 动态后滤波 gain 从 1.6 降至 1.5；这是已暴露录音4的单轮客观回归，不产生新 checkpoint。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.7224/0.7013/0.1133/2.3663/0.2206`；泄漏与 CER 未过门。Checkpoint SHA-256 `3a045e8571e77eedacf0b408ccfb9395b1bf212bf221956a8202288dad552cca`；候选 SHA-256 `0a24d19c018b155546131ab962032fe0f5d9d591c4ee32cebd8b08ad9a339ba2`。
+- 修改路径：`report/fixed_male_hubert_world_round73_20261027.{md,json}`、`coummucation.md`。
+- 复现命令：见 `report/fixed_male_hubert_world_round73_20261027.json`。
+- 限制：使用 identity OpenCC shim；录音5、Track 9 未用于选参；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL 或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round73_20261027.md`、`report/fixed_male_hubert_world_round73_20261027.json`。
+- 下一责任方：Hardware-A / Codex 继续 PS 方案探索。
+
+### [PS-20261021-10] HuBERT/WORLD Round 74 后滤波验证
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`91e513c0e9e48a56a13a4d5b58f1cbb7ac301c47`
+- 唯一变量：Round69 checkpoint 的非 F0 后滤波 gain 由 1.6 降至 1.3。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.7450/0.7298/0.1355/2.2570/0.3824`；仅身份两门通过，其他三门失败。Checkpoint SHA-256 `3a045e8571e77eedacf0b408ccfb9395b1bf212bf221956a8202288dad552cca`；候选 SHA-256 `23d30e3e30f1dd22ef5308c68a1074ba3d09356c4d0e3f4932049b5eee173ac5`。
+- 修改路径：`report/fixed_male_hubert_world_round74_20261027.{md,json}`、`coummucation.md`。
+- 复现命令：见 `report/fixed_male_hubert_world_round74_20261027.json`。
+- 限制：identity OpenCC shim；录音5、Track 9 未用于选参；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL 或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round74_20261027.md`、`report/fixed_male_hubert_world_round74_20261027.json`。
+- 下一责任方：Hardware-A / Codex 改变训练数据的目标锚点比例。
+
+### [PS-20261021-10] HuBERT/WORLD Round 75 目标锚点比例
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`ccc53f98a0519b14b5089f4b63b3ad3ee39a6bf7`
+- 唯一变量：目标自重建锚点采样概率由 0.25 降至 0.15；动态权重 1.25、固定种子和其他结构不变。验证 early stopping 在 step1200 选 checkpoint，训练历史到 step1600 停止。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.6839/0.6559/0.1117/2.3876/0.5000`；泄漏与 CER 未过门。Checkpoint SHA-256 `da359e8caa8a03f27211cd1fc02a2a509e2fad50e44565365c98649c24af6104`；候选 PCM16 SHA-256 `23b61c5ebbab4b4a16170baca47d44f812f4e301ca8fa618d7ef878531f51623`。
+- 修改路径：`report/fixed_male_hubert_world_round75_20261027.{md,json}`、`coummucation.md`。
+- 复现命令：见 `report/fixed_male_hubert_world_round75_20261027.json`；本轮锚点概率为训练运行时改写为 0.15。
+- 限制：identity OpenCC shim；录音5、Track 9 未用于选参；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL 或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round75_20261027.md`、`report/fixed_male_hubert_world_round75_20261027.json`。
+- 下一责任方：Hardware-A / Codex 继续电脑端固定男性方案探索。
+
+### [PS-20261021-10] HuBERT/WORLD Round 76 移除源韵律
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`1c1dced5ddf6d8179338f50ea28a52e4cf4311dd`
+- 唯一变量：从 Round37 衍生配置中移除 source prosody 输入；动态损失权重 1.25、锚点概率 0.25、固定种子、gain1.6 不变；验证 early stopping 在 step1400 停止。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.6860/0.6648/0.1611/2.1773/0.4118`；源泄漏、UTMOS、CER 失败。Checkpoint SHA-256 `6d3c276ad5345a0ea5302191476ba446d95615d7ba41e4174582c63b58d36cb8`；候选 PCM16 SHA-256 `b2a7afe0414eba2a0e4a2c5fb46259c70de38927d9fa97f2eabf2f2497ed964b`。
+- 修改路径：`report/fixed_male_hubert_world_round76_20261027.{md,json}`、`coummucation.md`。
+- 复现命令：见 `report/fixed_male_hubert_world_round76_20261027.json`。
+- 限制：identity OpenCC shim；录音5、Track 9 未用于选参；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL 或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round76_20261027.md`、`report/fixed_male_hubert_world_round76_20261027.json`。
+- 下一责任方：Hardware-A / Codex 保留 source prosody、测试移除 variance matching。
+
+### [PS-20261021-10] HuBERT/WORLD Round 77 移除方差匹配
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`629a65dc45cd22ae07225fa26634885f4e853078`
+- 唯一变量：保留 source prosody，移除 variance matching；动态损失权重1.25、锚点概率0.25、固定种子与gain1.6不变；step1600 early stop。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.6987/0.6740/0.1451/2.2132/0.3971`；泄漏、UTMOS、CER失败。Checkpoint SHA-256 `e71e7999dda6f0d2c86dd626bb1eb91b12322467b39741b46f3d5a98a60d2433`；候选 PCM16 SHA-256 `108895adf5b6e2b7ad56565671083fe649b1d4d8601dc2ea46dfd509e07e90ac`。
+- 修改路径：`report/fixed_male_hubert_world_round77_20261027.{md,json}`、`coummucation.md`。
+- 复现命令：见 `report/fixed_male_hubert_world_round77_20261027.json`。
+- 限制：identity OpenCC shim；录音5、Track 9 未用于选参；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL 或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round77_20261027.md`、`report/fixed_male_hubert_world_round77_20261027.json`。
+- 下一责任方：Hardware-A / Codex 保留 source prosody 与 variance matching，测试独立的 VUV BCE 权重变化。
+
+### [PS-20261021-10] HuBERT/WORLD Round 78 VUV 损失权重
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`e6d0c57fa4a08fb73d48d6f58d85a8b477d0d726`
+- 唯一变量：VUV BCE 系数由0.35升至0.70；保留 source prosody 和 variance matching，动态权重1.25、锚点0.25、gain1.6不变；step1600 early stop。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.6967/0.6721/0.1134/2.3254/0.2794`；源泄漏与 CER 未过门。Checkpoint SHA-256 `f3ebc219a32883027d26b2f1f6818545159e67351adc74d306006b0867fc891c`；候选 PCM16 SHA-256 `b2082fca1f4d73f2324085a7a54bb57903b8f3c66ae988089102a6399866ba31`。
+- 修改路径：`report/fixed_male_hubert_world_round78_20261027.{md,json}`、`coummucation.md`。
+- 复现命令：见 `report/fixed_male_hubert_world_round78_20261027.json`。
+- 限制：identity OpenCC shim；录音5、Track 9 未用于选参；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL 或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round78_20261027.md`、`report/fixed_male_hubert_world_round78_20261027.json`。
+- 下一责任方：Hardware-A / Codex 测试降低 VUV BCE 权重。
+
+### [PS-20261021-10] HuBERT/WORLD Round 79 VUV 损失权重
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`b2a26fa971cca004adbcf5aad3d650f9bcbfe94a`
+- 唯一变量：VUV BCE 系数由0.35降至0.15；其余训练结构、source prosody、variance matching、动态权重1.25、锚点概率0.25与gain1.6不变。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.7080/0.6891/0.1088/2.3807/0.4412`；泄漏与 CER 未过门。Checkpoint SHA-256 `257cb1d3fa86ab61adffe06ab9258105c38384442d73addfb19f180c244fa131`；候选 PCM16 SHA-256 `4ae7617ee724798347f7528048b9d7dabac7307b2a67f6edd3c0e9712c94fcbf`。
+- 修改路径：`report/fixed_male_hubert_world_round79_20261027.{md,json}`、`coummucation.md`。
+- 复现命令：见 `report/fixed_male_hubert_world_round79_20261027.json`。
+- 限制：identity OpenCC shim；录音5、Track 9 未用于选参；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL 或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round79_20261027.md`、`report/fixed_male_hubert_world_round79_20261027.json`。
+- 下一责任方：Hardware-A / Codex 继续围绕保留源韵律条件的模型改进低泄漏与CER。
+
+### [PS-20261021-10] HuBERT/WORLD Round 80 VUV 损失权重
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`05f07ba`
+- 唯一变量：以 Round79 的 VUV BCE 系数0.15为基准，仅提高至0.50；source prosody、variance matching、动态权重1.25、锚点概率0.25、gain1.6、随机种子和早停策略保持不变。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.7022/0.6817/0.1142/2.3071/0.2353`；泄漏高于门槛0.0142，CER高于门槛0.0853。检查点训练2000 step，最佳验证step1200；checkpoint SHA-256 `de268f4a915970f8dbe0298696301cd0b88dded3160eefbaffa27bde68d8a9ca`；候选 PCM16 SHA-256 `ee897bca071686a624f5631a0322238b0d1988cc9f7452900bdbb85d1d0b4c91`。
+- 修改路径：`report/fixed_male_hubert_world_round80_20261027.{md,json}`、`coummucation.md`。
+- 复现命令：见 `report/fixed_male_hubert_world_round80_20261027.json`；运行时训练脚本唯一系数改动及SHA亦记录在报告中。
+- 限制：identity OpenCC shim不执行简繁转换；CPU训练启动器虽写出并通过独立检查的checkpoint，但最后返回码为1；录音5和Track9未用于训练或筛选；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round80_20261027.md`、`report/fixed_male_hubert_world_round80_20261027.json`。
+- 下一责任方：Hardware-A / Codex 继续测试 VUV BCE 系数0.40，以在0.15、0.50、0.70之间收窄低CER与低泄漏的折中区间。
+
+### [PS-20261021-10] HuBERT/WORLD Round 81 VUV 损失权重
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`ca86719`
+- 唯一变量：以 Round80 的 VUV BCE 系数0.50为基准，仅降低至0.40；source prosody、variance matching、动态权重1.25、锚点概率0.25、gain1.6、随机种子和早停策略保持不变。
+- 成功标准：固定录音4严格身份均值≥0.45、P10≥0.35、源泄漏≤0.10、UTMOS≥2.30、CER≤0.15五门全部通过；通过后立即停止算法训练并转入本地验证门。
+- 数据边界：只用男性标准录音4评估；训练仍限男性录音1～3及目标Track5～8；锁定录音5和Track9不得用于训练、选参、早停或筛选。
+- 复现入口：`build/train_paired_hubert_world_gru_round26_20261025.py`、`build/apply_world_temporal_postfilter_round47_20261026.py`、`build/evaluate_seed_fixed_male_strict_20261024.py`；结果报告记录缓存与资产SHA及严格评测命令。
+- 限制：identity OpenCC shim的简繁归一化有限；不播放、不录音、不接触板卡，不声明试听、Cortex-A9、RTL/PL或实时通过。
+- 下一责任方：Hardware-A / Codex 完成本轮训练、严格评估并提交单轮结果。
+
+### [PS-20261021-10] HuBERT/WORLD Round 85 VUV 损失权重
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`d6bbebf`
+- 唯一变量：冻结Round82配置，仅将训练VUV BCE系数由0.30改为0.35；其余参数不变。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.6997/0.6769/0.0996/2.2724/0.2647`；身份、P10、泄漏通过，UTMOS与CER失败。检查点SHA-256 `f3fa1f9b5619ed79fc204ebc8e6e731363a4cec99d165ed60e4238f7e01c45e2`；候选SHA-256 `43fc85bcff9b5973dfe8be8168584b088ac9faff35703cfd8a0db513c752505b`。
+- 修改路径：`report/fixed_male_hubert_world_round85_20261027.{md,json}`、`coummucation.md`。
+- 限制：identity OpenCC shim；录音5、Track9未用于训练或筛选；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round85_20261027.md`、`report/fixed_male_hubert_world_round85_20261027.json`。
+- 下一责任方：Hardware-A / Codex 继续测试不注入源VUV的内容保持变量。
+
+### [PS-20261021-10] HuBERT/WORLD Round 86 源谱动态残差后处理
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`4160ab9`
+- 唯一变量：冻结Round85 checkpoint与gain1.6，仅把录音4源WORLD谱DCT动态残差按alpha=0.05注入；不注入源VUV、音高、能量或AP，不重训。
+- 成功标准：固定录音4严格身份均值≥0.45、P10≥0.35、源泄漏≤0.10、UTMOS≥2.30、CER≤0.15五门全部通过；否则记录并拒绝。
+- 数据边界：只用男性标准录音4评估；Track9和录音5继续锁定，不用于选择或训练。
+- 复现入口：`build/apply_world_temporal_postfilter_round47_20261026.py --source-residual-alphas 0.05` 与严格评测器。
+- 限制：不播放、不录音、不接触板卡，不声明试听、Cortex-A9、RTL/PL或实时通过。
+- 下一责任方：Hardware-A / Codex 完成本轮候选生成、严格评估并提交单轮结果。
+
+### [PS-20261021-10] HuBERT/WORLD Round 87 源谱动态残差后处理
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`43d2b70`
+- 唯一变量：冻结Round85 checkpoint与gain1.6，仅将录音4源WORLD谱DCT零均值动态残差alpha设为0.02；无源VUV/F0/能量/AP，无重训。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.7011/0.6794/0.1011/2.2824/0.2647`；身份、P10通过，泄漏、UTMOS、CER失败。候选SHA-256 `984939d4f10b6be67e6c147ef912ed8b9d03a986b6f7e714a506cb59961b6531`。
+- 修改路径：`report/fixed_male_hubert_world_round87_20261027.{md,json}`、`coummucation.md`。
+- 限制：identity OpenCC shim；录音5、Track9未用于训练或筛选；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round87_20261027.md`、`report/fixed_male_hubert_world_round87_20261027.json`。
+- 下一责任方：Hardware-A / Codex 停止源谱残差注入，恢复训练变量探索。
+
+### [PS-20261021-10] HuBERT/WORLD Round 88 多尺度动态损失权重
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`75940f6`
+- 唯一变量：冻结Round85配置，VUV BCE系数0.35不变，仅把多尺度动态损失权重从1.25降至1.20；source prosody、variance matching、锚点概率0.25、gain1.6、种子和早停策略保持不变。
+- 成功标准：固定录音4严格身份均值≥0.45、P10≥0.35、源泄漏≤0.10、UTMOS≥2.30、CER≤0.15五门全部通过；通过即停止训练。
+- 数据边界：只用男性标准录音4评估；训练仍限男性录音1～3及目标Track5～8；录音5和Track9锁定。
+- 复现入口：`build/train_paired_hubert_world_gru_round26_20261025.py --multiscale-weight 1.20`、candidate生成器和严格评测器。
+- 限制：不播放、不录音、不接触板卡，不声明试听、Cortex-A9、RTL/PL或实时通过。
+- 下一责任方：Hardware-A / Codex 完成本轮训练、严格评估并提交单轮结果。
+
+### [PS-20261021-10] HuBERT/WORLD Round 86 源谱动态残差后处理
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`02995a5`
+- 唯一变量：冻结Round85 checkpoint与gain1.6，仅将录音4源WORLD谱DCT零均值动态残差按alpha=0.05注入；无源VUV/F0/能量/AP，无重训。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.7026/0.6828/0.1021/2.2968/0.2647`；身份、P10通过，泄漏、UTMOS、CER失败。候选SHA-256 `4da876bf25cc41250cf1d280452805d0b8fe8f863ac56c43893ef01872db61d7`。
+- 修改路径：`report/fixed_male_hubert_world_round86_20261027.{md,json}`、`coummucation.md`。
+- 限制：identity OpenCC shim；录音5、Track9未用于训练或筛选；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round86_20261027.md`、`report/fixed_male_hubert_world_round86_20261027.json`。
+- 下一责任方：Hardware-A / Codex 测试更小谱残差alpha=0.02。
+
+### [PS-20261021-10] HuBERT/WORLD Round 87 源谱动态残差后处理
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`b5003d4`
+- 唯一变量：冻结Round85 checkpoint与gain1.6，仅将录音4源WORLD谱DCT零均值动态残差alpha由0改为0.02；无源VUV/F0/能量/AP，无重训。
+- 成功标准：固定录音4严格五门全部通过；否则记录泄漏、CER和自然度变化并拒绝。
+- 数据边界：只用男性标准录音4评估；Track9和录音5继续锁定，不用于选择或训练。
+- 复现入口：`build/apply_world_temporal_postfilter_round47_20261026.py --source-residual-alphas 0.02` 与严格评测器。
+- 限制：不播放、不录音、不接触板卡，不声明试听、Cortex-A9、RTL/PL或实时通过。
+- 下一责任方：Hardware-A / Codex 完成本轮候选生成、严格评估并提交单轮结果。
+
+### [PS-20261021-10] HuBERT/WORLD Round 82 VUV 损失权重
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`47b132e`
+- 唯一变量：VUV BCE系数由Round81的0.40降至0.30；其余训练结构、source prosody、variance matching、动态权重1.25、锚点0.25、gain1.6、种子不变。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.7003/0.6726/0.1006/2.3312/0.2941`；泄漏、CER未过门。检查点SHA-256 `2d69a00d00c21674de7578c03185d325294386504fe7100e242253a04ca0fc9b`；候选SHA-256 `681a830407284cddb03aa1ad9c9ce6f357ac96489cc20b445375cfaaa37b7d39`。
+- 修改路径：`report/fixed_male_hubert_world_round82_20261027.{md,json}`、`coummucation.md`。
+- 限制：identity OpenCC shim；CPU启动器返回码为1但产物已独立核验；录音5、Track9未用于训练或筛选；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round82_20261027.md`、`report/fixed_male_hubert_world_round82_20261027.json`。
+- 下一责任方：Hardware-A / Codex 转向内容保持后处理的单变量测试，优先围绕Round82模型评估可逆的VUV/内容平滑设置。
+
+### [PS-20261021-10] HuBERT/WORLD Round 83 源VUV后处理
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`671ddd3`
+- 唯一变量：冻结Round82 checkpoint与gain1.6，仅将预测VUV与录音4源WORLD VUV按源权重0.10混合；不重训、不注入源谱/音高/能量/AP。
+- 成功标准：固定录音4严格五门全部通过；否则记录泄漏、CER和自然度变化并拒绝。
+- 数据边界：只用男性标准录音4评估；Track9和录音5继续锁定，不用于选择或训练。
+- 复现入口：`build/apply_world_temporal_postfilter_round47_20261026.py --source-vuv-alphas 0.1` 与严格评测器；结果报告记录候选SHA。
+- 限制：不播放、不录音、不接触板卡，不声明试听、Cortex-A9、RTL/PL或实时通过。
+- 下一责任方：Hardware-A / Codex 完成本轮候选生成、严格评估并提交单轮结果。
+
+### [PS-20261021-10] HuBERT/WORLD Round 84 源VUV后处理
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`b86397d`
+- 唯一变量：冻结Round82 checkpoint与gain1.6，仅将预测VUV与录音4源WORLD VUV按源权重0.05混合；不重训、不注入源谱/音高/能量/AP。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.7012/0.6747/0.1005/2.3238/0.2500`；泄漏、CER未过门。候选SHA-256 `1d7320b567dd30f41dcdc7b1a96049146c8dca8c3efdbd9c05334185fd62e4c1`。
+- 修改路径：`report/fixed_male_hubert_world_round84_20261027.{md,json}`、`coummucation.md`。
+- 限制：identity OpenCC shim；录音5、Track9未用于训练或筛选；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round84_20261027.md`、`report/fixed_male_hubert_world_round84_20261027.json`。
+- 下一责任方：Hardware-A / Codex 回到不注入源VUV的内容保持后处理或训练变量。
+
+### [PS-20261021-10] HuBERT/WORLD Round 85 VUV 损失权重
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`8dda03d`
+- 唯一变量：冻结Round82配置，仅将训练VUV BCE系数由0.30改为0.35；source prosody、variance matching、动态权重1.25、锚点概率0.25、gain1.6、随机种子和早停策略保持不变。
+- 成功标准：固定录音4严格身份均值≥0.45、P10≥0.35、源泄漏≤0.10、UTMOS≥2.30、CER≤0.15五门全部通过；通过后立即停止算法训练并转入本地验证门。
+- 数据边界：只用男性标准录音4评估；训练仍限男性录音1～3及目标Track5～8；锁定录音5和Track9不得用于训练、选参、早停或筛选。
+- 复现入口：`build/train_paired_hubert_world_gru_round26_20261025.py`、`build/apply_world_temporal_postfilter_round47_20261026.py`、`build/evaluate_seed_fixed_male_strict_20261024.py`。
+- 限制：不播放、不录音、不接触板卡，不声明试听、Cortex-A9、RTL/PL或实时通过。
+- 下一责任方：Hardware-A / Codex 完成本轮训练、严格评估并提交单轮结果。
+
+### [PS-20261021-10] HuBERT/WORLD Round 83 源VUV后处理
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`671ddd3`
+- 唯一变量：冻结Round82 checkpoint与gain1.6，仅将预测VUV与录音4源WORLD VUV按源权重0.10混合；不重训、不注入源谱/音高/能量/AP。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.6990/0.6764/0.0993/2.3515/0.3235`；身份、P10、泄漏、UTMOS通过，CER失败。候选SHA-256 `746879f49f330f33e81facfe133f3eeb7c581281f2682a457167b29b5bf9c404`。
+- 修改路径：`report/fixed_male_hubert_world_round83_20261027.{md,json}`、`coummucation.md`。
+- 限制：identity OpenCC shim；录音5、Track9未用于训练或筛选；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round83_20261027.md`、`report/fixed_male_hubert_world_round83_20261027.json`。
+- 下一责任方：Hardware-A / Codex 继续针对内容保持，优先测试不注入源VUV的输出内容后处理。
+
+### [PS-20261021-10] HuBERT/WORLD Round 84 源VUV后处理
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`9c3384b`
+- 唯一变量：冻结Round82 checkpoint与gain1.6，仅将预测VUV与录音4源WORLD VUV按源权重0.05混合；不重训、不注入源谱/音高/能量/AP。
+- 成功标准：固定录音4严格五门全部通过；否则记录泄漏、CER和自然度变化并拒绝。
+- 数据边界：只用男性标准录音4评估；Track9和录音5继续锁定，不用于选择或训练。
+- 复现入口：`build/apply_world_temporal_postfilter_round47_20261026.py --source-vuv-alphas 0.05` 与严格评测器；结果报告记录候选SHA。
+- 限制：不播放、不录音、不接触板卡，不声明试听、Cortex-A9、RTL/PL或实时通过。
+- 下一责任方：Hardware-A / Codex 完成本轮候选生成、严格评估并提交单轮结果。
+
+### [PS-20261021-10] HuBERT/WORLD Round 81 VUV 损失权重
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`449c2ba`
+- 唯一变量：VUV BCE系数由Round80的0.50降至0.40；其余训练结构、source prosody、variance matching、动态权重1.25、锚点0.25、gain1.6、种子不变。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = `0.7020/0.6843/0.1140/2.2540/0.2353`；泄漏、UTMOS、CER未过门。检查点SHA-256 `3640730e8c350277688aeaea43391f0c355d5b421cc67b935ceb56df7be9aaa4`；候选SHA-256 `7ecdeba5335682dbb7226fb12e84ad306b7b4140c33083b0d3c2fa30189b2fad`。
+- 修改路径：`report/fixed_male_hubert_world_round81_20261027.{md,json}`、`coummucation.md`。
+- 限制：identity OpenCC shim；CPU训练/候选启动器返回码为1但输出和checkpoint已独立核验；录音5、Track9未用于训练或筛选；未播放、未接触板卡，无真人听感、Cortex-A9、RTL/PL或实时结论。
+- 报告链接：`report/fixed_male_hubert_world_round81_20261027.md`、`report/fixed_male_hubert_world_round81_20261027.json`。
+- 下一责任方：Hardware-A / Codex 继续围绕VUV BCE权重与输出后处理单变量试验。
+
+### [PS-20261021-10] HuBERT/WORLD Round 82 VUV 损失权重
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：`43a4ea2`
+- 唯一变量：以 Round81 的 VUV BCE 系数0.40为基准，仅降低至0.30；source prosody、variance matching、动态权重1.25、锚点概率0.25、gain1.6、随机种子和早停策略保持不变。
+- 成功标准：固定录音4严格身份均值≥0.45、P10≥0.35、源泄漏≤0.10、UTMOS≥2.30、CER≤0.15五门全部通过；通过后立即停止算法训练并转入本地验证门。
+- 数据边界：只用男性标准录音4评估；训练仍限男性录音1～3及目标Track5～8；锁定录音5和Track9不得用于训练、选参、早停或筛选。
+- 复现入口：`build/train_paired_hubert_world_gru_round26_20261025.py`、`build/apply_world_temporal_postfilter_round47_20261026.py`、`build/evaluate_seed_fixed_male_strict_20261024.py`；结果报告记录缓存与资产SHA及严格评测命令。
+- 限制：identity OpenCC shim的简繁归一化有限；不播放、不录音、不接触板卡，不声明试听、Cortex-A9、RTL/PL或实时通过。
+- 下一责任方：Hardware-A / Codex 完成本轮训练、严格评估并提交单轮结果。
+
+
+### [PS-20261021-10] HuBERT/WORLD Round 88 结果与训练数据用途更正
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：45cab049b3ad4d1179596adab70a68166056793b
+- 唯一变量：以Round85为基准，仅将多尺度动态损失权重1.25改为1.20；VUV BCE=0.35、source prosody、variance matching、锚点0.25、gain1.6和种子不变。
+- 量化结果：身份均值/P10/泄漏/UTMOS/CER = 0.6988806643/0.6764631763/0.1049895034/2.3280673822/0.2647058824；泄漏、CER失败。2000 step完成，checkpoint内最佳step=1200，验证loss=0.7921773791；checkpoint SHA-256 e21d8175cb56a5aa3f3e7ac75578705b5deb8cb40fea07a5a73ef87d38586faa；WAV SHA-256 a49aa55a3d9677ef42cf6d03daf63f2d4a52e451af62d3f2688c1966ea3969eb。
+- 数据用途更正：Round25缓存声明fixed_male_audio_used=false，192条公共配对训练、8条独立验证；女声Track5～8作自重建锚点。此前认领记录中“男性录音1～3用于训练”的文字不准确，实际它们用于评测源身份质心；本轮只评测录音4，未读取录音5或Track9。
+- 修改路径：build/reproduce_hubert_world_round88_20261027.py、report/fixed_male_hubert_world_round88_20261027.{md,json}、coummucation.md。
+- 复现命令：见JSON内reproduction四阶段命令；prepare与py_compile通过，evaluate入口重跑得到相同指标；原始checkpoint已独立加载并核对历史、权重有限值、缓存SHA、WAV SHA。
+- 限制：identity OpenCC shim不执行简繁转换，原始评测protocol文字与实际不符已披露；源ASR文字非人工真值。训练启动器写出产物后退出1；未播放、未录音、未接触板卡，无真人试听、PS/PL/实时结论。
+- 报告链接：report/fixed_male_hubert_world_round88_20261027.md、report/fixed_male_hubert_world_round88_20261027.json。
+- 下一责任方：Hardware-A / Codex；后续先针对CER与训练数据覆盖做诊断，避免继续重复无收益的微小权重扫描。Round59～88计30轮，剩余额度20轮；五门全过即停止。
+
+### [PS-20261021-10] HuBERT/WORLD Round 89 长片段训练认领
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：816b1ddc4b7a88d5ec39f7f6b55b1b7fe0fea551
+- 唯一变量：以Round88为基准，CROP从128增加到192帧（约2.56秒至3.84秒），测试更长上下文对CER的影响；VUV BCE=0.35、动态损失1.20、锚点0.25、种子、source prosody、variance matching、gain1.6和2000 step上限不变。
+- 数据与限制：沿用Round25公共配对缓存，192训练/8验证，目标Track5～8锚点。长度筛选使可抽样训练条数由184/192降为140/192，报告此混杂因素；固定男声1～3仍只用于评测源质心，只评测录音4，不读录音5和Track9。
+- 成功标准：身份均值>=0.45、P10>=0.35、泄漏<=0.10、UTMOS>=2.30、CER<=0.15；实际仍用identity OpenCC兼容评测，不能宣称完整归一化协议通过。
+- 修改路径：build/reproduce_hubert_world_round88_20261027.py（增加固定Round89配置）、coummucation.md；结果写report/fixed_male_hubert_world_round89_20261027.{md,json}。
+- 复现命令：python build/reproduce_hubert_world_round88_20261027.py prepare --experiment-round 89 --asset-root <asset-root>；随后相同入口train/candidate/evaluate；评测使用Python3.12，训练和生成使用既有yolo Python。
+- 已验证证据：Round25清单content_frames长度计数128帧合格184，192帧合格140；当前分支与main同步、PR13归本任务，无同路线新认领。
+- 现场边界：不播放、不录音、不接触板卡，不声明PS/PL或实时通过。
+- 下一责任方：Hardware-A / Codex 训练、严格评测、直接从产物提取证据并单轮提交。
+
+
+### [PS-20261021-10] HuBERT/WORLD Round 89 长片段训练结果
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：4ec44eb；Round88结果基线816b1ddc4b7a88d5ec39f7f6b55b1b7fe0fea551。
+- 改动：CROP128→192；其余Round88超参数不变。长度筛选使训练可用条数184→140（总192），存在覆盖率混杂。
+- 量化结果：身份/P10/泄漏/UTMOS/CER=0.6777270597/0.6568020193/0.1228567630/2.0558493137/0.3676470588；后三门失败，比Round88退步。早停step1300，最佳step500，验证loss0.8019716069。
+- 证据：checkpoint SHA-256 5846de735d14ddeccb44257901abc551efdb994c136a8d3dfc7005d60ff4761a；候选SHA-256 48095635b1a4e21fc5c23659ee0fafbc5c16c788dba23c1ae9f575c479329c6b；独立加载检查有限权重、训练历史、缓存及WAV SHA通过。
+- 修改路径与报告：report/fixed_male_hubert_world_round89_20261027.{md,json}、coummucation.md、team_project/project_status.md、report/ai_worklog.md。
+- 复现：build/reproduce_hubert_world_round88_20261027.py prepare/train/candidate/evaluate --experiment-round 89 --asset-root <asset-root>；具体解释器和命令见JSON。
+- 限制：identity OpenCC shim不执行简繁转换，CER源参考是ASR而非人工真值；训练及生成启动器产物完成后退出1，评测退出0。公共配对192训练/8验证，男性1～3仅评测质心；仅评测录音4，录音5/Track9保持锁定。无播放、录音、板测或PS/PL/实时结论。
+- 下一责任方：Hardware-A / Codex。恢复Round88的128帧基线，诊断PCA压缩瓶颈；Round59～89共31轮，剩19轮，五门全过即停止。
+
+
+### [PS-20261021-10] HuBERT/WORLD Round 90 PCA内容瓶颈认领
+- 日期：2026-10-27
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：CLAIMED
+- 基准提交：783e78d3ff5667119c10a24c19eb59ce79277e9d；算法对照Round88。
+- 唯一变量：HuBERT PCA_DIM96→192，源韵律拼接后输入99→195。保持GRU hidden192/2层、CROP128、BATCH8、STEPS2000、早停、VUV0.35、动态1.20、方差损失、锚点0.25、seed和gain1.6不变。输入线性层随维度变大，属同一变量的必要结构变化。
+- 依据：Round89增加上下文反而退步；过去多轮微调损失或源谱注入没有解决CER。检验96维压缩是否限制内容保留，不能预先宣称效果改善。
+- 数据：同一Round25缓存192公共配对训练/8验证；PCA和归一化仅拟合训练集，128帧可用184/192；目标Track5～8锚点。男性1～3仅评测源质心，录音4验证，录音5和Track9锁定。
+- 成功标准：身份>=0.45、P10>=0.35、泄漏<=0.10、UTMOS>=2.30、CER<=0.15全部通过；兼容评测identity OpenCC shim不得宣称完整归一化协议通过。
+- 修改路径：build/reproduce_hubert_world_round88_20261027.py、coummucation.md；结果报告report/fixed_male_hubert_world_round90_20261027.{md,json}。
+- 复现：入口prepare/train/candidate/evaluate --experiment-round 90 --asset-root <asset-root>。准备后检查base/prior均PCA192、trainer仍CROP128；训练前py_compile。
+- 限制：保持CPU既有解释器；无播放、录音、板测、PS/PL或实时结论。
+- 下一责任方：Hardware-A / Codex 完成本轮训练和客观评测并单轮提交。此轮完成后为32/50，最多至Round108。
+
+
+### [PS-20261021-10] Round90 评测依赖修正说明
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED（随Round90结果提交）。
+- 基准提交：ceae77a；修改路径：build/reproduce_hubert_world_round88_20261027.py、Round90报告。
+- 改动：补齐本地opencc-python-reimplemented==0.1.7，Round90默认使用真实t2s转换；Round88/89默认保留历史identity口径供复现，新增--cer-normalizer可显式选择。
+- 复现：Python3.12 -m pip install --target <asset-root>/build/generated/eval_opencc_deps_20261027 --no-cache-dir opencc-python-reimplemented==0.1.7；评测入口evaluate --experiment-round 90 --cer-normalizer opencc。
+- 量化证据：简繁转换smoke通过；从已提交的Round88/89保存ASR文本重算，CER分别仍为18/68=0.2647058824、25/68=0.3676470588；不改写历史报告，不重新读取音频。这是评测环境修复，不算额外训练轮次。
+- 限制：CER源参考仍是Whisper识别而非人工校对；未因此放宽门槛、读取录音5/Track9或执行现场测试。
+- 下一责任方：Hardware-A / Codex 完成Round90真实OpenCC评测并在JSON同时记录raw CER和normalized CER、依赖版本及上述核对证据。
+
+
+### [PS-20261021-10] HuBERT/WORLD Round 90 PCA内容瓶颈结果
+- 日期：2026-10-27；角色：Hardware-A / Codex（离线算法）；状态：REJECTED。
+- 基准提交：ceae77a94a77e7cc2bbb5701b9d80256ec0171f1；算法基线Round88。
+- 变量：PCA96→192，输入99→195，GRU其余配置保持Round88；参数量496779。128帧训练可用184/192，与Round88一致。
+- 量化结果：身份/P10/泄漏/UTMOS/CER=0.6439841784/0.6157650156/0.1262829402/2.1855001450/0.4558823529；后三门失败。最佳step600，完成step1400；增加PCA维度未改善录音4内容。
+- 证据：checkpoint SHA-256 2a29d614f6995fd0a4d3d4d349d2860fbe07a2017d988bfc6b853d82e43eab95；WAV SHA-256 fb8bc99c9a5319c58c96f6c0e2684fe69c36863918efc3119f899a5ef50c6c52；有限权重、PCA(768,192)、输入(192,195)、训练历史与缓存/WAV SHA核验通过。
+- 修改路径与报告：build/reproduce_hubert_world_round88_20261027.py、report/fixed_male_hubert_world_round90_20261027.{md,json}、coummucation.md、team_project/project_status.md、report/ai_worklog.md。
+- 复现：入口prepare/train/candidate/evaluate --experiment-round 90 --asset-root <asset-root>；evaluate实际使用OpenCC0.1.7 t2s，raw CER与normalized CER同为0.4558823529。报告含依赖安装、历史文本重算核对与完整命令。
+- 限制：源ASR非人工真值；训练和生成完成产物后退出1，独立检查通过，评测退出0。公共配对192训练/8验证，目标Track5～8锚点；固定男性1～3只作评测源质心，录音4验证，录音5/Track9锁定。无播放、录音、板测或PS/PL/实时结论。
+- 下一责任方：Hardware-A / Codex；恢复Round88并测试提高锚点概率，避免继续扩PCA。Round59～90共32轮，剩18轮。
+
+
+### [PS-20261021-10] HuBERT/WORLD Round 91 提高目标锚点认领
+- 日期：2026-10-27；角色：Hardware-A / Codex（电脑端离线算法）；状态：CLAIMED。
+- 基准提交：3f6504562efcf2c403e33406597cad3cd6e1bb62；算法配置恢复Round88，撤销Round89长crop和Round90 PCA增加。
+- 唯一训练变量：目标自重建锚点采样概率0.25→0.50；PCA96、GRU hidden192/2层、CROP128、BATCH8、STEPS2000、seed、早停、VUV0.35、动态1.20、方差损失、source prosody、gain1.6不变。更多锚点意味着相同step预算下公共配对采样减少，将如实报告。
+- 依据：Round75将锚点概率降至0.15时CER恶化到0.50；Round89/90增加上下文或保留维度均退步。测试更强目标自重建约束是否改善内容，尚无收益结论。
+- 数据：同一192公共配对训练/8验证，PCA和归一化仅训练集；128帧可用184/192，目标Track5～8锚点。固定男声1～3仅评测源质心，录音4验证，录音5/Track9锁定。
+- 成功标准：身份>=0.45、P10>=0.35、泄漏<=0.10、UTMOS>=2.30、CER<=0.15全部通过即停止训练；真实OpenCC0.1.7 t2s，与Round88保存文本重算CER相同。
+- 修改路径：build/reproduce_hubert_world_round88_20261027.py、coummucation.md；正式报告report/fixed_male_hubert_world_round91_20261027.{md,json}。
+- 复现：入口prepare/train/candidate/evaluate --experiment-round 91 --asset-root <asset-root>，评测--cer-normalizer opencc；具体解释器沿用Round90。
+- 验证：准备后核对PCA96、CROP128、ANCHOR_PROBABILITY0.50与runtime语法，结果从产物直接提取。
+- 限制：ASR源参考非人工真值；无播放、录音、板测、PS/PL/实时结论。
+- 下一责任方：Hardware-A / Codex 完成本轮训练、评测、独立检查并逐轮提交。完成后33/50，最多Round108。
+
+
+### [PS-20261021-10] HuBERT/WORLD Round 91 提高目标锚点结果
+- 日期：2026-10-27；角色：Hardware-A / Codex（离线算法）；状态：REJECTED。
+- 基准提交：1fe6b2d25c4adf452a609b98233eb1dc8bdc1106；算法基线Round88。
+- 唯一变量：目标自重建锚点概率0.25→0.50；其余恢复Round88，PCA96、CROP128、hidden192。相同步数下公共配对抽样相应减少。
+- 量化结果：身份/P10/泄漏/UTMOS/CER=0.6936297194/0.6723958308/0.1130648930/2.2011870543/0.3088235294；后三门失败，未优于Round88。完成step1800，最佳step1000，验证loss0.8054647967。
+- 证据：checkpoint SHA-256 fbc00a21c1360c3b57d900a521d8303d29b8fa0595caeac49ebf7f6335ecee2f；候选SHA-256 a7f803ac6791dd4f30e9e801737486cee37321505c68c5c3f0f281965703199f；有限权重、输入/PCA维度、缓存SHA、候选SHA核验通过。
+- 补充诊断：仅录音1～3提取源韵律，三列log-F0/VUV/log-energy的每段均值偏移均小于训练1σ；未发现严重均值分布越界，未改候选或选择校准。逐录音SHA和统计在JSON，复现build/audit_fixed_male_prosody_round91_20261027.py --asset-root <asset-root>。
+- 修改路径与报告：build/audit_fixed_male_prosody_round91_20261027.py、report/fixed_male_hubert_world_round91_20261027.{md,json}、coummucation.md、team_project/project_status.md、report/ai_worklog.md。
+- 复现：build/reproduce_hubert_world_round88_20261027.py prepare/train/candidate/evaluate --experiment-round 91 --asset-root <asset-root>，evaluate真实OpenCC0.1.7，具体解释器与命令见JSON。
+- 限制：ASR源参考非人工真值；训练/生成启动器产物完成后退出1，客观评测退出0；诊断启动器亦在写出有效JSON后退出1。公共配对192/8、目标Track5～8锚点；男性1～3未参与本轮模型训练，只用于评测源质心和上述只读诊断；仅录音4验证，录音5/Track9锁定。无现场或PS/PL/实时结论。
+- 下一责任方：Hardware-A / Codex；恢复Round88并测试GRU容量，保持五门。Round59～91共33轮，剩17轮，最多Round108。
+
+
+### [PS-20261021-10] HuBERT/WORLD Round 92 GRU容量认领
+- 日期：2026-10-27；角色：Hardware-A / Codex（离线算法）；状态：CLAIMED。
+- 基准提交：f92387488fefe90b966ecefde67cd6f3df4e9dcb；算法基线恢复Round88。
+- 唯一训练变量：两层因果GRU hidden192→384，输入PCA96+源韵律3维仍99；相关输入/输出线性层随hidden同步扩大。CROP128、BATCH8、STEPS2000、seed、早停、锚点0.25、VUV0.35、动态1.20、方差损失、gain1.6不变。
+- 依据：长片段、更大PCA、更多锚点均未改善录音4CER；源1～3韵律均值未严重越界。测试网络容量能否缓解声学重建不足；更大模型是否过拟合或可部署均未下结论。
+- 复现修正：prepare阶段所有任务模块只从当轮runtime/build导入，防止未来asset-root/build出现同名脚本时遮蔽当轮补丁；当前asset-root无这三个训练同名脚本，未发现此前结果受遮蔽。
+- 数据：同一公共配对192训练/8验证，训练PCA/归一化，128帧可用184/192；目标Track5～8锚点。男性1～3只作评测源质心；录音4验证，录音5/Track9锁定。
+- 成功标准：身份>=0.45、P10>=0.35、泄漏<=0.10、UTMOS>=2.30、CER<=0.15全部通过即停止；保持真实OpenCC0.1.7。
+- 修改路径：build/reproduce_hubert_world_round88_20261027.py、coummucation.md；报告report/fixed_male_hubert_world_round92_20261027.{md,json}。
+- 复现：prepare/train/candidate/evaluate --experiment-round 92 --asset-root <asset-root>，评测--cer-normalizer opencc；训练前核对PCA96、hidden384、anchor0.25、CROP128与语法。
+- 限制：ASR参考非人工真值；当前仅电脑端质量试验，不因容量增加而宣称Cortex-A9/PL预算或现场通过。无播放、录音、板测。
+- 下一责任方：Hardware-A / Codex 完成本轮训练、客观评测、独立核验及提交；完成后34/50，最多Round108。
+
+
+### [PS-20261021-10] HuBERT/WORLD Round 92 GRU容量结果
+- 日期：2026-10-27；角色：Hardware-A / Codex（离线算法）；状态：REJECTED。
+- 基准提交：adbba4bf2cd2b1f89df18b88d84924046db298c6；算法基线Round88。
+- 唯一变量：GRU hidden192→384，相关输入/输出层同步扩大，参数1841355；PCA96、CROP128、anchor0.25及其他配置保持Round88。
+- 量化结果：身份/P10/泄漏/UTMOS/CER=0.6774789683/0.6523689563/0.1209129382/2.2483020624/0.3823529412；后三门失败。完成step1300，最佳step500，验证loss0.7960573882。step500后验证损失回升，训练重建误差下降，存在过拟合迹象；不能把更低训练误差当作音质通过。
+- 证据：checkpoint SHA-256 457765a9bbc117dfc8316f3c105ab543f67e988241a5e7c46a48040da2381f1b；候选SHA-256 a10739d25b3a668fb13cb06975b1804d0996e5218170e3727a0912efdb24ecba；有限权重、PCA(768,96)、输入(384,99)、GRU权重(1152,384)、训练历史、缓存与WAV SHA核验通过。
+- 修改路径与报告：report/fixed_male_hubert_world_round92_20261027.{md,json}、coummucation.md、team_project/project_status.md、report/ai_worklog.md。
+- 复现：build/reproduce_hubert_world_round88_20261027.py prepare/train/candidate/evaluate --experiment-round 92 --asset-root <asset-root>；evaluate真实OpenCC0.1.7，完整命令见JSON。
+- 限制：训练/生成启动器产物完成后退出1，评测退出0；ASR参考非人工真值。公共配对192训练/8验证，Track5～8锚点，固定男性1～3仅评测源质心；仅录音4验证，录音5/Track9锁定。无播放、录音、板测、Cortex-A9/PL预算或实时结论。
+- 下一责任方：Hardware-A / Codex；针对宽模型过拟合测试层间dropout。Round59～92共34轮，剩16轮，最多Round108。
+
+
+### [PS-20261021-10] HuBERT/WORLD Round 93 宽GRU正则化认领
+- 日期：2026-10-27；角色：Hardware-A / Codex（离线算法）；状态：CLAIMED。
+- 基准提交：95a62a4ee769ddfe629b24b75742533bd34bea0f；算法基线Round92。
+- 唯一算法变量：hidden384两层GRU增加层间dropout0.20；PCA96、输入99、CROP128、BATCH8、STEPS2000、seed、早停、anchor0.25、VUV0.35、动态1.20、方差项、gain1.6保持Round92。
+- 必要模式修复：validate会设置eval，原训练循环没有恢复train；历史GRU dropout0且无BatchNorm，因此此前前向不因模式变化。新dropout必须在每次训练前model.train()，验证和生成保持eval；该变化作为dropout生效必需部分，不声称仅声明dropout参数即可。
+- 依据：Round92 step500后训练误差下降、验证损失回升，且录音4CER0.3824；检查正则化是否缓解过拟合，不预判收益。
+- 数据：同公共配对192训练/8验证，128帧184可用，Track5～8自重建锚点；男性1～3仅评测质心，录音4验证，录音5/Track9锁定。
+- 成功标准：身份>=0.45、P10>=0.35、泄漏<=0.10、UTMOS>=2.30、CER<=0.15全过即停止；真实OpenCC0.1.7。
+- 修改路径：build/reproduce_hubert_world_round88_20261027.py、coummucation.md；报告report/fixed_male_hubert_world_round93_20261027.{md,json}。
+- 复现：prepare/train/candidate/evaluate --experiment-round 93 --asset-root <asset-root>，evaluate --cer-normalizer opencc；准备后核对hidden384、dropout0.20、model.train与语法。
+- 限制：CPU离线，ASR参考非人工真值；无播放、录音、板测、Cortex-A9/PL或实时结论。
+- 下一责任方：Hardware-A / Codex 完成训练评测并单轮提交。完成后35/50，最多Round108。
+
+
+### [PS-20261021-10] 历轮收益复盘与Round93中止
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED / ROUND93_ABORTED。
+- 基准提交：a0a2b4e；用户要求从近百轮提取经验，停止无收益的小步调参。
+- 事实：Round93在特征准备阶段中止，进程34436已退出，未产出checkpoint/候选/指标；不计作完成音质评测，不扩充50轮预算。Round59～92已完成34轮。
+- 修改路径与报告：report/training_progress_retrospective_20261027.md、coummucation.md。
+- 复现：逐项读取报告内所列Round23/26/28/33/37/46/47/49/52及69/88～92；本次为既有证据复盘，无新训练。
+- 量化结论：扩展配对监督CER0.3804→0.1522（多变量混杂）；多尺度监督0.1522→0.1087；方差匹配UTMOS1.7038→1.8616；gain1.4验证UTMOS2.0055→2.4082。近期增crop/PCA/锚点/宽度均退步，不能继续局部扫描。
+- 更正：Seed9/18历史上客观过五门，但用户试听否决；当前无最终验收通过方案，不等于从未客观过门。目标自重建与真正男转女证据必须区分。
+- 限制：历史部分轮次无独立报告，未声称所有轮次统一复算；CER参考为ASR，不能替代人工真值或听感。无新音频、锁定集、现场或RTL/PL操作。
+- 下一责任方：Hardware-A / Codex 先审计非锁定公共教师内容上限、错误时段和源专用监督覆盖，获得机制证据后才提出下一训练轮；不自动启动dropout或进一步调权。
+
+
+### [PS-20261021-10] 公共配对教师内容诊断认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准提交：1a8954c；本次为收益复盘后的根因诊断，不新增训练或参数扫描。
+- 范围：仅现有公共配对8条validation，核对源/教师SHA，以同一Whisper-small分别识别并与manifest声明文本比较，同时报告teacher对source-ASR的CER，避免源识别错误被隐藏。
+- 修改路径：build/audit_paired_teacher_content_20261027.py、report/paired_teacher_content_audit_20261027.{json,md}、coummucation.md。
+- 复现：Python3.12 build/audit_paired_teacher_content_20261027.py --asset-root <asset-root> --output <generated>/teacher_content_audit.json。
+- 判据：先查教师是否保留内容；若教师自身明显错漏，不继续以优化学生权重解决教师缺陷。若教师内容良好，下一步定位学生预测和时间对齐。
+- 限制：声明文本仍需独立人工核验；非最终五门验收，不读录音4/5或Track9，不播放、不训练、不接触板卡。
+- 下一责任方：Hardware-A / Codex 完成诊断、记录逐句证据、推送后据此决定下一项机制验证。
+
+
+### [PS-20261021-10] 公共配对教师内容诊断结果
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED / DIAGNOSIS_ONLY。
+- 基准提交：1a8954c；修改路径：build/audit_paired_teacher_content_20261027.py、report/paired_teacher_content_audit_20261027.{md,json}、coummucation.md。
+- 量化结果：8验证对源/教师SHA和样本数通过；对声明152字，源21编辑CER0.1381579，教师22编辑CER0.1447368。SSB04340118源0/17而教师3/17，其他句也有教师更好的情况；不能仅凭总分判定教师完全可靠或普遍破坏内容。
+- 复现：Python3.12 build/audit_paired_teacher_content_20261027.py --asset-root <asset-root> --output <generated>/teacher_content_audit.json；退出0，真实OpenCC0.1.7。
+- 报告：report/paired_teacher_content_audit_20261027.md与JSON保留逐句文本、SHA、编辑数及脚本SHA。
+- 限制：专名、数字书写与ASR错误混合，声明文本未经独立人工校对；等长不证明音素对齐。未读录音4/5或Track9，不训练、不播放、不接触板卡；不是五门验收。
+- 下一责任方：Hardware-A / Codex 在同8句分离教师原音、WORLD压缩重建、冻结学生的内容误差，不恢复无机制依据的参数扫描。
+
+
+### [PS-20261021-10] 同句内容链诊断认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准提交：77dff33；冻结Round88模型，gain1.6，不训练、不扫描。
+- 范围：同8条公共validation，比较教师原音、SP60/AP12 5ms重建、训练缓存20ms再插值重建、学生预测+既有gain1.6。前两重建分支不用目标裁剪以隔离表示/时间压缩；学生保持生产裁剪。各分支还保留既有合成器平滑和峰值规则，不能把差异归因于单独DCT。
+- 修改路径：build/audit_content_chain_20261027.py、report/paired_content_chain_audit_20261027.{json,md}、coummucation.md。
+- 复现：yolo Python运行generate；Python3.12运行evaluate，均--asset-root <asset-root> --output <generated>/paired_content_chain_20261027；需先完成教师内容诊断。
+- 判据：若WORLD真值路径仍保留内容而预测路径恶化，优先诊断映射/对齐及监督；若20ms重建即退化，优先修复时间表示。不按结果直接扫描更多权重。
+- 限制：声明文本非人工核验，自动ASR差异非听感结论；不读录音4/5或Track9，不播放、不训练、不接触板卡。
+- 下一责任方：Hardware-A / Codex 完成逐句证据并提交。
+
+
+### [PS-20261021-10] 同句内容链诊断结果
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED / DIAGNOSIS_ONLY。
+- 基准提交：77dff33；模型冻结Round88，未训练和调参。
+- 量化结果：同8句152字，源21、教师22、WORLD5ms24、缓存20ms25、学生gain1.6为44编辑，CER依次0.138158/0.144737/0.157895/0.164474/0.289474。最大观察增量在缓存重建到学生管线，不支持20ms压缩本身为主要原因。
+- 修改路径与报告：build/audit_content_chain_20261027.py、report/paired_content_chain_audit_20261027.{md,json}、coummucation.md。
+- 复现：yolo Python入口generate，Python3.12入口evaluate，--asset-root <asset-root> --output <generated>/paired_content_chain_20261027；前置上一教师内容诊断，完整命令见JSON。
+- 核验：checkpoint SHA e21d8175cb56a5aa3f3e7ac75578705b5deb8cb40fea07a5a73ef87d38586faa；缓存/源/教师SHA通过；8行24WAV二次核对哈希，生成产物后退出1，评测退出0。
+- 限制：ASR差异不是因果可加误差分解；学生分支包含目标裁剪和gain，锚点使用5ms统计而非生产20ms插值，不声称录音4逐位复现；声明文本非人工核验。WORLD分支保留合成器平滑/VUV/峰值规则。无录音4/5、Track9、播放、训练或板端结论。
+- 下一责任方：Hardware-A / Codex 优先量化源/教师时间对齐、预测裁剪和动态误差，再选择有机制依据的监督修复；不恢复参数扫描。
+
+
+### [PS-20261021-10] 时序与裁剪诊断认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准提交：20ebd6a；冻结Round88，仅公共8句validation，无训练或选参。
+- 范围：源/教师能量包络±200ms相关，测全局错位代理；预测、gain1.6及裁剪后的谱/F0/能量/AP动态比和标准化误差、越界率；锚点沿生产20ms插值统计。
+- 修改路径：build/audit_alignment_clipping_20261027.py、report/alignment_clipping_audit_20261027.{json,md}、coummucation.md。
+- 复现：yolo Python build/audit_alignment_clipping_20261027.py --asset-root <asset-root> --output <generated>/alignment_clipping.json。
+- 判据：区分明显全局时移、动态不足与裁剪损失；能量相关不是音素对齐证明，不按最佳lag直接修改训练集。
+- 限制：只诊断，不合成、不读取录音4/5或Track9、不播放、不接触板卡。
+- 下一责任方：Hardware-A / Codex 完成逐句统计和报告。
+
+
+### [PS-20261021-10] 时序与裁剪诊断结果
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED / DIAGNOSIS_ONLY。
+- 基准提交：20ebd6a；冻结Round88，8公共validation，不训练或合成。
+- 量化结果：8/8能量包络最佳lag0，相关0.9103～0.9723，不支持全局平移修复。gain1.6导致能量27.97%、AP51.14%值越界；AP动态比预测0.7711→增益1.2337→裁剪0.8835，谱0.7512→1.2019→1.1507，能量0.9091→1.4546→1.3718。
+- 修改路径与报告：build/audit_alignment_clipping_20261027.py、report/alignment_clipping_audit_20261027.{md,json}、coummucation.md。
+- 复现：yolo Python build/audit_alignment_clipping_20261027.py --asset-root <asset-root> --output <generated>/alignment_clipping.json；启动器完成JSON后退出1，完整8行、有限值、checkpoint/缓存SHA独立核验。
+- 判定：统一增益与裁剪在不同参数组作用不同，优先冻结模型做能量/AP增益移除对照，而不是继续统一增益或损失权重扫描。
+- 限制：全局能量相关不证明局部音素对齐；RMS量不证明轨迹正确；统计位于20ms帧，非最终5ms裁剪率；仅参数统计不能证明CER改善。无录音4/5、Track9、训练、合成、播放、板测或PS/PL结论。
+- 下一责任方：Hardware-A / Codex 在同8句冻结模型和谱gain1.6、分别移除能量或AP增益，检查内容与自然度，结果出来前不选新配置。
+
+
+### [PS-20261021-10] 分组增益机制验证认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准提交：268dc96；冻结Round88 checkpoint，8公共validation，谱gain1.6。
+- 实验：原gain1.6、仅去能量增益、仅去AP增益三个固定对照；使用生产20ms锚点统计，其他裁剪/F0/VUV/合成不变，无搜索网格或训练。
+- 修改路径：build/audit_content_chain_20261027.py --group-ablation、report/group_gain_ablation_20261027.{md,json}、coummucation.md。
+- 复现：generate用yolo Python、evaluate用Python3.12，--group-ablation --asset-root <asset-root> --output <generated>/group_gain_ablation_20261027。
+- 选择证据：报告同句CER、逐句UTMOS、两说话人一致性；只改善总分而某人退步不选新配置。结果不能替代固定男性五门。
+- 限制：不读取录音4/5或Track9，不播放、不训练、不接触板卡。计为机制验证，不额外扩充50轮训练预算。
+- 下一责任方：Hardware-A / Codex 完成对照并提交证据。
+
+
+### [PS-20261021-10] 分组增益机制验证结果
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：REJECTED_AS_CONTENT_SOLUTION。
+- 基准提交：268dc96；模型Round88冻结，8公共validation，生产20ms锚点统计，无训练/网格。
+- 量化结果：baseline CER44/152=0.289474、UTMOS2.457535；去能量gain CER40/152=0.263158、UTMOS2.448939；去AP gain CER44/152=0.289474、UTMOS2.474633。
+- 跨人证据：去能量gain令SSB0080 UTMOS2.613651→2.561476，SSB0434为2.301418→2.336402，未满足无说话人回退门；去AP在两人小幅上升0.014700/0.019497，但8/8句CER均不变。AP版8/8WAV哈希不同，确实改了信号。
+- 判定：不选新生产候选；裁剪冲突不是简单移除单组gain即可解决的主要内容瓶颈，不继续本地增益微调。
+- 修改路径与报告：build/audit_content_chain_20261027.py、report/group_gain_ablation_20261027.{md,json}、coummucation.md。
+- 复现：入口generate/evaluate --group-ablation --asset-root <asset-root> --output <generated>/group_gain_ablation_20261027；解释器/脚本SHA见JSON。生成退出1但8行24WAV完成，哈希与有限分数独立检查；评测退出0。
+- 限制：8句自动ASR/UTMOS无显著性或听感结论，非固定男声五门；不读录音4/5或Track9，不训练、不播放、不接触板卡。
+- 下一责任方：Hardware-A / Codex 盘点允许的固定男声训练监督与内容表示，不再围绕统一增益/裁剪反复选点。50轮总预算不扩充，原Round93已中止不重启。
+
+### [PS-20261021-10] 固定男声监督与教师依赖盘点认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准提交：7b9bd19；范围：校验录音1～3与192/8公共配对清单，核对历史教师生成依赖及训练时序审计适用范围。
+- 修改路径：build/audit_fixed_male_supervision_20261027.py、report/fixed_male_supervision_inventory_20261027.{json,md}、coummucation.md。
+- 复现：Python3.12 build/audit_fixed_male_supervision_20261027.py --asset-root <main> --output report/fixed_male_supervision_inventory_20261027.json。
+- 量化结果：待校验；主工作区存在他人未提交RTL/报告及交流记录，全部保留；本工作在现有独立任务检出内进行。
+- 限制：不训练，不读录音4/5或Track9音频，不播放、不操作板卡；文件名/身份清单不等于音素覆盖或因果证明。
+- 下一责任方：Hardware-A / Codex 完成盘点，确定教师依赖恢复条件后再开展机制性训练，不扩充Round108上限。
+
+### [PS-20261021-10] 固定男声监督与教师依赖盘点结果
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED / DIAGNOSIS_ONLY。
+- 基准提交：7b9bd19；修改路径：build/audit_fixed_male_supervision_20261027.py、report/fixed_male_supervision_inventory_20261027.{md,json}、coummucation.md。
+- 量化结果：录音1～3哈希/字节通过；192训练/8验证的400个公共float32源/教师文件哈希/样本数通过；Fixed-Male标记训练行0。历史时序报告48条与当前192/8清单文件名交集均0，不能沿用其音素对齐结论。
+- 依赖：历史预期位置缺少CosyVoice源码和全部关键教师资产；官方API可访问且revision仍为29e01c4e8d000f4bcd70751be16fa94bf3d85a18；主要权重约4.43GB，D盘空闲约98.1GB，GPU8GB。没有宣称推理可运行。
+- 复现：Python3.12 build/audit_fixed_male_supervision_20261027.py --asset-root <main> --output report/fixed_male_supervision_inventory_20261027.json；退出0，报告附SHA与限制。
+- 限制：清单身份审计不是全盘音频去重；无固定男声配对监督不等于唯一失败原因。未读录音4/5或Track9音频、未训练/播放/板测；不是新方案轮。
+- 报告：report/fixed_male_supervision_inventory_20261027.md及JSON。
+- 下一责任方：Hardware-A / Codex 在D盘单一任务目录恢复官方精确revision教师依赖，先用训练录音检验内容，再决定源专用监督训练；保持Round108上限，不恢复参数扫描。
+
+### [PS-20261021-10] 源专用教师环境恢复认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准提交：5a53f54；范围：只恢复公共官方教师源码/资产，不启动新训练轮。
+- 路径：D:/2026_FPGA_teacher_workspace/{source,models,cache,tmp,venv,runs}；正式脚本build/restore_cosyvoice3_assets_20261027.py，结果后续进入report。
+- 版本：CosyVoice官方源码074ca6dc9e80a2f424f1f74b48bdd7d3fea531cc；Fun-CosyVoice3模型29e01c4e8d000f4bcd70751be16fa94bf3d85a18。
+- 复现：Python3.12 build/restore_cosyvoice3_assets_20261027.py --workspace D:/2026_FPGA_teacher_workspace；git定点fetch源码与submodule。
+- 资源：D盘开始空闲约98.1GB；模型主要文件约4.43GB，依赖/环境另需空间。现有yolo GPU torch2.8.0+cu128可用，不修改该全局环境。
+- 限制：未宣称依赖或推理通过；只下载公开资产，不上传语音；不读取锁定素材、不播放、不操作板卡。Round108上限不变。
+- 下一责任方：Hardware-A / Codex 逐件校验资产、独立依赖环境、训练素材离线烟测并发布结果。
+
+### [PS-20261021-10] 教师环境恢复启动证据
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED / ENVIRONMENT_IN_PROGRESS，非完成训练轮。
+- 基准提交：5a53f54；修改路径：build/restore_cosyvoice3_assets_20261027.py、report/cosyvoice3_teacher_restore_20261027.md、coummucation.md；大文件仅D:/2026_FPGA_teacher_workspace。
+- 已完成：官方源码074ca6d与Matcha子模块dd9105b定点检出退出0；torch2.8.0+cu128 CUDA可用；独立venv torchaudio2.8.0+cu128安装成功；模型配置与campplus官方SHA校验通过。
+- 在运行：模型下载session38601；依赖安装session5662。未完成全资产校验、import/推理测试；不得只凭本记录假定进程仍活跃，恢复时须查询实际handle。
+- 复现：Python3.12 build/restore_cosyvoice3_assets_20261027.py --workspace D:/2026_FPGA_teacher_workspace；源码/依赖版本见report/cosyvoice3_teacher_restore_20261027.md。
+- 限制：venv重用本机torch，尚非可跨电脑交付包；未训练/合成/播放/板测，未读锁定音频；不增加训练轮预算。
+- 下一责任方：Hardware-A / Codex 完成依赖校验并用训练录音离线检验教师内容，再确定源专用监督训练。
+
+### [PS-20261021-10] 固定男声训练素材教师烟测认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准提交：7e7602d；范围：依赖/权重校验后，仅对允许训练录音1～3做native VC教师生成；目标使用已有target_t6_8s.wav，SHA4651ab56…177c8f。
+- 修改路径：build/generate_fixed_male_teacher_20261027.py；输出D:/2026_FPGA_teacher_workspace/runs/fixed_male_teacher_20261027，正式结果后续report。
+- 复现：教师venv Python build/generate_fixed_male_teacher_20261027.py --asset-root <main> --workspace D:/2026_FPGA_teacher_workspace --recordings 1 2 3。
+- 判据：精确资产SHA、strict权重加载、有限非空输出、正确源/目标哈希与时长，随后独立ASR内容检查；通过烟测不等于配对质量或五门通过。
+- 限制：无ASR转TTS、无波形时间拉伸、不用录音4/5或Track9、不播放/板测、不训练学生；无源专用监督有效性结论。
+- 下一责任方：Hardware-A / Codex 完成生成与内容诊断后确定是否可进入源专用训练。
+
+### [PS-20261021-10] 教师烟测结果与用户暂停交接
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED / USER_PAUSED。
+- 基准提交：7e7602d；用户明确“今天先到这里吧”，持久目标已暂停，不再启动训练/评测。
+- 修改路径：build/generate_fixed_male_teacher_20261027.py、build/audit_fixed_male_teacher_content_20261027.py、report/fixed_male_teacher_{generation,content}_20261027.json、coummucation.md。
+- 已验证：14个模型文件下载校验完成，strict完整权重加载通过；配置导入/GPU运算通过；录音1～3教师生成退出0，时长18.04/16.76/19.52秒，峰值CUDA约1.99GB，生成耗时6.71/4.61/4.56秒。tokenizer ONNX回退CPU，flow/声码器GPU。
+- 内容评测：暂停时查询session94922已自然完成退出0，三段相对源ASR为11/73、17/70、18/67编辑，合计46/210=0.219048。不是人工金标准；教师内容尚不满足直接无条件作为优质监督的证据，不启动学生训练。
+- 复现：教师venv Python build/generate_fixed_male_teacher_20261027.py --asset-root <main> --workspace D:/2026_FPGA_teacher_workspace --recordings 1 2 3；Python3.12 build/audit_fixed_male_teacher_content_20261027.py --asset-root <main> --generation <teacher-workspace>/runs/fixed_male_teacher_20261027/generation.json --output <teacher-workspace>/runs/fixed_male_teacher_20261027/content_audit.json。
+- 限制：无试听、板测或五门结论；不读录音4/5或Track9，无新学生训练轮；原Round108上限不变。所有大文件保存在D盘任务目录；用户RTL/PL保留。
+- 下一责任方：用户恢复后Hardware-A核查教师逐句识别差异与局部对齐，判断是否适用监督；不直接恢复参数扫描。当前无本任务活跃训练/下载/评测进程。
+### [PS-20261021-10] 输出层低剂量源专用适配 Round 97 结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：REJECTED。
+- 基准：Round88；三段固定男声教师配对；仅输出层；25步，lr=1e-4；gain1.6；开发集仅录音4。
+- 五门：identity 0.700509（通过），P10 0.681271（通过），leakage 0.112999（失败），UTMOS 2.218100（失败），CER 0.308824（失败）。
+- 判定：缩短输出层适配未恢复内容或自然度，不进入录音5；继续既定较低学习率机制对照。
+- 证据：`report/fixed_male_teacher_finetune_round97_20261029.{md,json}`；checkpoint SHA `7da9b09c...8ff65c2`；候选 SHA `d96d7d2c...ee67bf3`。
+- 限制：录音5和Track9未使用；未播放、未接触板卡；客观指标不替代真人听感。
+- 下一责任方：Hardware-A / Codex 执行Round98。
+
+### [PS-20261021-10] 输出层低学习率适配 Round 98 结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：REJECTED。
+- 配置：Round88；train1～3；输出层100步，lr=3e-5；gain1.6；仅录音4开发。
+- 五门：identity 0.6970、P10 0.6747通过；leakage 0.1025、UTMOS 2.2767、CER 0.2941失败。
+- 判定：低学习率缓解泄漏/自然度退化，但未保护内容，不进入录音5。
+- 证据：`report/fixed_male_teacher_finetune_round98_20261029.{md,json}`；checkpoint `56806af3...fec42fd`；候选 `89d496f8...6b26d385`。
+- 限制：录音5/Track9未用；未播放、未接触板卡。下一责任方：Hardware-A / Codex执行Round99。
+
+### [PS-20261021-10] GRU与输出层适配 Round 99 结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：REJECTED。
+- 配置：Round88，train1～3，GRU+输出层25步，lr=1e-4，gain1.6。
+- 五门：0.6923/0.6722/0.1176/2.2391/0.3235；仅身份两门通过。
+- 判定：扩大可训练层恶化泄漏、自然度与内容，不进入录音5，不再扩层。
+- 证据：`report/fixed_male_teacher_finetune_round99_20261029.{md,json}`；checkpoint `7d06b7a1...12b5ce4`；候选 `ce2a06c1...f6b4536`。
+- 限制：录音5/Track9未用；未播放、未板测。下一责任方：Hardware-A / Codex执行Round100教师子集对照。
+
+### [PS-20261021-10] train1教师单句全模型适配 Round 100 结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：REJECTED。
+- 配置：Round88，仅train1，全模型25步，lr=1e-4，gain1.6。
+- 五门：0.6787/0.6592/0.1008/2.1770/0.3088；仅身份通过。
+- 判定：筛选内容最好的单句教师仍未保护内容/自然度，不进录音5。
+- 证据：`report/fixed_male_teacher_finetune_round100_20261029.{md,json}`；checkpoint `0582b714...97a165c`；候选 `9fc06823...8175e1d`。
+- 限制：录音5/Track9未用；未播放、未板测。下一责任方：Hardware-A / Codex执行Round101。
+
+### [PS-20261021-10] train1教师输出层适配 Round 101 结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：REJECTED。
+- 配置：Round88，仅train1，输出层100步，lr=1e-4，gain1.6；五门0.6800/0.6667/0.1022/2.1726/0.2794。
+- 判定：仅身份通过；单句+冻结内容网络仍不可用，不进录音5。
+- 证据：`report/fixed_male_teacher_finetune_round101_20261029.{md,json}`；checkpoint `0d6250b4...daf877d`；候选 `d4b332ae...e8c1f38`。
+- 限制：录音5/Track9未用；未播放、未板测。下一责任方：Hardware-A / Codex执行Round102。
+
+### [PS-20261021-10] train1+2教师输出层适配 Round 102 结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：REJECTED。
+- 配置：Round88，train1+2，输出层100步，lr=1e-4，gain1.6；五门0.6884/0.6728/0.1003/2.2894/0.3382。
+- 判定：泄漏/UTMOS虽近线但CER严重失败，不进录音5。
+- 证据：`report/fixed_male_teacher_finetune_round102_20261029.{md,json}`；checkpoint `d50b7f4f...caa4f38`；候选 `5147501f...9f82879`。
+- 限制：录音5/Track9未用；未播放、未板测。下一责任方：Hardware-A / Codex执行Round103。
+
+### [PS-20261021-10] train1+3教师输出层适配 Round 103 结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：REJECTED。
+- 配置：Round88，train1+3，输出层100步，lr=1e-4，gain1.6；五门0.6988/0.6877/0.1091/2.2228/0.2206。
+- 判定：CER恢复到Round69水平但仍不达0.15，且泄漏/UTMOS失败，综合不如Round69。
+- 证据：`report/fixed_male_teacher_finetune_round103_20261029.{md,json}`；checkpoint `dd8edfe7...7b803db`；候选 `05a74666...8b2c229`。
+- 限制：录音5/Track9未用；未播放、未板测。下一责任方：Hardware-A / Codex执行Round104低剂量对照。
+

@@ -99,3 +99,23 @@
 | 身份上限（技术结论） | 参数域可达 **0.53～0.56**，不再是 0.19～0.22 | 第三轮 + 复核 |
 | PL 合成卸载 | 时分复用版开发中；首版全并行 LUT 超限 132%/141%；最新综合 363 LUT 可疑，待核对是否被优化 | `build/generated/pl_synth_offload/`、`report/pl_synth_offload_sim.json` |
 | 历史待办（已过期） | 当时提出 A1 与 A3 听感取舍及 PL 资源/时序检查；A3 后来已被用户否决，当前任务依 `plan.md` | 见 worklog |
+
+
+## 2026-10-27 Hardware-A PS-20261021-10 Round89
+
+长片段训练已拒绝：泄漏0.1229、UTMOS2.0558、CER0.3676，身份/P10通过。最佳step500、早停1300；可用训练行184降至140存在混杂。详见[Round89报告](../report/fixed_male_hubert_world_round89_20261027.md)。未进入现场验证；录音5和Track9保持锁定。
+
+
+## 2026-10-27 Hardware-A PS-20261021-10 Round90
+
+PCA96→192拒绝：泄漏0.1263、UTMOS2.1855、CER0.4559，最佳step600，早停1400。真实OpenCC0.1.7已恢复；Round88/89保存文本重算CER不变。详见[Round90报告](../report/fixed_male_hubert_world_round90_20261027.md)。未进入现场验证。
+
+
+## 2026-10-27 Hardware-A PS-20261021-10 Round91
+
+锚点概率0.25→0.50拒绝：泄漏0.1131、UTMOS2.2012、CER0.3088，最佳1000/早停1800。男声1～3韵律均值偏移不到训练1σ，未选源校准。详见[Round91报告](../report/fixed_male_hubert_world_round91_20261027.md)。无现场验证。
+
+
+## 2026-10-27 Hardware-A PS-20261021-10 Round92
+
+GRU hidden192→384拒绝：泄漏0.1209、UTMOS2.2483、CER0.3824，最佳500/早停1300；参数1,841,355，尚无板端预算结论。验证回升而训练误差下降，下一轮检查正则化。详见[Round92报告](../report/fixed_male_hubert_world_round92_20261027.md)。

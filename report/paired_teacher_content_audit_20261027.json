@@ -1,0 +1,302 @@
+{
+  "task": "PS-20261021-10",
+  "kind": "public_validation_teacher_content_audit",
+  "manifest_sha256": "2404ce8282ec2759d4edabd32d7d3e8068d7b69c835194616fe121ec3015fabb",
+  "asr": "offline Whisper-small",
+  "normalization": "OpenCC0.1.7 t2s and existing evaluator punctuation rules",
+  "reference": "declared corpus text; not independently manually verified",
+  "recording4_used": false,
+  "recording5_used": false,
+  "track9_used": false,
+  "training": false,
+  "played": false,
+  "board_touched": false,
+  "rows": [
+    {
+      "stem": "SSB04340036",
+      "speaker": "SSB0434",
+      "declared_text": "不一定按照第二次网签申报的较低价格来征税",
+      "source": {
+        "sha256": "7f5ad67d120d20228f8e7969bc2059991fa042d9e9b4e479c1b69d91fbc09a7a",
+        "samples": 72075,
+        "asr": "不一定按照第二次往前审報的交低價格來徵稅",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 20,
+          "distance": 4,
+          "cer": 0.2
+        }
+      },
+      "teacher": {
+        "sha256": "f88f6a039fb83118766fcee9f25fe38f451b03a6bc61bb9a6617c9987aaeb701",
+        "samples": 72075,
+        "asr": "不一定按照第二次網線審報的交低價格來招稅",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 20,
+          "distance": 4,
+          "cer": 0.2
+        }
+      },
+      "teacher_cer_against_source_asr": {
+        "reference_chars": 20,
+        "hypothesis_chars": 20,
+        "distance": 3,
+        "cer": 0.15
+      }
+    },
+    {
+      "stem": "SSB04340089",
+      "speaker": "SSB0434",
+      "declared_text": "张继科罢赛另有隐情与乒羽中心各罚五万了事",
+      "source": {
+        "sha256": "60f0ec31b6ffbfe216662d6d114bbe6675a4e91b4e38451ddab4ce42097ed9a7",
+        "samples": 121859,
+        "asr": "張繼柯霸賽另有眼前與平與中心各罰5萬了事",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 20,
+          "distance": 7,
+          "cer": 0.35
+        }
+      },
+      "teacher": {
+        "sha256": "3e6a66d8d7c553214fae48964ffe1e83bcc7414c2c96709c083a8d5afb158d78",
+        "samples": 121859,
+        "asr": "張繼科 霸賽另有簡稱與 拼與中心各罰5萬料事",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 20,
+          "distance": 7,
+          "cer": 0.35
+        }
+      },
+      "teacher_cer_against_source_asr": {
+        "reference_chars": 20,
+        "hypothesis_chars": 20,
+        "distance": 5,
+        "cer": 0.25
+      }
+    },
+    {
+      "stem": "SSB04340076",
+      "speaker": "SSB0434",
+      "declared_text": "孙杨现在在苏州大学读体育教育专业的研究生",
+      "source": {
+        "sha256": "75cc56bdcc3bd76f1cd43535ff49da3d7e06934b0eca2c5f7331a32287427abf",
+        "samples": 81735,
+        "asr": "孫陽現在在蘇州大學讀體育教育專業的研究生",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 20,
+          "distance": 1,
+          "cer": 0.05
+        }
+      },
+      "teacher": {
+        "sha256": "6fa87c5ca2d54dd2f8e95bedaf30dd52cf8c4814b7bdbd1d368f86f3a01a0687",
+        "samples": 81735,
+        "asr": "孫陽現在在 蘇州大學讀體育教育專業的研究生",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 20,
+          "distance": 1,
+          "cer": 0.05
+        }
+      },
+      "teacher_cer_against_source_asr": {
+        "reference_chars": 20,
+        "hypothesis_chars": 20,
+        "distance": 0,
+        "cer": 0.0
+      }
+    },
+    {
+      "stem": "SSB04340118",
+      "speaker": "SSB0434",
+      "declared_text": "子女们可以通过手机调节摄像头的角度",
+      "source": {
+        "sha256": "b75c7f309987b5d4bd2da91f89e588896617f70633709b158aa9f0c96363d695",
+        "samples": 81735,
+        "asr": "子女们可以通过手机调节摄像头的角度",
+        "cer_against_declared": {
+          "reference_chars": 17,
+          "hypothesis_chars": 17,
+          "distance": 0,
+          "cer": 0.0
+        }
+      },
+      "teacher": {
+        "sha256": "11dbb9fca1ecb5c98473430168da92dbf0474375b17c9a8c6794ab56101172fe",
+        "samples": 81735,
+        "asr": "孫女們可以通過手機挑戰攝像頭的角度",
+        "cer_against_declared": {
+          "reference_chars": 17,
+          "hypothesis_chars": 17,
+          "distance": 3,
+          "cer": 0.17647058823529413
+        }
+      },
+      "teacher_cer_against_source_asr": {
+        "reference_chars": 17,
+        "hypothesis_chars": 17,
+        "distance": 3,
+        "cer": 0.17647058823529413
+      }
+    },
+    {
+      "stem": "SSB00800053",
+      "speaker": "SSB0080",
+      "declared_text": "金融街控股宣布安邦保险已增持至百分之二十",
+      "source": {
+        "sha256": "c551e9c1d8cf72e22652387559af5340cbcef02fa1a82d80b271f96925893776",
+        "samples": 108481,
+        "asr": "金融接控股宣布安邦保险已增持至20%",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 18,
+          "distance": 6,
+          "cer": 0.3
+        }
+      },
+      "teacher": {
+        "sha256": "b6c394c4c48efc949ffcc3bbf50dab92d6676f27219b265bfa474d902b6847f1",
+        "samples": 108481,
+        "asr": "金融街控股宣布安邦保險已增持至20%",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 18,
+          "distance": 5,
+          "cer": 0.25
+        }
+      },
+      "teacher_cer_against_source_asr": {
+        "reference_chars": 18,
+        "hypothesis_chars": 18,
+        "distance": 1,
+        "cer": 0.05555555555555555
+      }
+    },
+    {
+      "stem": "SSB00800102",
+      "speaker": "SSB0080",
+      "declared_text": "他五月底又被曝和朋友到新店山中聚会玩通宵",
+      "source": {
+        "sha256": "ab089a86b54ff23c04669f31ec45a75f9517256178513ae7482a307575f6065a",
+        "samples": 96962,
+        "asr": "他5月底又被報和朋友到新電山中聚會玩通宵。",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 20,
+          "distance": 3,
+          "cer": 0.15
+        }
+      },
+      "teacher": {
+        "sha256": "255ff2955881121c8eed04a12015606e9df1b6b2116ed0f0a64f522cb7a627ab",
+        "samples": 96962,
+        "asr": "他五月底又被抱和朋友到新殿山中聚会玩通宵。",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 20,
+          "distance": 2,
+          "cer": 0.1
+        }
+      },
+      "teacher_cer_against_source_asr": {
+        "reference_chars": 20,
+        "hypothesis_chars": 20,
+        "distance": 3,
+        "cer": 0.15
+      }
+    },
+    {
+      "stem": "SSB00800018",
+      "speaker": "SSB0080",
+      "declared_text": "参赛作品突出国际化创新创意的全新设计理念",
+      "source": {
+        "sha256": "8bcb63a1b795b57257cc34316af23647930abcabf5390e73ed4296010b5430fc",
+        "samples": 104746,
+        "asr": "參賽作品突出國際化,創新創意的全新設計理念",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 20,
+          "distance": 0,
+          "cer": 0.0
+        }
+      },
+      "teacher": {
+        "sha256": "320154cd3ca7b45a13990be3e0af7a8530e44d0df1a1ddf6dec4b72f85e77440",
+        "samples": 104746,
+        "asr": "參賽作品突出國際化,創新創意的全新設計理念",
+        "cer_against_declared": {
+          "reference_chars": 20,
+          "hypothesis_chars": 20,
+          "distance": 0,
+          "cer": 0.0
+        }
+      },
+      "teacher_cer_against_source_asr": {
+        "reference_chars": 20,
+        "hypothesis_chars": 20,
+        "distance": 0,
+        "cer": 0.0
+      }
+    },
+    {
+      "stem": "SSB00800067",
+      "speaker": "SSB0080",
+      "declared_text": "杰森在我们手上受了很痛苦的折磨",
+      "source": {
+        "sha256": "eb9462faf4b6b455368a2563828b8d4d0213a83f7cddee5752278533abed70a8",
+        "samples": 71524,
+        "asr": "傑森在我們手上受了很痛苦的折磨",
+        "cer_against_declared": {
+          "reference_chars": 15,
+          "hypothesis_chars": 15,
+          "distance": 0,
+          "cer": 0.0
+        }
+      },
+      "teacher": {
+        "sha256": "32f233d8a77029b6dcc3280d553cfeeb09750ec7bc420a96b97284d17aa64c70",
+        "samples": 71524,
+        "asr": "傑森在我們手上受了很痛苦的折磨",
+        "cer_against_declared": {
+          "reference_chars": 15,
+          "hypothesis_chars": 15,
+          "distance": 0,
+          "cer": 0.0
+        }
+      },
+      "teacher_cer_against_source_asr": {
+        "reference_chars": 15,
+        "hypothesis_chars": 15,
+        "distance": 0,
+        "cer": 0.0
+      }
+    }
+  ],
+  "summary": {
+    "source": {
+      "reference_chars": 152,
+      "distance": 21,
+      "micro_cer": 0.13815789473684212
+    },
+    "teacher": {
+      "reference_chars": 152,
+      "distance": 22,
+      "micro_cer": 0.14473684210526316
+    },
+    "teacher_vs_source_asr": {
+      "reference_chars": 150,
+      "distance": 15,
+      "micro_cer": 0.1
+    }
+  },
+  "complete": true,
+  "script_sha256": "80287a16d82ec9af530831d4994947064aefaa42f94be5f7ca2360874b220881",
+  "return_code": 0,
+  "command": "Python3.12 build/audit_paired_teacher_content_20261027.py --asset-root <asset-root> --output <generated>/teacher_content_audit.json",
+  "conclusion": "Source and teacher ASR error against declared text are similar overall, but one source-perfect sentence gains3/17 errors in teacher. ASR differences alone do not establish true acoustic corruption. Compare WORLD reconstruction and frozen student on exactly these sentences before another training change."
+}

@@ -630,3 +630,23 @@ ps-opt 把非周期最小相位优化移植进流式路径（改造 synthesisrea
 ## 2026-10-21 [Maintainer] 三写作者能力边界修正
 
 用户明确项目共有三个写作者：当前已经提交的两位写作者均有 Zynq-7020 板卡和 Vivado 环境，可共同承担板端、Vivado、RTL、PL 和集成；尚未加入的第三位写作者没有板卡和 Vivado，只能在自己的电脑运行 PS/软件音色方案，再交由前两位验证。协作角色据此改为 `Hardware-A`、`Hardware-B`、`Remote-PS-C`；两名硬件方改同一工程前必须先认领任务。
+
+
+## 2026-10-27 Hardware-A PS-20261021-10 Round89
+
+CROP128→192未改善内容：CER0.367647、泄漏0.122857、UTMOS2.055849，拒绝。早停1300/最佳500；checkpoint与WAV已独立验证。详见[报告](fixed_male_hubert_world_round89_20261027.md)。identity OpenCC兼容口径，无人工文本、听感或板端结论。
+
+
+## 2026-10-27 Hardware-A PS-20261021-10 Round90
+
+增加PCA维度未改善内容，CER0.455882、泄漏0.126283、UTMOS2.185500，拒绝。完成1400/最佳600，权重和维度核验通过；本轮评测真实OpenCC0.1.7，原始与归一CER相同。详见[报告](fixed_male_hubert_world_round90_20261027.md)。无现场或板端结论。
+
+
+## 2026-10-27 Hardware-A PS-20261021-10 Round91
+
+增加目标锚点概率未改善内容，CER0.308824、泄漏0.113065、UTMOS2.201187，拒绝。完成1800/最佳1000，权重/维度/资产SHA核验通过。补充男声1～3韵律统计未见严重均值偏移。详见[报告](fixed_male_hubert_world_round91_20261027.md)，无试听或板端结论。
+
+
+## 2026-10-27 Hardware-A PS-20261021-10 Round92
+
+更宽GRU未改善内容，CER0.382353、泄漏0.120913、UTMOS2.248302，拒绝。完成1300/最佳500，权重、模型维度和SHA核验通过。详见[报告](fixed_male_hubert_world_round92_20261027.md)。所有runtime模块采用当轮目录导入；无现场或板端结论。

@@ -1,0 +1,24 @@
+{
+  "task": "PS-20261021-10",
+  "round": 54,
+  "date": "2026-10-26",
+  "status": "REJECTED_BATCH_STOP",
+  "source": "人物音频资料/男声/标准录音 4.wav",
+  "gain": 1.8,
+  "source_detail_alpha": 0.4,
+  "cutoffs": [20, 16, 12, 8],
+  "rows": [
+    {"cutoff": 20, "identity": 0.6478, "identity_p10": 0.6261, "leakage": 0.0881, "utmos": 2.2849, "cer": 0.3382},
+    {"cutoff": 16, "identity": 0.6441, "identity_p10": 0.6276, "leakage": 0.0974, "utmos": 2.2640, "cer": 0.2941},
+    {"cutoff": 12, "identity": 0.6358, "identity_p10": 0.6166, "leakage": 0.1022, "utmos": 2.1760, "cer": 0.2941},
+    {"cutoff": 8, "identity": 0.6380, "identity_p10": 0.6204, "leakage": 0.1196, "utmos": 2.1769, "cer": 0.3088}
+  ],
+  "selected_cutoff": 16,
+  "all_gates_passed": false,
+  "locked_recording5_used": false,
+  "batch_rounds_completed": [45, 46, 47, 48, 49, 50, 51, 52, 53, 54],
+  "batch_stop_reason": "Ten requested rounds completed; fixed-male validation still fails UTMOS and CER.",
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}

@@ -1,0 +1,25 @@
+{
+  "task": "PS-20261021-10",
+  "round": 56,
+  "date": "2026-10-26",
+  "status": "REJECTED_USER_STOP",
+  "source": "人物音频资料/男声/标准录音 4.wav",
+  "gain": 1.6,
+  "source_vuv_alphas": [0.0, 0.25, 0.5, 0.75, 1.0],
+  "rows": [
+    {"alpha": 0.0, "identity": 0.6946, "identity_p10": 0.6766, "leakage": 0.1046, "utmos": 2.2746, "cer": 0.2500},
+    {"alpha": 0.25, "identity": 0.6954, "identity_p10": 0.6753, "leakage": 0.1138, "utmos": 2.2283, "cer": 0.3971},
+    {"alpha": 0.5, "identity": 0.7013, "identity_p10": 0.6872, "leakage": 0.1171, "utmos": 2.3003, "cer": 0.2647},
+    {"alpha": 0.75, "identity": 0.7013, "identity_p10": 0.6872, "leakage": 0.1171, "utmos": 2.3003, "cer": 0.2647},
+    {"alpha": 1.0, "identity": 0.7013, "identity_p10": 0.6872, "leakage": 0.1171, "utmos": 2.3003, "cer": 0.2647}
+  ],
+  "selected_alpha": 0.0,
+  "identical_output_groups": [[0.5, 0.75, 1.0]],
+  "all_gates_passed": false,
+  "locked_recording5_used": false,
+  "next_round_started": false,
+  "stop_reason": "User requested stopping after Round 56 completed.",
+  "played": false,
+  "board_touched": false,
+  "board_powered": false
+}
