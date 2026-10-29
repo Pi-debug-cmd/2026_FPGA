@@ -1,0 +1,22 @@
+PL-20261027-01 Round17 OOC implementation summary
+Date: 2026-10-29
+Base: 12d23894d308be30b44fd73292bed34cd0c18a8c
+Part: xc7z020clg400-2
+Target: 10.000 ns / 100 MHz
+Flow: Vitis HLS 2026.1 export_design -flow impl, Vivado 2026.1
+
+RESULT: ACCEPTED_OOC_ONLY
+Fully routed: yes
+Unrouted nets: 0
+Partially routed nets: 0
+WNS/TNS: +1.327 ns / 0.000 ns
+WHS/THS: +0.053 ns / 0.000 ns
+Setup/Hold failing endpoints: 0 / 0
+Post-implementation period: 8.673 ns
+Resources: 4996 LUT, 5769 FF, 38 DSP48E1, 7 BRAM18K, 1992 slices, 224 SRL
+Black boxes: 0
+DRC: 0 errors, 0 critical warnings, 94 warnings, 31 advisories
+
+LIMIT: OOC HD.CLK_SRC and HD.PARTPIN_LOCS are unset; full-design timing and
+connectivity DRC must be rerun after PS/AXI/audio integration. No bitstream was
+loaded and no recording, playback, or listening test was performed.

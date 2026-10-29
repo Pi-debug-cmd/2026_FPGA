@@ -1935,3 +1935,18 @@
 - 风险：XSIM 对显式 `inter false` 依赖提示记录 6720 条动态地址冲突警告；24 例数值通过但警告保留，不能据此宣称整机时序或板端通过。
 - 报告：`report/world_minphase_cosim_round16_20261029.{md,json,txt}`。本轮无板卡切换、录音、播放或试听。
 - 下一责任方：Hardware-A / Codex 独立提交本轮后执行 OOC 实现与时序/资源门；通过后再设计整机 DMA 接入。
+
+### [PL-20261027-01] Round17 最小相位融合核 OOC 实现认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`12d2389`。
+- 唯一变量：对 Round16 已通过 24/24 RTL cosim 的同一 HLS RTL 执行 Vivado OOC synthesis/implementation；不改算法、接口、时钟目标或测试向量。
+- 成功门：`xc7z020clg400-2`、100 MHz 下 routed WNS/WHS 均非负，无 black box 或 DRC Error，并记录实际 LUT/FF/BRAM/DSP；HLS 估算不能替代 routed 结果。
+- 限制：OOC 只证明核级可实现，不代表加入现有音频系统后仍收敛；本轮不加载位流、不操作板卡、不录放或试听。
+- 下一责任方：Hardware-A / Codex 运行短路径 OOC 实现并独立提交成功或失败证据。
+
+### [PL-20261027-01] Round17 最小相位融合核 OOC 实现结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：ACCEPTED（仅核级 OOC 门）；基准提交：`12d23894d308be30b44fd73292bed34cd0c18a8c`。
+- 复现：设置 `WORLD_HLS_PROJECT=D:/wpl_20261027_r16/m`，运行 `vitis-run --mode hls --tcl --input_file build/impl_world_minphase_hls.tcl`；Vitis HLS/Vivado 2026.1，器件 `xc7z020clg400-2`，100 MHz。
+- 量化：完成布线，WNS `+1.327 ns`、WHS `+0.053 ns`，setup/hold 失败端点均 0，未布线网络 0；实际 `4996 LUT / 5769 FF / 38 DSP / 7 BRAM18K`，black box 0、DRC Error 0。
+- 限制：OOC 边界缺少顶层 `HD.CLK_SRC/HD.PARTPIN_LOCS`，且 Vivado 提示不会执行全部连接型 DRC；94 项 Warning 主要为 DSP 流水建议及 OOC `RTSTAT-10/ZPS7-1`。不宣称整机时序或板端通过。
+- 报告：`report/world_minphase_ooc_round17_20261029.{md,json,txt}`；本轮未加载位流，未录音、播放或试听。
+- 下一责任方：Hardware-A / Codex 接入现有 Zynq 音频设计并完成整机 address/DRC/资源/时序门，通过后再进行可恢复的静默板端向量测试。
