@@ -2527,3 +2527,12 @@
 - 复现：教师venv Python build/generate_fixed_male_teacher_20261027.py --asset-root <main> --workspace D:/2026_FPGA_teacher_workspace --recordings 1 2 3；Python3.12 build/audit_fixed_male_teacher_content_20261027.py --asset-root <main> --generation <teacher-workspace>/runs/fixed_male_teacher_20261027/generation.json --output <teacher-workspace>/runs/fixed_male_teacher_20261027/content_audit.json。
 - 限制：无试听、板测或五门结论；不读录音4/5或Track9，无新学生训练轮；原Round108上限不变。所有大文件保存在D盘任务目录；用户RTL/PL保留。
 - 下一责任方：用户恢复后Hardware-A核查教师逐句识别差异与局部对齐，判断是否适用监督；不直接恢复参数扫描。当前无本任务活跃训练/下载/评测进程。
+### [PS-20261021-10] 输出层低剂量源专用适配 Round 97 结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：REJECTED。
+- 基准：Round88；三段固定男声教师配对；仅输出层；25步，lr=1e-4；gain1.6；开发集仅录音4。
+- 五门：identity 0.700509（通过），P10 0.681271（通过），leakage 0.112999（失败），UTMOS 2.218100（失败），CER 0.308824（失败）。
+- 判定：缩短输出层适配未恢复内容或自然度，不进入录音5；继续既定较低学习率机制对照。
+- 证据：`report/fixed_male_teacher_finetune_round97_20261029.{md,json}`；checkpoint SHA `7da9b09c...8ff65c2`；候选 SHA `d96d7d2c...ee67bf3`。
+- 限制：录音5和Track9未使用；未播放、未接触板卡；客观指标不替代真人听感。
+- 下一责任方：Hardware-A / Codex 执行Round98。
+
