@@ -2560,3 +2560,10 @@
 - 证据：`report/fixed_male_teacher_finetune_round100_20261029.{md,json}`；checkpoint `0582b714...97a165c`；候选 `9fc06823...8175e1d`。
 - 限制：录音5/Track9未用；未播放、未板测。下一责任方：Hardware-A / Codex执行Round101。
 
+### [PS-20261021-10] train1教师输出层适配 Round 101 结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：REJECTED。
+- 配置：Round88，仅train1，输出层100步，lr=1e-4，gain1.6；五门0.6800/0.6667/0.1022/2.1726/0.2794。
+- 判定：仅身份通过；单句+冻结内容网络仍不可用，不进录音5。
+- 证据：`report/fixed_male_teacher_finetune_round101_20261029.{md,json}`；checkpoint `0d6250b4...daf877d`；候选 `d4b332ae...e8c1f38`。
+- 限制：录音5/Track9未用；未播放、未板测。下一责任方：Hardware-A / Codex执行Round102。
+
