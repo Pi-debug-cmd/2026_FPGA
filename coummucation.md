@@ -2088,3 +2088,20 @@
 - 检查：Python编译通过；监督器完整回归17/17通过，覆盖静音预热、总帧数、峰值、三频元数据、延迟和prompt-only零Popen/单次restore；`git diff --check`通过。首次夹具目录缺失与随后4个旧kind字段缺失已如实记入报告。
 - 报告：`report/world_minphase_prompt_fix_round26_20261029.{md,json,txt}`；监督器SHA`63802aef...182ef`，测试SHA`67b64b28...1394a`。本轮未操作板卡、未播放、录音或试听。
 - 下一责任方：Hardware-A / Codex 独立提交后，在新的操作者准备确认下只执行prompt-only；用户明确确认可闻后才再次申请60秒录入。
+
+### [PL-20261027-01] Round27 开机自动 PL 与失败回退部署认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`3ffbfd6`。
+- 用户明确决定跳过稳定性和提示音可闻测试，直接执行：修复输出削顶、制作开机自动加载/失败回退服务、建立可恢复备份并写启动分区。
+- 方案边界：原厂`/boot/bit/zynq7020.bit`不覆盖；启动分区新增候选/恢复清单，rootfs安装版本化payload、module、runtime和监督服务。每次开机先由原厂bit安全启动，再由服务切换candidate；任一步失败在同次启动内恢复factory bit并重启v23。
+- 削顶修正：默认输出Q16从49152（0.75）降至16384（0.25）；按Round25峰值2.423787线性折算约0.807929。用户明确不要求本轮稳定性/听感测试，但仍执行静态、哈希、服务故障注入和板端无声启动/回退检查。
+- 成功门：安装物逐件SHA；服务语法/离线故障注入通过；启动分区原文件哈希不变且新增文件回读匹配；开机自动进入candidate服务状态；人为故障能恢复factory bit/v23；最终恢复到用户要求的candidate默认状态。
+- 风险：现有FAT未正常卸载警告保留；写入前后必须`sync`并回读，禁止覆盖原厂bit/uEnv/boot.scr。只迁移融合最小相位阶段，不能写完整WORLD全PL。
+- 下一责任方：Hardware-A / Codex 只读审计板端启动布局与空间，完成代码、包、故障注入、安装和双路径验收，每轮独立提交推送。
+
+### [PL-20261027-01] Round27 开机自动 PL 与失败回退方案结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：ACCEPTED（部署方案/故障注入门，尚未持久安装）；基准提交：`3ffbfd6`。
+- 用户免测边界：明确跳过稳定性和提示音可闻测试。削顶修正把默认输出Q16从49152降到16384；Round25 peak按线性折算从2.423787降至约0.807929，尚未做真人音量验证。
+- 方案：U-Boot保持原厂bit；FAT新增`/boot/world_pl`资产与`DISABLE`选择，原init备份为`world-voice.factory`，包装器自动切换candidate。资产/加载/module/device/runtime任一失败均写DISABLE、恢复factory bit/v23，下次启动直接factory。
+- 检查：host 20项中18通过、2项因Windows无POSIX sh跳过；板上`/tmp`四脚本BusyBox语法全通过，两项无声故障注入通过，输出`BOARD_BOOT_FAULT_TEST_PASS cases=2 audio_started=0 fpga_changed=0`。
+- 测试后状态：原厂服务和双PCM RUNNING、FPGA operating、taint0；本轮未持久安装、未写启动分区、未播放录音。报告`report/world_minphase_persistent_build_round27_20261029.{md,json,txt}`。
+- 下一责任方：Hardware-A / Codex 独立提交后进入Round28，先安装并逐件回读SHA但不启动；实际enable/reboot自动采录前仍需当次操作者准备确认。

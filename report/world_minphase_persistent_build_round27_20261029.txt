@@ -1,0 +1,9 @@
+PL-20261027-01 Round27 ACCEPTED_BUILD_AND_FAULT_INJECTION_ONLY
+user waived: stability test, prompt audibility test
+output gain: 49152 -> 16384; Round25 peak 2.423787389 -> estimated 0.807929130
+boot design: factory U-Boot bit unchanged; /boot/world_pl assets; DISABLE selects factory
+fallback: bad asset/load/module/device/runtime writes DISABLE and restores factory v23
+host: 18 tests pass, 2 POSIX-sh execution tests skipped
+board /tmp: 4 shell syntax checks pass; 2 silent fault injections pass
+post-test: factory service + both PCM RUNNING, FPGA operating, taint=0
+persistent install: not performed; boot partition: not written

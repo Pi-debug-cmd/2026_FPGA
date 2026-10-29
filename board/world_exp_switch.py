@@ -8,11 +8,13 @@ import argparse
 import array
 import hashlib
 import json
+import os
 from pathlib import Path
 import subprocess
 import time
 
 FACTORY_SHA = '16cb36f7161935896615ad12b000597088a6a9745856611162f1c44a51f82a61'
+FACTORY_SERVICE = os.environ.get('WORLD_FACTORY_SERVICE', '/etc/init.d/world-voice')
 AUDIO = [('platform', 'xlnx_snd_card', 'xlnx_snd_card.0.auto'),
          ('platform', 'xlnx_formatter_pcm', '43c40000.audio_formatter'),
          ('platform', 'xlnx_i2s', '43c60000.i2s_transmitter'),
@@ -126,7 +128,7 @@ def main():
         journal_path.write_text(json.dumps(saved, indent=2)+'\n')
         print(name, flush=True)
 
-    run('/etc/init.d/world-voice', 'stop')
+    run(FACTORY_SERVICE, 'stop')
     for node in ('pcm0p', 'pcm1c'):
         status = Path('/proc/asound/card0/'+node+'/sub0/status')
         assert (args.restore and not status.exists()) or status.read_text().strip() == 'closed'
@@ -175,7 +177,7 @@ def main():
         if args.keep_stopped:
             stage('factory_restored_audio_service_stopped')
         else:
-            run('/etc/init.d/world-voice', 'start')
+            run(FACTORY_SERVICE, 'start')
             stage('factory_and_v23_restored')
     else:
         stage('candidate_ready_audio_service_stopped')

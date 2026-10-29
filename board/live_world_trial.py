@@ -148,7 +148,7 @@ def run_prompt_only(base, ready_delay):
     return record['exit_code']
 
 
-def run_trial(base, seconds, prefill, gain=49152, input_gain=262144, fifo=False, fifo_io=False, require_voiced=False,
+def run_trial(base, seconds, prefill, gain=16384, input_gain=262144, fifo=False, fifo_io=False, require_voiced=False,
               period=512, capture_buffer=4096, playback_buffer=3072, start_delay=32000,
               prompt_tone=False, ready_delay=2.0):
     binary = preflight(base)
@@ -348,7 +348,7 @@ def main():
     parser.add_argument('--playback-buffer', type=int, default=3072)
     parser.add_argument('--start-delay-us', type=int, default=32000)
     parser.add_argument('--prefill-ms', type=int, default=200)
-    parser.add_argument('--output-gain-q16', type=int, default=49152)
+    parser.add_argument('--output-gain-q16', type=int, default=16384)
     parser.add_argument('--input-gain-q16', type=int, default=262144)
     scheduling = parser.add_mutually_exclusive_group()
     scheduling.add_argument('--fifo', action='store_true')
