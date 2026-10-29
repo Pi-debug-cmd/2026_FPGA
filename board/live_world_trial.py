@@ -24,10 +24,15 @@ def pcm_idle():
     return states
 
 
-def preflight(base):
+def audio_preflight():
     for command in ['arecord', 'aplay', 'amixer', 'alsactl']:
         if not shutil.which(command):
             raise RuntimeError('Missing command: ' + command)
+    return pcm_idle()
+
+
+def preflight(base):
+    pcm = audio_preflight()
     manifest = json.loads((base / 'world_live_manifest_v21.json').read_text())
     binary_name = manifest.get('binary_name', 'world_budget_v12')
     if not re.fullmatch(r'world_budget_v[0-9]+', binary_name):
@@ -36,7 +41,7 @@ def preflight(base):
     actual = hashlib.sha256(binary.read_bytes()).hexdigest()
     if manifest['binary_sha256'] != actual or not os.access(binary, os.X_OK):
         raise RuntimeError('Runtime binary is missing, not executable, or has wrong SHA')
-    record = {'kind': 'world_live_preflight', 'binary_sha256': actual, 'pcm': pcm_idle(),
+    record = {'kind': 'world_live_preflight', 'binary_sha256': actual, 'pcm': pcm,
               'cpu_online': Path('/sys/devices/system/cpu/online').read_text().strip()}
     print(json.dumps(record), flush=True)
     return binary
@@ -60,17 +65,19 @@ def codec_snapshot(run, label):
 
 
 def play_prompt(run, delay_seconds):
-    """Play two bounded same-format tones, then leave a silent preparation gap."""
+    """Warm up the codec, play three bounded tones, then leave a preparation gap."""
     rate = 32000
+    peak_fraction = 0.30
     samples = bytearray()
-    # Two ascending 300 ms tones separated by 180 ms make the cue unambiguous.
-    segments = [(880, .30), (0, .18), (1175, .30)]
+    # Keep one stream open through codec/DAPM warm-up; short first sounds were inaudible.
+    segments = [(0, .80), (660, .55), (0, .18), (880, .55),
+                (0, .18), (1175, .55), (0, .25)]
     for frequency, duration in segments:
         frames = int(rate * duration)
         for index in range(frames):
             if frequency:
                 edge = min(1.0, index / 320.0, (frames - 1 - index) / 320.0)
-                signed = int(0.12 * 8388607 * max(0.0, edge) *
+                signed = int(peak_fraction * 8388607 * max(0.0, edge) *
                              math.sin(2 * math.pi * frequency * index / rate))
                 word = signed & 0xffffff
             else:
@@ -85,7 +92,60 @@ def play_prompt(run, delay_seconds):
     print('WORLD_PROMPT_DONE recording_starts_in=%.1f' % delay_seconds, flush=True)
     time.sleep(delay_seconds)
     return {'exit': prompt.returncode, 'frames': sum(int(rate * x[1]) for x in segments),
-            'peak_fraction': 0.12, 'ready_delay_s': delay_seconds}
+            'peak_fraction': peak_fraction, 'warmup_s': segments[0][1],
+            'tone_hz': [x[0] for x in segments if x[0]], 'ready_delay_s': delay_seconds}
+
+
+def run_prompt_only(base, ready_delay):
+    """Verify the audible cue without starting capture or the WORLD runtime."""
+    pcm = audio_preflight()
+    run = base / ('prompt_' + str(time.monotonic_ns()))
+    run.mkdir()
+    record = {'kind': 'world_prompt_only', 'directory': str(run), 'pcm_before': pcm,
+              'capture_started': False, 'world_started': False, 'exit_code': 1}
+    mixer_saved = False
+    try:
+        with (run / 'mixer_store.log').open('wb') as log:
+            subprocess.run(['alsactl', '-f', str(run / 'mixer_before.state'), 'store', '0'],
+                           stdout=log, stderr=log, check=True, timeout=10)
+        mixer_saved = True
+        controls = [
+            ['sset', 'Left Output Mixer PCM', 'on'],
+            ['sset', 'Right Output Mixer PCM', 'on'],
+            ['sset', 'Headphone Playback ZC', 'on'],
+            ['sset', 'Headphone', '105,105'],
+            ['sset', 'Playback', '230,230'],
+        ]
+        with (run / 'mixer_setup.log').open('wb') as log:
+            for control in controls:
+                subprocess.run(['amixer'] + control, stdout=log, stderr=log,
+                               check=True, timeout=5)
+        codec_snapshot(run, 'configured')
+        record['prompt_tone'] = play_prompt(run, ready_delay)
+        record['exit_code'] = 0
+    except (Exception, KeyboardInterrupt) as exc:
+        record['error'] = str(exc) or type(exc).__name__
+    finally:
+        if mixer_saved:
+            try:
+                with (run / 'mixer_restore.log').open('wb') as log:
+                    restored = subprocess.run(
+                        ['alsactl', '-f', str(run / 'mixer_before.state'), 'restore', '0'],
+                        stdout=log, stderr=log, timeout=10)
+                record['mixer_restore_exit'] = restored.returncode
+                if restored.returncode:
+                    record['exit_code'] = 1
+            except Exception as exc:
+                record['mixer_restore_error'] = str(exc)
+                record['exit_code'] = 1
+        try:
+            record['pcm_after'] = pcm_idle()
+        except Exception as exc:
+            record['pcm_after_error'] = str(exc)
+            record['exit_code'] = 1
+        (run / 'result.json').write_text(json.dumps(record, indent=2) + '\n')
+        print(json.dumps(record), flush=True)
+    return record['exit_code']
 
 
 def run_trial(base, seconds, prefill, gain=49152, input_gain=262144, fifo=False, fifo_io=False, require_voiced=False,
@@ -279,6 +339,8 @@ def main():
     action = parser.add_mutually_exclusive_group(required=True)
     action.add_argument('--check', action='store_true')
     action.add_argument('--run', action='store_true')
+    action.add_argument('--prompt-only', action='store_true',
+                        help='Play and restore the cue without capture or WORLD')
     parser.add_argument('--seconds', type=int, default=20)
     parser.add_argument('--base', type=Path, default=BASE)
     parser.add_argument('--alsa-period', type=int, default=512)
@@ -312,6 +374,8 @@ def main():
     if args.check:
         preflight(args.base)
         return 0
+    if args.prompt_only:
+        return run_prompt_only(args.base, args.ready_delay_s)
     def terminate(signum, frame):
         raise KeyboardInterrupt('Supervisor interrupted by signal %d' % signum)
     signal.signal(signal.SIGTERM, terminate)

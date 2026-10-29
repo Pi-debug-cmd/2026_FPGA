@@ -2073,3 +2073,18 @@
 - 报告：`report/world_minphase_prompt_live60_round25_20261029.{md,json,txt}`；完整结果与active codec已保存。candidate active MICB/ADC/DAC/PGA/HP均On；驱动device约`386.25 us/call`。
 - 恢复：module卸载、sync、正常reboot；原厂bit/v23 SHA匹配，FPGA operating、服务running，双PCM在随后复核均RUNNING，自有模块无、taint0、临时目录清除。
 - 下一责任方：Hardware-A / Codex 先增加codec静音预热、更长更响三段提示和`--prompt-only`验证模式；取得新的播放准备确认并由用户明确确认可闻后，才再次申请60秒录入。
+
+### [PL-20261027-01] Round26 可闻提示音修正认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED / PROPOSED；基准提交：`59e4527`。
+- 唯一变量：监督器提示音先保持同一playback stream静音预热，再播放更长、更响的三段递增音；新增`--prompt-only`只验证提示、绝不启动采集或WORLD。
+- 成功门：本机mock验证帧数、幅度、频率时序、提示后延迟和prompt-only不启动录音；独立提交后，新的操作者准备确认下仅播放提示，由用户明确确认可闻。
+- 限制：本轮代码阶段不操作板卡、不录音、不播放；提示可闻也不等于60秒稳定性通过。
+- 下一责任方：Hardware-A / Codex 实现、回归、报告并独立提交。
+
+### [PL-20261027-01] Round26 可闻提示音修正结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：PROPOSED / WAIT_LOCAL_TEST；基准提交：`59e4527`。
+- 修正：同一播放流先静音预热0.80秒，再播放660/880/1175Hz三段0.55秒长音，段间0.18秒、尾部0.25秒，峰值0.30；总97920帧/3.06秒，正式录入前2秒准备窗口不变。
+- 新增`--prompt-only`：只保存/配置/恢复mixer并播放提示，结果显式`capture_started=false`、`world_started=false`；不启动arecord或WORLD。
+- 检查：Python编译通过；监督器完整回归17/17通过，覆盖静音预热、总帧数、峰值、三频元数据、延迟和prompt-only零Popen/单次restore；`git diff --check`通过。首次夹具目录缺失与随后4个旧kind字段缺失已如实记入报告。
+- 报告：`report/world_minphase_prompt_fix_round26_20261029.{md,json,txt}`；监督器SHA`63802aef...182ef`，测试SHA`67b64b28...1394a`。本轮未操作板卡、未播放、录音或试听。
+- 下一责任方：Hardware-A / Codex 独立提交后，在新的操作者准备确认下只执行prompt-only；用户明确确认可闻后才再次申请60秒录入。

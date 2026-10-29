@@ -1,0 +1,7 @@
+PL-20261027-01 Round26 PROPOSED_WAIT_LOCAL_PROMPT_TEST
+old cue: 24960 frames, 0.12 peak, two short tones, operator reported inaudible
+new cue: 97920 frames / 3.06 s, 0.80 s same-stream warmup, 660/880/1175 Hz x 0.55 s, 0.30 peak
+prompt-only: capture_started=false world_started=false, mixer always restored
+checks: py_compile pass; supervisor unittest 17/17 pass; diff-check pass
+board/audio: not used
+next: fresh readiness, prompt-only physical audibility test, no recording
