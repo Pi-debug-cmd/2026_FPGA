@@ -2027,3 +2027,19 @@
 - 检查：Python 编译、mock aplay 24960 帧/peak0.12/delay2.0 和 `git diff --check` 通过；监督器 SHA `cecf23ad...8b69f`。报告 `report/world_minphase_prompt_round22_20261029.{md,json,txt}`。
 - 限制：本轮未加载板卡或录放；Round21 原反馈与日志保留，但根据用户“录入的时候没有准备好”的补充，不作为候选可听性归因结论。
 - 下一责任方：Hardware-A / Codex 独立提交后部署；新的操作者准备确认后先验提示音可闻，再进行一次 20 秒实时测试。
+
+### [PL-20261027-01] Round23 提示音后实时复测认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`9515715`。
+- 操作者已明确“准备好了”。本轮复用 Round21 相同 candidate、程序、模块、200 ms/fifo_io/增益/ALSA 参数，唯一测试流程变化是录入前双提示音和 2 秒准备窗口。
+- 成功门：提示音由操作者确认可闻；其后 20 秒讲话有声、零 xrun/error/触顶/削顶、PL calls>0/fallback=0，用户确认转换声音可听并评价连续性/异常；结束后恢复原厂 bit/v23。
+- 限制：单次 20 秒不替代长稳或定量延迟；任何主观失败优先于客观日志。
+- 下一责任方：Hardware-A / Codex 执行预检、提示音实时测试、证据下载与恢复。
+
+### [PL-20261027-01] Round23 提示音后实时复测结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：ACCEPTED（20 秒实时可用门）；基准提交：`9515715`。
+- 条件：双提示音 exit0/24960帧，随后2秒准备；20秒/200ms/fifo_io，`WORLD_MINPHASE=pl`、`WORLD_EXP=cpu`，其余参数与Round21相同。
+- 客观：有声帧1079，子进程全0，录放xrun/ALSA error/输入触顶/输出削顶均0；PL `4857 calls / 0 fallback`，分析/渲染RTF `0.561150/0.310517`，最大分析 `34.605 ms`。candidate active MICB/ADC/DAC/PGA/HP均On。
+- 用户原话：**“讲话时能听到转换声音，效果和ps类似”**。据此接受有限时实时可用和主观与PS相近；用户未单独评价提示音，不补写提示音听感。
+- 报告：`report/world_minphase_prompt_live_round23_20261029.{md,json,txt}`；完整结果与active codec分别为`world_minphase_prompt_live20_result_round23_20261029.json`和`world_minphase_prompt_codec_active_round23_20261029.json`。
+- 恢复：结果下载后模块卸载、sync、正常reboot；原厂bit/v23 SHA匹配，FPGA operating、服务和双PCM RUNNING、自有模块无、taint0、临时目录清除。
+- 限制：单次20秒不替代60秒/10分钟/30分钟稳定性或物理延迟；只迁移融合最小相位阶段，并非完整WORLD全PL。下一责任方Hardware-A / Codex在新准备确认后执行同参数60秒提示音稳定性门。
