@@ -2536,3 +2536,11 @@
 - 限制：录音5和Track9未使用；未播放、未接触板卡；客观指标不替代真人听感。
 - 下一责任方：Hardware-A / Codex 执行Round98。
 
+### [PS-20261021-10] 输出层低学习率适配 Round 98 结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：REJECTED。
+- 配置：Round88；train1～3；输出层100步，lr=3e-5；gain1.6；仅录音4开发。
+- 五门：identity 0.6970、P10 0.6747通过；leakage 0.1025、UTMOS 2.2767、CER 0.2941失败。
+- 判定：低学习率缓解泄漏/自然度退化，但未保护内容，不进入录音5。
+- 证据：`report/fixed_male_teacher_finetune_round98_20261029.{md,json}`；checkpoint `56806af3...fec42fd`；候选 `89d496f8...6b26d385`。
+- 限制：录音5/Track9未用；未播放、未接触板卡。下一责任方：Hardware-A / Codex执行Round99。
+
