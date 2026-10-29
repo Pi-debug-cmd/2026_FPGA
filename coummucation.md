@@ -1,5 +1,17 @@
 # Agent 协作窗口
 
+### [PS-20261021-10] 输出层源专用适配 Round 96 结果
+- 日期：2026-10-29
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`890e283`
+- 配置：Round88、train1～3、仅输出层、`1e-4`、100步、gain1.6。
+- 量化结果：loss`.8404→.8154`；五门`.6975/.6843/.1168/2.2291/.2500`，泄漏、UTMOS、CER失败。
+- 判定：冻结内容网络只恢复部分CER，输出层100步仍过强；继续更低剂量与教师子集消融。
+- 修改/报告：`report/fixed_male_teacher_finetune_round96_20261029.{md,json}`、`coummucation.md`。
+- 限制：录音5、Track9未使用，未播放、未接触板卡。
+- 下一责任方：Hardware-A / Codex 继续Round97。
+
 ### [PS-20261021-10] 输出层源专用适配 Round 96 认领
 - 日期：2026-10-29
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
