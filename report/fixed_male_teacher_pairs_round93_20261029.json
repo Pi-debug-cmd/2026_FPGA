@@ -1,0 +1,19 @@
+{
+  "task": "PS-20261021-10",
+  "round": 93,
+  "date": "2026-10-29",
+  "status": "PASSED_PREFLIGHT",
+  "pairs": [
+    {"role": "train1", "frames_20ms": 901, "best_energy_lag_5ms": 1, "energy_correlation": 0.8839385646, "teacher_cer_against_source_asr": 0.1506849315},
+    {"role": "train2", "frames_20ms": 837, "best_energy_lag_5ms": 0, "energy_correlation": 0.8814517144, "teacher_cer_against_source_asr": 0.2428571429},
+    {"role": "train3", "frames_20ms": 975, "best_energy_lag_5ms": 0, "energy_correlation": 0.9287753446, "teacher_cer_against_source_asr": 0.2686567164}
+  ],
+  "teacher_micro_cer_against_source_asr": 0.2190476190,
+  "all_pairs_crop128_eligible": true,
+  "training_authorized": true,
+  "recording4_used": false,
+  "recording5_used": false,
+  "target_track9_used": false,
+  "played": false,
+  "board_touched": false
+}
