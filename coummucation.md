@@ -1981,3 +1981,20 @@
 - 构建：ARM 静态主程序/探针通过；模块 vermagic `5.15.0-xilinx SMP preempt mod_unload modversions ARMv7 p2v8`。换序 bin SHA `1bc4b3f8...29373`，确定性 gzip SHA `6a7fec99...8d98`，连续两次一致；其余哈希见 JSON。
 - 报告：`report/world_minphase_board_software_round19_20261029.{md,json,txt}`。本轮未加载板卡，不能宣称板端数值、RTF 或音质通过；未录放、试听或修改启动分区。
 - 下一责任方：Hardware-A / Codex 独立提交后执行可恢复的 24 例静默板测及文件转换对照，最后恢复并核对原厂 bit/v23、PCM、服务和内核状态。
+
+### [PL-20261027-01] Round20 最小相位静默板端验证认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`05d9c3a`。
+- 唯一变量：临时加载 Round18/19 candidate，插入匹配模块并运行 24 例静默数值探针；通过后再做既有 male1/male4 文件转换对照。启动分区、原 v23 和真人音频不改。
+- 前置门：先只读核对 COM4 上原厂 bit/v23 SHA、FPGA operating、双 PCM/服务、内核 taint 和自有模块；传输逐件 SHA。实际切换前遵守恢复脚本的当轮准备确认要求。
+- 成功门：24/24 ioctl 通过、relative-L2 不超过 `2e-5`、无超时；模块计数与耗时有效；文件输出满足 SNR/峰值误差和零 fallback；最后恢复原厂 bit/v23 并核对 PCM、服务、模块、taint。
+- 限制：全程静默，不录音、播放或试听；任何失败也独立提交，不能把构建或 host/RTL 结果当板端通过。
+- 下一责任方：Hardware-A / Codex 完成只读预检和传输；切换门满足后执行并记录测试/恢复。
+
+### [PL-20261027-01] Round20 最小相位静默板端验证结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：ACCEPTED（静默向量与文件门）；基准提交：`05d9c3a`。
+- 板端向量：24/24 通过，最坏 relative-L2 `8.53141669193e-7`，device 平均约 `383.2 us/call`，无超时。两段 v23 文件 minphase PL SNR `97.371/96.942 dB`、最大 PCM16 误差均 1、零 fallback；新程序 CPU 与原 v23 逐字节一致。
+- 性能：单次文件样本 CPU `2.845/2.823 s`、minphase PL `2.749/2.747 s`，仅为方向性证据。minphase+exp 请求与 minphase-only 逐字节一致且旧 exp calls=0，证明融合核已包含该阶段 exp/cos/sin，不应继续叠加旧逐算子路径。
+- 报告：`report/world_minphase_board_round20_20261029.{md,json,txt}` 和完整遥测 `report/world_minphase_file_result_round20_20261029.json`。首次旧 exp stats 缺失与组合调用假设错误均在报告保留，最终 v3 全部通过。
+- 恢复：两模块卸载后 `sync`/正常 reboot；原厂 bit/v23 SHA 匹配，FPGA operating、服务与双 PCM RUNNING、自有模块无、taint 0、临时目录清除。启动仍报既有 FAT 未正确卸载警告，本轮未写启动分区，建议维护窗口离线 fsck。
+- 限制：本轮未录音、播放、试听、长稳或物理延迟测试；只接受文件使用门，不能写真人实时通过或完整 WORLD 全 PL。
+- 下一责任方：Hardware-A / Codex 在操作者再次确认准备后，以 minphase PL 为唯一新增变量做有限时真实录放、听感和稳定性回归。

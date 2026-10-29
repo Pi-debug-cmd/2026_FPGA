@@ -1,0 +1,12 @@
+PL-20261027-01 Round20 silent board/file gate: PASS
+candidate swap sha256: 1bc4b3f8f5e5f1b722b0772b9aad23af3c60579dc3c81c44c8d86b408c429373
+probe: 24/24 pass; relative_l2_max=8.53141669193e-7; no timeout
+probe timing: copy_in=46644ns device=9197184ns copy_out=383652ns
+male1 minphase: elapsed=2.748740s SNR=97.371389dB max_pcm16_error=1
+male4 minphase: elapsed=2.747420s SNR=96.942108dB max_pcm16_error=1
+CPU-selectable output: byte-exact to factory v23 for both inputs
+combined request: byte-exact to minphase-only; independent exp calls=0 because fused kernel subsumes exp/cos/sin
+file driver delta: 5052 calls, device=1952720308ns, no fallback
+restore: factory bit/v23 hashes match; FPGA operating; service running; both PCM RUNNING; taint=0; modules absent
+warning: existing boot FAT unclean-volume warning remains; boot partition was not modified
+record/playback/listening/long stability/physical latency: NOT RUN

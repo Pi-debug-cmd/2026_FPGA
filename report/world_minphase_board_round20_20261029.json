@@ -1,0 +1,71 @@
+{
+  "task_id": "PL-20261027-01",
+  "round": 20,
+  "date": "2026-10-29",
+  "role": "Hardware-A / Codex",
+  "status": "ACCEPTED_SILENT_BOARD_AND_FILE_GATE",
+  "base_commit": "05d9c3a",
+  "candidate_sha256": "1bc4b3f8f5e5f1b722b0772b9aad23af3c60579dc3c81c44c8d86b408c429373",
+  "probe": {
+    "cases": 24,
+    "relative_l2_max": 8.53141669193e-7,
+    "passed": true,
+    "copy_in_ns": 46644,
+    "device_ns": 9197184,
+    "copy_out_ns": 383652,
+    "device_mean_us": 383.216
+  },
+  "file_gate": {
+    "passed": true,
+    "result_sha256": "582fba7adbed964297696355a791d89e509bdcdd8d3ee0b40e504b385203fabe",
+    "minphase_driver_calls_delta": 5052,
+    "copy_in_delta_ns": 11355091,
+    "device_delta_ns": 1952720308,
+    "copy_out_delta_ns": 92409768,
+    "device_mean_us": 386.524,
+    "cpu_exact_for_both_inputs": true,
+    "minphase": {
+      "male1": {"elapsed_s": 2.748740, "snr_db": 97.371389, "max_pcm16_error": 1},
+      "male4": {"elapsed_s": 2.747420, "snr_db": 96.942108, "max_pcm16_error": 1}
+    },
+    "cpu": {
+      "male1_elapsed_s": 2.845253,
+      "male4_elapsed_s": 2.822582
+    },
+    "combined_equals_minphase_byte_exact": true,
+    "combined_exp_calls": 0,
+    "fallbacks": 0
+  },
+  "restore": {
+    "method": "rmmod both temporary modules, sync, normal reboot",
+    "factory_bit_sha256": "16cb36f7161935896615ad12b000597088a6a9745856611162f1c44a51f82a61",
+    "v23_sha256": "f12da25e93a520b7f5255ce952a3cb9b5d1bbca474133b1bc529d8c8e18349b7",
+    "fpga_state": "operating",
+    "service": "running",
+    "playback_pcm": "RUNNING",
+    "capture_pcm": "RUNNING",
+    "temporary_modules_loaded": false,
+    "kernel_taint": 0,
+    "temporary_directory_present": false,
+    "boot_partition_modified": false,
+    "warning": "FAT-fs mmcblk0p1 reports volume was not properly unmounted; hashes remain correct and offline maintenance fsck is recommended."
+  },
+  "raw_log_sha256": {
+    "preflight": "1edfe1ede89619dace2369a472a578abecdb5dd4f57b6842cf35245efd030f38",
+    "payload_preflight": "54f54452175fe8e6396f29e79c3418d16f05d6b284f4e070f78aec3bcdd7d3a8",
+    "load": "eabb099e87ef49c0364a8deb63e6c8dbe4567d3e63e6dd9c2f4b1b29846df0fe",
+    "probe": "636ae9cfb2d5b3fa8f7064d529423bfd76c9e841758113b0e6c4df083b076312",
+    "initial_file_trial": "5607963a10bf8ad654f7dc844d14680814f952b68b51fb50945678a3fcb4c5de",
+    "final_file_trial": "b0926cf32e9932fc8cc160ab89560ef809fb8254c782ae2c5fd571fdf34f1d6d",
+    "reboot": "0102e30974e2559c4aef06e38a9793854170022988c8efde5756bb2bd27ee3a1",
+    "factory_restore": "23485fb663d804033e91c77bd6fcd40093b178cdbc9a52fb80477f0cf69b0a7b",
+    "factory_service_recheck": "c71c139c61414556e385185e34a03bc2ca6523c44377c8cec49f37205a4edc4a"
+  },
+  "limitations": [
+    "No recording, playback, listening, long-duration stability, or physical latency test was run.",
+    "Only the fixed 1024-point minimum-phase stage is fused in PL; this is not the complete WORLD chain.",
+    "Single-run file timings are directional evidence, not a stable performance claim.",
+    "The existing boot FAT unclean-volume warning remains and needs an offline maintenance check."
+  ],
+  "next_responsible": "Hardware-A / Codex after a fresh operator-ready confirmation: bounded live v23 minphase-PL regression, then listening and stability gates."
+}
