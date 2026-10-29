@@ -2043,3 +2043,18 @@
 - 报告：`report/world_minphase_prompt_live_round23_20261029.{md,json,txt}`；完整结果与active codec分别为`world_minphase_prompt_live20_result_round23_20261029.json`和`world_minphase_prompt_codec_active_round23_20261029.json`。
 - 恢复：结果下载后模块卸载、sync、正常reboot；原厂bit/v23 SHA匹配，FPGA operating、服务和双PCM RUNNING、自有模块无、taint0、临时目录清除。
 - 限制：单次20秒不替代60秒/10分钟/30分钟稳定性或物理延迟；只迁移融合最小相位阶段，并非完整WORLD全PL。下一责任方Hardware-A / Codex在新准备确认后执行同参数60秒提示音稳定性门。
+
+### [PL-20261027-01] Round24 60 秒提示音稳定性认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`e0b518e`；操作者明确“开始吧”。
+- 唯一变量：复用 Round23 完全相同 candidate、程序、模块、提示音、200 ms/fifo_io、增益和 ALSA 参数，只把正式录入从 20 秒延长到 60 秒。
+- 成功门：提示后有效持续讲话，零录放 xrun/ALSA error/输入触顶/输出削顶，PL calls>0/fallback=0，用户确认可听连续；保存 active codec 与结果并恢复原厂 bit/v23。
+- 限制：60 秒仍不替代 10/30 分钟长稳或定量物理延迟；失败不自动重跑。
+- 下一责任方：Hardware-A / Codex 部署并执行本轮测试。
+
+### [PL-20261027-01] Round24 60 秒提示音稳定性结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：REJECTED（无有效语音，测试条件无效）；基准提交：`e0b518e`。
+- 操作者原话：**“60s录入我没有准备好”**。因此本轮不能用于 60 秒真人稳定性验收，也不能把失败归因于 PL、VAD、麦克风或音频链；Round23 的 20 秒实时可用结论不变。
+- 客观：提示音 exit0/24960帧/后置2秒；子进程全0，录放 xrun/ALSA error/输入触顶/输出削顶均0；PL `7883 calls / 0 fallback`，但有声帧0，监督器按 `--require-voiced` 退出1。raw peak `0.423708`、RMS `0.027869`，分析/渲染RTF `0.283794/0.278869`。
+- 运行态：candidate active MICB/ADC/DAC/PGA/HP均On；驱动 device 累计`3.055748 s`、约`387.64 us/call`。报告：`report/world_minphase_prompt_live60_round24_20261029.{md,json,txt}`；完整结果与active codec已保存。
+- 恢复：module卸载、sync、正常reboot；原厂bit/v23 SHA匹配，FPGA operating、服务和双PCM RUNNING、自有模块无、taint0、临时目录清除。既有FAT警告仍在，本轮未写启动分区。
+- 下一责任方：Hardware-A / Codex 等待新的操作者准备确认后，使用完全相同参数重做60秒；提示后需在整个录入窗口持续讲话，失败不自动重跑。
