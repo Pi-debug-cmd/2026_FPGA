@@ -1,0 +1,10 @@
+PL-20261027-01 Round21 20-second live minphase PL: REJECTED
+operator feedback verbatim: 没听到声音
+children: 0/0/0; capture overrun=0; playback underrun=0; ALSA error=0
+PL calls=2725 fallback=0; driver device mean=416.05us/call
+voiced_frames=30; raw_capture_peak=0.424322; raw_clip=0
+output_peak=0.197959; output_clip=0
+analysis_rtf=0.272714 render_rtf=0.277273 analysis_max_ms=24.116382
+objective digital activity does not override failed audibility
+restore: factory bit/v23 match; FPGA operating; service + both PCM RUNNING; taint=0; modules absent
+next: separately gate factory reference playback and candidate reference playback before repeating WORLD

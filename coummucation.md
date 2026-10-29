@@ -1998,3 +1998,18 @@
 - 恢复：两模块卸载后 `sync`/正常 reboot；原厂 bit/v23 SHA 匹配，FPGA operating、服务与双 PCM RUNNING、自有模块无、taint 0、临时目录清除。启动仍报既有 FAT 未正确卸载警告，本轮未写启动分区，建议维护窗口离线 fsck。
 - 限制：本轮未录音、播放、试听、长稳或物理延迟测试；只接受文件使用门，不能写真人实时通过或完整 WORLD 全 PL。
 - 下一责任方：Hardware-A / Codex 在操作者再次确认准备后，以 minphase PL 为唯一新增变量做有限时真实录放、听感和稳定性回归。
+
+### [PL-20261027-01] Round21 最小相位 PL 实时监督准备认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED / PROPOSED；基准提交：`a7ea7bf`。
+- 唯一变量：在已验证的 v23/200 ms/fifo_io/既有增益配置上启用 `WORLD_MINPHASE=pl`、保持 `WORLD_EXP=cpu`；监督器增加 fused backend calls/fallback 强校验和结果保存，不改变算法、mixer 或 ALSA 参数。
+- 计划：先上传并逐件校验候选、模块、v24 命名程序、监督器和恢复镜像；实际切换与 20 秒真人录放必须取得新的当轮准备确认。成功门为有声、零 xrun/ALSA error/输入触顶/输出削顶、PL calls>0/fallback=0、mixer 恢复和 PCM closed。
+- 限制：20 秒只作为首轮实时门，不能替代 60 秒/10 分钟/30 分钟稳定性或定量物理延迟；听感由当次操作者原话记录。
+- 下一责任方：Hardware-A / Codex 完成静态预部署后请求操作者准备确认。
+
+### [PL-20261027-01] Round21 最小相位 PL 首轮实时结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：REJECTED（可听性）；基准提交：`a7ea7bf`。
+- 条件：操作者重新确认准备；20 秒/200 ms/fifo_io，既有增益与 ALSA 参数，`WORLD_MINPHASE=pl`、`WORLD_EXP=cpu`。监督器新增 minphase calls/fallback 强校验。
+- 客观：子进程全 0，录放 xrun/ALSA error/输入触顶/输出削顶均 0；PL `2725 calls / 0 fallback`，output peak `0.197959`，分析/渲染 RTF `0.272714/0.277273`，最大分析 `24.116 ms`，但只有 30 有声帧。
+- 用户原话：**“没听到声音”**。据此本轮硬判 REJECTED；数字链非零和零 xrun 不得覆盖用户听感。报告 `report/world_minphase_live20_round21_20261029.{md,json,txt}`，完整监督结果 `report/world_minphase_live20_result_round21_20261029.json`。
+- 恢复：结果下载后模块卸载、sync、正常 reboot；原厂 bit/v23 SHA 匹配，FPGA operating、服务和双 PCM RUNNING、taint 0、自有模块无、临时目录清除。恢复后只读 codec 显示左右 DAC/PGA/HP On；不能倒推候选运行态。
+- 限制与下一步：候选 active codec/DAPM 快照未在 reboot 前下载，尚未定位数字输出到模拟可听链的断点。不得直接重复 WORLD；下一次准备确认后依次做原厂参考播放、candidate 同参考播放，均可听才重跑短时 WORLD。

@@ -67,7 +67,8 @@ def run_trial(base, seconds, prefill, gain=49152, input_gain=262144, fifo=False,
     record = {'kind': 'world_live_trial', 'directory': str(run), 'seconds': seconds,
               'prefill_ms': prefill, 'output_gain_q16': gain, 'input_gain_q16': input_gain,
               'requested_fifo': fifo, 'requested_fifo_io': fifo_io, 'require_voiced': require_voiced, 'exit_code': 1,
-              'world_exp_requested': os.environ.get('WORLD_EXP', 'cpu'), 'alsa_period': period,
+              'world_exp_requested': os.environ.get('WORLD_EXP', 'cpu'),
+              'world_minphase_requested': os.environ.get('WORLD_MINPHASE', 'cpu'), 'alsa_period': period,
               'capture_buffer': capture_buffer, 'playback_buffer': playback_buffer, 'start_delay_us': start_delay}
     error = None
     try:
@@ -155,7 +156,12 @@ def run_trial(base, seconds, prefill, gain=49152, input_gain=262144, fifo=False,
             stats = next(item for item in telemetry if item.get('kind') == 'world_exp_backend')
             record['world_exp_backend'] = stats
             if stats['mode'] != 2 or stats['calls'] <= 0 or stats['fallback']:
-                raise RuntimeError('PL did not process all minimum-phase calls')
+                raise RuntimeError('PL exp backend did not process all eligible calls')
+        if os.environ.get('WORLD_MINPHASE') == 'pl':
+            stats = next(item for item in telemetry if item.get('kind') == 'world_minphase_pl')
+            record['world_minphase_backend'] = stats
+            if stats['calls'] <= 0 or stats['fallback']:
+                raise RuntimeError('PL fused minimum-phase backend was not used exclusively')
         if runtime['exit_code'] != 0:
             raise RuntimeError('Runtime check failed')
         if runtime.get('raw_capture_clipped_samples', 0):
@@ -207,6 +213,8 @@ def run_trial(base, seconds, prefill, gain=49152, input_gain=262144, fifo=False,
                 for item in telemetry:
                     if item.get('kind') == 'world_exp_backend':
                         record['world_exp_backend'] = item
+                    if item.get('kind') == 'world_minphase_pl':
+                        record['world_minphase_backend'] = item
             except (StopIteration, ValueError):
                 record['runtime_log_incomplete'] = True
         record['child_exits'] = [child.returncode for child in processes]
