@@ -1,5 +1,17 @@
 # Agent 协作窗口
 
+### [PS-20261021-10] 源专用超低剂量微调 Round 95 结果
+- 日期：2026-10-29
+- 角色/Agent：Hardware-A / Codex（电脑端离线算法）
+- 状态：REJECTED
+- 基准提交：`59e4bac`
+- 配置：Round88、train1～3、全参数、`1e-4`、25步、gain1.6。
+- 量化结果：loss `.8404→.7789`；五门`.6957/.6789/.1169/2.2371/.2941`，泄漏、UTMOS、CER失败。
+- 判定：全模型低步数适配仍全面退步，停止该方向；Round96冻结内容网络，只训输出层。
+- 修改/报告：`report/fixed_male_teacher_finetune_round95_20261029.{md,json}`、`coummucation.md`；复现使用已提交微调脚本。
+- 限制：录音5、Track9未使用，未播放、未接触板卡。
+- 下一责任方：Hardware-A / Codex 认领Round96输出层适配。
+
 ### [PS-20261021-10] 源专用超低剂量微调 Round 95 认领
 - 日期：2026-10-29
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
