@@ -1,0 +1,71 @@
+{
+  "task_id": "PL-20261027-01",
+  "round": 28,
+  "date": "2026-10-29",
+  "role": "Hardware-A / Codex",
+  "status": "ACCEPTED_PERSISTENT_INSTALL_GUARDED",
+  "base_commit": "8107d5a",
+  "candidate_started": false,
+  "audio_started": false,
+  "boot_partition_written": true,
+  "boot_originals_overwritten": false,
+  "selection": {
+    "disable_contents": "INSTALL_GUARD",
+    "current": "factory_v23",
+    "candidate_default_after_enable": true
+  },
+  "installed": {
+    "release": "/opt/world_voice_pl/releases/20261029_round27",
+    "current_symlink_target": "/opt/world_voice_pl/releases/20261029_round27",
+    "factory_init_backup_sha256": "067ba4d216fcdef094673e1e02da7b2ddbbd705c41553ac0b3a93d4259dd2447",
+    "wrapper_init_sha256": "211392ced7800c5e09db0a9cb8dade1cfe39da939faf3ce1a56e414e795bc499",
+    "control_sha256": "a097d330aaee63f49f602d38300bd964ca04514310e0e2f96589acad77d89dd6",
+    "candidate_gzip_sha256": "6a7fec9987d31c5f803b79b1bb8e115dca9fda0dfc278b8f462d60562b628d98",
+    "boot_manifest_sha256": "5e1ec6b17074f4a831ff47803723adb602053153efb30123d50949784e9be322",
+    "recovery_json_sha256": "6c015fefebdb784c473f009ddd26ba7704d614b6918d0032b0fdf2bda5cabbc2"
+  },
+  "factory_readback": {
+    "bit_sha256": "16cb36f7161935896615ad12b000597088a6a9745856611162f1c44a51f82a61",
+    "uenv_sha256": "e211c7f8b8034c02c9035d71c05237607f09efeec272ad9d9c774788431c53c2",
+    "boot_scr_sha256": "7702e40c863bb4d73b561ad9dd112537fd4560515286e9a3f5aebb133a6383f8",
+    "v23_sha256": "f12da25e93a520b7f5255ce952a3cb9b5d1bbca474133b1bc529d8c8e18349b7"
+  },
+  "manifest_readback": {
+    "rootfs_passed": 6,
+    "rootfs_total": 6,
+    "boot_passed": 1,
+    "boot_total": 1
+  },
+  "upload_interruption": {
+    "cause": "factory v23 periodic ALSA reopen messages interrupted serial transfer",
+    "unverified_partial_accepted": false,
+    "resume_encoded_offset": 2613248,
+    "encoded_total": 2686482,
+    "final_runtime_sha256": "2dea4725867974f20319f5ea418aa67258aede0bcfd43e72fb1cf2d39559f438"
+  },
+  "post_install_state": {
+    "factory_service": "stopped_for_upload_quiesce",
+    "capture_pcm": "closed",
+    "playback_pcm": "closed",
+    "fpga_state": "operating_factory",
+    "kernel_taint": 0,
+    "candidate_module_loaded": false
+  },
+  "source_artifacts": {
+    "installer_sha256": "3b634bc78c51eaff20bad57c254b4008dfc48e1fd956d9a5216699276fba7c0a",
+    "runtime_manifest_sha256": "57b2f331960814ba21a9c3c3555adb84c2623ba0e0547a7bb9495ce2a38ac55e",
+    "rootfs_manifest_sha256": "7715bd0138922ca1f2c34a7ac0cd7d889ce26539dde101824323051be3c5d1a0"
+  },
+  "raw_log_sha256": {
+    "preinstall": "6f4a7b9e95ab97bb06964fc944906362816847e59a1ca06011d32497331c1a6b",
+    "upload_quiesce": "04be3923e4145d62278744030f420aa4ef77a593ab2b2543ece54563b35c61f2",
+    "install": "9fefd0e1d5b4a4b8163be83e1441e97279ec95c660c7df47c2fe3f346149af78",
+    "postinstall": "cd98a8639564cd049446e0770737f1eec5eb462df223cef7b6f97053ad7298c3"
+  },
+  "limitations": [
+    "INSTALL_GUARD still selects factory; automatic candidate startup has not been exercised.",
+    "Factory service is intentionally stopped until fresh operator readiness for enable.",
+    "Existing FAT unclean-volume warning remains; writes were synced and read back successfully."
+  ],
+  "next_responsible": "Hardware-A / Codex after fresh operator readiness: remove INSTALL_GUARD via world-pl-control enable, verify automatic candidate state, then reboot once to verify persistent boot and fallback selector."
+}

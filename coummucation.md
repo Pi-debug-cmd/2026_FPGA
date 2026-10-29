@@ -2105,3 +2105,18 @@
 - 检查：host 20项中18通过、2项因Windows无POSIX sh跳过；板上`/tmp`四脚本BusyBox语法全通过，两项无声故障注入通过，输出`BOARD_BOOT_FAULT_TEST_PASS cases=2 audio_started=0 fpga_changed=0`。
 - 测试后状态：原厂服务和双PCM RUNNING、FPGA operating、taint0；本轮未持久安装、未写启动分区、未播放录音。报告`report/world_minphase_persistent_build_round27_20261029.{md,json,txt}`。
 - 下一责任方：Hardware-A / Codex 独立提交后进入Round28，先安装并逐件回读SHA但不启动；实际enable/reboot自动采录前仍需当次操作者准备确认。
+
+### [PL-20261027-01] Round28 持久资产安装与回读认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`8107d5a`。
+- 范围：上传到`/tmp` staging逐件校验；备份原`/etc/init.d/world-voice`；安装版本化rootfs资产、新包装init和control；FAT只新增`/boot/world_pl`候选gzip/manifest/recovery，不覆盖BOOT.BIN、uEnv、boot.scr或原厂bit。
+- 安全门：安装前后核对四个原厂SHA；所有新文件从目标位置回读SHA；默认先创建`DISABLE=INSTALL_GUARD`，保证安装后仍运行factory v23且不会自动启动candidate。
+- 本轮不重启、不切换FPGA、不打开新采录放。完成安装并提交后，再取得当次操作者准备确认，删除INSTALL_GUARD并首次enable。
+- 下一责任方：Hardware-A / Codex 完成传输、原子安装、回读和factory运行态复核。
+
+### [PL-20261027-01] Round28 持久资产安装与回读结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：ACCEPTED（持久安装完成，INSTALL_GUARD保持factory）；基准提交：`8107d5a`。
+- 安装：版本化release`/opt/world_voice_pl/releases/20261029_round27`及current链接；原init精确备份`world-voice.factory`；新wrapper/control安装；FAT新增`/boot/world_pl`候选gzip、manifest、recovery和`DISABLE=INSTALL_GUARD`。
+- 回读：rootfs manifest 6/6、boot 1/1均OK；factory bit/uEnv/boot.scr/v23哈希全部与安装前一致，原启动文件未覆盖。安装器输出`WORLD_MINPHASE_INSTALL_OK active=factory guard=INSTALL_GUARD boot_originals_unchanged=1`。
+- 传输异常：首次runtime在约97%被原厂周期性ALSA日志打断，未接受partial；停止factory服务后从encoded offset`2613248/2686482`续传，最终SHA`2dea4725...f438`通过。
+- 当前状态：factory FPGA operating，双PCM closed，taint0，无candidate module；factory服务为保证上传静默而stopped，没有为了本轮重新开启采录放。报告`report/world_minphase_persistent_install_round28_20261029.{md,json,txt}`。
+- 下一责任方：Hardware-A / Codex 独立提交后，取得新的操作者准备确认，再删除INSTALL_GUARD并首次enable；随后一次reboot验证开机自动candidate和回退选择。
