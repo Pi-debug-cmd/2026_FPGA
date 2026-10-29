@@ -2,11 +2,13 @@
 import argparse
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import re
 import shutil
 import signal
+import struct
 import subprocess
 import sys
 import time
@@ -57,8 +59,38 @@ def codec_snapshot(run, label):
     (run / ('codec_' + label + '.json')).write_text(json.dumps(snapshot, indent=2) + '\n')
 
 
+def play_prompt(run, delay_seconds):
+    """Play two bounded same-format tones, then leave a silent preparation gap."""
+    rate = 32000
+    samples = bytearray()
+    # Two ascending 300 ms tones separated by 180 ms make the cue unambiguous.
+    segments = [(880, .30), (0, .18), (1175, .30)]
+    for frequency, duration in segments:
+        frames = int(rate * duration)
+        for index in range(frames):
+            if frequency:
+                edge = min(1.0, index / 320.0, (frames - 1 - index) / 320.0)
+                signed = int(0.12 * 8388607 * max(0.0, edge) *
+                             math.sin(2 * math.pi * frequency * index / rate))
+                word = signed & 0xffffff
+            else:
+                word = 0
+            samples.extend(struct.pack('<II', word, word))
+    with (run / 'prompt.log').open('wb') as log:
+        prompt = subprocess.run(['aplay', '-D', 'default', '-t', 'raw', '-f', 'S24_LE',
+                                 '-r', str(rate), '-c', '2', '-'], input=bytes(samples),
+                                stdout=log, stderr=log, timeout=5)
+    if prompt.returncode:
+        raise RuntimeError('Prompt tone playback failed: %d' % prompt.returncode)
+    print('WORLD_PROMPT_DONE recording_starts_in=%.1f' % delay_seconds, flush=True)
+    time.sleep(delay_seconds)
+    return {'exit': prompt.returncode, 'frames': sum(int(rate * x[1]) for x in segments),
+            'peak_fraction': 0.12, 'ready_delay_s': delay_seconds}
+
+
 def run_trial(base, seconds, prefill, gain=49152, input_gain=262144, fifo=False, fifo_io=False, require_voiced=False,
-              period=512, capture_buffer=4096, playback_buffer=3072, start_delay=32000):
+              period=512, capture_buffer=4096, playback_buffer=3072, start_delay=32000,
+              prompt_tone=False, ready_delay=2.0):
     binary = preflight(base)
     run = base / ('live_' + str(time.monotonic_ns()))
     run.mkdir()  # Unique run directory also owns logs and mixer snapshot.
@@ -69,7 +101,8 @@ def run_trial(base, seconds, prefill, gain=49152, input_gain=262144, fifo=False,
               'requested_fifo': fifo, 'requested_fifo_io': fifo_io, 'require_voiced': require_voiced, 'exit_code': 1,
               'world_exp_requested': os.environ.get('WORLD_EXP', 'cpu'),
               'world_minphase_requested': os.environ.get('WORLD_MINPHASE', 'cpu'), 'alsa_period': period,
-              'capture_buffer': capture_buffer, 'playback_buffer': playback_buffer, 'start_delay_us': start_delay}
+              'capture_buffer': capture_buffer, 'playback_buffer': playback_buffer, 'start_delay_us': start_delay,
+              'prompt_tone_requested': prompt_tone, 'ready_delay_s': ready_delay}
     error = None
     try:
         with (run / 'mixer_store.log').open('wb') as log:
@@ -95,6 +128,8 @@ def run_trial(base, seconds, prefill, gain=49152, input_gain=262144, fifo=False,
             for control in controls:
                 subprocess.run(['amixer'] + control, stdout=log, stderr=log, check=True, timeout=5)
         codec_snapshot(run, 'configured')
+        if prompt_tone:
+            record['prompt_tone'] = play_prompt(run, ready_delay)
         for name in ['capture', 'process', 'playback']:
             logs.append((run / (name + '.log')).open('wb'))
         capture = subprocess.Popen(['arecord', '-v', '-D', 'hw:0,1', '-t', 'raw', '-f', 'S24_LE',
@@ -257,6 +292,9 @@ def main():
     scheduling.add_argument('--fifo', action='store_true')
     scheduling.add_argument('--fifo-io', action='store_true')
     parser.add_argument('--require-voiced', action='store_true', help='Reject speech trials without detected voiced input')
+    parser.add_argument('--prompt-tone', action='store_true', help='Play two tones before capture starts')
+    parser.add_argument('--ready-delay-s', type=float, default=2.0,
+                        help='Silent preparation gap after prompt and before capture')
     args = parser.parse_args()
     if (args.alsa_period < 128 or args.alsa_period > 1024 or
         any(n < 2*args.alsa_period or n > 8192 or n % args.alsa_period
@@ -265,6 +303,8 @@ def main():
         parser.error('Invalid ALSA buffer/period/start delay')
     if not 2 <= args.seconds <= 600 or not 0 <= args.prefill_ms <= 500:
         parser.error('seconds must be 2..600; prefill must be 0..500 ms')
+    if not .5 <= args.ready_delay_s <= 5:
+        parser.error('ready delay must be 0.5..5 seconds')
     if not 1 <= args.output_gain_q16 <= 65536:
         parser.error('output gain must be 1..65536')
     if not 1 <= args.input_gain_q16 <= 262144:
@@ -277,7 +317,8 @@ def main():
     signal.signal(signal.SIGTERM, terminate)
     return run_trial(args.base, args.seconds, args.prefill_ms, args.output_gain_q16, args.input_gain_q16,
                      args.fifo, args.fifo_io, args.require_voiced, args.alsa_period,
-                     args.capture_buffer, args.playback_buffer, args.start_delay_us)
+                     args.capture_buffer, args.playback_buffer, args.start_delay_us,
+                     args.prompt_tone, args.ready_delay_s)
 
 
 if __name__ == '__main__':

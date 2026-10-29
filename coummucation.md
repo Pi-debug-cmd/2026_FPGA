@@ -2013,3 +2013,17 @@
 - 用户原话：**“没听到声音”**。据此本轮硬判 REJECTED；数字链非零和零 xrun 不得覆盖用户听感。报告 `report/world_minphase_live20_round21_20261029.{md,json,txt}`，完整监督结果 `report/world_minphase_live20_result_round21_20261029.json`。
 - 恢复：结果下载后模块卸载、sync、正常 reboot；原厂 bit/v23 SHA 匹配，FPGA operating、服务和双 PCM RUNNING、taint 0、自有模块无、临时目录清除。恢复后只读 codec 显示左右 DAC/PGA/HP On；不能倒推候选运行态。
 - 限制与下一步：候选 active codec/DAPM 快照未在 reboot 前下载，尚未定位数字输出到模拟可听链的断点。不得直接重复 WORLD；下一次准备确认后依次做原厂参考播放、candidate 同参考播放，均可听才重跑短时 WORLD。
+
+### [PL-20261027-01] Round22 录入提示音与准备窗口修正认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED / PROPOSED；基准提交：`f98ccc8`。
+- 用户补充原话：**“因为刚刚录入的时候我没有准备好，你录入之前先给个提示音”**。因此 Round21 的“没听到声音”保留为原始反馈，但测试条件被操作者澄清为未及时准备，不能据此归因候选算法或模拟链故障。
+- 修正：监督器在 mixer 配置后、启动 arecord 前播放两段上升提示音（880/1175 Hz，各 300 ms，中间 180 ms），随后固定 2 秒静默准备窗口；提示使用与正式播放相同的 32 kHz/S24_LE/双声道路径，失败即不开始录入。
+- 成功门：先由操作者确认提示音可闻并按提示讲话；正式 20 秒仍要求有声、零 xrun/error/触顶/削顶、PL calls>0/fallback=0，并记录提示音 exit/帧数/准备间隔。正式测试前仍需新的准备确认。
+- 下一责任方：Hardware-A / Codex 完成静态检查、独立提交和部署后请求操作者准备。
+
+### [PL-20261027-01] Round22 录入提示音与准备窗口修正结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：PROPOSED / WAIT_LOCAL_TEST；基准提交：`f98ccc8`。
+- 实现：`--prompt-tone` 在 arecord 前播放 880/1175 Hz 各 300 ms 的上升双音，中间 180 ms，32 kHz/S24_LE/双声道/12%峰值；提示后 `--ready-delay-s 2` 再开始录入，提示失败则不录入。
+- 检查：Python 编译、mock aplay 24960 帧/peak0.12/delay2.0 和 `git diff --check` 通过；监督器 SHA `cecf23ad...8b69f`。报告 `report/world_minphase_prompt_round22_20261029.{md,json,txt}`。
+- 限制：本轮未加载板卡或录放；Round21 原反馈与日志保留，但根据用户“录入的时候没有准备好”的补充，不作为候选可听性归因结论。
+- 下一责任方：Hardware-A / Codex 独立提交后部署；新的操作者准备确认后先验提示音可闻，再进行一次 20 秒实时测试。
