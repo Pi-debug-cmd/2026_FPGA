@@ -2120,3 +2120,18 @@
 - 传输异常：首次runtime在约97%被原厂周期性ALSA日志打断，未接受partial；停止factory服务后从encoded offset`2613248/2686482`续传，最终SHA`2dea4725...f438`通过。
 - 当前状态：factory FPGA operating，双PCM closed，taint0，无candidate module；factory服务为保证上传静默而stopped，没有为了本轮重新开启采录放。报告`report/world_minphase_persistent_install_round28_20261029.{md,json,txt}`。
 - 下一责任方：Hardware-A / Codex 独立提交后，取得新的操作者准备确认，再删除INSTALL_GUARD并首次enable；随后一次reboot验证开机自动candidate和回退选择。
+
+### [PL-20261027-01] Round29 持久 PL 首次启用与重启认领
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`ca4b2ab`；操作者明确“继续吧”，作为本次自动采录放启用准备确认。
+- 范围：只读复核INSTALL_GUARD和原厂/候选哈希；执行`world-pl-control enable`删除guard并启动包装服务；核对candidate FPGA、module、service state、backend计数和削顶遥测。随后正常reboot一次，验证开机自动进入同一candidate状态。
+- 用户免测边界延续：不要求稳定性和提示音可闻验收；仍不得忽略启动失败、fallback、module/backend未使用或输出削顶。
+- 回退：任何启动/runtime失败应自动创建`/boot/world_pl/DISABLE`并恢复factory bit/v23；不覆盖原厂BOOT/uEnv/boot.scr/bit。
+- 下一责任方：Hardware-A / Codex 执行首次enable、证据下载、必要修复和一次持久重启验证，完成后独立提交推送。
+
+### [PL-20261027-01] Round29 持久 PL 首次启用与重启结果
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：REJECTED（开机音频竞态）；基准提交：`ca4b2ab`。
+- 手动enable通过：`READY_CANDIDATE`、DISABLE缺失、module live、PL calls2145、双PCM RUNNING，说明持久资产和candidate本身可启动。
+- 重启失败：`S99music-button`字典序早于`S99world-voice`，遗留PPid1的PID894 `aplay /opt/hardware_test/test.wav`占用pcm0p；candidate虽自动加载ready，WORLD preflight因AUDIO_BUSY退出1，写入`DISABLE=RUNTIME_1`。
+- 回退边界：同一busy PCM也阻止in-place restore的closed断言；factory start不能写成位流恢复成功。用户随后明确“现在不用恢复v23，你就把PL部署做好就行”，故停止factory/music并终止已确认PID894，未主动加载v23 restore。
+- 最终：双PCM closed、FPGA operating（依据日志推断candidate仍在）、module absent、taint4096、state FALLBACK_FACTORY_RUNTIME_1。诊断ps命令另有一次引号剥离导致额外aplay/arecord立即失败，未影响此前已确认的calls，已写入报告。
+- 报告：`report/world_minphase_persistent_boot_round29_20261030.{md,json,txt}`。下一责任方Hardware-A / Codex先独立提交失败证据，再修wrapper：停music-button、仅杀精确test.wav孤儿aplay、等待PCM closed，然后重新enable/reboot，最终保持PL。

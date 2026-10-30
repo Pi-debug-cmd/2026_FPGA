@@ -1,0 +1,73 @@
+{
+  "task_id": "PL-20261027-01",
+  "round": 29,
+  "date": "2026-10-30",
+  "role": "Hardware-A / Codex",
+  "status": "REJECTED_BOOT_AUDIO_RACE",
+  "base_commit": "ca4b2ab",
+  "operator_ready": true,
+  "operator_instruction": "现在不用恢复v23，你就把PL部署做好就行",
+  "manual_enable": {
+    "exit_code": 0,
+    "state": "READY_CANDIDATE",
+    "disable_absent": true,
+    "fpga_state": "operating",
+    "module_loaded": true,
+    "pl_calls": 2145,
+    "copy_in_ns": 4410900,
+    "device_ns": 830175412,
+    "copy_out_ns": 35474790,
+    "capture_pcm": "RUNNING",
+    "playback_pcm": "RUNNING"
+  },
+  "persistent_reboot": {
+    "candidate_load_reached_ready": true,
+    "runtime_started": false,
+    "runtime_exit": 1,
+    "error": "AUDIO_BUSY",
+    "disable_written": "RUNTIME_1",
+    "state": "FALLBACK_FACTORY_RUNTIME_1",
+    "restore_completed": false
+  },
+  "root_cause": {
+    "rc_link": "/etc/rc5.d/S99music-button",
+    "ordering": "S99music-button sorts before S99world-voice",
+    "orphan_pid": 894,
+    "orphan_comm": "aplay",
+    "orphan_exe": "/usr/bin/aplay",
+    "orphan_parent_pid": 1,
+    "orphan_audio": "/opt/hardware_test/test.wav",
+    "busy_pcm": "pcm0p",
+    "music_stop_kills_orphan_aplay": false
+  },
+  "diagnostic_command_incident": {
+    "cause": "serial quoting stripped grep -E pattern quotes",
+    "extra_aplay_exit": "device busy",
+    "extra_arecord_exit": "invalid/incomplete invocation",
+    "affected_active_chain": false
+  },
+  "final_state": {
+    "factory_restore_requested": false,
+    "reason": "User explicitly requested not to restore v23",
+    "factory_daemon": "stopped",
+    "music_button": "stopped",
+    "orphan_aplay_894": "terminated",
+    "capture_pcm": "closed",
+    "playback_pcm": "closed",
+    "fpga_state": "operating; inferred candidate remains because restore failed before fpgautil",
+    "candidate_module_loaded": false,
+    "kernel_taint": 4096,
+    "disable": "RUNTIME_1"
+  },
+  "raw_log_sha256": {
+    "preflight": "60fde6c024cb2af32298d019ba44e01df72ae0bc8a668faedd8ae9ce172794b3",
+    "enable": "9e81086814bf4d319b3461189fbd5e796a435e9875c34556b52d0dc8479fa875",
+    "active": "7daa74bdfa8f6d5c28ab9087ddd48c41e06aaff10e277a7d1b8870deb4888dbb",
+    "reboot": "113f3cacfc501973613e27cb5780295ab0582769b0666ec2d38c6a0e3de3cbdc",
+    "boot_verify": "28f8104a5887e4f13e079a47ea6c32dc48fbc6f9061e78fb16095c222f64d199",
+    "race_audit": "29febeff0eaf0bebfdf7ff789d298ff377074d3b93906687282d66fceff31ddd",
+    "music_button_audit": "1f32e571fba9249276ce4eb373e117848a45db3e421090169501c18104ed3fa5",
+    "quiesce": "aa455974ba1f5bf0249c9fefcfeb91592e48ef6b5ba29bbe3bef436addc25677"
+  },
+  "next_responsible": "Hardware-A / Codex: commit failure evidence, patch wrapper to quiesce music-button plus its exact orphan aplay, update installed wrapper, enable and reboot again, leaving candidate active."
+}
