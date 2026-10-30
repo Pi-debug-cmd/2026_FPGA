@@ -108,6 +108,20 @@ typedef struct {
   long long anchor_fallback_pulses;
   long long anchor_allocated_bytes; // anchor filter memory currently held
   long long anchor_peak_bytes;      // high-water mark of the same
+#if defined(WORLD_SYNTH_PULSE_MODEL_AVAILABLE)
+  // Host-only C model of the future PL pulse-response boundary.  These fields
+  // do not exist in normal or board builds, so the default ABI stays intact.
+  int pulse_model_enabled;
+  long long pulse_model_calls;
+  long long pulse_model_cpu_fallbacks;
+  float *pulse_periodic_real;
+  float *pulse_periodic_imag;
+  float *pulse_aperiodic_real;
+  float *pulse_aperiodic_imag;
+  float *pulse_raw_noise;
+  float *pulse_dc_remover;
+  float *pulse_response;
+#endif
 } WorldSynthesizer;
 
 //-----------------------------------------------------------------------------

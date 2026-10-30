@@ -40,6 +40,16 @@
 #include "world/constantnumbers.h"
 #include "world/matlabfunctions.h"
 
+#if defined(WORLD_SYNTH_PULSE_MODEL_AVAILABLE)
+extern "C" void world_synthesis_pulse(
+    const float periodic_filter_re[513],
+    const float periodic_filter_im[513],
+    const float aperiodic_filter_re[513],
+    const float aperiodic_filter_im[513],
+    const float raw_noise[1024], int noise_size,
+    const float dc_remover[512], float response[1024]);
+#endif
+
 namespace {
 
 static double AnchorNow() {
@@ -83,6 +93,13 @@ static int GetAnchorStride() {
   }
   return 1;
 }
+
+#if defined(WORLD_SYNTH_PULSE_MODEL_AVAILABLE)
+static int GetPulseModelEnabled() {
+  const char *value = getenv("WORLD_SYNTH_PULSE_MODEL");
+  return value != NULL && atoi(value) == 1 ? 1 : 0;
+}
+#endif
 
 static void GetNoiseSpectrum(int noise_size, int fft_size,
     const ForwardRealFFT *forward_real_fft, RandnState* randn_state) {
@@ -426,6 +443,53 @@ static void GetPeriodicResponse(int fft_size, const double *spectrum,
       periodic_response);
 }
 
+#if defined(WORLD_SYNTH_PULSE_MODEL_AVAILABLE)
+static void GetPeriodicFilterModel(const double *spectrum,
+    const double *aperiodic_ratio, double current_vuv,
+    WorldSynthesizer *synth) {
+  const int bins = synth->fft_size / 2 + 1;
+  if (current_vuv <= 0.5 || aperiodic_ratio[0] > 0.999) {
+    for (int i = 0; i < bins; ++i) {
+      synth->pulse_periodic_real[i] = 0.0f;
+      synth->pulse_periodic_imag[i] = 0.0f;
+    }
+    return;
+  }
+  for (int i = 0; i < bins; ++i)
+    synth->minimum_phase.log_spectrum[i] =
+      log(spectrum[i] * (1.0 - aperiodic_ratio[i]) +
+      world::kMySafeGuardMinimum) / 2.0;
+  GetMinimumPhaseSpectrum(&synth->minimum_phase);
+  for (int i = 0; i < bins; ++i) {
+    synth->pulse_periodic_real[i] = static_cast<float>(
+      synth->minimum_phase.minimum_phase_spectrum[i][0]);
+    synth->pulse_periodic_imag[i] = static_cast<float>(
+      synth->minimum_phase.minimum_phase_spectrum[i][1]);
+  }
+}
+
+static void GetPulseResponseModel(int noise_size, const double *spectrum,
+    const double *aperiodic_ratio, double current_vuv,
+    const double *filter_real, const double *filter_imag,
+    WorldSynthesizer *synth) {
+  const int bins = synth->fft_size / 2 + 1;
+  GetPeriodicFilterModel(spectrum, aperiodic_ratio, current_vuv, synth);
+  for (int i = 0; i < bins; ++i) {
+    synth->pulse_aperiodic_real[i] = static_cast<float>(filter_real[i]);
+    synth->pulse_aperiodic_imag[i] = static_cast<float>(filter_imag[i]);
+  }
+  for (int i = 0; i < noise_size; ++i)
+    synth->pulse_raw_noise[i] = static_cast<float>(randn(&synth->randn_state));
+  world_synthesis_pulse(synth->pulse_periodic_real,
+      synth->pulse_periodic_imag, synth->pulse_aperiodic_real,
+      synth->pulse_aperiodic_imag, synth->pulse_raw_noise, noise_size,
+      synth->pulse_dc_remover, synth->pulse_response);
+  const float scale = 1.0f / static_cast<float>(synth->fft_size);
+  for (int i = 0; i < synth->fft_size; ++i)
+    synth->impulse_response[i] = synth->pulse_response[i] * scale;
+}
+#endif
+
 static void GetSpectralEnvelope(double current_location,
     WorldSynthesizer *synth, double *spectral_envelope) {
   int current_frame_floor =
@@ -517,6 +581,18 @@ static void GetOneFrameSegment(int noise_size, int current_location,
     GetSpectralEnvelope(tmp_location, synth, spectral_envelope);
     GetAperiodicRatio(tmp_location, synth, aperiodic_ratio);
   }
+#if defined(WORLD_SYNTH_PULSE_MODEL_AVAILABLE)
+  if (synth->pulse_model_enabled && use_anchor) {
+    GetPulseResponseModel(noise_size, spectral_envelope, aperiodic_ratio,
+        current_vuv, filter_real, filter_imag, synth);
+    ++synth->pulse_model_calls;
+    ++synth->anchor_interpolated_pulses;
+    BuildAnchor(synth, frame_high + 1, voiced);
+    return;
+  }
+  if (synth->pulse_model_enabled && !use_anchor)
+    ++synth->pulse_model_cpu_fallbacks;
+#endif
   if (voiced) {
     GetPeriodicResponse(synth->fft_size, spectral_envelope, aperiodic_ratio,
         current_vuv, &synth->inverse_real_fft, &synth->minimum_phase,
@@ -766,8 +842,28 @@ void InitializeSynthesizer(int fs, double frame_period, int fft_size,
   synth->anchor_allocated_bytes = 0;
   synth->anchor_peak_bytes = 0;
 
+#if defined(WORLD_SYNTH_PULSE_MODEL_AVAILABLE)
+  synth->pulse_model_enabled =
+    GetPulseModelEnabled() && synth->fft_size == 1024 ? 1 : 0;
+  synth->pulse_model_calls = 0;
+  synth->pulse_model_cpu_fallbacks = 0;
+  const int pulse_bins = synth->fft_size / 2 + 1;
+  synth->pulse_periodic_real = new float[pulse_bins];
+  synth->pulse_periodic_imag = new float[pulse_bins];
+  synth->pulse_aperiodic_real = new float[pulse_bins];
+  synth->pulse_aperiodic_imag = new float[pulse_bins];
+  synth->pulse_raw_noise = new float[synth->fft_size];
+  synth->pulse_dc_remover = new float[synth->fft_size / 2];
+  synth->pulse_response = new float[synth->fft_size];
+#endif
+
   // Initilize internal parameters
   RefreshSynthesizer(synth);
+
+#if defined(WORLD_SYNTH_PULSE_MODEL_AVAILABLE)
+  for (int i = 0; i < synth->fft_size / 2; ++i)
+    synth->pulse_dc_remover[i] = static_cast<float>(synth->dc_remover[i]);
+#endif
 
   InitializeMinimumPhaseAnalysis(fft_size, &synth->minimum_phase);
   InitializeInverseRealFFT(fft_size, &synth->inverse_real_fft);
@@ -840,6 +936,12 @@ void RefreshSynthesizer(WorldSynthesizer *synth) {
 }
 
 void DestroySynthesizer(WorldSynthesizer *synth) {
+#if defined(WORLD_SYNTH_PULSE_MODEL_AVAILABLE)
+  if (synth->pulse_model_enabled)
+    fprintf(stderr, "{\"kind\":\"world_synthesis_pulse_model\","
+        "\"calls\":%lld,\"cpu_fallbacks\":%lld}\n",
+        synth->pulse_model_calls, synth->pulse_model_cpu_fallbacks);
+#endif
   RefreshSynthesizer(synth);
   delete[] synth->f0_length;
 
@@ -867,6 +969,16 @@ void DestroySynthesizer(WorldSynthesizer *synth) {
   delete[] synth->anchor_aperiodic;
   delete[] synth->anchor_filter_real;
   delete[] synth->anchor_filter_imag;
+
+#if defined(WORLD_SYNTH_PULSE_MODEL_AVAILABLE)
+  delete[] synth->pulse_periodic_real;
+  delete[] synth->pulse_periodic_imag;
+  delete[] synth->pulse_aperiodic_real;
+  delete[] synth->pulse_aperiodic_imag;
+  delete[] synth->pulse_raw_noise;
+  delete[] synth->pulse_dc_remover;
+  delete[] synth->pulse_response;
+#endif
 
   DestroyMinimumPhaseAnalysis(&synth->minimum_phase);
   DestroyInverseRealFFT(&synth->inverse_real_fft);

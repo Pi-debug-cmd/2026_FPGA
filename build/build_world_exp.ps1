@@ -7,9 +7,11 @@ param(
   [string]$FftModelSdk='',
   [switch]$FftPl,
   [switch]$MinphaseModel,
-  [switch]$MinphasePl
+  [switch]$MinphasePl,
+  [switch]$SynthesisPulseModel
 )
 $ErrorActionPreference='Stop'
+if ($SynthesisPulseModel -and ($Target -ne 'host' -or $FftModelSdk -or $FftPl -or $ProfileOperators -or $MinphaseModel -or $MinphasePl)) {throw 'Synthesis pulse model requires a plain host build'}
 if ($MinphaseModel -and ($Target -ne 'host' -or $FftModelSdk -or $FftPl -or $ProfileOperators)) {throw 'Minimum-phase model requires host without FFT/profile wrappers'}
 if ($MinphasePl -and ($Target -ne 'arm' -or $MinphaseModel -or $FftModelSdk -or $ProfileOperators)) {throw 'PL minimum-phase requires ARM without model/profile wrappers'}
 if ($ProfileOperators -and $CacheFftPlans) {throw 'Profile and cache wrappers must be built separately'}
@@ -70,6 +72,11 @@ if($MinphasePl) {
   $bin+='_minphasepl'
   $sources+=@("$root/src/ps/world_minphase_pl.cpp")
   $flags+='-Wl,--wrap=GetMinimumPhaseSpectrum'
+}
+if($SynthesisPulseModel) {
+  $bin+='_synthpulse_model'
+  $sources+=@("$root/src/hls/world_synthesis_pulse.cpp")
+  $flags+='-DWORLD_SYNTH_PULSE_MODEL_AVAILABLE=1'
 }
 if($Target -eq 'host') {$bin+='.exe'}
 & $Compiler @flags @includes "$root/src/ps/world_live_stream.cpp" "$root/src/ps/world_exp_hook.cpp" "$out/common.cpp" "$root/src/ps/world_v23/synthesis.cpp" "$root/src/ps/world_v23/synthesisrealtime.cpp" @sources "$WorldRoot/tools/audioio.cpp" -lm -o $bin

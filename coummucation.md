@@ -2170,3 +2170,17 @@
 - 风险：XSim依赖监视器保留2100条显式inter-false地址碰撞警告；5组通过不是形式证明。本轮仍非最终40ms batch，未做真实WORLD PCM回归、OOC/整机实现、板卡、音频或稳定性测试。
 - 报告：`report/world_synthesis_pulse_round31_20261030.{md,json,txt}`；复现入口`build/test_world_synthesis_pulse.ps1`、`build/probe_world_synthesis_pulse_hls.tcl`、`build/cosim_world_synthesis_pulse_hls.tcl`。
 - 下一责任方：Hardware-A / Codex 独立提交推送后进入Round32，把可选host模型接入`synthesisrealtime`做真实WORLD文件PCM16/SNR回归，再决定OOC/整机连接。
+
+### [PL-20261027-01] Round32 真实 WORLD 合成脉冲模型回归认领
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`30e89b5`。
+- 本轮唯一变量：在`WORLD_SYNTH_PULSE_MODEL=1`时，把Round31 float脉冲核接入`synthesisrealtime`的anchor路径；默认未设置时保持现有纯PS路径。RandnState仍由PS按原顺序消费，transition fallback仍走原CPU实现。
+- 成功门：同一真实WORLD参数/音频输入下相对默认PS路径PCM16最大误差≤3、SNR≥75dB、零削顶；记录模型调用和CPU fallback次数。未达到则不进入OOC/整机连接。
+- 范围：只做host文件回归和最小可选择hook，不切板、不录音、不播放，不修改Round30持久位流与服务。
+- 下一责任方：Hardware-A / Codex 实现可回退hook、重建host二进制、运行两段受控男声文件并独立提交结果。
+
+### [PL-20261027-01] Round32 真实 WORLD 合成脉冲模型回归结果
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：REJECTED（FFT尺度合同）；基准提交：`30e89b5`。
+- 接线：仅`WORLD_SYNTH_PULSE_MODEL=1`且FFT=1024时进入Round31核；默认关闭不变，transition仍CPU fallback；两例模型调用`1643/1628`、fallback `124/179`，证明真实链路已覆盖。
+- 失败：标准录音1/4的SNR仅`0.127282/0.180461 dB`，最大PCM16误差`17939/23965`，远未达到75 dB/3门；两例输出削顶均为0。
+- 根因：WORLD/Ooura c2r不归一化且原路径末尾除1024，HLS逆FFT已归一化，hook再次除1024造成重复缩放。报告`report/world_synthesis_pulse_round32_20261030.{md,json,txt}`。
+- 边界：本轮只做host文件回归，没有切板、录音、播放或修改Round30持久release。下一责任方Hardware-A / Codex独立提交失败路线后，以Round33只移除重复除法并原条件复测。
