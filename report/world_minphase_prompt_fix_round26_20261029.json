@@ -1,0 +1,56 @@
+{
+  "task_id": "PL-20261027-01",
+  "round": 26,
+  "date": "2026-10-29",
+  "role": "Hardware-A / Codex",
+  "status": "PROPOSED_WAIT_LOCAL_PROMPT_TEST",
+  "base_commit": "59e4527",
+  "board_used": false,
+  "audio_played": false,
+  "recording_started": false,
+  "prompt": {
+    "sample_rate_hz": 32000,
+    "channels": 2,
+    "format": "S24_LE",
+    "total_frames": 97920,
+    "total_seconds": 3.06,
+    "warmup_seconds": 0.8,
+    "tone_hz": [660, 880, 1175],
+    "tone_seconds_each": 0.55,
+    "inter_tone_silence_seconds": 0.18,
+    "tail_silence_seconds": 0.25,
+    "peak_fraction": 0.30,
+    "post_prompt_ready_delay_seconds": 2.0
+  },
+  "prompt_only": {
+    "capture_started_field": false,
+    "world_started_field": false,
+    "mixer_saved_and_restored": true,
+    "subprocess_popen_calls_in_test": 0
+  },
+  "checks": {
+    "py_compile": "pass",
+    "unittest_passed": 17,
+    "unittest_total": 17,
+    "initial_fixture_directory_errors": 17,
+    "stale_success_fixture_kind_failures_after_directory_fix": 4,
+    "final_failures": 0,
+    "diff_check": "pass"
+  },
+  "artifacts": {
+    "board/live_world_trial.py": {
+      "bytes": 20369,
+      "sha256": "63802aef6b0a1ebcdb3fb285a6893de54becd675e4dd9340354d8a23de7182ef"
+    },
+    "sim/test_live_world_supervisor.py": {
+      "bytes": 9566,
+      "sha256": "67b64b287223b9e74201c7d67a2ab236897c991d5ade4520785b824191a1394a"
+    }
+  },
+  "limitations": [
+    "Mock waveform and lifecycle checks do not prove the cue is physically audible.",
+    "No board, PL, recording, playback, or listening action occurred in this round.",
+    "Prompt audibility does not accept the 60-second WORLD stability gate."
+  ],
+  "next_responsible": "Hardware-A / Codex after fresh operator readiness: upload only the supervisor, stop factory audio temporarily, run --prompt-only, restore service, and obtain explicit audibility feedback."
+}

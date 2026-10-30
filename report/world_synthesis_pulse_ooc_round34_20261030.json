@@ -1,0 +1,15 @@
+{
+  "task": "PL-20261027-01",
+  "round": 34,
+  "status": "ACCEPTED_OOC_ROUTED",
+  "base_commit": "506d2dd",
+  "part": "xc7z020clg400-2",
+  "clock_ns": 10.0,
+  "csim": {"cases": 5, "worst_relative_l2": 1.72913210714e-7, "worst_absolute": 5.03438131873e-7, "passed": true},
+  "routed": {"slice": 3382, "lut": 6735, "ff": 8776, "bram18k": 16, "bram_tiles": 8, "dsp": 22, "wns_ns": 1.918719, "whs_ns": 0.047895, "achieved_period_ns": 8.081, "fully_routed_nets": 14930, "routing_errors": 0},
+  "drc": {"warnings": 68, "advisories": 21, "critical_warnings": 0, "errors": 0},
+  "conservative_combined_with_round18": {"lut": 20645, "lut_pct": 38.81, "ff": 28921, "ff_pct": 27.18, "bram_tiles": 17.5, "bram_pct": 12.5, "dsp": 69, "dsp_pct": 31.36},
+  "hashes": {"source": "43a21ed4d8c3d218f7e1b1e8b82e9876db3035e9435f5752da3d9b708cbaaaa8", "testbench": "d826f0f4fe10b99e4ce380d69c2cda406209be57516bc92a2e20137f3feb28bd", "csynth_report": "99b0fa33c2b8334ff89b30bdfd76b827efb83f71950877338b2df3eabcd40ed3", "export_report": "5ed7ac667658d2de4c1ae8053ccab37f5033b3b2f6138a4063accafb2ff76292", "routed_utilization": "a1b8832eb64ba4be46782d9169135a3a0a8053b52c5b62748c1deea9fc1a7387", "routed_timing": "f6deb7e41677f75a5d267b793692d54303de840d28b40aaba8b097debb816cef", "route_status": "17aa4b365f04c057087abb882198a394a6789ad36e9d4ed4dee34b57a6bb3a05", "drc": "c914e8262272256f3ac45a6f3ec0e0e647632eb4f96a847abf77073c80da7a15", "component_xml": "d385c447ad44fe55f2d3258531aaed6bd4db8da9304eac125825842ad0cae600"},
+  "passed": true,
+  "scope": "OOC only; no full design, bitstream deployment, board, recording, or playback"
+}

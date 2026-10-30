@@ -1,0 +1,1365 @@
+{
+  "kind": "world_arm_operator_profile",
+  "baseline_sha256": "f12da25e93a520b7f5255ce952a3cb9b5d1bbca474133b1bc529d8c8e18349b7",
+  "manifest": {
+    "world_exp_arm_profile": {
+      "bytes": 1056684,
+      "sha256": "58c64d52061f08dda68e0df9a8f2132a3593dd0f3f0c179dd5e1db00ce91e7f7"
+    },
+    "input.raw": {
+      "bytes": 160000,
+      "sha256": "7a23bd306128cb433d888378c087ca188e033f03a08ea54e548b861899aa00b2"
+    }
+  },
+  "stages": {
+    "0": "render/other",
+    "1": "dio",
+    "2": "refine",
+    "3": "spectrum",
+    "4": "aperiodic"
+  },
+  "types": {
+    "0": "r2c",
+    "1": "c2r",
+    "2": "c2c"
+  },
+  "ops": {
+    "0": "plan",
+    "1": "execute"
+  },
+  "runs": [
+    {
+      "name": "baseline",
+      "exit": 0,
+      "output_sha256": "d0ddb038272754eb6e635cc771e5a56869be8126318a349f50d6ea49545dfbee",
+      "telemetry": [
+        {
+          "kind": "world_raw_stream_runtime",
+          "exit_code": 0,
+          "seconds": 5,
+          "native_s24": false,
+          "prefill_ms": 0,
+          "captured16k": 80000,
+          "rendered16k_with_tail": 80080,
+          "played16k": 80000,
+          "submitted": 127,
+          "consumed": 127,
+          "input_queue_peak": 64,
+          "parameter_queue_peak": 2,
+          "output_queue_peak": 1,
+          "input_queue_waits": 111,
+          "output_queue_waits": 0,
+          "window_samples_max": 3712,
+          "live_parameters_max": 3,
+          "analysis_rtf": 0.558876,
+          "render_rtf_including_output_wait": 0.325931,
+          "analysis_max_ms": 33.865446,
+          "elapsed_s": 2.833727,
+          "analysis_stage_s": {
+            "dio": 0.746039,
+            "refine": 0.225668,
+            "spectrum": 0.56393,
+            "aperiodic": 1.20284,
+            "warp": 0.054924
+          },
+          "reader_cpu": 1,
+          "analysis_cpu": 0,
+          "render_cpu": 1,
+          "writer_cpu": 1,
+          "reader_pin_error": 0,
+          "analysis_pin_error": 0,
+          "render_pin_error": 0,
+          "writer_pin_error": 0,
+          "scheduling_fifo": false,
+          "scheduling_fifo_io": false,
+          "reader_sched_error": 0,
+          "analysis_sched_error": 0,
+          "render_sched_error": 0,
+          "writer_sched_error": 0,
+          "capture_peak": 0.885131836,
+          "capture_rms": 0.152939113,
+          "voiced_frames": 261,
+          "raw_capture_peak": 0.0,
+          "raw_capture_clipped_samples": 0,
+          "raw_capture_first_clipped32k": -1,
+          "raw_capture_last_clipped32k": -1,
+          "output_gain_q16": 39322,
+          "input_gain_q16": 65536,
+          "output_peak": 0.54385867,
+          "clipped_samples": 0
+        }
+      ]
+    },
+    {
+      "name": "profile1",
+      "exit": 0,
+      "output_sha256": "d0ddb038272754eb6e635cc771e5a56869be8126318a349f50d6ea49545dfbee",
+      "telemetry": [
+        {
+          "kind": "world_fft_profile",
+          "stage": 0,
+          "size": 1024,
+          "type": 0,
+          "op": 0,
+          "calls": 2,
+          "seconds": 0.000421998
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 0,
+          "size": 1024,
+          "type": 0,
+          "op": 1,
+          "calls": 2994,
+          "seconds": 0.259333131
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 0,
+          "size": 1024,
+          "type": 1,
+          "op": 0,
+          "calls": 1,
+          "seconds": 0.000109788
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 0,
+          "size": 1024,
+          "type": 1,
+          "op": 1,
+          "calls": 2337,
+          "seconds": 0.213472155
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 0,
+          "size": 1024,
+          "type": 2,
+          "op": 0,
+          "calls": 1,
+          "seconds": 9.3588e-05
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 0,
+          "size": 1024,
+          "type": 2,
+          "op": 1,
+          "calls": 1227,
+          "seconds": 0.181697172
+        },
+        {
+          "kind": "world_raw_stream_runtime",
+          "exit_code": 0,
+          "seconds": 5,
+          "native_s24": false,
+          "prefill_ms": 0,
+          "captured16k": 80000,
+          "rendered16k_with_tail": 80080,
+          "played16k": 80000,
+          "submitted": 127,
+          "consumed": 127,
+          "input_queue_peak": 64,
+          "parameter_queue_peak": 2,
+          "output_queue_peak": 1,
+          "input_queue_waits": 111,
+          "output_queue_waits": 0,
+          "window_samples_max": 3712,
+          "live_parameters_max": 3,
+          "analysis_rtf": 0.569225,
+          "render_rtf_including_output_wait": 0.331422,
+          "analysis_max_ms": 34.604665,
+          "elapsed_s": 2.883378,
+          "analysis_stage_s": {
+            "dio": 0.767873,
+            "refine": 0.231177,
+            "spectrum": 0.572165,
+            "aperiodic": 1.219218,
+            "warp": 0.054702
+          },
+          "reader_cpu": 1,
+          "analysis_cpu": 0,
+          "render_cpu": 1,
+          "writer_cpu": 1,
+          "reader_pin_error": 0,
+          "analysis_pin_error": 0,
+          "render_pin_error": 0,
+          "writer_pin_error": 0,
+          "scheduling_fifo": false,
+          "scheduling_fifo_io": false,
+          "reader_sched_error": 0,
+          "analysis_sched_error": 0,
+          "render_sched_error": 0,
+          "writer_sched_error": 0,
+          "capture_peak": 0.885131836,
+          "capture_rms": 0.152939113,
+          "voiced_frames": 261,
+          "raw_capture_peak": 0.0,
+          "raw_capture_clipped_samples": 0,
+          "raw_capture_first_clipped32k": -1,
+          "raw_capture_last_clipped32k": -1,
+          "output_gain_q16": 39322,
+          "input_gain_q16": 65536,
+          "output_peak": 0.54385867,
+          "clipped_samples": 0
+        },
+        {
+          "kind": "world_operator_top",
+          "stage": 1,
+          "calls": 126,
+          "seconds": 0.766638084
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 1024,
+          "type": 0,
+          "op": 0,
+          "calls": 30,
+          "seconds": 0.00202608
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 1024,
+          "type": 0,
+          "op": 1,
+          "calls": 35,
+          "seconds": 0.002989128
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 1024,
+          "type": 1,
+          "op": 0,
+          "calls": 25,
+          "seconds": 0.00172482
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 1024,
+          "type": 1,
+          "op": 1,
+          "calls": 25,
+          "seconds": 0.00218448
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 2048,
+          "type": 0,
+          "op": 0,
+          "calls": 726,
+          "seconds": 0.093832206
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 2048,
+          "type": 0,
+          "op": 1,
+          "calls": 847,
+          "seconds": 0.156127911
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 2048,
+          "type": 1,
+          "op": 0,
+          "calls": 605,
+          "seconds": 0.087711272
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 2048,
+          "type": 1,
+          "op": 1,
+          "calls": 605,
+          "seconds": 0.11908935
+        },
+        {
+          "kind": "world_operator_top",
+          "stage": 2,
+          "calls": 126,
+          "seconds": 0.22006018
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 2,
+          "size": 512,
+          "type": 0,
+          "op": 0,
+          "calls": 2,
+          "seconds": 8.184e-05
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 2,
+          "size": 512,
+          "type": 0,
+          "op": 1,
+          "calls": 4,
+          "seconds": 0.000160674
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 2,
+          "size": 1024,
+          "type": 0,
+          "op": 0,
+          "calls": 389,
+          "seconds": 0.026575776
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 2,
+          "size": 1024,
+          "type": 0,
+          "op": 1,
+          "calls": 778,
+          "seconds": 0.06383822
+        },
+        {
+          "kind": "world_operator_top",
+          "stage": 3,
+          "calls": 126,
+          "seconds": 0.571304917
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 3,
+          "size": 1024,
+          "type": 0,
+          "op": 0,
+          "calls": 126,
+          "seconds": 0.008895672
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 3,
+          "size": 1024,
+          "type": 0,
+          "op": 1,
+          "calls": 1002,
+          "seconds": 0.085739509
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 3,
+          "size": 1024,
+          "type": 1,
+          "op": 0,
+          "calls": 126,
+          "seconds": 0.008257248
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 3,
+          "size": 1024,
+          "type": 1,
+          "op": 1,
+          "calls": 501,
+          "seconds": 0.045035712
+        },
+        {
+          "kind": "world_operator_top",
+          "stage": 4,
+          "calls": 126,
+          "seconds": 1.218619668
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 4,
+          "size": 2048,
+          "type": 0,
+          "op": 0,
+          "calls": 252,
+          "seconds": 0.039617106
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 4,
+          "size": 2048,
+          "type": 0,
+          "op": 1,
+          "calls": 1827,
+          "seconds": 0.324210951
+        }
+      ]
+    },
+    {
+      "name": "profile2",
+      "exit": 0,
+      "output_sha256": "d0ddb038272754eb6e635cc771e5a56869be8126318a349f50d6ea49545dfbee",
+      "telemetry": [
+        {
+          "kind": "world_fft_profile",
+          "stage": 0,
+          "size": 1024,
+          "type": 0,
+          "op": 0,
+          "calls": 2,
+          "seconds": 0.00028854
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 0,
+          "size": 1024,
+          "type": 0,
+          "op": 1,
+          "calls": 2994,
+          "seconds": 0.258748795
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 0,
+          "size": 1024,
+          "type": 1,
+          "op": 0,
+          "calls": 1,
+          "seconds": 0.00010776
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 0,
+          "size": 1024,
+          "type": 1,
+          "op": 1,
+          "calls": 2337,
+          "seconds": 0.216019626
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 0,
+          "size": 1024,
+          "type": 2,
+          "op": 0,
+          "calls": 1,
+          "seconds": 9.831e-05
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 0,
+          "size": 1024,
+          "type": 2,
+          "op": 1,
+          "calls": 1227,
+          "seconds": 0.181296408
+        },
+        {
+          "kind": "world_raw_stream_runtime",
+          "exit_code": 0,
+          "seconds": 5,
+          "native_s24": false,
+          "prefill_ms": 0,
+          "captured16k": 80000,
+          "rendered16k_with_tail": 80080,
+          "played16k": 80000,
+          "submitted": 127,
+          "consumed": 127,
+          "input_queue_peak": 64,
+          "parameter_queue_peak": 2,
+          "output_queue_peak": 1,
+          "input_queue_waits": 111,
+          "output_queue_waits": 0,
+          "window_samples_max": 3712,
+          "live_parameters_max": 3,
+          "analysis_rtf": 0.571646,
+          "render_rtf_including_output_wait": 0.329433,
+          "analysis_max_ms": 34.53846,
+          "elapsed_s": 2.895753,
+          "analysis_stage_s": {
+            "dio": 0.786758,
+            "refine": 0.229951,
+            "spectrum": 0.567735,
+            "aperiodic": 1.218156,
+            "warp": 0.054631
+          },
+          "reader_cpu": 1,
+          "analysis_cpu": 0,
+          "render_cpu": 1,
+          "writer_cpu": 1,
+          "reader_pin_error": 0,
+          "analysis_pin_error": 0,
+          "render_pin_error": 0,
+          "writer_pin_error": 0,
+          "scheduling_fifo": false,
+          "scheduling_fifo_io": false,
+          "reader_sched_error": 0,
+          "analysis_sched_error": 0,
+          "render_sched_error": 0,
+          "writer_sched_error": 0,
+          "capture_peak": 0.885131836,
+          "capture_rms": 0.152939113,
+          "voiced_frames": 261,
+          "raw_capture_peak": 0.0,
+          "raw_capture_clipped_samples": 0,
+          "raw_capture_first_clipped32k": -1,
+          "raw_capture_last_clipped32k": -1,
+          "output_gain_q16": 39322,
+          "input_gain_q16": 65536,
+          "output_peak": 0.54385867,
+          "clipped_samples": 0
+        },
+        {
+          "kind": "world_operator_top",
+          "stage": 1,
+          "calls": 126,
+          "seconds": 0.785700622
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 1024,
+          "type": 0,
+          "op": 0,
+          "calls": 30,
+          "seconds": 0.002100528
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 1024,
+          "type": 0,
+          "op": 1,
+          "calls": 35,
+          "seconds": 0.002960334
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 1024,
+          "type": 1,
+          "op": 0,
+          "calls": 25,
+          "seconds": 0.00173322
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 1024,
+          "type": 1,
+          "op": 1,
+          "calls": 25,
+          "seconds": 0.002283558
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 2048,
+          "type": 0,
+          "op": 0,
+          "calls": 726,
+          "seconds": 0.094020456
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 2048,
+          "type": 0,
+          "op": 1,
+          "calls": 847,
+          "seconds": 0.156544801
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 2048,
+          "type": 1,
+          "op": 0,
+          "calls": 605,
+          "seconds": 0.091783849
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 2048,
+          "type": 1,
+          "op": 1,
+          "calls": 605,
+          "seconds": 0.119849269
+        },
+        {
+          "kind": "world_operator_top",
+          "stage": 2,
+          "calls": 126,
+          "seconds": 0.219195186
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 2,
+          "size": 512,
+          "type": 0,
+          "op": 0,
+          "calls": 2,
+          "seconds": 8.043e-05
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 2,
+          "size": 512,
+          "type": 0,
+          "op": 1,
+          "calls": 4,
+          "seconds": 0.000162624
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 2,
+          "size": 1024,
+          "type": 0,
+          "op": 0,
+          "calls": 389,
+          "seconds": 0.026445288
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 2,
+          "size": 1024,
+          "type": 0,
+          "op": 1,
+          "calls": 778,
+          "seconds": 0.063593916
+        },
+        {
+          "kind": "world_operator_top",
+          "stage": 3,
+          "calls": 126,
+          "seconds": 0.566919943
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 3,
+          "size": 1024,
+          "type": 0,
+          "op": 0,
+          "calls": 126,
+          "seconds": 0.008746818
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 3,
+          "size": 1024,
+          "type": 0,
+          "op": 1,
+          "calls": 1002,
+          "seconds": 0.085892533
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 3,
+          "size": 1024,
+          "type": 1,
+          "op": 0,
+          "calls": 126,
+          "seconds": 0.008155746
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 3,
+          "size": 1024,
+          "type": 1,
+          "op": 1,
+          "calls": 501,
+          "seconds": 0.044847853
+        },
+        {
+          "kind": "world_operator_top",
+          "stage": 4,
+          "calls": 126,
+          "seconds": 1.217571742
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 4,
+          "size": 2048,
+          "type": 0,
+          "op": 0,
+          "calls": 252,
+          "seconds": 0.038260789
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 4,
+          "size": 2048,
+          "type": 0,
+          "op": 1,
+          "calls": 1827,
+          "seconds": 0.326660035
+        }
+      ]
+    },
+    {
+      "name": "profile3",
+      "exit": 0,
+      "output_sha256": "d0ddb038272754eb6e635cc771e5a56869be8126318a349f50d6ea49545dfbee",
+      "telemetry": [
+        {
+          "kind": "world_fft_profile",
+          "stage": 0,
+          "size": 1024,
+          "type": 0,
+          "op": 0,
+          "calls": 2,
+          "seconds": 0.000288768
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 0,
+          "size": 1024,
+          "type": 0,
+          "op": 1,
+          "calls": 2994,
+          "seconds": 0.260098274
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 0,
+          "size": 1024,
+          "type": 1,
+          "op": 0,
+          "calls": 1,
+          "seconds": 0.000108852
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 0,
+          "size": 1024,
+          "type": 1,
+          "op": 1,
+          "calls": 2337,
+          "seconds": 0.213647269
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 0,
+          "size": 1024,
+          "type": 2,
+          "op": 0,
+          "calls": 1,
+          "seconds": 9.3144e-05
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 0,
+          "size": 1024,
+          "type": 2,
+          "op": 1,
+          "calls": 1227,
+          "seconds": 0.183638837
+        },
+        {
+          "kind": "world_raw_stream_runtime",
+          "exit_code": 0,
+          "seconds": 5,
+          "native_s24": false,
+          "prefill_ms": 0,
+          "captured16k": 80000,
+          "rendered16k_with_tail": 80080,
+          "played16k": 80000,
+          "submitted": 127,
+          "consumed": 127,
+          "input_queue_peak": 64,
+          "parameter_queue_peak": 2,
+          "output_queue_peak": 1,
+          "input_queue_waits": 111,
+          "output_queue_waits": 0,
+          "window_samples_max": 3712,
+          "live_parameters_max": 3,
+          "analysis_rtf": 0.567472,
+          "render_rtf_including_output_wait": 0.329806,
+          "analysis_max_ms": 34.462254,
+          "elapsed_s": 2.875185,
+          "analysis_stage_s": {
+            "dio": 0.761182,
+            "refine": 0.231191,
+            "spectrum": 0.570617,
+            "aperiodic": 1.218535,
+            "warp": 0.054828
+          },
+          "reader_cpu": 1,
+          "analysis_cpu": 0,
+          "render_cpu": 1,
+          "writer_cpu": 1,
+          "reader_pin_error": 0,
+          "analysis_pin_error": 0,
+          "render_pin_error": 0,
+          "writer_pin_error": 0,
+          "scheduling_fifo": false,
+          "scheduling_fifo_io": false,
+          "reader_sched_error": 0,
+          "analysis_sched_error": 0,
+          "render_sched_error": 0,
+          "writer_sched_error": 0,
+          "capture_peak": 0.885131836,
+          "capture_rms": 0.152939113,
+          "voiced_frames": 261,
+          "raw_capture_peak": 0.0,
+          "raw_capture_clipped_samples": 0,
+          "raw_capture_first_clipped32k": -1,
+          "raw_capture_last_clipped32k": -1,
+          "output_gain_q16": 39322,
+          "input_gain_q16": 65536,
+          "output_peak": 0.54385867,
+          "clipped_samples": 0
+        },
+        {
+          "kind": "world_operator_top",
+          "stage": 1,
+          "calls": 126,
+          "seconds": 0.760100633
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 1024,
+          "type": 0,
+          "op": 0,
+          "calls": 30,
+          "seconds": 0.002036286
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 1024,
+          "type": 0,
+          "op": 1,
+          "calls": 35,
+          "seconds": 0.002981934
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 1024,
+          "type": 1,
+          "op": 0,
+          "calls": 25,
+          "seconds": 0.001721856
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 1024,
+          "type": 1,
+          "op": 1,
+          "calls": 25,
+          "seconds": 0.002201886
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 2048,
+          "type": 0,
+          "op": 0,
+          "calls": 726,
+          "seconds": 0.09362522
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 2048,
+          "type": 0,
+          "op": 1,
+          "calls": 847,
+          "seconds": 0.155765012
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 2048,
+          "type": 1,
+          "op": 0,
+          "calls": 605,
+          "seconds": 0.086411796
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 1,
+          "size": 2048,
+          "type": 1,
+          "op": 1,
+          "calls": 605,
+          "seconds": 0.118586539
+        },
+        {
+          "kind": "world_operator_top",
+          "stage": 2,
+          "calls": 126,
+          "seconds": 0.220376404
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 2,
+          "size": 512,
+          "type": 0,
+          "op": 0,
+          "calls": 2,
+          "seconds": 0.00013356
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 2,
+          "size": 512,
+          "type": 0,
+          "op": 1,
+          "calls": 4,
+          "seconds": 0.000163686
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 2,
+          "size": 1024,
+          "type": 0,
+          "op": 0,
+          "calls": 389,
+          "seconds": 0.026455753
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 2,
+          "size": 1024,
+          "type": 0,
+          "op": 1,
+          "calls": 778,
+          "seconds": 0.063830779
+        },
+        {
+          "kind": "world_operator_top",
+          "stage": 3,
+          "calls": 126,
+          "seconds": 0.569789789
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 3,
+          "size": 1024,
+          "type": 0,
+          "op": 0,
+          "calls": 126,
+          "seconds": 0.008751798
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 3,
+          "size": 1024,
+          "type": 0,
+          "op": 1,
+          "calls": 1002,
+          "seconds": 0.085356477
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 3,
+          "size": 1024,
+          "type": 1,
+          "op": 0,
+          "calls": 126,
+          "seconds": 0.00815385
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 3,
+          "size": 1024,
+          "type": 1,
+          "op": 1,
+          "calls": 501,
+          "seconds": 0.04537083
+        },
+        {
+          "kind": "world_operator_top",
+          "stage": 4,
+          "calls": 126,
+          "seconds": 1.217944976
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 4,
+          "size": 2048,
+          "type": 0,
+          "op": 0,
+          "calls": 252,
+          "seconds": 0.039250662
+        },
+        {
+          "kind": "world_fft_profile",
+          "stage": 4,
+          "size": 2048,
+          "type": 0,
+          "op": 1,
+          "calls": 1827,
+          "seconds": 0.324029692
+        }
+      ]
+    }
+  ],
+  "output_exact": true,
+  "fft_summary": [
+    {
+      "kind": "world_fft_profile",
+      "stage": 0,
+      "size": 1024,
+      "type": 0,
+      "op": 0,
+      "calls": 2,
+      "seconds": 0.000421998,
+      "seconds_median": 0.000288768,
+      "samples_seconds": [
+        0.000421998,
+        0.00028854,
+        0.000288768
+      ]
+    },
+    {
+      "kind": "world_fft_profile",
+      "stage": 0,
+      "size": 1024,
+      "type": 0,
+      "op": 1,
+      "calls": 2994,
+      "seconds": 0.259333131,
+      "seconds_median": 0.259333131,
+      "samples_seconds": [
+        0.259333131,
+        0.258748795,
+        0.260098274
+      ]
+    },
+    {
+      "kind": "world_fft_profile",
+      "stage": 0,
+      "size": 1024,
+      "type": 1,
+      "op": 0,
+      "calls": 1,
+      "seconds": 0.000109788,
+      "seconds_median": 0.000108852,
+      "samples_seconds": [
+        0.000109788,
+        0.00010776,
+        0.000108852
+      ]
+    },
+    {
+      "kind": "world_fft_profile",
+      "stage": 0,
+      "size": 1024,
+      "type": 1,
+      "op": 1,
+      "calls": 2337,
+      "seconds": 0.213472155,
+      "seconds_median": 0.213647269,
+      "samples_seconds": [
+        0.213472155,
+        0.216019626,
+        0.213647269
+      ]
+    },
+    {
+      "kind": "world_fft_profile",
+      "stage": 0,
+      "size": 1024,
+      "type": 2,
+      "op": 0,
+      "calls": 1,
+      "seconds": 9.3588e-05,
+      "seconds_median": 9.3588e-05,
+      "samples_seconds": [
+        9.3588e-05,
+        9.831e-05,
+        9.3144e-05
+      ]
+    },
+    {
+      "kind": "world_fft_profile",
+      "stage": 0,
+      "size": 1024,
+      "type": 2,
+      "op": 1,
+      "calls": 1227,
+      "seconds": 0.181697172,
+      "seconds_median": 0.181697172,
+      "samples_seconds": [
+        0.181697172,
+        0.181296408,
+        0.183638837
+      ]
+    },
+    {
+      "kind": "world_fft_profile",
+      "stage": 1,
+      "size": 1024,
+      "type": 0,
+      "op": 0,
+      "calls": 30,
+      "seconds": 0.00202608,
+      "seconds_median": 0.002036286,
+      "samples_seconds": [
+        0.00202608,
+        0.002100528,
+        0.002036286
+      ]
+    },
+    {
+      "kind": "world_fft_profile",
+      "stage": 1,
+      "size": 1024,
+      "type": 0,
+      "op": 1,
+      "calls": 35,
+      "seconds": 0.002989128,
+      "seconds_median": 0.002981934,
+      "samples_seconds": [
+        0.002989128,
+        0.002960334,
+        0.002981934
+      ]
+    },
+    {
+      "kind": "world_fft_profile",
+      "stage": 1,
+      "size": 1024,
+      "type": 1,
+      "op": 0,
+      "calls": 25,
+      "seconds": 0.00172482,
+      "seconds_median": 0.00172482,
+      "samples_seconds": [
+        0.00172482,
+        0.00173322,
+        0.001721856
+      ]
+    },
+    {
+      "kind": "world_fft_profile",
+      "stage": 1,
+      "size": 1024,
+      "type": 1,
+      "op": 1,
+      "calls": 25,
+      "seconds": 0.00218448,
+      "seconds_median": 0.002201886,
+      "samples_seconds": [
+        0.00218448,
+        0.002283558,
+        0.002201886
+      ]
+    },
+    {
+      "kind": "world_fft_profile",
+      "stage": 1,
+      "size": 2048,
+      "type": 0,
+      "op": 0,
+      "calls": 726,
+      "seconds": 0.093832206,
+      "seconds_median": 0.093832206,
+      "samples_seconds": [
+        0.093832206,
+        0.094020456,
+        0.09362522
+      ]
+    },
+    {
+      "kind": "world_fft_profile",
+      "stage": 1,
+      "size": 2048,
+      "type": 0,
+      "op": 1,
+      "calls": 847,
+      "seconds": 0.156127911,
+      "seconds_median": 0.156127911,
+      "samples_seconds": [
+        0.156127911,
+        0.156544801,
+        0.155765012
+      ]
+    },
+    {
+      "kind": "world_fft_profile",
+      "stage": 1,
+      "size": 2048,
+      "type": 1,
+      "op": 0,
+      "calls": 605,
+      "seconds": 0.087711272,
+      "seconds_median": 0.087711272,
+      "samples_seconds": [
+        0.087711272,
+        0.091783849,
+        0.086411796
+      ]
+    },
+    {
+      "kind": "world_fft_profile",
+      "stage": 1,
+      "size": 2048,
+      "type": 1,
+      "op": 1,
+      "calls": 605,
+      "seconds": 0.11908935,
+      "seconds_median": 0.11908935,
+      "samples_seconds": [
+        0.11908935,
+        0.119849269,
+        0.118586539
+      ]
+    },
+    {
+      "kind": "world_fft_profile",
+      "stage": 2,
+      "size": 512,
+      "type": 0,
+      "op": 0,
+      "calls": 2,
+      "seconds": 8.184e-05,
+      "seconds_median": 8.184e-05,
+      "samples_seconds": [
+        8.184e-05,
+        8.043e-05,
+        0.00013356
+      ]
+    },
+    {
+      "kind": "world_fft_profile",
+      "stage": 2,
+      "size": 512,
+      "type": 0,
+      "op": 1,
+      "calls": 4,
+      "seconds": 0.000160674,
+      "seconds_median": 0.000162624,
+      "samples_seconds": [
+        0.000160674,
+        0.000162624,
+        0.000163686
+      ]
+    },
+    {
+      "kind": "world_fft_profile",
+      "stage": 2,
+      "size": 1024,
+      "type": 0,
+      "op": 0,
+      "calls": 389,
+      "seconds": 0.026575776,
+      "seconds_median": 0.026455753,
+      "samples_seconds": [
+        0.026575776,
+        0.026445288,
+        0.026455753
+      ]
+    },
+    {
+      "kind": "world_fft_profile",
+      "stage": 2,
+      "size": 1024,
+      "type": 0,
+      "op": 1,
+      "calls": 778,
+      "seconds": 0.06383822,
+      "seconds_median": 0.063830779,
+      "samples_seconds": [
+        0.06383822,
+        0.063593916,
+        0.063830779
+      ]
+    },
+    {
+      "kind": "world_fft_profile",
+      "stage": 3,
+      "size": 1024,
+      "type": 0,
+      "op": 0,
+      "calls": 126,
+      "seconds": 0.008895672,
+      "seconds_median": 0.008751798,
+      "samples_seconds": [
+        0.008895672,
+        0.008746818,
+        0.008751798
+      ]
+    },
+    {
+      "kind": "world_fft_profile",
+      "stage": 3,
+      "size": 1024,
+      "type": 0,
+      "op": 1,
+      "calls": 1002,
+      "seconds": 0.085739509,
+      "seconds_median": 0.085739509,
+      "samples_seconds": [
+        0.085739509,
+        0.085892533,
+        0.085356477
+      ]
+    },
+    {
+      "kind": "world_fft_profile",
+      "stage": 3,
+      "size": 1024,
+      "type": 1,
+      "op": 0,
+      "calls": 126,
+      "seconds": 0.008257248,
+      "seconds_median": 0.008155746,
+      "samples_seconds": [
+        0.008257248,
+        0.008155746,
+        0.00815385
+      ]
+    },
+    {
+      "kind": "world_fft_profile",
+      "stage": 3,
+      "size": 1024,
+      "type": 1,
+      "op": 1,
+      "calls": 501,
+      "seconds": 0.045035712,
+      "seconds_median": 0.045035712,
+      "samples_seconds": [
+        0.045035712,
+        0.044847853,
+        0.04537083
+      ]
+    },
+    {
+      "kind": "world_fft_profile",
+      "stage": 4,
+      "size": 2048,
+      "type": 0,
+      "op": 0,
+      "calls": 252,
+      "seconds": 0.039617106,
+      "seconds_median": 0.039250662,
+      "samples_seconds": [
+        0.039617106,
+        0.038260789,
+        0.039250662
+      ]
+    },
+    {
+      "kind": "world_fft_profile",
+      "stage": 4,
+      "size": 2048,
+      "type": 0,
+      "op": 1,
+      "calls": 1827,
+      "seconds": 0.324210951,
+      "seconds_median": 0.324210951,
+      "samples_seconds": [
+        0.324210951,
+        0.326660035,
+        0.324029692
+      ]
+    }
+  ],
+  "fft_plan_seconds_median_sum": 0.26849159100000003,
+  "fft_execute_seconds_median_sum": 1.454058228
+}

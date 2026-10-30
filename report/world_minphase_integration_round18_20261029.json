@@ -1,0 +1,108 @@
+{
+  "task_id": "PL-20261027-01",
+  "round": 18,
+  "date": "2026-10-29",
+  "role": "Hardware-A / Codex",
+  "status": "ACCEPTED_FULL_DESIGN_BUILD_ONLY",
+  "base_commit": "7065a2f",
+  "part": "xc7z020clg400-2",
+  "tool": "Vivado 2026.1",
+  "project": "D:/wpl_20261029_full/m",
+  "integration": {
+    "ip": "xilinx.com:hls:world_minphase:1.0",
+    "clock_mhz": 100,
+    "ap_ctrl_base": "0x43C70000",
+    "pointer_args_base": "0x43C80000",
+    "input_master": "S_AXI_HP2 via minphase_mem/S00_AXI",
+    "output_master": "S_AXI_HP2 via minphase_mem/S01_AXI",
+    "interrupt": "IRQ_F2P bit 14",
+    "audio_ddr": "S_AXI_HP0",
+    "existing_world_exp_ddr": "S_AXI_HP1"
+  },
+  "build": {
+    "bd_validate": "pass",
+    "synthesis_errors": 0,
+    "implementation_errors": 0,
+    "bitstream_generated": true,
+    "fully_routed": true,
+    "logical_nets": 45801,
+    "routable_nets": 32065,
+    "fully_routed_nets": 32065,
+    "routing_error_nets": 0,
+    "black_boxes": 0
+  },
+  "timing": {
+    "wns_ns": 0.856,
+    "tns_ns": 0.0,
+    "setup_failing_endpoints": 0,
+    "whs_ns": 0.029,
+    "ths_ns": 0.0,
+    "hold_failing_endpoints": 0,
+    "worst_pulse_width_slack_ns": 0.530,
+    "pulse_width_failing_endpoints": 0,
+    "unconstrained_internal_endpoints": 0,
+    "register_pins_without_clock": 0,
+    "external_inputs_without_delay": 3,
+    "external_outputs_without_delay": 6,
+    "bus_skew_slack_ns": [9.358, 9.037, 9.404, 9.234, 9.138]
+  },
+  "resource": {
+    "slice_luts": 13910,
+    "slice_registers": 20145,
+    "block_ram_tiles": 9.5,
+    "bram18k_equivalents": 19,
+    "dsp48e1": 47
+  },
+  "delta_from_world_exp_round1": {
+    "slice_luts": 5884,
+    "slice_registers": 6862,
+    "block_ram_tiles": 3.5,
+    "dsp48e1": 38
+  },
+  "drc": {
+    "errors": 0,
+    "critical_warnings": 0,
+    "warnings": 131,
+    "advisories": 38,
+    "checks_found": 169,
+    "warning_breakdown": {
+      "DPIP-1": 47,
+      "DPOP-1": 35,
+      "DPOP-2": 22,
+      "PDCN-1569": 9,
+      "REQP-1839": 8,
+      "REQP-1840": 9,
+      "RTSTAT-10": 1
+    }
+  },
+  "artifacts": {
+    "bit": {
+      "bytes": 4045767,
+      "sha256": "e2131f0c4306f891e05f9a5aa9cee33077ad794b3ab2a2a53e0eac9d67b8cee3"
+    },
+    "bin_raw": {
+      "bytes": 4045564,
+      "sha256": "2e8517d9d126261fd397ec76e3209b111d9cee232d6374bdc9bb099473d79117"
+    },
+    "routed_dcp": {
+      "bytes": 15090535,
+      "sha256": "f3aaccbd59a381751b654f34759e09b2c612082548f9d547ec512bfaa287a298"
+    }
+  },
+  "report_sha256": {
+    "utilization.txt": "604f4c0671e9d8fd4915b51820807f7493a4edfcf5001ddc2ccc42d6d7cc1282",
+    "timing_summary.txt": "db35e15e23fb0d8e233a0c7ed7b0ea33775e261d65a4cd1de857144271a29471",
+    "drc.txt": "6b65a4b0b80d45657bb7d6db9b2ac39be67310f6beb22a5901d8b0e98ba37bae",
+    "route_status.txt": "ea5fbbf95224e790ebffe022e5a1c082abbf847d4f04dbd106d707ea0d801403",
+    "bus_skew.txt": "4179efc918c1699096d6f84a3cf381ded90f66d16cde1da75355ba35d14cc8c4"
+  },
+  "initial_failure": "The first long-path project validated but generate_target failed at a 260-character HLS floating-point subcore path. Rebuilding the same design at D:/wpl_20261029_full/m resolved it without an RTL change.",
+  "limitations": [
+    "This round built but did not load the candidate on hardware.",
+    "The raw Vivado .bin still requires the established per-word byte swap before Linux FPGA Manager loading.",
+    "External audio/I2C timing remains incomplete for 3 input and 6 output ports, matching the existing audio baseline limitation.",
+    "DRC has 131 warnings and 38 advisories; zero errors does not mean zero warnings.",
+    "No recording, playback, listening, or real-time performance claim was made."
+  ],
+  "next_responsible": "Hardware-A / Codex: package the Linux payload, add a coherent-buffer bounded-polling driver and WORLD wrapper, then run a recoverable silent board vector test."
+}

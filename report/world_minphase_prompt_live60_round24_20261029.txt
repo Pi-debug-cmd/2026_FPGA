@@ -1,0 +1,10 @@
+PL-20261027-01 Round24 REJECTED_NO_VALID_SPEECH
+operator: "60s录入我没有准备好"
+prompt: exit=0 frames=24960 ready_delay_s=2.0
+children: 0/0/0; capture_overruns=0 playback_underruns=0 alsa_errors=0
+stream: captured16k=960000 played16k=960000 submitted=1502 consumed=1502
+speech: voiced_frames=0 error="Speech trial contains no voiced frames"
+PL: calls=7883 fallback=0 driver_device_mean_us=387.64
+signal: raw_peak=0.423707604 rms=0.027869094 raw_clips=0 output_peak=0.148521703 output_clips=0
+restore: factory bit/v23 hashes match; FPGA operating; service and both PCM RUNNING; taint=0; candidate modules absent; tmp absent
+interpretation: invalid operator input; do not attribute this failure to PL, VAD, microphone, or audio path

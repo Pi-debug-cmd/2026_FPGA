@@ -1,0 +1,7 @@
+PL-20261027-01 Round29 REJECTED_BOOT_AUDIO_RACE
+manual enable: READY_CANDIDATE, DISABLE absent, PL calls=2145, both PCM RUNNING
+reboot: candidate loaded ready, then runtime exit1 AUDIO_BUSY on pcm0p owner PID894
+root cause: S99music-button starts first; orphan /usr/bin/aplay /opt/hardware_test/test.wav PPid1 survives stop
+fallback: DISABLE=RUNTIME_1 written; in-place restore blocked by same busy PCM
+final per user: no v23 restore; factory/music stopped; PID894 terminated; both PCM closed; module absent
+next: exact music orphan quiesce before candidate, update wrapper, enable and reboot again, final PL active

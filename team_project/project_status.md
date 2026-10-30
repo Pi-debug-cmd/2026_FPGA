@@ -99,3 +99,23 @@
 | 身份上限（技术结论） | 参数域可达 **0.53～0.56**，不再是 0.19～0.22 | 第三轮 + 复核 |
 | PL 合成卸载 | 时分复用版开发中；首版全并行 LUT 超限 132%/141%；最新综合 363 LUT 可疑，待核对是否被优化 | `build/generated/pl_synth_offload/`、`report/pl_synth_offload_sim.json` |
 | 历史待办（已过期） | 当时提出 A1 与 A3 听感取舍及 PL 资源/时序检查；A3 后来已被用户否决，当前任务依 `plan.md` | 见 worklog |
+
+## 2026-10-27 [Hardware-A / PL-20261027-01] WORLD v23 PL首轮现场
+
+用户指定停止Deepseek，已恢复WORLD v23加速。复数exp核整机100MHz时序通过，板端49248 bins零差异，语音PL=整数模型，渲染RTF较CPU约降低6.2%；定速文件PS管线p95约115ms，仍未实现高实时目标。现场20秒低缓冲测试2次播放欠载且仅2帧有声，拒绝。原厂位流已重新加载，但重绑非音频外设时Linux串口停止响应，v23尚未重启，等待操作者系统复位/重上电。启动分区与原v23未改。详见`report/world_exp_live20_round1_20261027.md`、`report/world_exp_restore_stall_20261027.json`和`coummucation.md`；PR #16。
+
+### 2026-10-27 [PL-20261027-01] 恢复状态更新
+
+操作者已复位。只读核验FPGA operating、原v23 SHA匹配、单组采录放进程运行、PCM录放均RUNNING，临时PL模块未加载；先前恢复阻塞已解除。20秒低缓冲欠载失败结论不变。证据：`report/world_exp_reboot_recovery_20261027.{md,json}`。
+
+### 2026-10-27 [PL-20261027-01] FFT部署与性能现状（Round11）
+
+FFT计划复用已在ARM两输入18次验证逐字节相同，文件墙钟约降低9.6–10.7%。Xilinx浮点FFT+exp整机已完成45帧RTL位准确/背压、100MHz布局布线和板端数值回归；compact版17255LUT/29197FF/24.5BRAM/69DSP、WNS+0.283ns/WHS+0.040ns，外部IO约束仍不完整。FFT硬件数值通过但传输开销抵消计算收益，仍不默认启用；目前首选是PS计划复用+PL exp。
+
+Round11同位流旧新适配36次文件回归均与Round10逐字节一致，combined中位2.621563/2.608862秒，仍不快于exp_only 2.602989/2.605818。静默定速PS管线p95约114ms，排除ALSA/codec/模拟/声学；高实时目标未通过。没有新现场听感。当前compact候选临时驻留、服务停止，下一步内核阶段计时；恢复前避免反复audio热重绑，使用正常启动清理驱动引用。报告world_fft_adapter_round11_20261027、world_fft_paced_round10_20261027；PR16。
+
+### [PL-20261027-01] 2026-10-27 当日停止与交接
+- 角色Hardware-A / Codex；状态暂停（用户“今天先到这里”）。Round16短路径综合/C-sim通过，RTL进入编译/展开但未完成，相关HLS/xelab进程已停止，未写RTL通过。
+- 证据report/world_minphase_round16_paused_20261027.md及synth/cosim TXT；交接handoff_20261027_PL.md。原厂位流/v23已恢复、双PCM RUNNING，临时驱动卸载，启动分区未改，无新录放。
+- 用户方向：尽量把WORLD分析/映射/合成迁入PL，PS保留I/O控制；首个最小相位融合核host两输入误差1/SNR约97dB，HLS估算38DSP/约1万LUT，尚待RTL/整机/板测。
+- 下一责任方Hardware-A / Codex：用户下次要求继续后，先完成24例RTL cosim，再评估整机/板端收益。不得把估算当高实时验收。

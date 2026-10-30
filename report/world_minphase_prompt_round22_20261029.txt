@@ -1,0 +1,8 @@
+PL-20261027-01 Round22 prompt-tone supervisor: PROPOSED / WAIT LIVE TEST
+operator clarification: 因为刚刚录入的时候我没有准备好，你录入之前先给个提示音
+cue: 880Hz 300ms + 180ms silence + 1175Hz 300ms
+format: 32000Hz S24_LE stereo; peak=0.12; fade=320 frames
+post-cue preparation gap: 2.0s
+mock result: 24960 frames, pass
+supervisor sha256: cecf23add060312ab85acb84b83ab7ab19ff850919646e62f524b997bea8b69f
+board/audio test: NOT RUN

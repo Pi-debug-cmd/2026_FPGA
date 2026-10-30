@@ -1,0 +1,10 @@
+{
+  "task": "PL-20261027-01",
+  "source_commit": "20344a5",
+  "result": "REJECTED_script_readiness_check",
+  "fpga_loaded": true,
+  "audio_service_running": false,
+  "cause": "asynchronous soundcard device registration; immediate exists() assertion raced with udev",
+  "followup_readonly": "/proc/asound/cards has card0, /dev/snd/controlC0 exists, FPGA operating",
+  "log": "audio_stopped\nclk_unregister: unregistering prepared clock: audio-clk-out1\nunregister bridge v_tc which is owned by other component\ndrivers_unbound\nfpga_manager fpga0: writing world_exp_swap.bin to Xilinx Zynq FPGA Manager\nfpga_loaded\nov5640 2-003c: supply DOVDD not found, using dummy regulator\nov5640 2-003c: supply AVDD not found, using dummy regulator\nov5640 2-003c: supply DVDD not found, using dummy regulator\nov5640 2-003c: ov5640_read_reg: error: reg=300a\nov5640 2-003c: ov5640_check_chip_id: failed to read chip identifier\nov5640: probe of 2-003c failed with error -5\nxlnx_formatter_pcm 43c40000.audio_formatter: sound card device will use DAI link: i2s_transmitter\nxlnx_i2s 43c50000.i2s_receiver: xlnx_i2s_capture DAI registered\nxlnx_formatter_pcm 43c40000.audio_formatter: sound card device will use DAI link: i2s_receiver\nxlnx_i2s 43c60000.i2s_transmitter: xlnx_i2s_playback DAI registered\nxlnx_snd_card xlnx_snd_card.0.auto: RINPUT1 NULL MICB\nFAILED_run_restore_immediately\nTraceback (most recent call last):\n  Filxlnx_snd_card xlnx_snd_card.0.auto: RINPUT2 NULL MICB\ne \"/var/volatile/tmp/codex_world_exp_20261027/world_exp_switch.py\", line 173, in <module>\n    main()\n  File \"/var/volatile/tmp/codex_world_exp_20261027/world_exp_switch.py\", line 156, in main\n    assert Path('/dev/snd/controlC0').exists()\nAssertionError\nbr#"
+}

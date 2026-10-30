@@ -1,0 +1,5 @@
+PL-20261027-01 Round32 REJECTED
+case1: calls=1643 fallback=124 snr_db=0.127282 max_pcm16_error=17939 clipped=0
+case2: calls=1628 fallback=179 snr_db=0.180461 max_pcm16_error=23965 clipped=0
+root cause: normalized HLS IFFT output was divided by fft_size again in the host hook
+no board, recording, or playback operation was performed

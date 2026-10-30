@@ -1,0 +1,68 @@
+{
+  "task_id": "PL-20261027-01",
+  "round": 27,
+  "date": "2026-10-29",
+  "role": "Hardware-A / Codex",
+  "status": "ACCEPTED_BUILD_AND_FAULT_INJECTION_ONLY",
+  "base_commit": "3ffbfd6",
+  "user_waived": ["stability_test", "prompt_audibility_test"],
+  "persistent_install_performed": false,
+  "boot_partition_written": false,
+  "clipping_fix": {
+    "old_output_gain_q16": 49152,
+    "new_output_gain_q16": 16384,
+    "round25_peak": 2.423787389,
+    "linearly_scaled_peak": 0.80792913,
+    "estimated_headroom_db": 1.85,
+    "physically_validated": false
+  },
+  "boot_audit": {
+    "boot_size_mb": 40,
+    "boot_free_mb": 27,
+    "rootfs_free_gb": 14,
+    "factory_bit_sha256": "16cb36f7161935896615ad12b000597088a6a9745856611162f1c44a51f82a61",
+    "factory_v23_sha256": "f12da25e93a520b7f5255ce952a3cb9b5d1bbca474133b1bc529d8c8e18349b7",
+    "uenv_sha256": "e211c7f8b8034c02c9035d71c05237607f09efeec272ad9d9c774788431c53c2",
+    "boot_scr_sha256": "7702e40c863bb4d73b561ad9dd112537fd4560515286e9a3f5aebb133a6383f8",
+    "existing_files_overwritten_by_design": false,
+    "warning": "Existing FAT unclean-volume warning requires verified writes and sync."
+  },
+  "fallback": {
+    "selection_file": "/boot/world_pl/DISABLE",
+    "candidate_default_when_absent": true,
+    "bad_asset_latches_factory": true,
+    "runtime_failure_latches_factory": true,
+    "factory_init_backup": "/etc/init.d/world-voice.factory",
+    "control": "world-pl-control enable|disable|status"
+  },
+  "checks": {
+    "host_unittest_passed": 18,
+    "host_unittest_skipped_no_posix_sh": 2,
+    "board_shell_syntax_scripts": 4,
+    "board_fault_injection_cases": 2,
+    "board_fault_injection_passed": true,
+    "board_audio_started": false,
+    "board_fpga_changed": false,
+    "factory_service_after_test": "running",
+    "factory_capture_pcm_after_test": "RUNNING",
+    "factory_playback_pcm_after_test": "RUNNING",
+    "kernel_taint_after_test": 0
+  },
+  "artifacts": {
+    "board/live_world_trial.py": "b7affa84f085507c81ed923e37859814197cad27906e9f0f148b212927b5e8a8",
+    "board/world_exp_switch.py": "2dc8710757c1dbca41f8e50de9cd698bf26b5a834eebfb28dd03bb04cb1d821c",
+    "board/world_minphase_autostart.sh": "aa3dd25ca25399e6f9f48c3a55658f4ed4fdd9bc526ed11d58d29f07d40d4954",
+    "board/world_minphase_init.sh": "211392ced7800c5e09db0a9cb8dade1cfe39da939faf3ce1a56e414e795bc499",
+    "board/world_minphase_control.sh": "a097d330aaee63f49f602d38300bd964ca04514310e0e2f96589acad77d89dd6",
+    "board/world_minphase_boot_manifest.sha256": "5e1ec6b17074f4a831ff47803723adb602053153efb30123d50949784e9be322",
+    "board/world_minphase_recovery.json": "6c015fefebdb784c473f009ddd26ba7704d614b6918d0032b0fdf2bda5cabbc2",
+    "sim/test_world_minphase_boot.py": "85d4b1453f8782572f9b8327d0bc8081d6c6e3b54384d82423c3ee2024b2ee9b",
+    "sim/board_world_minphase_boot_fault_test.sh": "c4f025f3b909e63c15b91398114eb9bdf8047df70b149e5973913a31e750525e"
+  },
+  "limitations": [
+    "The persistent installation and automatic candidate start have not occurred yet.",
+    "The reduced gain is a static clipping fix and has not been listening-tested by user choice.",
+    "Only the fused minimum-phase stage is in PL, not the complete WORLD chain."
+  ],
+  "next_responsible": "Hardware-A / Codex: commit/push, then install and hash-verify persistent assets without starting audio; ask readiness before enable/reboot."
+}

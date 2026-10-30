@@ -1,0 +1,25 @@
+PL-20261027-01 Round18 full-design implementation
+Date: 2026-10-29
+Base: 7065a2f
+Vivado: 2026.1
+Part: xc7z020clg400-2
+Project: D:/wpl_20261029_full/m
+
+RESULT: ACCEPTED_FULL_DESIGN_BUILD_ONLY
+BD validate: PASS
+Synthesis / implementation errors: 0 / 0
+WNS/TNS: +0.856 ns / 0.000 ns
+WHS/THS: +0.029 ns / 0.000 ns
+Setup/Hold/Pulse-width failing endpoints: 0 / 0 / 0
+Unconstrained internal endpoints / no-clock registers: 0 / 0
+External ports without input/output delay: 3 / 6
+Bus-skew minimum slack: +9.037 ns
+Fully routed/error nets: 32065 / 0
+Black boxes / DRC errors: 0 / 0
+DRC: 131 warnings, 38 advisories
+Resources: 13910 LUT, 20145 FF, 9.5 BRAM tiles, 47 DSP
+
+Addresses: ap_ctrl=0x43C70000, pointer_args=0x43C80000, DDR via HP2.
+Initial long-path generate_target failed at Windows 260 characters; the same
+design passed at the explicit short project path. Candidate was built but not
+loaded. No recording, playback, listening, or real-time claim.

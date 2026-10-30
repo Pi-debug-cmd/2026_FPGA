@@ -1,0 +1,73 @@
+{
+  "task_id": "PL-20261027-01",
+  "round": 21,
+  "date": "2026-10-29",
+  "role": "Hardware-A / Codex",
+  "status": "REJECTED_AUDIBILITY",
+  "base_commit": "a7ea7bf",
+  "operator_ready": true,
+  "operator_feedback_verbatim": "没听到声音",
+  "objective_gate": {
+    "supervisor_exit": 0,
+    "child_exits": [0, 0, 0],
+    "capture_overruns": 0,
+    "playback_underruns": 0,
+    "alsa_errors": 0,
+    "pl_calls": 2725,
+    "pl_fallback": 0,
+    "voiced_frames": 30,
+    "raw_capture_peak": 0.424322128,
+    "raw_capture_clipped_samples": 0,
+    "output_peak": 0.197959166,
+    "output_clipped_samples": 0,
+    "analysis_rtf": 0.272714,
+    "render_rtf_including_output_wait": 0.277273,
+    "analysis_max_ms": 24.116382,
+    "mixer_restore_exit": 0,
+    "pcm_after": ["closed", "closed"]
+  },
+  "driver": {
+    "calls": 2725,
+    "copy_in_ns": 5862948,
+    "device_ns": 1133735089,
+    "copy_out_ns": 47025354,
+    "device_mean_us": 416.05
+  },
+  "restore": {
+    "factory_bit_sha256": "16cb36f7161935896615ad12b000597088a6a9745856611162f1c44a51f82a61",
+    "v23_sha256": "f12da25e93a520b7f5255ce952a3cb9b5d1bbca474133b1bc529d8c8e18349b7",
+    "fpga_state": "operating",
+    "service": "running",
+    "playback_pcm": "RUNNING",
+    "capture_pcm": "RUNNING",
+    "kernel_taint": 0,
+    "temporary_modules_loaded": false,
+    "temporary_directory_present": false,
+    "boot_partition_modified": false
+  },
+  "recovered_factory_codec": {
+    "headphone": "105,105",
+    "playback": "230,230",
+    "left_pcm_mixer": "on",
+    "right_pcm_mixer": "on",
+    "dapm_on": ["Left DAC", "Right DAC", "LOUT1 PGA", "ROUT1 PGA", "HP_L", "HP_R"]
+  },
+  "artifact_sha256": {
+    "live_result": "d4aad7850499596d35d18c81cd305540515ac5d9f6490b2bfcfc5b38d84db2d5",
+    "payload_preflight_log": "5fe9eaa2594eb4fe08aece1eb0d31ab9a24aa6145b4f1948d75217b0f793bda7",
+    "load_log": "e0419d77290a64c3558bf88d1ebf0e109e8e59a2d684834703edbce66f4e2ca0",
+    "check_log": "ae9ae3f55af9ad418c77acfb2f03b1d68f2ce0dcebf8692370e582d1826b3d1a",
+    "live_log": "68e0f8a6fe05173c69c818460d5e6c978c87c608eed6b384fc1d3788ad6e6556",
+    "stats_log": "b7dcf56c08d3267700674f3cea89d5b678b718fd540e71be2b5377045884e675",
+    "reboot_log": "9c819915c91764cceba1c2d682264f21f3ed6168dd70c667793dde0af420d4e0",
+    "restore_log": "3bc1b3f1e588fda1ab8fa1bc8d911ddc49a602dce037833a98c7787f7e1c6c0d",
+    "factory_codec_log": "61b9ae88afed31df042c63369e0ad564790707c179a5a2806b287f06e6d263b5"
+  },
+  "diagnosis_boundary": [
+    "The digital pipeline advanced and emitted nonzero samples, but this does not prove audible analog output.",
+    "Only 30 voiced frames were detected; the effective speech load was low.",
+    "Candidate active codec/DAPM snapshots were not downloaded before reboot, so the silent point is not localized.",
+    "Do not rerun WORLD first; gate factory and candidate reference playback separately."
+  ],
+  "next_responsible": "Hardware-A / Codex after a fresh ready confirmation: factory reference playback, candidate reference playback, then bounded WORLD only if both are audible."
+}
