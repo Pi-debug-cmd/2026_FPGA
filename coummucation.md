@@ -2184,3 +2184,16 @@
 - 失败：标准录音1/4的SNR仅`0.127282/0.180461 dB`，最大PCM16误差`17939/23965`，远未达到75 dB/3门；两例输出削顶均为0。
 - 根因：WORLD/Ooura c2r不归一化且原路径末尾除1024，HLS逆FFT已归一化，hook再次除1024造成重复缩放。报告`report/world_synthesis_pulse_round32_20261030.{md,json,txt}`。
 - 边界：本轮只做host文件回归，没有切板、录音、播放或修改Round30持久release。下一责任方Hardware-A / Codex独立提交失败路线后，以Round33只移除重复除法并原条件复测。
+
+### [PL-20261027-01] Round33 合成脉冲模型尺度修正认领
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`9500220`。
+- 本轮唯一变量：移除host hook对已归一化HLS逆FFT输出的重复`/fft_size`；模型接口、RandnState顺序、anchor/fallback、输入、增益和门槛全部保持Round32不变。
+- 成功门：两段真实5秒输入各自SNR≥75 dB、PCM16最大误差≤3、CPU与模型输出削顶均为0、模型调用>0，并记录fallback。
+- 范围：host文件回归；不切板、不录音、不播放、不修改Round30持久release。下一责任方Hardware-A / Codex完成单变量修正、原条件复测和独立提交。
+
+### [PL-20261027-01] Round33 合成脉冲模型尺度修正结果
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：ACCEPTED（host模型门）；基准提交：`9500220`。
+- 单变量修正：移除hook对已归一化HLS逆FFT结果的重复`/1024`；默认关闭路径、RandnState顺序、anchor和transition fallback不变。
+- 数值：标准录音1/4分别SNR=`105.295306/104.549879 dB`，最大PCM16误差均为`1`，RMS误差`0.015811/0.014577`，CPU/模型削顶均`0/0`；模型调用`1643/1628`、CPU fallback `124/179`，全部通过75 dB/3/零削顶门。
+- 证据：模型exe SHA `8a7d60f5...a3e1a09e`；输入PCM SHA分别`7a23bd30...00b2`、`8edae31b...d70d1c`；报告`report/world_synthesis_pulse_round33_20261030.{md,json,txt}`。
+- 限制：只证明真实WORLD host模型的数值合同，不宣称OOC、整机时序、板卡、音频听感或稳定性通过；本轮未切板、录音、播放或修改Round30 release。下一责任方Hardware-A / Codex独立提交后进入OOC/整机DMA batch连接。

@@ -484,9 +484,11 @@ static void GetPulseResponseModel(int noise_size, const double *spectrum,
       synth->pulse_periodic_imag, synth->pulse_aperiodic_real,
       synth->pulse_aperiodic_imag, synth->pulse_raw_noise, noise_size,
       synth->pulse_dc_remover, synth->pulse_response);
-  const float scale = 1.0f / static_cast<float>(synth->fft_size);
   for (int i = 0; i < synth->fft_size; ++i)
-    synth->impulse_response[i] = synth->pulse_response[i] * scale;
+    // The HLS inverse FFT is normalized, while WORLD's Ooura c2r is not and
+    // GetOneFrameSegment divides its result by fft_size.  The two operations
+    // cancel, so the normalized kernel response is already the final impulse.
+    synth->impulse_response[i] = synth->pulse_response[i];
 }
 #endif
 
