@@ -2135,3 +2135,20 @@
 - 回退边界：同一busy PCM也阻止in-place restore的closed断言；factory start不能写成位流恢复成功。用户随后明确“现在不用恢复v23，你就把PL部署做好就行”，故停止factory/music并终止已确认PID894，未主动加载v23 restore。
 - 最终：双PCM closed、FPGA operating（依据日志推断candidate仍在）、module absent、taint4096、state FALLBACK_FACTORY_RUNTIME_1。诊断ps命令另有一次引号剥离导致额外aplay/arecord立即失败，未影响此前已确认的calls，已写入报告。
 - 报告：`report/world_minphase_persistent_boot_round29_20261030.{md,json,txt}`。下一责任方Hardware-A / Codex先独立提交失败证据，再修wrapper：停music-button、仅杀精确test.wav孤儿aplay、等待PCM closed，然后重新enable/reboot，最终保持PL。
+
+### [PL-20261027-01] Round30 music-button 竞态修复与持久 PL 重验认领
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`9b18b7e`。
+- 修复：candidate启动前停止music-button；仅终止`comm=aplay`且cmdline包含`/opt/hardware_test/test.wav`的孤儿；等待pcm0p/pcm1c均closed再启动。禁止全局killall aplay。
+- 加固：autostart直接运行时也执行同一quiesce；runtime失败后先等待PCM关闭再restore，减少busy断言阻断回退。
+- 部署：创建新版本化release而非原地改Round27；更新rootfs manifest/current链接和wrapper init，原厂bit/v23与boot文件不变。
+- 成功门：shell/Python回归、板端语法通过；重新enable达到READY/calls>0/双PCM RUNNING；正常reboot后再次自动达到同状态，DISABLE保持缺失；最终不恢复v23。
+- 下一责任方：Hardware-A / Codex 完成修复、版本化热更新、enable与重启证据，独立提交推送。
+
+### [PL-20261027-01] Round30 PL 持久部署结果
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：ACCEPTED（用户免测边界内）；基准提交：`9b18b7e`。
+- 修复：candidate 前停止music-button，仅终止精确匹配`aplay /opt/hardware_test/test.wav`的孤儿并等待PCM关闭；wrapper启动daemon前删除旧PID/state，消除旧状态误判。新release为`20261030_round30`，state-fix原子安装且未重启当时音频。
+- 正常reboot通过：自动选择PL candidate，`READY_CANDIDATE`、DISABLE缺失、双PCM RUNNING；PL calls从2278增长至13751，进程表无hardware_test孤儿。最终保持PL，不恢复v23。
+- 完整性：factory bit/uEnv/boot.scr/v23及candidate gzip重启后SHA均匹配；原启动文件未覆盖。out-of-tree module使taint=4096，属预期。
+- 检查：相关unittest 21项中19通过、2项因Windows无POSIX sh跳过；板端shell语法/安装通过。全sim另有2项因缺失被忽略的旧target profile生成资产报错，与本轮无关且未伪造资产。
+- 限制：用户明确跳过提示可闻和长稳；本结果只证明融合最小相位PL阶段，不宣称完整WORLD全PL。shutdown记录Xilinx audio formatter内核警告但随后重启成功；FAT旧未正确卸载警告仍在。
+- 报告：`report/world_minphase_persistent_boot_round30_20261030.{md,json,txt}`；下一责任方为维护者审核PR。若后续要求产品化长稳，再单独处理shutdown驱动警告和10/30分钟门。

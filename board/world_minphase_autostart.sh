@@ -14,6 +14,7 @@ FACTORY_SHA=${WORLD_PL_FACTORY_SHA:-16cb36f7161935896615ad12b000597088a6a9745856
 CHILD_PID=
 STOP_REQUESTED=0
 SWITCH_STARTED=0
+MUSIC_INIT=${WORLD_PL_MUSIC_INIT:-/etc/init.d/music-button}
 
 write_state() {
     mkdir -p "${RUN_DIR}"
@@ -32,8 +33,34 @@ stop_child() {
     CHILD_PID=
 }
 
+pcm_closed() {
+    for node in pcm0p pcm1c; do
+        path=/proc/asound/card0/${node}/sub0/status
+        [ ! -e "${path}" ] || [ "$(cat "${path}")" = closed ] || return 1
+    done
+    return 0
+}
+
+quiesce_boot_audio() {
+    "${MUSIC_INIT}" stop >/dev/null 2>&1 || true
+    for proc in /proc/[0-9]*; do
+        [ -r "${proc}/comm" ] || continue
+        [ "$(cat "${proc}/comm" 2>/dev/null)" = aplay ] || continue
+        if grep -q '/opt/hardware_test/test.wav' "${proc}/cmdline" 2>/dev/null; then
+            kill "${proc##*/}" 2>/dev/null || true
+        fi
+    done
+    count=0
+    while ! pcm_closed && [ "${count}" -lt 50 ]; do
+        sleep 0.1
+        count=$((count + 1))
+    done
+    pcm_closed
+}
+
 restore_factory() {
     stop_child
+    quiesce_boot_audio || true
     if grep -q '^world_minphase_dma ' /proc/modules 2>/dev/null; then
         rmmod world_minphase_dma >> "${LOG}" 2>&1 || true
     fi
@@ -72,6 +99,7 @@ write_state STARTING
 log AUTOSTART_BEGIN
 
 [ ! -e "${BOOT_DIR}/DISABLE" ] || fail_to_factory DISABLED
+quiesce_boot_audio || fail_to_factory MUSIC_BUSY
 [ "$(sha256sum "${FACTORY_BIT}" | awk '{print $1}')" = "${FACTORY_SHA}" ] || \
     fail_to_factory FACTORY_HASH
 (cd "${BOOT_DIR}" && sha256sum -c manifest.sha256) >> "${LOG}" 2>&1 || \

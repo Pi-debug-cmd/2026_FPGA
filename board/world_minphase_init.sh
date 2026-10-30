@@ -13,8 +13,35 @@ FACTORY=${WORLD_PL_FACTORY_INIT:-/etc/init.d/world-voice.factory}
 PIDFILE=${WORLD_PL_PIDFILE:-/var/run/world-voice-pl.pid}
 STATE=${WORLD_PL_STATE:-/run/world_minphase/state}
 DISABLE=${WORLD_PL_DISABLE:-/boot/world_pl/DISABLE}
+MUSIC_INIT=${WORLD_PL_MUSIC_INIT:-/etc/init.d/music-button}
+
+pcm_closed() {
+    for node in pcm0p pcm1c; do
+        path=/proc/asound/card0/${node}/sub0/status
+        [ ! -e "${path}" ] || [ "$(cat "${path}")" = closed ] || return 1
+    done
+    return 0
+}
+
+quiesce_boot_audio() {
+    "${MUSIC_INIT}" stop >/dev/null 2>&1 || true
+    for proc in /proc/[0-9]*; do
+        [ -r "${proc}/comm" ] || continue
+        [ "$(cat "${proc}/comm" 2>/dev/null)" = aplay ] || continue
+        if grep -q '/opt/hardware_test/test.wav' "${proc}/cmdline" 2>/dev/null; then
+            kill "${proc##*/}" 2>/dev/null || true
+        fi
+    done
+    count=0
+    while ! pcm_closed && [ "${count}" -lt 50 ]; do
+        sleep 0.1
+        count=$((count + 1))
+    done
+    pcm_closed
+}
 
 start_factory() {
+    quiesce_boot_audio || true
     "${FACTORY}" start
 }
 
@@ -25,12 +52,18 @@ case "$1" in
             start_factory
             exit $?
         fi
+        if ! quiesce_boot_audio; then
+            echo "world-minphase cannot close boot audio; selecting factory v23"
+            printf '%s\n' MUSIC_BUSY > "${DISABLE}"
+            start_factory
+            exit 1
+        fi
         if [ -f "${PIDFILE}" ] && kill -0 "$(cat "${PIDFILE}")" 2>/dev/null; then
             echo "world-minphase already running"
             exit 0
         fi
         "${FACTORY}" stop >/dev/null 2>&1 || true
-        rm -f "${PIDFILE}"
+        rm -f "${PIDFILE}" "${STATE}"
         start-stop-daemon -S -b -m -p "${PIDFILE}" -x "${DAEMON}"
         count=0
         while [ "${count}" -lt 300 ]; do

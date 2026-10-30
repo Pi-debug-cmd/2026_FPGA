@@ -75,6 +75,12 @@ class PersistentBootChecks(unittest.TestCase):
         self.assertIn('--output-gain-q16 16384', text)
         self.assertNotIn('--output-gain-q16 49152', text)
 
+    def test_init_discards_stale_readiness_before_launch(self):
+        text = INIT.read_text()
+        self.assertIn('rm -f "${PIDFILE}" "${STATE}"', text)
+        self.assertLess(text.index('rm -f "${PIDFILE}" "${STATE}"'),
+                        text.index('start-stop-daemon -S'))
+
 
 if __name__ == '__main__':
     unittest.main()
