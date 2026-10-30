@@ -2152,3 +2152,21 @@
 - 检查：相关unittest 21项中19通过、2项因Windows无POSIX sh跳过；板端shell语法/安装通过。全sim另有2项因缺失被忽略的旧target profile生成资产报错，与本轮无关且未伪造资产。
 - 限制：用户明确跳过提示可闻和长稳；本结果只证明融合最小相位PL阶段，不宣称完整WORLD全PL。shutdown记录Xilinx audio formatter内核警告但随后重启成功；FAT旧未正确卸载警告仍在。
 - 报告：`report/world_minphase_persistent_boot_round30_20261030.{md,json,txt}`；下一责任方为维护者审核PR。若后续要求产品化长稳，再单独处理shutdown驱动警告和10/30分钟门。
+
+### [PL-20261027-01] Round31 WORLD 合成 batch 继续迁移认领
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`a8f6f8f`。
+- 用户授权：按“PL承担主要DSP、PS仅保留控制/音频I/O/回退”的路线继续；目标不是取消PS，而是逐层迁移约80%～95%的计算负载。
+- 本轮唯一变量：在已通过的minphase PL核之后建立完整合成batch的状态/接口与host golden原型，覆盖脉冲位置、周期/非周期激励、RandnState消费顺序、anchor及跨batch overlap-add；不先改DIO/CheapTrick/D4C。
+- 成功门：与WORLD v23同输入同状态逐样本/PCM16对照，最大PCM16误差≤3、SNR≥75dB、零削顶；接口将逐帧513-bin中间往返改为40ms batch，保留16kHz/10ms帧和128样本输出契约。
+- 改动范围：`src/hls/`、`src/ps/`、`sim/`、`build/`及`report/`中的本轮最小实现和证据。Round30板上启动release/位流保持不变，本轮不录音、不播放、不切板。
+- 限制：首先完成host数值门和资源可综合结构；未通过前不宣称HLS、布局布线、板卡或实时提升。
+- 下一责任方：Hardware-A / Codex 阅读WORLD 0.3.5 synthesisrealtime实现，固定batch契约，完成原型、回归和独立提交推送。
+
+### [PL-20261027-01] Round31 WORLD 合成脉冲核原型结果
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：ACCEPTED（host/C-sim/Verilog RTL原型门）；基准提交：`a8f6f8f`。
+- 实现：单脉冲PL边界包含三次FFT、噪声去均值、非周期频域乘法、fftshift、周期DC去除和最终缩放；PS暂留原RandnState、脉冲定位和overlap-add，避免改变随机序列后误判音色。
+- 数值：5组host、HLS C-sim、Verilog cosim全部通过；最坏relative-L2 `1.7291321e-7`、最大绝对误差`5.0343813e-7`。RTL latency min/avg/max=`50445/51603/55214` cycles。
+- 资源：三次变换复用同一Transform后HLS估算`10920 LUT / 9495 FF / 18 BRAM18K / 22 DSP`，较初版节省3541 LUT和18 DSP，100MHz最坏估算0.567ms/脉冲。估算不是routed签核。
+- 风险：XSim依赖监视器保留2100条显式inter-false地址碰撞警告；5组通过不是形式证明。本轮仍非最终40ms batch，未做真实WORLD PCM回归、OOC/整机实现、板卡、音频或稳定性测试。
+- 报告：`report/world_synthesis_pulse_round31_20261030.{md,json,txt}`；复现入口`build/test_world_synthesis_pulse.ps1`、`build/probe_world_synthesis_pulse_hls.tcl`、`build/cosim_world_synthesis_pulse_hls.tcl`。
+- 下一责任方：Hardware-A / Codex 独立提交推送后进入Round32，把可选host模型接入`synthesisrealtime`做真实WORLD文件PCM16/SNR回归，再决定OOC/整机连接。

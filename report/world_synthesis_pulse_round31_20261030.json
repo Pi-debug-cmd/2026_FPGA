@@ -1,0 +1,85 @@
+{
+  "task_id": "PL-20261027-01",
+  "round": 31,
+  "date": "2026-10-30",
+  "role": "Hardware-A / Codex",
+  "status": "ACCEPTED_HOST_CSIM_RTL_PROTOTYPE",
+  "base_commit": "a8f6f8f",
+  "part": "xc7z020clg400-2",
+  "clock_mhz": 100,
+  "scope": [
+    "noise mean removal",
+    "one forward FFT and two inverse FFTs through one shared transform datapath",
+    "aperiodic spectral multiply",
+    "fftshift",
+    "periodic DC removal",
+    "final WORLD scaling"
+  ],
+  "state_boundary": {
+    "randn_owner": "PS, preserving WORLD RandnState consumption order",
+    "pulse_location_owner": "PS",
+    "overlap_add_owner": "PS",
+    "next_fusion": "filter generation plus multi-pulse descriptors plus overlap-add"
+  },
+  "numeric": {
+    "cases": 5,
+    "host_passed": true,
+    "hls_csim_passed": true,
+    "verilog_cosim_passed": true,
+    "worst_relative_l2": 1.72913210714e-7,
+    "worst_absolute": 5.03438131873e-7
+  },
+  "rtl_cosim_cycles": {
+    "latency_min": 50445,
+    "latency_avg": 51603,
+    "latency_max": 55214,
+    "interval_min": 50471,
+    "interval_avg": 50727,
+    "interval_max": 51496,
+    "total": 258123
+  },
+  "hls_estimate_shared_transform": {
+    "clock_estimated_ns": 7.3,
+    "latency_min_cycles": 45369,
+    "latency_max_cycles": 56650,
+    "lut": 10920,
+    "ff": 9495,
+    "bram18k": 18,
+    "dsp": 22
+  },
+  "hls_estimate_unshared_first_attempt": {
+    "lut": 14461,
+    "ff": 11871,
+    "bram18k": 20,
+    "dsp": 40,
+    "latency_max_cycles": 43074
+  },
+  "estimated_with_round18_full_design_not_routed": {
+    "lut": 24830,
+    "ff": 29640,
+    "bram18k": 37,
+    "dsp": 69
+  },
+  "warnings": {
+    "xsim_dependence_monitor_count": 2100,
+    "meaning": "Explicit inter-iteration dependence waivers require later signoff; passing five vectors is not formal proof."
+  },
+  "board_or_audio_changed": false,
+  "limitations": [
+    "No real WORLD file PCM16/SNR regression yet.",
+    "No OOC implementation or full-design route yet.",
+    "No board load, recording, playback, listening or stability test.",
+    "The interface is still one pulse per transaction, not the final 40 ms batch."
+  ],
+  "sha256": {
+    "source": "43a21ed4d8c3d218f7e1b1e8b82e9876db3035e9435f5752da3d9b708cbaaaa8",
+    "testbench": "d826f0f4fe10b99e4ce380d69c2cda406209be57516bc92a2e20137f3feb28bd",
+    "probe_tcl": "9d514bcf50fbaa7e1f5a192f277b932c1967d013e92b6fe4126b182cd47f04c0",
+    "cosim_tcl": "8a8e495bdf8c149007df52e83a85c96e14d4a492b402f410f9193b4d47e05d93",
+    "host_test_script": "47fc20e3a0dd51b5b1d0341cf195a43b12f5faaa57df932ffde808eb22ea3fbf",
+    "csynth_report": "23fc818d975c120bf32a6f82bfbb3bab36253a9b9aaed279062185dd592cff4c",
+    "cosim_report": "e830a11f3d417a4599b0275ad6479ee85d5bae2db5303ad3e63f141e124fd794",
+    "xsim_log": "9c8ff57c0fc712fdcae72b4ed0d57324fb6d3ee8ddd42ae45b0520df30c1754d"
+  },
+  "next_responsible": "Hardware-A / Codex: commit this prototype, then integrate a selectable host model into synthesisrealtime for real WORLD file regression before OOC/full-design work."
+}

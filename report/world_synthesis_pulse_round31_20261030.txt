@@ -1,0 +1,10 @@
+PL-20261027-01 Round31 ACCEPTED_HOST_CSIM_RTL_PROTOTYPE
+part=xc7z020clg400-2 clock=100MHz
+numeric cases=5 relative_l2_max=1.72913210714e-7 absolute_max=5.03438131873e-7
+host=PASS hls_csim=PASS verilog_cosim=PASS
+rtl cycles min/avg/max=50445/51603/55214 total=258123
+hls estimate shared transform: LUT=10920 FF=9495 BRAM18K=18 DSP=22 max_latency=56650
+first unshared estimate: LUT=14461 FF=11871 BRAM18K=20 DSP=40 max_latency=43074
+xsim dependence warnings=2100; retained as signoff risk
+board/audio changed=false; Round30 persistent candidate unchanged
+not yet: real WORLD PCM regression, OOC/full route, board deployment, final 40ms batch
