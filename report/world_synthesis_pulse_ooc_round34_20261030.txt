@@ -1,0 +1,7 @@
+PL-20261027-01 Round34 ACCEPTED_OOC_ROUTED
+csim=5/5 relative_l2=1.72913210714e-7 max_abs=5.03438131873e-7
+routed=6735_LUT 8776_FF 16_BRAM18K 22_DSP 3382_slice
+timing=WNS_1.918719ns WHS_0.047895ns achieved_period_8.081ns
+route=14930_fully_routed 0_errors; DRC=68_warning 21_advisory 0_critical 0_error
+combined_round18_upper_bound=20645_LUT 28921_FF 17.5_BRAM_tile 69_DSP
+scope=OOC_only no_board no_recording no_playback

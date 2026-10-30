@@ -2197,3 +2197,16 @@
 - 数值：标准录音1/4分别SNR=`105.295306/104.549879 dB`，最大PCM16误差均为`1`，RMS误差`0.015811/0.014577`，CPU/模型削顶均`0/0`；模型调用`1643/1628`、CPU fallback `124/179`，全部通过75 dB/3/零削顶门。
 - 证据：模型exe SHA `8a7d60f5...a3e1a09e`；输入PCM SHA分别`7a23bd30...00b2`、`8edae31b...d70d1c`；报告`report/world_synthesis_pulse_round33_20261030.{md,json,txt}`。
 - 限制：只证明真实WORLD host模型的数值合同，不宣称OOC、整机时序、板卡、音频听感或稳定性通过；本轮未切板、录音、播放或修改Round30 release。下一责任方Hardware-A / Codex独立提交后进入OOC/整机DMA batch连接。
+
+### [PL-20261027-01] Round34 合成脉冲核 OOC 实现认领
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`506d2dd`。
+- 本轮唯一变量：从干净短路径重建Round31共享Transform核，并执行HLS `export_design -flow impl`，取得xc7z020clg400-2的真实OOC布线资源、时序和DRC；不修改核算法与接口。
+- 成功门：host/C-sim仍通过；OOC实现完成，setup/hold均非负、DRC无Error、无未布线；资源与Round18整机相加不超过Zynq-7020容量，并保留≥20% LUT/BRAM/DSP余量供互连与后续融合。
+- 范围：只构建离线工程和报告；不接整机、不生成或加载板上bit、不录音、不播放、不修改Round30 release。下一责任方Hardware-A / Codex运行OOC并独立提交可复现结果。
+
+### [PL-20261027-01] Round34 合成脉冲核 OOC 实现结果
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：ACCEPTED（OOC routed门）；基准提交：`506d2dd`。
+- 数值/实现：C-sim 5/5，relative-L2 `1.7291321e-7`；routed资源`6735 LUT / 8776 FF / 16 BRAM18K / 22 DSP`，WNS=`1.918719 ns`、WHS=`0.047895 ns`，14930 fully routed、0 routing error。
+- DRC：68 Warning、21 Advisory、0 Critical/Error；主要为浮点流水建议，OOC壳另有PS7缺失及边界时钟/pin未固定警告，必须由整机重签。
+- 容量：与Round18完整音频+minphase保守相加为`20645 LUT / 28921 FF / 17.5 BRAM Tile / 69 DSP`，占比`38.81%/27.18%/12.5%/31.36%`，虽未计新互连但远高于20%余量门。
+- 证据：`report/world_synthesis_pulse_ooc_round34_20261030.{md,json,txt}`；外部工程`D:/wpl_20261030_r34/pulse_ooc`，报告SHA在JSON。本轮未接整机、切板、录音、播放或修改Round30 release。下一责任方Hardware-A / Codex独立提交后将pulse IP接入完整工程并签核整机时序/资源。
