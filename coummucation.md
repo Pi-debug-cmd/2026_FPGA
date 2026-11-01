@@ -1518,3 +1518,16 @@
 - 止损：若两个 CFG 都未降低泄漏或造成 CER 失败，本路线立即停止，不追加更高 CFG；既有 1.70 已有内容塌缩证据。
 - 限制：电脑端离线开发，不播放、不改板上 v23；Remote-PS-C 不负责验证本方案。
 - 下一责任方：Hardware-A / Codex 完成 CFG 筛选并按结果提交。
+
+### [SUBMIT-20261101-01] Round30 AMD 自主选题参赛包
+- 日期：2026-11-01
+- 角色/Agent：Hardware-A / Codex
+- 状态：PROPOSED
+- 基准提交：Round30 实现提交 `a8f6f8f32b159eaea277354118220c633f31fbc2`（来源分支 `agent/Pi-debug-cmd/PL-20261027-01`）；参赛包基线 `9a3657a`
+- 目标：从 2026-10-30 WORLD minphase PS+PL 实现整理英文命名、可公开、可复现的 AMD 自主选题完整提交目录，并建立独立 GitHub 项目。
+- 范围：仅选入本方案源代码、板端和构建脚本、仿真夹具、资源/时序与实测摘要、设计报告、复现说明和 Skill；不纳入受控真人语音、模型、位流和生成物。真实音频复现条件在文档中声明。
+- 修改路径：公开工程 `https://github.com/Pi-debug-cmd/amd-zynq-world-voice-pl-2026`，首提交 `ed7bebfc83a8453e5ea3ea7a355c4cee573e2c89`；本记录与 `report/amd_round30_submission_package_20261101.md`。
+- 复现/检查命令：`python -m unittest sim.test_world_minphase_boot -v`（2 passed、2 skipped，Windows 无 POSIX `sh`）；`python metrics/scripts/validate_metrics.py`（18 条指标证据路径全部存在）；20 个核心源文件与 Round30 `a8f6f8f` Git blob SHA 一致。
+- 量化结果：公开包 77 文件、6310 行；目录文件和源码、构建/板端脚本、RTL/HLS testbench、资源时序/板测报告、设计报告、指标表、复现说明与 Vivado MCP/GitHub Skill 已推送。未纳入语音、位流、系统镜像及生成物。
+- 限制：Round30 仅通过持久部署/重启自启边界；长稳、音色身份、陌生人泛化和最终目标音色未通过或未测。全系统 clean-room 构建所需 vendor base project、Vivado 生成物、PetaLinux 镜像未随来源仓库提供；Round24 无有效语音，Round21 听感否决仍保留。无新的板卡录音/播放/试听。
+- 下一责任方：Maintainer 审核本仓库 PR；项目负责人按 `SUBMISSION_CHECKLIST.md` 补齐完整工程再确定最终参赛交付。
