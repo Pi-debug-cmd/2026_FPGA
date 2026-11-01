@@ -1,0 +1,9 @@
+PL-20261027-01 Round25 REJECTED_PROMPT_INAUDIBLE_AND_RUNTIME_GATE
+operator: "我刚刚没有听到提示音"
+prompt process: exit=0 frames=24960 peak_fraction=0.12; operator_audible=false
+children: 0/6/0; capture_overruns=0 playback_underruns=0
+stream: captured16k=960000 played16k=960000 submitted=1502 consumed=1502
+speech/output: voiced_frames=0 output_peak=2.423787389 clipped_samples=133
+PL: calls=8803 fallback=0 driver_device_mean_us=386.25
+restore: factory bit/v23 hashes match; FPGA operating; service and both PCM RUNNING after recheck; taint=0; modules/tmp absent
+next: add silent codec warm-up, longer/louder three-tone cue and prompt-only audible validation before another recording

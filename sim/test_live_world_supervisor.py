@@ -3,6 +3,7 @@ import contextlib
 import importlib.util
 import io
 from pathlib import Path
+import struct
 import subprocess
 import tempfile
 import unittest
@@ -15,6 +16,48 @@ spec.loader.exec_module(trial)
 
 
 class SupervisorChecks(unittest.TestCase):
+    def test_prompt_warms_codec_and_uses_bounded_three_tone_signal(self):
+        captured = {}
+        def run(command, **kwargs):
+            captured['command'] = command
+            captured['input'] = kwargs['input']
+            return subprocess.CompletedProcess(command, 0)
+        with tempfile.TemporaryDirectory(dir=ROOT / 'build/generated/world_budget') as directory, \
+             patch.object(trial.subprocess, 'run', side_effect=run), \
+             patch.object(trial.time, 'sleep') as sleep:
+            result = trial.play_prompt(Path(directory), 2.0)
+        words = struct.unpack('<' + 'I' * (len(captured['input']) // 4), captured['input'])
+        signed = [((word & 0xffffff) ^ 0x800000) - 0x800000 for word in words]
+        self.assertEqual(captured['command'][1:3], ['-D', 'default'])
+        self.assertEqual(len(captured['input']) // 8, result['frames'])
+        self.assertTrue(all(value == 0 for value in signed[:2 * 25600]))
+        self.assertGreater(max(abs(value) for value in signed) / 8388607, 0.29)
+        self.assertLessEqual(max(abs(value) for value in signed) / 8388607, 0.30)
+        self.assertEqual(result['tone_hz'], [660, 880, 1175])
+        self.assertEqual(result['warmup_s'], 0.8)
+        sleep.assert_called_once_with(2.0)
+
+    def test_prompt_only_never_starts_capture_or_world(self):
+        events = []
+        def run(command, **kwargs):
+            if command[-2:] == ['store', '0']:
+                Path(command[2]).write_text('saved mixer')
+            if command[-2:] == ['restore', '0']:
+                events.append('restore')
+            return subprocess.CompletedProcess(command, 0)
+        with tempfile.TemporaryDirectory(dir=ROOT / 'build/generated/world_budget') as directory, \
+             patch.object(trial, 'audio_preflight', return_value={'pcm0p': 'closed', 'pcm1c': 'closed'}), \
+             patch.object(trial, 'pcm_idle', return_value={'pcm0p': 'closed', 'pcm1c': 'closed'}), \
+             patch.object(trial, 'codec_snapshot'), \
+             patch.object(trial, 'play_prompt', return_value={'exit': 0}), \
+             patch.object(trial.subprocess, 'run', side_effect=run), \
+             patch.object(trial.subprocess, 'Popen') as popen, \
+             contextlib.redirect_stdout(io.StringIO()):
+            code = trial.run_prompt_only(Path(directory), 2.0)
+        self.assertEqual(code, 0)
+        self.assertEqual(events, ['restore'])
+        popen.assert_not_called()
+
     def exercise(self, fault):
         events, children = [], []
         class Child:
@@ -53,21 +96,23 @@ class SupervisorChecks(unittest.TestCase):
                 if fault in ('fifo_ok', 'fifo_fallback'):
                     self.assertEqual(command[-1], 'fifo')
                     enabled = 'true' if fault == 'fifo_ok' else 'false'
-                    kwargs['stderr'].write(('{"exit_code":0,"scheduling_fifo":' + enabled +
+                    kwargs['stderr'].write(('{"kind":"world_raw_stream_runtime","exit_code":0,"scheduling_fifo":' + enabled +
                         ',"reader_sched_error":0,"analysis_sched_error":0,"render_sched_error":0,"writer_sched_error":0}\n').encode())
                 elif fault in ('fifo_io_ok', 'fifo_io_fallback', 'fifo_io_wrong_compute'):
                     self.assertEqual(command[-1], 'fifo_io')
-                    runtime = {'exit_code': 0, 'scheduling_fifo_io': fault != 'fifo_io_fallback',
+                    runtime = {'kind': 'world_raw_stream_runtime', 'exit_code': 0,
+                               'scheduling_fifo_io': fault != 'fifo_io_fallback',
                                'scheduling_fifo': fault == 'fifo_io_wrong_compute',
                                'reader_sched_error': 0, 'analysis_sched_error': 0,
                                'render_sched_error': 0, 'writer_sched_error': 0}
                     import json
                     kwargs['stderr'].write((json.dumps(runtime) + '\n').encode())
                 elif fault in ('voiced_ok', 'voiced_missing'):
-                    kwargs['stderr'].write(b'{"exit_code":0,"voiced_frames":100}\n' if fault == 'voiced_ok'
-                                           else b'{"exit_code":0,"voiced_frames":0}\n')
+                    kwargs['stderr'].write(b'{"kind":"world_raw_stream_runtime","exit_code":0,"voiced_frames":100}\n' if fault == 'voiced_ok'
+                                           else b'{"kind":"world_raw_stream_runtime","exit_code":0,"voiced_frames":0}\n')
                 else:
-                    kwargs['stderr'].write(b'{"exit_code":0,"raw_capture_clipped_samples":1}\n' if fault == 'adc_clip' else b'{"exit_code":0}\n')
+                    kwargs['stderr'].write(b'{"kind":"world_raw_stream_runtime","exit_code":0,"raw_capture_clipped_samples":1}\n' if fault == 'adc_clip'
+                                           else b'{"kind":"world_raw_stream_runtime","exit_code":0}\n')
             return child
 
         def run(command, **kwargs):

@@ -1,0 +1,10 @@
+PL-20261027-01 Round23 prompted 20-second live: ACCEPTED
+operator feedback verbatim: 讲话时能听到转换声音，效果和ps类似
+prompt: exit=0 frames=24960 ready_delay=2.0s (operator did not separately rate prompt)
+children=0/0/0 xrun=0 ALSA_error=0 input_clip=0 output_clip=0
+PL calls=4857 fallback=0; driver device mean=388.16us/call
+voiced_frames=1079 raw_capture_peak=0.415668 output_peak=0.404884
+analysis_rtf=0.561150 render_rtf=0.310517 analysis_max_ms=34.605499
+candidate active MICB/ADC/DAC/PGA/HP: all On
+restore: factory bit/v23 match; FPGA operating; service and both PCM RUNNING; taint=0; modules absent
+scope: accepted 20-second usable gate only; long stability and physical latency pending

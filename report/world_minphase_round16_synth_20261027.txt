@@ -1,0 +1,332 @@
+****** vitis-run v2026.1 (64-bit)
+  **** SW Build 6511674 on 2026-06-16-13:14:00
+  **** Start of session at: Tue Oct 27 19:57:43 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+  **** HLS Build v2026.1 6493734
+Sourcing Tcl script 'C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/build/probe_world_minphase_hls.tcl'
+INFO: [HLS 200-1510] Running: open_project D:/wpl_20261027_r16/m
+WARNING: [HLS 200-2182] The 'm' project will not automatically appear within Vitis IDE workspaces and is meant only for TCL batch use.  Please use open_component instead of open_project/open_solution to generate Vitis IDE compatible component files and directory structure.
+Resolution: For help on HLS 200-2182 see docs.amd.com/access/sources/dita/topic?Doc_Version=2026.1%20English&url=ug1448-hls-guidance&resourceid=200-2182.html
+INFO: [HLS 200-10] Creating and opening solution 'D:/wpl_20261027_r16/m'.
+INFO: [HLS 200-1510] Running: set_top world_minphase
+INFO: [HLS 200-1510] Running: add_files C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp
+INFO: [HLS 200-10] Adding design file 'C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp' to the project
+INFO: [HLS 200-1510] Running: open_solution -reset solution -flow_target vivado
+INFO: [HLS 200-10] Creating and opening solution 'D:/wpl_20261027_r16/m/solution'.
+INFO: [HLS 200-10] Cleaning up the solution database.
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.amd.com/access/sources/dita/topic?Doc_Version=2026.1%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+WARNING: [HLS 200-2149] The 'flow_target' option is deprecated and will be removed in a future release. For 'vivado' value you may simply remove the option for equivalent behavior.
+WARNING: [HLS 200-484] The 'open_solution -flow_target' command is deprecated and will be removed in a future release.
+INFO: [HLS 200-1510] Running: set_part xc7z020clg400-2
+INFO: [HLS 200-1611] Setting target device to 'xc7z020-clg400-2'
+INFO: [HLS 200-1510] Running: create_clock -period 10 -name default
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-1510] Running: csynth_design
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.653 seconds; current allocated memory: 139.102 MB.
+INFO: [HLS 200-2191] C-Synthesis will use clang-16 as the compiler
+INFO: [HLS 200-10] Analyzing design file 'C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp' ...
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 4.279 seconds; current allocated memory: 142.039 MB.
+INFO: [HLS 200-1995] There were 19,661 instructions in the design after the 'Compile/Link' phase of compilation. See the Design Size Report for more details (D:/wpl_20261027_r16/m/solution/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 214-291] Loop 'anonymous' is marked as complete unroll implied by the pipeline pragma (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/src/hls\utils/x_hls_float_utils.h:289:5)
+INFO: [HLS 214-291] Loop 'anonymous' is marked as complete unroll implied by the pipeline pragma (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/src/hls\utils/x_hls_float_utils.h:282:5)
+INFO: [HLS 214-291] Loop 'anonymous' is marked as complete unroll implied by the pipeline pragma (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/src/hls\utils/x_hls_float_utils.h:269:5)
+INFO: [HLS 214-291] Loop 'anonymous' is marked as complete unroll implied by the pipeline pragma (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/src/hls\utils/x_hls_float_utils.h:268:41)
+INFO: [HLS 214-291] Loop 'anonymous' is marked as complete unroll implied by the pipeline pragma
+INFO: [HLS 214-186] Unrolling loop 'anonymous' (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/src/hls\utils/x_hls_float_utils.h:289:5) in function 'scaled_fixed2ieee<29, 1>' completely with a factor of 2 (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/src/hls\utils/x_hls_float_utils.h:257:0)
+INFO: [HLS 214-186] Unrolling loop 'anonymous' (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/src/hls\utils/x_hls_float_utils.h:282:5) in function 'scaled_fixed2ieee<29, 1>' completely with a factor of 2 (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/src/hls\utils/x_hls_float_utils.h:257:0)
+INFO: [HLS 214-186] Unrolling loop 'anonymous' (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/src/hls\utils/x_hls_float_utils.h:269:5) in function 'scaled_fixed2ieee<29, 1>' completely with a factor of 1 (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/src/hls\utils/x_hls_float_utils.h:257:0)
+INFO: [HLS 214-186] Unrolling loop 'anonymous' (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/src/hls\utils/x_hls_float_utils.h:268:41) in function 'scaled_fixed2ieee<29, 1>' completely with a factor of 2 (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/src/hls\utils/x_hls_float_utils.h:257:0)
+INFO: [HLS 214-186] Unrolling loop 'anonymous' () in function 'scaled_fixed2ieee<29, 1>' completely with a factor of 1 (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/src/hls\utils/x_hls_float_utils.h:257:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_13_2' (C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:13:22) in function '(anonymous namespace)::Forward' completely with a factor of 10 (C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:8:0)
+INFO: [HLS 200-1995] There were 1,795 instructions in the design after the 'Unroll/Inline' phase of compilation. See the Design Size Report for more details (D:/wpl_20261027_r16/m/solution/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 1,083 instructions in the design after the 'Unroll/Inline (step 2)' phase of compilation. See the Design Size Report for more details (D:/wpl_20261027_r16/m/solution/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::fp_struct(float)' into 'void range_redux_payne_hanek_hotbm<29, float, 29, 29>(float, ap_uint<3>&, ap_ufixed<29, 0, (ap_q_mode)5, (ap_o_mode)3, 0>&, ap_ufixed<29, 0, (ap_q_mode)5, (ap_o_mode)3, 0>&, ap_int<fp_struct<float>::EXP_BITS>&)' (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_range_redux.h:437:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::expv() const' into 'void range_redux_payne_hanek_hotbm<29, float, 29, 29>(float, ap_uint<3>&, ap_ufixed<29, 0, (ap_q_mode)5, (ap_o_mode)3, 0>&, ap_ufixed<29, 0, (ap_q_mode)5, (ap_o_mode)3, 0>&, ap_int<fp_struct<float>::EXP_BITS>&)' (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_range_redux.h:437:0)
+INFO: [HLS 214-178] Inlining function 'ap_uint<(((2) * ((23) + (1))) + (29)) + (3)> table_lookup_4oPi_hotbm<23, 29>(int, float)' into 'void range_redux_payne_hanek_hotbm<29, float, 29, 29>(float, ap_uint<3>&, ap_ufixed<29, 0, (ap_q_mode)5, (ap_o_mode)3, 0>&, ap_ufixed<29, 0, (ap_q_mode)5, (ap_o_mode)3, 0>&, ap_int<fp_struct<float>::EXP_BITS>&)' (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_range_redux.h:437:0)
+INFO: [HLS 214-178] Inlining function 'unsigned int clz<29, 58, 0>(ap_ufixed<58, 0, (ap_q_mode)5, (ap_o_mode)3, 0>)' into 'void range_redux_payne_hanek_hotbm<29, float, 29, 29>(float, ap_uint<3>&, ap_ufixed<29, 0, (ap_q_mode)5, (ap_o_mode)3, 0>&, ap_ufixed<29, 0, (ap_q_mode)5, (ap_o_mode)3, 0>&, ap_int<fp_struct<float>::EXP_BITS>&)' (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/hlsmath/include/FloatingPoint/hls_range_redux.h:437:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::data() const (.47.56.67.76)' into 'fp_struct<float>::to_float() const (.44.53.64.73)' (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/src/hls\utils/x_hls_utils.h:322:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::to_float() const (.44.53.64.73)' into 'fp_struct<float>::to_ieee() const' (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/src/hls\utils/x_hls_utils.h:346:0)
+INFO: [HLS 214-178] Inlining function 'clz(int) (.23361)' into 'void scaled_fixed2ieee<29, 1>(ap_ufixed<29, 1, (ap_q_mode)5, (ap_o_mode)3, 0>, float&, int)' (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/src/hls\utils/x_hls_float_utils.h:257:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::set_mantissa(ap_ufixed<24, 1, (ap_q_mode)5, (ap_o_mode)3, 0>)' into 'void scaled_fixed2ieee<29, 1>(ap_ufixed<29, 1, (ap_q_mode)5, (ap_o_mode)3, 0>, float&, int)' (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/src/hls\utils/x_hls_float_utils.h:257:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::to_ieee() const' into 'void scaled_fixed2ieee<29, 1>(ap_ufixed<29, 1, (ap_q_mode)5, (ap_o_mode)3, 0>, float&, int)' (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/src/hls\utils/x_hls_float_utils.h:257:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::fp_struct(float)' into 'float hotbm_::sin_or_cos<float>(float, bool, bool)' (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_hotbm.h:210:0)
+INFO: [HLS 214-178] Inlining function 'void range_redux_payne_hanek_hotbm<29, float, 29, 29>(float, ap_uint<3>&, ap_ufixed<29, 0, (ap_q_mode)5, (ap_o_mode)3, 0>&, ap_ufixed<29, 0, (ap_q_mode)5, (ap_o_mode)3, 0>&, ap_int<fp_struct<float>::EXP_BITS>&)' into 'float hotbm_::sin_or_cos<float>(float, bool, bool)' (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_hotbm.h:210:0)
+INFO: [HLS 214-178] Inlining function 'ap_ufixed<29, 1, (ap_q_mode)5, (ap_o_mode)3, 0> hotbm_::value_list<float>::sin_or_cos_approximation<29, 29>(bool, ap_uint<3>&, ap_ufixed<29, 0, (ap_q_mode)5, (ap_o_mode)3, 0>&, ap_ufixed<29, 0, (ap_q_mode)5, (ap_o_mode)3, 0>&, ap_int<8>&)' into 'float hotbm_::sin_or_cos<float>(float, bool, bool)' (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_hotbm.h:210:0)
+INFO: [HLS 214-178] Inlining function 'void scaled_fixed2ieee<29, 1>(ap_ufixed<29, 1, (ap_q_mode)5, (ap_o_mode)3, 0>, float&, int)' into 'float hotbm_::sin_or_cos<float>(float, bool, bool)' (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_hotbm.h:210:0)
+INFO: [HLS 214-178] Inlining function 'fp_struct<float>::to_ieee() const' into 'float hotbm_::sin_or_cos<float>(float, bool, bool)' (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_hotbm.h:210:0)
+INFO: [HLS 214-178] Inlining function 'hotbm_::cos(float)' into 'cosf' (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib\hlsmath\src\c\sincosfloat.cpp:11:0)
+INFO: [HLS 214-178] Inlining function 'cosf' into 'std::cos(float)' (D:/USER_Software/vivado/2026.1/Vitis/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath:185:0)
+INFO: [HLS 214-178] Inlining function 'hotbm_::sin(float)' into 'sinf' (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib\hlsmath\src\c\sincosfloat.cpp:7:0)
+INFO: [HLS 214-178] Inlining function 'sinf' into 'std::sin(float)' (D:/USER_Software/vivado/2026.1/Vitis/tps/mingw/8.3.0/win64.o/nt\lib\gcc\x86_64-w64-mingw32\8.3.0\include\c++\cmath:426:0)
+INFO: [HLS 214-178] Inlining function 'std::exp(float)' into 'world_minphase' (C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:47:0)
+INFO: [HLS 214-178] Inlining function 'std::cos(float)' into 'world_minphase' (C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:47:0)
+INFO: [HLS 214-178] Inlining function 'std::sin(float)' into 'world_minphase' (C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:47:0)
+INFO: [HLS 200-1995] There were 1,013 instructions in the design after the 'Unroll/Inline (step 3)' phase of compilation. See the Design Size Report for more details (D:/wpl_20261027_r16/m/solution/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 721 instructions in the design after the 'Unroll/Inline (step 4)' phase of compilation. See the Design Size Report for more details (D:/wpl_20261027_r16/m/solution/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 214-248] Applying array_partition to '_ZZN6hotbm_10value_listIfE24sin_or_cos_approximationILi29ELi29EEE9ap_ufixedIXT_ELi1EL9ap_q_mode5EL9ap_o_mode3ELi0EEbR7ap_uintILi3EERS3_IXT_ELi0ELS4_5ELS5_3ELi0EERS3_IXT0_ELi0ELS4_5ELS5_3ELi0EER6ap_intILi8EEE10swap_table': Complete partitioning on dimension 1. (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib\hlsmath\src\common\hls_hotbm_float.cpp:14:0)
+INFO: [HLS 214-248] Applying array_partition to '_ZZN6hotbm_10sin_or_cosIfEET_S1_bbE13neg_cos_table': Complete partitioning on dimension 1. (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_hotbm.h:217:0)
+INFO: [HLS 214-248] Applying array_partition to '_ZZN6hotbm_10sin_or_cosIfEET_S1_bbE13neg_sin_table': Complete partitioning on dimension 1. (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_hotbm.h:216:0)
+INFO: [HLS 214-248] Applying array_partition to '_ZZN6hotbm_10sin_or_cosIfEET_S1_bbE10swap_table': Complete partitioning on dimension 1. (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_hotbm.h:215:0)
+WARNING: [HLS 214-358] Array transformation on index using bit extension logic may lead to poor performance. Please use int or long for array index computation to benefit from optimizations. (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_hotbm.h:242:30)
+WARNING: [HLS 214-358] Array transformation on index using bit extension logic may lead to poor performance. Please use int or long for array index computation to benefit from optimizations. (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib\hlsmath\src\common\hls_hotbm_float.cpp:25:67)
+WARNING: [HLS 214-358] Array transformation on index using bit extension logic may lead to poor performance. Please use int or long for array index computation to benefit from optimizations. (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_hotbm.h:267:8)
+INFO: [HLS 200-1995] There were 813 instructions in the design after the 'Array/Struct' phase of compilation. See the Design Size Report for more details (D:/wpl_20261027_r16/m/solution/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 703 instructions in the design after the 'Array/Struct (step 2)' phase of compilation. See the Design Size Report for more details (D:/wpl_20261027_r16/m/solution/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 703 instructions in the design after the 'Array/Struct (step 3)' phase of compilation. See the Design Size Report for more details (D:/wpl_20261027_r16/m/solution/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 703 instructions in the design after the 'Array/Struct (step 4)' phase of compilation. See the Design Size Report for more details (D:/wpl_20261027_r16/m/solution/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 707 instructions in the design after the 'Array/Struct (step 5)' phase of compilation. See the Design Size Report for more details (D:/wpl_20261027_r16/m/solution/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 705 instructions in the design after the 'Performance' phase of compilation. See the Design Size Report for more details (D:/wpl_20261027_r16/m/solution/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 214-376] Pipelining loop< VITIS_LOOP_11_1> at C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:11:20 due to pipeline_loops threshold
+INFO: [HLS 214-376] Pipelining loop< VITIS_LOOP_53_1> at C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:53:20 due to pipeline_loops threshold
+INFO: [HLS 214-376] Pipelining loop< VITIS_LOOP_60_2> at C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:60:20 due to pipeline_loops threshold
+INFO: [HLS 214-376] Pipelining loop< VITIS_LOOP_61_3> at C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:61:20 due to pipeline_loops threshold
+INFO: [HLS 200-1995] There were 705 instructions in the design after the 'Performance (step 2)' phase of compilation. See the Design Size Report for more details (D:/wpl_20261027_r16/m/solution/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 705 instructions in the design after the 'Performance (step 3)' phase of compilation. See the Design Size Report for more details (D:/wpl_20261027_r16/m/solution/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 705 instructions in the design after the 'Performance (step 4)' phase of compilation. See the Design Size Report for more details (D:/wpl_20261027_r16/m/solution/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 716 instructions in the design after the 'HW Transforms' phase of compilation. See the Design Size Report for more details (D:/wpl_20261027_r16/m/solution/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 757 instructions in the design after the 'HW Transforms (step 2)' phase of compilation. See the Design Size Report for more details (D:/wpl_20261027_r16/m/solution/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 1 seconds. CPU system time: 1 seconds. Elapsed time: 13.479 seconds; current allocated memory: 145.816 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.005 seconds; current allocated memory: 145.816 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.1 seconds; current allocated memory: 154.273 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.052 seconds; current allocated memory: 158.078 MB.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_hotbm.h:209:18) to (C:\scratch\HEAD\hls_product\738\2026.1\src\shared\hls\clib/hlsmath/include/FloatingPoint\hls_hotbm.h:287:5) in function 'hotbm_::sin_or_cos<float>'... converting 13 basic blocks.
+INFO: [XFORM 203-11] Balancing expressions in function '(anonymous namespace)::Forward' (C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:11:22)...9 expression(s) balanced.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.134 seconds; current allocated memory: 181.922 MB.
+WARNING: [ANALYSIS 214-52] Found false inter dependency for variable 're'.
+WARNING: [ANALYSIS 214-52] Found false inter dependency for variable 'im'.
+WARNING: [ANALYSIS 214-52] Found false inter dependency for variable 're'.
+WARNING: [ANALYSIS 214-52] Found false inter dependency for variable 'im'.
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.152 seconds; current allocated memory: 247.301 MB.
+INFO: [HLS 200-2255] Checking Wire Delay Status: Wire Delay Mode is ON
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'world_minphase' ...
+WARNING: [SYN 201-103] Legalizing function name '(anonymous namespace)Forward_Pipeline_VITIS_LOOP_11_1' to 'p_anonymous_namespace_Forward_Pipeline_VITIS_LOOP_11_1'.
+WARNING: [SYN 201-103] Legalizing function name '(anonymous namespace)Forward_Pipeline_VITIS_LOOP_25_4' to 'p_anonymous_namespace_Forward_Pipeline_VITIS_LOOP_25_4'.
+WARNING: [SYN 201-103] Legalizing function name '(anonymous namespace)Forward' to 'p_anonymous_namespace_Forward'.
+WARNING: [SYN 201-103] Legalizing function name 'sin_or_cos<float>' to 'sin_or_cos_float_s'.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'world_minphase_Pipeline_VITIS_LOOP_53_1'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_53_1'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 11, loop 'VITIS_LOOP_53_1'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.188 seconds; current allocated memory: 251.703 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 1.269 seconds; current allocated memory: 252.922 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'p_anonymous_namespace_Forward_Pipeline_VITIS_LOOP_11_1'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_11_1'.
+INFO: [HLS 200-2199] The II Violation in module 'p_anonymous_namespace_Forward_Pipeline_VITIS_LOOP_11_1' (loop 'VITIS_LOOP_11_1'): Potential resource conflict between 'load' operation 32 bit ('im_load', C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:19) on array 'im' and 'store' operation ('im_addr_3_write_ln19', C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:19) of variable 't', C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:19 32 bit on array 'im' on common resource 'im'.
+INFO: [HLS 200-2198] Existing conflicting constraints include from 'load' operation 32 bit ('im_load', C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:19) on array 'im' to 'load' operation 32 bit ('im_load', C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:19) on array 'im' with distance of 1 (conflict 1 of 3)
+INFO: [HLS 200-2198] Existing conflicting constraints include from 'load' operation 32 bit ('im_load', C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:19) on array 'im' to 'store' operation ('im_addr_write_ln19', C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:19) of variable 'im_load', C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:19 32 bit on array 'im' with distance of 0 (conflict 2 of 3)
+INFO: [HLS 200-2198] Existing conflicting constraints include from 'store' operation ('im_addr_write_ln19', C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:19) of variable 'im_load', C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:19 32 bit on array 'im' to 'store' operation ('im_addr_3_write_ln19', C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:19) of variable 't', C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:19 32 bit on array 'im' with distance of 1 (conflict 3 of 3)
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 3, Depth = 3, loop 'VITIS_LOOP_11_1'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.038 seconds; current allocated memory: 253.043 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.047 seconds; current allocated memory: 253.062 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'p_anonymous_namespace_Forward_Pipeline_VITIS_LOOP_25_4'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_25_4'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 2, Final II = 2, Depth = 21, loop 'VITIS_LOOP_25_4'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.08 seconds; current allocated memory: 253.258 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.049 seconds; current allocated memory: 253.277 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'p_anonymous_namespace_Forward'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.047 seconds; current allocated memory: 253.516 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.026 seconds; current allocated memory: 253.672 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'world_minphase_Pipeline_VITIS_LOOP_60_2'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_60_2'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 7, loop 'VITIS_LOOP_60_2'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.032 seconds; current allocated memory: 253.879 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.021 seconds; current allocated memory: 253.879 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'world_minphase_Pipeline_VITIS_LOOP_61_3'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_61_3'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 1, loop 'VITIS_LOOP_61_3'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.029 seconds; current allocated memory: 254.008 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.021 seconds; current allocated memory: 254.008 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'sin_or_cos_float_s'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining function 'sin_or_cos<float>'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 15, function 'sin_or_cos<float>'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.075 seconds; current allocated memory: 255.219 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.047 seconds; current allocated memory: 255.688 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'world_minphase_Pipeline_VITIS_LOOP_63_4'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_63_4'.
+WARNING: [HLS 200-448] Lower bound of II is 2 due to multiple operations accessing 'output_mem' m_axi write: operation list {bus write operation ('output_mem_addr_write_ln66', C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:66) on port 'output_mem' (C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:66), bus write operation ('output_mem_addr_1_write_ln67', C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:67) on port 'output_mem' (C:/Users/World/Desktop/2026_FPGA/tmp/world_v23_pl_worktree/src/hls/world_minphase.cpp:67)}
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 2, Depth = 34, loop 'VITIS_LOOP_63_4'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.069 seconds; current allocated memory: 256.070 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.031 seconds; current allocated memory: 256.227 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'world_minphase'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.041 seconds; current allocated memory: 256.570 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.026 seconds; current allocated memory: 256.863 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'world_minphase_Pipeline_VITIS_LOOP_53_1'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'world_minphase_Pipeline_VITIS_LOOP_53_1' pipeline 'VITIS_LOOP_53_1' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'world_minphase_Pipeline_VITIS_LOOP_53_1'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.094 seconds; current allocated memory: 258.852 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'p_anonymous_namespace_Forward_Pipeline_VITIS_LOOP_11_1'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'p_anonymous_namespace_Forward_Pipeline_VITIS_LOOP_11_1'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 1.706 seconds; current allocated memory: 260.664 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'p_anonymous_namespace_Forward_Pipeline_VITIS_LOOP_25_4'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SYN 201-210] Renamed object name 'p_anonymous_namespace_Forward_Pipeline_VITIS_LOOP_25_4_world_twiddle_re_ROM_AUTO_1R' to 'p_anonymous_namespace_Forward_Pipeline_VITIS_LOOP_25_4_world_twiddle_re_ROM_Abkb' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'p_anonymous_namespace_Forward_Pipeline_VITIS_LOOP_25_4_world_twiddle_im_ROM_AUTO_1R' to 'p_anonymous_namespace_Forward_Pipeline_VITIS_LOOP_25_4_world_twiddle_im_ROM_Acud' due to the length limit 80
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'p_anonymous_namespace_Forward_Pipeline_VITIS_LOOP_25_4' pipeline 'VITIS_LOOP_25_4' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'fadd_32ns_32ns_32_5_full_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'faddfsub_32ns_32ns_32_5_full_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'fmul_32ns_32ns_32_4_max_dsp_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'fsub_32ns_32ns_32_5_full_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'p_anonymous_namespace_Forward_Pipeline_VITIS_LOOP_25_4'.
+INFO: [RTMG 210-279] Implementing memory 'world_minphase_p_anonymous_namespace_Forward_Pipeline_VITIS_LOOP_25_4_world_twiddle_re_ROM_Abkb' using auto ROMs.
+INFO: [RTMG 210-279] Implementing memory 'world_minphase_p_anonymous_namespace_Forward_Pipeline_VITIS_LOOP_25_4_world_twiddle_im_ROM_Acud' using auto ROMs.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.185 seconds; current allocated memory: 262.934 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'p_anonymous_namespace_Forward'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'p_anonymous_namespace_Forward'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.134 seconds; current allocated memory: 264.789 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'world_minphase_Pipeline_VITIS_LOOP_60_2'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'world_minphase_Pipeline_VITIS_LOOP_60_2' pipeline 'VITIS_LOOP_60_2' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'fmul_32ns_32ns_32_4_max_dsp_1': 2 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'world_minphase_Pipeline_VITIS_LOOP_60_2'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.11 seconds; current allocated memory: 265.488 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'world_minphase_Pipeline_VITIS_LOOP_61_3'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'world_minphase_Pipeline_VITIS_LOOP_61_3'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 1 seconds. Elapsed time: 0.107 seconds; current allocated memory: 266.117 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'sin_or_cos_float_s'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Generating core module 'ctlz_30_30_1_0': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'ctlz_32_32_1_0': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_15ns_15ns_30_1_0': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_15ns_15s_30_1_0': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_23s_22ns_45_1_0': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_30s_29ns_58_1_0': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_80s_24ns_80_5_0': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_17_3_1_1_0': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_33_4_1_1_0': 2 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'sin_or_cos_float_s'.
+INFO: [RTMG 210-279] Implementing memory 'world_minphase_sin_or_cos_float_s_ref_4oPi_table_100_ROM_1P_LUTRAM_1R' using distributed ROMs.
+INFO: [RTMG 210-279] Implementing memory 'world_minphase_sin_or_cos_float_s_second_order_float_sin_cos_K0_ROM_1P_LUTRAM_1R' using distributed ROMs.
+INFO: [RTMG 210-279] Implementing memory 'world_minphase_sin_or_cos_float_s_second_order_float_sin_cos_K1_ROM_1P_LUTRAM_1R' using distributed ROMs.
+INFO: [RTMG 210-279] Implementing memory 'world_minphase_sin_or_cos_float_s_second_order_float_sin_cos_K2_ROM_1P_LUTRAM_1R' using distributed ROMs.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 1.525 seconds; current allocated memory: 268.316 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'world_minphase_Pipeline_VITIS_LOOP_63_4'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'world_minphase_Pipeline_VITIS_LOOP_63_4' pipeline 'VITIS_LOOP_63_4' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'fexp_32ns_32ns_32_8_full_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'fmul_32ns_32ns_32_4_max_dsp_1': 2 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'world_minphase_Pipeline_VITIS_LOOP_63_4'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.283 seconds; current allocated memory: 272.113 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'world_minphase'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+WARNING: [RTGEN 206-101] Design contains AXI ports. Reset is fixed to synchronous and active low.
+INFO: [RTGEN 206-500] Setting interface mode on port 'world_minphase/input_mem' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'world_minphase/output_mem' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'world_minphase/log_spectrum' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'world_minphase/filter_re' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'world_minphase/filter_im' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'world_minphase' to 's_axilite & ap_ctrl_hs'.
+INFO: [RTGEN 206-100] Bundling port 'return' to AXI-Lite port control.
+INFO: [RTGEN 206-100] Bundling port 'log_spectrum', 'filter_re' and 'filter_im' to AXI-Lite port control_r.
+INFO: [RTGEN 206-100] Generating core module 'fmul_32ns_32ns_32_4_max_dsp_1': 2 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'world_minphase'.
+INFO: [RTMG 210-278] Implementing memory 'world_minphase_re_RAM_AUTO_1R1W' using auto RAMs.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.214 seconds; current allocated memory: 276.262 MB.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 1 seconds. CPU system time: 1 seconds. Elapsed time: 2.061 seconds; current allocated memory: 279.988 MB.
+INFO: [HLS 200-2225] Wrote inferred directives to file D:/wpl_20261027_r16/m/solution/syn/inferred_directives.ini
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 1 seconds. CPU system time: 3 seconds. Elapsed time: 5.121 seconds; current allocated memory: 281.578 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for world_minphase.
+INFO: [VLOG 209-307] Generating Verilog RTL for world_minphase.
+INFO: [HLS 200-790] **** Loop Constraint Status: Not all loop constraints were satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 136.99 MHz
+INFO: [HLS 200-2161] Finished Command csynth_design Elapsed time: 00:00:36; Allocated memory: 142.648 MB.
+INFO: [HLS 200-112] Total CPU user time: 5 seconds. Total CPU system time: 12 seconds. Total elapsed time: 42.349 seconds; peak allocated memory: 281.578 MB.
+INFO: [vitis-run 60-791] Total elapsed time: 0h 0m 45s
+INFO: [vitis-run 60-1662] Stopping dispatch session having empty uuid.

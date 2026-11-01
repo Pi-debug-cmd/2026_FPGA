@@ -1,0 +1,45 @@
+{
+  "task": "PL-20261027-01",
+  "round": 16,
+  "date": "2026-10-29",
+  "tool": "Vitis HLS 2026.1 build 6493734 / XSIM 2026.1 build 6511674",
+  "part": "xc7z020-clg400-2",
+  "clock_target_ns": 10.0,
+  "project": "D:/wpl_20261027_r16/m",
+  "status": "PASS",
+  "cases": 24,
+  "c_sim_relative_l2_max": 8.59436601769e-07,
+  "rtl_relative_l2_max": 8.53141669198e-07,
+  "rtl_latency_cycles": {
+    "min": 32231,
+    "avg": 32231,
+    "max": 32232
+  },
+  "rtl_interval_cycles": {
+    "min": 32245,
+    "avg": 32245,
+    "max": 32246
+  },
+  "total_execution_cycles": 773889,
+  "dependence_monitor_warnings": 6720,
+  "hls_estimate": {
+    "clock_ns": 7.3,
+    "lut": 10007,
+    "ff": 7732,
+    "bram_18k": 8,
+    "dsp": 38
+  },
+  "sha256": {
+    "src/hls/world_minphase.cpp": "ae0665779bc9043013aab51ca43d86bf35303a29bd15d1c3cad1eb60be8808cd",
+    "src/hls/world_minphase_twiddles.h": "5a7a3f38c90614cdd571189c58a22c222174d7351e414635deedaf42485234a7",
+    "sim/tb_world_minphase.cpp": "c0e9322969c727e83dbe0c014dfed28f9a0a2d2a95d09cfb9ddbd9c2c02b4bb3",
+    "build/cosim_world_minphase_hls.tcl": "eb39ac7ccc3c111d8e6ce161fec41d82d72b4413ef5af7f8c9c23f84b550dd54",
+    "generated_cosim_report": "226fefa1573e712efefa9b5bf6822aaa62a6c2e34dc825a36ffbb42cdec0fc31",
+    "generated_csynth_report": "aae6615f5eeffd02c3b19c092036870b554d8c9b27e3d3aa943250a05b67a402"
+  },
+  "limitations": [
+    "The result proves the generated Verilog against the 24-case WORLD golden testbench, not routed timing or board performance.",
+    "The HLS dependence monitor reports address collisions after the explicit inter false pragmas; the 24 cases pass, but the warnings remain a signoff risk.",
+    "No board, recording, playback, or listening operation was performed."
+  ]
+}

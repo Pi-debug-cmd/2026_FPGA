@@ -1,0 +1,26 @@
+{
+  "task": "PL-20261027-01",
+  "date": "2026-10-27",
+  "implementation": "b551646",
+  "evidence_commit": "a05d00c",
+  "status": "REJECTED: complex FFT convention in PS adapter/probe",
+  "first_trial": {
+    "ExitCode": 1,
+    "Raw": "world_exp_dma: loading out-of-tree module taints kernel.\r\nTraceback (most recent call last):\r\n  File \"/var/volatile/tmp/codex_world_fft_round7/world_fft_pl_trial.py\", line 23, in <module>\r\n    assert probe.returncode == 0, probe.stderr.decode(errors='replace')\r\nAssertionError: FFT mismatch n=1024 relative=1.41421356\r\n\r\nbr# __XD502836__=1\r\n",
+    "Ok": false,
+    "Output": "world_exp_dma: loading out-of-tree module taints kernel.\nTraceback (most recent call last):\n  File \"/var/volatile/tmp/codex_world_fft_round7/world_fft_pl_trial.py\", line 23, in <module>\n    assert probe.returncode == 0, probe.stderr.decode(errors='replace')\nAssertionError: FFT mismatch n=1024 relative=1.41421356\n\nbr#"
+  },
+  "state": {
+    "ExitCode": 0,
+    "Raw": "FFT mismatch n=1024 relative=1.41421356\r\noperating\r\nclosed\r\nclosed\r\n    Tainted: G  \r\nworld_fft_dma 16384 0 - Live 0xbf035000 (O)\r\nworld_exp_dma 16384 0 - Live 0xbf028000 (O)\r\nusb_f_acm 16384 1 - Live 0xbf00c000\r\nu_serial 20480 1 usb_f_acm, Live 0xbf046000\r\nbr# __XD721623__=0\r\n",
+    "Output": "FFT mismatch n=1024 relative=1.41421356\noperating\nclosed\nclosed\n    Tainted: G  \nworld_fft_dma 16384 0 - Live 0xbf035000 (O)\nworld_exp_dma 16384 0 - Live 0xbf028000 (O)\nusb_f_acm 16384 1 - Live 0xbf00c000\nu_serial 20480 1 usb_f_acm, Live 0xbf046000\nbr#",
+    "Ok": true
+  },
+  "diagnosis": "Ooura WORLD c2c wrapper conjugates its complex input relative to standard DFT; impulse0.5+0.5i exposes sqrt(2) relative error. Full speech model had real c2c input so this escaped that gate. r2c/c2r are separate cases.",
+  "action": "Conjugate c2c input in host model and PS float adapter, adjust hardware probe to compare against unchanged WORLD convention; rerun CPU/mode regression. No RTL change required.",
+  "limits": [
+    "No full-file FFT hardware result",
+    "No new recording/playback",
+    "Candidate resident, service stopped; no high real-time pass"
+  ]
+}

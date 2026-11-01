@@ -1518,3 +1518,695 @@
 - 止损：若两个 CFG 都未降低泄漏或造成 CER 失败，本路线立即停止，不追加更高 CFG；既有 1.70 已有内容塌缩证据。
 - 限制：电脑端离线开发，不播放、不改板上 v23；Remote-PS-C 不负责验证本方案。
 - 下一责任方：Hardware-A / Codex 完成 CFG 筛选并按结果提交。
+
+### [PL-20261027-01] WORLD v23 复数 exp 卸载认领
+- 日期：2026-10-27
+- 角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准提交：`e507cf7`；分支：`agent/Pi-debug-cmd/PL-20261027-01`。
+- 用户本轮明确停止 Deepseek，指定以已经试听认可的 WORLD v23 为基线部署 PL；本任务据此恢复 v23 加速，不宣称已通过固定目标身份、陌生多人或最终注册门。
+- 协作检查：已检查开放 PR #9/#11/#13/#15，无 WORLD v23 PL 重叠；根工作区保留 10-22 未提交文件，使用独立 worktree，禁止覆盖。
+- 范围：`src/rtl/synth_offload/`、新增 WORLD exp DMA 构建/驱动/报告；复用 10-22 已验证的 exp 核，PS 保留双精度 FFT。
+- 复现：将随首轮报告给出完整命令；当前只完成只读核验 `sha256sum /opt/world_voice/world_budget_v23`。
+- 量化：板端 v23 SHA256 为 `f12da25e93a520b7f5255ce952a3cb9b5d1bbca474133b1bc529d8c8e18349b7`，与既存基线一致；历史 exp 核 49248 bins 零 LSB、100MHz OOC WNS +4.584ns，仅作历史结果，尚非本轮整机/板测。
+- 限制：板端无 udmabuf 或现成 DMA 设备，必须先解决一致性内存；不改启动分区，现场录放须当轮确认。
+- 下一责任方：Hardware-A / Codex 完成 AXIS/DMA 整机实现、数值与板端耗时验证；依据 `report/pl_synth_offload_route_update_20261022.md`（待导入原件）。
+
+### [PL-20261027-01] WORLD exp 集成首轮方案与静默回归
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED。
+- 基准提交：`e507cf7`；改动：`src/rtl/synth_offload/`、`src/ps/world_v23/`、`src/ps/world_exp*`、`src/kernel/world_exp*`、`build/*world_exp*`、`board/world_exp_switch.py`。
+- 复现：见 `report/world_exp_round1_20261027.md`，上游及优化源SHA见同名JSON；生成物不入Git。
+- 量化：随机背压RTL 49248 bins零LSB/零TLAST错误；受控标准录音1/4前5秒软件模型回归 SNR 79.06/78.57dB、最大PCM16误差3/2；ARM/host和匹配内核驱动已编译。
+- 限制：整机P&R尚在运行，未加载新位流，未录放、未宣称板端提速或实测端到端延迟；原v23保留运行。
+- 下一责任方：Hardware-A / Codex 完成整机实现、板端数值与耗时测试，再经当轮准备确认安排现场回归。
+
+### [PL-20261027-01] Cortex-A9 静默 CPU 等价回归
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（仅本项文件回归）。
+- 基准提交：`45b167d`，实现 `50974e2`；改动：`board/world_exp_file_trial.py`、`report/world_exp_cpu_board_20261027.{md,json}`、`coummucation.md`。
+- 复现：报告内 `python3 world_exp_file_trial.py --base /tmp/codex_world_exp_20261027 --cpu-only`；输入与首轮标准录音1完全相同。
+- 量化：新CPU与原v23的80000样本逐字节一致；模型相对CPU SNR79.0566dB、最大PCM16误差3、1227次零fallback；三路均零削顶。
+- 恢复准备：原厂bit已核验，/tmp恢复载荷SHA `af275946c15ae958e9bed16c12f6cab45b63ebecc18645cec24176315db7fc60`；未切PL、不改启动分区。v23为稳定串口传输暂时停止，此轮无录放。
+- 限制：模型ARM耗时非PL速度；分析RTF约0.55仍是瓶颈。无现场听感/PL/实测延迟通过结论。
+- 下一责任方：Hardware-A / Codex 完成P&R/MCP复核并执行硬件向量和文件回归。
+
+### [PL-20261027-01] 整机布局布线与 Vivado MCP 复核
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（仅实现门）。
+- 基准提交：`69544be`；改动：`build/implement_world_exp_20261027.tcl`、`build/package_world_exp.py`、`report/world_exp_implementation_20261027.*`及四项`world_exp_routed_*_20261027.txt`。
+- 复现：报告内独立Vivado构建及MCP打开完整routed DCP；未覆盖旧工程。
+- 量化：100MHz WNS+1.391ns/WHS+0.036ns，零失败端点/黑盒/DRC Error；8026LUT/13283FF/6BRAM/9DSP，bus skew最小裕量+8.996ns。
+- 限制：外部音频/I2C延时约束未完全签核；仍有DRC Warning/Advisory。位流已校验传输，尚未加载或进行PL板测。
+- 报告：`report/world_exp_implementation_20261027.md`、同名JSON；下一责任方：Hardware-A / Codex 执行静默硬件数值与文件回归。
+
+### [PL-20261027-01] 临时加载后的声卡就绪检查竞态
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：REJECTED（切换脚本就绪检查，非RTL数值）。
+- 基准提交：`20344a5`；改动：`board/world_exp_switch.py`、`report/world_exp_load_race_20261027.json`。
+- 复现：报告所记校验SHA的`world_exp_switch.py --load`；恢复位流已核验。解绑旧PL消费者后候选已成功加载、FPGA operating。
+- 失败：bind返回后立即断言`/dev/snd/controlC0`，与声卡异步注册/udev生成竞态；随后只读检查card0及所有PCM节点齐全、FPGA仍operating。未打开音频或DMA，未请求现场试听。
+- 修复：增加最多15秒的节点就绪等待；新增`--keep-stopped`允许静默恢复原厂位流，避免恢复服务自动提示音未经当轮确认。
+- 限制：当前仍是候选位流、音频服务停止，尚未有DMA/PL语音结果；不能把就绪检查失败写成硬件加速通过。
+- 下一责任方：Hardware-A / Codex 使用当前已就绪声卡完成静默DMA与文件测试；失败即静默恢复。
+
+### [PL-20261027-01] PL首轮板端文件：数值通过、性能拒绝
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：REJECTED（性能门）。
+- 基准提交：`8563cee`，实现程序`50974e2`；改动：`report/world_exp_{dma,pl}_board_round1_20261027.json`、PL同名MD及本记录。
+- 复现：报告中的probe与四路径文件命令；候选位流SHA与原厂恢复SHA已核验，只在/tmp，不改启动。
+- 数值：49248 bins全64bit零差异；PL与模型80000语音样本逐字节一致；相对v23 SNR79.0566dB、最大误差3、1227次零fallback。
+- 性能：DMA均值90.799µs，p95 91.248µs；但PL接口总323µs/调用，渲染RTF0.339278比CPU0.326107略差；整链未提速，不能验收加速。
+- 限制：没有录放或听感结论，候选临时驻留、v23服务停止；分析RTF约0.55仍为另一瓶颈。
+- 下一责任方：Hardware-A / Codex 优化逐bin remainder/floor/打包并加入分项计时；同输入重复静默回归，性能过后再请求现场确认。
+
+### [PL-20261027-01] PS接口优化 Round 2 方案
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED。
+- 基准提交：`724464a`；改动：`src/ps/world_exp_hook.cpp`、`report/world_exp_round2_proposal_20261027.md`及本记录。
+- 唯一主要变量：以截断+负数纠正替代逐bin floor，常用相位范围跳过remainder，新增prepare/DMA/unpack计时；PL、音频算法、量化和输入不变。
+- 复现：首轮构建与`check_world_exp_quality.py`相同命令；host男声1 SNR79.0566dB/最大误差3保持一致，ARM已编译。
+- 限制：新程序正在静默传输，还未有本轮板端耗时；候选位流驻留、音频服务停止，无录放。
+- 下一责任方：Hardware-A / Codex 同输入板端四路径回归并提交性能结果。
+
+### [PL-20261027-01] Round 2 精确取整优化板端结果
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（局部优化，非整链验收）。
+- 基准提交：`3483bae`；改动：`report/world_exp_pl_board_round2_20261027.{json,md}`及本记录。
+- 复现：相同文件四路径命令；PL位流不变。PL=模型逐字节一致，v23=新CPU逐字节一致；相对v23 SNR79.0566dB/最大误差3/1227次零fallback。
+- 量化：PL接口0.396830→0.250069s；准备0.112455/DMA0.121293/解包0.016321s；渲染RTF0.309557，总墙钟2.792953s，分析RTF0.551393仍主导。
+- 限制：只接受该局部优化，不能宣布整链高实时通过；未录放，候选驻留、音频服务停止。
+- 下一责任方：Hardware-A / Codex 检查逐bin相位remainder，随后同输入回归。
+
+### [PL-20261027-01] Round 3 相位打包与现场入口方案
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED。
+- 基准提交：`ffe7189`；改动：`src/ps/world_exp_hook.cpp`、`board/live_world_trial.py`、`report/world_exp_round3_proposal_20261027.md`及本记录。
+- 复现：前轮构建与host男声1回归；SNR79.0566dB/最大PCM16误差3不变。ARM新程序传输中，尚未板测。
+- 唯一算法外变量：有界圈数乘减替代remainder，PL和语音算法不变；监督入口新增独立base/ALSA参数和按kind解析日志，默认保留旧配置。
+- 限制：现场20秒低缓冲候选尚未执行，必须当轮确认；缓冲数值不等于实测端到端延迟。候选驻留、音频服务停止。
+- 下一责任方：Hardware-A / Codex 完成静默四路径回归，性能收益确认后请求现场准备。
+
+### [PL-20261027-01] Round 3 板端数值/性能与静默管线滞后
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（数值和局部优化），BLOCKED（整链高实时门未通过，非外部权限阻塞）。
+- 基准实现：`7269c2a` / 同步`7a0f16b`；改动：`board/world_exp_latency_probe.py`、`report/world_exp_pl_board_round3_20261027.*`、`report/world_exp_paced_latency_{v23,pl}_20261027.json`及本记录。
+- 复现：报告内四路径文件与定速管道命令；原始625块计时留存，未录放。
+- 量化：PL=模型80000样本逐字节一致，SNR79.0566dB/最大PCM16误差3/1227次零fallback；接口总0.235515s，渲染RTF0.306332；分析RTF0.552814仍为关键路径。
+- 滞后：定速文件PS管线p95原v23 115.867ms/PL115.484ms；不含ALSA/codec/模拟链，不能作为物理端到端通过证据，亦未达到100ms。
+- 现场：20秒低缓冲只读preflight通过，已发当轮准备确认，尚未执行；当前候选驻留、音频服务停止，恢复镜像可用。
+- 下一责任方：Hardware-A / Codex 获得现场准备确认后做短回归；随后针对分析端与参数批次的关键路径继续推进，不能把当前exp功能集成宣称整链完成。
+
+### [PL-20261027-01] 首轮20秒现场：欠载拒绝，恢复停于非音频重绑
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：REJECTED（低缓冲稳定性），BLOCKED（等待现场复位恢复）。
+- 基准提交：`8c0095c`；改动：`board/world_exp_switch.py`、`report/world_exp_live20_round1_20261027.{md,json,txt}`、`report/world_exp_restore_stall_20261027.json`及状态追加。
+- 授权：操作者明确“准备好了，开始20秒PL实时测试”；仅执行一轮，没有追加录放。
+- 复现：报告内20秒WORLD_EXP=pl命令；prefill100ms/period256/capture2048/playback1024/start-delay16000µs、增益4与0.6。
+- 量化：子进程全0，0采集overrun/2播放underrun，0原始和输出削顶；PL3177次/0fallback，502参数提交=消费；分析RTF0.266565/渲染0.294135；仅2帧有声，不算持续语音负载。
+- 恢复：原厂载荷成功加载，但非音频显示/摄像外设重绑阶段串口失去响应，尚未启动v23。Ctrl-C/换行/BREAK无响应，MCP hw_server无JTAG target；已请操作者复位或重上电，启动分区未改。电脑保留完整证据。
+- 修复与限制：恢复脚本延后非音频外设至正常开机，并逐bind写journal；语法检查通过，尚未板测。不宣称原v23已恢复、听感通过或高实时验收。
+- 报告：`report/world_exp_live20_round1_20261027.md`与恢复JSON；下一责任方：操作者复位；Hardware-A / Codex 随后核验原v23与PCM状态，补现场听感，再安排后续调度/分析优化。
+
+### [PL-20261027-01] 操作者复位后原v23恢复核验
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（仅基线恢复）。
+- 基准提交：`2335923`；修改：`report/world_exp_reboot_recovery_20261027.{md,json}`与三份共享记录追加。
+- 操作者确认：“已重启板卡”；本轮仅只读检查，没有发起新的录放。
+- 复现：读取fpga_manager、v23 SHA、/proc进程cmdline和PCM status；机器证据见报告JSON。
+- 量化：FPGA operating，v23 SHA与基线一致；单组arecord645/runtime646/aplay647，PCM0p/PCM1c均RUNNING，PL测试模块未加载；prefill和ALSA恢复原配置。
+- 结论：解除前轮“等待现场复位”的恢复阻塞，原v23现已运行。20秒低缓冲2次欠载的REJECTED不变；无新听感或高实时验收。
+- 下一责任方：Hardware-A / Codex 后续分析关键路径/批次调度优化；任何新现场录放须当轮确认。
+
+### [PL-20261027-01] Round 4 ARM实际算子剖析认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准提交：`ed3624a`（按仓库入口要求rebase最新main，原结果报告内旧SHA保留作历史）。
+- 当前依据：exp卸载渲染只改善约6.2%，定速PS管线p95约115ms，低缓冲现场2次欠载；不能继续用电脑端profile推断ARM热点。
+- 范围：新增可复现ARM算子计时构建/脚本，先测FFT执行、FFT建表和各分析阶段，数值保持原v23；本轮暂不改音色或批次。
+- 复现/量化：待本轮报告；原证据`report/world_exp_pl_board_round3_20261027.md`。原v23已由操作者复位恢复，现场录放不在本轮范围。
+- 下一责任方：Hardware-A / Codex 根据真实ARM占比选下一个PL模块或移除接口开销；完成静默文件数值对齐和计时后提交PR #16。
+
+### [PL-20261027-01] Round 4 ARM算子剖析方案提交
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED。
+- 基准：`ed3624a`；改动：`src/ps/world_operator_profile.cpp`、`build/build_world_exp.ps1`、`report/world_operator_profile_round4_proposal_20261027.md`及本记录。
+- 复现：`build_world_exp.ps1 -Target arm -ProfileOperators -WorldRoot <WORLD>`；ARM已编译，板端待测。
+- 方法：链接器wrap FFT plan/execute及4个分析API，线程局部计数，按阶段/长度/类型细分；默认生产路径不启用。先比对原v23输出SHA，再使用剖析结果。
+- 限制：原厂PL保持，只有文件测试；服务为稳定串口传输暂时停止，完成后恢复。计时有插桩开销，尚无下一算子加速结论。
+- 下一责任方：Hardware-A / Codex 执行相同输入对齐与ARM计时，按占比实施下一优化。
+
+### [PL-20261027-01] Round 4 ARM算子结果
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（诊断数值，非高实时验收）。
+- 基准提交：`fccd97b`；改动：`board/world_operator_profile_trial.py`、`report/world_operator_profile_round4_20261027.{md,json}`及本记录。
+- 复现：报告内相同5秒文件、三次profile；80000样本与板上原v23逐字节相同，profile墙钟中位2.883378s，相对单次基线2.833727s约+1.75%。
+- 量化：FFT执行累计1.454058s，建表0.268492s；D4C2048执行0.324211s，合成1024执行0.654678s，均为线程累计，非墙钟加速比。
+- 限制：原厂PL，服务临时停止以便静默文件和串口传输；无录放。未使用电脑端耗时推断ARM，未宣称新的PL或低延迟通过。
+- 下一责任方：Hardware-A / Codex 先复用FFT计划，再验证适合double/log谱的PL FFT精度与DMA收益；保持v23声学路径。
+
+### [PL-20261027-01] Round 5 FFT计划复用方案
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED / PROPOSED。
+- 基准：`bf748af`；修改：`src/ps/world_fft_plan_cache.cpp`、构建入口、板端runner、`report/world_fft_cache_round5_proposal_20261027.md`与host JSON。
+- 复现：构建`-CacheFftPlans`，板端按manifest运行`world_fft_cache_trial.py`。每线程32槽/4MiB，独立工作区；只移除重复建表，不改FFT算术。
+- 量化：修复MinGW线程析构生命周期问题后，两段男声20次host文件正常退出、开关逐字节一致；ARM已编译，待静默板测。报告记录开发失败及修复，不把host计时当ARM收益。
+- 限制：原厂PL，服务临时停止；无新录放或位流切换，没有高实时结论。
+- 下一责任方：Hardware-A / Codex 完成ARM交错回归并发布本轮结果，再评估PL FFT。
+
+### [PL-20261027-01] Round 5 ARM FFT复用结果
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（数值与文件吞吐，非高实时验收）。
+- 基准实现：`35fc480`；改动：`report/world_fft_cache_board_round5_20261027.{md,json}`与恢复JSON、本记录。
+- 复现：板端runner两输入×3轮×baseline/cache_off/cache_on；18次退出0，输出与原v23逐字节一致。
+- 量化：male1墙钟中位2.901327→2.592240s（-10.65%），male4 2.883022→2.605723s（-9.62%）；分析RTF分别0.572398→0.507131、0.566304→0.508260；总保留工作区约283KiB。male4最大分析批次中位34.499→36.244ms，不能宣称延迟峰值改善。
+- 限制与状态：只静默文件，原厂PL；已恢复原v23服务并记录SHA/PCM状态。无新现场听感或高实时结论，FFT还未上PL。
+- 下一责任方：Hardware-A / Codex 用Vivado MCP FFT IP位准确模型验证1024/2048浮点精度和吞吐预算，再确定PL接入。
+
+### [PL-20261027-01] Round 6 PL浮点FFT候选认领与方案
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED / PROPOSED。
+- 基准：`9b609d4`；改动：`build/create_world_fft_probe.tcl`、`src/ps/world_fft_ip_model.cpp`、构建入口、`report/world_fft_ip_round6_proposal_20261027.md`。
+- 复现：独立xfft9.1浮点/25bit twiddle/2048可变长度/100MHz，Vivado MCP已生成官方位准确C模型；host显式FftModelSdk构建成功，尚无本轮语音结果或板测。
+- 范围：先验证D4C/分析/合成FFT数值，再看OOC资源和DMA收益；不沿用慢且精度不足的18bit旧核，不改变板卡PL。
+- 板卡状态补充：Round5服务start后的首个立即PCM读取closed；异步启动完成后只读复核arecord954/aplay956两PCM均RUNNING，v23 pid918。无新现场测试。
+- 限制：官方C模型和OOC都不能替代真实PL数值/实时性；当前未加载FFT候选，未声明高实时验收。
+- 下一责任方：Hardware-A / Codex 执行位准确模型回归，数值合格再集成PS/PL。
+
+### [PL-20261027-01] Round 6 浮点FFT位准确模型结果
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（模型数值门）。
+- 基准：`53645ef`；改动：`build/check_world_fft_ip_quality.py`、`report/world_fft_ip_model_round6_20261027.{md,json}`。
+- 复现：报告内SDK构建和质量脚本；30独立FFT方向/尺度/切换用例，相对L2最大6.60848722e-08；两受控输入完整WORLD各cpu/d4c/analysis/render/all。
+- 量化：全FFT替换SNR男声1 88.876dB、男声4 87.845dB，最大PCM16误差均1；单D4C分别118.306/113.844dB。其余尺寸仍CPU，调用数完整保存。
+- 限制：模型数值通过不代表资源、RTL板测或高实时；独立OOC综合进行中，未加载FFT位流、未新录放，板上原v23运行。
+- 下一责任方：Hardware-A / Codex 完成FFT流接口、独立DMA和OOC/整机时序，静默板测后才请求现场试听。
+
+### [PL-20261027-01] Round 7 FFT PS/PL集成认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准：`ecb911e`；范围：FFT AXI流配置头、独立HP2 DMA、临时root-only驱动、PS double/float适配；保留exp及音频路径。
+- 依据：Round6官方位准确模型两段完整语音SNR≥87.845dB/最大PCM16误差1；独立FFT综合已完成，待读取资源与时序。
+- 复现与量化：将随本轮方案报告提交；先仿真流握手、综合实现与时序，再静默板测；不提前宣称FFT板端或高实时通过。
+- 限制：当前原v23/原厂PL继续运行，不修改启动分区；任何新现场录放仍需当轮确认。
+- 下一责任方：Hardware-A / Codex 完成可复现候选及客观门，再安排现场。
+
+### [PL-20261027-01] 浮点FFT独立综合资源结果
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（仅OOC综合预算）。
+- 基准构建：`ecb911e`所含probe方案，模型实现`53645ef`；改动：`report/world_fft_core_ooc_20261027.json`及资源/时序TXT。
+- 复现：Vivado MCP独立probe、open_run world_fft_probe_synth_1、report_utilization/report_timing_summary。
+- 量化：7744LUT/12935FF/15.5BRAM/60DSP；100MHz综合WNS+5.043ns、WHS+0.158ns，0 Error/0 Critical Warning/4 Warning。
+- 限制：非布局布线签核，不是整机时序或FFT板测；Round7独立HP2 DMA集成正在构建和RTL仿真，板上原v23未切换。
+- 下一责任方：Hardware-A / Codex 完成Round7流接口数值/背压仿真与整机布局布线。
+
+### [PL-20261027-01] Round 7 FFT PS/PL集成方案提交
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED。
+- 基准：`9092e1f`；改动：FFT流包装、独立HP2 DMA Tcl、临时驱动/ioctl、PS适配/probe、构建和静默板测runner；详见`report/world_fft_integration_round7_proposal_20261027.md`及build JSON。
+- 复现：报告内Vivado tclargs fft、ARM CacheFftPlans/FftPl和WSL module构建；ARM/module/probe已编译、BD已validate，RTL仿真与整机综合进行中。
+- 合约：每事务64bit配置头+N复数float，输出N复数；1024/2048、forward/inverse未归一化，c2r显式补Hermitian；DMA0x40410000，独立于已有exp。
+- 限制：没有加载FFT候选，板上原v23运行；只有模型和OOC资源门通过，整机时序/RTL全部向量/板测尚未完成；不宣称高实时。
+- 下一责任方：Hardware-A / Codex 先完成30帧位准确/背压仿真、布局布线，再做静默文件和DMA性能门；现场录放须当轮确认。
+
+### [PL-20261027-01] Round 7 FFT AXI RTL位准确仿真
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（仅RTL仿真）。
+- 基准实现：`b551646`；改动：`report/world_fft_stream_round7_20261027.{json,txt}`。
+- 复现：质量脚本生成30帧官方模型mem向量，Vivado MCP运行`run_world_fft_sim.tcl`；40960复数float词全64bit一致，含1024→2048→1024、正反向、零/脉冲/常数/随机/弱信号和输入空拍/输出背压。
+- 量化：无背压稳态1024帧4293拍（42.93µs）、2048帧8389拍（83.89µs）@100MHz；只含流核，不含PS转换/DMA。整机综合完成，布局布线已启动。
+- 限制：未加载FFT候选、尚无FFT板端收益或听感。下一责任方：Hardware-A / Codex 完成整机时序/DRC与静默板测。
+
+### [PL-20261027-01] 临时高速UART尝试拒绝并自动恢复
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：REJECTED（921600串口），ACCEPTED（原基线恢复）。
+- 基准：`b551646`；证据：`report/world_uart_baud_recovery_20261027.json`。
+- 为缩短位流传输，停v23后临时设置921600；控制台失去响应。标准/高速重连、Ctrl-C和JTAG仅恢复UART寄存器仍未恢复；Windows PnP重启被系统权限拒绝，未执行。
+- 本次JTAG已可连接（Digilent210357A7D00EA），通过XSDB系统复位并从未改动启动分区正常boot；串口115200、原v23 SHA匹配、PCM0p/PCM1c RUNNING恢复。
+- 处置：撤销未提交的BaudRate参数，上传工具仍固定115200，不重试该加速传输路径。不把具体UART驱动/内核原因写成已定位；事故期间未加载FFT候选，无新现场测试。
+- 下一责任方：Hardware-A / Codex 保持115200完成候选传输；继续等待已启动的整机布局布线。
+
+### [PL-20261027-01] Round 7 FFT整机布局布线结果
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（整机实现门）。
+- 基准实现：`b551646`；改动：打包脚本`--fft`、`report/world_fft_implementation_round7_20261027.{md,json}`和4份routed TXT。
+- 复现：报告内完整Vivado tclargs fft；Vivado MCP打开impl_1复核完整设计。
+- 量化：100MHz WNS+0.302ns/WHS+0.036ns，0失败端点/黑盒/DRC Error，17200LUT/29183FF/24.5BRAM/69DSP；bus skew全MET，位流swap SHA bdb4c0877e9818976dd7d9281a8ccc162018681cdf880bf117d2f55d3af72988。
+- 限制：3输入/6输出缺外部IO延时，保留DRC Warning/Advisory。程序已校验传输，位流传输中；服务临时停止，没有FFT板测/听感/高实时结论。
+- 下一责任方：Hardware-A / Codex 完成临时加载、128次DMA对照与两段文件全路径回归；任何新的现场录放仍先确认。
+
+### [PL-20261027-01] Round 8 硬件FFT首轮约定检查拒绝
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：REJECTED（PS c2c适配/测试约定）。
+- 实现：`b551646`，位流实现证据`a05d00c`；报告：`report/world_fft_board_round8_rejected_20261027.json`。
+- 复现：按manifest上传，临时加载已签核SHA位流，insmod两个自有module，运行world_fft_pl_trial.py；probe在复数脉冲用例失败，1024 relativeL2=1.41421356，未进入语音文件测试。
+- 原因：WORLD/Ooura c2c包装相对标准DFT隐含共轭输入虚部；PL和模型当前采用标准复数输入。此前语音链c2c输入为实数，模型检查未暴露此差异；30个模型RTL一致结论有效，但不能代替WORLD接口约定测试。
+- 修正方向：PS适配/host模型明确共轭c2c输入，probe与原WORLD约定对齐，再完整回归；无需改RTL。r2c/c2r不套用此变更。
+- 状态：FPGA候选operating，两临时module已加载、音频服务停止，无新录放或FFT板端验收。下一责任方：Hardware-A / Codex 修正并提交下一方案轮次，随后静默回归。
+
+### [PL-20261027-01] Round 9 复数约定修正方案
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED / PROPOSED。
+- 基准：`214be3e`；改动：`src/ps/world_fft_pl.cpp`、`world_fft_ip_model.cpp`、`world_fft_dma_probe.cpp`。
+- 修正：仅c2c输入虚部取反以匹配WORLD/Ooura；r2c/c2r、RTL/位流/驱动不变。probe的CPU参考保留原WORLD，PL发送共轭数据，覆盖正反向随机复数及复数脉冲。
+- 复现：相同ARM/host构建与完整质量脚本；修正ARM SHA2754d7d04aa874c346e362592f68dbfd88b1d6ad608ccb5d3653755d21e51904，probe SHAaddeeaf3ea941c6a697b5adb88bb26678624e14758b73f227184cb95a96fa059。
+- 限制：模型语音相对旧模型仅微小变化，原Round8“c2c输入为实数”应理解为该使用路径实部占主导，不能推断所有虚部严格为零。独立复数用例是必要补充；本轮板端复测尚未执行。候选驻留，服务停止，无录放。
+- 下一责任方：Hardware-A / Codex 完成同位流probe及两段语音全路径回归，按真实性能选默认模式。
+
+### [PL-20261027-01] Round 9 修正模型数值回归
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（修正模型）。
+- 基准实现：`0e557e7`；改动：`report/world_fft_model_round9_20261027.json`。
+- 复现：相同官方C模型checker，30个独立方向/尺度用例及两输入各5种模式；修正c2c输入共轭。
+- 量化：男声1全FFT SNR88.881dB、男声4 87.845dB，最大PCM16误差1，全部门通过；模型耗时不作硬件速度结论。
+- 限制：修正ARM/probe仍在115200校验传输，尚未执行本轮板测；位流驻留、音频服务停止，无录放。
+- 下一责任方：Hardware-A / Codex 同位流重跑DMA probe及两段文件全路径，失败仍独立提交。
+
+### [PL-20261027-01] Round 9 FFT板测：数值通过、逐次DMA性能拒绝
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（数值），REJECTED（FFT卸载性能）。
+- 实现：`0e557e7`；报告：`report/world_fft_board_round9_20261027.{md,json}`；复现同runner/manifest、同routed位流。
+- 数值：128次硬件FFT最坏relativeL2 5.537e-8；两输入CPU逐字节相同，FFT-only最大PCM16误差1、组合3/2，所有exp零fallback/零削顶。
+- 性能：1024 ioctl p50 86.538µs、2048 163.770µs；male1计划复用CPU墙钟2.591575s，fft2048 2.775234、fft_all3.274853s；male4同样退步。2048打包+DMA+解包约0.785s/3279次；全FFT互斥等待约0.73s。
+- 结论：数值门通过不能抵消性能退步，不默认启用FFT。下一步先改2048实FFT传输/接口，评估时钟优化；先前6.2%exp收益和PS计划复用是独立已证据成果。
+- 状态：候选临时驻留、服务停止，恢复镜像/JTAG可用，无新录放或高实时验收。下一责任方：Hardware-A / Codex 继续实现减少实际接口开销的候选并回归。
+
+### [PL-20261027-01] Round 10 实输入FFT紧凑传输认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准：`098f57b`；范围：只减少r2c的DMA冗余零虚部与共轭半谱；不改FFT核精度/时钟/音色/批次。复杂FFT和c2r仍保留完整协议。
+- 依据：Round9数值已通过，但完整N复数TX/RX和PS转换导致性能退步；2048主要用于分析r2c，没有必要从ARM发送全零虚部或回收后半共轭谱。
+- 计划：头bit9为real输入、N个float打包为N/2个64bit数据，PL扩展零虚部；只返回N/2+1复数并内部排空其余，防止丢TLAST或下一帧污染。每轮测试仍独立提交。
+- 限制：当前候选临时驻留、服务停止，无新录放，未宣布该优化有效；下一责任方Hardware-A / Codex做RTL全格式/背压回归后再板测。
+
+### [PL-20261027-01] Round 10 实输入紧凑协议方案提交
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED。
+- 基准：`098f57b`；改动：FFT流包装/ioctl/驱动/PS/probe、向量与TB；报告`report/world_fft_compact_round10_proposal_20261027.md`、build JSON及Round9恢复JSON。
+- 复现：完整FFT构建仍tclargs fft；质量脚本生成30旧格式+15compact帧；ARM和module已编译。
+- 主要变量：r2c仅传N实float、收N/2+1复数；头bit9，内部正确排空后半谱，complex/c2r格式保持。核精度/100MHz/音色/批次不变，尚未有本轮RTL或性能结果。
+- 恢复：Round9后按修复脚本成功静默恢复原厂位流，先卸载两个DMA module，只重绑audio/I2C，未出现前轮显示重绑卡死。当前原厂operating、服务临时停止，无录放。
+- 下一责任方：Hardware-A / Codex 完成45帧RTL逐位/背压、整机时序及192次probe和全路径文件，实际加速才保留默认。
+
+### [PL-20261027-01] Round 10 紧凑实FFT RTL数值/背压结果
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（RTL门）。
+- 实现：`bfbc3d0`；证据：`report/world_fft_compact_rtl_round10_20261027.{json,txt}`。
+- 复现：30帧原格式+15帧compact mem官方模型对照，Vivado MCP source run_world_fft_sim.tcl；旧格式40960词、compact10255词全部float64打包逐位一致。
+- 覆盖：1024→2048→1024，complex正反向与real-forward，零/复数或实数脉冲/常量/随机/弱信号；compact均有输入空拍和输出背压，半谱TLAST/内部排空/下一帧握手通过。
+- 限制：仿真拍数不代表ARM到PL收益；整机综合完成，布局布线已启动；板端仍原厂PL、服务暂时停止，compact候选尚未加载，无新录放。
+- 下一责任方：Hardware-A / Codex 完成新版routed签核与静默192次probe/两段文件，按性能结果选择默认。
+
+### [PL-20261027-01] Round 10 静默管线滞后入口补充
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED（诊断入口）。
+- 基准：`cf28ab1`；改动：`board/world_exp_latency_probe.py`。
+- 复现：原定速128样本/8ms文件管道，新增显式binary/fft-mode/label及程序/输入SHA；默认v23/pl行为保持。可在同位流、同输入比较cache_cpu/cache_exp/cache_fft2048，结果不互相覆盖。
+- 限制：语法检查通过，入口已校验上传，尚未运行；45帧RTL已过但新版布局布线仍进行中。管线滞后不包括ALSA/codec/模拟/声学，不可作为物理端到端验收。
+- 下一责任方：Hardware-A / Codex 新版文件数值/性能门后执行并记录至少625个原始块计时，再决定现场候选。
+
+### [PL-20261027-01] Round 10 紧凑实FFT完整布局布线
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（内部routed门）。
+- 源实现：`bfbc3d0`；证据：`report/world_fft_compact_implementation_round10_20261027.json`及4份compact routed TXT。
+- 复现：同完整FFT构建、Vivado MCP open_run impl_1，核参数/100MHz不变；17255LUT/29197FF/24.5BRAM/69DSP。
+- 量化：WNS+0.283ns/WHS+0.040ns，0失败端点/黑盒/DRC Error，bus skew全MET；swap SHA9a7a45027c087a43ce2a3809945317cd892725a2ac1f891ba3db92f61cfaeee9。
+- 限制：外部3输入/6输出延时仍未完全约束，DRC警告/建议保留；位流校验传输中，当前原厂PL/服务停止；尚无compact板端性能结论，无新录放。
+- 下一责任方：Hardware-A / Codex 完成192次probe与全路径文件、定速滞后比较，再选择候选模式。
+
+### [PL-20261027-01] Round 10 compact板测：数值通过、整链性能仍拒绝
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（数值/局部开销下降），REJECTED（整链性能）。
+- 实现：`bfbc3d0`，签核`17df24f`；证据：`report/world_fft_compact_board_round10_20261027.{md,json}`及load JSON。
+- 复现：同runner两输入各7路径；192次probe含compact，最坏relativeL2 5.617e-8；CPU输出逐字节一致、FFT最大误差1、组合3/2，零exp fallback/零削顶。
+- 量化：2048接口累计0.784→0.637s（约-18.9%），但male1 cache+exp2.583090s/compact+exp2.626509s，male4 2.566616/2.604988s；仍不能默认FFT。
+- 内核状态：热切换出现xlnx_formatter_pcm_remove Bad of_node_put引用告警，后续注册与全部测试成功；完整日志保留，不宣称反复热切安全。后续切换前正常重启恢复驱动状态。
+- 限制：候选驻留、服务停止，无新录放或高实时验收；下一责任方Hardware-A / Codex继续静默定速滞后和DMA开销优化，必要时用JTAG/正常重启回原厂。
+
+### [PL-20261027-01] Round 10 静默定速管线滞后结果
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：REJECTED（100ms实时目标）。
+- 基准：`1b8e909`，入口`4513f66`；证据：`report/world_fft_paced_round10_20261027.md`及3份paced原始JSON。
+- 复现：world_exp_latency_probe.py，5秒male1，128样本/8ms定速，625块；模式与输入/程序SHA在JSON中，未使用ALSA/录放。
+- 量化：baseline p95 117.058676ms；cache+exp 113.992885ms；compact2048+exp 114.187369ms；FFT无显著额外收益。
+- 限制：仅软件输入交付到输出到达，排除ALSA/codec/模拟/声学，不能作为物理端到端验收；无新用户听感。候选驻留、服务暂时停止。
+- 下一责任方：Hardware-A / Codex继续接口开销优化，客观门后才请求新现场轮次。
+
+### [PL-20261027-01] Round 11 PS浮点适配开销认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准：`1b8e909`；范围：只优化PS float打包/解包有限值检查与实输入循环，不改位流/驱动/精度/批次。
+- 依据：compact接口仍有约0.20s prepare/unpack；ARM反汇编显示每bin std::isfinite触发VFP abs/compare/vmrs同步；改按IEEE754指数位聚合检查，仍拒绝Inf/NaN，不放弃校验。
+- 复现与量化待本轮报告；先CPU逐字节和同位流PL数值/三次耗时。候选驻留、服务停止，无新录放；下一责任方Hardware-A / Codex。
+
+### [PL-20261027-01] Round 11 浮点适配优化方案
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：PROPOSED。
+- 基准：`6193bc8`；范围：src/ps/world_fft_pl.cpp、board/world_fft_adapter_trial.py；报告 world_fft_adapter_round11_proposal_20261027.md。
+- 复现：ARM CacheFftPlans/FftPl构建已成功；binary SHA 2b9d98466955262f68462e78256fb5f8e192bc9fecb265d666f3910e80807d65。
+- 变量：逐bin VFP isfinite改IEEE754指数掩码聚合，仍拒绝Inf/NaN；r2c单独打包循环；不改DMA、核/位流、音色或批次。
+- 限制：无本轮板端性能结果；当前compact候选驻留、服务停止，无新录放。
+- 下一责任方：Hardware-A / Codex同位流/旧程序交错三次、两输入三模式逐字节回归，结果独立提交。
+
+### [PL-20261027-01] Round 11 适配对照：数值保持、FFT默认仍拒绝
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：ACCEPTED（数值保持），REJECTED（默认FFT性能）。
+- 实现979fb89；报告report/world_fft_adapter_round11_20261027.{md,json}；同位流旧新两输入三模式各三遍，共36次，全部逐字节一致/零exp fallback。
+- 量化：combined墙钟中位2.645587→2.621563s及2.658425→2.608862s；新exp_only为2.602989/2.605818s，FFT仍无可靠净收益；DMA约0.436s/3279次。
+- 限制：无ALSA/新录放；候选驻留、服务停止，未过高实时门；下一责任方Hardware-A / Codex分解内核复制和DMA耗时，再优化实际瓶颈。
+
+### [PL-20261027-01] Round 12 FFT内核阶段计时认领
+- 日期：2026-10-27；角色：Hardware-A / Codex；状态：CLAIMED。
+- 基准8ee3902；范围src/kernel/world_fft_dma.c与小型证据，不改RTL/位流/算法；新增默认关闭的只读诊断计数。
+- 依据：Round11打包节省不足，约0.436s/3279次仍在ioctl；必须区分内核复制和设备等待，再选择200MHz或接口融合方向。
+- 复现：匹配5.15.0-xilinx module构建；同位流停用旧module、载入profile=1候选，probe/文件数值与关闭计时对照；量化待报告。
+- 限制：静默诊断，无ALSA/新现场；服务停止、compact位流驻留。下一责任方Hardware-A / Codex。
+
+### [PL-20261027-01] Round12 计时方案提交
+- 日期：2026-10-27；Hardware-A / Codex；PROPOSED；基准8ee3902。
+- 改动src/kernel/world_fft_dma.c；复现与边界见report/world_fft_kernel_profile_round12_proposal_20261027.md；module构建通过，SHA a882bc0bf3cadf7a6a89ceba3b640bd99b329db6be8eb75fe2e0a29dc1df447f。
+- 量化：尚无阶段板测；默认profile=0无额外时钟，profile=1按copy_in/device/copy_out累计，stats只读。内核已有bufferable映射，不盲改WRITE_COMBINE。
+- 限制：只静默诊断，候选驻留、服务停止，无ALSA/新录放；下一责任方Hardware-A / Codex完成开关对照，随后按用户方向转向阶段融合卸载。
+
+### [PL-20261027-01] Round12 内核阶段计时通过，转向完整计算阶段融合
+- 日期：2026-10-27；Hardware-A / Codex；ACCEPTED（诊断）；驱动198565e。
+- 报告report/world_fft_kernel_profile_round12_20261027.{md,json}；runner board/world_fft_kernel_profile_trial.py；开关三遍两输入12次逐字节相同，两组各192次probe通过。
+- 量化male1：3279调用，copy_in28.288ms/device263.459ms/copy_out132.327ms；约31%内核开销为结果复制。开启与关闭中位墙钟2.631122/2.637466秒，无显著插桩扰动。
+- 用户新指令：能放PL就放PL，能全放更好；后续以WORLD分析/映射/合成完整计算阶段为迁移目标，PS先保留音频I/O与控制，避免逐算子往返。当前核资源余量不等于整链已能容纳，需HLS/RTL资源实测。
+- 限制：结束profile=0；服务停止、compact候选驻留，无新录放/高实时结论；下一责任方Hardware-A / Codex检查HLS工具并认领融合实现。
+
+### [PL-20261027-01] Round13 WORLD整链PL融合方案认领与提案
+- 日期：2026-10-27；Hardware-A / Codex；状态：CLAIMED / PROPOSED；基准9eb5509。
+- 用户明确要求能放PL就放PL，能全放更好。Round12显示逐FFT ioctl中回读约31%、设备事务约62%，故切换帧级融合，不再把单FFT加速当主路径。
+- 提案报告：`report/world_full_pl_migration_round13_proposal_20261027.md`。分层范围：4帧前端谱→D4C批处理→合成状态→单事务融合DMA；PS保留音频I/O与控制。
+- 量化门：逐层与v23 PCM16最大误差≤3、SNR≥75dB、零fallback/零削顶；每层独立HLS/RTL/资源/时序门。当前只是架构提案，无板测/试听/高实时结论。
+- 下一责任方：Hardware-A / Codex 编写第一阶段frame frontend golden/HLS C-sim，随后Vivado MCP综合资源评估。
+
+### [PL-20261027-01] Round13 最小相位融合原型方案
+- 日期2026-10-27；Hardware-A / Codex；PROPOSED；基准622fbd8。
+- 源码src/hls/world_minphase.cpp、host wrapper、build MinphaseModel开关、HLS tcl与24例单元；报告report/world_minphase_fused_round13_proposal_20261027.md。
+- 范围：镜像log谱→两FFT→倒谱→复数指数在一个PL核；只输入谱/输出最终滤波器，减少往返；尚非完整D4C/合成。
+- 复现：报告内MinphaseModel和vitis-run命令；初步host/HLS结果已产生，将独立结果提交。默认CPU不变，无新录放。
+- 修正方案：随机激励必须原WORLD算法/种子/消费顺序，不能LFSR替代；STFT不能直接当CheapTrick，D4C内部FFT尺寸按原公式。
+- 下一责任方Hardware-A / Codex提交完整结果，资源/周期不达标则先优化HLS，禁止提前板测通过。
+
+### [PL-20261027-01] Round13 融合核数值通过、首版周期拒绝
+- 日期2026-10-27；Hardware-A / Codex；ACCEPTED（host数值），REJECTED（首版周期）；实现2c2e2d0。
+- 报告report/world_minphase_fused_round13_20261027.md、host JSON和两份HLS原始TXT；24例最大relativeL2 9.2324e-7，完整两输入PCM16最大误差1/SNR96.237及96.601dB。
+- HLS RTL已生成，估算18150LUT/11213FF/3 BRAM36K/81DSP，但动态FFT循环顶层周期未知，不能直接板测或宣称加速。
+- 限制：无RTL cosim/routed/板测/新听感；candidate驻留、服务停止。下一责任方Hardware-A / Codex固定循环/ROM及指数流水，逐轮提交结果。
+
+### [PL-20261027-01] Round14 固定循环融合核优化认领
+- 日期2026-10-27；Hardware-A / Codex；CLAIMED；基准49627af。
+- 范围最小相位HLS：1024点固定bit reversal、每级512蝶形、float32旋转因子ROM、输出exp/sin/cos流水；不改输入/输出/算法约定。
+- 依据Round13数值通过但动态循环周期未知；本轮先确定周期资源，再决定是否使用官方FFT IP替代自定义蝶形。报告与数值待本轮结果。
+- 限制无新录放/板测，候选驻留、服务停止；下一责任方Hardware-A / Codex。
+
+### [PL-20261027-01] Round14 固定周期融合核方案
+- 日期2026-10-27；Hardware-A / Codex；PROPOSED；基准49627af。
+- 固定每级512蝶形、预计算ROM、固定bit反转、exp输出流水；源码及生成/质量脚本见report/world_minphase_round14_proposal_20261027.md。
+- 24例host最大relativeL2 8.5944e-7；完整语音/HLS进行中，后续独立结果提交；同级无地址重叠依赖声明必须RTL cosim验证。
+- 限制无RTL/板测/新录放；当前compact候选驻留、服务停止；下一责任方Hardware-A / Codex完成周期/资源与数值门。
+
+### [PL-20261027-01] Round14 host通过，HLS估算改善但待RTL门
+- 日期2026-10-27；Hardware-A / Codex；ACCEPTED（host/资源估算）；实现bfb9327。
+- 报告report/world_minphase_fused_round14_20261027.md、host JSON及两份HLS TXT；24例最大relativeL2 8.5944e-7，两输入PCM16误差1/SNR97.268及96.811dB。
+- 量化HLS：9972LUT/7734FF/4BRAM36K/38DSP，29813拍@100MHz（估算298.13µs），非routed/实际DDR。
+- 风险：工具flatten级循环，inter false约束必须禁止跨级重叠后RTL cosim；exp目标II=1未完全满足，不宣称RTL通过。
+- 下一责任方Hardware-A / Codex明确LOOP_FLATTEN off并完成cosim，之后才考虑整机融合；无新录放。
+
+### [PL-20261027-01] Round15 FFT级间依赖与RTL验证认领
+- 日期2026-10-27；Hardware-A / Codex；CLAIMED / PROPOSED；基准e6d1306。
+- src/hls/world_minphase.cpp明确LOOP_FLATTEN off；build/cosim_world_minphase_hls.tcl用原WORLD common/fft/matlabfunctions做24例C/RTL对照，HLS重综合后cosim。
+- 目标同级蝶形并行但级间完整排空，消除Round14 flatten与inter false组合的风险；结果待生成，不预设通过。
+- 限制无新板测或录放；candidate驻留/服务停止。下一责任方Hardware-A / Codex读取cosim/周期资源并独立提交。
+
+### [PL-20261027-01] Round15 C-sim通过，RTL因Windows长路径失败；基线已恢复
+- 日期2026-10-27；Hardware-A / Codex；ACCEPTED（C-sim/恢复），BLOCKED（本轮cosim工具路径）；实现e98e787。
+- 报告report/world_minphase_cosim_round15_20261027.md及工具TXT/restore JSON；24例relativeL2最大8.5944e-7，HLS30229拍/10007LUT/38DSP，RTL未执行。
+- 失败：浮点IP生成完整路径超过Windows260字符，非RTL数值失败；入口include引号已修正，下一轮用D盘短生成目录。
+- 恢复：stop/rmmod/sync/正常reboot，原厂bit与v23 SHA匹配，FPGA operating、PCM双RUNNING、内核Not tainted、自有模块卸载。启动分区未改，无新录放。
+- 下一责任方Hardware-A / Codex短路径重跑HLS/RTL并继续融合迁移。
+
+### [PL-20261027-01] Round16 短路径HLS工具修复认领
+- 日期2026-10-27；Hardware-A / Codex；CLAIMED / PROPOSED；基准3ddb50d。
+- 修改两HLS入口支持WORLD_HLS_PROJECT；probe只接受新目录防覆盖历史。生成工程D:/wpl_20261027_r16/m，源码留仓库，避开260字符限制。
+- 复现：设置WORLD_HLS_PROJECT后vitis-run依次probe/cosim；算法/RTL约束不变。结果待本轮报告。
+- 限制：板端已恢复原厂v23运行，不再切板；无新录放；下一责任方Hardware-A / Codex验证工具修复及RTL数值。
+
+### [PL-20261027-01] 2026-10-27 当日停止与交接
+- 角色Hardware-A / Codex；状态暂停（用户“今天先到这里”）。Round16短路径综合/C-sim通过，RTL进入编译/展开但未完成，相关HLS/xelab进程已停止，未写RTL通过。
+- 证据report/world_minphase_round16_paused_20261027.md及synth/cosim TXT；交接handoff_20261027_PL.md。原厂位流/v23已恢复、双PCM RUNNING，临时驱动卸载，启动分区未改，无新录放。
+- 用户方向：尽量把WORLD分析/映射/合成迁入PL，PS保留I/O控制；首个最小相位融合核host两输入误差1/SNR约97dB，HLS估算38DSP/约1万LUT，尚待RTL/整机/板测。
+- 下一责任方Hardware-A / Codex：用户下次要求继续后，先完成24例RTL cosim，再评估整机/板端收益。不得把估算当高实时验收。
+
+### [PL-20261027-01] Round16 短路径 RTL cosim 恢复认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`fe556e66fd5bd1a3feb0a34fbd3db2e8cb29a045`。
+- 用户要求继续 WORLD v23 PL 迁移直到可用；本轮先恢复 `D:/wpl_20261027_r16/m` 的 24 例 Verilog cosim，关闭前不把 HLS 估算或未完成日志写成 RTL 通过。
+- 协作边界：根工作区存在他人未提交改动，继续只使用独立工作树 `tmp/world_v23_pl_worktree`；板卡保持原厂 bit/v23，不进行录音、播放或试听。
+- 成功门：24/24 RTL 输出与同一 WORLD golden 对照通过，并记录工具版本、周期与误差；通过后再评估整机资源/时序和静默板端收益。
+- 下一责任方：Hardware-A / Codex 完成本轮 cosim、证据、提交和 PR 更新。
+
+### [PL-20261027-01] Round16 短路径 RTL cosim 结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：ACCEPTED（仅 RTL cosim 门）；基准提交：`fe556e66fd5bd1a3feb0a34fbd3db2e8cb29a045`。
+- 复现：设置 `WORLD_HLS_PROJECT=D:/wpl_20261027_r16/m`，运行报告中的 Vitis HLS 2026.1 命令；WORLD 0.3.5 golden 源来自根工作区忽略目录，源码与报告 SHA 见 JSON。
+- 量化：24/24 Verilog RTL 用例通过，RTL 后检查最大 relative L2 `8.53141669198e-7`；延迟 `32231..32232` 拍，事务间隔 `32245..32246` 拍。HLS 估算 `10007 LUT / 7732 FF / 8 BRAM18K / 38 DSP`，尚非 routed。
+- 风险：XSIM 对显式 `inter false` 依赖提示记录 6720 条动态地址冲突警告；24 例数值通过但警告保留，不能据此宣称整机时序或板端通过。
+- 报告：`report/world_minphase_cosim_round16_20261029.{md,json,txt}`。本轮无板卡切换、录音、播放或试听。
+- 下一责任方：Hardware-A / Codex 独立提交本轮后执行 OOC 实现与时序/资源门；通过后再设计整机 DMA 接入。
+
+### [PL-20261027-01] Round17 最小相位融合核 OOC 实现认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`12d2389`。
+- 唯一变量：对 Round16 已通过 24/24 RTL cosim 的同一 HLS RTL 执行 Vivado OOC synthesis/implementation；不改算法、接口、时钟目标或测试向量。
+- 成功门：`xc7z020clg400-2`、100 MHz 下 routed WNS/WHS 均非负，无 black box 或 DRC Error，并记录实际 LUT/FF/BRAM/DSP；HLS 估算不能替代 routed 结果。
+- 限制：OOC 只证明核级可实现，不代表加入现有音频系统后仍收敛；本轮不加载位流、不操作板卡、不录放或试听。
+- 下一责任方：Hardware-A / Codex 运行短路径 OOC 实现并独立提交成功或失败证据。
+
+### [PL-20261027-01] Round17 最小相位融合核 OOC 实现结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：ACCEPTED（仅核级 OOC 门）；基准提交：`12d23894d308be30b44fd73292bed34cd0c18a8c`。
+- 复现：设置 `WORLD_HLS_PROJECT=D:/wpl_20261027_r16/m`，运行 `vitis-run --mode hls --tcl --input_file build/impl_world_minphase_hls.tcl`；Vitis HLS/Vivado 2026.1，器件 `xc7z020clg400-2`，100 MHz。
+- 量化：完成布线，WNS `+1.327 ns`、WHS `+0.053 ns`，setup/hold 失败端点均 0，未布线网络 0；实际 `4996 LUT / 5769 FF / 38 DSP / 7 BRAM18K`，black box 0、DRC Error 0。
+- 限制：OOC 边界缺少顶层 `HD.CLK_SRC/HD.PARTPIN_LOCS`，且 Vivado 提示不会执行全部连接型 DRC；94 项 Warning 主要为 DSP 流水建议及 OOC `RTSTAT-10/ZPS7-1`。不宣称整机时序或板端通过。
+- 报告：`report/world_minphase_ooc_round17_20261029.{md,json,txt}`；本轮未加载位流，未录音、播放或试听。
+- 下一责任方：Hardware-A / Codex 接入现有 Zynq 音频设计并完成整机 address/DRC/资源/时序门，通过后再进行可恢复的静默板端向量测试。
+
+### [PL-20261027-01] Round18 最小相位融合核整机接入认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED / PROPOSED；基准提交：`7065a2f`。
+- 唯一变量：把 Round17 导出的 `xilinx.com:hls:world_minphase:1.0` 接入现有完整音频工程；保留音频 HP0 和现有 WORLD exp HP1，新增核的两个 AXI master 独占 HP2，两个 AXI-Lite 从口接 GP0 控制互联。
+- 地址计划：ap_ctrl `0x43C70000`、指针参数 `0x43C80000`；输入/输出 DDR 视图均为 HP2 `0x00000000..0x3fffffff`。中断暂接 F2P bit14，首轮驱动仍采用有界轮询。
+- 成功门：BD validate 通过且地址无重叠；随后完整综合/布局布线满足 WNS/WHS 非负、0 未布线、0 DRC Error，并记录整机资源。任何失败也独立提交，不覆盖历史工程。
+- 限制：本轮只生成新的 `build/generated/world_minphase_20261029` 工程，不加载位流、不操作板卡、不录放或试听；导出 IP 由 `WORLD_MINPHASE_IP_REPO` 显式指定，避免把大生成物提交 Git。
+- 下一责任方：Hardware-A / Codex 完成整机 validate/implementation 与证据。
+
+### [PL-20261027-01] Round18 最小相位融合核整机实现结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：ACCEPTED（整机静态实现门）；基准提交：`7065a2f`。
+- 接入：ap_ctrl `0x43C70000`、指针参数 `0x43C80000`，输入/输出 AXI master 经新互联独占 HP2；音频 HP0、既有 WORLD-exp HP1 不变。F2P bit14 保留中断，首轮驱动计划有界轮询。
+- 量化：完整 routed WNS `+0.856 ns`、WHS `+0.029 ns`，setup/hold/pulse-width 失败端点 0，32,065/32,065 可路由网络完成；black box 0、DRC Error 0。整机 `13910 LUT / 20145 FF / 9.5 BRAM Tile / 47 DSP`。
+- 风险：DRC 仍有 131 Warning/38 Advisory；现有音频约束仍缺 3 输入和 6 输出 I/O delay。首次长路径工程因 Windows 260 字符失败，同设计在 `D:/wpl_20261029_full/m` 通过；不能宣称外部接口完整 signoff。
+- 报告：`report/world_minphase_integration_round18_20261029.{md,json,txt}`；候选 bit/bin/DCP SHA 见 JSON，生成物未入 Git。本轮未加载板卡、未录放或试听。
+- 下一责任方：Hardware-A / Codex 生成 Linux 换序载荷，实现 coherent-buffer/超时轮询驱动和 WORLD 包装，再执行可恢复的静默板端向量测试。
+
+### [PL-20261027-01] Round19 最小相位板端软件闭环认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED / PROPOSED；基准提交：`4c13edd`。
+- 唯一变量：为 Round18 位流增加 Linux FPGA Manager 换序打包、`/dev/world_minphase` coherent-buffer 驱动、`GetMinimumPhaseSpectrum` ARM 包装和 24 例静默 DMA 探针；不改 HLS 算法或整机连接。
+- 驱动契约：513 float32 输入、513+513 float32 输出；控制/参数基址 `0x43C70000/0x43C80000`，物理缓冲经 HP2，20 ms 有界轮询，超时后拒绝继续静默回退。
+- 成功门：ARM 静态程序和匹配 5.15.0-xilinx module 构建通过；载荷换序/哈希可复现；主机编译与 ioctl ABI 检查通过。独立提交后才临时加载板卡做 24 例静默向量并验证恢复。
+- 限制：本轮软件构建不加载板卡、不录放或试听；板端阶段也只做文件/向量，启动分区不修改。
+- 下一责任方：Hardware-A / Codex 完成构建、证据与提交。
+
+### [PL-20261027-01] Round19 最小相位板端软件闭环结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：ACCEPTED（仅软件构建门）；基准提交：`4c13edd`。
+- 交付：确定性 FPGA Manager 换序/gzip 打包、`/dev/world_minphase` coherent DMA 模块、WORLD `GetMinimumPhaseSpectrum` 包装和 24 例静默探针；控制/参数基址 `0x43C70000/0x43C80000`，20 ms 超时后锁存失败，不静默回退。
+- 构建：ARM 静态主程序/探针通过；模块 vermagic `5.15.0-xilinx SMP preempt mod_unload modversions ARMv7 p2v8`。换序 bin SHA `1bc4b3f8...29373`，确定性 gzip SHA `6a7fec99...8d98`，连续两次一致；其余哈希见 JSON。
+- 报告：`report/world_minphase_board_software_round19_20261029.{md,json,txt}`。本轮未加载板卡，不能宣称板端数值、RTF 或音质通过；未录放、试听或修改启动分区。
+- 下一责任方：Hardware-A / Codex 独立提交后执行可恢复的 24 例静默板测及文件转换对照，最后恢复并核对原厂 bit/v23、PCM、服务和内核状态。
+
+### [PL-20261027-01] Round20 最小相位静默板端验证认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`05d9c3a`。
+- 唯一变量：临时加载 Round18/19 candidate，插入匹配模块并运行 24 例静默数值探针；通过后再做既有 male1/male4 文件转换对照。启动分区、原 v23 和真人音频不改。
+- 前置门：先只读核对 COM4 上原厂 bit/v23 SHA、FPGA operating、双 PCM/服务、内核 taint 和自有模块；传输逐件 SHA。实际切换前遵守恢复脚本的当轮准备确认要求。
+- 成功门：24/24 ioctl 通过、relative-L2 不超过 `2e-5`、无超时；模块计数与耗时有效；文件输出满足 SNR/峰值误差和零 fallback；最后恢复原厂 bit/v23 并核对 PCM、服务、模块、taint。
+- 限制：全程静默，不录音、播放或试听；任何失败也独立提交，不能把构建或 host/RTL 结果当板端通过。
+- 下一责任方：Hardware-A / Codex 完成只读预检和传输；切换门满足后执行并记录测试/恢复。
+
+### [PL-20261027-01] Round20 最小相位静默板端验证结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：ACCEPTED（静默向量与文件门）；基准提交：`05d9c3a`。
+- 板端向量：24/24 通过，最坏 relative-L2 `8.53141669193e-7`，device 平均约 `383.2 us/call`，无超时。两段 v23 文件 minphase PL SNR `97.371/96.942 dB`、最大 PCM16 误差均 1、零 fallback；新程序 CPU 与原 v23 逐字节一致。
+- 性能：单次文件样本 CPU `2.845/2.823 s`、minphase PL `2.749/2.747 s`，仅为方向性证据。minphase+exp 请求与 minphase-only 逐字节一致且旧 exp calls=0，证明融合核已包含该阶段 exp/cos/sin，不应继续叠加旧逐算子路径。
+- 报告：`report/world_minphase_board_round20_20261029.{md,json,txt}` 和完整遥测 `report/world_minphase_file_result_round20_20261029.json`。首次旧 exp stats 缺失与组合调用假设错误均在报告保留，最终 v3 全部通过。
+- 恢复：两模块卸载后 `sync`/正常 reboot；原厂 bit/v23 SHA 匹配，FPGA operating、服务与双 PCM RUNNING、自有模块无、taint 0、临时目录清除。启动仍报既有 FAT 未正确卸载警告，本轮未写启动分区，建议维护窗口离线 fsck。
+- 限制：本轮未录音、播放、试听、长稳或物理延迟测试；只接受文件使用门，不能写真人实时通过或完整 WORLD 全 PL。
+- 下一责任方：Hardware-A / Codex 在操作者再次确认准备后，以 minphase PL 为唯一新增变量做有限时真实录放、听感和稳定性回归。
+
+### [PL-20261027-01] Round21 最小相位 PL 实时监督准备认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED / PROPOSED；基准提交：`a7ea7bf`。
+- 唯一变量：在已验证的 v23/200 ms/fifo_io/既有增益配置上启用 `WORLD_MINPHASE=pl`、保持 `WORLD_EXP=cpu`；监督器增加 fused backend calls/fallback 强校验和结果保存，不改变算法、mixer 或 ALSA 参数。
+- 计划：先上传并逐件校验候选、模块、v24 命名程序、监督器和恢复镜像；实际切换与 20 秒真人录放必须取得新的当轮准备确认。成功门为有声、零 xrun/ALSA error/输入触顶/输出削顶、PL calls>0/fallback=0、mixer 恢复和 PCM closed。
+- 限制：20 秒只作为首轮实时门，不能替代 60 秒/10 分钟/30 分钟稳定性或定量物理延迟；听感由当次操作者原话记录。
+- 下一责任方：Hardware-A / Codex 完成静态预部署后请求操作者准备确认。
+
+### [PL-20261027-01] Round21 最小相位 PL 首轮实时结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：REJECTED（可听性）；基准提交：`a7ea7bf`。
+- 条件：操作者重新确认准备；20 秒/200 ms/fifo_io，既有增益与 ALSA 参数，`WORLD_MINPHASE=pl`、`WORLD_EXP=cpu`。监督器新增 minphase calls/fallback 强校验。
+- 客观：子进程全 0，录放 xrun/ALSA error/输入触顶/输出削顶均 0；PL `2725 calls / 0 fallback`，output peak `0.197959`，分析/渲染 RTF `0.272714/0.277273`，最大分析 `24.116 ms`，但只有 30 有声帧。
+- 用户原话：**“没听到声音”**。据此本轮硬判 REJECTED；数字链非零和零 xrun 不得覆盖用户听感。报告 `report/world_minphase_live20_round21_20261029.{md,json,txt}`，完整监督结果 `report/world_minphase_live20_result_round21_20261029.json`。
+- 恢复：结果下载后模块卸载、sync、正常 reboot；原厂 bit/v23 SHA 匹配，FPGA operating、服务和双 PCM RUNNING、taint 0、自有模块无、临时目录清除。恢复后只读 codec 显示左右 DAC/PGA/HP On；不能倒推候选运行态。
+- 限制与下一步：候选 active codec/DAPM 快照未在 reboot 前下载，尚未定位数字输出到模拟可听链的断点。不得直接重复 WORLD；下一次准备确认后依次做原厂参考播放、candidate 同参考播放，均可听才重跑短时 WORLD。
+
+### [PL-20261027-01] Round22 录入提示音与准备窗口修正认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED / PROPOSED；基准提交：`f98ccc8`。
+- 用户补充原话：**“因为刚刚录入的时候我没有准备好，你录入之前先给个提示音”**。因此 Round21 的“没听到声音”保留为原始反馈，但测试条件被操作者澄清为未及时准备，不能据此归因候选算法或模拟链故障。
+- 修正：监督器在 mixer 配置后、启动 arecord 前播放两段上升提示音（880/1175 Hz，各 300 ms，中间 180 ms），随后固定 2 秒静默准备窗口；提示使用与正式播放相同的 32 kHz/S24_LE/双声道路径，失败即不开始录入。
+- 成功门：先由操作者确认提示音可闻并按提示讲话；正式 20 秒仍要求有声、零 xrun/error/触顶/削顶、PL calls>0/fallback=0，并记录提示音 exit/帧数/准备间隔。正式测试前仍需新的准备确认。
+- 下一责任方：Hardware-A / Codex 完成静态检查、独立提交和部署后请求操作者准备。
+
+### [PL-20261027-01] Round22 录入提示音与准备窗口修正结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：PROPOSED / WAIT_LOCAL_TEST；基准提交：`f98ccc8`。
+- 实现：`--prompt-tone` 在 arecord 前播放 880/1175 Hz 各 300 ms 的上升双音，中间 180 ms，32 kHz/S24_LE/双声道/12%峰值；提示后 `--ready-delay-s 2` 再开始录入，提示失败则不录入。
+- 检查：Python 编译、mock aplay 24960 帧/peak0.12/delay2.0 和 `git diff --check` 通过；监督器 SHA `cecf23ad...8b69f`。报告 `report/world_minphase_prompt_round22_20261029.{md,json,txt}`。
+- 限制：本轮未加载板卡或录放；Round21 原反馈与日志保留，但根据用户“录入的时候没有准备好”的补充，不作为候选可听性归因结论。
+- 下一责任方：Hardware-A / Codex 独立提交后部署；新的操作者准备确认后先验提示音可闻，再进行一次 20 秒实时测试。
+
+### [PL-20261027-01] Round23 提示音后实时复测认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`9515715`。
+- 操作者已明确“准备好了”。本轮复用 Round21 相同 candidate、程序、模块、200 ms/fifo_io/增益/ALSA 参数，唯一测试流程变化是录入前双提示音和 2 秒准备窗口。
+- 成功门：提示音由操作者确认可闻；其后 20 秒讲话有声、零 xrun/error/触顶/削顶、PL calls>0/fallback=0，用户确认转换声音可听并评价连续性/异常；结束后恢复原厂 bit/v23。
+- 限制：单次 20 秒不替代长稳或定量延迟；任何主观失败优先于客观日志。
+- 下一责任方：Hardware-A / Codex 执行预检、提示音实时测试、证据下载与恢复。
+
+### [PL-20261027-01] Round23 提示音后实时复测结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：ACCEPTED（20 秒实时可用门）；基准提交：`9515715`。
+- 条件：双提示音 exit0/24960帧，随后2秒准备；20秒/200ms/fifo_io，`WORLD_MINPHASE=pl`、`WORLD_EXP=cpu`，其余参数与Round21相同。
+- 客观：有声帧1079，子进程全0，录放xrun/ALSA error/输入触顶/输出削顶均0；PL `4857 calls / 0 fallback`，分析/渲染RTF `0.561150/0.310517`，最大分析 `34.605 ms`。candidate active MICB/ADC/DAC/PGA/HP均On。
+- 用户原话：**“讲话时能听到转换声音，效果和ps类似”**。据此接受有限时实时可用和主观与PS相近；用户未单独评价提示音，不补写提示音听感。
+- 报告：`report/world_minphase_prompt_live_round23_20261029.{md,json,txt}`；完整结果与active codec分别为`world_minphase_prompt_live20_result_round23_20261029.json`和`world_minphase_prompt_codec_active_round23_20261029.json`。
+- 恢复：结果下载后模块卸载、sync、正常reboot；原厂bit/v23 SHA匹配，FPGA operating、服务和双PCM RUNNING、自有模块无、taint0、临时目录清除。
+- 限制：单次20秒不替代60秒/10分钟/30分钟稳定性或物理延迟；只迁移融合最小相位阶段，并非完整WORLD全PL。下一责任方Hardware-A / Codex在新准备确认后执行同参数60秒提示音稳定性门。
+
+### [PL-20261027-01] Round24 60 秒提示音稳定性认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`e0b518e`；操作者明确“开始吧”。
+- 唯一变量：复用 Round23 完全相同 candidate、程序、模块、提示音、200 ms/fifo_io、增益和 ALSA 参数，只把正式录入从 20 秒延长到 60 秒。
+- 成功门：提示后有效持续讲话，零录放 xrun/ALSA error/输入触顶/输出削顶，PL calls>0/fallback=0，用户确认可听连续；保存 active codec 与结果并恢复原厂 bit/v23。
+- 限制：60 秒仍不替代 10/30 分钟长稳或定量物理延迟；失败不自动重跑。
+- 下一责任方：Hardware-A / Codex 部署并执行本轮测试。
+
+### [PL-20261027-01] Round24 60 秒提示音稳定性结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：REJECTED（无有效语音，测试条件无效）；基准提交：`e0b518e`。
+- 操作者原话：**“60s录入我没有准备好”**。因此本轮不能用于 60 秒真人稳定性验收，也不能把失败归因于 PL、VAD、麦克风或音频链；Round23 的 20 秒实时可用结论不变。
+- 客观：提示音 exit0/24960帧/后置2秒；子进程全0，录放 xrun/ALSA error/输入触顶/输出削顶均0；PL `7883 calls / 0 fallback`，但有声帧0，监督器按 `--require-voiced` 退出1。raw peak `0.423708`、RMS `0.027869`，分析/渲染RTF `0.283794/0.278869`。
+- 运行态：candidate active MICB/ADC/DAC/PGA/HP均On；驱动 device 累计`3.055748 s`、约`387.64 us/call`。报告：`report/world_minphase_prompt_live60_round24_20261029.{md,json,txt}`；完整结果与active codec已保存。
+- 恢复：module卸载、sync、正常reboot；原厂bit/v23 SHA匹配，FPGA operating、服务和双PCM RUNNING、自有模块无、taint0、临时目录清除。既有FAT警告仍在，本轮未写启动分区。
+- 下一责任方：Hardware-A / Codex 等待新的操作者准备确认后，使用完全相同参数重做60秒；提示后需在整个录入窗口持续讲话，失败不自动重跑。
+
+### [PL-20261027-01] Round25 60 秒有效讲话稳定性复测认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`d85bee6`；操作者明确“准备好了”。
+- 唯一变量：复用 Round24 完全相同 candidate、程序、module、提示音、200 ms/fifo_io、增益和 ALSA 参数，重新执行60秒；本轮操作者将在提示后持续讲话。
+- 成功门：有声帧>0，零录放 xrun/ALSA error/输入触顶/输出削顶，PL calls>0/fallback=0；保存结果与active codec，取得用户听感后恢复原厂bit/v23。
+- 限制：60秒不替代10/30分钟长稳和定量物理延迟；任何失败仍单独提交，不自动重跑。
+- 下一责任方：Hardware-A / Codex 部署、执行、取证并恢复。
+
+### [PL-20261027-01] Round25 60 秒有效讲话稳定性复测结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：REJECTED（提示音不可闻且客观门失败）；基准提交：`d85bee6`。
+- 用户原话：**“我刚刚没有听到提示音”**。提示进程虽报告exit0/24960帧，但操作者没有听见，正式录入起点不可判定；不得把进程成功写成提示可闻。
+- 客观：60秒采集/播放各960000样本、零xrun，PL `8803 calls / 0 fallback`；但子进程`0/6/0`、有声帧0、输出peak `2.423787`且削顶133样本，监督器exit1。本轮不能作为60秒有效讲话稳定性验收。
+- 报告：`report/world_minphase_prompt_live60_round25_20261029.{md,json,txt}`；完整结果与active codec已保存。candidate active MICB/ADC/DAC/PGA/HP均On；驱动device约`386.25 us/call`。
+- 恢复：module卸载、sync、正常reboot；原厂bit/v23 SHA匹配，FPGA operating、服务running，双PCM在随后复核均RUNNING，自有模块无、taint0、临时目录清除。
+- 下一责任方：Hardware-A / Codex 先增加codec静音预热、更长更响三段提示和`--prompt-only`验证模式；取得新的播放准备确认并由用户明确确认可闻后，才再次申请60秒录入。
+
+### [PL-20261027-01] Round26 可闻提示音修正认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED / PROPOSED；基准提交：`59e4527`。
+- 唯一变量：监督器提示音先保持同一playback stream静音预热，再播放更长、更响的三段递增音；新增`--prompt-only`只验证提示、绝不启动采集或WORLD。
+- 成功门：本机mock验证帧数、幅度、频率时序、提示后延迟和prompt-only不启动录音；独立提交后，新的操作者准备确认下仅播放提示，由用户明确确认可闻。
+- 限制：本轮代码阶段不操作板卡、不录音、不播放；提示可闻也不等于60秒稳定性通过。
+- 下一责任方：Hardware-A / Codex 实现、回归、报告并独立提交。
+
+### [PL-20261027-01] Round26 可闻提示音修正结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：PROPOSED / WAIT_LOCAL_TEST；基准提交：`59e4527`。
+- 修正：同一播放流先静音预热0.80秒，再播放660/880/1175Hz三段0.55秒长音，段间0.18秒、尾部0.25秒，峰值0.30；总97920帧/3.06秒，正式录入前2秒准备窗口不变。
+- 新增`--prompt-only`：只保存/配置/恢复mixer并播放提示，结果显式`capture_started=false`、`world_started=false`；不启动arecord或WORLD。
+- 检查：Python编译通过；监督器完整回归17/17通过，覆盖静音预热、总帧数、峰值、三频元数据、延迟和prompt-only零Popen/单次restore；`git diff --check`通过。首次夹具目录缺失与随后4个旧kind字段缺失已如实记入报告。
+- 报告：`report/world_minphase_prompt_fix_round26_20261029.{md,json,txt}`；监督器SHA`63802aef...182ef`，测试SHA`67b64b28...1394a`。本轮未操作板卡、未播放、录音或试听。
+- 下一责任方：Hardware-A / Codex 独立提交后，在新的操作者准备确认下只执行prompt-only；用户明确确认可闻后才再次申请60秒录入。
+
+### [PL-20261027-01] Round27 开机自动 PL 与失败回退部署认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`3ffbfd6`。
+- 用户明确决定跳过稳定性和提示音可闻测试，直接执行：修复输出削顶、制作开机自动加载/失败回退服务、建立可恢复备份并写启动分区。
+- 方案边界：原厂`/boot/bit/zynq7020.bit`不覆盖；启动分区新增候选/恢复清单，rootfs安装版本化payload、module、runtime和监督服务。每次开机先由原厂bit安全启动，再由服务切换candidate；任一步失败在同次启动内恢复factory bit并重启v23。
+- 削顶修正：默认输出Q16从49152（0.75）降至16384（0.25）；按Round25峰值2.423787线性折算约0.807929。用户明确不要求本轮稳定性/听感测试，但仍执行静态、哈希、服务故障注入和板端无声启动/回退检查。
+- 成功门：安装物逐件SHA；服务语法/离线故障注入通过；启动分区原文件哈希不变且新增文件回读匹配；开机自动进入candidate服务状态；人为故障能恢复factory bit/v23；最终恢复到用户要求的candidate默认状态。
+- 风险：现有FAT未正常卸载警告保留；写入前后必须`sync`并回读，禁止覆盖原厂bit/uEnv/boot.scr。只迁移融合最小相位阶段，不能写完整WORLD全PL。
+- 下一责任方：Hardware-A / Codex 只读审计板端启动布局与空间，完成代码、包、故障注入、安装和双路径验收，每轮独立提交推送。
+
+### [PL-20261027-01] Round27 开机自动 PL 与失败回退方案结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：ACCEPTED（部署方案/故障注入门，尚未持久安装）；基准提交：`3ffbfd6`。
+- 用户免测边界：明确跳过稳定性和提示音可闻测试。削顶修正把默认输出Q16从49152降到16384；Round25 peak按线性折算从2.423787降至约0.807929，尚未做真人音量验证。
+- 方案：U-Boot保持原厂bit；FAT新增`/boot/world_pl`资产与`DISABLE`选择，原init备份为`world-voice.factory`，包装器自动切换candidate。资产/加载/module/device/runtime任一失败均写DISABLE、恢复factory bit/v23，下次启动直接factory。
+- 检查：host 20项中18通过、2项因Windows无POSIX sh跳过；板上`/tmp`四脚本BusyBox语法全通过，两项无声故障注入通过，输出`BOARD_BOOT_FAULT_TEST_PASS cases=2 audio_started=0 fpga_changed=0`。
+- 测试后状态：原厂服务和双PCM RUNNING、FPGA operating、taint0；本轮未持久安装、未写启动分区、未播放录音。报告`report/world_minphase_persistent_build_round27_20261029.{md,json,txt}`。
+- 下一责任方：Hardware-A / Codex 独立提交后进入Round28，先安装并逐件回读SHA但不启动；实际enable/reboot自动采录前仍需当次操作者准备确认。
+
+### [PL-20261027-01] Round28 持久资产安装与回读认领
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`8107d5a`。
+- 范围：上传到`/tmp` staging逐件校验；备份原`/etc/init.d/world-voice`；安装版本化rootfs资产、新包装init和control；FAT只新增`/boot/world_pl`候选gzip/manifest/recovery，不覆盖BOOT.BIN、uEnv、boot.scr或原厂bit。
+- 安全门：安装前后核对四个原厂SHA；所有新文件从目标位置回读SHA；默认先创建`DISABLE=INSTALL_GUARD`，保证安装后仍运行factory v23且不会自动启动candidate。
+- 本轮不重启、不切换FPGA、不打开新采录放。完成安装并提交后，再取得当次操作者准备确认，删除INSTALL_GUARD并首次enable。
+- 下一责任方：Hardware-A / Codex 完成传输、原子安装、回读和factory运行态复核。
+
+### [PL-20261027-01] Round28 持久资产安装与回读结果
+- 日期：2026-10-29；角色：Hardware-A / Codex；状态：ACCEPTED（持久安装完成，INSTALL_GUARD保持factory）；基准提交：`8107d5a`。
+- 安装：版本化release`/opt/world_voice_pl/releases/20261029_round27`及current链接；原init精确备份`world-voice.factory`；新wrapper/control安装；FAT新增`/boot/world_pl`候选gzip、manifest、recovery和`DISABLE=INSTALL_GUARD`。
+- 回读：rootfs manifest 6/6、boot 1/1均OK；factory bit/uEnv/boot.scr/v23哈希全部与安装前一致，原启动文件未覆盖。安装器输出`WORLD_MINPHASE_INSTALL_OK active=factory guard=INSTALL_GUARD boot_originals_unchanged=1`。
+- 传输异常：首次runtime在约97%被原厂周期性ALSA日志打断，未接受partial；停止factory服务后从encoded offset`2613248/2686482`续传，最终SHA`2dea4725...f438`通过。
+- 当前状态：factory FPGA operating，双PCM closed，taint0，无candidate module；factory服务为保证上传静默而stopped，没有为了本轮重新开启采录放。报告`report/world_minphase_persistent_install_round28_20261029.{md,json,txt}`。
+- 下一责任方：Hardware-A / Codex 独立提交后，取得新的操作者准备确认，再删除INSTALL_GUARD并首次enable；随后一次reboot验证开机自动candidate和回退选择。
+
+### [PL-20261027-01] Round29 持久 PL 首次启用与重启认领
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`ca4b2ab`；操作者明确“继续吧”，作为本次自动采录放启用准备确认。
+- 范围：只读复核INSTALL_GUARD和原厂/候选哈希；执行`world-pl-control enable`删除guard并启动包装服务；核对candidate FPGA、module、service state、backend计数和削顶遥测。随后正常reboot一次，验证开机自动进入同一candidate状态。
+- 用户免测边界延续：不要求稳定性和提示音可闻验收；仍不得忽略启动失败、fallback、module/backend未使用或输出削顶。
+- 回退：任何启动/runtime失败应自动创建`/boot/world_pl/DISABLE`并恢复factory bit/v23；不覆盖原厂BOOT/uEnv/boot.scr/bit。
+- 下一责任方：Hardware-A / Codex 执行首次enable、证据下载、必要修复和一次持久重启验证，完成后独立提交推送。
+
+### [PL-20261027-01] Round29 持久 PL 首次启用与重启结果
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：REJECTED（开机音频竞态）；基准提交：`ca4b2ab`。
+- 手动enable通过：`READY_CANDIDATE`、DISABLE缺失、module live、PL calls2145、双PCM RUNNING，说明持久资产和candidate本身可启动。
+- 重启失败：`S99music-button`字典序早于`S99world-voice`，遗留PPid1的PID894 `aplay /opt/hardware_test/test.wav`占用pcm0p；candidate虽自动加载ready，WORLD preflight因AUDIO_BUSY退出1，写入`DISABLE=RUNTIME_1`。
+- 回退边界：同一busy PCM也阻止in-place restore的closed断言；factory start不能写成位流恢复成功。用户随后明确“现在不用恢复v23，你就把PL部署做好就行”，故停止factory/music并终止已确认PID894，未主动加载v23 restore。
+- 最终：双PCM closed、FPGA operating（依据日志推断candidate仍在）、module absent、taint4096、state FALLBACK_FACTORY_RUNTIME_1。诊断ps命令另有一次引号剥离导致额外aplay/arecord立即失败，未影响此前已确认的calls，已写入报告。
+- 报告：`report/world_minphase_persistent_boot_round29_20261030.{md,json,txt}`。下一责任方Hardware-A / Codex先独立提交失败证据，再修wrapper：停music-button、仅杀精确test.wav孤儿aplay、等待PCM closed，然后重新enable/reboot，最终保持PL。
+
+### [PL-20261027-01] Round30 music-button 竞态修复与持久 PL 重验认领
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`9b18b7e`。
+- 修复：candidate启动前停止music-button；仅终止`comm=aplay`且cmdline包含`/opt/hardware_test/test.wav`的孤儿；等待pcm0p/pcm1c均closed再启动。禁止全局killall aplay。
+- 加固：autostart直接运行时也执行同一quiesce；runtime失败后先等待PCM关闭再restore，减少busy断言阻断回退。
+- 部署：创建新版本化release而非原地改Round27；更新rootfs manifest/current链接和wrapper init，原厂bit/v23与boot文件不变。
+- 成功门：shell/Python回归、板端语法通过；重新enable达到READY/calls>0/双PCM RUNNING；正常reboot后再次自动达到同状态，DISABLE保持缺失；最终不恢复v23。
+- 下一责任方：Hardware-A / Codex 完成修复、版本化热更新、enable与重启证据，独立提交推送。
+
+### [PL-20261027-01] Round30 PL 持久部署结果
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：ACCEPTED（用户免测边界内）；基准提交：`9b18b7e`。
+- 修复：candidate 前停止music-button，仅终止精确匹配`aplay /opt/hardware_test/test.wav`的孤儿并等待PCM关闭；wrapper启动daemon前删除旧PID/state，消除旧状态误判。新release为`20261030_round30`，state-fix原子安装且未重启当时音频。
+- 正常reboot通过：自动选择PL candidate，`READY_CANDIDATE`、DISABLE缺失、双PCM RUNNING；PL calls从2278增长至13751，进程表无hardware_test孤儿。最终保持PL，不恢复v23。
+- 完整性：factory bit/uEnv/boot.scr/v23及candidate gzip重启后SHA均匹配；原启动文件未覆盖。out-of-tree module使taint=4096，属预期。
+- 检查：相关unittest 21项中19通过、2项因Windows无POSIX sh跳过；板端shell语法/安装通过。全sim另有2项因缺失被忽略的旧target profile生成资产报错，与本轮无关且未伪造资产。
+- 限制：用户明确跳过提示可闻和长稳；本结果只证明融合最小相位PL阶段，不宣称完整WORLD全PL。shutdown记录Xilinx audio formatter内核警告但随后重启成功；FAT旧未正确卸载警告仍在。
+- 报告：`report/world_minphase_persistent_boot_round30_20261030.{md,json,txt}`；下一责任方为维护者审核PR。若后续要求产品化长稳，再单独处理shutdown驱动警告和10/30分钟门。
+
+### [PL-20261027-01] Round31 WORLD 合成 batch 继续迁移认领
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`a8f6f8f`。
+- 用户授权：按“PL承担主要DSP、PS仅保留控制/音频I/O/回退”的路线继续；目标不是取消PS，而是逐层迁移约80%～95%的计算负载。
+- 本轮唯一变量：在已通过的minphase PL核之后建立完整合成batch的状态/接口与host golden原型，覆盖脉冲位置、周期/非周期激励、RandnState消费顺序、anchor及跨batch overlap-add；不先改DIO/CheapTrick/D4C。
+- 成功门：与WORLD v23同输入同状态逐样本/PCM16对照，最大PCM16误差≤3、SNR≥75dB、零削顶；接口将逐帧513-bin中间往返改为40ms batch，保留16kHz/10ms帧和128样本输出契约。
+- 改动范围：`src/hls/`、`src/ps/`、`sim/`、`build/`及`report/`中的本轮最小实现和证据。Round30板上启动release/位流保持不变，本轮不录音、不播放、不切板。
+- 限制：首先完成host数值门和资源可综合结构；未通过前不宣称HLS、布局布线、板卡或实时提升。
+- 下一责任方：Hardware-A / Codex 阅读WORLD 0.3.5 synthesisrealtime实现，固定batch契约，完成原型、回归和独立提交推送。
+
+### [PL-20261027-01] Round31 WORLD 合成脉冲核原型结果
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：ACCEPTED（host/C-sim/Verilog RTL原型门）；基准提交：`a8f6f8f`。
+- 实现：单脉冲PL边界包含三次FFT、噪声去均值、非周期频域乘法、fftshift、周期DC去除和最终缩放；PS暂留原RandnState、脉冲定位和overlap-add，避免改变随机序列后误判音色。
+- 数值：5组host、HLS C-sim、Verilog cosim全部通过；最坏relative-L2 `1.7291321e-7`、最大绝对误差`5.0343813e-7`。RTL latency min/avg/max=`50445/51603/55214` cycles。
+- 资源：三次变换复用同一Transform后HLS估算`10920 LUT / 9495 FF / 18 BRAM18K / 22 DSP`，较初版节省3541 LUT和18 DSP，100MHz最坏估算0.567ms/脉冲。估算不是routed签核。
+- 风险：XSim依赖监视器保留2100条显式inter-false地址碰撞警告；5组通过不是形式证明。本轮仍非最终40ms batch，未做真实WORLD PCM回归、OOC/整机实现、板卡、音频或稳定性测试。
+- 报告：`report/world_synthesis_pulse_round31_20261030.{md,json,txt}`；复现入口`build/test_world_synthesis_pulse.ps1`、`build/probe_world_synthesis_pulse_hls.tcl`、`build/cosim_world_synthesis_pulse_hls.tcl`。
+- 下一责任方：Hardware-A / Codex 独立提交推送后进入Round32，把可选host模型接入`synthesisrealtime`做真实WORLD文件PCM16/SNR回归，再决定OOC/整机连接。
+
+### [PL-20261027-01] Round32 真实 WORLD 合成脉冲模型回归认领
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`30e89b5`。
+- 本轮唯一变量：在`WORLD_SYNTH_PULSE_MODEL=1`时，把Round31 float脉冲核接入`synthesisrealtime`的anchor路径；默认未设置时保持现有纯PS路径。RandnState仍由PS按原顺序消费，transition fallback仍走原CPU实现。
+- 成功门：同一真实WORLD参数/音频输入下相对默认PS路径PCM16最大误差≤3、SNR≥75dB、零削顶；记录模型调用和CPU fallback次数。未达到则不进入OOC/整机连接。
+- 范围：只做host文件回归和最小可选择hook，不切板、不录音、不播放，不修改Round30持久位流与服务。
+- 下一责任方：Hardware-A / Codex 实现可回退hook、重建host二进制、运行两段受控男声文件并独立提交结果。
+
+### [PL-20261027-01] Round32 真实 WORLD 合成脉冲模型回归结果
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：REJECTED（FFT尺度合同）；基准提交：`30e89b5`。
+- 接线：仅`WORLD_SYNTH_PULSE_MODEL=1`且FFT=1024时进入Round31核；默认关闭不变，transition仍CPU fallback；两例模型调用`1643/1628`、fallback `124/179`，证明真实链路已覆盖。
+- 失败：标准录音1/4的SNR仅`0.127282/0.180461 dB`，最大PCM16误差`17939/23965`，远未达到75 dB/3门；两例输出削顶均为0。
+- 根因：WORLD/Ooura c2r不归一化且原路径末尾除1024，HLS逆FFT已归一化，hook再次除1024造成重复缩放。报告`report/world_synthesis_pulse_round32_20261030.{md,json,txt}`。
+- 边界：本轮只做host文件回归，没有切板、录音、播放或修改Round30持久release。下一责任方Hardware-A / Codex独立提交失败路线后，以Round33只移除重复除法并原条件复测。
+
+### [PL-20261027-01] Round33 合成脉冲模型尺度修正认领
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`9500220`。
+- 本轮唯一变量：移除host hook对已归一化HLS逆FFT输出的重复`/fft_size`；模型接口、RandnState顺序、anchor/fallback、输入、增益和门槛全部保持Round32不变。
+- 成功门：两段真实5秒输入各自SNR≥75 dB、PCM16最大误差≤3、CPU与模型输出削顶均为0、模型调用>0，并记录fallback。
+- 范围：host文件回归；不切板、不录音、不播放、不修改Round30持久release。下一责任方Hardware-A / Codex完成单变量修正、原条件复测和独立提交。
+
+### [PL-20261027-01] Round33 合成脉冲模型尺度修正结果
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：ACCEPTED（host模型门）；基准提交：`9500220`。
+- 单变量修正：移除hook对已归一化HLS逆FFT结果的重复`/1024`；默认关闭路径、RandnState顺序、anchor和transition fallback不变。
+- 数值：标准录音1/4分别SNR=`105.295306/104.549879 dB`，最大PCM16误差均为`1`，RMS误差`0.015811/0.014577`，CPU/模型削顶均`0/0`；模型调用`1643/1628`、CPU fallback `124/179`，全部通过75 dB/3/零削顶门。
+- 证据：模型exe SHA `8a7d60f5...a3e1a09e`；输入PCM SHA分别`7a23bd30...00b2`、`8edae31b...d70d1c`；报告`report/world_synthesis_pulse_round33_20261030.{md,json,txt}`。
+- 限制：只证明真实WORLD host模型的数值合同，不宣称OOC、整机时序、板卡、音频听感或稳定性通过；本轮未切板、录音、播放或修改Round30 release。下一责任方Hardware-A / Codex独立提交后进入OOC/整机DMA batch连接。
+
+### [PL-20261027-01] Round34 合成脉冲核 OOC 实现认领
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：CLAIMED；基准提交：`506d2dd`。
+- 本轮唯一变量：从干净短路径重建Round31共享Transform核，并执行HLS `export_design -flow impl`，取得xc7z020clg400-2的真实OOC布线资源、时序和DRC；不修改核算法与接口。
+- 成功门：host/C-sim仍通过；OOC实现完成，setup/hold均非负、DRC无Error、无未布线；资源与Round18整机相加不超过Zynq-7020容量，并保留≥20% LUT/BRAM/DSP余量供互连与后续融合。
+- 范围：只构建离线工程和报告；不接整机、不生成或加载板上bit、不录音、不播放、不修改Round30 release。下一责任方Hardware-A / Codex运行OOC并独立提交可复现结果。
+
+### [PL-20261027-01] Round34 合成脉冲核 OOC 实现结果
+- 日期：2026-10-30；角色：Hardware-A / Codex；状态：ACCEPTED（OOC routed门）；基准提交：`506d2dd`。
+- 数值/实现：C-sim 5/5，relative-L2 `1.7291321e-7`；routed资源`6735 LUT / 8776 FF / 16 BRAM18K / 22 DSP`，WNS=`1.918719 ns`、WHS=`0.047895 ns`，14930 fully routed、0 routing error。
+- DRC：68 Warning、21 Advisory、0 Critical/Error；主要为浮点流水建议，OOC壳另有PS7缺失及边界时钟/pin未固定警告，必须由整机重签。
+- 容量：与Round18完整音频+minphase保守相加为`20645 LUT / 28921 FF / 17.5 BRAM Tile / 69 DSP`，占比`38.81%/27.18%/12.5%/31.36%`，虽未计新互连但远高于20%余量门。
+- 证据：`report/world_synthesis_pulse_ooc_round34_20261030.{md,json,txt}`；外部工程`D:/wpl_20261030_r34/pulse_ooc`，报告SHA在JSON。本轮未接整机、切板、录音、播放或修改Round30 release。下一责任方Hardware-A / Codex独立提交后将pulse IP接入完整工程并签核整机时序/资源。

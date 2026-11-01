@@ -1,0 +1,74 @@
+{
+  "task_id": "PL-20261027-01",
+  "round": 17,
+  "date": "2026-10-29",
+  "role": "Hardware-A / Codex",
+  "status": "ACCEPTED_OOC_ONLY",
+  "base_commit": "12d23894d308be30b44fd73292bed34cd0c18a8c",
+  "branch": "agent/Pi-debug-cmd/PL-20261027-01",
+  "tool": {
+    "vitis_hls": "2026.1",
+    "vivado": "2026.1",
+    "part": "xc7z020clg400-2",
+    "clock_target_ns": 10.0,
+    "clock_target_mhz": 100.0
+  },
+  "reproduction": {
+    "environment": "WORLD_HLS_PROJECT=D:/wpl_20261027_r16/m",
+    "command": "D:/USER_Software/vivado/2026.1/Vitis/bin/vitis-run.bat --mode hls --tcl --input_file build/impl_world_minphase_hls.tcl",
+    "flow": "export_design -flow impl -rtl verilog -format ip_catalog"
+  },
+  "post_implementation": {
+    "fully_routed": true,
+    "unrouted_nets": 0,
+    "partially_routed_nets": 0,
+    "wns_ns": 1.327,
+    "tns_ns": 0.0,
+    "setup_failing_endpoints": 0,
+    "whs_ns": 0.053,
+    "ths_ns": 0.0,
+    "hold_failing_endpoints": 0,
+    "achieved_period_ns": 8.673,
+    "slice_luts": 4996,
+    "slice_registers": 5769,
+    "dsp48e1": 38,
+    "bram18k_equivalents": 7,
+    "block_ram_tiles": 3.5,
+    "slices": 1992,
+    "srl": 224,
+    "black_boxes": 0,
+    "drc_errors": 0,
+    "drc_critical_warnings": 0,
+    "drc_warnings": 94,
+    "drc_advisories": 31
+  },
+  "drc_notes": {
+    "warning_breakdown": {
+      "DPIP-1": 47,
+      "DPOP-1": 30,
+      "DPOP-2": 15,
+      "RTSTAT-10": 1,
+      "ZPS7-1": 1
+    },
+    "advisory_breakdown": {
+      "AVAL-4": 21,
+      "AVAL-5": 10
+    }
+  },
+  "limitations": [
+    "This is an out-of-context kernel implementation, not a timing signoff of the complete audio design.",
+    "HD.CLK_SRC and HD.PARTPIN_LOCS are intentionally absent at the OOC boundary, so clock skew and boundary-path timing must be rechecked after integration.",
+    "Vivado warns that not all connectivity-based DRC checks run in OOC mode; ZPS7-1 is expected because the standalone kernel wrapper contains no PS7 block.",
+    "The Round16 XSIM dynamic dependence warnings remain an integration risk even though all 24 RTL numerical cases passed.",
+    "No bitstream was loaded and no board recording, playback, or listening test was performed."
+  ],
+  "sha256": {
+    "src/hls/world_minphase.cpp": "ae0665779bc9043013aab51ca43d86bf35303a29bd15d1c3cad1eb60be8808cd",
+    "build/impl_world_minphase_hls.tcl": "e7552b5d30b87833c903a8717ed10e383e764cc4819ede94ed81cad4bedc3a02",
+    "world_minphase_export.rpt": "b0cde47922715a07c88f6569777267d3ce73ba004e7f7b805a0db56ce7e54a6f",
+    "world_minphase_timing_routed.rpt": "9f9da53d0cfbc9c4cdbee8b11db28d5f342b3c300a2beae56a00e17cccbf9eed",
+    "world_minphase_utilization_routed.rpt": "652aa59c5cffdb75f71a5d6f4b098be9829a08df414f767e7f8c153a0c3bfb61",
+    "bd_0_wrapper_drc_routed.rpt": "e88332fe4550c254c8e94bcb0e378b3afcedb4b5bb38d3af282bb2f160dbee75"
+  },
+  "next_responsible": "Hardware-A / Codex: integrate the packaged kernel into the existing Zynq audio design, then rerun full-design address, DRC, timing, and resource checks before any board load."
+}

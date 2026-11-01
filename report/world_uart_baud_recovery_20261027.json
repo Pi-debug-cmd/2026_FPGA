@@ -1,0 +1,36 @@
+{
+  "task": "PL-20261027-01",
+  "date": "2026-10-27",
+  "status": "REJECTED: transient UART baud increase",
+  "attempt": "service stopped, stty921600 and host changed to921600",
+  "observed": "No console response at 921600 or115200; hardware UART baud restore did not restore console",
+  "pnp_restart": "denied: not elevated; not performed",
+  "jtag_available_now": true,
+  "jtag_target": "Digilent/210357A7D00EA, Zynq7020",
+  "recovery": "XSDB rst -system, normal unmodified U-Boot boot; serial115200 and original v23 verified",
+  "register_attempts": {
+    "UART0_before": {
+      "CR": "0x114",
+      "BAUDGEN": 1,
+      "BAUDDIV": 108
+    },
+    "restore": {
+      "CR": "0x117",
+      "BAUDGEN": 124,
+      "BAUDDIV": 6
+    }
+  },
+  "verification": {
+    "Raw": "115200\r\n 01:57:43  up   0:00,  1 user,  load average: 0.67, 0.18, 0.06\r\nworld-voice running pid=603\r\nf12da25e93a520b7f5255ce952a3cb9b5d1bbca474133b1bc529d8c8e18349b7  /opt/world_voice/world_budget_v23\r\noperating\r\nstate: RUNNING\r\nowner_pid   : 649\r\ntrigger_time: 21.597149943\r\ntstamp      : 0.000000000\r\ndelay       : 3048\r\navail       : 24\r\navail_max   : 2560\r\n-----\r\nhw_ptr      : 377368\r\nappl_ptr    : 380416\r\nstate: RUNNING\r\nowner_pid   : 647\r\ntrigger_time: 21.595021641\r\ntstamp      : 0.000000000\r\ndelay       : 280\r\navail       : 280\r\navail_max   : 512\r\n-----\r\nhw_ptr      : 377624\r\nappl_ptr    : 377344\r\nbr# __XD144308__=0\r\n",
+    "Output": "115200\n 01:57:43  up   0:00,  1 user,  load average: 0.67, 0.18, 0.06\nworld-voice running pid=603\nf12da25e93a520b7f5255ce952a3cb9b5d1bbca474133b1bc529d8c8e18349b7  /opt/world_voice/world_budget_v23\noperating\nstate: RUNNING\nowner_pid   : 649\ntrigger_time: 21.597149943\ntstamp      : 0.000000000\ndelay       : 3048\navail       : 24\navail_max   : 2560\n-----\nhw_ptr      : 377368\nappl_ptr    : 380416\nstate: RUNNING\nowner_pid   : 647\ntrigger_time: 21.595021641\ntstamp      : 0.000000000\ndelay       : 280\navail       : 280\navail_max   : 512\n-----\nhw_ptr      : 377624\nappl_ptr    : 377344\nbr#",
+    "Ok": true,
+    "ExitCode": 0
+  },
+  "limits": [
+    "No claim about exact driver/kernel root cause",
+    "Do not retry console baud switching on this board",
+    "FFT bitstream not loaded during incident",
+    "No physical user reset needed; no boot files changed"
+  ],
+  "code_disposition": "optional baud parameter removed; upload tool remains115200"
+}

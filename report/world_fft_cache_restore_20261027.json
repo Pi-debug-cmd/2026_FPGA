@@ -1,0 +1,6 @@
+{
+  "Raw": "world-voice started\r\nworld-voice running pid=918\r\nf12da25e93a520b7f5255ce952a3cb9b5d1bbca474133b1bc529d8c8e18349b7  /opt/world_voice/world_budget_v23\r\noperating\r\nclosed\r\nclosed\r\nbr# __XD753349__=0\r\n",
+  "Output": "world-voice started\nworld-voice running pid=918\nf12da25e93a520b7f5255ce952a3cb9b5d1bbca474133b1bc529d8c8e18349b7  /opt/world_voice/world_budget_v23\noperating\nclosed\nclosed\nbr#",
+  "ExitCode": 0,
+  "Ok": true
+}

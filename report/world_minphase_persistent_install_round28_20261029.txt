@@ -1,0 +1,8 @@
+PL-20261027-01 Round28 ACCEPTED_PERSISTENT_INSTALL_GUARDED
+boot write: /boot/world_pl only; original BOOT/uEnv/boot.scr/factory bit hashes unchanged
+rootfs: release 20261029_round27, factory init backup, wrapper init, control installed
+manifests: rootfs 6/6 OK; boot 1/1 OK
+selection: DISABLE=INSTALL_GUARD -> factory v23
+candidate/audio: not started; FPGA factory operating; PCM closed; taint=0
+upload: runtime resumed at encoded 2613248/2686482 after factory log interruption; final SHA verified
+next: fresh readiness, enable candidate, then persistent reboot verification

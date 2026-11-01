@@ -1,0 +1,66 @@
+{
+  "task_id": "PL-20261027-01",
+  "round": 30,
+  "date": "2026-10-30",
+  "role": "Hardware-A / Codex",
+  "status": "ACCEPTED_PERSISTENT_PL_DEPLOYMENT",
+  "base_commit": "9b18b7e",
+  "operator_ready": true,
+  "user_waivers": [
+    "long stability test",
+    "prompt audibility test"
+  ],
+  "fixes": {
+    "music_button_stopped_before_candidate": true,
+    "orphan_match": "comm=aplay and cmdline contains /opt/hardware_test/test.wav",
+    "global_killall_used": false,
+    "pcm_close_wait_seconds": 5,
+    "stale_state_removed_before_daemon_launch": true
+  },
+  "installed": {
+    "release": "/opt/world_voice_pl/releases/20261030_round30",
+    "current_matches_release": true,
+    "init_sha256": "4f70ab031bff21c685ef9fbcc51ef5484cb8878d6d7920dbbccad850f3789489",
+    "audio_restarted_during_statefix": false
+  },
+  "persistent_reboot": {
+    "boot_selection": "WORLD minphase PL candidate",
+    "state": "READY_CANDIDATE",
+    "disable_absent": true,
+    "service_pid": 766,
+    "capture_pcm": "RUNNING",
+    "playback_pcm": "RUNNING",
+    "orphan_hardware_test_aplay_present": false,
+    "pl_calls_first_check": 2278,
+    "pl_calls_later_check": 13751,
+    "kernel_taint": 4096
+  },
+  "original_sha256": {
+    "factory_bit": "16cb36f7161935896615ad12b000597088a6a9745856611162f1c44a51f82a61",
+    "uenv": "e211c7f8b8034c02c9035d71c05237607f09efeec272ad9d9c774788431c53c2",
+    "boot_scr": "7702e40c863bb4d73b561ad9dd112537fd4560515286e9a3f5aebb133a6383f8",
+    "factory_v23": "f12da25e93a520b7f5255ce952a3cb9b5d1bbca474133b1bc529d8c8e18349b7",
+    "candidate_gzip": "6a7fec9987d31c5f803b79b1bb8e115dca9fda0dfc278b8f462d60562b628d98"
+  },
+  "tests": {
+    "relevant_unittest_passed": 19,
+    "relevant_unittest_skipped_no_posix_sh": 2,
+    "board_shell_syntax": "pass",
+    "full_sim_discovery": "66 passed, 2 skipped, 2 unrelated errors due missing ignored generated target profile"
+  },
+  "known_limits": [
+    "Fused minimum-phase stage is in PL; this is not a claim that the whole WORLD pipeline is implemented in PL.",
+    "Prompt audibility and long-duration stability were waived by the user.",
+    "Shutdown printed a Xilinx audio formatter Bad of_node_put warning before a successful reboot.",
+    "FAT printed the pre-existing unclean-unmount warning; post-boot hashes still matched."
+  ],
+  "raw_log_sha256": {
+    "active": "26efb302c7fff1a7123ee7d6b14f322a23c3d5e4505e18a2092c593b64e14a24",
+    "statefix_install": "2e8d9a82a0e09628fbb18b2cc26ab28d5abfd91664b78234bf7b0236413c9613",
+    "reboot": "e47a61630b5cd4c0c716620ebc10d0d01934314efb0a9d190fc746aa3d3600cf",
+    "boot_login": "4ef679a5e31ef15b5d54f6a0ebbe33383b18e037befad986b51e19aab82c6463",
+    "boot_verify": "1fb32fe6bd2abeed9442005961eb2a481a316a67e3e8701bee2078bfb18eb3a6",
+    "integrity": "5acd27af43bb7d9b783bfc19783e60bbd398803aa5fa2fe93d442894e4569f78"
+  },
+  "final_state": "PL candidate active; READY_CANDIDATE; capture and playback RUNNING; v23 not restored"
+}

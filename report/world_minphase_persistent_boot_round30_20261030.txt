@@ -1,0 +1,120 @@
+==== 2026-10-30 20:11:42 PORT=COM4 CMD: /usr/sbin/world-pl-control status; cat /run/world_minphase/state; test ! -e /boot/world_pl/DISABLE; echo disable_absent=$?; readlink -f /opt/world_voice_pl/current; sha256sum /etc/init.d/world-voice; cat /sys/module/world_minphase_dma/parameters/stats; cat /proc/asound/pcm; for f in /proc/asound/card*/pcm*/sub*/status; do echo $f; cat $f; done; cat /proc/sys/kernel/tainted; ps -w; tail -n 60 /var/log/world_minphase_autostart.log ====
+
+[01;32mroot@zynq_plnx[00m:[01;34m~[00m#
+[01;32mroot@zynq_plnx[00m:[01;34m~[00m#/usr/sbin/world-pl-control status; cat /run/world_minphase/statee; test ! -e /boot/world_pl/DISABLE; echo disable_absent=$?; readlink -f /opt/worrld_voice_pl/current; sha256sum /etc/init.d/world-voice; cat /sys/module/world_miinphase_dma/parameters/stats; cat /proc/asound/pcm; for f in /proc/asound/card*/ppcm*/sub*/status; do echo $f; cat $f; done; cat /proc/sys/kernel/tainted; ps -w;  tail -n 60 /var/log/world_minphase_autostart.log ; echo "XDONE592986=$?"
+boot selection: WORLD minphase PL candidate
+world-minphase running pid=766 state=READY_CANDIDATE
+READY_CANDIDATE
+disable_absent=0
+/opt/world_voice_pl/releases/20261030_round30
+4f70ab031bff21c685ef9fbcc51ef5484cb8878d6d7920dbbccad850f3789489  /etc/init.d/world-voice
+{"calls":2278,"copy_in_ns":5040882,"device_ns":882226167,"copy_out_ns":39869490}
+00-00: (null) wm8960-hifi-0 :  : playback 1
+00-01: (null) wm8960-hifi-1 :  : capture 1
+/proc/asound/card0/pcm0p/sub0/status
+state: RUNNING
+owner_pid   : 1238
+trigger_time: 34.099235509
+tstamp      : 0.000000000
+delay       : 2840
+avail       : 232
+avail_max   : 2560
+-----
+hw_ptr      : 427752
+appl_ptr    : 430592
+/proc/asound/card0/pcm1c/sub0/status
+state: RUNNING
+owner_pid   : 1236
+trigger_time: 34.081210710
+tstamp      : 0.000000000
+delay       : 472
+avail       : 472
+avail_max   : 512
+-----
+hw_ptr      : 428504
+appl_ptr    : 428032
+4096
+  PID USER       VSZ STAT COMMAND
+    1 root      1556 S    init [5]
+    2 root         0 SW   [kthreadd]
+    3 root         0 IW<  [rcu_gp]
+    4 root         0 IW<  [rcu_par_gp]
+    5 root         0 IW   [kworker/0:0-rcu]
+    6 root         0 IW<  [kworker/0:0H-ev]
+    7 root         0 IW   [kworker/u4:0-ev]
+    8 root         0 IW<  [mm_percpu_wq]
+    9 root         0 SW   [rcu_tasks_kthre]
+   10 root         0 SW   [ksoftirqd/0]
+   11 root         0 IW   [rcu_preempt]
+   12 root         0 SW   [migration/0]
+   13 root         0 SW   [cpuhp/0]
+   14 root         0 SW   [cpuhp/1]
+   15 root         0 SW   [migration/1]
+   16 root         0 SW   [ksoftirqd/1]
+   17 root         0 IW   [kworker/1:0-eve]
+   18 root         0 IW<  [kworker/1:0H-kb]
+   19 root         0 SW   [kdevtmpfs]
+   20 root         0 IW<  [inet_frag_wq]
+   21 root         0 IW   [kworker/0:1-mm_]
+   22 root         0 IW   [kworker/1:1-mm_]
+   23 root         0 SW   [oom_reaper]
+   24 root         0 IW<  [writeback]
+   25 root         0 IW<  [kblockd]
+   26 root         0 IW<  [edac-poller]
+   27 root         0 SW   [watchdogd]
+   28 root         0 IW<  [kworker/0:1H-mm]
+   29 root         0 IW<  [rpciod]
+   30 root         0 IW<  [kworker/u5:0]
+   31 root         0 IW<  [xprtiod]
+   32 root         0 IW   [kworker/u4:1-ev]
+   33 root         0 SW   [kswapd0]
+   34 root         0 IW<  [nfsiod]
+   35 root         0 IW   [kworker/0:2-eve]
+   39 root         0 IW<  [ci_otg]
+   41 root         0 IW   [kworker/u4:2-ev]
+   42 root         0 IW   [kworker/1:2-rcu]
+   43 root         0 IW<  [sdhci]
+   44 root         0 SW   [irq/39-mmc0]
+   45 root         0 IW<  [sdhci]
+   46 root         0 SW   [irq/40-mmc1]
+   47 root         0 IW   [kworker/1:3-mm_]
+   48 root         0 IW   [kworker/1:4-rcu]
+   49 root         0 IW<  [mmc_complete]
+   50 root         0 IW<  [kworker/1:1H-kb]
+   51 root         0 IW<  [mmc_complete]
+   52 root         0 IW<  [mld]
+   53 root         0 IW<  [ipv6_addrconf]
+   58 root         0 SW   [jbd2/mmcblk0p2-]
+   59 root         0 IW<  [ext4-rsv-conver]
+   63 root         0 IW<  [kworker/1:2H-kb]
+   65 root         0 IW<  [kworker/0:2H]
+   92 root      3720 S    /lib/systemd/systemd-udevd -d
+  259 root         0 SW   [jbd2/mmcblk1-8]
+  261 root         0 IW<  [ext4-rsv-conver]
+  473 root      2360 S    udhcpc -R -b -p /var/run/udhcpc.eth0.pid -i eth0
+  480 messageb  3760 S    /usr/bin/dbus-daemon --system
+  483 root      7388 S    /usr/sbin/haveged -w 1024 -v 1
+  487 root      1964 S    /usr/sbin/dropbear -r /etc/dropbear/dropbear_rsa_host_key -p 22 -B
+  491 rpc       3360 S    /usr/sbin/rpcbind
+  496 rpcuser   2028 S    /usr/sbin/rpc.statd
+  521 root         0 SW   [file-storage]
+  533 root      2360 S    /usr/sbin/inetd
+  540 ntp       6260 S    /usr/sbin/ntpd -u ntp:ntp -p /var/run/ntpd.pid -g
+  545 root      2360 S    /sbin/syslogd -n -O /var/log/messages
+  548 root      2360 S    /sbin/klogd -n
+  568 root     12892 S    /usr/sbin/tcf-agent -d -L- -l0
+  766 root      2528 S    {world_minphase_} /bin/sh /opt/world_voice_pl/current/world_minphase_autostart.sh
+ 1170 root         0 SW   [irq/63-41600000]
+ 1198 root     11164 S    python3 /opt/world_voice_pl/current/live_world_trial.py --base /run/world_minphase --run --seconds 600 --
+ 1202 root      2528 S    {start_getty} /bin/sh /bin/start_getty 115200 ttyPS0 vt102
+ 1203 root      2360 S    /sbin/getty 38400 tty1
+ 1221 root      3148 S    /bin/login --
+ 1236 root      2772 S    arecord -v -D hw:0,1 -t raw -f S24_LE -r 32000 -c 2 --period-size=512 --buffer-size=4096 -d 600 -
+ 1237 root     29472 S    /run/world_minphase/world_budget_v24 600 native_s24 200 16384 262144 fifo_io
+ 1238 root      2772 S    aplay -v -D default -t raw -f S24_LE -r 32000 -c 2 --period-size=512 --buffer-size=3072 --start-delay=320
+ 1242 root      3064 S    -sh
+ 1263 root      2448 R    ps -w
+tail: cannot open '/var/log/world_minphase_autostart.log' for reading: No such file or directory
+XDONE592986=1
+[01;32mroot@zynq_plnx[00m:[01;34m~[00m#[K
+[exit=1]

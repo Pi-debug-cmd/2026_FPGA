@@ -1,0 +1,191 @@
+{
+  "task": "PL-20261027-01",
+  "implementation": "b551646",
+  "passed": true,
+  "frames": [
+    {
+      "frame": 0,
+      "n": 1024,
+      "cycles": 4296,
+      "microseconds_at_100mhz": 42.96
+    },
+    {
+      "frame": 1,
+      "n": 1024,
+      "cycles": 4293,
+      "microseconds_at_100mhz": 42.93
+    },
+    {
+      "frame": 2,
+      "n": 1024,
+      "cycles": 4293,
+      "microseconds_at_100mhz": 42.93
+    },
+    {
+      "frame": 3,
+      "n": 1024,
+      "cycles": 4293,
+      "microseconds_at_100mhz": 42.93
+    },
+    {
+      "frame": 4,
+      "n": 1024,
+      "cycles": 4293,
+      "microseconds_at_100mhz": 42.93
+    },
+    {
+      "frame": 5,
+      "n": 1024,
+      "cycles": 4293,
+      "microseconds_at_100mhz": 42.93
+    },
+    {
+      "frame": 6,
+      "n": 1024,
+      "cycles": 4293,
+      "microseconds_at_100mhz": 42.93
+    },
+    {
+      "frame": 7,
+      "n": 1024,
+      "cycles": 4293,
+      "microseconds_at_100mhz": 42.93
+    },
+    {
+      "frame": 8,
+      "n": 1024,
+      "cycles": 4293,
+      "microseconds_at_100mhz": 42.93
+    },
+    {
+      "frame": 9,
+      "n": 1024,
+      "cycles": 4293,
+      "microseconds_at_100mhz": 42.93
+    },
+    {
+      "frame": 10,
+      "n": 2048,
+      "cycles": 8391,
+      "microseconds_at_100mhz": 83.91
+    },
+    {
+      "frame": 11,
+      "n": 2048,
+      "cycles": 8389,
+      "microseconds_at_100mhz": 83.89
+    },
+    {
+      "frame": 12,
+      "n": 2048,
+      "cycles": 8389,
+      "microseconds_at_100mhz": 83.89
+    },
+    {
+      "frame": 13,
+      "n": 2048,
+      "cycles": 8389,
+      "microseconds_at_100mhz": 83.89
+    },
+    {
+      "frame": 14,
+      "n": 2048,
+      "cycles": 8389,
+      "microseconds_at_100mhz": 83.89
+    },
+    {
+      "frame": 15,
+      "n": 2048,
+      "cycles": 8927,
+      "microseconds_at_100mhz": 89.27
+    },
+    {
+      "frame": 16,
+      "n": 2048,
+      "cycles": 8927,
+      "microseconds_at_100mhz": 89.27
+    },
+    {
+      "frame": 17,
+      "n": 2048,
+      "cycles": 8927,
+      "microseconds_at_100mhz": 89.27
+    },
+    {
+      "frame": 18,
+      "n": 2048,
+      "cycles": 8914,
+      "microseconds_at_100mhz": 89.14
+    },
+    {
+      "frame": 19,
+      "n": 2048,
+      "cycles": 8922,
+      "microseconds_at_100mhz": 89.22
+    },
+    {
+      "frame": 20,
+      "n": 1024,
+      "cycles": 4552,
+      "microseconds_at_100mhz": 45.52
+    },
+    {
+      "frame": 21,
+      "n": 1024,
+      "cycles": 4559,
+      "microseconds_at_100mhz": 45.59
+    },
+    {
+      "frame": 22,
+      "n": 1024,
+      "cycles": 4562,
+      "microseconds_at_100mhz": 45.62
+    },
+    {
+      "frame": 23,
+      "n": 1024,
+      "cycles": 4550,
+      "microseconds_at_100mhz": 45.5
+    },
+    {
+      "frame": 24,
+      "n": 1024,
+      "cycles": 4573,
+      "microseconds_at_100mhz": 45.73
+    },
+    {
+      "frame": 25,
+      "n": 1024,
+      "cycles": 4575,
+      "microseconds_at_100mhz": 45.75
+    },
+    {
+      "frame": 26,
+      "n": 1024,
+      "cycles": 4547,
+      "microseconds_at_100mhz": 45.47
+    },
+    {
+      "frame": 27,
+      "n": 1024,
+      "cycles": 4550,
+      "microseconds_at_100mhz": 45.5
+    },
+    {
+      "frame": 28,
+      "n": 1024,
+      "cycles": 4562,
+      "microseconds_at_100mhz": 45.62
+    },
+    {
+      "frame": 29,
+      "n": 1024,
+      "cycles": 4571,
+      "microseconds_at_100mhz": 45.71
+    }
+  ],
+  "words": 40960,
+  "comparison": "RTL float32 complex words bit-exact with AMD C-model",
+  "backpressure": "frames >=15 input bubbles and output backpressure",
+  "board_tested": false
+}

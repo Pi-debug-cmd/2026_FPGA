@@ -1,0 +1,5 @@
+PL-20261027-01 Round33 ACCEPTED_HOST_MODEL
+case1: calls=1643 fallback=124 snr_db=105.295306 max_pcm16_error=1 rms=0.015811 clipped_cpu/model=0/0
+case2: calls=1628 fallback=179 snr_db=104.549879 max_pcm16_error=1 rms=0.014577 clipped_cpu/model=0/0
+single fix: removed the duplicate fft_size division after the normalized HLS inverse FFT
+scope: host model only; no board, recording, playback, listening, or stability claim

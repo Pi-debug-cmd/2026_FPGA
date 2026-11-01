@@ -1,0 +1,93 @@
+{
+  "kind": "pl_expunit_acceptance",
+  "date": "2026-10-22",
+  "tasks": [
+    "PL-EXP-20261022",
+    "PL-EXP2-20261022"
+  ],
+  "role": "Lead 最终验收（独立 xsim 复跑 + Vivado MCP OOC 综合 + 后综合 funcsim）",
+  "verdict": "ACCEPTED_FUNCTION_AND_TIMING",
+  "rtl": {
+    "minphase_exp_unit.v": "599953b8b7f05cf0d7d7ff577aa77db49a9e68f73c845275f7457dae24cb3b24",
+    "minphase_rom_1024.v": "43a150723f35cc44988a721681edc8fd9a3187c0855ce4aae570ac011fa10989",
+    "tb_minphase_exp_unit.sv": "61db7360da0b3e6d720b09ff52d5f4336f060c225fb3443f216b69f86e338c29"
+  },
+  "functional_simulation": {
+    "workdir": "D:/xsim_work/exp_unit_verify2_20261022",
+    "result": "PASS: 96 calls / 49248 bins, exp unit 20-bit fields bit-exact (0 LSB)",
+    "log": "build/generated/pl_synth_offload/exp_unit_synth2/rtl_xsim_gsr.log"
+  },
+  "tb_change": {
+    "file": "src/rtl/synth_offload/tb_minphase_exp_unit.sv",
+    "sha256_before": "1611d4c3c5592e0e94b3b01a598a27a12e8366b4ba5cbd72ea494f1abe0ed0cf",
+    "sha256_after": "61db7360da0b3e6d720b09ff52d5f4336f060c225fb3443f216b69f86e338c29",
+    "change": "在 initial 块 readmemh 后增加 #200 延时再释放 rst_n（等 glbl GSR 释放）",
+    "reason": "后综合 funcsim 带 glbl 全局复位（约前 100 ns）；首个后综合仿真在 rst_n 释放后、GSR 仍有效期间开始送数，导致前 6 个输出被 TB 丢掉且看门狗超时。这是 TB 与网表仿真的对齐问题，不是 RTL 功能错误：同一 TB 加 GSR 等待后，RTL 与后综合网表都 0 LSB 通过；失败日志保留 post_synth_first_fail.log。",
+    "rtl_rerun_after_tb_change": "PASS（仍然 0 LSB）"
+  },
+  "synthesis": {
+    "tool": "Vivado 2026.1 OOC（MCP，Lead 单会话执行）",
+    "part": "xc7z020clg400-2",
+    "clock_mhz": 100,
+    "resources": {
+      "slice_lut": 484,
+      "slice_ff": 271,
+      "ramb36": 1,
+      "ramb18": 0,
+      "dsp48e1": 9
+    },
+    "timing": {
+      "wns_ns": 4.584,
+      "whs_ns": 0.24,
+      "setup_failing_endpoints": 0,
+      "hold_failing_endpoints": 0,
+      "critical_path_data_delay_ns": 5.044,
+      "critical_path": "r0_r_reg/CLK -> u_prod/A[23]"
+    },
+    "verdict": "TIMING_MET_AT_100MHZ",
+    "reports": "build/generated/pl_synth_offload/exp_unit_synth2/",
+    "funcsim_netlist": "build/generated/pl_synth_offload/exp_unit_synth2/minphase_exp_unit_funcsim.v",
+    "dcp": "build/generated/pl_synth_offload/exp_unit_synth2/minphase_exp_unit_synth.dcp"
+  },
+  "post_synthesis_simulation": {
+    "workdir": "D:/xsim_work/exp_unit_verify2_20261022/post_synth",
+    "result": "PASS: 96 calls / 49248 bins, exp unit 20-bit fields bit-exact (0 LSB)",
+    "log": "build/generated/pl_synth_offload/exp_unit_synth2/post_synth_xsim_gsr.log",
+    "first_attempt_failure_log": "build/generated/pl_synth_offload/exp_unit_synth2/post_synth_first_fail.log"
+  },
+  "throughput": {
+    "cycles_per_bin": 13,
+    "cycles_per_frame_513bins": 6669,
+    "us_per_frame_at_100mhz": 66.69,
+    "frame_budget_ms": 10.0,
+    "duty_percent": 0.667,
+    "note": "10 ms 帧预算的 0.667%；按 400 次/s 调用占空比约 1.44%。"
+  },
+  "comparison_with_previous_version": {
+    "previous_wns_ns": -2.511,
+    "previous_setup_failing_endpoints": 98,
+    "previous_ff": 172,
+    "previous_lut": 482,
+    "current_wns_ns": 4.584,
+    "current_ff": 271,
+    "current_lut": 484,
+    "dsp_same": 9,
+    "note": "为时序把 7 拍/bin 扩到 13 拍/bin：FF 172→271、LUT 482→484，DSP 不变；WNS −2.511→+4.584 ns。"
+  },
+  "evidence_sha256": {
+    "build/generated/pl_synth_offload/exp_unit_synth2/utilization.txt": "33d7336ebce7e76c04634141e7b413ffc69cbbda7245853a853ce0f44d50615f",
+    "build/generated/pl_synth_offload/exp_unit_synth2/timing_summary.txt": "ca747f91632e7ebdb583dbcfc3d8a145298aa93e6336f22849f2b17963de06fc",
+    "build/generated/pl_synth_offload/exp_unit_synth2/minphase_exp_unit_funcsim.v": "ca14c641d65d62a6f8ccea18fde90fb8a74a914203e5649d5f48c9155bbd770a",
+    "build/generated/pl_synth_offload/exp_unit_synth2/rtl_xsim_gsr.log": "f04387e3923fc4eb2f2bf4202c26ae18f251f8b8f41fd293099ca245863c2721",
+    "build/generated/pl_synth_offload/exp_unit_synth2/post_synth_xsim_gsr.log": "69728a85ecb1b30ad11d920de27ed7e5bb1db35916df815cdd271719c45eb951"
+  },
+  "not_done": [
+    "PS 侧 AXI-Stream/DMA 包装与 C 驱动（下一步）",
+    "与 PS 双精度最小相位链的逐帧端到端数值对齐（下一步）",
+    "板端集成、实际 RTF 与延迟实测（下一步）",
+    "place & route 后时序复核（OOC 综合不含布局布线）",
+    "exp 成对 ROM 综合后未出现 RAMB18（用 LUT ROM 实现），实现后需复核资源/时序"
+  ],
+  "board_touched": false,
+  "github_touched": false
+}

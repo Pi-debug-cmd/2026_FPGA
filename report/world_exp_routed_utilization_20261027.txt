@@ -1,0 +1,56 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2026.1 (win64) Build 6511674 Tue Jun 16 11:02:23 MDT 2026
+| Date         : Tue Oct 27 17:18:46 2026
+| Host         : LAPTOP-2P078LDE running 64-bit major release  (build 9200)
+| Command      : report_utilization -hierarchical -hierarchical_depth 3 -file mcp_routed_utilization.txt
+| Design       : zynq_wrapper
+| Device       : xc7z020clg400-2
+| Speed File   : -2
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++---------------------+------------------------------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+|       Instance      |                     Module                     | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs  | RAMB36 | RAMB18 | DSP Blocks |
++---------------------+------------------------------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+| zynq_wrapper        |                                          (top) |       8026 |       7633 |      72 |  321 | 13283 |      3 |      6 |          9 |
+|   (zynq_wrapper)    |                                          (top) |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|   zynq_i            |                                           zynq |       8026 |       7633 |      72 |  321 | 13283 |      3 |      6 |          9 |
+|     pitch_dma_mem   |                           zynq_pitch_dma_mem_0 |        487 |        474 |      10 |    3 |   620 |      0 |      0 |          0 |
+|       s00_couplers  |                        s00_couplers_imp_YIMGTN |         44 |         42 |       2 |    0 |    88 |      0 |      0 |          0 |
+|       s01_couplers  |                       s01_couplers_imp_1QJK3J1 |        169 |        161 |       8 |    0 |   212 |      0 |      0 |          0 |
+|       xbar          |                  zynq_pitch_dma_mem_imp_xbar_0 |        274 |        271 |       0 |    3 |   320 |      0 |      0 |          0 |
+|     audio_dma_ic    |                            zynq_audio_dma_ic_0 |       1027 |        974 |      10 |   43 |  1252 |      0 |      0 |          0 |
+|       s00_couplers  |                        s00_couplers_imp_TEKUT1 |        342 |        320 |       2 |   20 |   465 |      0 |      0 |          0 |
+|       s01_couplers  |                       s01_couplers_imp_1VYU9VN |        401 |        373 |       8 |   20 |   470 |      0 |      0 |          0 |
+|       xbar          |                   zynq_audio_dma_ic_imp_xbar_0 |        284 |        281 |       0 |    3 |   317 |      0 |      0 |          0 |
+|     audio_dynclk    |                            zynq_audio_dynclk_0 |        238 |        238 |       0 |    0 |   354 |      0 |      0 |          0 |
+|       U0            |                 zynq_audio_dynclk_0_axi_dynclk |        238 |        238 |       0 |    0 |   354 |      0 |      0 |          0 |
+|     audio_formatter |                         zynq_audio_formatter_0 |       2131 |       1989 |      44 |   98 |  4006 |      0 |      2 |          0 |
+|       inst          | zynq_audio_formatter_0_audio_formatter_v1_0_18 |       2131 |       1989 |      44 |   98 |  4006 |      0 |      2 |          0 |
+|     axi_iic         |                                 zynq_axi_iic_0 |        393 |        383 |       0 |   10 |   389 |      0 |      0 |          0 |
+|       U0            |                         zynq_axi_iic_0_axi_iic |        393 |        383 |       0 |   10 |   389 |      0 |      0 |          0 |
+|     ctrl_ic         |                                 zynq_ctrl_ic_0 |        640 |        579 |       0 |   61 |   662 |      0 |      0 |          0 |
+|       s00_couplers  |                       s00_couplers_imp_1DSH34H |        405 |        344 |       0 |   61 |   534 |      0 |      0 |          0 |
+|       xbar          |                        zynq_ctrl_ic_imp_xbar_0 |        235 |        235 |       0 |    0 |   128 |      0 |      0 |          0 |
+|     i2s_receiver    |                            zynq_i2s_receiver_0 |        506 |        506 |       0 |    0 |  1735 |      0 |      1 |          0 |
+|       inst          |       zynq_i2s_receiver_0_i2s_receiver_v1_0_11 |        506 |        506 |       0 |    0 |  1735 |      0 |      1 |          0 |
+|     i2s_transmitter |                         zynq_i2s_transmitter_0 |        571 |        571 |       0 |    0 |  1683 |      0 |      1 |          0 |
+|       inst          | zynq_i2s_transmitter_0_i2s_transmitter_v1_0_11 |        571 |        571 |       0 |    0 |  1683 |      0 |      1 |          0 |
+|     pitch           |                                   zynq_pitch_0 |        463 |        463 |       0 |    0 |   273 |      1 |      0 |          9 |
+|       inst          |                    zynq_pitch_0_axis_world_exp |        463 |        463 |       0 |    0 |   273 |      1 |      0 |          9 |
+|     pitch_dma       |                               zynq_pitch_dma_0 |       1539 |       1427 |       8 |  104 |  2243 |      2 |      2 |          0 |
+|       U0            |                       zynq_pitch_dma_0_axi_dma |       1539 |       1427 |       8 |  104 |  2243 |      2 |      2 |          0 |
++---------------------+------------------------------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+* Note: The sum of lower-level cells may be larger than their parent cells total, due to cross-hierarchy LUT combining
+
+

@@ -630,3 +630,25 @@ ps-opt 把非周期最小相位优化移植进流式路径（改造 synthesisrea
 ## 2026-10-21 [Maintainer] 三写作者能力边界修正
 
 用户明确项目共有三个写作者：当前已经提交的两位写作者均有 Zynq-7020 板卡和 Vivado 环境，可共同承担板端、Vivado、RTL、PL 和集成；尚未加入的第三位写作者没有板卡和 Vivado，只能在自己的电脑运行 PS/软件音色方案，再交由前两位验证。协作角色据此改为 `Hardware-A`、`Hardware-B`、`Remote-PS-C`；两名硬件方改同一工程前必须先认领任务。
+
+## 2026-10-27 [Hardware-A / PL-20261027-01] WORLD v23 PL与低缓冲现场
+
+按用户新指令停止Deepseek，复用已验证exp核完成64bit AXIS/DMA/一致性内存及临时位流集成；Vivado2026.1 P&R与MCP routed复核100MHz WNS+1.391/WHS+0.036，板端49248 bins零差异、PL语音=整数模型，相对CPU语音SNR79.06dB。多轮接口优化后渲染RTF0.326521→0.306332，但PS管线p95仍115ms。所有方案/失败/测试逐轮推送PR #16并更新coummucation。
+
+操作者当轮准备确认后仅跑20秒低缓冲现场：PL3177次零fallback/零削顶，但2次播放欠载、只有2帧有声，拒绝稳定性门。恢复原厂bit成功，后续非音频外围重绑阶段失去串口响应，未到v23启动；MCP未发现JTAG target，已请现场系统复位。修复脚本延后非音频重绑至正常开机、增加逐bind日志，尚未板测。当前恢复状态不可写成成功；证据在`report/world_exp_live20_round1_20261027.md`与`report/world_exp_restore_stall_20261027.json`。
+
+### 2026-10-27 [PL-20261027-01] 基线恢复完成
+
+用户确认板卡重启后，串口只读核验原v23 SHA、单实例运行链与两个PCM均RUNNING、FPGA operating、PL临时模块未加载；未发起新录放。恢复证据见`report/world_exp_reboot_recovery_20261027.{md,json}`，解除待复位状态，不改写20秒低缓冲失败结论。
+
+### 2026-10-27 [PL-20261027-01] Round4–11数值与性能更新
+
+ARM算子剖析→FFT计划复用（18次板测逐字节一致、墙钟约-9.6–10.7%）→官方浮点FFT模型→AXIS/HP2 DMA→compact实输入协议已逐轮提交PR16。45帧RTL/背压全位准确，compact布局布线100MHz内部时序通过，板端192次probe最坏relativeL2 5.617e-8，两段完整语音FFT最大PCM16误差1、exp组合3/2，零exp fallback。但FFT逐次DMA抵消收益；Round11优化浮点打包后36次旧新交错全部逐字节一致，仍未比cache+exp获得可靠净收益。静默定速p95约114ms，非物理端到端验收。
+
+临时921600串口尝试失败已撤销；用现已连接的JTAG/XSDB系统复位成功恢复115200及原v23。修复后的恢复脚本已成功回原厂一次；再次热切时audio驱动有Bad of_node_put引用告警，后续正常测试成功但不能宣称反复切换安全。当前compact位流驻留、服务停止，后续正常启动恢复清理引用。所有失败与恢复证据保留，未改启动分区，无新现场听感。详见各world_fft_*round4–11报告和coummucation。
+
+### [PL-20261027-01] 2026-10-27 当日停止与交接
+- 角色Hardware-A / Codex；状态暂停（用户“今天先到这里”）。Round16短路径综合/C-sim通过，RTL进入编译/展开但未完成，相关HLS/xelab进程已停止，未写RTL通过。
+- 证据report/world_minphase_round16_paused_20261027.md及synth/cosim TXT；交接handoff_20261027_PL.md。原厂位流/v23已恢复、双PCM RUNNING，临时驱动卸载，启动分区未改，无新录放。
+- 用户方向：尽量把WORLD分析/映射/合成迁入PL，PS保留I/O控制；首个最小相位融合核host两输入误差1/SNR约97dB，HLS估算38DSP/约1万LUT，尚待RTL/整机/板测。
+- 下一责任方Hardware-A / Codex：用户下次要求继续后，先完成24例RTL cosim，再评估整机/板端收益。不得把估算当高实时验收。

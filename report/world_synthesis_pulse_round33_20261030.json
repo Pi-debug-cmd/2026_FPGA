@@ -1,0 +1,14 @@
+{
+  "task": "PL-20261027-01",
+  "round": 33,
+  "status": "ACCEPTED_HOST_MODEL",
+  "base_commit": "9500220",
+  "exe_sha256": "8a7d60f58b2c4b6e03b891959e0cdd336ceb7f2688cae06b2cceee78a3e1a09e",
+  "thresholds": {"snr_db_min": 75.0, "max_pcm16_error_max": 3, "clipped_samples_max": 0, "model_calls_min": 1},
+  "cases": [
+    {"source": "标准录音 1.wav", "source_sha256": "bffd53e9873a829ff8855bd191d4610b64436fb7054401d2598eecf9b862b11e", "input_sha256": "7a23bd306128cb433d888378c087ca188e033f03a08ea54e548b861899aa00b2", "cpu_output_sha256": "d0ddb038272754eb6e635cc771e5a56869be8126318a349f50d6ea49545dfbee", "model_output_sha256": "39ca0261231994141183e2611051799dfb069a3b0cd78d47f34db4053d8a3817", "snr_db": 105.29530581839744, "max_pcm16_error": 1, "rms_pcm16_error": 0.015811388300841896, "model_calls": 1643, "cpu_fallbacks": 124, "cpu_clipped_samples": 0, "model_clipped_samples": 0, "passed": true},
+    {"source": "标准录音 4.wav", "source_sha256": "f4a026e5c97f3bf25447876101dce71a6a160e8ebc81b9b488c7d3a41c62d68c", "input_sha256": "8edae31b70294b2e3c444ca56bca79e4cb33d59b3dac009777174ae6d1d70d1c", "cpu_output_sha256": "96e71f49ab1264ed06e662efac071225187b27e7b84c1ade2252ab5f537fecf2", "model_output_sha256": "dafc165860c420548991d136b234ef237eecdd6ba42346ad77f682bc82dedb71", "snr_db": 104.5498794270647, "max_pcm16_error": 1, "rms_pcm16_error": 0.01457737973711325, "model_calls": 1628, "cpu_fallbacks": 179, "cpu_clipped_samples": 0, "model_clipped_samples": 0, "passed": true}
+  ],
+  "passed": true,
+  "scope": "host model only; no OOC, implementation, board, recording, playback, listening, or stability claim"
+}

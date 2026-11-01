@@ -1,0 +1,22 @@
+{
+  "task": "PL-20261027-01",
+  "date": "2026-10-27",
+  "source_commit": "8c0095c",
+  "factory_fpga_load": "success (fpga_loaded journal stage reached)",
+  "v23_service_restarted": false,
+  "recovery_stalled_during": "non-audio display/camera peripheral rebinding; exact final sysfs bind not logged",
+  "console": "no response to Ctrl-C, newline, or serial BREAK/sysrq-b",
+  "mcp_jtag": {
+    "elapsed_seconds": 7.477,
+    "error_type": "COMMAND_ERROR",
+    "exit_code": 1,
+    "output": "INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121\r\nINFO: [Labtools 27-2222] Launching hw_server...\r\nINFO: [Labtools 27-2221] Launch Output:\r\n\r\n****** Xilinx hw_server v2026.1\r\n  **** Build date : May 29 2026 at 14:55:19\r\n    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.\r\r\n\r\r\n\r\nINFO: [Labtools 27-3415] Connecting to cs_server url TCP:localhost:0\r\nINFO: [Labtools 27-3417] Launching cs_server...\r\nINFO: [Labtools 27-2221] Launch Output:\r\n\r\n****** Xilinx cs_server v2026.1\r\n  **** Build Info : #60 | 2026-06-15 19:15 UTC | a9691a9\r\n    ** Copyright 2017-2022 Xilinx, Inc. All Rights Reserved.\r\n    ** Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.\r\n\r\n\r\n\r\nconnect_hw_server: Time (s): cpu = 00:00:00 ; elapsed = 00:00:07 . Memory (MB): peak = 1791.961 ; gain = 0.000\r\nERROR: [Labtoolstcl 44-199] No matching targets found on connected servers: localhost\r\nResolution: If needed connect the desired target to a server and use command refresh_hw_server. Then rerun the get_hw_targets command.\r\nERROR: [Common 17-39] 'get_hw_targets' failed due to earlier errors.",
+    "recovery_hint": "Run failed. To diagnose:\n1. Check detailed errors:\n   vivado_log_messages(session_id='...')\n2. Check run status:\n   vivado_status(session_id='...', action='runs')\n3. Common fixes: check constraints, source files, and IP status.\n4. Search for the error:\n   vivado_doc_search(query='<error message>')",
+    "session_id": "vivado-20261027-171557-994ea2b1",
+    "stderr_output": "ERROR: [Labtoolstcl 44-199] No matching targets found on connected servers: localhost\r\nResolution: If needed connect the desired target to a server and use command refresh_hw_server. Then rerun the get_hw_targets command.",
+    "used_mode": "proxy"
+  },
+  "restore_console": "audio_stopped\nclk_unregister: unregistering prepared clock: audio-clk-out1\ndrivers_unbound\nfpga_manager fpga0: writing factory_restore.bin to Xilinx Zynq FPGA Manager\nfpga_loaded\nxilinx-frmbuf 43cb0000.v_frmbuf_wr: Xilinx AXI frmbuf DMA_DEV_TO_MEM\nxilinx-frmbuf 43cb0000.v_frmbuf_wr: Xilinx AXI FrameBuffer Engine Driver Probed!!\nxilinx-frmbuf 43c70000.v_frmbuf_rd: Xilinx AXI frmbuf DMA_MEM_TO_DEV\nxilinx-frmbuf 43ca0000.v_frmbuf_rd: Xilinx AXI frmbuf DMA_MEM_TO_DEV\nxilinx-frmbuf 43c70000.v_frmbuf_rd: Xilinx AXI FrameBuffer Engine Driver Probed!!\nxilinx-frmbuf 43ca0000.v_frmbuf_rd: Xilinx AXI FrameBuffer Engine Driver Probed!!\n42c00000.serial: ttyUL0 at MMIO 0x42c00000 (irq = 64, base_baud = 0) is a uartlite\nov5640 2-003c: supply DOVDD not found, using dummy regulator\nov5640 2-003c: supply AVDD not found, using dummy regulator\nov5640 2-003c: supply DVDD not found, using dummy regulator\nov5640 2-003c: ov5640_read_reg: error: reg=300a\nov5640 2-003c: ov5640_check_chip_id: failed to read chip identifier\nov5640: probe of 2-003c failed with error -5\nxlnx,bridge-vtc 43c80000.v_tc: vtc ppc = 1\nxlnx,bridge-vtc 43c80000.v_tc: Xilinx VTC IP version : 0x0602000c\nxlnx,bridge-vtc 43c80000.v_tc: Xilinx VTC DRM Bridge driver probed\nxilinx-vtc 43c00000.v_tc: device found, version 6.020\nxlnx-drm xlnx-drm.0: bound amba_pl:drm_pl_disp_hdmi (ops 0xc073b764)\nxlnx-drm xlnx-drm.0: bound amba_pl:xlnx_hdmi (ops 0xc073bae8)\nxlnx-pl-disp amba_pl:drm_pl_disp_hdmi: [drm] Cannot find any crtc or sizes\n[drm] Initialized xlnx 1.0.0 20130509 for amba_pl:drm_pl_disp_hdmi on minor 0\nxlnx-pl-disp amba_pl:drm_pl_disp_hdmi: Xlnx PL display driver probed\n",
+  "next_action": "operator board reset or power cycle requested; unchanged boot partition expected to restore factory audio and v23",
+  "fix": "defer non-audio peripheral rebinding to normal boot; log each bind before executing; patch not yet board-tested"
+}

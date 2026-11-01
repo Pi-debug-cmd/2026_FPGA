@@ -1,0 +1,90 @@
+{
+  "task_id": "PL-20261027-01",
+  "round": 24,
+  "date": "2026-10-29",
+  "role": "Hardware-A / Codex",
+  "status": "REJECTED_NO_VALID_SPEECH",
+  "base_commit": "e0b518e",
+  "operator_feedback_verbatim": "60s录入我没有准备好",
+  "attribution": "invalid operator input; do not attribute to PL, VAD, microphone, or audio path",
+  "prompt": {
+    "exit": 0,
+    "frames": 24960,
+    "peak_fraction": 0.12,
+    "ready_delay_s": 2.0
+  },
+  "live": {
+    "seconds": 60,
+    "exit_code": 1,
+    "error": "Speech trial contains no voiced frames",
+    "prefill_ms": 200,
+    "scheduling": "fifo_io",
+    "child_exits": [0, 0, 0],
+    "capture_overruns": 0,
+    "playback_underruns": 0,
+    "alsa_errors": 0,
+    "pl_calls": 7883,
+    "pl_fallback": 0,
+    "captured16k": 960000,
+    "played16k": 960000,
+    "submitted": 1502,
+    "consumed": 1502,
+    "voiced_frames": 0,
+    "raw_capture_peak": 0.423707604,
+    "capture_rms": 0.027869094,
+    "raw_capture_clipped_samples": 0,
+    "output_peak": 0.148521703,
+    "output_clipped_samples": 0,
+    "analysis_rtf": 0.283794,
+    "render_rtf_including_output_wait": 0.278869,
+    "analysis_max_ms": 16.826334,
+    "mixer_restore_exit": 0,
+    "pcm_after": ["closed", "closed"]
+  },
+  "driver": {
+    "calls": 7883,
+    "copy_in_ns": 15978294,
+    "device_ns": 3055747554,
+    "copy_out_ns": 134268642,
+    "device_mean_us": 387.64
+  },
+  "candidate_active_codec": {
+    "MICB": "On",
+    "Left ADC": "On",
+    "Right ADC": "On",
+    "Left DAC": "On",
+    "Right DAC": "On",
+    "LOUT1 PGA": "On",
+    "ROUT1 PGA": "On",
+    "HP_L": "On",
+    "HP_R": "On"
+  },
+  "restore": {
+    "factory_bit_sha256": "16cb36f7161935896615ad12b000597088a6a9745856611162f1c44a51f82a61",
+    "v23_sha256": "f12da25e93a520b7f5255ce952a3cb9b5d1bbca474133b1bc529d8c8e18349b7",
+    "fpga_state": "operating",
+    "service": "running",
+    "playback_pcm": "RUNNING",
+    "capture_pcm": "RUNNING",
+    "kernel_taint": 0,
+    "temporary_modules_loaded": false,
+    "temporary_directory_present": false,
+    "boot_partition_modified": false
+  },
+  "artifact_sha256": {
+    "live_result": "d49f0a893ce101634219233b34e0316755a760b89e9453e1d760b75fa28c6614",
+    "active_codec": "aa4d6dbff3462bfc66cf5bad5cf2d9503ca24654874bf90ebb094e2a2da64198",
+    "process_log": "1949368dcb77f84ecfa8fa71707249605ffafef4b6d81360f747a6206d5c5a20",
+    "capture_log": "c3cd7b4a4309f5f04083d226850e1280077ca5f4d915649982e0cd8c42ebb115",
+    "candidate_state_log": "70f188b704fa2e36d49f19a12b3550b4cd654ec4f096a41642021d8c4c5deff2",
+    "reboot_log": "0c4056f8baf8262cdfc2c15c3320ffd3b9d1c9c9e258fa25f26233ca0fd4cc6c",
+    "restore_verify_log": "749b41e3cc49a0a8f3e3191befdea713b39a24bff9070fe3c5712f611123588b"
+  },
+  "limitations": [
+    "The operator explicitly said they were not ready for the 60-second recording.",
+    "Zero voiced frames makes this run invalid for live speech stability acceptance.",
+    "The clean 60-second transport and PL statistics cannot substitute for a voiced trial.",
+    "Only the fused minimum-phase stage is in PL; this is not the complete WORLD chain."
+  ],
+  "next_responsible": "Hardware-A / Codex after a fresh operator-ready confirmation: repeat the identical 60-second prompted trial and speak throughout the recording window."
+}

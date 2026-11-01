@@ -1,0 +1,90 @@
+{
+  "task_id": "PL-20261027-01",
+  "round": 23,
+  "date": "2026-10-29",
+  "role": "Hardware-A / Codex",
+  "status": "ACCEPTED_20S_LIVE_USABLE_GATE",
+  "base_commit": "9515715",
+  "operator_ready": true,
+  "operator_feedback_verbatim": "讲话时能听到转换声音，效果和ps类似",
+  "prompt": {
+    "exit": 0,
+    "frames": 24960,
+    "peak_fraction": 0.12,
+    "ready_delay_s": 2.0,
+    "operator_explicitly_confirmed_audible": false
+  },
+  "live": {
+    "seconds": 20,
+    "prefill_ms": 200,
+    "scheduling": "fifo_io",
+    "child_exits": [0, 0, 0],
+    "capture_overruns": 0,
+    "playback_underruns": 0,
+    "alsa_errors": 0,
+    "pl_calls": 4857,
+    "pl_fallback": 0,
+    "captured16k": 320000,
+    "played16k": 320000,
+    "submitted": 502,
+    "consumed": 502,
+    "voiced_frames": 1079,
+    "raw_capture_peak": 0.415668249,
+    "raw_capture_clipped_samples": 0,
+    "output_peak": 0.404883505,
+    "output_clipped_samples": 0,
+    "analysis_rtf": 0.56115,
+    "render_rtf_including_output_wait": 0.310517,
+    "analysis_max_ms": 34.605499,
+    "mixer_restore_exit": 0,
+    "pcm_after": ["closed", "closed"]
+  },
+  "driver": {
+    "calls": 4857,
+    "copy_in_ns": 10295250,
+    "device_ns": 1885301419,
+    "copy_out_ns": 85489069,
+    "device_mean_us": 388.16
+  },
+  "candidate_active_codec": {
+    "MICB": "On",
+    "Left ADC": "On",
+    "Right ADC": "On",
+    "Left DAC": "On",
+    "Right DAC": "On",
+    "LOUT1 PGA": "On",
+    "ROUT1 PGA": "On",
+    "HP_L": "On",
+    "HP_R": "On"
+  },
+  "restore": {
+    "factory_bit_sha256": "16cb36f7161935896615ad12b000597088a6a9745856611162f1c44a51f82a61",
+    "v23_sha256": "f12da25e93a520b7f5255ce952a3cb9b5d1bbca474133b1bc529d8c8e18349b7",
+    "fpga_state": "operating",
+    "service": "running",
+    "playback_pcm": "RUNNING",
+    "capture_pcm": "RUNNING",
+    "kernel_taint": 0,
+    "temporary_modules_loaded": false,
+    "temporary_directory_present": false,
+    "boot_partition_modified": false
+  },
+  "artifact_sha256": {
+    "payload_log": "ca300c511e47b5306e0cdd3698ca2a807066b288765016b086a3714c5f77770d",
+    "load_log": "b4040ee233f5fe06227e777b785d86e718c06798a277ee4003db966cb2eea72d",
+    "check_log": "3a7b89e5f36f704d2009c1984c2504c6441e66d36a4d69af4eb36f6689193dfd",
+    "live_log": "c939c65d2bb03ab26b3cc7665f3d922aca5200e4e5fbb2e4dd374b002eb71a1b",
+    "live_result": "fbd20ed21690263c9e52d57916adff6b141a966a8c9bffff5b9bdb9ca7d82d7e",
+    "active_codec": "aa4d6dbff3462bfc66cf5bad5cf2d9503ca24654874bf90ebb094e2a2da64198",
+    "reboot_log": "c561ec26be40c55dbfe1d1add0cb921e0ccc48a508a62313f584ac8e4e346820",
+    "restore_log": "be516dd300ddd6c7bd050d9936e9855d45e7c16fb1120fc8b18d89410df755f9",
+    "service_recheck_log": "b736243be3761294f933650edb1614357bfb22f2a1c1bcdee991f1820a7f0da9"
+  },
+  "limitations": [
+    "The operator confirmed converted speech and PS-like effect, but did not separately confirm hearing the prompt tone.",
+    "This is one 20-second run, not 60-second, 10-minute, or 30-minute stability acceptance.",
+    "Only the fused minimum-phase stage is in PL; this is not the complete WORLD chain.",
+    "No quantitative physical end-to-end latency measurement was made."
+  ],
+  "next_responsible": "Hardware-A / Codex after a fresh ready confirmation: 60-second prompted live stability test using the identical candidate and parameters."
+}

@@ -1,0 +1,14 @@
+{
+  "task": "PL-20261027-01",
+  "round": 32,
+  "status": "REJECTED",
+  "base_commit": "30e89b5",
+  "exe_sha256": "0455af6b937b964b19f964b9e6f13b16407a5849c7b005ddf3f4e3d398c985f0",
+  "thresholds": {"snr_db_min": 75.0, "max_pcm16_error_max": 3, "clipped_samples_max": 0, "model_calls_min": 1},
+  "cases": [
+    {"source": "标准录音 1.wav", "input_sha256": "7a23bd306128cb433d888378c087ca188e033f03a08ea54e548b861899aa00b2", "snr_db": 0.12728234965326216, "max_pcm16_error": 17939, "rms_pcm16_error": 2866.626938709936, "model_calls": 1643, "cpu_fallbacks": 124, "clipped_samples": 0, "passed": false},
+    {"source": "标准录音 4.wav", "snr_db": 0.1804605460252093, "max_pcm16_error": 23965, "rms_pcm16_error": 2410.740207086301, "model_calls": 1628, "cpu_fallbacks": 179, "clipped_samples": 0, "passed": false}
+  ],
+  "root_cause": "HLS inverse FFT is normalized but the hook divided by fft_size a second time",
+  "board_or_audio_changed": false
+}

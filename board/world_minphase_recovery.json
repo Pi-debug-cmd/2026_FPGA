@@ -1,0 +1,17 @@
+{
+  "task_id": "PL-20261027-01",
+  "round": 27,
+  "factory_bit": "/boot/bit/zynq7020.bit",
+  "factory_bit_sha256": "16cb36f7161935896615ad12b000597088a6a9745856611162f1c44a51f82a61",
+  "factory_v23": "/opt/world_voice/world_budget_v23",
+  "factory_v23_sha256": "f12da25e93a520b7f5255ce952a3cb9b5d1bbca474133b1bc529d8c8e18349b7",
+  "candidate_gzip": "/boot/world_pl/world_minphase_swap.bin.gz",
+  "candidate_gzip_sha256": "6a7fec9987d31c5f803b79b1bb8e115dca9fda0dfc278b8f462d60562b628d98",
+  "candidate_payload_sha256": "1bc4b3f8f5e5f1b722b0772b9aad23af3c60579dc3c81c44c8d86b408c429373",
+  "selection": {
+    "candidate_default": "absence of /boot/world_pl/DISABLE",
+    "factory_recovery": "create /boot/world_pl/DISABLE, then reboot or run world-pl-control disable",
+    "automatic_failure": "service writes DISABLE and restores factory bit/v23"
+  },
+  "boot_files_overwritten": false
+}

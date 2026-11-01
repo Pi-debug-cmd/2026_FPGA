@@ -1,0 +1,33 @@
+{
+  "task_id": "PL-20261027-01",
+  "round": 22,
+  "date": "2026-10-29",
+  "role": "Hardware-A / Codex",
+  "status": "PROPOSED_WAIT_LIVE_TEST",
+  "base_commit": "f98ccc8",
+  "operator_clarification_verbatim": "因为刚刚录入的时候我没有准备好，你录入之前先给个提示音",
+  "round21_interpretation": "Original evidence retained; audibility attribution invalid because operator was not ready at capture start.",
+  "prompt": {
+    "format": "32000 Hz S24_LE stereo",
+    "segments": [
+      {"frequency_hz": 880, "duration_ms": 300},
+      {"frequency_hz": 0, "duration_ms": 180},
+      {"frequency_hz": 1175, "duration_ms": 300}
+    ],
+    "frames": 24960,
+    "peak_fraction": 0.12,
+    "fade_frames": 320,
+    "ready_delay_s": 2.0,
+    "failure_prevents_capture": true
+  },
+  "checks": {
+    "python_compile": "pass",
+    "mock_aplay": "pass",
+    "generated_frames": 24960,
+    "git_diff_check": "pass"
+  },
+  "supervisor_sha256": "cecf23add060312ab85acb84b83ab7ab19ff850919646e62f524b997bea8b69f",
+  "board_loaded": false,
+  "recording_or_playback": false,
+  "next_responsible": "Hardware-A / Codex after fresh operator confirmation: deploy, verify prompt audibility, then run one bounded 20-second live trial."
+}
