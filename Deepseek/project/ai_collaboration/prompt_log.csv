@@ -1,0 +1,29 @@
+round,date,topic,prompt_gist,model_output_gist,evidence_file,outcome,refuted_hypothesis
+1,2026-10-09,scope,"先做资产核对：文件数/时长/SHA/能证明什么，不要先改代码","逐文件核对 manifest，指出 4 段 screen 语音同属 SSB0434",ai_collaboration/01_data_and_scope.md,correction,"4 名留出说话人"
+2,2026-10-15,corpus,"交接包全量清点，给出训练/验证切分","8399 文件 SHA 全一致；192 对/20 人；开发句不在训练文本",ai_collaboration/01_data_and_scope.md,accepted,"素材只有几条"
+3,2026-10-18,algorithm,"比较 WORLD 与 STFT 包络作为模型输入域","STFT 幅度谱属分布外；维持 WORLD CheapTrick 513 bin",ai_collaboration/02_algorithm_chain.md,accepted,
+4,2026-10-19,algorithm,"D4C 只贡献 1 个特征维，能否隔帧","D4C 帧网格是入参，隔 10 帧 + 插值可跳过真实计算",board_c_20261025_stage2.md,accepted,
+5,2026-10-20,algorithm,"CheapTrick 只跑一遍：频轴映射方案","实现并实测 waveform corr 0.9793",board_c_20261025_stage2.md,refuted,"频轴映射等价于第二遍 CheapTrick"
+6,2026-10-20,algorithm,"改用 STFT 幅度谱 + DCT-48 当包络","corr 0.8857，更差",board_c_20261025_stage2.md,refuted,"STFT 可替代 WORLD 包络"
+7,2026-10-21,algorithm,"CheapTrick 隔 2 帧 + 插值","corr 0.9893 < 0.99 门槛",board_c_20261025_stage2.md,refuted,"隔帧插值够用"
+8,2026-10-21,algorithm,"f0 继承 + 精确 CheapTrick + 藏到 MLP 后","corr 0.9986，采纳",board_c_20261025_stage2.md,accepted,
+9,2026-10-22,perf,"MLP 24 ms/帧，给瓶颈判断与实验设计","判断为内存受限，提出批处理",board_c_20261025.md,refuted,"MLP 是算力问题"
+10,2026-10-22,perf,"批处理反而更慢，重新定位","2 维分块（8 帧 x 8 神经元）落 L1，9.5 ms/帧",board_c_20261025.md,correction,"批处理能提吞吐"
+11,2026-10-23,perf,"整包 -O3 是否有收益","主机 553 vs 539 ms，无收益，仅对 MLP 函数加 O3 属性",board_c_20261025.md,refuted,"整包 O3 更快"
+12,2026-10-23,perf,"int8 权重能否解实时之困","实现 int8 并测四项指标：UTMOS -0.008，identity +0.003",board_c_20261025_int8_latency.md,accepted,
+13,2026-10-24,perf,"给出 int8 前的前提：实时瓶颈到底是什么","写为内存带宽与 DMA 争用（后被推翻）",board_c_20261025_int8_latency.md,refuted,"实时瓶颈是内存带宽"
+14,2026-10-24,perf,"设计能推翻带宽假设的单变量实验","4/8 帧 x fp32/int8 三组流量对照：流量 /4 只快 11%",board_c_20261025_int8_latency.md,correction,"int8 是实时解药"
+15,2026-10-24,perf,"确认 issue-bound 后的提速路线","寄存器分块 + 显式 NEON + 双核，MLP 2097->1272 ms",board_c_20261025_stage2.md,accepted,
+16,2026-10-24,numerics,"逐阶段 dump 比对 C 与 Python oracle","12 级中间量，最终 121.71 dB / 126.16 dB",board_c_20261025.md,accepted,
+17,2026-10-24,numerics,"板端 vs oracle 只有 74.86 dB，找原因","怀疑实现差异；随后用同一份 float32 输入重测",board_c_20261025.md,refuted,"74.86 dB 是实现差异"
+18,2026-10-24,numerics,"喂同一份输入后再比","126.16 dB，证明是 1 ulp 经网络放大约 10^3",board_c_20261025.md,correction,"同上"
+19,2026-10-25,board,"把 WORLD+MLP 链跑上 Zynq，RTF <=1.0","stage-1 RTF 2.067，给出分阶段预算与三条提速路线",board_c_20261025.md,accepted,
+20,2026-10-25,board,"C 静态交叉编译与上板","ELF 校验 + 848 s 串口上传 + SHA 双端一致",board_c_20261025.md,accepted,
+21,2026-10-25,pl,"用 Vivado 2018.3 重建 PL 变调核","IP 版本无需改；仅把 xlconstant 换成 AXI GPIO",pl_build_20261025.md,accepted,
+22,2026-10-25,pl,"端到端比对 RTL 与定点模型","首轮 16 样本错（2x8 全 0），次轮 max diff 0",fpga/report/m3_compare_output.txt,refuted,"16 个 0 样本是 RTL 复位问题"
+23,2026-10-25,pl,"定位 16 个 0 样本的真正原因","cacheflush 只清 L1；加 2 MiB L2 冲刷后归零",skill/dma_cache_coherency/diag_checklist.md,correction,"cacheflush 足以保证一致性"
+24,2026-10-25,pl,"恒等比例与第二比例复验","65536 输出 SHA == 输入 SHA；48000 同样 bit-exact",fpga/report/m3_compare_ratio48k.txt,accepted,
+25,2026-10-25,realtime,"300 ms 块能否 0 欠载","--preset live：285 ms/块、585 ms 延迟、3 次全 0",board_c_20261025_squeeze.md,accepted,
+26,2026-10-26,packaging,"按官方目录结构整理可提交参赛包","建立 docs/fpga/host/metrics/skill/report/ai_collaboration",README.md,accepted,
+27,2026-10-26,tooling,"把协作经验提炼成可复用 skill","三条 skill + 已验证复用记录 + 回归测试",skill/README.md,accepted,
+28,2026-10-26,verification,"用真实数据回归比对工具","golden_compare 在 y16 上误判 bin 级故障，修正后与人工结论一致",skill/golden_reference_compare/results.md,correction,"bins_bad==bins_total 的判据"

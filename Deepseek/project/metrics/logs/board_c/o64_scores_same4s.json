@@ -1,0 +1,54 @@
+[
+  {
+    "wav": "board_o64_norm.wav",
+    "seconds": 4.0,
+    "identity_file": 0.586,
+    "identity_mean": 0.586,
+    "identity_p10": 0.586,
+    "windows": 1,
+    "leakage_file": 0.2552,
+    "utmos": 2.226,
+    "leakage_mean": 0.2552,
+    "leakage_strict": 0.2552,
+    "cer": 0.1538,
+    "hyp": "老人每天在公园尝试上放本书",
+    "leakage_rel": 0.0479,
+    "margin": 0.3308,
+    "cer_rel": -0.0337,
+    "gate": {
+      "identity_mean": "pass",
+      "identity_p10": "pass",
+      "leakage_rel": "fail",
+      "utmos": "fail",
+      "cer_rel": "pass"
+    },
+    "all_pass": false,
+    "label": "board_o64_norm"
+  },
+  {
+    "wav": "python_o64_norm.wav",
+    "seconds": 4.0,
+    "identity_file": 0.5862,
+    "identity_mean": 0.5862,
+    "identity_p10": 0.5862,
+    "windows": 1,
+    "leakage_file": 0.2566,
+    "utmos": 2.2253,
+    "leakage_mean": 0.2566,
+    "leakage_strict": 0.2566,
+    "cer": 0.1538,
+    "hyp": "老人每天在公园尝试上放本书",
+    "leakage_rel": 0.0493,
+    "margin": 0.3296,
+    "cer_rel": -0.0337,
+    "gate": {
+      "identity_mean": "pass",
+      "identity_p10": "pass",
+      "leakage_rel": "fail",
+      "utmos": "fail",
+      "cer_rel": "pass"
+    },
+    "all_pass": false,
+    "label": "pyref_o64_norm"
+  }
+]

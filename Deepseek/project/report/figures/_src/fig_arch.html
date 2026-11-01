@@ -1,0 +1,160 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<title>fig1 architecture</title><style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#fff}
+body{width:3200px;height:1800px;overflow:hidden;
+     font-family:"Microsoft YaHei","Segoe UI",sans-serif;color:#16222e;
+     -webkit-font-smoothing:antialiased;}
+.canvas{position:relative;width:3200px;height:1800px;background:#fff}
+.abs{position:absolute}
+
+.chipTag{background:#1b2a3a;color:#fff;border-radius:10px;display:flex;align-items:center;
+         justify-content:center;font-size:26px;font-weight:700;letter-spacing:.6px}
+.ioChip{background:#eef3f9;border:1.5px solid #b9c8d8;border-radius:10px;display:flex;
+        align-items:center;justify-content:center;font-size:21px;color:#2b3d50;font-weight:600}
+.ioArrow{font-size:26px;color:#4a5f77;display:flex;align-items:center;justify-content:center}
+
+.legend{display:flex;align-items:center;gap:34px;height:30px}
+.lg{display:flex;align-items:center;gap:10px;font-size:20px;color:#3f5164}
+.sw{width:30px;height:16px;border-radius:4px}
+
+.panel{border-radius:16px}
+.p-input{background:#f6f9fc;border:2.5px solid #a9b8c8}
+.p-ps{background:#f7fafe;border:2.5px solid #9cc0e2}
+.p-pl{background:#fffbf6;border:2.5px solid #e2b992}
+.p-out{background:#f6f9fc;border:2.5px solid #a9b8c8}
+
+.tag{position:absolute;height:36px;line-height:36px;padding:0 18px;border-radius:9px;
+     color:#fff;font-size:22px;font-weight:700;letter-spacing:.8px}
+.t-input{background:#5b6b7c}
+.t-ps{background:#2f6fb5}
+.t-pl{background:#c1621f}
+.t-out{background:#5b6b7c}
+
+.box{background:#fff;border:1.5px solid #b9c8d8;border-radius:11px;
+     display:flex;flex-direction:column;align-items:center;justify-content:center}
+.box .t{font-size:26px;font-weight:700;color:#1c3045;line-height:32px}
+.box .s{font-size:20px;color:#54697f;line-height:26px;margin-top:4px}
+.box .ico{font-size:30px;line-height:1}
+
+.ptitle{font-size:30px;font-weight:700;line-height:38px}
+.badge{font-size:19px;font-weight:700;color:#fff;border-radius:10px;padding:2px 14px;
+       line-height:28px;display:inline-block;vertical-align:4px;margin-left:12px}
+
+.step{position:absolute;display:flex;align-items:center;background:#fff;
+      border:1.5px solid #c6d8ec;border-left:6px solid #2f6fb5;border-radius:10px;
+      padding:0 18px 0 14px}
+.step.pl-in{background:#fffdf9;border-color:#e8cdb0;border-left-color:#c1621f}
+.num{flex:0 0 48px;height:48px;border-radius:50%;background:#eaf2fc;border:1.5px solid #a9c6e8;
+     color:#1d4f8a;font-size:23px;font-weight:700;display:flex;align-items:center;
+     justify-content:center;margin-right:17px}
+.step.pl-in .num{background:#fbead9;border-color:#d9b48c;color:#9a4a13}
+.ct{flex:1 1 auto;min-width:0}
+.t1{font-size:26px;font-weight:700;line-height:33px;color:#152537;white-space:nowrap}
+.t2{font-size:20px;line-height:27px;color:#4a5d72;margin-top:2px;white-space:nowrap}
+.step.pl-in .t1{color:#7d3f11}
+.plmark{color:#b4581a;font-weight:700}
+
+.foot{background:#fff;border:1.5px dashed #9fb0c2;border-radius:10px;padding:0 16px;
+      display:flex;flex-direction:column;justify-content:center}
+.foot .t{font-size:22px;font-weight:700;color:#22384e;line-height:28px}
+.foot .s{font-size:20px;color:#5b6f85;line-height:26px}
+.foot.ctrl{border-color:#a892ce;background:#fbfaff}
+.foot.ctrl .t{color:#4a3575}
+
+.stat{background:#fff;border:1.5px solid #eccbad;border-radius:11px;
+      display:flex;flex-direction:column;align-items:center;justify-content:center}
+.stat .v{font-family:Consolas,"Cascadia Mono",monospace;font-size:31px;font-weight:700;
+         color:#9a4a13;line-height:36px;letter-spacing:-.5px}
+.stat .k{font-size:20px;color:#7a6553;line-height:25px;margin-top:7px}
+
+.iface{background:#fff;border:1.5px dashed #dfc0a2;border-radius:11px;padding:14px 22px;
+       display:flex;flex-direction:column;justify-content:center}
+.iface .t{font-size:21px;font-weight:700;color:#8a5a22;line-height:28px}
+.iface .b{font-size:20px;color:#6b5545;line-height:29px;margin-top:6px}
+
+.card8b{background:#fff;border:1.5px solid #eccbad;border-radius:11px;padding:12px 20px;
+        display:flex;flex-direction:column;justify-content:center}
+.card8b .t{font-size:26px;font-weight:700;color:#7d3f11;line-height:33px}
+.card8b .s{font-size:20px;color:#6b5545;line-height:27px;margin-top:3px}
+
+.chipx{background:#fdf2e8;border:1.5px solid #dfb591;border-radius:10px;
+       display:flex;flex-direction:column;align-items:center;justify-content:center;
+       text-align:center;padding:0 12px}
+.chipx .a{font-size:23px;font-weight:700;color:#7d3f11;line-height:30px;white-space:nowrap}
+.chipx .b{font-size:20px;color:#8a6a52;line-height:26px;margin-top:7px;white-space:nowrap}
+
+.perf{background:#fff;border:1.5px solid #eccbad;border-left:6px solid #c1621f;border-radius:10px;
+      padding:14px 22px;display:flex;flex-direction:column;justify-content:center}
+.perf .l1{font-size:22px;font-weight:700;color:#8a3d10;line-height:30px;white-space:nowrap}
+.perf .l2{font-size:20px;color:#6b5545;line-height:28px;margin-top:6px;white-space:nowrap}
+
+.note{background:#fdf8ec;border:2px dashed #d9bd8a;border-radius:14px;padding:18px 22px}
+.note .t{font-size:26px;font-weight:700;color:#8a6320;line-height:34px;white-space:nowrap}
+.note .b{font-size:20px;color:#6f5a34;line-height:32px;margin-top:8px}
+
+.wirelab{background:#fff;text-align:center}
+.wirelab .a{font-size:20px;font-weight:700;color:#1f3a55;line-height:27px;white-space:nowrap}
+.wirelab .b{font-size:20px;color:#5b6f85;line-height:26px;white-space:nowrap}
+.wirelab.blue .a{color:#1d4f8a}
+.wirelab.blue .b{color:#3f6ea3}
+.wirelab.orange .a{color:#9a4a13}
+.wirelab.orange .b{color:#a8764f}
+
+svg.wires{position:absolute;left:0;top:0;z-index:20}
+</style></head><body>
+<div class="canvas">
+<div class="abs chipTag" style="left:60px;top:28px;width:500px;height:60px">Zynq-7020 · xc7z020clg400-2</div>
+<div class="abs ioChip" style="left:2180px;top:34px;width:480px;height:48px">输入 32 kHz / S24_LE / 2ch</div>
+<div class="abs ioArrow" style="left:2670px;top:34px;width:60px;height:48px">→</div>
+<div class="abs ioChip" style="left:2740px;top:34px;width:400px;height:48px">输出 32 kHz / S24_LE</div>
+<div class="abs legend" style="left:60px;top:110px;width:1200px"><div class="lg"><span class="sw" style="background:#f5f8fb;border:2px solid #7d8c9d"></span>板外 / 外设</div><div class="lg"><span class="sw" style="background:#f6f9fe;border:2px solid #2f6fb5"></span>PS 软件域</div><div class="lg"><span class="sw" style="background:#fffaf4;border:2px solid #c1621f"></span>PL 硬件域</div><div class="lg"><span class="sw" style="background:#fdf8ec;border:2px dashed #b8912f"></span>设计说明</div></div>
+<div class="abs panel p-input" style="left:60px;top:170px;width:280px;height:300px"></div>
+<div class="abs tag t-input" style="left:84px;top:152px">输入设备</div>
+<div class="abs box" style="left:85px;top:182px;width:230px;height:90px"><div class="t">麦克风</div><div class="s">模拟输入 · 板外</div></div>
+<div class="abs box" style="left:85px;top:302px;width:230px;height:136px"><div class="t">WM8960</div><div class="s">Codec · I2S</div><div class="s">32 kHz · 24 bit</div></div>
+<div class="abs panel p-ps" style="left:520px;top:170px;width:1000px;height:1510px"></div>
+<div class="abs tag t-ps" style="left:544px;top:152px">PS 软件域</div>
+<div class="abs ptitle" style="left:552px;top:188px;color:#1d4f8a">PS · 双核 Cortex-A9 @ 667 MHz<span class="badge" style="background:#2f6fb5">软件 · 11 步主流水线</span></div>
+<div class="abs" style="left:552px;top:234px;width:930px;font-size:20px;line-height:29px;color:#3f5670"><b style="font-family:Consolas,monospace;font-size:19px;color:#1d4f8a">vc_pl_dbg3</b> 静态 ARM ELF（无 INTERP）· MLP 用 <b style="font-family:Consolas,monospace;font-size:19px;color:#1d4f8a">-O3</b> · NEON 双核切帧</div>
+<div class="step" style="left:546px;top:320px;width:948px;height:96px"><div class="num">1</div><div class="ct"><div class="t1">arecord 采集</div><div class="t2">32 kHz / S24_LE / 2ch，300 ms 块流式读入</div></div></div>
+<div class="step" style="left:546px;top:436px;width:948px;height:96px"><div class="num">2</div><div class="ct"><div class="t1">32k → 16k 抽取</div><div class="t2">127-tap Hamming-sinc FIR，fc 7.5 kHz，群延迟 31 样本</div></div></div>
+<div class="step" style="left:546px;top:552px;width:948px;height:96px"><div class="num">3</div><div class="ct"><div class="t1">SoundTouch WSOLA 升调 1.4×</div><div class="t2">F0 中位 135.3 → 188.7 Hz</div></div></div>
+<div class="step" style="left:546px;top:668px;width:948px;height:96px"><div class="num">4</div><div class="ct"><div class="t1">WORLD 分析</div><div class="t2">DIO → StoneMask → CheapTrick → D4C，fft 1024，帧移 10 ms</div></div></div>
+<div class="step" style="left:546px;top:784px;width:948px;height:96px"><div class="num">5</div><div class="ct"><div class="t1">特征 646 维</div><div class="t2">32 阶倒谱 + 句级统计 34 + ±4 帧上下文 612</div></div></div>
+<div class="step" style="left:546px;top:900px;width:948px;height:96px"><div class="num">6</div><div class="ct"><div class="t1">MLP 4 × 512 GELU</div><div class="t2">1,152,064 参数，O64 定版 · NEON 双核切帧</div></div></div>
+<div class="step" style="left:546px;top:1016px;width:948px;height:96px"><div class="num">7</div><div class="ct"><div class="t1">包络移植 · 513 bin 增益</div><div class="t2">限幅 ±20 dB，量化 Q4.19 后下发 PL</div></div></div>
+<div class="step pl-in" style="left:546px;top:1132px;width:948px;height:96px"><div class="num">8</div><div class="ct"><div class="t1">加窗 → int16 帧 <span class="plmark">→ PL</span></div><div class="t2">periodic Hann，1024 点 · PL 的输入侧</div></div></div>
+<div class="step" style="left:546px;top:1248px;width:948px;height:96px"><div class="num">9</div><div class="ct"><div class="t1">OLA / wsum 重叠相加</div><div class="t2">收回 PL 的 z·256，50% 重叠相加</div></div></div>
+<div class="step" style="left:546px;top:1364px;width:948px;height:96px"><div class="num">10</div><div class="ct"><div class="t1">16k → 32k 重采样 · S24 打包</div><div class="t2">S24_LE 32-bit 容器，左对齐</div></div></div>
+<div class="step" style="left:546px;top:1480px;width:948px;height:96px"><div class="num">11</div><div class="ct"><div class="t1">流式调度 · 交叉淡化</div><div class="t2">300 ms 块，aplay 反压</div></div></div>
+<div class="abs foot" style="left:546px;top:1592px;width:462px;height:60px"><div class="t">DDR3 1 GB 缓冲</div><div class="s">帧缓冲 / DMA 缓冲 / 权重 4.94 MB</div></div>
+<div class="abs foot ctrl" style="left:1032px;top:1592px;width:462px;height:60px"><div class="t">AXI-Lite 控制面 0x41200000</div><div class="s">状态 / 帧计数 / 位流就绪位</div></div>
+<div class="abs panel p-pl" style="left:1780px;top:170px;width:1000px;height:1000px"></div>
+<div class="abs tag t-pl" style="left:1804px;top:152px">PL 硬件域</div>
+<div class="abs ptitle" style="left:1812px;top:188px;color:#9a4a13">PL · 100 MHz<span class="badge" style="background:#c1621f">硬件</span></div>
+<div class="abs" style="left:1812px;top:234px;width:930px;font-size:20px;line-height:29px;color:#6b5545"><b style="font-family:Consolas,monospace;font-size:19px;color:#9a4a13">axis_stft_gain</b> 帧引擎 · 2 × <b style="font-family:Consolas,monospace;font-size:19px;color:#9a4a13">xfft 9.1</b> IP（unscaled）· AXI-Stream 从接口</div>
+<div class="abs stat" style="left:1806px;top:284px;width:183px;height:126px"><div class="v">16,723</div><div class="k">LUT · 31.4%</div></div>
+<div class="abs stat" style="left:1997px;top:284px;width:183px;height:126px"><div class="v">28,677</div><div class="k">FF</div></div>
+<div class="abs stat" style="left:2188px;top:284px;width:183px;height:126px"><div class="v">22</div><div class="k">BRAM · 15.7%</div></div>
+<div class="abs stat" style="left:2379px;top:284px;width:183px;height:126px"><div class="v">76</div><div class="k">DSP · 34.6%</div></div>
+<div class="abs stat" style="left:2570px;top:284px;width:183px;height:126px"><div class="v">+0.347</div><div class="k">WNS / ns</div></div>
+<div class="abs iface" style="left:1806px;top:434px;width:948px;height:120px"><div class="t">PS ↔ PL 数据面</div><div class="b">AXI-Stream 2 × MM2S + 1 × S2MM / 帧 · AXI DMA ↔ /dev/mem · 往返 75.6 ms / 4 s</div></div>
+<div class="abs" style="left:1806px;top:580px;font-size:24px;font-weight:700;color:#9a4a13">STFT / IFFT 帧引擎（PL 承担的全部计算）</div>
+<div class="abs card8b" style="left:1806px;top:620px;width:948px;height:96px"><div class="t">收帧 + 收增益</div><div class="s">1024 样本 int16 + 513 个 Q4.19 实数增益</div></div>
+<div class="abs chipx" style="left:1806px;top:742px;width:280px;height:140px"><div class="a">fft_fwd 1024</div><div class="b">unscaled · 24 bit</div></div>
+<div class="abs chipx" style="left:2140px;top:742px;width:280px;height:140px"><div class="a">逐 bin × g_q</div><div class="b">513 bin 实数增益</div></div>
+<div class="abs chipx" style="left:2474px;top:742px;width:280px;height:140px"><div class="a">fft_inv 1024</div><div class="b">unscaled · 32 bit</div></div>
+<div class="abs perf" style="left:1806px;top:906px;width:948px;height:144px"><div class="l1">延时 <span style="background:#fbe3cd;padding:0 6px;border-radius:4px">8,715 cycles/帧 = 87 µs</span>（10 ms 帧预算的 0.87%）</div><div class="l2">8,715 cycles 全程无停顿 · 输出 1024 × z·256 回 ARM 做 OLA</div><div class="l2">算法与模型都不变，只换定点实现</div></div>
+<div class="abs note" style="left:1780px;top:1200px;width:505px;height:250px"><div class="t">为什么 STFT / IFFT，不是变调</div><div class="b">FFT/IFFT 是同一变换的定点实现，数学等价，可与全 ARM 逐样本比对（corr 0.99999999 / max 4 LSB）。变调核是相位声码器式重采样，会改变波形相位、伤音质，与 ARM 参考链不等价。</div></div>
+<div class="abs note" style="left:2305px;top:1200px;width:475px;height:250px"><div class="t">备用设计（未入链）· 定点变调核</div><div class="b">8,378 LUT / 5 BRAM / 6 DSP，WNS +0.813 ns，128000 样本 bit-exact。与 STFT 版互斥：同一 PL 只能加载一个位流。</div></div>
+<div class="abs panel p-out" style="left:2830px;top:1460px;width:310px;height:300px"></div>
+<div class="abs tag t-out" style="left:2854px;top:1424px">输出设备</div>
+<div class="abs box" style="left:2850px;top:1473px;width:270px;height:110px"><div class="t">aplay</div><div class="s">ALSA · 32 kHz / S24</div></div>
+<div class="abs box" style="left:2850px;top:1623px;width:270px;height:110px"><div class="t">音箱</div><div class="s">实时播放</div></div>
+<div class="abs wirelab" style="left:340px;top:292px;width:180px;height:58px"><div class="a">I2S / ALSA</div><div class="b">32 kHz · 24 bit</div></div>
+<div class="abs wirelab blue" style="left:1530px;top:598px;width:244px;height:48px"><div class="a">帧 + 增益</div><div class="b">AXI-Stream 2 × MM2S</div></div>
+<div class="abs wirelab orange" style="left:1526px;top:1316px;width:250px;height:48px"><div class="a">IFFT 结果 z·256</div><div class="b">1 × S2MM / 帧</div></div>
+<div class="abs wirelab" style="left:2000px;top:1476px;width:420px;height:28px"><div class="b" style="font-size:20px">S24_LE · 32 kHz 连续流 → aplay</div></div>
+<svg class="wires" width="3200" height="1800" viewBox="0 0 3200 1800"><path d="M 1020.0 421.0 L 1020.0 416.0" fill="none" stroke="#ffffff" stroke-width="10.5" stroke-linejoin="round" stroke-linecap="round"/><path d="M 1020.0 537.0 L 1020.0 532.0" fill="none" stroke="#ffffff" stroke-width="10.5" stroke-linejoin="round" stroke-linecap="round"/><path d="M 1020.0 653.0 L 1020.0 648.0" fill="none" stroke="#ffffff" stroke-width="10.5" stroke-linejoin="round" stroke-linecap="round"/><path d="M 1020.0 769.0 L 1020.0 764.0" fill="none" stroke="#ffffff" stroke-width="10.5" stroke-linejoin="round" stroke-linecap="round"/><path d="M 1020.0 885.0 L 1020.0 880.0" fill="none" stroke="#ffffff" stroke-width="10.5" stroke-linejoin="round" stroke-linecap="round"/><path d="M 1020.0 1001.0 L 1020.0 996.0" fill="none" stroke="#ffffff" stroke-width="10.5" stroke-linejoin="round" stroke-linecap="round"/><path d="M 1020.0 1117.0 L 1020.0 1112.0" fill="none" stroke="#ffffff" stroke-width="10.5" stroke-linejoin="round" stroke-linecap="round"/><path d="M 1020.0 1233.0 L 1020.0 1228.0" fill="none" stroke="#ffffff" stroke-width="10.5" stroke-linejoin="round" stroke-linecap="round"/><path d="M 1020.0 1349.0 L 1020.0 1344.0" fill="none" stroke="#ffffff" stroke-width="10.5" stroke-linejoin="round" stroke-linecap="round"/><path d="M 1020.0 1465.0 L 1020.0 1460.0" fill="none" stroke="#ffffff" stroke-width="10.5" stroke-linejoin="round" stroke-linecap="round"/><path d="M 200.0 277.0 L 200.0 282.0" fill="none" stroke="#ffffff" stroke-width="10.5" stroke-linejoin="round" stroke-linecap="round"/><path d="M 320.0 370.0 L 522.0 370.0" fill="none" stroke="#ffffff" stroke-width="10.9" stroke-linejoin="round" stroke-linecap="round"/><path d="M 1499.0 1528.0 L 2826.0 1528.0" fill="none" stroke="#ffffff" stroke-width="10.9" stroke-linejoin="round" stroke-linecap="round"/><path d="M 2985.0 1588.0 L 2985.0 1603.0" fill="none" stroke="#ffffff" stroke-width="10.5" stroke-linejoin="round" stroke-linecap="round"/><path d="M 1499.0 1180.0 L 1560.0 1180.0 L 1560.0 668.0 L 1782.0 668.0" fill="none" stroke="#ffffff" stroke-width="10.9" stroke-linejoin="round" stroke-linecap="round"/><path d="M 1801.0 978.0 L 1620.0 978.0 L 1620.0 1296.0 L 1518.0 1296.0" fill="none" stroke="#ffffff" stroke-width="10.9" stroke-linejoin="round" stroke-linecap="round"/><path d="M 2280.0 721.0 L 2280.0 722.0" fill="none" stroke="#ffffff" stroke-width="10.5" stroke-linejoin="round" stroke-linecap="round"/><path d="M 2091.0 812.0 L 2120.0 812.0" fill="none" stroke="#ffffff" stroke-width="10.5" stroke-linejoin="round" stroke-linecap="round"/><path d="M 2425.0 812.0 L 2454.0 812.0" fill="none" stroke="#ffffff" stroke-width="10.5" stroke-linejoin="round" stroke-linecap="round"/><path d="M 1020.0 416.0 L 1020.0 436.0" fill="none" stroke="#3d5876" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round"/><polygon points="1020.0,436.0 1013.0,422.0 1027.0,422.0" fill="#3d5876"/><path d="M 1020.0 532.0 L 1020.0 552.0" fill="none" stroke="#3d5876" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round"/><polygon points="1020.0,552.0 1013.0,538.0 1027.0,538.0" fill="#3d5876"/><path d="M 1020.0 648.0 L 1020.0 668.0" fill="none" stroke="#3d5876" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round"/><polygon points="1020.0,668.0 1013.0,654.0 1027.0,654.0" fill="#3d5876"/><path d="M 1020.0 764.0 L 1020.0 784.0" fill="none" stroke="#3d5876" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round"/><polygon points="1020.0,784.0 1013.0,770.0 1027.0,770.0" fill="#3d5876"/><path d="M 1020.0 880.0 L 1020.0 900.0" fill="none" stroke="#3d5876" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round"/><polygon points="1020.0,900.0 1013.0,886.0 1027.0,886.0" fill="#3d5876"/><path d="M 1020.0 996.0 L 1020.0 1016.0" fill="none" stroke="#3d5876" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round"/><polygon points="1020.0,1016.0 1013.0,1002.0 1027.0,1002.0" fill="#3d5876"/><path d="M 1020.0 1112.0 L 1020.0 1132.0" fill="none" stroke="#3d5876" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round"/><polygon points="1020.0,1132.0 1013.0,1118.0 1027.0,1118.0" fill="#3d5876"/><path d="M 1020.0 1228.0 L 1020.0 1248.0" fill="none" stroke="#3d5876" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round"/><polygon points="1020.0,1248.0 1013.0,1234.0 1027.0,1234.0" fill="#3d5876"/><path d="M 1020.0 1344.0 L 1020.0 1364.0" fill="none" stroke="#3d5876" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round"/><polygon points="1020.0,1364.0 1013.0,1350.0 1027.0,1350.0" fill="#3d5876"/><path d="M 1020.0 1460.0 L 1020.0 1480.0" fill="none" stroke="#3d5876" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round"/><polygon points="1020.0,1480.0 1013.0,1466.0 1027.0,1466.0" fill="#3d5876"/><path d="M 200.0 272.0 L 200.0 302.0" fill="none" stroke="#3d5876" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round"/><polygon points="200.0,302.0 193.0,288.0 207.0,288.0" fill="#3d5876"/><path d="M 315.0 370.0 L 546.0 370.0" fill="none" stroke="#3d5876" stroke-width="3.4" stroke-linejoin="round" stroke-linecap="round"/><polygon points="546.0,370.0 528.0,378.6 528.0,361.4" fill="#3d5876"/><path d="M 1494.0 1528.0 L 2850.0 1528.0" fill="none" stroke="#3d5876" stroke-width="3.4" stroke-linejoin="round" stroke-linecap="round"/><polygon points="2850.0,1528.0 2832.0,1536.6 2832.0,1519.4" fill="#3d5876"/><path d="M 2985.0 1583.0 L 2985.0 1623.0" fill="none" stroke="#3d5876" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round"/><polygon points="2985.0,1623.0 2978.0,1609.0 2992.0,1609.0" fill="#3d5876"/><path d="M 1494.0 1180.0 L 1560.0 1180.0 L 1560.0 668.0 L 1806.0 668.0" fill="none" stroke="#2f6fb5" stroke-width="3.4" stroke-linejoin="round" stroke-linecap="round"/><polygon points="1806.0,668.0 1788.0,676.6 1788.0,659.4" fill="#2f6fb5"/><path d="M 1806.0 978.0 L 1620.0 978.0 L 1620.0 1296.0 L 1494.0 1296.0" fill="none" stroke="#c1621f" stroke-width="3.4" stroke-linejoin="round" stroke-linecap="round"/><polygon points="1494.0,1296.0 1512.0,1287.4 1512.0,1304.6" fill="#c1621f"/><path d="M 2280.0 716.0 L 2280.0 742.0" fill="none" stroke="#3d5876" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round"/><polygon points="2280.0,742.0 2273.0,728.0 2287.0,728.0" fill="#3d5876"/><path d="M 2086.0 812.0 L 2140.0 812.0" fill="none" stroke="#3d5876" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round"/><polygon points="2140.0,812.0 2126.0,819.0 2126.0,805.0" fill="#3d5876"/><path d="M 2420.0 812.0 L 2474.0 812.0" fill="none" stroke="#3d5876" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round"/><polygon points="2474.0,812.0 2460.0,819.0 2460.0,805.0" fill="#3d5876"/></svg>
+</div></body></html>

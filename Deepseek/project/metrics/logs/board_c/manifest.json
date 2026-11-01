@@ -1,0 +1,34 @@
+[
+  {
+    "label": "A_desktop_t4",
+    "wav": "D:\\FPGA_\u97f3\u8272\u6a21\u578b_\u7814\u53d1\\board_c_20261025\\out\\score\\A_desktop_t4.wav",
+    "sr": 16000,
+    "n": 64000,
+    "peak": 0.45038,
+    "rms": 0.07648
+  },
+  {
+    "label": "B_desktop_t4_boardin",
+    "wav": "D:\\FPGA_\u97f3\u8272\u6a21\u578b_\u7814\u53d1\\board_c_20261025\\out\\score\\B_desktop_t4_boardin.wav",
+    "sr": 16000,
+    "n": 64000,
+    "peak": 1.0,
+    "rms": 0.22731
+  },
+  {
+    "label": "C_board_stage1",
+    "wav": "D:\\FPGA_\u97f3\u8272\u6a21\u578b_\u7814\u53d1\\board_c_20261025\\out\\score\\C_board_stage1.wav",
+    "sr": 16000,
+    "n": 64000,
+    "peak": 1.0,
+    "rms": 0.2273
+  },
+  {
+    "label": "D_board_stage2",
+    "wav": "D:\\FPGA_\u97f3\u8272\u6a21\u578b_\u7814\u53d1\\board_c_20261025\\out\\score\\D_board_stage2.wav",
+    "sr": 16000,
+    "n": 64000,
+    "peak": 1.0,
+    "rms": 0.22722
+  }
+]

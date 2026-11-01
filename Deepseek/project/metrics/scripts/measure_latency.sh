@@ -1,0 +1,103 @@
+#!/bin/sh
+# measure_latency.sh - collect the PER-BLOCK processing time distribution on the board
+# and print p50 / p95 / p99 / max. This is the measurement that metrics.csv marks as
+# "not_measured" for this submission; run it to fill those rows in.
+#
+# Structure of the latency:
+#     end_to_end = block_ms (accumulating the block) + proc_ms (processing it)
+# The distribution that matters is proc_ms; block_ms is a constant you chose.
+#
+# Usage (board, root, in /tmp/vc):
+#   sh measure_latency.sh [block_ms] [seconds] [input_raw] [out_csv]
+#   sh measure_latency.sh 300 60 in.raw lat_300.csv
+#
+# Notes
+#  * output goes to /dev/null: this measures pure processing, not aplay scheduling.
+#    For the end-to-end underrun check add aplay and count "underrun" (see bottom).
+#  * the input file is concatenated until `seconds` of audio is available.
+#
+# 2026-10-26 fix: vc_live's per-block JSON prints a *cumulative* "proc_ms"
+# (it is st.proc_ms += ... in stream_mode.inc), so the original awk below
+# (which greps "proc_ms" as-is) produced percentiles of the running total --
+# e.g. p50 = 26 s for a 60 s run.  The percentiles are now taken over the
+# first difference of that counter, which is the per-block processing time;
+# the sum of the differences is checked against the final summary line.
+set -e
+
+B="${1:-300}"
+SEC="${2:-60}"
+IN="${3:-in.raw}"
+OUT="${4:-lat_${B}.csv}"
+BIN="${VC:-./vc_live}"
+
+[ -x "$BIN" ] || { echo "missing $BIN (set VC=/path/to/vc_live)"; exit 2; }
+[ -f "$IN" ] || { echo "missing $IN"; exit 2; }
+
+# in.raw is 4 s of 32 kHz S24 stereo = 1,024,000 bytes -> 256,000 bytes per second
+BYTES_PER_SEC=256000
+NEED=$((SEC * BYTES_PER_SEC))
+HAVE=$(wc -c < "$IN")
+REP=$(( (NEED + HAVE - 1) / HAVE ))
+[ "$REP" -lt 1 ] && REP=1
+
+echo "== running $SEC s with $B ms blocks ($REP x $IN) =="
+i=0
+: > /tmp/_latcat.raw
+while [ "$i" -lt "$REP" ]; do cat "$IN" >> /tmp/_latcat.raw; i=$((i+1)); done
+
+"$BIN" "$SEC" native_s24 200 --stream "$B" --preset live \
+    < /tmp/_latcat.raw > /dev/null 2> /tmp/_latblocks.jsonl || true
+
+# per-block JSON lines look like:
+# {"block":1,"frames_in":9600,"audio_ms":300.0,"proc_ms":237.8,"block_rtf":0.793,...}
+# proc_ms is CUMULATIVE: emit the first difference (block 1 = its own value).
+awk '/"block":/ {
+        if (match($0, /"proc_ms":[0-9.]+/)) {
+            v = substr($0, RSTART + 10, RLENGTH - 10) + 0;
+            printf "%.3f\n", v - prev;
+            prev = v; n++;
+        }
+     }' /tmp/_latblocks.jsonl | sort -n > /tmp/_latproc.txt
+
+N=$(wc -l < /tmp/_latproc.txt)
+[ "$N" -gt 0 ] || { echo "no per-block data captured (check the binary supports --stream)"; exit 3; }
+
+pct() { # pct <fraction>  (nearest rank)
+    awk -v n="$N" -v f="$1" 'BEGIN{k=int((n-1)*f)+1; if(k<1)k=1; if(k>n)k=n; print k}'
+}
+at() { sed -n "$1p" /tmp/_latproc.txt; }
+
+P50=$(at "$(pct 0.50)")
+P95=$(at "$(pct 0.95)")
+P99=$(at "$(pct 0.99)")
+PMIN=$(sed -n '1p' /tmp/_latproc.txt)
+PMAX=$(sed -n "${N}p" /tmp/_latproc.txt)
+MEAN=$(awk '{s+=$1} END {if(NR) printf "%.2f", s/NR}' /tmp/_latproc.txt)
+BLOCKS=$(grep -c '"block"' /tmp/_latblocks.jsonl || true)
+SUM=$(awk '{s+=$1} END {printf "%.2f", s}' /tmp/_latproc.txt)
+TOTAL=$(awk '/"ok":true/ {
+        if (match($0, /"proc_ms":[0-9.]+/))
+            print substr($0, RSTART + 10, RLENGTH - 10)
+     }' /tmp/_latblocks.jsonl | tail -1)
+
+# the per-block diffs must add up to the summary's cumulative total (rounding only)
+awk -v a="$SUM" -v b="${TOTAL:-0}" 'BEGIN{
+        d = a - b; if (d < 0) d = -d;
+        printf "per-block sum %.2f ms vs summary total %.2f ms (delta %.2f ms)\n", a, b, d;
+        if (b > 0 && d > 0.05 * b) { print "WARNING: per-block sum disagrees with summary"; }
+     }'
+
+printf 'block_ms,blocks,proc_min_ms,proc_p50_ms,proc_p95_ms,proc_p99_ms,proc_max_ms,proc_mean_ms,e2e_p50_ms,e2e_p95_ms,e2e_p99_ms\n' > "$OUT"
+awk -v b="$B" -v n="$BLOCKS" -v mn="$PMIN" -v p50="$P50" -v p95="$P95" -v p99="$P99" \
+    -v mx="$PMAX" -v mean="$MEAN" 'BEGIN{
+        printf "%s,%s,%s,%.2f,%.2f,%.2f,%s,%.2f,%.2f,%.2f,%.2f\n", b,n,mn,p50,p95,p99,mx,mean,b+p50,b+p95,b+p99
+    }' >> "$OUT"
+
+echo "--- $OUT ---"
+cat "$OUT"
+echo
+echo "verdict thresholds (this project): block 300 ms -> e2e_p95 <= 700 ms, underruns == 0"
+echo "next: run the aplay variant to count underruns:"
+echo "  cat /tmp/_latcat.raw | $BIN $SEC native_s24 200 --stream $B --preset live 2>/dev/null \\"
+echo "    | aplay -D default -t raw -f S24_LE -r 32000 -c 2 --start-delay=64000 > aplay.log 2>&1"
+echo "  grep -c underrun aplay.log"

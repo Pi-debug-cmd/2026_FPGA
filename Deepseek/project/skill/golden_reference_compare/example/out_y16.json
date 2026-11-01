@@ -1,0 +1,39 @@
+{
+  "samples": 64000,
+  "max_abs_diff": 0.00043088197708129883,
+  "rms_diff": 4.11824243279523e-05,
+  "snr_db": 74.86,
+  "inf_snr": false,
+  "corr": 0.999999984,
+  "mismatch_count": 56524,
+  "mismatch_frac": 0.883188,
+  "first_bad": 0,
+  "rms_ref": 0.22782960807992955,
+  "rel_max_diff": 0.001891246623793218,
+  "mismatch_runs": 166,
+  "first_run": {
+    "start": 0,
+    "len": 32,
+    "all_zero": false
+  },
+  "max_run_len": 5862,
+  "zero_runs": 0,
+  "zero_run_lengths": [],
+  "shape": [
+    64000
+  ],
+  "gate": {
+    "bit_exact": false,
+    "within_tol": true,
+    "snr_ok": false
+  },
+  "pass": false,
+  "reference": "<workspace>/board_c_20261025/out/board/dump/y16.f32",
+  "dut": "<workspace>/board_c_20261025/out/c_board_exact/y16.f32",
+  "label": "board_vs_oracle_y16_1ulp_in",
+  "lag": 0,
+  "lag_corr": 0.999999984,
+  "tol": 2.0,
+  "snr_min": 100.0,
+  "verdict": "FAIL - differs almost everywhere but only by <=1.9e-03 of signal RMS: numeric axis (1-ulp input amplification, rounding mode), not a structural bug"
+}

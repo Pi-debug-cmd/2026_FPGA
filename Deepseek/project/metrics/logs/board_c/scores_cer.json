@@ -1,0 +1,80 @@
+[
+  {
+    "wav": "A_desktop_t4.wav",
+    "seconds": 4.0,
+    "identity_file": 0.6262,
+    "identity_mean": 0.6262,
+    "identity_p10": 0.6262,
+    "windows": 1,
+    "leakage_file": 0.17,
+    "utmos": 1.3521,
+    "leakage_mean": 0.17,
+    "leakage_strict": 0.17,
+    "cer": 0.3077,
+    "hyp": "老人每天在公园尝一张套本书",
+    "leakage_rel": -0.0373,
+    "margin": 0.4562,
+    "cer_rel": 0.1202,
+    "gate": {
+      "identity_mean": "pass",
+      "identity_p10": "pass",
+      "leakage_rel": "pass",
+      "utmos": "fail",
+      "cer_rel": "fail"
+    },
+    "all_pass": false,
+    "label": "A_desktop_t4"
+  },
+  {
+    "wav": "C_board_stage1.wav",
+    "seconds": 4.0,
+    "identity_file": 0.6463,
+    "identity_mean": 0.6463,
+    "identity_p10": 0.6463,
+    "windows": 1,
+    "leakage_file": 0.2288,
+    "utmos": 2.1063,
+    "leakage_mean": 0.2288,
+    "leakage_strict": 0.2288,
+    "cer": 0.0769,
+    "hyp": "老人每天在公园长椅子上放本书",
+    "leakage_rel": 0.0215,
+    "margin": 0.4175,
+    "cer_rel": -0.1106,
+    "gate": {
+      "identity_mean": "pass",
+      "identity_p10": "pass",
+      "leakage_rel": "fail",
+      "utmos": "fail",
+      "cer_rel": "pass"
+    },
+    "all_pass": false,
+    "label": "C_board_stage1"
+  },
+  {
+    "wav": "E_board_stage2_final.wav",
+    "seconds": 4.0,
+    "identity_file": 0.6373,
+    "identity_mean": 0.6373,
+    "identity_p10": 0.6373,
+    "windows": 1,
+    "leakage_file": 0.223,
+    "utmos": 2.1045,
+    "leakage_mean": 0.223,
+    "leakage_strict": 0.223,
+    "cer": 0.0769,
+    "hyp": "老人每天在公园长椅子上放本书",
+    "leakage_rel": 0.0157,
+    "margin": 0.4143,
+    "cer_rel": -0.1106,
+    "gate": {
+      "identity_mean": "pass",
+      "identity_p10": "pass",
+      "leakage_rel": "fail",
+      "utmos": "fail",
+      "cer_rel": "pass"
+    },
+    "all_pass": false,
+    "label": "E_board_stage2_final"
+  }
+]

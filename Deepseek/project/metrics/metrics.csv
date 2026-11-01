@@ -1,0 +1,131 @@
+section,config,metric,value,unit,hardware,tool,clock_mhz,runs,sample_duration_s,source,status,note
+latency,default_batch_4s,total_ms,3887,ms,xc7z020clg400-2,Vivado/SDK 2018.3 + PetaLinux 2022.2,100,3,4,metrics/reports/board_c_20261025.md 10.1,measured,RTF 0.972
+latency,default_batch_4s,total_ms_min,3857,ms,xc7z020clg400-2,Vivado/SDK 2018.3,100,3,4,metrics/reports/board_c_20261025_stage2.md 1,measured,
+latency,default_batch_4s,total_ms_max,3941,ms,xc7z020clg400-2,Vivado/SDK 2018.3,100,3,4,metrics/reports/board_c_20261025_stage2.md 1,measured,
+latency,live_stream_300,proc_per_block_ms,285,ms,xc7z020clg400-2,Vivado/SDK 2018.3,100,3,12,metrics/reports/board_c_20261025_squeeze.md 1,measured,preset live
+latency,live_stream_300,end_to_end_ms,585,ms,xc7z020clg400-2,Vivado/SDK 2018.3,100,3,12,metrics/reports/board_c_20261025_squeeze.md 1,derived,= 300 block + 285 proc
+latency,live_stream_300,p50_ms,268.70,ms,xc7z020clg400-2,PetaLinux 2022.2 + vc_live 83257578,100,1,60,metrics/logs/stability_20261026/lat_300_fix.csv 2026-10-26,measured,per-block PROC (stdout to /dev/null); e2e p50 = 568.70 ms
+latency,live_stream_300,p95_ms,276.70,ms,xc7z020clg400-2,PetaLinux 2022.2 + vc_live 83257578,100,1,60,metrics/logs/stability_20261026/lat_300_fix.csv 2026-10-26,measured,per-block PROC; e2e p95 = 576.70 ms <= 700 ms gate PASS
+latency,live_stream_300,p99_ms,277.90,ms,xc7z020clg400-2,PetaLinux 2022.2 + vc_live 83257578,100,1,60,metrics/logs/stability_20261026/lat_300_fix.csv 2026-10-26,measured,per-block PROC; e2e p99 = 577.90 ms
+latency,live_stream_300,proc_max_ms,278.10,ms,xc7z020clg400-2,PetaLinux 2022.2 + vc_live 83257578,100,1,60,metrics/logs/stability_20261026/lat_300_fix.csv 2026-10-26,measured,200 blocks; no block exceeded 278.2 ms of pure processing
+latency,live_stream_300,e2e_max_ms,578.10,ms,xc7z020clg400-2,PetaLinux 2022.2 + vc_live 83257578,100,1,60,metrics/logs/stability_20261026/lat_300_fix.csv 2026-10-26,derived,= 300 ms block + proc_max (different run than the 585 ms row above: that one was 3x12 s with proc 285 ms)
+latency,live_stream_500,proc_per_block_ms,480,ms,xc7z020clg400-2,Vivado/SDK 2018.3,100,2,12,metrics/reports/board_c_20261025_squeeze.md 1,measured,preset live
+latency,live_stream_500,end_to_end_ms,980,ms,xc7z020clg400-2,Vivado/SDK 2018.3,100,2,12,metrics/reports/board_c_20261025_squeeze.md 1,derived,= 500 block + 480 proc
+rtf,default_batch_4s,rtf,0.972,ratio,xc7z020clg400-2,Vivado/SDK 2018.3,100,1,4,metrics/reports/board_c_20261025_squeeze.md 1,measured,L0 default fp32
+rtf,l1_sm_stride2,rtf,0.950,ratio,xc7z020clg400-2,Vivado/SDK 2018.3,100,1,4,metrics/reports/board_c_20261025_squeeze.md 1,measured,
+rtf,l2_sm_stride2_int8,rtf,0.931,ratio,xc7z020clg400-2,Vivado/SDK 2018.3,100,1,4,metrics/reports/board_c_20261025_squeeze.md 1,measured,
+rtf,l3_ct_stride2,rtf,0.885,ratio,xc7z020clg400-2,Vivado/SDK 2018.3,100,1,4,metrics/reports/board_c_20261025_squeeze.md 1,measured,
+rtf,l4_ct2_sm2,rtf,0.865,ratio,xc7z020clg400-2,Vivado/SDK 2018.3,100,1,4,metrics/reports/board_c_20261025_squeeze.md 1,measured,
+rtf,l5_preset_live,rtf,0.845,ratio,xc7z020clg400-2,Vivado/SDK 2018.3,100,1,4,metrics/reports/board_c_20261025_squeeze.md 1,measured,ct2+sm2+int8
+rtf,pl_pitch_core,rtf,0.0078,ratio,xc7z020clg400-2,Vivado 2018.3 + PetaLinux 2022.2,100,1,4,metrics/reports/pl_build_20261025.md 4.4,measured,includes file IO on PS
+rtf,pl_pitch_core_pl_only,rtf,0.0037,ratio,xc7z020clg400-2,Vivado 2018.3,100,1,4,metrics/reports/pl_build_20261025.md 4.4,derived,118 us per 1024-word chunk
+throughput,pl_pitch_core,samples_per_s,4103715,count/s,xc7z020clg400-2,Vivado 2018.3,100,1,4,metrics/reports/pl_build_20261025.md 4.2,measured,4 s audio in 31.19 ms
+throughput,pl_pitch_core,chunk_us_min,117.7,us,xc7z020clg400-2,Vivado 2018.3,100,125,4,metrics/reports/pl_build_20261025.md 4.2,measured,1024 words per AXI DMA transfer
+throughput,pl_pitch_core,chunk_us_max,118.6,us,xc7z020clg400-2,Vivado 2018.3,100,125,4,metrics/reports/pl_build_20261025.md 4.2,measured,
+throughput,pl_identity_bypass,samples_per_s,6489549,count/s,xc7z020clg400-2,Vivado 2018.3,100,1,4,metrics/reports/pl_build_20261025.md 4.3,measured,ratio_q16=65536
+resources,impl,slice_luts,8378,count,xc7z020clg400-2,Vivado 2018.3,100,1,N/A,fpga/report/impl_utilization.txt,measured,15.75% of 53200
+resources,impl,slice_registers,13286,count,xc7z020clg400-2,Vivado 2018.3,100,1,N/A,fpga/report/impl_utilization.txt,measured,12.49% of 106400
+resources,impl,block_ram_tile,5,count,xc7z020clg400-2,Vivado 2018.3,100,1,N/A,fpga/report/impl_utilization.txt,measured,3.57% of 140
+resources,impl,dsps,6,count,xc7z020clg400-2,Vivado 2018.3,100,1,N/A,fpga/report/impl_utilization.txt,measured,2.73% of 220
+resources,impl,bonded_iob,12,count,xc7z020clg400-2,Vivado 2018.3,100,1,N/A,fpga/report/impl_utilization.txt,measured,9.60% of 125
+resources,synth,slice_luts,9374,count,xc7z020clg400-2,Vivado 2018.3,100,1,N/A,fpga/report/synth_utilization.txt,measured,
+resources,synth,slice_registers,14506,count,xc7z020clg400-2,Vivado 2018.3,100,1,N/A,fpga/report/synth_utilization.txt,measured,
+timing,impl,wns,0.813,ns,xc7z020clg400-2,Vivado 2018.3,100,1,N/A,fpga/report/impl_timing.txt,measured,positive slack
+timing,impl,whs,0.045,ns,xc7z020clg400-2,Vivado 2018.3,100,1,N/A,fpga/report/impl_timing.txt,measured,
+timing,impl,wpws,0.530,ns,xc7z020clg400-2,Vivado 2018.3,100,1,N/A,fpga/report/impl_timing.txt,measured,
+timing,impl,failing_endpoints,0,count,xc7z020clg400-2,Vivado 2018.3,100,1,N/A,fpga/report/impl_timing.txt,measured,
+timing,synth,wns,3.750,ns,xc7z020clg400-2,Vivado 2018.3,100,1,N/A,fpga/report/synth_timing.txt,measured,
+timing,impl,clock_period,10.000,ns,xc7z020clg400-2,Vivado 2018.3,100,1,N/A,fpga/report/impl_timing.txt,measured,clk_fpga_0 = 100 MHz
+quality,desktop_reference_a,identity_mean,0.6262,cosine,x86 host,torch + WeSpeaker,0,1,4,metrics/logs/board_c/scores_cer.json,measured,librosa phase vocoder
+quality,desktop_reference_a,identity_p10,0.6262,cosine,x86 host,torch + WeSpeaker,0,1,4,metrics/logs/board_c/scores_cer.json,measured,
+quality,desktop_reference_a,leakage_rel,-0.0373,cosine,x86 host,torch + WeSpeaker,0,1,4,metrics/logs/board_c/scores_cer.json,measured,vs female baseline 0.2073
+quality,desktop_reference_a,utmos,1.3521,mos,x86 host,UTMOS22-Strong,0,1,4,metrics/logs/board_c/scores_cer.json,measured,gap 2.30 NOT met
+quality,desktop_reference_a,cer,0.3077,ratio,x86 host,whisper-small,0,1,4,metrics/logs/board_c/scores_cer.json,measured,
+quality,board_stage1_c,identity_mean,0.6463,cosine,xc7z020clg400-2,PetaLinux 2022.2,100,1,4,metrics/logs/board_c/scores_cer.json,measured,
+quality,board_stage1_c,identity_p10,0.6463,cosine,xc7z020clg400-2,PetaLinux 2022.2,100,1,4,metrics/logs/board_c/scores_cer.json,measured,
+quality,board_stage1_c,leakage_rel,0.0215,cosine,xc7z020clg400-2,PetaLinux 2022.2,100,1,4,metrics/logs/board_c/scores_cer.json,measured,gap <=0 NOT met
+quality,board_stage1_c,utmos,2.1063,mos,xc7z020clg400-2,PetaLinux 2022.2,100,1,4,metrics/logs/board_c/scores_cer.json,measured,gap 2.30 NOT met
+quality,board_stage1_c,cer,0.0769,ratio,xc7z020clg400-2,PetaLinux 2022.2,100,1,4,metrics/logs/board_c/scores_cer.json,measured,
+quality,board_stage2_e,identity_mean,0.6373,cosine,xc7z020clg400-2,PetaLinux 2022.2,100,1,4,metrics/logs/board_c/scores_cer.json,measured,delivered default
+quality,board_stage2_e,identity_p10,0.6373,cosine,xc7z020clg400-2,PetaLinux 2022.2,100,1,4,metrics/logs/board_c/scores_cer.json,measured,
+quality,board_stage2_e,leakage_rel,0.0157,cosine,xc7z020clg400-2,PetaLinux 2022.2,100,1,4,metrics/logs/board_c/scores_cer.json,measured,gap <=0 NOT met
+quality,board_stage2_e,utmos,2.1045,mos,xc7z020clg400-2,PetaLinux 2022.2,100,1,4,metrics/logs/board_c/scores_cer.json,measured,gap 2.30 NOT met
+quality,board_stage2_e,cer,0.0769,ratio,xc7z020clg400-2,PetaLinux 2022.2,100,1,4,metrics/logs/board_c/scores_cer.json,measured,
+quality,l5_preset_live,identity_mean,0.6047,cosine,xc7z020clg400-2,PetaLinux 2022.2,100,1,4,metrics/logs/board_c/scores_L5.json,measured,demo preset
+quality,l5_preset_live,leakage_rel,0.0174,cosine,xc7z020clg400-2,PetaLinux 2022.2,100,1,4,metrics/logs/board_c/scores_L5.json,measured,
+quality,l5_preset_live,utmos,2.1351,mos,xc7z020clg400-2,PetaLinux 2022.2,100,1,4,metrics/logs/board_c/scores_L5.json,measured,
+quality,l5_preset_live,cer,0.1538,ratio,xc7z020clg400-2,PetaLinux 2022.2,100,1,4,metrics/logs/board_c/scores_L5.json,measured,4 s = ~13 chars so 1 error doubles it
+consistency,c_vs_python_16k,snr_db,121.71,db,x86 host + board,GCC 7.3.1 + pyworld 0.3.5,100,1,4,metrics/reports/board_c_20261025.md 8.2,measured,same float32 input
+consistency,c_vs_python_32k,snr_db,126.16,db,xc7z020clg400-2,GCC 7.3.1 + pyworld 0.3.5,100,1,4,metrics/reports/board_c_20261025.md 8.2,measured,board-captured 32 kHz input
+consistency,arm_vs_x86,snr_db,139.38,db,xc7z020clg400-2 vs x86,GCC 7.3.1,100,1,4,metrics/reports/board_c_20261025.md 8.2,measured,max_abs_diff 2.4e-7
+consistency,arm_vs_x86,x16_bit_exact,1,bool,xc7z020clg400-2 vs x86,GCC 7.3.1,100,1,4,metrics/reports/board_c_20261025.md 8.2,measured,byte identical
+consistency,pl_vs_fixed_model,max_abs_diff,0,count,xc7z020clg400-2,Vivado 2018.3,100,1,4,fpga/report/m3_compare_clean.txt,measured,128000 samples ratio 86856
+consistency,pl_vs_fixed_model_48k,max_abs_diff,0,count,xc7z020clg400-2,Vivado 2018.3,100,1,4,fpga/report/m3_compare_ratio48k.txt,measured,ratio 48000
+consistency,pl_identity,output_sha_equals_input,1,bool,xc7z020clg400-2,Vivado 2018.3,100,1,4,metrics/logs/pl_build/board_ratio_identity_20261025.log,measured,ratio 65536
+stability,default_batch_4s,run_to_run_spread_pct,0.1,percent,xc7z020clg400-2,PetaLinux 2022.2,100,3,4,metrics/reports/board_c_20261025.md 8.1,measured,8171/8170/8176 ms
+stability,live_stream_300,underruns_per_12s,0,count,xc7z020clg400-2,PetaLinux 2022.2,100,3,12,metrics/reports/board_c_20261025_squeeze.md 1,measured,all three runs zero
+stability,live_stream_500,underruns_per_12s,1,count,xc7z020clg400-2,PetaLinux 2022.2,100,2,12,metrics/reports/board_c_20261025_squeeze.md 1,measured,
+stability,live_stream_300,underruns_30min,0,count,xc7z020clg400-2,PetaLinux 2022.2 + vc_live 83257578,100,1,1800,metrics/logs/stability_20261026/analysis.json (aplay chain),measured,6000/6000 blocks; block index contiguous 1..6000; rtf 0.9963; aplay reported no underrun for 30 min
+stability,live_stream_300,clipped_samples_30min,21473,count,xc7z020clg400-2,PetaLinux 2022.2 + vc_live 83257578,100,1,1800,metrics/logs/stability_20261026/analysis.json,measured,0.019% of 115.2 M output samples; the 4 s batch path is 0 -- the leak is the block-wise SoundTouch restart (x86 same config: 86 per 4 s)
+stability,live_stream_300,rss_steady_kb,8172,kb,xc7z020clg400-2,PetaLinux 2022.2 + vc_live 83257578,100,1,1800,metrics/logs/stability_20261026/analysis.json,measured,RSS constant from t=30 s to t=1770 s; 5736 kB at t=0 (before the 4.8 MB blob is touched); transient max 8960 kB
+stability,live_stream_300,rss_growth_30min_kb,0,kb,xc7z020clg400-2,PetaLinux 2022.2 + vc_live 83257578,100,1,1800,metrics/logs/stability_20261026/analysis.json,derived,rss(t=1770 s) - rss(t=30 s) = 0; free memory 694360 -> 693468 kB
+stability,live_stream_300,block_stream_gaps,0,count,xc7z020clg400-2,PetaLinux 2022.2 + vc_live 83257578,100,1,1800,metrics/logs/stability_20261026/analysis.json,measured,no missing / out-of-order block index in 30 min -> no dropped audio
+stability,live_stream_300,proc_mean_ms_30min,298.9,ms,xc7z020clg400-2,PetaLinux 2022.2 + vc_live 83257578,100,1,1800,metrics/logs/stability_20261026/analysis.json,measured,with aplay in the pipe (includes stdout backpressure); pure processing is the 268.70 ms row
+stability,board,rebuild_reproducibility,1,bool,xc7z020clg400-2,GCC 7.3.1,100,1,N/A,host/app/build/BUILD_NOTE.md SHA fe312bb1,measured,recompiled binary byte-identical
+rtf,o64_live_4s,rtf,0.8602,ratio,xc7z020clg400-2,PetaLinux 2022.2 + vc_o64 1a9ca16d,100,3,4,metrics/O64_LIVE_20261027.md 3,measured,ct_stride2+sm_stride2+int8; runs 0.8602/0.8595/0.8611
+rtf,o64_live_23s,rtf,0.8815,ratio,xc7z020clg400-2,PetaLinux 2022.2 + vc_o64 1a9ca16d,100,1,23.72,metrics/O64_LIVE_20261027.md 5,measured,23.72 s whole segment; wall 20.949 s; clipped 0
+rtf,pl_in_loop_o64_live,rtf,0.8237,ratio,xc7z020clg400-2,Vivado 2018.3 + PetaLinux 2022.2 + vc_pl_dbg3 40dc1375,100,3,4,board_final_20261027\CURRENT_STATE.md 4,measured,PL STFT v5 + O64 blob + --preset live (pl_stft=1); runs 0.8237/0.8238/0.8235; in-package summary report/PL_IN_LOOP_20261027.md
+rtf,pl_in_loop_o64_live_23s,rtf,0.8396,ratio,xc7z020clg400-2,Vivado 2018.3 + PetaLinux 2022.2 + vc_pl_dbg3 40dc1375,100,1,23.72,board_final_20261027\CURRENT_STATE.md 4,measured,23.72 s whole segment; total_ms 19915
+rtf,pl_in_loop_o64_live_stream_300,rtf,0.8555,ratio,xc7z020clg400-2,Vivado 2018.3 + PetaLinux 2022.2 + vc_pl_dbg3 40dc1375,100,1,60,board_final_20261027\CURRENT_STATE.md 5,measured,streaming total 51330 ms over 60 s; pure ARM VC_PL=0 was 0.8910
+latency,o64_live_stream_300,p50_ms,276.00,ms,xc7z020clg400-2,PetaLinux 2022.2 + vc_o64 1a9ca16d,100,1,60,metrics/O64_LIVE_20261027.md 4,measured,per-block PROC (stdout to /dev/null); e2e p50 = 576.00 ms
+latency,o64_live_stream_300,p95_ms,284.00,ms,xc7z020clg400-2,PetaLinux 2022.2 + vc_o64 1a9ca16d,100,1,60,metrics/O64_LIVE_20261027.md 4,measured,e2e p95 = 584.00 ms <= 700 ms gate PASS
+latency,o64_live_stream_300,p99_ms,284.80,ms,xc7z020clg400-2,PetaLinux 2022.2 + vc_o64 1a9ca16d,100,1,60,metrics/O64_LIVE_20261027.md 4,measured,e2e p99 = 584.80 ms
+latency,o64_live_stream_300,proc_max_ms,286.80,ms,xc7z020clg400-2,PetaLinux 2022.2 + vc_o64 1a9ca16d,100,1,60,metrics/O64_LIVE_20261027.md 4,measured,200 blocks; no block exceeded 300 ms
+latency,o64_live_stream_300,e2e_max_ms,586.80,ms,xc7z020clg400-2,PetaLinux 2022.2 + vc_o64 1a9ca16d,100,1,60,metrics/O64_LIVE_20261027.md 4,derived,= 300 ms block + proc_max
+stability,o64_live_stream_300,underruns_60s,0,count,xc7z020clg400-2,PetaLinux 2022.2 + vc_o64 1a9ca16d,100,1,60,metrics/O64_LIVE_20261027.md 4,measured,0 of 200 blocks over the 300 ms deadline
+latency,pl_in_loop_o64_live,total_ms,3294.7,ms,xc7z020clg400-2,Vivado 2018.3 + PetaLinux 2022.2 + vc_pl_dbg3 40dc1375,100,3,4,board_final_20261027\CURRENT_STATE.md 4,measured,wall time for 4.000 s audio
+latency,pl_in_loop_o64_live,analysis_ms,2639.5,ms,xc7z020clg400-2,Vivado 2018.3 + PetaLinux 2022.2 + vc_pl_dbg3 40dc1375,100,3,4,board_final_20261027\CURRENT_STATE.md 4,measured,WORLD sub-stages dio 205 + stonemask 202 + cheaptrick 929 + d4c 155; two threads
+latency,pl_in_loop_o64_live,mlp_ms,1754.0,ms,xc7z020clg400-2,Vivado 2018.3 + PetaLinux 2022.2 + vc_pl_dbg3 40dc1375,100,3,4,board_final_20261027\CURRENT_STATE.md 4,measured,512 hidden x4 layers; O64 output; int8 weights
+latency,pl_in_loop_o64_live,stft_env_ms,309.5,ms,xc7z020clg400-2,Vivado 2018.3 + PetaLinux 2022.2 + vc_pl_dbg3 40dc1375,100,3,4,board_final_20261027\CURRENT_STATE.md 4,measured,PL path; same binary VC_PL=0 gives 451.3 ms (-142 ms); includes 75.6 ms DMA
+latency,pl_in_loop_o64_live,stft_env_ms_all_arm,451.3,ms,xc7z020clg400-2,Vivado 2018.3 + PetaLinux 2022.2 + vc_pl_dbg3 40dc1375,100,1,4,board_final_20261027\CURRENT_STATE.md 4,measured,VC_PL=0 same binary; PL saving 142 ms
+latency,pl_in_loop_o64_live,pl_dma_ms,75.6,ms,xc7z020clg400-2,Vivado 2018.3 + PetaLinux 2022.2 + vc_pl_dbg3 40dc1375,100,3,4,board_final_20261027\CURRENT_STATE.md 4,measured,3 runs 75.60/75.63/75.67
+latency,pl_in_loop_o64_live,pitch_ms,184.3,ms,xc7z020clg400-2,Vivado 2018.3 + PetaLinux 2022.2 + vc_pl_dbg3 40dc1375,100,3,4,board_final_20261027\CURRENT_STATE.md 4,measured,SoundTouch WSOLA ratio 1.40
+latency,pl_in_loop_o64_live,output_ms,132.7,ms,xc7z020clg400-2,Vivado 2018.3 + PetaLinux 2022.2 + vc_pl_dbg3 40dc1375,100,3,4,board_final_20261027\CURRENT_STATE.md 4,measured,16k to 32k resample + S24 pack
+latency,pl_in_loop_o64_live_stream_300,p99_ms,274.8,ms,xc7z020clg400-2,Vivado 2018.3 + PetaLinux 2022.2 + vc_pl_dbg3 40dc1375,100,1,60,board_final_20261027\CURRENT_STATE.md 5,measured,per-block PROC; e2e p99 574.8 ms
+latency,pl_in_loop_o64_live_stream_300,proc_max_ms,275.0,ms,xc7z020clg400-2,Vivado 2018.3 + PetaLinux 2022.2 + vc_pl_dbg3 40dc1375,100,1,60,board_final_20261027\CURRENT_STATE.md 5,measured,200 blocks; p50 266.0 / p95 273.9
+latency,pl_in_loop_o64_live_stream_300,e2e_p99_ms,574.8,ms,xc7z020clg400-2,Vivado 2018.3 + PetaLinux 2022.2 + vc_pl_dbg3 40dc1375,100,1,60,board_final_20261027\CURRENT_STATE.md 5,derived,= 300 ms block + 274.8 ms proc
+stability,pl_in_loop_o64_live_stream_300,underruns_60s,0,count,xc7z020clg400-2,Vivado 2018.3 + PetaLinux 2022.2 + vc_pl_dbg3 40dc1375,100,1,60,board_final_20261027\CURRENT_STATE.md 5,measured,0 of 200 blocks over the 300 ms deadline
+quality,o64_live,identity_mean,0.7321,cosine,xc7z020clg400-2,PetaLinux 2022.2 + score_full.py,100,1,23.72,metrics/O64_LIVE_20261027.md 6,measured,10 windows; exact档 0.7293
+quality,o64_live,identity_p10,0.7006,cosine,xc7z020clg400-2,PetaLinux 2022.2 + score_full.py,100,1,23.72,metrics/O64_LIVE_20261027.md 6,measured,exact档 0.6919
+quality,o64_live,leakage_rel,-0.0346,cosine,xc7z020clg400-2,PetaLinux 2022.2 + score_full.py,100,1,23.72,metrics/O64_LIVE_20261027.md 6,measured,exact档 -0.0223; <=0 gate PASS
+quality,o64_live,utmos,2.1900,mos,xc7z020clg400-2,UTMOS22-Strong,100,1,23.72,metrics/O64_LIVE_20261027.md 6,measured,exact档 2.2659 (delta -0.0759); gap 2.30 NOT met
+quality,pl_in_loop_o64_live,identity_mean,0.7324,cosine,xc7z020clg400-2,PetaLinux 2022.2 + score_full.py,100,1,23.72,board_final_20261027\CURRENT_STATE.md 6,measured,10 windows of 4 s; identity_file 0.7836; gate >=0.45 PASS
+quality,pl_in_loop_o64_live,identity_p10,0.6903,cosine,xc7z020clg400-2,PetaLinux 2022.2 + score_full.py,100,1,23.72,board_final_20261027\CURRENT_STATE.md 6,measured,gate >=0.35 PASS
+quality,pl_in_loop_o64_live,leakage_rel,-0.0343,cosine,xc7z020clg400-2,PetaLinux 2022.2 + score_full.py,100,1,23.72,board_final_20261027\CURRENT_STATE.md 6,measured,strict leakage 0.1730 - 0.2073; gate <=0 PASS
+quality,pl_in_loop_o64_live,utmos,2.1532,mos,xc7z020clg400-2,UTMOS22-Strong,100,1,23.72,board_final_20261027\CURRENT_STATE.md 6,measured,gap 2.30 NOT met; output peak 0.990 not loudness-normalised
+quality,pl_in_loop_o64_live,cer_rel,-0.0250,ratio,xc7z020clg400-2,PetaLinux 2022.2 + whisper-small,100,1,23.72,board_final_20261027\CURRENT_STATE.md 6,measured,CER 0.1625 - 0.1875; gate <=0 PASS
+consistency,o64_live_vs_exact,corr,0.995159765,cosine,xc7z020clg400-2,PetaLinux 2022.2 + numpy,100,1,23.72,metrics/O64_LIVE_20261027.md 7,measured,379520 samples; max 13579.6 LSB; rms 408.0 LSB
+latency,pl_stft_4s,stft_env_ms_all_arm,449.04,ms,xc7z020clg400-2,Vivado 2018.3 + PetaLinux 2022.2,100,1,4,fpga/stft/PL_STFT_20261027.md 5.1,measured,vc_o64 all-ARM baseline; 4 s same input and model
+latency,pl_stft_4s,stft_env_ms_pl,305.82,ms,xc7z020clg400-2,Vivado 2018.3 + PetaLinux 2022.2,100,1,4,fpga/stft/PL_STFT_20261027.md 5.1,measured,vc_o64_pl; -143.22 ms (-31.9%); includes PL DMA 75.63 ms
+latency,pl_stft_4s,pl_dma_ms,75.63,ms,xc7z020clg400-2,Vivado 2018.3 + PetaLinux 2022.2,100,1,4,fpga/stft/PL_STFT_20261027.md 5.1,measured,2x MM2S + 1x S2MM per frame
+rtf,pl_stft_4s,rtf_all_arm,0.9376,ratio,xc7z020clg400-2,PetaLinux 2022.2 + vc_o64,100,1,4,fpga/stft/PL_STFT_20261027.md 5.1,measured,total_ms 3750.29
+rtf,pl_stft_4s,rtf_pl,0.9019,ratio,xc7z020clg400-2,Vivado 2018.3 + PetaLinux 2022.2,100,1,4,fpga/stft/PL_STFT_20261027.md 5.1,measured,total_ms 3607.80; -142.49 ms (-3.8%)
+resources,pl_stft_impl,slice_luts,16723,count,xc7z020clg400-2,Vivado 2018.3,100,1,N/A,fpga/stft/report/impl_utilization.txt,measured,31.43% of 53200
+resources,pl_stft_impl,slice_registers,28677,count,xc7z020clg400-2,Vivado 2018.3,100,1,N/A,fpga/stft/report/impl_utilization.txt,measured,26.95% of 106400
+resources,pl_stft_impl,block_ram_tile,22,count,xc7z020clg400-2,Vivado 2018.3,100,1,N/A,fpga/stft/report/impl_utilization.txt,measured,15.71% of 140
+resources,pl_stft_impl,dsps,76,count,xc7z020clg400-2,Vivado 2018.3,100,1,N/A,fpga/stft/report/impl_utilization.txt,measured,34.55% of 220
+timing,pl_stft_impl,wns,0.347,ns,xc7z020clg400-2,Vivado 2018.3,100,1,N/A,fpga/stft/report/impl_timing.txt,measured,100 MHz; 0 failing endpoints; fmax approx 103.6 MHz
+timing,pl_stft_impl,whs,0.040,ns,xc7z020clg400-2,Vivado 2018.3,100,1,N/A,fpga/stft/report/impl_timing.txt,measured,
+stability,pl_stft_8x4s,fails,0,count,xc7z020clg400-2,PetaLinux 2022.2 + vc_o64_pl,100,8,32,fpga/stft/PL_STFT_20261027.md 5.3,measured,8/8 outputs byte-identical
+stability,pl_stft_8x4s,rtf,0.904,ratio,xc7z020clg400-2,PetaLinux 2022.2 + vc_o64_pl,100,8,32,fpga/stft/PL_STFT_20261027.md 5.3,measured,
+consistency,pl_stft_e2e,corr,0.99999999,cosine,xc7z020clg400-2,Vivado 2018.3 + PetaLinux 2022.2,100,1,4,fpga/stft/PL_STFT_20261027.md 5.1,measured,left channel 128000 samples vs all-ARM vc_o64
+consistency,pl_stft_e2e,max_abs_diff_lsb,4,count,xc7z020clg400-2,Vivado 2018.3 + PetaLinux 2022.2,100,1,4,fpga/stft/PL_STFT_20261027.md 5.1,measured,22/128000 samples differ by >2 LSB (0.017%)
+consistency,pl_stft_e2e,rms_diff_lsb,0.60,count,xc7z020clg400-2,Vivado 2018.3 + PetaLinux 2022.2,100,1,4,fpga/stft/PL_STFT_20261027.md 5.1,measured,
+stability,o64_live_stream_300,underruns_30min,0,count,xc7z020clg400-2,PetaLinux 2022.2 + vc_o64 1a9ca16d,100,1,1800,metrics/O64_LIVE_20261027.md 8,measured,6000/6000 blocks; aplay.log has no underrun line
+stability,o64_live_stream_300,blocks_30min,6000,count,xc7z020clg400-2,PetaLinux 2022.2 + vc_o64 1a9ca16d,100,1,1800,metrics/O64_LIVE_20261027.md 8,measured,1800.0 s audio; 300 ms blocks
+stability,o64_live_stream_300,block_stream_gaps,0,count,xc7z020clg400-2,PetaLinux 2022.2 + vc_o64 1a9ca16d,100,1,1800,metrics/O64_LIVE_20261027.md 8,measured,block index contiguous 1..6000
+stability,o64_live_stream_300,rss_steady_kb,8408,kb,xc7z020clg400-2,PetaLinux 2022.2 + vc_o64 1a9ca16d,100,1,1800,metrics/O64_LIVE_20261027.md 8,measured,constant t=30 s to t=1770 s; transient max 9196; 5472 before blob touch
+stability,o64_live_stream_300,rss_growth_30min_kb,0,kb,xc7z020clg400-2,PetaLinux 2022.2 + vc_o64 1a9ca16d,100,1,1800,metrics/O64_LIVE_20261027.md 8,derived,rss(t=1770 s) - rss(t=30 s) = 0
+stability,o64_live_stream_300,clipped_samples_30min,10501,count,xc7z020clg400-2,PetaLinux 2022.2 + vc_o64 1a9ca16d,100,1,1800,metrics/O64_LIVE_20261027.md 8,measured,T4 same denominator was 21473; batch path is 0
+stability,o64_live_stream_300,proc_mean_ms_30min,298.98,ms,xc7z020clg400-2,PetaLinux 2022.2 + vc_o64 1a9ca16d,100,1,1800,metrics/O64_LIVE_20261027.md 8,measured,with aplay in the pipe (includes stdout backpressure); T4 identical chain was 298.9; pure processing is the 276.00 ms row
+stability,o64_live_stream_300,rtf_30min_aplay_paced,0.9966,ratio,xc7z020clg400-2,PetaLinux 2022.2 + vc_o64 1a9ca16d,100,1,1800,metrics/O64_LIVE_20261027.md 8,measured,consumption-rate number from aplay-paced pipeline; T4 was 0.9963; pure compute RTF is 0.8602 (4 s)

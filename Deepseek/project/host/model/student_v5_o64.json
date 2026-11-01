@@ -1,0 +1,19 @@
+{
+  "ckpt": "models/ceporder_20261025/O64.pt",
+  "blob": "student_v5_o64.blob",
+  "bytes": 4941804,
+  "sha256": "01aecb78d4a5a9b1a960f4a15cbc4bc524e005a39e59a54b107a5ebc2f32bbc5",
+  "in_dim": 646,
+  "hidden": 512,
+  "layers": 4,
+  "out_dim": 64,
+  "context": 4,
+  "nceps_in": 32,
+  "n_bins": 513,
+  "pitch_ratio": 1.4,
+  "params": 1152064,
+  "synth_is_pinv_transpose": true,
+  "note": "synth rows are orthonormal (dct_out @ dct_out.T == I), so synth ~= dct_out; the exact pinv is stored anyway to remove any doubt about the inverse DCT.",
+  "dct_out_orthonormality_maxerr": 1.1920928955078125e-06,
+  "synth_vs_dct_out_maxerr": 3.725290298461914e-09
+}

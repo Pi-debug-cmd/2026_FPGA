@@ -1,0 +1,28 @@
+[
+  {
+    "wav": "board_o64_full.wav",
+    "seconds": 23.72,
+    "identity_file": 0.7734,
+    "identity_mean": 0.7293,
+    "identity_p10": 0.6919,
+    "windows": 10,
+    "leakage_file": 0.185,
+    "utmos": 2.2659,
+    "leakage_mean": 0.1743,
+    "leakage_strict": 0.185,
+    "cer": 5.2308,
+    "hyp": "老人每天在公园尝一项放本书有人坐下翻看他变微笑说被翻旧了来看书的人越来越多尝一尝了小的图书馆他是最严谨的馆长直到某间尝一尝多了一束花和一张纸条谢谢你我考上了",
+    "leakage_rel": -0.0223,
+    "margin": 0.5443,
+    "cer_rel": 5.0433,
+    "gate": {
+      "identity_mean": "pass",
+      "identity_p10": "pass",
+      "leakage_rel": "pass",
+      "utmos": "fail",
+      "cer_rel": "fail"
+    },
+    "all_pass": false,
+    "label": "board_o64_full"
+  }
+]

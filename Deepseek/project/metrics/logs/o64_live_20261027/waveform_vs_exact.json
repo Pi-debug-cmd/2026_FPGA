@@ -1,0 +1,1 @@
+{"exact":"o64_20261026/board/y16_full.f32 (O64 exact, --ap/ct/sm-stride 1, 23.72 s)","live":"board_o64live_full.wav (O64 --preset live, same input, same model)","n":379520,"corr":0.995159765,"max_abs_lsb":13579.6,"rms_lsb":408.0,"method":"numpy corrcoef on the 16 kHz signals; LSB = 1/32768 of full scale"}
