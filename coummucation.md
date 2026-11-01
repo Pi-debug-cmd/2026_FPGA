@@ -1530,5 +1530,5 @@
 - 量化结果：Skill Creator `quick_validate.py` 返回 `Skill is valid!`；`git diff --check` 退出码 0；3 个参考链接均解析到仓库内文件。
 - 限制：本轮只整理文档，不启动 Vivado/MCP、不连接板卡、不执行 FPGA 操作；项目特定绝对路径只作为本机实例，不视为通用值。
 - 报告链接：`report/docs_20261101_01_vivado_mcp_git_skill.md`。
-- 提交或 PR：待提交后回填。
+- 提交或 PR：提交 `690aa5b`；PR [#17](https://github.com/Pi-debug-cmd/2026_FPGA/pull/17)。
 - 下一责任方：Maintainer 审核 Skill 的 MCP 调用和协作流程后合并；Hardware-A/B 按新失败证据维护经验。
