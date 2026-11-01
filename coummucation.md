@@ -1518,3 +1518,17 @@
 - 止损：若两个 CFG 都未降低泄漏或造成 CER 失败，本路线立即停止，不追加更高 CFG；既有 1.70 已有内容塌缩证据。
 - 限制：电脑端离线开发，不播放、不改板上 v23；Remote-PS-C 不负责验证本方案。
 - 下一责任方：Hardware-A / Codex 完成 CFG 筛选并按结果提交。
+
+### [DOCS-20261101-01] Vivado MCP 与 Git/GitHub 项目 Skill
+- 日期：2026-11-01
+- 角色/Agent：Hardware-A / Codex
+- 状态：PROPOSED（Skill 已创建并通过格式验证，待评审合并）
+- 基准提交：`bea4184abebfb3e94999fab5b8ed1847518355c6`
+- 目标：综合项目指南、Vivado MCP 使用记录、GitHub 协作规则及近期 PL 分支轮次，创建可复用的项目 Skill，覆盖 MCP 调用、提交流程和实战故障经验。
+- 修改路径：`skill/04_vivado_mcp_git_github/SKILL.md`、`skill/04_vivado_mcp_git_github/README.md`、`skill/04_vivado_mcp_git_github/references/`、`report/docs_20261101_01_vivado_mcp_git_skill.md`、`coummucation.md`。
+- 复现/检查命令：`python <skill-creator>/scripts/quick_validate.py skill/04_vivado_mcp_git_github`；`git diff --check`；`git status --short`。
+- 量化结果：Skill Creator `quick_validate.py` 返回 `Skill is valid!`；`git diff --check` 退出码 0；3 个参考链接均解析到仓库内文件。
+- 限制：本轮只整理文档，不启动 Vivado/MCP、不连接板卡、不执行 FPGA 操作；项目特定绝对路径只作为本机实例，不视为通用值。
+- 报告链接：`report/docs_20261101_01_vivado_mcp_git_skill.md`。
+- 提交或 PR：待提交后回填。
+- 下一责任方：Maintainer 审核 Skill 的 MCP 调用和协作流程后合并；Hardware-A/B 按新失败证据维护经验。
