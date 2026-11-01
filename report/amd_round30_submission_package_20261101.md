@@ -6,8 +6,8 @@
 - Source implementation: `PL-20261027-01` Round30 commit `a8f6f8f32b159eaea277354118220c633f31fbc2`.
 - Later source branch head inspected only to establish provenance: `6f0d68ba367c920afbef2aa7f7265a5d0176edd3`. Round31-34 synthesis-pulse experiments are not included.
 - Public package repository: `https://github.com/Pi-debug-cmd/amd-zynq-world-voice-pl-2026`.
-- Package commit: `ed7bebfc83a8453e5ea3ea7a355c4cee573e2c89`.
-- Package: 77 files, 6,310 lines; English-only directory and file names.
+- Latest package commit: `bc1c51c4bc7e329a0a84bd94ff9773ec69f82385` (initial package commit: `ed7bebfc83a8453e5ea3ea7a355c4cee573e2c89`).
+- Package: 78 files, 6,323 lines; English-only directory and file names.
 
 ## Contents
 
