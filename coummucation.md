@@ -512,6 +512,18 @@
 - 提交或 PR：分支 `agent/Pi-debug-cmd/PS-20261021-10`，继续更新 PR [#10](https://github.com/Pi-debug-cmd/2026_FPGA/pull/10)。
 - 下一责任方：Hardware-A / Codex 完成 CFG 筛选并按结果提交。
 
+### [LOCAL-PS-20261102-SD01] SD 卡只读备份与镜像内容盘点
+- 日期：2026-11-02 至 2026-11-03
+- 角色/Agent：Hardware-A / Codex
+- 状态：CLAIMED → BLOCKED（FAT32 文件级备份与盘点完成；整卡镜像在 Linux 分区区域附近遇到 CRC 错误，未完成）
+- 基准提交：`5d4e193`（本地 origin/main 更新后建立独立任务 worktree）
+- 改动路径：`report/sd_card_inventory_20261102.md`、`coummucation.md`；FAT32 文件级副本在非系统盘 `D:\2026_FPGA_sd_boot_files_20261102`。
+- 复现命令：`Get-Disk`；`Get-Partition -DiskNumber 1`；`Get-ChildItem E:\ -Force -Recurse`；`Get-FileHash -Algorithm SHA256`；管理员只读物理盘读取 `\\.\PhysicalDrive1`。
+- 量化结果：USB Disk 1 `Generic STORAGE DEVICE`，15,978,201,088 字节；分区 1 FAT32 41,943,040 字节，分区 2 Linux 15,934,160,896 字节。D: 起始可用约 77.5 GB。35 个 FAT32 文件（21,473,587 字节）已复制，逐文件 SHA-256 与源匹配。整盘读取在约 11,811,160,064 字节处返回 Windows CRC 错误，部分镜像末次观察大小 11,844,714,496 字节，无整盘哈希。
+- 限制：部分镜像无效，不可用于恢复；Linux 分区没有检查，PetaLinux rootfs、镜像或项目内容未知。FAT32 中有 `BOOT.BIN`、`kernel/zImage`、Zynq-7020 bitstream、DTB、`world_pl` 运行包；未发现 `image.ub`。`SD卡.zip` 只是 FAT32 启动文件副本，不是整卡镜像。未对源卡执行有意写入。
+- 报告链接：`report/sd_card_inventory_20261102.md`。
+- 下一责任方：Hardware-A 使用可靠读卡器/恢复成像工具重试整卡只读备份并记录坏扇区；随后只读检查 Linux 分区。当前不把卡上组件视为已恢复的 PetaLinux 项目或可复用 build 镜像。
+
 ### [PS-20261021-10] HuBERT→WORLD 学习式保底教师上限 Round 20 认领
 - 日期：2026-10-25
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
