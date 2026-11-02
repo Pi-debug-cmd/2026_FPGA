@@ -6,8 +6,11 @@
 - Partition 1: MBR type 0x0c FAT32, 41,943,040 bytes, mounted as `E:`.
 - Partition 2: MBR type 0x83 Linux, 15,934,160,896 bytes, not readable through the Windows volume mount.
 - Destination: `D:\2026_FPGA_sd_boot_files_20261102` (D: had about 77.5 GB free before imaging).
-- A raw read-only image was started at `D:\2026_FPGA_sd_backup_20261102.img`. Physical-disk reads stopped with Windows CRC error at approximately byte offset 11,811,160,064. The resulting file is partial and must not be treated as a valid image. Its last observed size was 11,844,714,496 bytes; no whole-image hash was produced.
-- Recovery was not completed. Do not use the partial raw image to restore a card. Retry with a reliable reader/card or a recovery imager that logs unreadable sectors; preserve the source card unchanged.
+- A raw read-only image was started at `D:\2026_FPGA_sd_backup_20261102.img`. The first pass stopped with Windows CRC error at byte offset 11,811,160,064.
+- A later read-only probe of the exact offset succeeded for 11 nearby 512-byte sectors and for 512 KiB, 1 MiB, and 8 MiB requests. An adaptive reread from byte offset 10,737,418,240 then passed the original failure location and continued to byte offset 15,971,924,480.
+- Near the end of the device, reads again returned CRC errors. The log records 30 consecutive 512-byte read errors beginning at offset 15,971,090,432; the image length confirms 29 sectors were zero-filled through offset 15,971,924,480 (exclusive). A final error was logged at that boundary, but its zero-fill write was interrupted. The pass stopped before completing the remaining 6,286,608 bytes because 512-byte retries were progressing too slowly.
+- The current image length is 15,971,924,480 bytes versus the device length of 15,978,201,088 bytes. It is incomplete, contains known zero-filled sectors, and has no whole-image SHA-256. Do not restore it or describe it as a complete backup.
+- The source still reports online. The initial CRC at 11.81 GB was transient during retest; the later CRCs near the final 6.3 MB were repeatable during the adaptive pass. A different reader/adapter and a recovery imager with a map file are still needed to determine the tail region and recover readable sectors efficiently.
 
 ## FAT32 files copied
 
@@ -26,7 +29,7 @@ Key files observed on the card:
 
 ## Linux partition status
 
-Partition 2 was not inspected because Windows exposes no filesystem volume for it and whole-disk imaging failed on a read CRC error. Presence of project files, a PetaLinux root filesystem, or a reusable image inside that partition remains unknown. The boot script indicates that partition 2 is expected to provide the root filesystem, but does not establish that it contains a complete PetaLinux project or build output.
+Partition 2 was not inspected because Windows exposes no filesystem volume for it and whole-disk imaging did not complete. Presence of project files, a PetaLinux root filesystem, or a reusable image inside that partition remains unknown. The boot script indicates that partition 2 is expected to provide the root filesystem, but does not establish that it contains a complete PetaLinux project or build output.
 
 ## Reproduction
 
