@@ -512,6 +512,32 @@
 - 提交或 PR：分支 `agent/Pi-debug-cmd/PS-20261021-10`，继续更新 PR [#10](https://github.com/Pi-debug-cmd/2026_FPGA/pull/10)。
 - 下一责任方：Hardware-A / Codex 完成 CFG 筛选并按结果提交。
 
+### [LOCAL-PS-20261102-SD01] SD 卡只读备份与镜像内容盘点
+- 日期：2026-11-02 至 2026-11-03
+- 角色/Agent：Hardware-A / Codex
+- 状态：CLAIMED → BLOCKED（FAT32 文件级备份与盘点完成；整卡镜像在 Linux 分区区域附近遇到 CRC 错误，未完成）
+- 基准提交：`5d4e193`（本地 origin/main 更新后建立独立任务 worktree）
+- 改动路径：`report/sd_card_inventory_20261102.md`、`coummucation.md`；FAT32 文件级副本在非系统盘 `D:\2026_FPGA_sd_boot_files_20261102`。
+- 复现命令：`Get-Disk`；`Get-Partition -DiskNumber 1`；`Get-ChildItem E:\ -Force -Recurse`；`Get-FileHash -Algorithm SHA256`；管理员只读物理盘读取 `\\.\PhysicalDrive1`。
+- 量化结果：USB Disk 1 `Generic STORAGE DEVICE`，15,978,201,088 字节；分区 1 FAT32 41,943,040 字节，分区 2 Linux 15,934,160,896 字节。D: 起始可用约 77.5 GB。35 个 FAT32 文件（21,473,587 字节）已复制，逐文件 SHA-256 与源匹配。整盘读取在约 11,811,160,064 字节处返回 Windows CRC 错误，部分镜像末次观察大小 11,844,714,496 字节，无整盘哈希。
+- 限制：部分镜像无效，不可用于恢复；Linux 分区没有检查，PetaLinux rootfs、镜像或项目内容未知。FAT32 中有 `BOOT.BIN`、`kernel/zImage`、Zynq-7020 bitstream、DTB、`world_pl` 运行包；未发现 `image.ub`。`SD卡.zip` 只是 FAT32 启动文件副本，不是整卡镜像。未对源卡执行有意写入。
+- 报告链接：`report/sd_card_inventory_20261102.md`。
+- 下一责任方：Hardware-A 使用可靠读卡器/恢复成像工具重试整卡只读备份并记录坏扇区；随后只读检查 Linux 分区。当前不把卡上组件视为已恢复的 PetaLinux 项目或可复用 build 镜像。
+- 复测补充（2026-11-03）：原 CRC 偏移 `11,811,160,064` 的 11 个相邻 512-byte 扇区及 512 KiB / 1 MiB / 8 MiB 读取均通过；自 10 GiB 自适应重读成功越过该偏移。卡末端随后出现连续 CRC，记录 30 个失败扇区，其中 29 个已填零；在镜像长度 `15,971,924,480 / 15,978,201,088` bytes 时停止，剩余 6,286,608 bytes 未读取。具体证据与限制见报告；镜像仍不完整且不可恢复使用。
+
+### [LOCAL-PS-20261102-SD01] 整卡恢复读取完成与卡内项目资产盘点
+- 日期：2026-11-03
+- 角色/Agent：Hardware-A / Codex
+- 状态：ACCEPTED（整卡容量恢复完成，含已记录的零填充坏区；非无损镜像）
+- 基准提交：`818cd1f`
+- 修改路径：`report/sd_card_inventory_20261102.md`、`coummucation.md`；全长镜像 `D:\2026_FPGA_sd_backup_20261102.img` 和读取日志 `D:\2026_FPGA_sd_backup_status.txt` 保存在本机 D:，不入 Git。
+- 复现命令：`(Get-Item D:\2026_FPGA_sd_backup_20261102.img).Length`；`Get-FileHash D:\2026_FPGA_sd_backup_20261102.img -Algorithm SHA256`；`Select-String '^BAD_SECTOR|^BAD_RANGE|^TAIL_COMPLETE' D:\2026_FPGA_sd_backup_status.txt`。
+- 量化结果：镜像长度 `15,978,201,088` bytes，与源设备容量一致；整文件 SHA-256 `8A55C0136215FB1DF337370281F1A3F5B6AA79800B7C19F21DE7D60196E90AD3`。采集日志记有 30 个 512-byte 失败扇区及 16 个末端失败范围，合计 `1,049,088` bytes 三次 CRC 重试失败后填零。最初约 11.81 GB 的错误偏移经邻近扇区和 512 KiB / 1 MiB / 8 MiB 复测可读，续读亦越过。
+- 盘点结果：FAT32 分区 35 个文件已逐文件 SHA-256 匹配。第二分区为 ext4 `ROOTFS`，包含可启动 PetaLinux rootfs 和 `/opt/world_voice`、`/opt/world_voice_pl/releases/20261029_round27`、`20261030_round30` 下的运行资产（`world_budget_v23/v24`、DMA 模块、脚本和 manifest）。未发现独立 `image.ub` / `.img` / `.wic`，也未发现 Vivado `.xpr` / `.xsa` / `.hdf` 或 PetaLinux `project-spec` 工程源文件；因此不是完整可重建工程交付。`/etc/petalinux/version` 的 `1.00` 不作为工具链版本依据。
+- 限制：镜像全长但不是逐字节无损，已知坏读区被置零，不得称无错误备份，也不建议直接用于恢复；源卡未执行有意写入。续行定点重读时 Disk 1 在线且只读，但当前进程打开 `\\.\PhysicalDrive1` 收到 Access denied，未能修补零填充区。之前记录的“镜像未完成、Linux 分区未知”是续读前状态，由本次结果和更新报告取代，保留为过程记录。
+- 报告链接：`report/sd_card_inventory_20261102.md`。
+- 下一责任方：Hardware-A 按需从恢复镜像提取可用运行资产；若需要无损镜像或可重建 PetaLinux/Vivado 工程，需换读卡器重试坏区，并另行寻找工程源码/构建产物。当前 PETA 系统运行内容已在卡内，但没有独立 PetaLinux 镜像文件。
+
 ### [PS-20261021-10] HuBERT→WORLD 学习式保底教师上限 Round 20 认领
 - 日期：2026-10-25
 - 角色/Agent：Hardware-A / Codex（电脑端离线算法）
